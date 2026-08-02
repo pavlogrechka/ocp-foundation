@@ -9,10 +9,10 @@
 | Engineering and governance foundation | 100% | Репозиторій, ADR, governance, registry, review process і versioning створені |
 | Core domain ontology | 40% | Resource, Operation, Assignment і Constraint мають статус Accepted; більшість інших фундаментальних Concept ще не визначена |
 | Operational rules and workflows | 10% | Є invariants, participation та admissibility derivations, але немає завершених coordination, authorization, lifecycle та conflict models |
-| Machine-readable schemas and enforcement | 0% | Reference checker, fixtures і CI ще не злиті; перший executable slice заплановано PR-0006 |
-| **Загальна foundation-готовність** | **≈30%** | Constraint cycle завершено; наступний критичний крок — executable ontology checker |
+| Machine-readable schemas and enforcement | 15% | Є reference checker, YAML fixtures, regression tests і початковий CI; повний registry/status linter та implementation contracts ще відсутні |
+| **Загальна foundation-готовність** | **≈35%** | Перший executable validation loop створено; наступний крок — розширення fixtures і Constraint patterns |
 
-Відсоток не означає готовність production-системи. Репозиторій поки формує специфікаційний фундамент, а не програмну реалізацію.
+Відсоток не означає готовність production-системи. Репозиторій поки формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
 ## Milestone 0 — Engineering Foundation
 
@@ -44,23 +44,25 @@
 
 ## Milestone 1A — Early Executable Validation Loop
 
-Цей milestone виконується одразу після PR-0005, а не відкладається до завершення Operational Rules.
-
-- [ ] `PR-0006 — Add Executable Ontology Checker`
-- [ ] YAML fixtures for Resource, Operation, Assignment and Constraint
-- [ ] Valid and invalid lifecycle fixtures
-- [ ] Regression fixtures for accepted review counterexamples
-- [ ] Reference checks for two-way field invariants and authoritative transition histories
-- [ ] Reference derivations:
+- [x] `PR-0006 — Add Executable Ontology Checker`
+- [x] YAML fixtures for Resource, Operation, Assignment and Constraint
+- [x] Valid and invalid lifecycle fixtures for the initial reference subset
+- [x] Regression fixtures for accepted Assignment and Constraint review counterexamples
+- [x] Reference checks for two-way field invariants and authoritative transition histories
+- [x] Reference derivations:
   - `assignment_effective_at`
   - `derived_participates_in`
+  - `constraint_effective_at`
   - `constraint_applicable_to`
   - `effective_constraint_result`
+  - `constraint_blocks`
   - `constraint_set_decision`
-- [ ] Initial CI status check
-- [ ] Checker guidance for every subsequent Concept PR
+- [x] Initial GitHub Actions CI check
+- [x] Checker guidance for subsequent Concept PRs
+- [ ] Cross-document Concept status synchronization check
+- [ ] Graph-wide uniqueness and acyclicity checks
 
-PR-0006 є reference validation layer, а не production implementation. Expression language, persistence model і production evaluator залишаються окремими рішеннями.
+PR-0006 є reference validation layer, а не production implementation. OCP documents remain authoritative. Expression language, persistence model and production evaluator remain separate decisions.
 
 ## Milestone 2 — Operational Rules
 
@@ -81,15 +83,15 @@ PR-0006 є reference validation layer, а не production implementation. Expres
 - [ ] Full ontology reference and status linter
 - [ ] Constraint expression and evaluator contracts
 - [ ] Example datasets without sensitive information
-- [ ] CI checks for schemas, lifecycle consistency and normative references
+- [ ] Expanded CI checks for schemas, lifecycle consistency and normative references
 - [ ] Versioned implementation-facing contracts
 
 ## Planned Sequence
 
 1. `PR-0005 — Define Constraint Concept` — completed and Accepted.
-2. `PR-0006 — Add Executable Ontology Checker` and regression fixtures.
+2. `PR-0006 — Add Executable Ontology Checker` — implementation and review cycle.
 3. Require fixtures for subsequent Concept and corrective cycles where expressible.
-4. Constraint patterns for Assignment conflict, exclusivity, capacity and replacement timing.
+4. Define Constraint patterns for Assignment conflict, exclusivity, capacity and replacement timing.
 5. Review ADR-DRAFT-007 using evidence from Operation, Assignment, Constraint and executable fixtures.
-6. Organization and Coordination concepts.
+6. Define Organization and Coordination concepts.
 7. Expand machine-readable schemas and ontology linter before first Canonical promotion.
