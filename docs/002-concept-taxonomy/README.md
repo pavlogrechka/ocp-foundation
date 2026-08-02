@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.5.0
+Version: 0.6.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -78,7 +78,7 @@ Operation
 ├── Spatial Context
 │   └── Operational Area [Proposed]
 ├── Participation
-│   └── Assignment [Proposed]
+│   └── Assignment [Under Review]
 ├── Constraints
 │   └── Constraint [Proposed]
 └── Outcome
@@ -90,6 +90,28 @@ Operation
 
 Остаточна класифікація Operation та її предметних спеціалізацій не затверджена.
 
+## Assignment
+
+Concept `Assignment` має статус `Under Review` і визначається в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
+
+Assignment є ідентифікованим контекстним зв’язком рівно одного Resource з рівно однією Operation.
+
+Робоча структура:
+
+```text
+Assignment
+├── Identity
+├── Resource Reference
+├── Operation Reference
+├── RoleSpecification [local structure]
+├── Applicability [local temporal properties]
+├── Lifecycle [local stages]
+├── Provenance Reference
+└── Supersession [optional]
+```
+
+`RoleSpecification`, `Applicability`, `AssignmentTransitionRecord` і `supersedes_assignment_ref` є локальними частинами моделі Assignment та не створюють окремі фундаментальні Concept автоматично.
+
 ## Прийнята робоча гіпотеза
 
 `Actor` не виділяється в окрему фундаментальну гілку. Діяч є Resource, який отримує роль у конкретному контексті через Assignment.
@@ -97,6 +119,8 @@ Operation
 ```text
 Resource + Assignment + Operation Context = Operational Role
 ```
+
+Участь Resource в Operation є похідною від ефективного Assignment, а не окремим незалежним Core-зв’язком.
 
 ## Базові типи зв’язків
 
@@ -116,3 +140,4 @@ Resource + Assignment + Operation Context = Operational Role
 - Чи частина Infrastructure Resource повинна належати категорії Environment?
 - Чи потрібен окремий Concept Operational Intent?
 - Чи належать Objective, Result і Constraint до окремих верхньорівневих категорій?
+- Чи потрібні окремі Concept Reservation, Allocation або Role Taxonomy?
