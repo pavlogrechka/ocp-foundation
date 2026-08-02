@@ -5,10 +5,11 @@
 - Decision date: 2026-08-02
 - Resolution branch: `agent/pr-0005-constraint-concept`
 - Resolution PR: `PR-0005 — Define Constraint Concept`
+- Final Architecture Board decision: `Accepted`
 
 ## Finding 1 — Applicable Constraint may retain `not_applicable`
 
-**Status:** Accepted — blocking.
+**Status:** Accepted — resolved.
 
 The draft allowed an authoritative `ConstraintEvaluationRecord.result = not_applicable` to coexist with `constraint_applicable_to(Constraint, Context) = true`.
 
@@ -25,7 +26,7 @@ Because the admissibility derivation ignored that contradiction, an evaluator er
 
 ## Finding 2 — Advisory violation and advisory uncertainty are asymmetric
 
-**Status:** Accepted as clarification.
+**Status:** Accepted as clarification — resolved.
 
 The draft allowed:
 
@@ -66,7 +67,7 @@ The repository does not retain the reviewer’s exact transient comparison snaps
 
 ## Finding 4 — Concept status choreography is inconsistent
 
-**Status:** Accepted.
+**Status:** Accepted — resolved.
 
 Earlier Concept cycles used `Under Review` at different stages, while Constraint remained `Proposed` in a Draft PR.
 
@@ -81,9 +82,7 @@ Architecture Board approval      → Accepted before merge
 Separate canonicalization PR     → Canonical
 ```
 
-External or adversarial review while the PR remains Draft does not automatically change Concept status.
-
-Before PR-0005 merge, `Constraint` must pass through `Under Review` and then be synchronously updated to `Accepted` in OCP-000, OCP-002 and OCP-006 after the explicit Architecture Board decision.
+PR-0005 passed through ready-for-review / `Under Review`, then `Constraint` was synchronously updated to `Accepted` in OCP-000, OCP-002 and OCP-006 after the explicit Architecture Board decision.
 
 ## Finding 5 — Executable validation is scheduled too late
 
@@ -103,4 +102,4 @@ PR-0006 is a reference validation layer, not production implementation.
 
 ## Architecture Board decision
 
-> Accept the `not_applicable` finding and the advisory/indeterminate clarification. Clarify the sequencing finding: the reviewer’s earlier stacked-diff concern was resolved by merging PR-0004A separately, and the current PR #8 contains only the Constraint cycle. Adopt a single Concept status choreography. Move executable validation forward as PR-0006. Do not merge PR-0005 until the accepted semantic findings are resolved, externally rechecked and the Concept status is updated to `Accepted` by explicit Architecture Board decision.
+> Accept OCP-006 Constraint Concept after resolution and external verification of the review findings. Preserve the clarified sequencing provenance, retain defense-in-depth for contradictory evaluation records, adopt the unified Concept status choreography, and make PR-0006 the next cycle. Constraint status is Accepted before merge.
