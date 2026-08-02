@@ -48,7 +48,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Result | Proposed | — |
 | Event | Proposed | — |
 | Spectrum | Proposed | — |
-| Constraint | Proposed | OCP-006 / PR-0005 |
+| Constraint | Under Review | OCP-006 / PR-0005 |
 | Risk | Proposed | AB-005; після Constraint |
 | Order | Proposed | AB-002 |
 | Coordination | Proposed | — |
