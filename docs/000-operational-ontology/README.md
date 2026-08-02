@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.2.0
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -37,7 +37,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Concept | Status | Specification / Decision |
 |---|---|---|
 | Resource | Accepted | OCP-003 |
-| Operation | Under Review | OCP-004 / PR-0003 |
+| Operation | Accepted | OCP-004; Architecture Board approval of PR-0003 |
 | Assignment | Proposed | заплановано OCP-005 |
 | Operational Space | Proposed | — |
 | Operational Area | Proposed | — |
@@ -54,7 +54,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Coordination | Proposed | — |
 | Capability | Proposed | AB-004 |
 
-Статуси в таблиці є статусами Concept, а не статусами документів.
+Статуси в таблиці є статусами Concept, а не статусами документів. `Accepted` означає, що Architecture Board прийняла поточне визначення як основу подальшої роботи; це не означає `Canonical` і не змінює автоматично статус документа.
 
 ## Робоче рішення щодо Resource
 
