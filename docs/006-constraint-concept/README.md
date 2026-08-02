@@ -40,9 +40,9 @@ Constraint надає OCP єдину модель для формального 
 - предметних правил без включення їх до Core Concept напряму;
 - пояснюваної derivation рішень про допустимість.
 
-Constraint дає змогу відокремити:
+Constraint відокремлює:
 
-- факт або планований стан моделі;
+- факт або candidate state моделі;
 - правило, яке до нього застосовується;
 - результат оцінювання правила;
 - рішення про допустимість;
@@ -75,7 +75,7 @@ Constraint може бути джерелом derivation для цих моде�
 | Concept | Status | Використання в OCP-006 |
 |---|---|---|
 | Resource | Accepted | можливий subject або учасник оцінювання |
-| Operation | Accepted | можливий контекст або subject |
+| Operation | Accepted | можливий context або subject |
 | Assignment | Accepted | основний subject для перевірки сумісності та залучення |
 | Capability | Proposed | можливий вхід перевірки відповідності; не визначається тут |
 | Event | Proposed | можливе evidence або trigger повторного оцінювання |
@@ -99,16 +99,9 @@ Constraint може бути джерелом derivation для цих моде�
 - результату конкретного оцінювання;
 - implementation function або database query.
 
-Два Constraint можуть використовувати однаковий predicate, але мати різні:
+Два Constraint можуть використовувати однаковий predicate, але мати різні subjects, parameters, applicability, enforcement або provenance.
 
-- subjects;
-- параметри;
-- applicability intervals;
-- enforcement specification;
-- provenance;
-- domain namespace.
-
-Після Establishment зміна predicate, target specification або enforcement semantics створює новий Constraint. Новий Constraint може посилатися на попередній через `supersedes_constraint_ref`.
+Після Establishment зміна predicate, target specification, parameters або enforcement semantics створює новий Constraint. Новий Constraint може посилатися на попередній через `supersedes_constraint_ref`.
 
 ## 6. Minimum Structural Contract
 
@@ -122,11 +115,14 @@ Constraint
 - validity_end [optional]
 - transition_history [authoritative local records]
 - lifecycle_stage [derived or materialized projection]
+- created_at
 - established_at [derived projection]
 - retired_at [derived projection]
 - establishment_provenance_ref [derived projection]
 - supersedes_constraint_ref [optional]
 ```
+
+`Established lineage` означає lifecycle stages `Established` або `Retired`.
 
 Це логічний контракт Concept, а не схема БД чи API.
 
@@ -167,7 +163,7 @@ PredicateSpecification
 
 PredicateSpecification описує перевірне правило, але не визначає технологію його виконання.
 
-За однакових input snapshot, часу оцінювання, predicate version і параметрів результат повинен бути детермінованим або явно позначеним `indeterminate`.
+За однакових input snapshot, evaluation time, predicate version і parameters результат повинен бути детермінованим або явно позначеним `indeterminate`.
 
 ### 6.3 EnforcementSpecification
 
@@ -180,10 +176,10 @@ EnforcementSpecification
 ```
 
 - `blocking` означає, що порушення впливає на допустимість candidate context;
-- `advisory` фіксує finding, але саме по собі не робить candidate context недопустимим;
-- `indeterminate_disposition` визначає, як обробляється відсутність достатніх даних.
+- `advisory` фіксує finding, але саме по собі не робить context недопустимим;
+- `indeterminate_disposition` визначає обробку недостатніх даних.
 
-Значення `allow` для indeterminate є явним рішенням Constraint і не може бути системним припущенням за замовчуванням.
+Значення `allow` для indeterminate є явним рішенням конкретного Constraint і не може бути системним припущенням за замовчуванням.
 
 ### 6.4 Validity interval
 
@@ -192,7 +188,9 @@ validity_start [optional]
 validity_end [optional]
 ```
 
-Якщо `validity_end` заданий, він повинен бути пізнішим за `validity_start`.
+Якщо задані обидві межі, `validity_start < validity_end`.
+
+`validity_end` може бути заданий без `validity_start`, щоб обмежити правило лише верхньою часовою межею.
 
 Validity interval описує часову застосовність правила й не є lifecycle Constraint.
 
@@ -257,6 +255,8 @@ constraint_effective_at(Constraint, t) :=
 
 Retired Constraint зберігає історичну ефективність для часу до `retired_at`.
 
+Constraint не застосовується ретроактивно до часу раніше Establishment без окремого майбутнього правила.
+
 ## 9. Evaluation Context
 
 Оцінювання Constraint виконується відносно локального `ConstraintEvaluationContext`:
@@ -283,10 +283,11 @@ Constraint застосовується до evaluation context, якщо:
 constraint_applicable_to(Constraint, Context) :=
     constraint_effective_at(Constraint, Context.evaluation_time)
     AND target_specification matches Context
-    AND required predicate inputs are addressable
 ```
 
-Відсутність необхідних значень input не означає `not_applicable`. Якщо target match існує, але даних недостатньо, результат оцінювання є `indeterminate`.
+Applicability визначається temporal і target scope, а не наявністю всіх predicate inputs.
+
+Якщо target match існує, але required inputs відсутні або непридатні, результат оцінювання є `indeterminate`, а не `not_applicable`.
 
 ## 11. Evaluation Result
 
@@ -317,19 +318,36 @@ ConstraintEvaluationRecord
 - evaluator_ref
 ```
 
-`evaluated_at` є часом виконання оцінювання, а `ConstraintEvaluationContext.evaluation_time` — часом моделі, для якого виконано оцінювання. Вони не є взаємозамінними.
+`evaluated_at` є часом виконання оцінювання, а `ConstraintEvaluationContext.evaluation_time` — часом моделі, для якого виконано оцінювання.
+
+`evaluator_ref` є непрозорим посиланням на реалізацію або сервіс оцінювання й не вводить окремий фундаментальний Concept.
+
+Для конкретної пари `constraint_version_ref + context_ref + input_snapshot_ref` authoritative result повинен бути однозначним.
+
+Локальна effective result визначається так:
+
+```text
+effective_constraint_result(Constraint, Context) :=
+    authoritative stored or reproducible result
+        for the exact Constraint version and input snapshot
+    OR indeterminate
+        if no such current result exists
+```
+
+Відсутність current evaluation ніколи не трактується як `satisfied`.
 
 ## 12. Admissibility Derivation
 
 Локальна blocking effect визначається так:
 
 ```text
-constraint_blocks(Constraint, Evaluation) :=
-    enforcement.mode = blocking
+constraint_blocks(Constraint, Context) :=
+    constraint_applicable_to(Constraint, Context)
+    AND enforcement.mode = blocking
     AND (
-        Evaluation.result = violated
+        effective_constraint_result = violated
         OR (
-            Evaluation.result = indeterminate
+            effective_constraint_result = indeterminate
             AND enforcement.indeterminate_disposition = block
         )
     )
@@ -368,7 +386,7 @@ Constraint violation:
 
 ## 14. Working Constraint Patterns
 
-Наведені нижче patterns є робочими прикладами, а не канонічною taxonomy.
+Наведені patterns є робочими прикладами, а не канонічною taxonomy.
 
 ### 14.1 Exclusive Assignment
 
@@ -418,7 +436,7 @@ Established Constraint не змінює незалежно:
 - target specification;
 - predicate specification;
 - enforcement specification;
-- параметри, що впливають на результат оцінювання.
+- parameters, що впливають на evaluation result.
 
 Змістовна зміна створює новий Constraint із новою identity та, за потреби:
 
@@ -430,29 +448,32 @@ Supersession не Retire попередній Constraint автоматично.
 
 ## 17. Business Rules
 
-1. Constraint поза Draft повинен мати повний minimum structural contract.
-2. Blocking Constraint повинен мати явний `indeterminate_disposition`.
-3. Відсутність required input при matched target дає `indeterminate`, а не `not_applicable`.
-4. Candidate context не може вважатися admissible, якщо хоча б один застосовний Constraint його блокує.
-5. Advisory Constraint не блокує candidate context без окремого правила агрегації.
-6. Збережене evaluation повинно посилатися на точну версію Constraint та input snapshot.
-7. Зміна predicate або enforcement semantics після Establishment створює новий Constraint.
-8. Conflict, Risk, Readiness і availability не виводяться з одного violation без окремого прийнятого правила.
-9. Domain module може визначати власні predicate namespaces, але не може змінювати Core semantics evaluation results.
-10. Constraint не створює lifecycle transition subject автоматично.
+1. Constraint у stage `Established` або `Retired` повинен мати повний minimum structural contract.
+2. Cancelled Constraint може залишатися неповним, але має identity та валідний `Draft → Cancelled` transition.
+3. Кожен Constraint повинен мати явний `indeterminate_disposition`.
+4. Відсутність required input при matched target дає `indeterminate`, а не `not_applicable`.
+5. Відсутність current evaluation для applicable Constraint трактується як `indeterminate`, а не `satisfied`.
+6. Candidate context не може вважатися admissible, якщо хоча б один застосовний Constraint його блокує.
+7. Advisory Constraint не блокує candidate context без окремого правила агрегації.
+8. Збережене evaluation повинно посилатися на точну версію Constraint та input snapshot.
+9. Зміна predicate або enforcement semantics після Establishment створює новий Constraint.
+10. Conflict, Risk, Readiness і availability не виводяться з одного violation без окремого прийнятого правила.
+11. Domain module може визначати власні predicate namespaces, але не може змінювати Core semantics evaluation results.
+12. Constraint не створює lifecycle transition subject автоматично.
 
 ## 18. Semantic Rules
 
 1. Constraint описує правило; EvaluationRecord описує результат застосування правила.
 2. `satisfied` не означає, що Operation досягне Objective.
 3. `violated` не означає автоматично, що фактична дія припинена.
-4. `indeterminate` означає недостатність або невизначеність входів, а не відсутність Constraint.
+4. `indeterminate` означає недостатність або невизначеність inputs, а не відсутність Constraint.
 5. `not_applicable` означає, що target або temporal scope не відповідає context.
 6. Наявність Constraint не означає наявність Conflict.
 7. Відсутність збереженого EvaluationRecord не означає, що Constraint satisfied.
 8. Constraint не є Permission, Policy, Order або user access rule.
 9. Constraint evaluation не є fundamental State.
 10. Constraint не успадковується через composition без явного selector або propagation rule.
+11. Retired Constraint може залишатися applicable для історичного evaluation time до `retired_at`.
 
 ## 19. Invariants
 
@@ -461,17 +482,20 @@ Supersession не Retire попередній Constraint автоматично.
 3. Кожен Constraint у Established lineage має TargetSpecification з explicit subject або непорожнім selector.
 4. Кожен Constraint у Established lineage має повний PredicateSpecification з непорожніми code, namespace, version та input contract reference.
 5. Кожен Constraint у Established lineage має валідний EnforcementSpecification.
-6. Якщо `validity_end` заданий, `validity_start < validity_end`.
-7. Transition history кожного Constraint дорівнює одному з допустимих лінійних paths у §7.
-8. Матеріалізований `lifecycle_stage` відповідає останньому transition або `Draft` для порожньої history.
-9. `established_at` заданий тоді й лише тоді, коли history містить `Draft → Established`, і дорівнює timestamp цього record.
-10. `retired_at` заданий тоді й лише тоді, коли history завершується `Established → Retired`, і дорівнює timestamp цього record.
-11. Матеріалізований establishment provenance заданий тоді й лише тоді, коли існує Establishment transition, і дорівнює його provenance.
-12. Кожен ConstraintEvaluationRecord посилається на існуючий Constraint, точну його версію, context, input snapshot та evaluator.
-13. Result кожного ConstraintEvaluationRecord належить множині `{satisfied, violated, indeterminate, not_applicable}`.
-14. Evaluation з result `not_applicable` не може одночасно бути використане як blocking violation.
-15. Constraint не може supersede сам себе, а граф `supersedes_constraint_ref` є ациклічним.
-16. За однакових predicate version, parameters, input snapshot і evaluation time два детерміновані evaluations не можуть мати різні результати.
+6. Якщо задані обидві validity bounds, `validity_start < validity_end`.
+7. Кожен ConstraintTransitionRecord має непорожні `transition_id`, `constraint_ref`, допустимі stages, валідний `occurred_at` та непорожній `provenance_ref`.
+8. Transition history кожного Constraint дорівнює одному з допустимих лінійних paths у §7.
+9. Матеріалізований `lifecycle_stage` відповідає останньому transition або `Draft` для порожньої history.
+10. `established_at` заданий тоді й лише тоді, коли history містить `Draft → Established`, і дорівнює timestamp цього record.
+11. `retired_at` заданий тоді й лише тоді, коли history завершується `Established → Retired`, і дорівнює timestamp цього record.
+12. Матеріалізований establishment provenance заданий тоді й лише тоді, коли існує Establishment transition, і дорівнює його provenance.
+13. `created_at` не пізніший за перший transition timestamp, а transition timestamps не зменшуються.
+14. Кожен ConstraintEvaluationRecord посилається на існуючий Constraint, точну його version, context, input snapshot та evaluator.
+15. Result кожного ConstraintEvaluationRecord належить множині `{satisfied, violated, indeterminate, not_applicable}`.
+16. Evaluation з result `not_applicable` не може одночасно бути використане як blocking violation.
+17. Для однакових constraint version, context та input snapshot не може існувати два authoritative evaluation results з різними значеннями.
+18. Constraint не може supersede сам себе, а граф `supersedes_constraint_ref` є ациклічним.
+19. За однакових predicate version, parameters, input snapshot і evaluation time два детерміновані evaluations не можуть мати різні результати.
 
 ## 20. Examples
 
@@ -494,6 +518,10 @@ Advisory Constraint повертає `violated`. Candidate context залиша�
 ### Example E — insufficient data
 
 Target match існує, але потрібний input відсутній. Результат — `indeterminate`; подальша дія визначається `indeterminate_disposition`.
+
+### Example F — missing evaluation
+
+Applicable blocking Constraint не має evaluation для поточного snapshot. Effective result є `indeterminate`, а не `satisfied`.
 
 ## 21. Non-Examples
 
