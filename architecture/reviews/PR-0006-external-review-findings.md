@@ -5,13 +5,14 @@
 - Decision date: 2026-08-02
 - Resolution branch: `agent/pr-0006-executable-ontology-checker`
 - Resolution PR: `PR #9`
-- Current Architecture Board state: review corrections implemented; merge not approved
+- External review verdict: `Approved`
+- Current Architecture Board state: ready for review; merge not approved
 
 ## Finding 1 — Effective evaluation ignored exact Constraint version
 
 **Severity:** Blocking.
 
-**Status:** Accepted — resolved.
+**Status:** Accepted — resolved and externally verified.
 
 The initial `_matching_evaluation` implementation selected records by `context_ref + input_snapshot_ref` and returned the last YAML item. A stale permissive record for an older Constraint version could therefore override a current blocking result, making admissibility depend on list order.
 
@@ -30,7 +31,7 @@ The initial `_matching_evaluation` implementation selected records by `context_r
 
 **Severity:** Moderate.
 
-**Status:** Accepted — resolved.
+**Status:** Accepted — resolved and externally verified.
 
 The initial manifest covered only part of the emitted validation codes and omitted the implemented `constraint_effective_at` derivation.
 
@@ -46,7 +47,7 @@ The initial manifest covered only part of the emitted validation codes and omitt
 
 **Severity:** Moderate.
 
-**Status:** Accepted — resolved.
+**Status:** Accepted — resolved and externally verified.
 
 OCP-005 and OCP-006 state that lifecycle projections may be materialized. The initial checker treated absence as mismatch and therefore imposed a stronger rule than the specifications.
 
@@ -61,7 +62,7 @@ OCP-005 and OCP-006 state that lifecycle projections may be materialized. The in
 
 **Severity:** Minor.
 
-**Status:** Accepted — resolved.
+**Status:** Accepted — resolved and externally verified.
 
 Expected and actual error-code sets now require exact equality. Unexpected additional errors fail both unit tests and the fixture CLI.
 
@@ -69,7 +70,7 @@ Expected and actual error-code sets now require exact equality. Unexpected addit
 
 **Severity:** Minor.
 
-**Status:** Accepted — resolved.
+**Status:** Accepted — resolved and externally verified.
 
 The CLI now reports an individual malformed fixture as `FAIL`, increments the failure count and continues checking remaining files.
 
@@ -77,7 +78,7 @@ The CLI now reports an individual malformed fixture as `FAIL`, increments the fa
 
 **Severity:** Minor / high-value governance automation.
 
-**Status:** Accepted — resolved in PR-0006.
+**Status:** Accepted — resolved and externally verified.
 
 The checker now compares:
 
@@ -91,7 +92,7 @@ OCP-002 is updated to version `0.8.1` with the machine-readable projection. AB-0
 
 **Severity:** Minor.
 
-**Status:** Accepted as clarification — resolved.
+**Status:** Accepted as clarification — resolved and externally verified.
 
 The checker README now states:
 
@@ -101,6 +102,10 @@ The checker README now states:
 - `relation_scope` evaluation is deferred;
 - `subject_selector` supports only the test placeholder `match_all` in this slice.
 
+## External reviewer verdict
+
+> All seven resolutions were verified at code and test level, including YAML order reversal and exact manifest equality. The three remaining observations are non-blocking follow-ups suitable for a later single-commit correction. From the external reviewer position, PR-0006 is approved.
+
 ## Architecture Board correction decision
 
-> Accept the exact-version finding as blocking. Require current-version selection independent of YAML order, full rule-manifest traceability, optional materialized projections, exact fixture-error expectations, resilient malformed-YAML handling, and repository status synchronization. Preserve the checker as a reference validation layer rather than introducing new OCP-006 structural semantics. Keep PR-0006 Draft until external re-verification and explicit Architecture Board approval.
+> Accept the exact-version finding as blocking. Require current-version selection independent of YAML order, full rule-manifest traceability, optional materialized projections, exact fixture-error expectations, resilient malformed-YAML handling, and repository status synchronization. Preserve the checker as a reference validation layer rather than introducing new OCP-006 structural semantics. External review is complete; PR-0006 may proceed to Architecture Board review. Merge still requires an explicit Board decision and AB-040 resolution before merge.
