@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.5.0
+Version: 0.6.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -48,8 +48,8 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Result | Proposed | — |
 | Event | Proposed | — |
 | Spectrum | Proposed | — |
-| Constraint | Proposed | наступний Concept cycle; AB-034 |
-| Risk | Proposed | — |
+| Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
+| Risk | Proposed | AB-005; після Constraint |
 | Order | Proposed | AB-002 |
 | Coordination | Proposed | — |
 | Capability | Proposed | AB-004 |
@@ -75,3 +75,4 @@ Operational Ontology веде реєстр понять, їхніх статус
 - Межі між Resource та Organization.
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
+- Межа між Constraint violation та майбутнім Conflict Concept.

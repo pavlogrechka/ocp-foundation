@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.7.0
+Version: 0.8.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -80,7 +80,7 @@ Operation
 ├── Participation
 │   └── Assignment [Accepted]
 ├── Constraints
-│   └── Constraint [Proposed]
+│   └── Constraint [Accepted; OCP-006]
 └── Outcome
     ├── Event [Proposed]
     └── Result [Proposed]
@@ -112,6 +112,31 @@ Assignment
 
 `RoleSpecification`, `Applicability`, `AssignmentTransitionRecord` і `supersedes_assignment_ref` є локальними частинами моделі Assignment та не створюють окремі фундаментальні Concept автоматично.
 
+## Constraint
+
+Прийнята чернетка Concept `Constraint` має статус `Accepted` і визначається в [OCP-006 — Constraint Concept](../006-constraint-concept/README.md).
+
+Constraint є ідентифікованою декларативною умовою, яка обмежує допустимість або сумісність операційного context.
+
+Робоча структура:
+
+```text
+Constraint
+├── Identity
+├── TargetSpecification [local structure]
+├── PredicateSpecification [local structure]
+├── EnforcementSpecification [local structure]
+├── Validity [local temporal properties]
+├── Lifecycle [local stages and transition history]
+├── Evaluation Context [local structure]
+├── Evaluation Record [local structure]
+└── Supersession [optional]
+```
+
+`TargetSpecification`, `PredicateSpecification`, `EnforcementSpecification`, `ConstraintEvaluationContext`, `ConstraintEvaluationRecord` і lifecycle records є локальними частинами моделі та не створюють окремі фундаментальні Concept автоматично.
+
+Constraint violation не є автоматично Conflict, Risk, Readiness або State.
+
 ## Прийнята робоча гіпотеза
 
 `Actor` не виділяється в окрему фундаментальну гілку. Діяч є Resource, який отримує роль у конкретному контексті через Assignment.
@@ -122,10 +147,13 @@ Resource + Assignment + Operation Context = Operational Role
 
 Участь Resource в Operation є похідною від ефективного Assignment, а не окремим незалежним Core-зв’язком. Нормативне derivation rule визначено лише в OCP-005 §§8–9.
 
+Допустимість candidate або observed context оцінюється через застосовні Constraint. Наявність кількох Assignment або overlap не є порушенням без відповідного Constraint.
+
 ## Базові типи зв’язків
 
 - Structural: `contains`, `belongs_to`, `owns`, `part_of`;
 - Operational: `assigned_to`, `participates_in`, `controls`, `coordinates`;
+- Constraint: `constrains`, `applies_to`, `evaluates`, `blocks`, `advises`;
 - Spatial: `located_in`, `overlaps`, `intersects`, `adjacent_to`;
 - Temporal: `starts_before`, `ends_after`, `overlaps_time`;
 - Dependency: `requires`, `depends_on`, `blocks`, `enables`;
@@ -141,3 +169,5 @@ Resource + Assignment + Operation Context = Operational Role
 - Чи потрібен окремий Concept Operational Intent?
 - Чи належать Objective, Result і Constraint до окремих верхньорівневих категорій?
 - Чи потрібні окремі Concept Reservation, Allocation або Role Taxonomy?
+- Чи потрібен окремий фундаментальний Concept Conflict?
+- Яка taxonomy потрібна для constraint kinds, evaluation outcomes та enforcement modes?
