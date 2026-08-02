@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.2.0
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -14,7 +14,7 @@ Last-Review: 2026-08-02
 ## Верхній рівень
 
 ```text
-Concept
+Concept Categories
 ├── Organization
 ├── Resource
 ├── Operation
@@ -26,9 +26,11 @@ Concept
 
 Ця структура є робочою гіпотезою та не має статусу Canonical.
 
+Вузол у цій структурі є категорією класифікації. Категорія таксономії не вважається визначеним фундаментальним Concept без окремого визначення, статусу та рішення Architecture Board. Зокрема, `Governance` у цьому дереві є категорією, а не визначеним Concept.
+
 ## Resource
 
-Канонічна чернетка Concept `Resource` визначена в [OCP-003 — Resource Concept](../003-resource-concept/README.md).
+Прийнята чернетка Concept `Resource` визначена в [OCP-003 — Resource Concept](../003-resource-concept/README.md).
 
 Робоча класифікація:
 
@@ -50,9 +52,18 @@ Resource
 │   ├── Launch Site
 │   └── Relay Site
 └── Consumable Resource
+    ├── Fuel Stock
+    ├── Energy Stock
+    └── Other Consumable Stock
 ```
 
+`Fuel`, `energy` або інший матеріал як абстрактний тип чи значення кількості не є окремим Resource. Resource у витратній гілці представляє ідентифікований керований запас, партію, контейнер, комплект або іншу облікову одиницю.
+
 Остаточна класифікація Resource не затверджена. Зокрема, відкритими залишаються межі між `Organization`, `Organizational Resource`, `Infrastructure Resource` та `Environment`.
+
+## Operation
+
+Concept `Operation` перебуває у статусі `Under Review` і визначається в OCP-004 / PR-0003.
 
 ## Прийнята робоча гіпотеза
 
