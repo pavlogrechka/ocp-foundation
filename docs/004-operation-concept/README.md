@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.4.0
+Version: 0.5.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003
@@ -60,7 +60,7 @@ Operation не визначає сама по собі:
 | Concept | Status | Використання в OCP-004 |
 |---|---|---|
 | Resource | Accepted | елемент, що залучається до Operation |
-| Assignment | Under Review | авторитетний контекст участі Resource; OCP-005 |
+| Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
 | Objective | Proposed | представлення бажаного ефекту або мети |
 | Operational Area | Proposed | просторовий контекст |
 | Constraint | Proposed | обмеження Operation та Assignment |
@@ -97,7 +97,7 @@ Operation
 ├── Spatial Context
 │   └── Operational Area [Proposed]
 ├── Participation
-│   └── Assignment [Under Review]
+│   └── Assignment [Accepted]
 ├── Constraints
 │   └── Constraint [Proposed]
 └── Outcome
@@ -173,17 +173,9 @@ Operational Area є контекстом Operation, а не частиною ї�
 Assignment assigns Resource to Operation
 ```
 
-Кожен Assignment пов’язує рівно один Resource з рівно однією Operation, має власну ідентичність, RoleSpecification, applicability interval та lifecycle запису.
+Кожен Assignment пов’язує рівно один Resource з рівно однією Operation, має власну ідентичність, RoleSpecification, applicability interval та lifecycle record.
 
-Участь для моменту `t` виводиться за правилом OCP-005:
-
-```text
-derived_participates_in(Resource, Operation, t) :=
-    exists Assignment a such that
-        a.resource_ref = Resource
-        AND a.operation_ref = Operation
-        AND assignment_effective_at(a, t)
-```
+Нормативні правила часової чинності `assignment_effective_at` і участі `derived_participates_in` визначені лише в OCP-005 §§8–9. Цей документ не повторює їхню формулу.
 
 Окремий авторитетний зв’язок `Resource participates_in Operation` або `Operation uses Resource` у Core не зберігається незалежно від Assignment.
 
@@ -310,7 +302,7 @@ Operation завершена без переходу до фактичного �
 
 Operation припинена після початку фактичного виконання або через неможливість продовження.
 
-Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до Operation Lifecycle після перегляду ADR-DRAFT-007.
+Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до Operation Lifecycle після Constraint і перегляду ADR-DRAFT-007.
 
 ## 14. Result, Completion and Events
 
@@ -349,7 +341,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 7. Предметна спеціалізація Operation визначається domain або capability module; вона не є екземпляром Concept Capability лише через свою спеціалізацію.
 8. Readiness і State не виводяться з lifecycle stage Operation без окремого прийнятого правила.
 9. Операційна участь Resource в Operation представляється та виводиться через ефективний Assignment.
-10. `derived_participates_in` є derivation rule і не дублюється як інваріант.
+10. Нормативні правила участі визначені лише в OCP-005 §§8–9 і не дублюються як інваріанти або незалежні формули Operation.
 11. Assignment не успадковується автоматично через композицію Operation або Resource.
 12. Наявність Established Assignment не означає фактичної участі поза його applicability interval.
 
