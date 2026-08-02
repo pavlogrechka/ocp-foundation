@@ -1,13 +1,13 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
 Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coordination Model, Constraint Model, Domain Models
 Defines-Concepts: Assignment
-Concept-Status: Under Review
+Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
 
@@ -55,7 +55,7 @@ Assignment може бути підставою для перевірки цих
 
 ## 4. Concept Status and Dependencies
 
-`Assignment` має статус `Under Review` у реєстрі OCP-000 та визначається цим документом.
+`Assignment` має статус `Accepted` у реєстрі OCP-000 на підставі рішення Architecture Board про схвалення PR-0004.
 
 | Concept | Status | Використання в OCP-005 |
 |---|---|---|
@@ -96,15 +96,18 @@ Assignment
 - role_specification [required after Establishment]
 - applicability_start [required after Establishment]
 - applicability_end [optional]
-- lifecycle_stage
+- transition_history [authoritative local records]
+- lifecycle_stage [derived or materialized projection]
 - created_at
-- established_at [required for Established lineage]
-- terminal_at [required for Closed or Revoked]
-- provenance_ref [required for Established lineage]
+- established_at [derived projection; exactly for Established lineage]
+- terminal_at [derived projection; exactly for Closed or Revoked]
+- provenance_ref [derived establishment provenance]
 - supersedes_assignment_ref [optional]
 ```
 
 `Established lineage` означає lifecycle stages `Established`, `Closed` або `Revoked`.
+
+`transition_history` є авторитетним джерелом lifecycle. Поля `lifecycle_stage`, `established_at`, `terminal_at` і `provenance_ref` можуть бути матеріалізовані для пошуку або інтеграції, але не є незалежними джерелами істини та повинні однозначно відтворюватися з transition history.
 
 Цей перелік визначає мінімальні перевірні поля Concept, але не є схемою бази даних чи API.
 
@@ -159,6 +162,8 @@ Applicability interval не є lifecycle Assignment і не вводить ок�
 
 ### 6.4 Provenance
 
+Establishment provenance зберігається в transition record `Draft → Established`. Матеріалізований `provenance_ref` Assignment, якщо він використовується, повинен дорівнювати `provenance_ref` цього transition record.
+
 `provenance_ref` є непорожнім непрозорим посиланням на рішення, правило, Event, Order, системну дію або інший доказ установлення Assignment.
 
 Наявність provenance перевіряє простежуваність, але цей документ не визначає окремий фундаментальний Concept джерела повноваження.
@@ -202,11 +207,52 @@ Established Assignment достроково припинений. Його іс�
 
 ```text
 AssignmentTransitionRecord
+- transition_id
+- assignment_ref
 - from_stage
 - to_stage
 - occurred_at
 - provenance_ref
 ```
+
+### 7.6 Authoritative transition history
+
+Transition history одного Assignment повинна утворювати рівно один із допустимих лінійних шляхів:
+
+```text
+[]
+[Draft → Established]
+[Draft → Established, Established → Closed]
+[Draft → Established, Established → Revoked]
+[Draft → Cancelled]
+```
+
+Порожня history означає поточний stage `Draft`.
+
+Для одного Assignment:
+
+- `Draft → Established` і `Draft → Cancelled` є взаємовиключними;
+- після `Draft → Established` може існувати не більше одного terminal transition;
+- `Established → Closed` і `Established → Revoked` є взаємовиключними;
+- `from_stage` наступного record дорівнює `to_stage` попереднього;
+- `occurred_at` records не зменшується;
+- поточний `lifecycle_stage` дорівнює `to_stage` останнього record або `Draft`, якщо history порожня.
+
+Проєкції визначаються однозначно:
+
+```text
+established_at(Assignment)
+    := occurred_at of the unique Draft → Established record
+
+terminal_at(Assignment)
+    := occurred_at of the unique Established → Closed
+       or Established → Revoked record
+
+provenance_ref(Assignment)
+    := provenance_ref of the unique Draft → Established record
+```
+
+Якщо відповідного transition record немає, відповідна проєкція відсутня.
 
 ## 8. Temporal Effectivity
 
@@ -214,14 +260,18 @@ Assignment є ефективним для моменту `t`, якщо одно�
 
 ```text
 assignment_effective_at(Assignment, t) :=
-    lifecycle_stage in {Established, Closed, Revoked}
-    AND established_at is defined
+    established_at(Assignment) is defined
+    AND established_at(Assignment) <= t
     AND applicability_start <= t
     AND (applicability_end is absent OR t < applicability_end)
-    AND (terminal_at is absent OR t < terminal_at)
+    AND (terminal_at(Assignment) is absent OR t < terminal_at(Assignment))
 ```
 
-`terminal_at` означає час `Closed` або `Revoked`. Поточний lifecycle stage не скасовує історичну ефективність до `terminal_at`.
+Derivation використовує проєкції з авторитетної transition history, а не незалежно введені timestamps або stage.
+
+`terminal_at` означає час `Closed` або `Revoked`. Поточний terminal lifecycle stage не скасовує історичну ефективність до `terminal_at`.
+
+До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.
 
 Точна модель часових значень і часових зон буде визначена окремо. OCP-005 фіксує лише логічні межі derivation.
 
@@ -237,7 +287,7 @@ derived_participates_in(Resource, Operation, t) :=
         AND assignment_effective_at(a, t)
 ```
 
-Це derivation rule, а не інваріант.
+Це derivation rule, а не інваріант. OCP-005 §§8–9 є єдиним нормативним місцем визначення цих формул.
 
 Пряме авторитетне ребро:
 
@@ -285,7 +335,7 @@ Assignment застосовується лише до Resource та Operation, �
 supersedes_assignment_ref
 ```
 
-Це означає, що новий Assignment замінює попередній у визначеному контексті. Попередній Assignment має бути Closed або Revoked відповідно до фактичного завершення.
+Supersession означає намір замінити попередній Assignment у визначеному контексті, але саме по собі не завершує, не відкликає та не змінює його temporal effectivity.
 
 Supersession не видаляє історію та не змінює ідентичність попереднього Assignment.
 
@@ -311,6 +361,7 @@ Assignment не означає автоматично:
 5. Встановлення Assignment не підтверджує Readiness, availability, достатність Capability чи авторизацію Operation.
 6. Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.
 7. Assignment для Consumable Resource визначає залучений керований запас, але не кількість споживання.
+8. Якщо новий Assignment має `supersedes_assignment_ref`, replacement process повинен містити явний terminal transition попереднього Assignment відповідно до replacement policy. Допустимий порядок, overlap або gap між Establishment нового та terminal transition попереднього визначаються Constraint або amendment rule; supersession не створює цей перехід автоматично.
 
 ## 15. Semantic Rules
 
@@ -323,21 +374,26 @@ Assignment не означає автоматично:
 7. Assignment не гарантує результат Operation.
 8. Materialized participation є похідним представленням і не може бути незалежним джерелом істини.
 9. Cancelled Assignment не входить до Established lineage та не використовується в derivation участі.
+10. Матеріалізовані `lifecycle_stage`, `established_at`, `terminal_at` і `provenance_ref` є проєкціями transition history та не можуть редагуватися незалежно від неї.
 
 ## 16. Invariants
 
 1. Кожен Assignment має рівно один непорожній стабільний `assignment_id`.
 2. Два різні Assignment не мають одного й того самого `assignment_id`.
 3. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має рівно один resolvable `resource_ref` і рівно один resolvable `operation_ref`.
-4. Після переходу до Established значення `resource_ref` та `operation_ref` є незмінними.
+4. Після transition `Draft → Established` значення `resource_ref` та `operation_ref` є незмінними.
 5. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має RoleSpecification, нормалізований `role_code` якого містить щонайменше одну літеру або цифру.
 6. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має `applicability_start`.
 7. Якщо `applicability_end` заданий, `applicability_start < applicability_end`.
-8. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має непорожні `established_at` і `provenance_ref`.
-9. Кожен Closed або Revoked Assignment має `terminal_at`, і `established_at <= terminal_at`.
-10. Cancelled Assignment не має `established_at`.
-11. Assignment не може supersede сам себе, а граф `supersedes_assignment_ref` є ациклічним.
-12. Кожен AssignmentTransitionRecord містить один із дозволених переходів, валідний `occurred_at` і непорожній `provenance_ref`.
+8. Кожен AssignmentTransitionRecord має непорожні `transition_id`, `assignment_ref`, допустимі `from_stage` і `to_stage`, валідний `occurred_at` та непорожній `provenance_ref`.
+9. Transition history кожного Assignment дорівнює одному з п’яти допустимих лінійних шляхів, визначених у §7.6; розгалуження, повторний вихід з одного stage і одночасні взаємовиключні переходи заборонені.
+10. Матеріалізований `lifecycle_stage` дорівнює `to_stage` останнього transition record або `Draft`, якщо history порожня.
+11. `established_at` заданий тоді й лише тоді, коли history містить `Draft → Established`, і дорівнює `occurred_at` цього єдиного record.
+12. `terminal_at` заданий тоді й лише тоді, коли history завершується `Established → Closed` або `Established → Revoked`, і дорівнює `occurred_at` цього єдиного terminal record.
+13. Матеріалізований establishment `provenance_ref` заданий тоді й лише тоді, коли history містить `Draft → Established`, і дорівнює provenance цього record.
+14. `created_at` не пізніший за `occurred_at` першого transition record, а timestamps transition history не зменшуються.
+15. Якщо `terminal_at` заданий, `established_at <= terminal_at`.
+16. Assignment не може supersede сам себе, а граф `supersedes_assignment_ref` є ациклічним.
 
 ## 17. Examples
 
@@ -355,11 +411,15 @@ Technical Resource засобу РЕБ отримує Assignment до Operation 
 
 ### Example D — replacement
 
-Після відмови борта його Assignment `A-010` відкликається. Новий Assignment `A-011` посилається на інший Resource та `supersedes_assignment_ref = A-010`.
+Після відмови борта створюється Assignment `A-011` для іншого Resource з `supersedes_assignment_ref = A-010`. Окремий replacement process явно переводить A-010 до `Revoked`; порядок переходів визначається Constraint або amendment rule.
 
 ### Example E — consumable stock
 
 Fuel Stock `FS-001` може бути пов’язаний з Operation через Assignment. Кількість зарезервованого або фактично спожитого пального не визначається самим Assignment.
+
+### Example F — invalid silent termination
+
+Assignment у stage `Established` із довільно заповненим `terminal_at`, але без terminal transition record, є невалідним. Такий запис не може мовчки припинити `derived_participates_in`.
 
 ## 18. Non-Examples
 
@@ -387,6 +447,7 @@ Fuel Stock `FS-001` може бути пов’язаний з Operation чер�
 8. Як Constraint визначає конфлікт одночасних Assignment?
 9. Чи може один Assignment мати кілька неперервних applicability intervals, чи кожен інтервал потребує окремого Assignment?
 10. Які provenance types повинні бути канонічними для Establishment, Revocation і Closure?
+11. Яка replacement policy визначає допустимі overlap і gap між старим та новим Assignment?
 
 ## 20. Deferred Decisions
 
@@ -395,7 +456,8 @@ Fuel Stock `FS-001` може бути пов’язаний з Operation чер�
 - конфлікти одночасного залучення;
 - ексклюзивність;
 - capacity rules;
-- допустимість кількох ролей.
+- допустимість кількох ролей;
+- допустимі overlap і gap під час replacement.
 
 До Capability Concept відкладаються:
 
@@ -403,7 +465,7 @@ Fuel Stock `FS-001` може бути пов’язаний з Operation чер�
 - substitutability;
 - автоматичний підбір заміни.
 
-До перегляду ADR-DRAFT-007 відкладаються:
+До перегляду ADR-DRAFT-007 після Constraint відкладаються:
 
 - Readiness і availability;
 - operational status Resource;
