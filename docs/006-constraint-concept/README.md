@@ -348,6 +348,8 @@ effective_constraint_result(Constraint, Context) :=
 
 Збережений `not_applicable` для applicable Constraint є суперечливим evaluation і не може створити permissive decision. Він нормалізується до `indeterminate` та підлягає обробці через `indeterminate_disposition`.
 
+Інваріант, що забороняє такий authoritative record, і fail-safe нормалізація в derivation є навмисним defense-in-depth. Validator повинен відхилити суперечливий record, але derivation все одно повинна повернути `indeterminate`, якщо некоректний record потрапив через import, legacy data, concurrency defect або інший обхід валідації. PR-0006 повинен окремо тестувати обидва шари захисту.
+
 Відсутність current evaluation ніколи не трактується як `satisfied`.
 
 ## 12. Admissibility Derivation
@@ -476,9 +478,9 @@ Supersession не Retire попередній Constraint автоматично.
 10. Conflict, Risk, Readiness і availability не виводяться з одного violation без окремого прийнятого правила.
 11. Domain module може визначати власні predicate namespaces, але не може змінювати Core semantics evaluation results.
 12. Constraint не створює lifecycle transition subject автоматично.
-13. Authoritative result `not_applicable` допускається лише тоді, коли `constraint_applicable_to(Constraint, Context) = false`.
-14. Якщо applicable Constraint має збережений result `not_applicable`, effective result нормалізується до `indeterminate`, а не до permissive outcome.
-15. Для advisory Constraint відомий `violated` залишається finding, а `indeterminate + require_review` може зупинити лише автоматичне рішення; `review_required` не є `inadmissible`.
+13. Збережений `not_applicable` допустимий лише для context, до якого Constraint не застосовується.
+14. Суперечливий stored result не може створювати більш permissive derivation, ніж відсутній evaluation.
+15. `review_required` не є `inadmissible`; воно зупиняє лише автоматичне завершення decision workflow.
 
 ## 18. Semantic Rules
 
@@ -613,12 +615,10 @@ Advisory Constraint із відомим `violated` створює finding без
 - operational status;
 - межа між derived evaluation та фундаментальним State.
 
-До `PR-0006 — Add Executable Ontology Checker` відкладаються:
+До machine-readable schemas відкладаються:
 
-- перші YAML fixtures для Resource, Operation, Assignment і Constraint;
-- executable checks для lifecycle consistency та двосторонніх field invariants;
-- reference implementations `assignment_effective_at`, `derived_participates_in`, `constraint_applicable_to`, `effective_constraint_result` і `constraint_set_decision`;
-- regression fixtures для accepted review counterexamples, включно з contradictory `not_applicable`;
-- перші CI checks.
-
-Повна expression language, production evaluator interface, остаточний snapshot format і versioned implementation contracts залишаються наступними етапами machine-readable foundation.
+- expression language;
+- evaluator interface;
+- snapshot format;
+- linter rules;
+- deterministic replay contract.
