@@ -1,11 +1,16 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.8.0
+Version: 0.8.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
 Used-By: Domain Model, Knowledge Graph, Architecture
+Concept-Statuses:
+  Resource: Accepted
+  Operation: Accepted
+  Assignment: Accepted
+  Constraint: Accepted
 Last-Review: 2026-08-02
 ---
 
