@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.3.0
+Version: 0.4.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002
@@ -134,7 +134,7 @@ Consumable Resource не представляє окрему фізичну ча
 
 Resource не має сталої операційної ролі.
 
-Роль Resource у конкретній Operation визначається через `Assignment`.
+Роль Resource у конкретній Operation визначається через `Assignment`, модель якого перебуває у статусі `Under Review` в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
 
 ```text
 Resource + Assignment + Operation Context = Operational Role
@@ -165,11 +165,10 @@ Resource may_contain Resource
 ### Operational
 
 ```text
-Resource participates_in Assignment
 Assignment assigns Resource to Operation
 ```
 
-Окремий авторитетний зв’язок `Resource participates_in Operation` цим документом не визначається.
+Окремий авторитетний зв’язок `Resource participates_in Operation` цим документом не визначається. Участь є похідною від ефективного Assignment відповідно до OCP-005.
 
 ### Capability and constraints
 
@@ -206,7 +205,7 @@ Resource може бути складеним.
 Identified → Registered → Active → Retired
 ```
 
-`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після `Assignment` відповідно до `ADR-DRAFT-007`.
+`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після Assignment відповідно до `ADR-DRAFT-007`.
 
 ## 10. Business Rules
 
@@ -222,15 +221,19 @@ Identified → Registered → Active → Retired
 4. Кількість, маса, об’єм, заряд або залишок є характеристиками керованого Resource, а не окремими Resource.
 5. Операційна участь Resource в Operation представляється та виводиться через Assignment; прямий авторитетний зв’язок участі між Resource та Operation у Core не визначено.
 6. Операційна роль є властивістю контексту Assignment, а не сталою властивістю Resource.
+7. Assignment складеного Resource не створює Assignment для його складових Resource автоматично.
 
-Робоче derivation rule до прийняття OCP-005:
+Derivation rule визначено в OCP-005:
 
 ```text
-derived_participates_in(Resource, Operation)
-    := exists Assignment that links the same Resource and Operation
+derived_participates_in(Resource, Operation, t)
+    := exists Assignment a such that
+        a.resource_ref = Resource
+        AND a.operation_ref = Operation
+        AND assignment_effective_at(a, t)
 ```
 
-Це derivation rule, а не інваріант. Кардинальність, чинність і часову семантику Assignment буде визначено в OCP-005.
+Це derivation rule, а не інваріант Resource.
 
 ## 12. Invariants
 
@@ -256,7 +259,7 @@ derived_participates_in(Resource, Operation)
 
 ### Example D — launch site
 
-Конкретний майданчик запуску є Infrastructure Resource. Його використання в конкретній Operation оформлюється через Assignment або інший зв’язок, який буде уточнено після Assignment Concept.
+Конкретний майданчик запуску є Infrastructure Resource. Його використання в конкретній Operation оформлюється через Assignment.
 
 ### Example E — fuel stock
 
@@ -285,15 +288,14 @@ derived_participates_in(Resource, Operation)
 3. Чи потрібен окремий Concept `Resource Group` для тимчасового об’єднання ресурсів?
 4. Якою моделлю описується поточна доступність Resource?
 5. Чи є `Readiness` окремим Concept, спеціалізацією можливого `State`, контекстною оцінкою Resource або похідним результатом щодо конкретного Assignment чи Operation?
-6. Чи Assignment є єдиним механізмом залучення інфраструктурних і витратних ресурсів до Operation?
+6. Чи потрібні окремі механізми масового створення Assignment для складених Resource?
 7. Як моделюється взаємозамінність однотипних Resource без втрати ідентичності окремих екземплярів?
 8. Де проходить межа між Resource і Capability?
 
 ## 16. Deferred Decisions
 
-До завершення `Assignment Concept` відкладаються:
+Після визначення Assignment залишаються відкладеними:
 
-- формальна derivation участі Resource в Operation;
 - модель доступності;
 - онтологічна природа Readiness та її зв’язок із Resource, Assignment, Operation і можливим State;
 - модель поточного використання;

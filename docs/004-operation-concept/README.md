@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.3.0
+Version: 0.4.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003
@@ -60,10 +60,10 @@ Operation не визначає сама по собі:
 | Concept | Status | Використання в OCP-004 |
 |---|---|---|
 | Resource | Accepted | елемент, що залучається до Operation |
-| Assignment | Proposed | робочий механізм участі Resource |
+| Assignment | Under Review | авторитетний контекст участі Resource; OCP-005 |
 | Objective | Proposed | представлення бажаного ефекту або мети |
 | Operational Area | Proposed | просторовий контекст |
-| Constraint | Proposed | обмеження Operation |
+| Constraint | Proposed | обмеження Operation та Assignment |
 | Event | Proposed | значущий факт або зміна |
 | Result | Proposed | наслідок або підсумок виконання |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
@@ -97,7 +97,7 @@ Operation
 ├── Spatial Context
 │   └── Operational Area [Proposed]
 ├── Participation
-│   └── Assignment [Proposed]
+│   └── Assignment [Under Review]
 ├── Constraints
 │   └── Constraint [Proposed]
 └── Outcome
@@ -167,26 +167,29 @@ Operational Area є контекстом Operation, а не частиною ї�
 
 ## 10. Participation and Assignment
 
-У поточній робочій моделі участь Resource в Operation представляється через Assignment:
+Авторитетна участь Resource в Operation представляється через Assignment, модель якого визначена в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
 
 ```text
 Assignment assigns Resource to Operation
 ```
 
-Окремий авторитетний зв’язок `Resource participates_in Operation` або `Operation uses Resource` цим документом не визначається.
+Кожен Assignment пов’язує рівно один Resource з рівно однією Operation, має власну ідентичність, RoleSpecification, applicability interval та lifecycle запису.
 
-Робоче derivation rule до прийняття OCP-005:
+Участь для моменту `t` виводиться за правилом OCP-005:
 
 ```text
-derived_participates_in(Resource, Operation)
-    := exists Assignment that links the same Resource and Operation
+derived_participates_in(Resource, Operation, t) :=
+    exists Assignment a such that
+        a.resource_ref = Resource
+        AND a.operation_ref = Operation
+        AND assignment_effective_at(a, t)
 ```
 
-Assignment має визначити роль, часову застосовність, обсяг та інші умови участі. Детальна семантика, кардинальність і чинність Assignment буде визначена в `OCP-005 — Assignment Concept`.
+Окремий авторитетний зв’язок `Resource participates_in Operation` або `Operation uses Resource` у Core не зберігається незалежно від Assignment.
+
+Assignment до parent Operation не створює Assignment до child Operation. Assignment складеного Resource не створює Assignment його складових Resource.
 
 Operation не володіє Resource і не змінює його організаційну чи командну належність.
-
-До прийняття OCP-005 правила участі через Assignment є provisional contract між OCP-003 і OCP-004. Derivation участі є Semantic Rule, а не самостійним інваріантом Operation.
 
 ## 11. Relationships
 
@@ -247,6 +250,8 @@ Parent/child використовується лише тоді, коли доч
 
 Координація між незалежними Operation не створює parent/child автоматично.
 
+Assignment не успадковується між parent і child Operation автоматично.
+
 Остаточні правила композиції залишаються відкритим питанням.
 
 ## 13. Working Lifecycle
@@ -291,6 +296,8 @@ Operation має мінімальний плановий контекст, до�
 
 Зафіксовано початок фактичного виконання Operation.
 
+`Active` Operation не робить усі пов’язані Assignment ефективними автоматично: для кожного Assignment окремо застосовується temporal effectivity rule OCP-005.
+
 ### 13.5 Completed
 
 Зафіксовано завершення фактичного виконання Operation.
@@ -303,7 +310,7 @@ Operation завершена без переходу до фактичного �
 
 Operation припинена після початку фактичного виконання або через неможливість продовження.
 
-Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до Operation Lifecycle після OCP-005 і перегляду ADR-DRAFT-007.
+Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до Operation Lifecycle після перегляду ADR-DRAFT-007.
 
 ## 14. Result, Completion and Events
 
@@ -329,6 +336,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
 7. Explicit intent може використовуватися поза `Draft` лише після проходження змістовної перевірки за domain validation rule; Core перевіряє структурний record і результат перевірки, але не замінює предметну оцінку.
+8. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
 
 ## 16. Semantic Rules
 
@@ -340,8 +348,10 @@ Event фіксує значущий факт або зміну, пов’яза�
 6. Шаблон операції не є Operation instance.
 7. Предметна спеціалізація Operation визначається domain або capability module; вона не є екземпляром Concept Capability лише через свою спеціалізацію.
 8. Readiness і State не виводяться з lifecycle stage Operation без окремого прийнятого правила.
-9. Операційна участь Resource в Operation представляється та виводиться через Assignment; пряме авторитетне ребро участі між Resource та Operation у Core не визначено.
-10. `derived_participates_in` є derivation rule і не повинно дублюватися як інваріант виду «для кожної участі існує Assignment».
+9. Операційна участь Resource в Operation представляється та виводиться через ефективний Assignment.
+10. `derived_participates_in` є derivation rule і не дублюється як інваріант.
+11. Assignment не успадковується автоматично через композицію Operation або Resource.
+12. Наявність Established Assignment не означає фактичної участі поза його applicability interval.
 
 ## 17. Invariants
 
@@ -357,7 +367,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 
 ### Example A — UAV mission
 
-Конкретний виліт є Operation. Маршрут, часові межі, екіпаж, борт, зв’язок і Objective формують її контекст. Спеціальні параметри визначаються UAV domain або capability module.
+Конкретний виліт є Operation. Маршрут, часові межі, екіпаж, борт, зв’язок і Objective формують її контекст. Спеціальні параметри визначаються UAV domain або capability module. Екіпаж і борт залучаються окремими Assignment.
 
 ### Example B — EW activity
 
@@ -373,6 +383,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 
 - шаблон операції;
 - Resource;
+- Assignment;
 - роль виконавця;
 - маршрут без операційного наміру;
 - окрема частота;
@@ -396,17 +407,15 @@ Event фіксує значущий факт або зміну, пов’яза�
 10. Чи має Operation власну Readiness, окрему від Readiness залучених Resource?
 11. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
 12. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
+13. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
 
 ## 21. Deferred Decisions
 
-До завершення `OCP-005 — Assignment Concept` відкладаються:
+До Constraint Concept відкладаються:
 
-- формальна семантика та кардинальність Assignment;
-- остаточна derivation участі Resource в Operation;
-- конфлікти одночасного залучення;
-- часові межі Assignment відносно Operation;
-- ролі резерву, підтримки, координації та погодження;
-- правила заміни Resource в Active Operation.
+- конфлікти одночасного залучення Resource;
+- ексклюзивність і capacity rules;
+- допустимість кількох одночасних ролей.
 
 До перегляду `ADR-DRAFT-007` відкладаються:
 
@@ -421,4 +430,5 @@ Event фіксує значущий факт або зміну, пов’яза�
 - окремий Concept Operational Intent;
 - канонічна модель композиції Operation;
 - канонічна модель conflict і coordination;
-- taxonomy provenance для transition та relationship records.
+- taxonomy provenance для transition та relationship records;
+- правила автоматичного завершення або відкликання Assignment після завершення Operation.
