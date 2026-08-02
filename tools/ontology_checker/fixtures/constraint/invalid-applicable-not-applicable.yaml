@@ -1,5 +1,7 @@
 case_id: constraint-regression-applicable-not-applicable
 concept: Constraint
+reference:
+  constraint_version_ref: C-NA-001@1
 expected:
   valid: false
   error_codes:
