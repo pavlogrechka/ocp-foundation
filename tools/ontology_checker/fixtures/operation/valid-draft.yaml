@@ -1,0 +1,7 @@
+case_id: operation-valid-draft-001
+concept: Operation
+expected:
+  valid: true
+entity:
+  operation_id: OP-001
+  lifecycle_stage: Draft

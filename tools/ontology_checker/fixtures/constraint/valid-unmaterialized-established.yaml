@@ -1,0 +1,29 @@
+case_id: constraint-valid-unmaterialized-established
+concept: Constraint
+reference:
+  constraint_version_ref: C-002@1
+expected:
+  valid: true
+  error_codes: []
+contexts: []
+entity:
+  constraint_id: C-002
+  target_specification:
+    explicit_subject_refs: [R-001]
+  predicate_specification:
+    predicate_code: role_multiplicity
+    predicate_namespace: ocp.core
+    predicate_version: 1
+    input_contract_ref: contract://role-multiplicity/v1
+  enforcement_specification:
+    mode: advisory
+    indeterminate_disposition: require_review
+  transition_history:
+    - transition_id: CT-002
+      constraint_ref: C-002
+      from_stage: Draft
+      to_stage: Established
+      occurred_at: 2026-08-02T08:00:00Z
+      provenance_ref: BOARD-002
+  created_at: 2026-08-02T07:50:00Z
+  evaluation_records: []

@@ -23,7 +23,7 @@
 - Concept Taxonomy;
 - Architecture Decision Records;
 - архітектурний backlog;
-- схеми та приклади без чутливих даних.
+- reference checker, схеми та приклади без чутливих даних.
 
 Репозиторій **не повинен містити**:
 
@@ -41,17 +41,19 @@ docs/          канонічні специфікації
 adr/           архітектурні рішення
 architecture/  діаграми та архітектурні моделі
 schemas/       машинозчитувані схеми
+tools/         reference checker та інженерні перевірки
 backlog/       відкриті питання та дорожня карта
 ```
 
 ## Статус
 
-**Foundation 0.2 — Core Domain Foundation.**
+**Foundation 0.3 — Executable Validation Foundation.**
 
 - Resource, Operation, Assignment і Constraint мають статус `Accepted`;
-- State і Readiness залишаються Deferred до першого executable validation cycle та перегляду ADR-DRAFT-007;
-- machine-readable schemas, ontology linter та implementation contracts ще не створені;
-- наступний цикл: `PR-0006 — Add Executable Ontology Checker`;
-- орієнтовна загальна foundation-готовність: **≈30%**.
+- reference ontology checker перевіряє YAML fixtures, exact-version Constraint evaluation, lifecycle projections, status synchronization і прийняті regression counterexamples;
+- GitHub Actions запускає unit tests і fixture validation для pull request та `main`;
+- State і Readiness залишаються Deferred до завершення першого executable validation cycle та перегляду ADR-DRAFT-007;
+- checker не є production validator або незалежним нормативним джерелом;
+- орієнтовна загальна foundation-готовність після прийняття PR-0006: **≈35%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

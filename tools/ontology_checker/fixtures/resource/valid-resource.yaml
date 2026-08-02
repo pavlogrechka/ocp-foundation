@@ -1,0 +1,10 @@
+case_id: resource-valid-001
+concept: Resource
+expected:
+  valid: true
+entity:
+  resource_id: R-001
+  classifications:
+    - Technical Resource
+    - Platform
+  contains_refs: []

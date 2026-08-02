@@ -1,0 +1,166 @@
+manifest_version: 0.2.0
+authority: reference-only
+normative_source: OCP documents
+rules:
+- id: ASSIGNMENT_APPLICABILITY_INTERVAL_INVALID
+  kind: validation
+  source: OCP-005 §16 invariant 7
+- id: ASSIGNMENT_APPLICABILITY_START_REQUIRED
+  kind: validation
+  source: OCP-005 §16 invariant 6
+- id: ASSIGNMENT_CREATED_AFTER_TRANSITION
+  kind: validation
+  source: OCP-005 §16 invariant 14
+- id: ASSIGNMENT_ESTABLISHED_AT_MISMATCH
+  kind: validation
+  source: OCP-005 §16 invariant 11
+- id: ASSIGNMENT_HISTORY_INVALID
+  kind: validation
+  source: OCP-005 §7.6 and §16 invariant 9
+- id: ASSIGNMENT_ID_REQUIRED
+  kind: validation
+  source: OCP-005 §16 invariant 1
+- id: ASSIGNMENT_LIFECYCLE_STAGE_MISMATCH
+  kind: validation
+  source: OCP-005 §16 invariant 10
+- id: ASSIGNMENT_OPERATION_REQUIRED
+  kind: validation
+  source: OCP-005 §16 invariant 3
+- id: ASSIGNMENT_PROVENANCE_REF_MISMATCH
+  kind: validation
+  source: OCP-005 §16 invariant 13
+- id: ASSIGNMENT_RESOURCE_REQUIRED
+  kind: validation
+  source: OCP-005 §16 invariant 3
+- id: ASSIGNMENT_ROLE_REQUIRED
+  kind: validation
+  source: OCP-005 §16 invariant 5
+- id: ASSIGNMENT_SELF_SUPERSESSION
+  kind: validation
+  source: OCP-005 §16 invariant 16
+- id: ASSIGNMENT_TERMINAL_AT_MISMATCH
+  kind: validation
+  source: OCP-005 §16 invariant 12
+- id: ASSIGNMENT_TERMINAL_BEFORE_ESTABLISHMENT
+  kind: validation
+  source: OCP-005 §16 invariant 15
+- id: ASSIGNMENT_TRANSITION_INCOMPLETE
+  kind: validation
+  source: OCP-005 §16 invariant 8
+- id: ASSIGNMENT_TRANSITION_REF_MISMATCH
+  kind: validation
+  source: OCP-005 §16 invariant 8
+- id: ASSIGNMENT_TRANSITION_TIME_ORDER
+  kind: validation
+  source: OCP-005 §7.6 and §16 invariant 14
+- id: CONSTRAINT_AUTHORITATIVE_RESULT_CONFLICT
+  kind: validation
+  source: OCP-006 §11 and §19 invariant 18
+- id: CONSTRAINT_ENFORCEMENT_INVALID
+  kind: validation
+  source: OCP-006 §6.3 and §19 structural invariants
+- id: CONSTRAINT_ESTABLISHED_AT_MISMATCH
+  kind: validation
+  source: OCP-006 §19 lifecycle projection invariants
+- id: CONSTRAINT_ESTABLISHMENT_PROVENANCE_REF_MISMATCH
+  kind: validation
+  source: OCP-006 §19 lifecycle projection invariants
+- id: CONSTRAINT_EVALUATION_INCOMPLETE
+  kind: validation
+  source: OCP-006 §11 and §19 evaluation invariants
+- id: CONSTRAINT_EVALUATION_REF_MISMATCH
+  kind: validation
+  source: OCP-006 §11 and §19 evaluation invariants
+- id: CONSTRAINT_HISTORY_INVALID
+  kind: validation
+  source: OCP-006 §7 and §19 invariant 8
+- id: CONSTRAINT_ID_REQUIRED
+  kind: validation
+  source: OCP-006 §19 invariant 1
+- id: CONSTRAINT_LIFECYCLE_STAGE_MISMATCH
+  kind: validation
+  source: OCP-006 §19 lifecycle projection invariants
+- id: CONSTRAINT_NOT_APPLICABLE_CONTRADICTION
+  kind: validation
+  source: OCP-006 §11 and §19 invariants 16–17
+- id: CONSTRAINT_PREDICATE_INCOMPLETE
+  kind: validation
+  source: OCP-006 §6.2 and §19 structural invariants
+- id: CONSTRAINT_RETIRED_AT_MISMATCH
+  kind: validation
+  source: OCP-006 §19 lifecycle projection invariants
+- id: CONSTRAINT_SELF_SUPERSESSION
+  kind: validation
+  source: OCP-006 §19 supersession invariant
+- id: CONSTRAINT_TARGET_REQUIRED
+  kind: validation
+  source: OCP-006 §6.1 and §19 structural invariants
+- id: CONSTRAINT_TRANSITION_INCOMPLETE
+  kind: validation
+  source: OCP-006 §19 transition invariants
+- id: CONSTRAINT_TRANSITION_REF_MISMATCH
+  kind: validation
+  source: OCP-006 §19 transition invariants
+- id: CONSTRAINT_TRANSITION_TIME_ORDER
+  kind: validation
+  source: OCP-006 §19 transition invariants
+- id: CONSTRAINT_VALIDITY_INTERVAL_INVALID
+  kind: validation
+  source: OCP-006 §6.4 and §19 temporal invariants
+- id: FIXTURE_CONCEPT_UNSUPPORTED
+  kind: validation
+  source: PR-0006 fixture contract
+- id: FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED
+  kind: validation
+  source: OCP-006 §11 exact-version evaluation contract; PR-0006 fixture envelope
+- id: OPERATION_ID_REQUIRED
+  kind: validation
+  source: OCP-004 invariants
+- id: OPERATION_INTENT_REQUIRED
+  kind: validation
+  source: OCP-004 explicit-intent invariant
+- id: OPERATION_SELF_PARENT
+  kind: validation
+  source: OCP-004 composition invariant
+- id: RESOURCE_CLASSIFICATION_REQUIRED
+  kind: validation
+  source: OCP-003 §12 invariant 3
+- id: RESOURCE_ID_REQUIRED
+  kind: validation
+  source: OCP-003 §12 invariant 1
+- id: RESOURCE_SELF_CONTAINMENT
+  kind: validation
+  source: OCP-003 §12 composition invariants
+- id: STATUS_DEFINING_DOCUMENT_MISSING
+  kind: validation
+  source: OCP-001 Concept status synchronization
+- id: STATUS_MISMATCH
+  kind: validation
+  source: OCP-001 Concept status synchronization
+- id: STATUS_REGISTRY_MISSING
+  kind: validation
+  source: OCP-001 Concept status synchronization
+- id: STATUS_TAXONOMY_MISSING
+  kind: validation
+  source: OCP-001 Concept status synchronization
+- id: assignment_effective_at
+  kind: derivation
+  source: OCP-005 §8
+- id: constraint_applicable_to
+  kind: derivation
+  source: OCP-006 §10
+- id: constraint_blocks
+  kind: derivation
+  source: OCP-006 §12
+- id: constraint_effective_at
+  kind: derivation
+  source: OCP-006 §8
+- id: constraint_set_decision
+  kind: derivation
+  source: OCP-006 §12
+- id: derived_participates_in
+  kind: derivation
+  source: OCP-005 §9
+- id: effective_constraint_result
+  kind: derivation
+  source: OCP-006 §11

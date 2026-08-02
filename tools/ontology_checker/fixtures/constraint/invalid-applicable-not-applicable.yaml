@@ -1,0 +1,51 @@
+case_id: constraint-regression-applicable-not-applicable
+concept: Constraint
+reference:
+  constraint_version_ref: C-NA-001@1
+expected:
+  valid: false
+  error_codes:
+    - CONSTRAINT_NOT_APPLICABLE_CONTRADICTION
+contexts:
+  - context_id: CTX-NA-001
+    evaluation_time: 2026-08-02T10:30:00Z
+    candidate_or_observed: candidate
+    subject_refs: [R-001]
+    input_snapshot_ref: SNAP-NA-001
+    operation_context_ref: OP-001
+entity:
+  constraint_id: C-NA-001
+  target_specification:
+    explicit_subject_refs: [R-001]
+    operation_context_ref: OP-001
+  predicate_specification:
+    predicate_code: exclusive_assignment
+    predicate_namespace: ocp.core
+    predicate_version: 1
+    input_contract_ref: contract://assignment-overlap/v1
+  enforcement_specification:
+    mode: blocking
+    indeterminate_disposition: block
+  validity_start: 2026-08-02T00:00:00Z
+  validity_end: null
+  transition_history:
+    - transition_id: CT-NA-001
+      constraint_ref: C-NA-001
+      from_stage: Draft
+      to_stage: Established
+      occurred_at: 2026-08-02T08:00:00Z
+      provenance_ref: BOARD-NA-001
+  lifecycle_stage: Established
+  created_at: 2026-08-02T07:50:00Z
+  established_at: 2026-08-02T08:00:00Z
+  retired_at: null
+  establishment_provenance_ref: BOARD-NA-001
+  evaluation_records:
+    - evaluation_id: EV-NA-001
+      constraint_ref: C-NA-001
+      constraint_version_ref: C-NA-001@1
+      context_ref: CTX-NA-001
+      input_snapshot_ref: SNAP-NA-001
+      evaluated_at: 2026-08-02T10:30:01Z
+      result: not_applicable
+      evaluator_ref: checker://fault-injection
