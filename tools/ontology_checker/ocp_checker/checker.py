@@ -10,6 +10,70 @@ import yaml
 
 ALNUM = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
+ERROR_CODES = frozenset(
+    {
+        "RESOURCE_ID_REQUIRED",
+        "RESOURCE_CLASSIFICATION_REQUIRED",
+        "RESOURCE_SELF_CONTAINMENT",
+        "OPERATION_ID_REQUIRED",
+        "OPERATION_INTENT_REQUIRED",
+        "OPERATION_SELF_PARENT",
+        "ASSIGNMENT_ID_REQUIRED",
+        "ASSIGNMENT_HISTORY_INVALID",
+        "ASSIGNMENT_TRANSITION_INCOMPLETE",
+        "ASSIGNMENT_TRANSITION_REF_MISMATCH",
+        "ASSIGNMENT_TRANSITION_TIME_ORDER",
+        "ASSIGNMENT_LIFECYCLE_STAGE_MISMATCH",
+        "ASSIGNMENT_ESTABLISHED_AT_MISMATCH",
+        "ASSIGNMENT_TERMINAL_AT_MISMATCH",
+        "ASSIGNMENT_PROVENANCE_REF_MISMATCH",
+        "ASSIGNMENT_RESOURCE_REQUIRED",
+        "ASSIGNMENT_OPERATION_REQUIRED",
+        "ASSIGNMENT_ROLE_REQUIRED",
+        "ASSIGNMENT_APPLICABILITY_START_REQUIRED",
+        "ASSIGNMENT_APPLICABILITY_INTERVAL_INVALID",
+        "ASSIGNMENT_CREATED_AFTER_TRANSITION",
+        "ASSIGNMENT_TERMINAL_BEFORE_ESTABLISHMENT",
+        "ASSIGNMENT_SELF_SUPERSESSION",
+        "CONSTRAINT_ID_REQUIRED",
+        "CONSTRAINT_HISTORY_INVALID",
+        "CONSTRAINT_TRANSITION_INCOMPLETE",
+        "CONSTRAINT_TRANSITION_REF_MISMATCH",
+        "CONSTRAINT_TRANSITION_TIME_ORDER",
+        "CONSTRAINT_LIFECYCLE_STAGE_MISMATCH",
+        "CONSTRAINT_ESTABLISHED_AT_MISMATCH",
+        "CONSTRAINT_RETIRED_AT_MISMATCH",
+        "CONSTRAINT_ESTABLISHMENT_PROVENANCE_REF_MISMATCH",
+        "CONSTRAINT_TARGET_REQUIRED",
+        "CONSTRAINT_PREDICATE_INCOMPLETE",
+        "CONSTRAINT_ENFORCEMENT_INVALID",
+        "CONSTRAINT_VALIDITY_INTERVAL_INVALID",
+        "CONSTRAINT_EVALUATION_INCOMPLETE",
+        "CONSTRAINT_EVALUATION_REF_MISMATCH",
+        "CONSTRAINT_NOT_APPLICABLE_CONTRADICTION",
+        "CONSTRAINT_AUTHORITATIVE_RESULT_CONFLICT",
+        "CONSTRAINT_SELF_SUPERSESSION",
+        "FIXTURE_CONCEPT_UNSUPPORTED",
+        "FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED",
+        "STATUS_REGISTRY_MISSING",
+        "STATUS_TAXONOMY_MISSING",
+        "STATUS_DEFINING_DOCUMENT_MISSING",
+        "STATUS_MISMATCH",
+    }
+)
+
+DERIVATION_RULES = frozenset(
+    {
+        "assignment_effective_at",
+        "derived_participates_in",
+        "constraint_effective_at",
+        "constraint_applicable_to",
+        "effective_constraint_result",
+        "constraint_blocks",
+        "constraint_set_decision",
+    }
+)
+
 
 @dataclass(frozen=True)
 class ValidationResult:
@@ -18,6 +82,10 @@ class ValidationResult:
     @property
     def valid(self) -> bool:
         return not self.errors
+
+
+def _result(errors: Iterable[str]) -> ValidationResult:
+    return ValidationResult(tuple(dict.fromkeys(errors)))
 
 
 def _nonempty(value: Any) -> bool:
@@ -66,6 +134,16 @@ def _times_non_decreasing(history: list[dict[str, Any]]) -> bool:
     return all(item is not None for item in times) and all(a <= b for a, b in zip(times, times[1:]))
 
 
+def _check_materialized_projections(
+    entity: dict[str, Any], projections: dict[str, Any], prefix: str
+) -> list[str]:
+    errors: list[str] = []
+    for field, expected in projections.items():
+        if field in entity and entity[field] != expected:
+            errors.append(f"{prefix}_{field.upper()}_MISMATCH")
+    return errors
+
+
 def validate_resource(resource: dict[str, Any]) -> ValidationResult:
     errors: list[str] = []
     if not _nonempty(resource.get("resource_id")):
@@ -76,7 +154,7 @@ def validate_resource(resource: dict[str, Any]) -> ValidationResult:
     contains = resource.get("contains_refs", [])
     if resource.get("resource_id") in contains:
         errors.append("RESOURCE_SELF_CONTAINMENT")
-    return ValidationResult(tuple(errors))
+    return _result(errors)
 
 
 def validate_operation(operation: dict[str, Any]) -> ValidationResult:
@@ -99,7 +177,7 @@ def validate_operation(operation: dict[str, Any]) -> ValidationResult:
             errors.append("OPERATION_INTENT_REQUIRED")
     if operation.get("parent_operation_ref") == operation.get("operation_id"):
         errors.append("OPERATION_SELF_PARENT")
-    return ValidationResult(tuple(errors))
+    return _result(errors)
 
 
 ASSIGNMENT_PATHS = {
@@ -149,9 +227,7 @@ def validate_assignment(assignment: dict[str, Any]) -> ValidationResult:
         errors.append("ASSIGNMENT_TRANSITION_TIME_ORDER")
 
     projections = assignment_projections(assignment)
-    for field, expected in projections.items():
-        if assignment.get(field) != expected:
-            errors.append(f"ASSIGNMENT_{field.upper()}_MISMATCH")
+    errors.extend(_check_materialized_projections(assignment, projections, "ASSIGNMENT"))
 
     stage = projections["lifecycle_stage"]
     if stage in {"Established", "Closed", "Revoked"}:
@@ -182,7 +258,7 @@ def validate_assignment(assignment: dict[str, Any]) -> ValidationResult:
 
     if assignment.get("supersedes_assignment_ref") == assignment_id:
         errors.append("ASSIGNMENT_SELF_SUPERSESSION")
-    return ValidationResult(tuple(dict.fromkeys(errors)))
+    return _result(errors)
 
 
 def assignment_effective_at(assignment: dict[str, Any], at: str) -> bool:
@@ -194,10 +270,17 @@ def assignment_effective_at(assignment: dict[str, Any], at: str) -> bool:
     terminal = _parse_time(projections["terminal_at"])
     if moment is None or established is None or start is None:
         return False
-    return established <= moment and start <= moment and (end is None or moment < end) and (terminal is None or moment < terminal)
+    return (
+        established <= moment
+        and start <= moment
+        and (end is None or moment < end)
+        and (terminal is None or moment < terminal)
+    )
 
 
-def derived_participates_in(assignments: Iterable[dict[str, Any]], resource_ref: str, operation_ref: str, at: str) -> bool:
+def derived_participates_in(
+    assignments: Iterable[dict[str, Any]], resource_ref: str, operation_ref: str, at: str
+) -> bool:
     return any(
         item.get("resource_ref") == resource_ref
         and item.get("operation_ref") == operation_ref
@@ -235,7 +318,12 @@ def constraint_effective_at(constraint: dict[str, Any], at: str) -> bool:
     retired = _parse_time(projection["retired_at"])
     if moment is None or established is None:
         return False
-    return established <= moment and (start is None or start <= moment) and (end is None or moment < end) and (retired is None or moment < retired)
+    return (
+        established <= moment
+        and (start is None or start <= moment)
+        and (end is None or moment < end)
+        and (retired is None or moment < retired)
+    )
 
 
 def _target_matches(target: dict[str, Any], context: dict[str, Any]) -> bool:
@@ -244,7 +332,10 @@ def _target_matches(target: dict[str, Any], context: dict[str, Any]) -> bool:
     selector = target.get("subject_selector") or {}
     explicit_match = bool(explicit.intersection(subjects)) if explicit else False
     selector_match = bool(selector.get("match_all"))
-    operation_match = not target.get("operation_context_ref") or target.get("operation_context_ref") == context.get("operation_context_ref")
+    operation_match = (
+        not target.get("operation_context_ref")
+        or target.get("operation_context_ref") == context.get("operation_context_ref")
+    )
     return (explicit_match or selector_match) and operation_match
 
 
@@ -254,53 +345,96 @@ def constraint_applicable_to(constraint: dict[str, Any], context: dict[str, Any]
     )
 
 
-def _matching_evaluation(constraint: dict[str, Any], context: dict[str, Any]) -> dict[str, Any] | None:
-    candidates = [
+def _matching_evaluations(
+    constraint: dict[str, Any],
+    context: dict[str, Any],
+    constraint_version_ref: str,
+) -> list[dict[str, Any]]:
+    return [
         item
         for item in constraint.get("evaluation_records", [])
-        if item.get("context_ref") == context.get("context_id")
+        if item.get("constraint_version_ref") == constraint_version_ref
+        and item.get("context_ref") == context.get("context_id")
         and item.get("input_snapshot_ref") == context.get("input_snapshot_ref")
     ]
-    return candidates[-1] if candidates else None
 
 
-def effective_constraint_result(constraint: dict[str, Any], context: dict[str, Any]) -> str:
-    applicable = constraint_applicable_to(constraint, context)
-    if not applicable:
+def effective_constraint_result(
+    constraint: dict[str, Any],
+    context: dict[str, Any],
+    constraint_version_ref: str,
+) -> str:
+    if not constraint_applicable_to(constraint, context):
         return "not_applicable"
-    evaluation = _matching_evaluation(constraint, context)
-    if evaluation is None:
+    if not _nonempty(constraint_version_ref):
         return "indeterminate"
-    result = evaluation.get("result")
+
+    candidates = _matching_evaluations(constraint, context, constraint_version_ref)
+    if not candidates:
+        return "indeterminate"
+
+    results = {item.get("result") for item in candidates}
+    if len(results) != 1:
+        return "indeterminate"
+
+    result = next(iter(results))
     return result if result in {"satisfied", "violated", "indeterminate"} else "indeterminate"
 
 
-def constraint_blocks(constraint: dict[str, Any], context: dict[str, Any]) -> bool:
+def constraint_blocks(
+    constraint: dict[str, Any],
+    context: dict[str, Any],
+    constraint_version_ref: str,
+) -> bool:
     if not constraint_applicable_to(constraint, context):
         return False
     enforcement = constraint.get("enforcement_specification") or {}
     if enforcement.get("mode") != "blocking":
         return False
-    result = effective_constraint_result(constraint, context)
-    return result == "violated" or (result == "indeterminate" and enforcement.get("indeterminate_disposition") == "block")
+    result = effective_constraint_result(constraint, context, constraint_version_ref)
+    return result == "violated" or (
+        result == "indeterminate" and enforcement.get("indeterminate_disposition") == "block"
+    )
 
 
-def constraint_set_decision(constraints: Iterable[dict[str, Any]], context: dict[str, Any]) -> str:
+def constraint_set_decision(
+    constraints: Iterable[dict[str, Any]],
+    context: dict[str, Any],
+    constraint_version_refs: dict[str, str],
+) -> str:
     applicable = [item for item in constraints if constraint_applicable_to(item, context)]
-    if any(constraint_blocks(item, context) for item in applicable):
+    if any(
+        constraint_blocks(
+            item,
+            context,
+            constraint_version_refs.get(str(item.get("constraint_id")), ""),
+        )
+        for item in applicable
+    ):
         return "inadmissible"
     for item in applicable:
         enforcement = item.get("enforcement_specification") or {}
-        if effective_constraint_result(item, context) == "indeterminate" and enforcement.get("indeterminate_disposition") == "require_review":
+        result = effective_constraint_result(
+            item,
+            context,
+            constraint_version_refs.get(str(item.get("constraint_id")), ""),
+        )
+        if result == "indeterminate" and enforcement.get("indeterminate_disposition") == "require_review":
             return "review_required"
     return "admissible"
 
 
-def validate_constraint(constraint: dict[str, Any], contexts: dict[str, dict[str, Any]] | None = None) -> ValidationResult:
+def validate_constraint(
+    constraint: dict[str, Any],
+    contexts: dict[str, dict[str, Any]] | None = None,
+    constraint_version_ref: str | None = None,
+) -> ValidationResult:
     errors: list[str] = []
     constraint_id = constraint.get("constraint_id")
     if not _nonempty(constraint_id):
         errors.append("CONSTRAINT_ID_REQUIRED")
+    if not _nonempty(constraint_version_ref):
+        errors.append("FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED")
 
     history = constraint.get("transition_history") or []
     if not isinstance(history, list) or _transition_signature(history) not in CONSTRAINT_PATHS:
@@ -319,9 +453,7 @@ def validate_constraint(constraint: dict[str, Any], contexts: dict[str, dict[str
         errors.append("CONSTRAINT_TRANSITION_TIME_ORDER")
 
     projection = constraint_projections(constraint)
-    for field, expected in projection.items():
-        if constraint.get(field) != expected:
-            errors.append(f"CONSTRAINT_{field.upper()}_MISMATCH")
+    errors.extend(_check_materialized_projections(constraint, projection, "CONSTRAINT"))
 
     if projection["lifecycle_stage"] in {"Established", "Retired"}:
         target = constraint.get("target_specification") or {}
@@ -335,11 +467,9 @@ def validate_constraint(constraint: dict[str, Any], contexts: dict[str, dict[str
                 errors.append("CONSTRAINT_PREDICATE_INCOMPLETE")
                 break
         enforcement = constraint.get("enforcement_specification") or {}
-        if enforcement.get("mode") not in {"blocking", "advisory"} or enforcement.get("indeterminate_disposition") not in {
-            "block",
-            "require_review",
-            "allow",
-        }:
+        if enforcement.get("mode") not in {"blocking", "advisory"} or enforcement.get(
+            "indeterminate_disposition"
+        ) not in {"block", "require_review", "allow"}:
             errors.append("CONSTRAINT_ENFORCEMENT_INVALID")
 
     start = _parse_time(constraint.get("validity_start"))
@@ -350,23 +480,41 @@ def validate_constraint(constraint: dict[str, Any], contexts: dict[str, dict[str
     contexts = contexts or {}
     authoritative: dict[tuple[Any, Any, Any], str] = {}
     for record in constraint.get("evaluation_records", []):
-        required = ("evaluation_id", "constraint_ref", "constraint_version_ref", "context_ref", "input_snapshot_ref", "evaluated_at", "result", "evaluator_ref")
+        required = (
+            "evaluation_id",
+            "constraint_ref",
+            "constraint_version_ref",
+            "context_ref",
+            "input_snapshot_ref",
+            "evaluated_at",
+            "result",
+            "evaluator_ref",
+        )
         if not all(_nonempty(record.get(field)) for field in required):
             errors.append("CONSTRAINT_EVALUATION_INCOMPLETE")
             continue
         if record.get("constraint_ref") != constraint_id:
             errors.append("CONSTRAINT_EVALUATION_REF_MISMATCH")
         context = contexts.get(str(record.get("context_ref")))
-        if context and record.get("result") == "not_applicable" and constraint_applicable_to(constraint, context):
+        if (
+            context
+            and record.get("constraint_version_ref") == constraint_version_ref
+            and record.get("result") == "not_applicable"
+            and constraint_applicable_to(constraint, context)
+        ):
             errors.append("CONSTRAINT_NOT_APPLICABLE_CONTRADICTION")
-        key = (record.get("constraint_version_ref"), record.get("context_ref"), record.get("input_snapshot_ref"))
+        key = (
+            record.get("constraint_version_ref"),
+            record.get("context_ref"),
+            record.get("input_snapshot_ref"),
+        )
         previous = authoritative.setdefault(key, str(record.get("result")))
         if previous != record.get("result"):
             errors.append("CONSTRAINT_AUTHORITATIVE_RESULT_CONFLICT")
 
     if constraint.get("supersedes_constraint_ref") == constraint_id:
         errors.append("CONSTRAINT_SELF_SUPERSESSION")
-    return ValidationResult(tuple(dict.fromkeys(errors)))
+    return _result(errors)
 
 
 def load_fixture(path: Path) -> dict[str, Any]:
@@ -388,5 +536,72 @@ def validate_fixture(fixture: dict[str, Any]) -> ValidationResult:
         return validate_assignment(entity)
     if concept == "Constraint":
         contexts = {item["context_id"]: item for item in fixture.get("contexts", [])}
-        return validate_constraint(entity, contexts)
+        reference = fixture.get("reference") or {}
+        return validate_constraint(entity, contexts, reference.get("constraint_version_ref"))
     return ValidationResult(("FIXTURE_CONCEPT_UNSUPPORTED",))
+
+
+def _read_frontmatter(path: Path) -> dict[str, Any]:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return {}
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return {}
+    loaded = yaml.safe_load(text[4:end])
+    return loaded if isinstance(loaded, dict) else {}
+
+
+def _ontology_registry(path: Path) -> dict[str, str]:
+    rows: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("|"):
+            continue
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells) < 2 or cells[0] in {"Concept", "---"} or set(cells[0]) == {"-"}:
+            continue
+        rows[cells[0]] = cells[1]
+    return rows
+
+
+def validate_repository(repo_root: Path) -> ValidationResult:
+    errors: list[str] = []
+    registry_path = repo_root / "docs/000-operational-ontology/README.md"
+    taxonomy_path = repo_root / "docs/002-concept-taxonomy/README.md"
+    if not registry_path.exists():
+        return ValidationResult(("STATUS_REGISTRY_MISSING",))
+    if not taxonomy_path.exists():
+        return ValidationResult(("STATUS_TAXONOMY_MISSING",))
+
+    registry = _ontology_registry(registry_path)
+    taxonomy = _read_frontmatter(taxonomy_path).get("Concept-Statuses") or {}
+    if not isinstance(taxonomy, dict):
+        taxonomy = {}
+
+    defining: dict[str, str] = {}
+    for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
+        metadata = _read_frontmatter(path)
+        concepts = metadata.get("Defines-Concepts")
+        status = metadata.get("Concept-Status")
+        if not concepts:
+            continue
+        names = [item.strip() for item in str(concepts).split(",") if item.strip()]
+        for name in names:
+            if not _nonempty(status):
+                errors.append("STATUS_DEFINING_DOCUMENT_MISSING")
+            else:
+                defining[name] = str(status)
+
+    for concept, status in defining.items():
+        registry_status = registry.get(concept)
+        taxonomy_status = taxonomy.get(concept)
+        if registry_status is None:
+            errors.append("STATUS_REGISTRY_MISSING")
+        if taxonomy_status is None:
+            errors.append("STATUS_TAXONOMY_MISSING")
+        if registry_status is not None and registry_status != status:
+            errors.append("STATUS_MISMATCH")
+        if taxonomy_status is not None and str(taxonomy_status) != status:
+            errors.append("STATUS_MISMATCH")
+
+    return _result(errors)
