@@ -80,7 +80,7 @@ Operation
 ├── Participation
 │   └── Assignment [Accepted]
 ├── Constraints
-│   └── Constraint [Under Review; OCP-006]
+│   └── Constraint [Accepted; OCP-006]
 └── Outcome
     ├── Event [Proposed]
     └── Result [Proposed]
@@ -114,7 +114,7 @@ Assignment
 
 ## Constraint
 
-Чернетка Concept `Constraint` має статус `Under Review` і визначається в [OCP-006 — Constraint Concept](../006-constraint-concept/README.md).
+Прийнята чернетка Concept `Constraint` має статус `Accepted` і визначається в [OCP-006 — Constraint Concept](../006-constraint-concept/README.md).
 
 Constraint є ідентифікованою декларативною умовою, яка обмежує допустимість або сумісність операційного context.
 
