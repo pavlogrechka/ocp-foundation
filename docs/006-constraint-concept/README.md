@@ -7,7 +7,7 @@ Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
 Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Readiness Review, Domain Models, Conflict Engine
 Defines-Concepts: Constraint
-Concept-Status: Proposed
+Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
 
@@ -70,7 +70,7 @@ Constraint може бути джерелом derivation для цих моде�
 
 ## 4. Concept Status and Dependencies
 
-`Constraint` має статус `Proposed` у реєстрі OCP-000 та визначається цим документом для review у PR-0005.
+`Constraint` має статус `Accepted` у реєстрі OCP-000 згідно з рішенням Architecture Board щодо PR-0005.
 
 | Concept | Status | Використання в OCP-006 |
 |---|---|---|
@@ -478,9 +478,9 @@ Supersession не Retire попередній Constraint автоматично.
 10. Conflict, Risk, Readiness і availability не виводяться з одного violation без окремого прийнятого правила.
 11. Domain module може визначати власні predicate namespaces, але не може змінювати Core semantics evaluation results.
 12. Constraint не створює lifecycle transition subject автоматично.
-13. Збережений `not_applicable` допустимий лише для context, до якого Constraint не застосовується.
-14. Суперечливий stored result не може створювати більш permissive derivation, ніж відсутній evaluation.
-15. `review_required` не є `inadmissible`; воно зупиняє лише автоматичне завершення decision workflow.
+13. Authoritative result `not_applicable` допускається лише тоді, коли `constraint_applicable_to(Constraint, Context) = false`.
+14. Якщо applicable Constraint має збережений result `not_applicable`, effective result нормалізується до `indeterminate`, а не до permissive outcome.
+15. Для advisory Constraint відомий `violated` залишається finding, а `indeterminate + require_review` може зупинити лише автоматичне рішення; `review_required` не є `inadmissible`.
 
 ## 18. Semantic Rules
 
@@ -615,10 +615,12 @@ Advisory Constraint із відомим `violated` створює finding без
 - operational status;
 - межа між derived evaluation та фундаментальним State.
 
-До machine-readable schemas відкладаються:
+До `PR-0006 — Add Executable Ontology Checker` відкладаються:
 
-- expression language;
-- evaluator interface;
-- snapshot format;
-- linter rules;
-- deterministic replay contract.
+- перші YAML fixtures для Resource, Operation, Assignment і Constraint;
+- executable checks для lifecycle consistency та двосторонніх field invariants;
+- reference implementations `assignment_effective_at`, `derived_participates_in`, `constraint_applicable_to`, `effective_constraint_result` і `constraint_set_decision`;
+- regression fixtures для accepted review counterexamples, включно з contradictory `not_applicable`;
+- перші CI checks.
+
+Повна expression language, production evaluator interface, остаточний snapshot format і versioned implementation contracts залишаються наступними етапами machine-readable foundation.
