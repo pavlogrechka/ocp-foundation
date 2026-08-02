@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.4.0
+Version: 0.5.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002
@@ -134,7 +134,7 @@ Consumable Resource не представляє окрему фізичну ча
 
 Resource не має сталої операційної ролі.
 
-Роль Resource у конкретній Operation визначається через `Assignment`, модель якого перебуває у статусі `Under Review` в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
+Роль Resource у конкретній Operation визначається через `Assignment`, модель якого має статус `Accepted` і визначена в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
 
 ```text
 Resource + Assignment + Operation Context = Operational Role
@@ -168,7 +168,7 @@ Resource may_contain Resource
 Assignment assigns Resource to Operation
 ```
 
-Окремий авторитетний зв’язок `Resource participates_in Operation` цим документом не визначається. Участь є похідною від ефективного Assignment відповідно до OCP-005.
+Окремий авторитетний зв’язок `Resource participates_in Operation` цим документом не визначається. Участь є похідною від ефективного Assignment відповідно до нормативного правила OCP-005 §§8–9.
 
 ### Capability and constraints
 
@@ -205,7 +205,7 @@ Resource може бути складеним.
 Identified → Registered → Active → Retired
 ```
 
-`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після Assignment відповідно до `ADR-DRAFT-007`.
+`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після Constraint відповідно до `ADR-DRAFT-007`.
 
 ## 10. Business Rules
 
@@ -222,18 +222,7 @@ Identified → Registered → Active → Retired
 5. Операційна участь Resource в Operation представляється та виводиться через Assignment; прямий авторитетний зв’язок участі між Resource та Operation у Core не визначено.
 6. Операційна роль є властивістю контексту Assignment, а не сталою властивістю Resource.
 7. Assignment складеного Resource не створює Assignment для його складових Resource автоматично.
-
-Derivation rule визначено в OCP-005:
-
-```text
-derived_participates_in(Resource, Operation, t)
-    := exists Assignment a such that
-        a.resource_ref = Resource
-        AND a.operation_ref = Operation
-        AND assignment_effective_at(a, t)
-```
-
-Це derivation rule, а не інваріант Resource.
+8. Нормативні правила `assignment_effective_at` і `derived_participates_in` визначені лише в OCP-005 §§8–9; цей документ не створює їх незалежної копії.
 
 ## 12. Invariants
 

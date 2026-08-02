@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.6.0
+Version: 0.7.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -78,7 +78,7 @@ Operation
 ├── Spatial Context
 │   └── Operational Area [Proposed]
 ├── Participation
-│   └── Assignment [Under Review]
+│   └── Assignment [Accepted]
 ├── Constraints
 │   └── Constraint [Proposed]
 └── Outcome
@@ -92,7 +92,7 @@ Operation
 
 ## Assignment
 
-Concept `Assignment` має статус `Under Review` і визначається в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
+Прийнята чернетка Concept `Assignment` має статус `Accepted` і визначена в [OCP-005 — Assignment Concept](../005-assignment-concept/README.md).
 
 Assignment є ідентифікованим контекстним зв’язком рівно одного Resource з рівно однією Operation.
 
@@ -105,7 +105,7 @@ Assignment
 ├── Operation Reference
 ├── RoleSpecification [local structure]
 ├── Applicability [local temporal properties]
-├── Lifecycle [local stages]
+├── Lifecycle [local stages and transition history]
 ├── Provenance Reference
 └── Supersession [optional]
 ```
@@ -120,7 +120,7 @@ Assignment
 Resource + Assignment + Operation Context = Operational Role
 ```
 
-Участь Resource в Operation є похідною від ефективного Assignment, а не окремим незалежним Core-зв’язком.
+Участь Resource в Operation є похідною від ефективного Assignment, а не окремим незалежним Core-зв’язком. Нормативне derivation rule визначено лише в OCP-005 §§8–9.
 
 ## Базові типи зв’язків
 
