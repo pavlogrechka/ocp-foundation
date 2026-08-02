@@ -35,7 +35,7 @@
 | AB-031 | Lifecycle record consistency | Resolved for Assignment | OCP-005 використовує authoritative linear transition history; поширити патерн на Operation у межах AB-028 |
 | AB-032 | Canonical rule reference integrity | Resolved as governance rule | OCP-001 вимагає єдине defining location; автоматичну перевірку включити до AB-012 |
 | AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, direct/force push і deletion заборонені, enforcement для адміністраторів |
-| AB-034 | Constraint Concept | Draft | PR-0005 / OCP-006: виправити accepted review findings; після ready-for-review змінити Concept status на Under Review |
+| AB-034 | Constraint Concept | Resolved | OCP-006 Accepted рішенням Architecture Board у PR-0005; executable fixtures і checker — AB-040 / PR-0006 |
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
 | AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
