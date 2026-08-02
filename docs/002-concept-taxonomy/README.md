@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.4.0
+Version: 0.5.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -63,7 +63,7 @@ Resource
 
 ## Operation
 
-Concept `Operation` перебуває у статусі `Under Review` і визначається в [OCP-004 — Operation Concept](../004-operation-concept/README.md).
+Прийнята чернетка Concept `Operation` має статус `Accepted` і визначена в [OCP-004 — Operation Concept](../004-operation-concept/README.md).
 
 Operation є універсальним контекстом координованої діяльності. Предметні типи, зокрема місія БпС або операція РЕБ, визначаються domain або capability modules і не входять до Core Taxonomy автоматично.
 
