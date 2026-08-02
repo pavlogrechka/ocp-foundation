@@ -42,3 +42,4 @@
 | AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
 | AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay |
 | AB-040 | Executable ontology checker | Under Review | PR-0006: перевірити exact-version selection, manifest completeness, optional projections, fixtures, status sync і CI; після Board approval змінити на Resolved |
+| AB-041 | Relationship as foundation | Discovery | AD-001: обрати між local models, fundamental Relationship Concept або governed modeling pattern до PR-0007 |
