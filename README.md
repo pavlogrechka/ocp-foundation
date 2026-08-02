@@ -48,10 +48,10 @@ backlog/       відкриті питання та дорожня карта
 
 **Foundation 0.2 — Core Domain Foundation.**
 
-- Resource, Operation та Assignment мають статус `Accepted`;
-- Constraint визначається в OCP-006 / PR-0005;
-- State і Readiness залишаються Deferred до завершення Constraint cycle;
+- Resource, Operation, Assignment і Constraint мають статус `Accepted`;
+- State і Readiness залишаються Deferred до першого executable validation cycle та перегляду ADR-DRAFT-007;
 - machine-readable schemas, ontology linter та implementation contracts ще не створені;
-- орієнтовна загальна foundation-готовність: **≈25%**, після прийняття Constraint — **≈30%**.
+- наступний цикл: `PR-0006 — Add Executable Ontology Checker`;
+- орієнтовна загальна foundation-готовність: **≈30%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
