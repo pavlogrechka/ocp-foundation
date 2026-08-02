@@ -46,4 +46,12 @@ backlog/       відкриті питання та дорожня карта
 
 ## Статус
 
-Foundation 0.1 — формування фундаменту предметної області та правил розвитку OCP.
+**Foundation 0.2 — Core Domain Foundation.**
+
+- Resource, Operation та Assignment мають статус `Accepted`;
+- Constraint визначається в OCP-006 / PR-0005;
+- State і Readiness залишаються Deferred до завершення Constraint cycle;
+- machine-readable schemas, ontology linter та implementation contracts ще не створені;
+- орієнтовна загальна foundation-готовність: **≈25%**, після прийняття Constraint — **≈30%**.
+
+Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
