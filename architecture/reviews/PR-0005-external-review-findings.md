@@ -20,7 +20,8 @@ Because the admissibility derivation ignored that contradiction, an evaluator er
 - for an applicable Constraint, `effective_constraint_result` cannot be `not_applicable`;
 - an applicable stored `not_applicable` is normalized to `indeterminate`;
 - a dedicated invariant prohibits the contradictory authoritative record;
-- the counterexample is retained as an example and will become a PR-0006 regression fixture.
+- invariant rejection and derivation normalization are intentionally retained as defense-in-depth;
+- the counterexample is retained as an example and will become a PR-0006 regression fixture that tests both layers.
 
 ## Finding 2 — Advisory violation and advisory uncertainty are asymmetric
 
@@ -42,20 +43,26 @@ This asymmetry is intentional but was not explained.
 
 No automatic prohibition of `indeterminate_disposition = block` for advisory Constraint is introduced in this correction. The current `constraint_blocks` formula still requires `enforcement.mode = blocking`, so an advisory Constraint cannot directly produce `inadmissible`.
 
-## Finding 3 — PR-0004A and PR-0005 are bundled in PR #8
+## Finding 3 — Corrective and Concept cycles appeared bundled in the review snapshot
 
-**Status:** Rejected — factually incorrect.
+**Status:** Clarified — resolved by sequencing.
 
-PR-0004A was independently approved and squash-merged before PR-0005:
+The external reviewer reported that the initial review snapshot showed PR-0004A commits together with PR-0005 changes relative to the then-observed `main`. The current GitHub PR metadata and diff show PR #8 based on the separately merged PR-0004A commit:
 
 ```text
-PR-0004A merge commit:
+PR-0004A merge commit / current PR #8 base:
 faacaf7aacfa29de0d4bf642036b603a96097c9b
 ```
 
-PR #8 uses that commit as its base and changes only the Constraint cycle files. OCP-001, OCP-003, OCP-004 and OCP-005 corrections from PR-0004A are already present in `main` and are not part of the PR #8 diff.
+The repository does not retain the reviewer’s exact transient comparison snapshot, so the earlier state should not be labelled factually incorrect. The process concern was valid: corrective and new Concept cycles must remain independently approvable.
 
-The governance precedent remains valid: corrective cycles and new Concept cycles are separate unless Architecture Board explicitly approves an exception.
+**Resolution:**
+
+- PR-0004A was approved and squash-merged separately;
+- the current PR #8 diff contains only the Constraint cycle and related governance/roadmap changes;
+- PR-0005 cannot merge PR-0004A implicitly;
+- the governance precedent remains: corrective cycles and new Concept cycles are separate unless Architecture Board explicitly approves and records an exception;
+- future stacked PR review should record the compared base SHA and intended merge order to preserve provenance.
 
 ## Finding 4 — Concept status choreography is inconsistent
 
@@ -76,6 +83,8 @@ Separate canonicalization PR     → Canonical
 
 External or adversarial review while the PR remains Draft does not automatically change Concept status.
 
+Before PR-0005 merge, `Constraint` must pass through `Under Review` and then be synchronously updated to `Accepted` in OCP-000, OCP-002 and OCP-006 after the explicit Architecture Board decision.
+
 ## Finding 5 — Executable validation is scheduled too late
 
 **Status:** Accepted — sequence changed.
@@ -94,4 +103,4 @@ PR-0006 is a reference validation layer, not production implementation.
 
 ## Architecture Board decision
 
-> Accept the `not_applicable` finding and the advisory/indeterminate clarification. Reject the bundling finding because PR-0004A was merged separately before PR-0005. Adopt a single Concept status choreography. Move executable validation forward as PR-0006. Do not merge PR-0005 until the accepted semantic findings are resolved and reviewed.
+> Accept the `not_applicable` finding and the advisory/indeterminate clarification. Clarify the sequencing finding: the reviewer’s earlier stacked-diff concern was resolved by merging PR-0004A separately, and the current PR #8 contains only the Constraint cycle. Adopt a single Concept status choreography. Move executable validation forward as PR-0006. Do not merge PR-0005 until the accepted semantic findings are resolved, externally rechecked and the Concept status is updated to `Accepted` by explicit Architecture Board decision.
