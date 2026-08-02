@@ -51,7 +51,7 @@ Assignment не визначає сама по собі:
 - кількість, резервування або споживання Consumable Resource;
 - факт успішного виконання Operation.
 
-Assignment може бути підставою для перевірки цих аспектів, але не замінює відповідні Concept або правила.
+Assignment може бути підставою для перевірки цих аспектів, але не замінює відповідні моделі та правила.
 
 ## 4. Concept Status and Dependencies
 
@@ -91,18 +91,20 @@ Assignment може бути підставою для перевірки цих
 ```text
 Assignment
 - assignment_id
-- resource_ref
-- operation_ref
-- role_specification
-- applicability_start
+- resource_ref [required after Establishment]
+- operation_ref [required after Establishment]
+- role_specification [required after Establishment]
+- applicability_start [required after Establishment]
 - applicability_end [optional]
 - lifecycle_stage
 - created_at
-- established_at [conditional]
-- terminal_at [conditional]
-- provenance_ref [conditional]
+- established_at [required for Established lineage]
+- terminal_at [required for Closed or Revoked]
+- provenance_ref [required for Established lineage]
 - supersedes_assignment_ref [optional]
 ```
+
+`Established lineage` означає lifecycle stages `Established`, `Closed` або `Revoked`.
 
 Цей перелік визначає мінімальні перевірні поля Concept, але не є схемою бази даних чи API.
 
@@ -144,7 +146,7 @@ RoleSpecification
 
 ### 6.3 Applicability interval
 
-Assignment має часову застосовність:
+Assignment Established lineage має часову застосовність:
 
 ```text
 applicability_start
@@ -163,11 +165,13 @@ Applicability interval не є lifecycle Assignment і не вводить ок�
 
 ## 7. Working Lifecycle
 
-Робочий lifecycle запису Assignment:
+Дозволені переходи робочого lifecycle запису Assignment:
 
 ```text
-Draft → Established → Closed
-  ↘ Cancelled       ↘ Revoked
+Draft → Established
+Draft → Cancelled
+Established → Closed
+Established → Revoked
 ```
 
 Lifecycle запису не дорівнює часовій чинності Assignment і не є значенням фундаментального Concept `State`.
@@ -188,7 +192,7 @@ Assignment завершений у нормальному порядку. Йог
 
 ### 7.4 Cancelled
 
-Draft Assignment скасований до встановлення. Cancelled Assignment ніколи не створює участі.
+Draft Assignment скасований до встановлення. Він може залишатися неповним, але зберігає identity та запис переходу `Draft → Cancelled`.
 
 ### 7.5 Revoked
 
@@ -300,11 +304,11 @@ Assignment не означає автоматично:
 
 ## 14. Business Rules
 
-1. Assignment поза Draft повинен мати повний мінімальний структурний контракт.
+1. Assignment у lifecycle stage `Established`, `Closed` або `Revoked` повинен мати повний мінімальний структурний контракт.
 2. Resource або Operation в Established Assignment не можуть бути замінені редагуванням references; створюється новий Assignment.
 3. Семантична допустимість `role_code` визначається відповідною classification rule.
 4. Одночасність кількох Assignment не є автоматичною помилкою; конфлікт визначається застосовними Constraint.
-5. Встановлення Assignment не підтверджує Readiness, Availability, Capability sufficiency чи авторизацію Operation.
+5. Встановлення Assignment не підтверджує Readiness, availability, достатність Capability чи авторизацію Operation.
 6. Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.
 7. Assignment для Consumable Resource визначає залучений керований запас, але не кількість споживання.
 
@@ -318,20 +322,22 @@ Assignment не означає автоматично:
 6. Assignment не успадковується автоматично через composition Resource або Operation.
 7. Assignment не гарантує результат Operation.
 8. Materialized participation є похідним представленням і не може бути незалежним джерелом істини.
+9. Cancelled Assignment не входить до Established lineage та не використовується в derivation участі.
 
 ## 16. Invariants
 
 1. Кожен Assignment має рівно один непорожній стабільний `assignment_id`.
 2. Два різні Assignment не мають одного й того самого `assignment_id`.
-3. Кожен Assignment поза Draft має рівно один resolvable `resource_ref` і рівно один resolvable `operation_ref`.
-4. Після переходу з Draft значення `resource_ref` та `operation_ref` є незмінними.
-5. Кожен Assignment поза Draft має RoleSpecification, нормалізований `role_code` якого містить щонайменше одну літеру або цифру.
-6. Якщо `applicability_end` заданий, `applicability_start < applicability_end`.
-7. Кожен Established, Closed або Revoked Assignment має непорожні `established_at` і `provenance_ref`.
-8. Кожен Closed або Revoked Assignment має `terminal_at`, і `established_at <= terminal_at`.
-9. Cancelled Assignment не має `established_at` і не може задовольняти `assignment_effective_at` для жодного часу.
-10. Assignment не може supersede сам себе, а граф `supersedes_assignment_ref` є ациклічним.
-11. Кожен AssignmentTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
+3. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має рівно один resolvable `resource_ref` і рівно один resolvable `operation_ref`.
+4. Після переходу до Established значення `resource_ref` та `operation_ref` є незмінними.
+5. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має RoleSpecification, нормалізований `role_code` якого містить щонайменше одну літеру або цифру.
+6. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має `applicability_start`.
+7. Якщо `applicability_end` заданий, `applicability_start < applicability_end`.
+8. Кожен Assignment у stage `Established`, `Closed` або `Revoked` має непорожні `established_at` і `provenance_ref`.
+9. Кожен Closed або Revoked Assignment має `terminal_at`, і `established_at <= terminal_at`.
+10. Cancelled Assignment не має `established_at`.
+11. Assignment не може supersede сам себе, а граф `supersedes_assignment_ref` є ациклічним.
+12. Кожен AssignmentTransitionRecord містить один із дозволених переходів, валідний `occurred_at` і непорожній `provenance_ref`.
 
 ## 17. Examples
 
@@ -399,7 +405,7 @@ Fuel Stock `FS-001` може бути пов’язаний з Operation чер�
 
 До перегляду ADR-DRAFT-007 відкладаються:
 
-- Readiness і Availability;
+- Readiness і availability;
 - operational status Resource;
 - derived State Assignment або участі.
 
