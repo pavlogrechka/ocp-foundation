@@ -1,10 +1,11 @@
 # AD-001 — Relationship as Foundation
 
-- Status: Discovery
+- Status: Accepted
 - Owner: Architecture Board
 - Created: 2026-08-02
-- Review target: before `PR-0007 — Define Organization Concept`
-- Decision effect: none until explicitly accepted by Architecture Board
+- Decision-Date: 2026-08-03
+- Decision: Option C — Relationship as a governed modeling pattern
+- Applies-To: PR-0007 and subsequent Concept specifications
 
 ## 1. Question
 
@@ -35,29 +36,15 @@ A single `parent_id` cannot represent these relations without semantic loss.
 
 ## 3. Problem
 
-If every Concept defines relations independently, OCP may duplicate:
-
-- identity rules;
-- directionality;
-- temporal effectivity;
-- lifecycle;
-- provenance;
-- supersession;
-- validation and graph constraints.
+If every Concept defines relations independently, OCP may duplicate identity, directionality, temporal effectivity, lifecycle, provenance, supersession, validation and graph constraints.
 
 If one universal Relationship is introduced too early, it may become an untyped container that weakens Concept boundaries and replaces specialized domain semantics.
 
-## 4. Options
+## 4. Considered options
 
 ### Option A — Local relationships only
 
 Each defining document owns its local relation structures and rules.
-
-Examples:
-
-- Organization defines organizational relations;
-- Resource defines composition relations;
-- Operation defines operation dependencies.
 
 Advantages:
 
@@ -75,20 +62,6 @@ Risks:
 
 Relationship becomes an identified domain entity connecting source and target subjects.
 
-A candidate shared structure could include:
-
-```text
-relationship_id
-source_ref
-target_ref
-relationship_type_ref
-directionality
-effectivity interval
-lifecycle history
-provenance_ref
-supersedes_relationship_ref [optional]
-```
-
 Advantages:
 
 - one common graph-edge contract;
@@ -104,15 +77,7 @@ Risks:
 
 ### Option C — Relationship as a governed modeling pattern
 
-Relationship is not itself a fundamental domain Concept. OCP-001 defines criteria for when a local relation must be represented as an identified relation record rather than a simple reference.
-
-Each defining Concept remains responsible for:
-
-- relation meaning;
-- allowed source and target types;
-- directionality;
-- lifecycle and temporal rules;
-- invariants and derivations.
+Relationship is not itself a fundamental domain Concept. Each defining Concept remains responsible for relation meaning, allowed endpoint types, directionality, lifecycle, temporal rules, invariants and derivations.
 
 Shared tooling may provide reusable technical structures, but those structures do not become an independent normative Concept.
 
@@ -127,25 +92,35 @@ Risks:
 
 - some duplication remains;
 - common contracts may emerge slowly;
-- requires governance rules to prevent inconsistent local models.
+- governance is required to prevent inconsistent local models.
 
-## 5. Candidate principles
+## 5. Decision
 
-### CP-1 — Semantics remain domain-owned
+Architecture Board accepts **Option C — Relationship as a governed modeling pattern**.
 
-A generic relation mechanism must not invent semantics. Relationship meaning is defined by the owning Concept or specification.
+`Relationship` is not registered as a fundamental Concept in OCP-000 or OCP-002.
 
-### CP-2 — Specialized Concepts are not reduced to generic relationships
+A defining Concept may introduce a local identified relationship record when the relation requires independent identity, temporal effectivity, lifecycle, provenance, supersession, relation-specific attributes, authorization or constraints.
 
-`Assignment`, `Constraint`, and any future Concept with independent domain meaning remain separate Concepts even if they connect other entities.
+The local record remains part of the defining Concept model and does not become a universal OCP Relationship Concept.
 
-### CP-3 — No arbitrary relationship type strings
+## 6. Governing principles
 
-Normative relationship kinds require a defining specification, stable identifier and explicit source/target contract.
+### GP-1 — Semantics remain domain-owned
 
-### CP-4 — Reification threshold
+A generic technical mechanism must not invent relationship semantics. Meaning is defined by the owning Concept or specification.
 
-A relation should be represented as an identified record when at least one of the following is required:
+### GP-2 — Specialized Concepts are not reduced to generic relationships
+
+`Assignment`, `Constraint`, and future Concepts with independent domain meaning remain separate Concepts even if they connect other entities.
+
+### GP-3 — No arbitrary relationship type strings
+
+Normative relationship kinds require a stable identifier, defining specification, version and explicit endpoint contract.
+
+### GP-4 — Reification threshold
+
+A relation should be represented as an identified record when one or more of the following are required:
 
 - independent identity;
 - temporal effectivity;
@@ -157,95 +132,39 @@ A relation should be represented as an identified record when at least one of th
 
 A relation that has none of these properties may remain a direct reference or derived edge.
 
-### CP-5 — One normative home
+### GP-5 — One normative home
 
 Each relationship kind has one normative defining location. Shared tooling may implement it but does not redefine it.
 
-### CP-6 — Derived edges are not authoritative records
+### GP-6 — Derived edges are not authoritative records
 
-A derived graph edge must identify the authoritative record or rule from which it is derived.
+A derived graph edge must identify the authoritative record or derivation rule from which it is derived.
 
-## 6. Evaluation against existing OCP
+## 7. Consequences for PR-0007
 
-### Assignment
-
-Assignment passes the reification threshold and remains a specialized Concept. It must not be replaced by generic Relationship.
-
-### Constraint
-
-Constraint is not a relationship. It evaluates admissibility relative to a target and context and remains a specialized Concept.
-
-### Resource composition
-
-A simple immutable containment reference may remain local. If containment requires effectivity, provenance or amendment history, the Resource specification may introduce an identified local relation record.
-
-### Operation relationships
-
-Parent/child, dependency and coordination relations may require different semantics. They should not be forced into one generic type until their domain rules are defined.
-
-### Organization
-
-Organization itself should not contain one universal `parent_id`. Structural, operational, administrative, support and coordination relations must be explicitly typed and independently representable.
-
-## 7. Preliminary recommendation
-
-Adopt **Option C — Relationship as a governed modeling pattern** for PR-0007.
-
-Do not register `Relationship` as a fundamental Concept at this stage.
-
-PR-0007 may define a local identified structure such as `OrganizationRelationshipRecord`, provided that:
-
-- its semantics remain inside the Organization defining document;
-- relation kinds are closed or governed, not arbitrary strings;
-- source and target are Organization instances;
-- temporal, provenance and lifecycle contracts are explicit;
-- the structure is not presented as a universal OCP Relationship Concept.
-
-## 8. Falsification criteria
-
-The preliminary recommendation should be reconsidered if two or more independent defining Concepts require materially identical normative contracts for:
-
-- relation identity;
-- endpoints;
-- lifecycle;
-- temporal effectivity;
-- provenance;
-- supersession;
-- validation and derivation.
-
-Similarity of implementation classes alone is insufficient. The domain semantics must also be meaningfully shared.
-
-## 9. Consequences for PR-0007
-
-PR-0007 should:
+PR-0007 shall:
 
 1. define Organization independently of its relations;
-2. prohibit a single generic `parent_id` as the authoritative organization model;
-3. define explicit local organization relation records;
+2. prohibit one generic `parent_id` as the authoritative organization model;
+3. define explicit local `OrganizationRelationshipRecord` structures where reification criteria are met;
 4. distinguish structural hierarchy from operational, administrative, support and coordination relations;
-5. define whether structural relations form a tree, forest or constrained DAG;
-6. allow horizontal relations between organizations from different verticals;
-7. include temporal effectivity and provenance where required;
-8. add executable fixtures for accepted invariants and counterexamples.
+5. define graph constraints separately for each governed relationship kind;
+6. allow horizontal relations between organizations belonging to different verticals;
+7. include temporal effectivity and provenance contracts;
+8. include executable fixtures for accepted invariants and counterexamples.
 
-## 10. Open questions
+## 8. Non-consequences
 
-- Are all Organization relations directed?
-- Which relation kinds may be reciprocal or symmetric?
-- Does structural subordination require exactly one effective parent at a time?
-- Can operational subordination overlap with structural subordination?
-- Can one Organization participate in multiple operational chains simultaneously?
-- Does coordination require a separate future Coordination Concept rather than an Organization relation?
-- Which Organization relations are authoritative records and which are derived views?
-- What cycle constraints apply separately to structural, operational and coordination graphs?
+This decision does not:
 
-## 11. Decision required
+- require every direct reference to become a record;
+- introduce one universal relationship lifecycle;
+- define a universal relationship type registry;
+- convert Assignment or Constraint into relationship subtypes;
+- decide Organization identity continuity or organizational classification.
 
-Architecture Board must choose one:
+## 9. Reconsideration criteria
 
-- `Accept Option A — local relationships only`;
-- `Accept Option B — Relationship as fundamental Concept`;
-- `Accept Option C — Relationship as governed modeling pattern`;
-- `Continue Discovery`.
+The decision may be reviewed if two or more independent defining Concepts require materially identical normative contracts for relation identity, endpoints, lifecycle, temporal effectivity, provenance, supersession, validation and derivation.
 
-Until that decision, AD-001 is non-normative and Relationship is not added to OCP-000 or OCP-002.
+Similarity of implementation classes alone is insufficient. Shared domain semantics must also be demonstrated.
