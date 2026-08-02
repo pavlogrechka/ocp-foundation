@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -17,9 +17,11 @@ Last-Review: 2026-08-02
 
 ## Призначення
 
-Operational Ontology визначає канонічні поняття, зв’язки та інваріанти предметної області OCP.
+Operational Ontology веде реєстр понять, їхніх статусів, зв’язків та інваріантів предметної області OCP.
 
 Онтологія описує реальний операційний світ, а не таблиці бази даних, API, екрани або конкретні технології.
+
+Термін стає канонічним лише після проходження життєвого циклу, визначеного в OCP-001. Сам факт згадування в цьому документі не надає статусу Accepted або Canonical.
 
 ## Фундаментальні принципи
 
@@ -27,31 +29,36 @@ Operational Ontology визначає канонічні поняття, зв’
 2. **Operation First** — будь-яка координована активність моделюється як Operation.
 3. **Resource Agnostic** — сили та засоби моделюються через універсальне поняття Resource.
 4. **Separation of Structures** — штатна структура, оперативне підпорядкування й операційна координація є незалежними моделями.
-5. **One Concept — One Name** — кожне поняття має одну канонічну назву та визначення.
+5. **One Concept — One Name** — кожне прийняте поняття має одну назву та одне місце визначення.
 6. **Knowledge Graph Model** — онтологія є мережею понять і типізованих зв’язків; технологія зберігання не визначається цим документом.
 
-## Початкові канонічні поняття
+## Початковий реєстр Concept
 
-- Operation
-- Operational Space
-- Operational Area
-- Organization
-- Resource
-- Assignment
-- Objective
-- Readiness
-- Result
-- Event
-- Spectrum
-- Constraint
-- Risk
-- Order
-- Coordination
-- Capability
+| Concept | Status | Specification / Decision |
+|---|---|---|
+| Resource | Accepted | OCP-003 |
+| Operation | Under Review | OCP-004 / PR-0003 |
+| Assignment | Proposed | заплановано OCP-005 |
+| Operational Space | Proposed | — |
+| Operational Area | Proposed | — |
+| Organization | Proposed | — |
+| Objective | Proposed | — |
+| Readiness | Deferred | ADR-DRAFT-007; після Operation та Assignment |
+| State | Deferred | ADR-DRAFT-007; після Operation та Assignment |
+| Result | Proposed | — |
+| Event | Proposed | — |
+| Spectrum | Proposed | — |
+| Constraint | Proposed | — |
+| Risk | Proposed | — |
+| Order | Proposed | AB-002 |
+| Coordination | Proposed | — |
+| Capability | Proposed | AB-004 |
+
+Статуси в таблиці є статусами Concept, а не статусами документів.
 
 ## Робоче рішення щодо Resource
 
-Actor не є окремим фундаментальним Concept. Людина, екіпаж, розрахунок, технічний засіб або інший залучений елемент моделюється як Resource. Його операційна роль визначається через Assignment.
+`Actor` не є окремим фундаментальним Concept. Людина, екіпаж, розрахунок, технічний засіб або інший залучений елемент моделюється як Resource. Його операційна роль визначається через Assignment.
 
 ## Незалежні моделі
 
@@ -60,9 +67,11 @@ Actor не є окремим фундаментальним Concept. Людин�
 - Operational Model — участь в операціях.
 - Coordination Model — взаємодія між учасниками, зокрема між незалежними вертикалями у спільній операційній зоні.
 
+Назви моделей не створюють однойменні фундаментальні Concept автоматично.
+
 ## Відкриті питання
 
-- Чи є State окремим фундаментальним Concept?
+- Остаточна онтологічна природа State і Readiness.
 - Межі між Resource та Organization.
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
