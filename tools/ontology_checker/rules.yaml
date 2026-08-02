@@ -1,0 +1,44 @@
+manifest_version: 0.1.0
+authority: reference-only
+normative_source: OCP documents
+rules:
+  - id: RESOURCE_ID_REQUIRED
+    source: OCP-003 §12 invariant 1
+  - id: RESOURCE_CLASSIFICATION_REQUIRED
+    source: OCP-003 §12 invariant 3
+  - id: OPERATION_ID_REQUIRED
+    source: OCP-004 invariant 1
+  - id: OPERATION_INTENT_REQUIRED
+    source: OCP-004 invariant 2
+  - id: ASSIGNMENT_HISTORY_INVALID
+    source: OCP-005 §7.6 and §16 invariant 9
+  - id: ASSIGNMENT_LIFECYCLE_STAGE_MISMATCH
+    source: OCP-005 §16 invariant 10
+  - id: ASSIGNMENT_ESTABLISHED_AT_MISMATCH
+    source: OCP-005 §16 invariant 11
+  - id: ASSIGNMENT_TERMINAL_AT_MISMATCH
+    source: OCP-005 §16 invariant 12
+  - id: ASSIGNMENT_PROVENANCE_REF_MISMATCH
+    source: OCP-005 §16 invariant 13
+  - id: assignment_effective_at
+    kind: derivation
+    source: OCP-005 §8
+  - id: derived_participates_in
+    kind: derivation
+    source: OCP-005 §9
+  - id: CONSTRAINT_HISTORY_INVALID
+    source: OCP-006 §7 and §19 invariant 8
+  - id: CONSTRAINT_NOT_APPLICABLE_CONTRADICTION
+    source: OCP-006 §19 invariants 16–17
+  - id: constraint_applicable_to
+    kind: derivation
+    source: OCP-006 §10
+  - id: effective_constraint_result
+    kind: derivation
+    source: OCP-006 §11
+  - id: constraint_blocks
+    kind: derivation
+    source: OCP-006 §12
+  - id: constraint_set_decision
+    kind: derivation
+    source: OCP-006 §12
