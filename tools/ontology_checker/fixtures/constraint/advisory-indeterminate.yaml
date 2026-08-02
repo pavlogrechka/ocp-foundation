@@ -1,7 +1,10 @@
 case_id: constraint-advisory-indeterminate-review
 concept: Constraint
+reference:
+  constraint_version_ref: C-ADV-001@1
 expected:
   valid: true
+  error_codes: []
 contexts:
   - context_id: CTX-ADV-001
     evaluation_time: 2026-08-02T10:30:00Z
