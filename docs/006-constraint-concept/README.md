@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -181,6 +181,8 @@ EnforcementSpecification
 
 Значення `allow` для indeterminate є явним рішенням конкретного Constraint і не може бути системним припущенням за замовчуванням.
 
+Для `advisory` Constraint відомий результат `violated` залишається finding і сам по собі не змінює admissibility. Результат `indeterminate` з disposition `require_review` може дати `review_required`, оскільки система не має достатніх даних для автоматичного завершення рішення. `review_required` не означає `inadmissible`; це явна передача контексту на ручний або окремо визначений review workflow.
+
 ### 6.4 Validity interval
 
 ```text
@@ -328,11 +330,23 @@ ConstraintEvaluationRecord
 
 ```text
 effective_constraint_result(Constraint, Context) :=
+    not_applicable
+        if NOT constraint_applicable_to(Constraint, Context)
+
     authoritative stored or reproducible result
-        for the exact Constraint version and input snapshot
-    OR indeterminate
-        if no such current result exists
+        if constraint_applicable_to(Constraint, Context)
+        AND result ∈ {satisfied, violated, indeterminate}
+        AND result is for the exact Constraint version and input snapshot
+
+    indeterminate
+        if constraint_applicable_to(Constraint, Context)
+        AND (
+            no current authoritative result exists
+            OR stored result = not_applicable
+        )
 ```
+
+Збережений `not_applicable` для applicable Constraint є суперечливим evaluation і не може створити permissive decision. Він нормалізується до `indeterminate` та підлягає обробці через `indeterminate_disposition`.
 
 Відсутність current evaluation ніколи не трактується як `satisfied`.
 
@@ -367,6 +381,8 @@ constraint_set_decision(Context) :=
 ```
 
 Advisory violation залишається finding і не змінює admissibility без окремого правила.
+
+Асиметрія є навмисною: відомий advisory violation уже класифікований і може бути переданий domain workflow, тоді як advisory indeterminate з `require_review` зупиняє лише автоматичне рішення через недостатність даних. `review_required` не прирівнюється до `inadmissible`.
 
 `constraint_set_decision` є derivation rule OCP-006. Воно не замінює authorization, approval або execution decision.
 
@@ -460,6 +476,9 @@ Supersession не Retire попередній Constraint автоматично.
 10. Conflict, Risk, Readiness і availability не виводяться з одного violation без окремого прийнятого правила.
 11. Domain module може визначати власні predicate namespaces, але не може змінювати Core semantics evaluation results.
 12. Constraint не створює lifecycle transition subject автоматично.
+13. Authoritative result `not_applicable` допускається лише тоді, коли `constraint_applicable_to(Constraint, Context) = false`.
+14. Якщо applicable Constraint має збережений result `not_applicable`, effective result нормалізується до `indeterminate`, а не до permissive outcome.
+15. Для advisory Constraint відомий `violated` залишається finding, а `indeterminate + require_review` може зупинити лише автоматичне рішення; `review_required` не є `inadmissible`.
 
 ## 18. Semantic Rules
 
@@ -474,6 +493,8 @@ Supersession не Retire попередній Constraint автоматично.
 9. Constraint evaluation не є fundamental State.
 10. Constraint не успадковується через composition без явного selector або propagation rule.
 11. Retired Constraint може залишатися applicable для історичного evaluation time до `retired_at`.
+12. `not_applicable` описує невідповідність scope, а не помилку або недостатність evaluator.
+13. `review_required` означає необхідність окремого review, а не автоматичну заборону context.
 
 ## 19. Invariants
 
@@ -492,10 +513,11 @@ Supersession не Retire попередній Constraint автоматично.
 13. `created_at` не пізніший за перший transition timestamp, а transition timestamps не зменшуються.
 14. Кожен ConstraintEvaluationRecord посилається на існуючий Constraint, точну його version, context, input snapshot та evaluator.
 15. Result кожного ConstraintEvaluationRecord належить множині `{satisfied, violated, indeterminate, not_applicable}`.
-16. Evaluation з result `not_applicable` не може одночасно бути використане як blocking violation.
-17. Для однакових constraint version, context та input snapshot не може існувати два authoritative evaluation results з різними значеннями.
-18. Constraint не може supersede сам себе, а граф `supersedes_constraint_ref` є ациклічним.
-19. За однакових predicate version, parameters, input snapshot і evaluation time два детерміновані evaluations не можуть мати різні результати.
+16. Якщо authoritative ConstraintEvaluationRecord має `result = not_applicable`, тоді `constraint_applicable_to(Constraint, Context) = false`.
+17. Якщо `constraint_applicable_to(Constraint, Context) = true`, effective result не може бути `not_applicable`; суперечливий stored result нормалізується до `indeterminate`.
+18. Для однакових constraint version, context та input snapshot не може існувати два authoritative evaluation results з різними значеннями.
+19. Constraint не може supersede сам себе, а граф `supersedes_constraint_ref` є ациклічним.
+20. За однакових predicate version, parameters, input snapshot і evaluation time два детерміновані evaluations не можуть мати різні результати.
 
 ## 20. Examples
 
@@ -522,6 +544,14 @@ Target match існує, але потрібний input відсутній. Р�
 ### Example F — missing evaluation
 
 Applicable blocking Constraint не має evaluation для поточного snapshot. Effective result є `indeterminate`, а не `satisfied`.
+
+### Example G — contradictory not_applicable
+
+Target і temporal scope відповідають context, але evaluator зберіг `result = not_applicable`. Такий record суперечить applicability contract. Effective result нормалізується до `indeterminate`, тому помилка evaluator не може мовчки зробити candidate context admissible.
+
+### Example H — advisory uncertainty
+
+Advisory Constraint із відомим `violated` створює finding без автоматичного блокування. Той самий Constraint із `indeterminate_disposition = require_review` та результатом `indeterminate` створює `review_required`, оскільки автоматичне рішення не має достатніх даних. Це не означає `inadmissible`.
 
 ## 21. Non-Examples
 
@@ -583,10 +613,12 @@ Applicable blocking Constraint не має evaluation для поточного 
 - operational status;
 - межа між derived evaluation та фундаментальним State.
 
-До machine-readable schemas відкладаються:
+До `PR-0006 — Add Executable Ontology Checker` відкладаються:
 
-- expression language;
-- evaluator interface;
-- snapshot format;
-- linter rules;
-- deterministic replay contract.
+- перші YAML fixtures для Resource, Operation, Assignment і Constraint;
+- executable checks для lifecycle consistency та двосторонніх field invariants;
+- reference implementations `assignment_effective_at`, `derived_participates_in`, `constraint_applicable_to`, `effective_constraint_result` і `constraint_set_decision`;
+- regression fixtures для accepted review counterexamples, включно з contradictory `not_applicable`;
+- перші CI checks.
+
+Повна expression language, production evaluator interface, остаточний snapshot format і versioned implementation contracts залишаються наступними етапами machine-readable foundation.
