@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -28,6 +28,10 @@ Concept
 
 ## Resource
 
+Канонічна чернетка Concept `Resource` визначена в [OCP-003 — Resource Concept](../003-resource-concept/README.md).
+
+Робоча класифікація:
+
 ```text
 Resource
 ├── Human Resource
@@ -42,18 +46,20 @@ Resource
 │   ├── Communication Asset
 │   └── EW Asset
 ├── Infrastructure Resource
-│   ├── Position
+│   ├── Position Site
 │   ├── Launch Site
 │   └── Relay Site
 └── Consumable Resource
 ```
+
+Остаточна класифікація Resource не затверджена. Зокрема, відкритими залишаються межі між `Organization`, `Organizational Resource`, `Infrastructure Resource` та `Environment`.
 
 ## Прийнята робоча гіпотеза
 
 `Actor` не виділяється в окрему фундаментальну гілку. Діяч є Resource, який отримує роль у конкретному контексті через Assignment.
 
 ```text
-Resource + Assignment = operational role in Operation
+Resource + Assignment + Operation Context = Operational Role
 ```
 
 ## Базові типи зв’язків
@@ -70,3 +76,5 @@ Resource + Assignment = operational role in Operation
 - Чи має Environment залишатися єдиною верхньорівневою категорією для Space, Time і Spectrum?
 - Чи є Organization окремою категорією від Resource в усіх операційних контекстах?
 - Чи є State окремою верхньорівневою категорією?
+- Чи потрібна окрема проєкція Organization як Organizational Resource?
+- Чи частина Infrastructure Resource повинна належати Environment?
