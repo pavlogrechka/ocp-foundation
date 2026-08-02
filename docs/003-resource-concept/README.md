@@ -1,12 +1,13 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.2.0
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002
 Used-By: Operation Concept, Assignment Concept, Organization Model, Capability Model, Domain Model
-Canonical-Concepts: Resource
+Defines-Concepts: Resource
+Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
 
@@ -166,8 +167,9 @@ Resource may_contain Resource
 ```text
 Resource participates_in Assignment
 Assignment assigns Resource to Operation
-Operation uses Resource through Assignment
 ```
+
+Окремий авторитетний зв’язок `Resource participates_in Operation` цим документом не визначається.
 
 ### Capability and constraints
 
@@ -204,7 +206,7 @@ Resource може бути складеним.
 Identified → Registered → Active → Retired
 ```
 
-`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після `Operation` та `Assignment` відповідно до `ADR-DRAFT-007`.
+`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після `Assignment` відповідно до `ADR-DRAFT-007`.
 
 ## 10. Business Rules
 
@@ -218,16 +220,25 @@ Identified → Registered → Active → Retired
 2. Наявність Capability не є достатньою підставою для висновку про готовність, доступність або фактичне призначення Resource.
 3. Базовий тип Resource не визначає його операційну роль.
 4. Кількість, маса, об’єм, заряд або залишок є характеристиками керованого Resource, а не окремими Resource.
+5. Операційна участь Resource в Operation представляється та виводиться через Assignment; прямий авторитетний зв’язок участі між Resource та Operation у Core не визначено.
+6. Операційна роль є властивістю контексту Assignment, а не сталою властивістю Resource.
+
+Робоче derivation rule до прийняття OCP-005:
+
+```text
+derived_participates_in(Resource, Operation)
+    := exists Assignment that links the same Resource and Operation
+```
+
+Це derivation rule, а не інваріант. Кардинальність, чинність і часову семантику Assignment буде визначено в OCP-005.
 
 ## 12. Invariants
 
 1. Кожен Resource має непорожній стабільний ідентифікатор у межах визначеної гранулярності управління.
 2. Два різні Resource не мають одного й того самого ідентифікатора.
 3. Кожен Resource має щонайменше один визначений тип або класифікацію.
-4. Для кожного твердження про участь Resource в Operation існує Assignment, що пов’язує той самий Resource із тією самою Operation.
-5. Кожне твердження про операційну роль Resource належить Assignment, а не безпосередньо Resource.
-6. Якщо Resource `A` містить Resource `B` і `B` моделюється як Resource, `B` має ідентичність, відмінну від `A`.
-7. Кожен Consumable Resource ідентифікує керований запас, партію, контейнер, комплект або облікову одиницю; абстрактний тип матеріалу чи значення кількості не може бути типізоване як Resource.
+4. Якщо Resource `A` містить Resource `B` і `B` моделюється як Resource, `B` має ідентичність, відмінну від `A`.
+5. Кожен Consumable Resource ідентифікує керований запас, партію, контейнер, комплект або облікову одиницю; абстрактний тип матеріалу чи значення кількості не може бути типізоване як Resource.
 
 ## 13. Examples
 
@@ -280,8 +291,9 @@ Identified → Registered → Active → Retired
 
 ## 16. Deferred Decisions
 
-До завершення `Operation Concept` та `Assignment Concept` відкладаються:
+До завершення `Assignment Concept` відкладаються:
 
+- формальна derivation участі Resource в Operation;
 - модель доступності;
 - онтологічна природа Readiness та її зв’язок із Resource, Assignment, Operation і можливим State;
 - модель поточного використання;

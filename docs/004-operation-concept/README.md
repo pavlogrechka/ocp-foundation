@@ -1,12 +1,13 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.2.0
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003
 Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business Rules, Domain Model
 Defines-Concepts: Operation
+Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
 
@@ -52,7 +53,7 @@ Operation не визначає сама по собі:
 
 ## 4. Concept Status and Dependencies
 
-`Operation` має статус `Under Review` у реєстрі OCP-000.
+`Operation` має статус `Accepted` у реєстрі OCP-000 на підставі рішення Architecture Board про схвалення PR-0003.
 
 Цей документ використовує такі зареєстровані Concept:
 
@@ -110,7 +111,7 @@ Operation
 
 ## 7. Intent and Objective
 
-Operation має операційний намір, представлений описом наміру та/або одним чи більше Objective.
+Operation має операційний намір, представлений одним або більше Objective та/або локальним structured explicit intent record.
 
 ```text
 Operation pursues Objective
@@ -118,9 +119,24 @@ Operation pursues Objective
 
 Objective описує бажаний ефект або мету, але не дорівнює самій Operation.
 
-Operation може існувати без повністю визначеного Objective лише на lifecycle stage `Draft`.
+Локальний `ExplicitIntentRecord` не вводиться як фундаментальний Concept. Він є структурою перевірки повноти Operation:
 
-Остаточна семантика Objective буде визначена окремою специфікацією.
+```text
+ExplicitIntentRecord
+- intent_id
+- statement
+- validation_status: not_evaluated | passed | failed
+- validation_rule_ref
+- validated_at
+```
+
+Нормалізований `statement` повинен містити щонайменше один символ літери або цифри. Значення, що складаються лише з пробілів, розділових знаків або службових заповнювачів, не є валідним statement.
+
+Для використання explicit intent поза stage `Draft` запис повинен мати `validation_status = passed`, непорожній `validation_rule_ref` і `validated_at`. Змістовні критерії достатності визначаються domain validation rule, на який посилається `validation_rule_ref`.
+
+Operation може існувати без валідованого наміру лише на lifecycle stage `Draft`.
+
+Остаточна семантика Objective і можливого Concept `Operational Intent` буде визначена окремими специфікаціями.
 
 ## 8. Temporal Context
 
@@ -157,11 +173,20 @@ Operational Area є контекстом Operation, а не частиною ї�
 Assignment assigns Resource to Operation
 ```
 
-Assignment має визначити роль, часову застосовність, обсяг та інші умови участі. Детальна семантика буде визначена в `OCP-005 — Assignment Concept`.
+Окремий авторитетний зв’язок `Resource participates_in Operation` або `Operation uses Resource` цим документом не визначається.
+
+Робоче derivation rule до прийняття OCP-005:
+
+```text
+derived_participates_in(Resource, Operation)
+    := exists Assignment that links the same Resource and Operation
+```
+
+Assignment має визначити роль, часову застосовність, обсяг та інші умови участі. Детальна семантика, кардинальність і чинність Assignment буде визначена в `OCP-005 — Assignment Concept`.
 
 Operation не володіє Resource і не змінює його організаційну чи командну належність.
 
-До прийняття OCP-005 правила участі через Assignment є provisional contract між OCP-003 і OCP-004.
+До прийняття OCP-005 правила участі через Assignment є provisional contract між OCP-003 і OCP-004. Derivation участі є Semantic Rule, а не самостійним інваріантом Operation.
 
 ## 11. Relationships
 
@@ -187,9 +212,21 @@ Operation supports Operation
 Operation conflicts_with Operation
 ```
 
-Ці зв’язки не виникають автоматично через просторове або часове перекриття. Джерело кожного встановленого зв’язку повинно бути простежуваним до правила, рішення або результату обчислення.
+Ці зв’язки не виникають автоматично через просторове або часове перекриття.
 
-Точна семантика буде визначена Coordination Model.
+Кожен збережений inter-operation relationship представляється локальним structured assertion record:
+
+```text
+InterOperationRelationshipAssertion
+- source_operation_id
+- relation_type: coordinates_with | depends_on | supports | conflicts_with
+- target_operation_id
+- provenance_ref
+```
+
+`provenance_ref` є непорожнім посиланням на правило, рішення, Event, результат обчислення або інший доказ, що пояснює встановлення зв’язку. Таке посилання не створює нового фундаментального Concept.
+
+Точна семантика цих зв’язків і типів provenance буде визначена Coordination Model.
 
 ### 11.3 Authorization references
 
@@ -224,6 +261,18 @@ Draft → Planned → Authorized → Active → Completed
 
 Ці значення є lifecycle stages, визначеними локально для Operation. Вони не є значеннями фундаментального Concept `State`, статус якого відкладено в ADR-DRAFT-007.
 
+Кожна зафіксована зміна lifecycle представляється локальним structured transition record:
+
+```text
+LifecycleTransitionRecord
+- from_stage
+- to_stage
+- occurred_at
+- provenance_ref
+```
+
+`provenance_ref` є непорожнім непрозорим посиланням на Event, Order, правило, рішення, системну дію або інший доказ переходу. Вимога до `provenance_ref` перевіряє простежуваність запису, але не визначає фундаментальний Concept джерела дозволу чи переходу.
+
 ### 13.1 Draft
 
 Operation зареєстрована, але її намір, контекст або склад можуть бути неповними.
@@ -236,7 +285,7 @@ Operation має мінімальний плановий контекст, до�
 
 Для Operation зафіксовано необхідне підтвердження дозволу на виконання відповідно до застосовних правил.
 
-Цей stage не визначає, який саме Concept або артефакт є джерелом дозволу.
+Цей stage не визначає, який саме Concept або артефакт є джерелом дозволу. Простежуваність конкретного переходу забезпечується `provenance_ref` у LifecycleTransitionRecord.
 
 ### 13.4 Active
 
@@ -279,6 +328,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або Result.
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
+7. Explicit intent може використовуватися поза `Draft` лише після проходження змістовної перевірки за domain validation rule; Core перевіряє структурний record і результат перевірки, але не замінює предметну оцінку.
 
 ## 16. Semantic Rules
 
@@ -290,17 +340,18 @@ Event фіксує значущий факт або зміну, пов’яза�
 6. Шаблон операції не є Operation instance.
 7. Предметна спеціалізація Operation визначається domain або capability module; вона не є екземпляром Concept Capability лише через свою спеціалізацію.
 8. Readiness і State не виводяться з lifecycle stage Operation без окремого прийнятого правила.
+9. Операційна участь Resource в Operation представляється та виводиться через Assignment; пряме авторитетне ребро участі між Resource та Operation у Core не визначено.
+10. `derived_participates_in` є derivation rule і не повинно дублюватися як інваріант виду «для кожної участі існує Assignment».
 
 ## 17. Invariants
 
-1. Кожен Operation instance має рівно одну стабільну identity.
-2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має щонайменше один Objective reference або непорожній explicit intent statement.
-3. Для кожного зв’язку участі між Resource і Operation існує щонайменше один Assignment, що пов’язує той самий Resource з тією самою Operation.
-4. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
-5. Жодна Operation не може бути parent або child самої себе.
-6. Граф parent/child між Operation є ациклічним.
-7. Кожен запис переходу lifecycle містить попередній stage, наступний stage, час переходу та джерело переходу.
-8. Кожен встановлений зв’язок `coordinates_with`, `depends_on`, `supports` або `conflicts_with` має простежуване джерело.
+1. Кожен Operation instance має рівно одну непорожню стабільну identity.
+2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має щонайменше один resolvable Objective reference або ExplicitIntentRecord, у якому нормалізований statement містить літеру чи цифру, `validation_status = passed`, а `validation_rule_ref` і `validated_at` є непорожніми.
+3. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
+4. Жодна Operation не може бути parent або child самої себе.
+5. Граф parent/child між Operation є ациклічним.
+6. Кожен LifecycleTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
+7. Кожен InterOperationRelationshipAssertion містить валідні `source_operation_id`, `relation_type`, `target_operation_id` і непорожній `provenance_ref`.
 
 ## 18. Examples
 
@@ -314,7 +365,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 
 ### Example C — coordinated independent operations
 
-Місія БпС і робота РЕБ можуть бути окремими Operation різних вертикалей. Вони не стають parent/child лише через спільний час або район. Координаційний зв’язок повинен бути встановлений окремо та мати джерело.
+Місія БпС і робота РЕБ можуть бути окремими Operation різних вертикалей. Вони не стають parent/child лише через спільний час або район. Координаційний зв’язок повинен бути встановлений окремо та мати provenance reference.
 
 ## 19. Non-Examples
 
@@ -334,7 +385,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 ## 20. Open Questions
 
 1. Чи є Order обов’язковим механізмом авторизації Operation або лише одним із можливих джерел?
-2. Чи потрібен окремий Concept `Operational Intent`, чи достатньо Objective та explicit intent statement?
+2. Чи потрібен окремий Concept `Operational Intent`, чи достатньо Objective та ExplicitIntentRecord?
 3. Чи всі Operation повинні мати Operational Area?
 4. Чи потрібен `Suspended` у канонічному lifecycle?
 5. Як представляти повторювані Operation без змішування шаблону й instance?
@@ -344,12 +395,14 @@ Event фіксує значущий факт або зміну, пов’яза�
 9. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
 10. Чи має Operation власну Readiness, окрему від Readiness залучених Resource?
 11. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
+12. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
 
 ## 21. Deferred Decisions
 
 До завершення `OCP-005 — Assignment Concept` відкладаються:
 
-- остаточні правила участі Resource;
+- формальна семантика та кардинальність Assignment;
+- остаточна derivation участі Resource в Operation;
 - конфлікти одночасного залучення;
 - часові межі Assignment відносно Operation;
 - ролі резерву, підтримки, координації та погодження;
@@ -367,4 +420,5 @@ Event фіксує значущий факт або зміну, пов’яза�
 - моделі авторизації, наказів і погоджень;
 - окремий Concept Operational Intent;
 - канонічна модель композиції Operation;
-- канонічна модель conflict і coordination.
+- канонічна модель conflict і coordination;
+- taxonomy provenance для transition та relationship records.
