@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, ADR, governance, registry, review process і versioning створені |
-| Core domain ontology | 30% | Resource, Operation та Assignment Accepted; Constraint у PR-0005; більшість Concept ще не визначена |
-| Operational rules and workflows | 5% | Є окремі invariants і derivations, але немає завершених coordination, authorization, lifecycle та conflict models |
+| Core domain ontology | 40% | Resource, Operation, Assignment і Constraint мають статус Accepted; більшість інших фундаментальних Concept ще не визначена |
+| Operational rules and workflows | 10% | Є invariants, participation та admissibility derivations, але немає завершених coordination, authorization, lifecycle та conflict models |
 | Machine-readable schemas and enforcement | 0% | Reference checker, fixtures і CI ще не злиті; перший executable slice заплановано PR-0006 |
-| **Загальна foundation-готовність** | **≈25%** | Після прийняття Constraint очікується орієнтовно **≈30%** |
+| **Загальна foundation-готовність** | **≈30%** | Constraint cycle завершено; наступний критичний крок — executable ontology checker |
 
 Відсоток не означає готовність production-системи. Репозиторій поки формує специфікаційний фундамент, а не програмну реалізацію.
 
@@ -32,7 +32,7 @@
 - [x] Resource Accepted working description
 - [x] Operation Accepted working description
 - [x] Assignment Accepted working description
-- [ ] Constraint Accepted working description — PR-0005
+- [x] Constraint Accepted working description — PR-0005
 - [ ] Review ADR-DRAFT-007 after Constraint and first executable fixtures
 - [ ] Organization Model
 - [ ] Operational Coordination Model
@@ -86,12 +86,10 @@ PR-0006 є reference validation layer, а не production implementation. Expres
 
 ## Planned Sequence
 
-1. PR-0005 — Define Constraint Concept.
-2. Resolve accepted PR-0005 review findings in the same Concept PR.
-3. Architecture Board decision on Constraint; synchronize status before merge.
-4. PR-0006 — Add Executable Ontology Checker and regression fixtures.
-5. Require fixtures for subsequent Concept and corrective cycles where expressible.
-6. Constraint patterns for Assignment conflict, exclusivity, capacity and replacement timing.
-7. Review ADR-DRAFT-007 using evidence from Operation, Assignment, Constraint and executable fixtures.
-8. Organization and Coordination concepts.
-9. Expand machine-readable schemas and ontology linter before first Canonical promotion.
+1. `PR-0005 — Define Constraint Concept` — completed and Accepted.
+2. `PR-0006 — Add Executable Ontology Checker` and regression fixtures.
+3. Require fixtures for subsequent Concept and corrective cycles where expressible.
+4. Constraint patterns for Assignment conflict, exclusivity, capacity and replacement timing.
+5. Review ADR-DRAFT-007 using evidence from Operation, Assignment, Constraint and executable fixtures.
+6. Organization and Coordination concepts.
+7. Expand machine-readable schemas and ontology linter before first Canonical promotion.
