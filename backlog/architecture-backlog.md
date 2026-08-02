@@ -11,5 +11,7 @@
 | AB-007 | State як Concept | Deferred | Після Operation та Assignment |
 | AB-008 | Межа Infrastructure Resource / Environment | Open | Перевірити на Position Site, Launch Site і Relay Site |
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити після Assignment Concept |
-| AB-010 | Залучення consumable Resource до Operation | Open | Визначити, чи достатньо Assignment |
-| AB-011 | Взаємозамінність Resource | Open | Описати після Capability і Constraint |
+| AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
+| AB-011 | Взаємозамінність Resource | Open | Описати взаємозамінність без втрати ідентичності екземплярів після Capability і Constraint |
+| AB-012 | Автоматична перевірка нормативних Concept references | Planned | Додати ontology linter до переходу перших документів у Canonical |
+| AB-013 | Машинозчитувані інваріанти | Planned | Визначити формат після стабілізації schemas і базових Concept |
