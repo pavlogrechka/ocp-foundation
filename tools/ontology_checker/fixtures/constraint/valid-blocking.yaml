@@ -1,0 +1,47 @@
+case_id: constraint-valid-blocking-001
+concept: Constraint
+expected:
+  valid: true
+contexts:
+  - context_id: CTX-001
+    evaluation_time: 2026-08-02T10:30:00Z
+    candidate_or_observed: candidate
+    subject_refs: [R-001]
+    input_snapshot_ref: SNAP-001
+    operation_context_ref: OP-001
+entity:
+  constraint_id: C-001
+  target_specification:
+    explicit_subject_refs: [R-001]
+    operation_context_ref: OP-001
+  predicate_specification:
+    predicate_code: exclusive_assignment
+    predicate_namespace: ocp.core
+    predicate_version: 1
+    input_contract_ref: contract://assignment-overlap/v1
+  enforcement_specification:
+    mode: blocking
+    indeterminate_disposition: block
+  validity_start: 2026-08-02T00:00:00Z
+  validity_end: null
+  transition_history:
+    - transition_id: CT-001
+      constraint_ref: C-001
+      from_stage: Draft
+      to_stage: Established
+      occurred_at: 2026-08-02T08:00:00Z
+      provenance_ref: BOARD-001
+  lifecycle_stage: Established
+  created_at: 2026-08-02T07:50:00Z
+  established_at: 2026-08-02T08:00:00Z
+  retired_at: null
+  establishment_provenance_ref: BOARD-001
+  evaluation_records:
+    - evaluation_id: EV-001
+      constraint_ref: C-001
+      constraint_version_ref: C-001@1
+      context_ref: CTX-001
+      input_snapshot_ref: SNAP-001
+      evaluated_at: 2026-08-02T10:30:01Z
+      result: satisfied
+      evaluator_ref: checker://reference
