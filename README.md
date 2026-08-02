@@ -50,7 +50,7 @@ backlog/       відкриті питання та дорожня карта
 **Foundation 0.3 — Executable Validation Foundation.**
 
 - Resource, Operation, Assignment і Constraint мають статус `Accepted`;
-- перший reference ontology checker перевіряє YAML fixtures, lifecycle projections і прийняті regression counterexamples;
+- reference ontology checker перевіряє YAML fixtures, exact-version Constraint evaluation, lifecycle projections, status synchronization і прийняті regression counterexamples;
 - GitHub Actions запускає unit tests і fixture validation для pull request та `main`;
 - State і Readiness залишаються Deferred до завершення першого executable validation cycle та перегляду ADR-DRAFT-007;
 - checker не є production validator або незалежним нормативним джерелом;
