@@ -1,0 +1,50 @@
+case_id: constraint-regression-stale-version-permissive
+concept: Constraint
+reference:
+  constraint_version_ref: C-VER-001@2
+expected:
+  valid: true
+  error_codes: []
+contexts:
+  - context_id: CTX-VER-001
+    evaluation_time: 2026-08-02T10:30:00Z
+    candidate_or_observed: candidate
+    subject_refs: [R-001]
+    input_snapshot_ref: SNAP-VER-001
+entity:
+  constraint_id: C-VER-001
+  target_specification:
+    explicit_subject_refs: [R-001]
+  predicate_specification:
+    predicate_code: exclusive_assignment
+    predicate_namespace: ocp.core
+    predicate_version: 2
+    input_contract_ref: contract://assignment-overlap/v2
+  enforcement_specification:
+    mode: blocking
+    indeterminate_disposition: block
+  transition_history:
+    - transition_id: CT-VER-001
+      constraint_ref: C-VER-001
+      from_stage: Draft
+      to_stage: Established
+      occurred_at: 2026-08-02T08:00:00Z
+      provenance_ref: BOARD-VER-001
+  created_at: 2026-08-02T07:50:00Z
+  evaluation_records:
+    - evaluation_id: EV-VER-CURRENT
+      constraint_ref: C-VER-001
+      constraint_version_ref: C-VER-001@2
+      context_ref: CTX-VER-001
+      input_snapshot_ref: SNAP-VER-001
+      evaluated_at: 2026-08-02T10:30:02Z
+      result: violated
+      evaluator_ref: checker://reference-v2
+    - evaluation_id: EV-VER-STALE
+      constraint_ref: C-VER-001
+      constraint_version_ref: C-VER-001@1
+      context_ref: CTX-VER-001
+      input_snapshot_ref: SNAP-VER-001
+      evaluated_at: 2026-08-02T10:30:01Z
+      result: satisfied
+      evaluator_ref: checker://reference-v1
