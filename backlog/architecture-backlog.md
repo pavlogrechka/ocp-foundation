@@ -6,7 +6,7 @@
 | AB-002 | Order як фундаментальний Concept | Open | Визначити, чи є Order обов’язковим або одним із можливих джерел авторизації Operation |
 | AB-003 | Погодження між незалежними вертикалями | Open | Включити до Coordination Model |
 | AB-004 | Capability Registry | Open | Визначити межі Core і Capability |
-| AB-005 | Risk Taxonomy | Open | Після Constraint |
+| AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
 | AB-007 | State як Concept | Deferred | Переглянути ADR-DRAFT-007 після Constraint та стабілізації Accepted Operation і Assignment |
 | AB-008 | Межа Infrastructure Resource / Environment | Open | Перевірити на Position Site, Launch Site і Relay Site |
@@ -19,7 +19,7 @@
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
 | AB-016 | Композиція Operation | Open | Визначити правила parent/child, ациклічність і межу з незалежною координацією |
 | AB-017 | Авторизація Operation | Open | Визначити джерела авторизації без передчасного введення Authority, Approval або Policy |
-| AB-018 | Conflict між Operation як факт або похідний результат | Open | Уточнити в Coordination Model і Conflict Engine |
+| AB-018 | Conflict між Operation як факт або похідний результат | Open | Визначити межу між Constraint violation, агрегованим finding і Conflict Concept |
 | AB-019 | Suspended у lifecycle Operation | Deferred | Переглянути після Constraint, Assignment і State |
 | AB-020 | Operation Template як окремий Concept | Open | Перевірити після стабілізації Operation lifecycle і повторюваних Operation |
 | AB-021 | Формальна derivation участі через Assignment | Resolved | Нормативне визначення в OCP-005 §§8–9; подальші зміни лише у defining document |
@@ -32,7 +32,12 @@
 | AB-028 | Узгодження lifecycle Operation та Assignment | Open | Визначити правила для незавершених Assignment при Completed, Cancelled або Aborted Operation після Constraint |
 | AB-029 | Кілька applicability intervals в Assignment | Open | Вирішити: один Assignment з кількома інтервалами чи окремий Assignment на інтервал |
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
-| AB-031 | Lifecycle record consistency | Under Review | PR-0004A: transition history як source of truth, linear path, двостороння узгодженість stage і timestamps для Assignment; поширити патерн на Operation |
-| AB-032 | Canonical rule reference integrity | Under Review | PR-0004A прибирає копії derivation з OCP-003/OCP-004; ontology linter має виявляти незалежні дублікати нормативних правил |
+| AB-031 | Lifecycle record consistency | Resolved for Assignment | OCP-005 використовує authoritative linear transition history; поширити патерн на Operation у межах AB-028 |
+| AB-032 | Canonical rule reference integrity | Resolved as governance rule | OCP-001 вимагає єдине defining location; автоматичну перевірку включити до AB-012 |
 | AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, direct/force push і deletion заборонені, enforcement для адміністраторів |
-| AB-034 | Constraint Concept | Planned | Наступний Concept cycle PR-0005; визначити conflict, exclusivity, capacity, multiple roles та replacement overlap/gap до перегляду ADR-DRAFT-007 |
+| AB-034 | Constraint Concept | Under Review | PR-0005 / OCP-006: target, predicate, enforcement, lifecycle, evaluation та admissibility derivation |
+| AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
+| AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
+| AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
+| AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
+| AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay |
