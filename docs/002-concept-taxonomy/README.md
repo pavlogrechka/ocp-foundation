@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.3.0
+Version: 0.4.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -59,11 +59,36 @@ Resource
 
 `Fuel`, `energy` або інший матеріал як абстрактний тип чи значення кількості не є окремим Resource. Resource у витратній гілці представляє ідентифікований керований запас, партію, контейнер, комплект або іншу облікову одиницю.
 
-Остаточна класифікація Resource не затверджена. Зокрема, відкритими залишаються межі між `Organization`, `Organizational Resource`, `Infrastructure Resource` та `Environment`.
+Остаточна класифікація Resource не затверджена. Зокрема, відкритими залишаються межі між `Organization`, `Organizational Resource`, `Infrastructure Resource` та категорією `Environment`.
 
 ## Operation
 
-Concept `Operation` перебуває у статусі `Under Review` і визначається в OCP-004 / PR-0003.
+Concept `Operation` перебуває у статусі `Under Review` і визначається в [OCP-004 — Operation Concept](../004-operation-concept/README.md).
+
+Operation є універсальним контекстом координованої діяльності. Предметні типи, зокрема місія БпС або операція РЕБ, визначаються domain або capability modules і не входять до Core Taxonomy автоматично.
+
+Робоча структура:
+
+```text
+Operation
+├── Identity
+├── Intent
+│   └── Objective [Proposed]
+├── Temporal Context
+├── Spatial Context
+│   └── Operational Area [Proposed]
+├── Participation
+│   └── Assignment [Proposed]
+├── Constraints
+│   └── Constraint [Proposed]
+└── Outcome
+    ├── Event [Proposed]
+    └── Result [Proposed]
+```
+
+`Intent`, `Temporal Context`, `Spatial Context`, `Participation`, `Constraints` і `Outcome` у цьому дереві є секціями моделі Operation, а не автоматично окремими фундаментальними Concept.
+
+Остаточна класифікація Operation та її предметних спеціалізацій не затверджена.
 
 ## Прийнята робоча гіпотеза
 
@@ -84,8 +109,10 @@ Resource + Assignment + Operation Context = Operational Role
 
 ## Питання до наступного рев’ю
 
-- Чи має Environment залишатися єдиною верхньорівневою категорією для Space, Time і Spectrum?
+- Чи має категорія Environment залишатися єдиною верхньорівневою категорією для Space, Time і Spectrum?
 - Чи є Organization окремою категорією від Resource в усіх операційних контекстах?
 - Чи є State окремою верхньорівневою категорією?
 - Чи потрібна окрема проєкція Organization як Organizational Resource?
-- Чи частина Infrastructure Resource повинна належати Environment?
+- Чи частина Infrastructure Resource повинна належати категорії Environment?
+- Чи потрібен окремий Concept Operational Intent?
+- Чи належать Objective, Result і Constraint до окремих верхньорівневих категорій?
