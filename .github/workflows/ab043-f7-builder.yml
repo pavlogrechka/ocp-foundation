@@ -26,7 +26,9 @@ jobs:
         run: python -m pip install -r tools/ontology_checker/requirements.txt
 
       - name: Materialize F7
-        run: python .ab043/apply_f7.py
+        run: |
+          python .ab043/apply_f7.py
+          python .ab043/fix_f7_test_placeholder.py
 
       - name: Run full unit suite
         run: python -m unittest discover -s tools/ontology_checker/tests -v
