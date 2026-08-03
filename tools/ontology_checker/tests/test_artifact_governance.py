@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -47,8 +48,9 @@ artifact_classes:
 commit_convention:
   merge_method: squash
   linear_history_required: true
-  history_audit_scope: all_reachable_commits
+  history_audit_scope: post_baseline_reachable_commits
   history_audit_requires_complete_history: true
+  history_audit_baseline: "0000000000000000000000000000000000000000"
 """
 
 
@@ -194,27 +196,75 @@ class ArtifactGovernanceTests(unittest.TestCase):
         self.git(root, "commit", "-m", "initial")
         return root
 
-    def test_process_audit_accepts_linear_complete_history(self) -> None:
+    def head(self, root: Path) -> str:
+        return subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=root, check=True, capture_output=True, text=True
+        ).stdout.strip()
+
+    def set_history_baseline(self, root: Path, baseline: str) -> None:
+        path = root / "architecture/artifact-taxonomy.yaml"
+        text = path.read_text(encoding="utf-8")
+        updated, count = re.subn(
+            r'history_audit_baseline: \"?[0-9a-f]{40}\"?',
+            f'history_audit_baseline: \"{baseline}\"',
+            text,
+            count=1,
+        )
+        self.assertEqual(count, 1)
+        path.write_text(updated, encoding="utf-8")
+        self.git(root, "add", str(path.relative_to(root)))
+        self.git(root, "commit", "-m", "set history audit baseline")
+
+    def create_merge(self, root: Path, name: str) -> str:
+        self.git(root, "checkout", "-b", name)
+        (root / f"{name}.txt").write_text(f"{name}\n", encoding="utf-8")
+        self.git(root, "add", f"{name}.txt")
+        self.git(root, "commit", "-m", name)
+        self.git(root, "checkout", "main")
+        marker = root / f"main-{name}.txt"
+        marker.write_text(f"main {name}\n", encoding="utf-8")
+        self.git(root, "add", marker.name)
+        self.git(root, "commit", "-m", f"main before {name}")
+        self.git(root, "merge", "--no-ff", name, "-m", f"merge {name}")
+        return self.head(root)
+
+    def test_process_audit_accepts_linear_history_after_baseline(self) -> None:
         root = self.make_git_repo()
+        baseline = self.head(root)
+        self.set_history_baseline(root, baseline)
+        (root / "linear.txt").write_text("linear\n", encoding="utf-8")
+        self.git(root, "add", "linear.txt")
+        self.git(root, "commit", "-m", "linear after baseline")
         self.assertTrue(validate_process_audit(root, context="main").valid)
 
-    def test_process_audit_finds_merge_below_head(self) -> None:
+    def test_process_audit_accepts_legacy_merge_at_baseline(self) -> None:
         root = self.make_git_repo()
-        self.git(root, "checkout", "-b", "feature")
-        (root / "feature.txt").write_text("feature\n", encoding="utf-8")
-        self.git(root, "add", "feature.txt")
-        self.git(root, "commit", "-m", "feature")
-        self.git(root, "checkout", "main")
-        (root / "main.txt").write_text("main\n", encoding="utf-8")
-        self.git(root, "add", "main.txt")
-        self.git(root, "commit", "-m", "main")
-        self.git(root, "merge", "--no-ff", "feature", "-m", "merge")
-        (root / "after.txt").write_text("after\n", encoding="utf-8")
-        self.git(root, "add", "after.txt")
-        self.git(root, "commit", "-m", "after merge")
+        legacy_merge = self.create_merge(root, "legacy-feature")
+        self.set_history_baseline(root, legacy_merge)
+        (root / "after-baseline.txt").write_text("linear\n", encoding="utf-8")
+        self.git(root, "add", "after-baseline.txt")
+        self.git(root, "commit", "-m", "linear after legacy baseline")
+        self.assertTrue(validate_process_audit(root, context="main").valid)
+
+    def test_process_audit_rejects_merge_after_baseline(self) -> None:
+        root = self.make_git_repo()
+        baseline = self.head(root)
+        self.set_history_baseline(root, baseline)
+        self.create_merge(root, "post-baseline-feature")
+        (root / "after-merge.txt").write_text("after\n", encoding="utf-8")
+        self.git(root, "add", "after-merge.txt")
+        self.git(root, "commit", "-m", "after post-baseline merge")
         self.assertEqual(
             set(validate_process_audit(root, context="main").errors),
             {PROCESS_HISTORY_NON_LINEAR},
+        )
+
+    def test_process_audit_rejects_unreachable_baseline(self) -> None:
+        root = self.make_git_repo()
+        self.set_history_baseline(root, "f" * 40)
+        self.assertEqual(
+            set(validate_process_audit(root, context="main").errors),
+            {PROCESS_HISTORY_AUDIT_FAILED},
         )
 
     def test_process_audit_rejects_shallow_history(self) -> None:
