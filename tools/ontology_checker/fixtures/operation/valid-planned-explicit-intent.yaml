@@ -1,0 +1,23 @@
+case_id: operation-valid-planned-explicit-intent-001
+concept: Operation
+expected:
+  valid: true
+  error_codes: []
+entity:
+  operation_id: OP-INTENT-001
+  lifecycle_stage: Planned
+  explicit_intent_record:
+    intent_id: INT-001
+    intent_version_ref: INT-001@1
+    statement: Preserve access to the transit corridor
+    validation_rule_ref: RULE-INTENT-001@2
+    input_snapshot_ref: SNAP-INTENT-001
+    validation_status: passed
+    validation_records:
+      - validation_id: INT-VAL-001
+        intent_version_ref: INT-001@1
+        validation_rule_ref: RULE-INTENT-001@2
+        input_snapshot_ref: SNAP-INTENT-001
+        evaluated_at: 2026-08-03T18:00:00Z
+        evaluator_ref: checker://intent-v2
+        result: passed

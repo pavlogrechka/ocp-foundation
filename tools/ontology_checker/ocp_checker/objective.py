@@ -14,11 +14,18 @@ OBJECTIVE_ERROR_CODES = frozenset(
         "OBJECTIVE_SELF_SUPERSESSION",
         "OBJECTIVE_STATEMENT_REQUIRED",
         "OBJECTIVE_SUPERSESSION_CYCLE",
+        "OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT",
+        "OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID",
+        "OPERATION_EXPLICIT_INTENT_EVIDENCE_MISSING",
+        "OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE",
+        "OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH",
         "OPERATION_INTENT_REPRESENTATION_CONFLICT",
         "OPERATION_OBJECTIVE_REFERENCE_INVALID",
         "OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED",
     }
 )
+
+VALIDATION_RESULTS = frozenset({"not_evaluated", "passed", "failed"})
 
 
 def _result(errors: Iterable[str]) -> ValidationResult:
@@ -31,6 +38,13 @@ def _nonempty(value: Any) -> bool:
 
 def _has_alnum(value: Any) -> bool:
     return isinstance(value, str) and any(char.isalnum() for char in value)
+
+
+def _versioned_ref(value: Any) -> bool:
+    if not isinstance(value, str):
+        return False
+    subject, separator, version = value.strip().rpartition("@")
+    return bool(separator and subject.strip() and version.strip())
 
 
 def _parse_time(value: Any) -> datetime | None:
@@ -103,16 +117,64 @@ def validate_objective_dataset(objectives: Iterable[dict[str, Any]]) -> Validati
     return _result(errors)
 
 
-def _valid_explicit_intent(intent: Any) -> bool:
-    if not isinstance(intent, dict):
+def _validation_record_valid(record: Any) -> bool:
+    if not isinstance(record, dict):
         return False
     return (
-        _nonempty(intent.get("intent_id"))
-        and _has_alnum(intent.get("statement"))
-        and intent.get("validation_status") == "passed"
-        and _nonempty(intent.get("validation_rule_ref"))
-        and _parse_time(intent.get("validated_at")) is not None
+        _nonempty(record.get("validation_id"))
+        and _versioned_ref(record.get("intent_version_ref"))
+        and _versioned_ref(record.get("validation_rule_ref"))
+        and _nonempty(record.get("input_snapshot_ref"))
+        and _parse_time(record.get("evaluated_at")) is not None
+        and _nonempty(record.get("evaluator_ref"))
+        and record.get("result") in VALIDATION_RESULTS
     )
+
+
+def _validate_explicit_intent(intent: Any) -> list[str]:
+    if not isinstance(intent, dict):
+        return ["OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID"]
+
+    errors: list[str] = []
+    top_level_valid = (
+        _nonempty(intent.get("intent_id"))
+        and _versioned_ref(intent.get("intent_version_ref"))
+        and _has_alnum(intent.get("statement"))
+        and _versioned_ref(intent.get("validation_rule_ref"))
+        and _nonempty(intent.get("input_snapshot_ref"))
+    )
+    if not top_level_valid:
+        errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID")
+
+    effective_result: str | None = None
+    records = intent.get("validation_records")
+    if not isinstance(records, list) or not records:
+        errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_MISSING")
+    elif any(not _validation_record_valid(record) for record in records):
+        errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID")
+    elif top_level_valid:
+        exact = [
+            record
+            for record in records
+            if record.get("intent_version_ref") == intent.get("intent_version_ref")
+            and record.get("validation_rule_ref") == intent.get("validation_rule_ref")
+            and record.get("input_snapshot_ref") == intent.get("input_snapshot_ref")
+        ]
+        if not exact:
+            errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE")
+        else:
+            exact_results = {str(record["result"]) for record in exact}
+            if len(exact_results) != 1:
+                errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT")
+            else:
+                effective_result = next(iter(exact_results))
+
+    normative_projection = effective_result or "not_evaluated"
+    if "validation_status" in intent and intent.get("validation_status") != normative_projection:
+        errors.append("OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH")
+    if effective_result is not None and effective_result != "passed":
+        errors.append("OPERATION_INTENT_REQUIRED")
+    return errors
 
 
 def _objective_index(fixture: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
@@ -166,8 +228,7 @@ def validate_operation_fixture(fixture: dict[str, Any]) -> ValidationResult:
             if not refs_valid:
                 return _result(errors)
         elif explicit_present:
-            if not _valid_explicit_intent(operation.get("explicit_intent_record")):
-                errors.append("OPERATION_INTENT_REQUIRED")
+            errors.extend(_validate_explicit_intent(operation.get("explicit_intent_record")))
         else:
             errors.append("OPERATION_INTENT_REQUIRED")
 

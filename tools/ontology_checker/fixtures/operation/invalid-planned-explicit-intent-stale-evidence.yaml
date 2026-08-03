@@ -1,0 +1,25 @@
+case_id: operation-invalid-planned-explicit-intent-stale-evidence-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE
+    - OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH
+entity:
+  operation_id: OP-INTENT-STALE-001
+  lifecycle_stage: Planned
+  explicit_intent_record:
+    intent_id: INT-STALE-001
+    intent_version_ref: INT-STALE-001@2
+    statement: Preserve access to the transit corridor
+    validation_rule_ref: RULE-INTENT-001@2
+    input_snapshot_ref: SNAP-INTENT-STALE-001
+    validation_status: passed
+    validation_records:
+      - validation_id: INT-VAL-STALE-001
+        intent_version_ref: INT-STALE-001@1
+        validation_rule_ref: RULE-INTENT-001@2
+        input_snapshot_ref: SNAP-INTENT-STALE-001
+        evaluated_at: 2026-08-03T17:55:00Z
+        evaluator_ref: checker://intent-v2
+        result: passed

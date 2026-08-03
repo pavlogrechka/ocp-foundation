@@ -1,0 +1,18 @@
+case_id: operation-invalid-planned-explicit-intent-missing-evidence-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_EXPLICIT_INTENT_EVIDENCE_MISSING
+    - OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH
+entity:
+  operation_id: OP-INTENT-MISSING-001
+  lifecycle_stage: Planned
+  explicit_intent_record:
+    intent_id: INT-MISSING-001
+    intent_version_ref: INT-MISSING-001@1
+    statement: Preserve access to the transit corridor
+    validation_rule_ref: RULE-INTENT-001@2
+    input_snapshot_ref: SNAP-INTENT-MISSING-001
+    validation_status: passed
+    validation_records: []
