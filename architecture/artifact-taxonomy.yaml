@@ -1,0 +1,73 @@
+taxonomy_version: 0.1.0
+authority: Architecture Board
+artifact_classes:
+  OCP:
+    normative_level: binding
+    lifecycle: [Draft, Accepted, Canonical, Deprecated, Archived]
+    status_authority: Architecture Board
+    numbering_authority: Architecture Board
+    location: docs/
+    external_review_required: true
+    purpose: Domain and ontology specifications.
+  Pattern:
+    normative_level: binding-when-invoked
+    lifecycle: [Draft, Accepted, Deprecated, Archived]
+    status_authority: Architecture Board
+    numbering_authority: Architecture Board
+    location: patterns/
+    external_review_required: true
+    invocation_metadata: Uses-Patterns
+    purpose: Reusable modeling contracts without domain semantics.
+  AD:
+    normative_level: binding
+    lifecycle: [Discovery, Under Review, Accepted, Superseded, Archived]
+    status_authority: Architecture Board
+    numbering_authority: Architecture Board
+    location: architecture/discovery/
+    external_review_required: true
+    purpose: New architecture decisions and discovery that govern future artifacts.
+  ADR:
+    normative_level: binding
+    lifecycle: [Draft, Accepted, Superseded, Archived]
+    status_authority: Architecture Board
+    numbering_authority: frozen
+    location: adr/
+    external_review_required: true
+    new_ids_allowed: false
+    purpose: Historical decision registry; existing ADR-DRAFT-007 completes its lifecycle here.
+  AB:
+    normative_level: record
+    lifecycle: [Open, Proposed, Discovery, Deferred, Planned, Under Review, Resolved, Rejected]
+    status_authority: Architecture Board
+    numbering_authority: Architecture Board
+    location: backlog/architecture-backlog.md
+    external_review_required: false
+    purpose: Board backlog and decision accounting.
+  Review:
+    normative_level: record
+    lifecycle: [Draft, Final]
+    status_authority: review_author
+    numbering_authority: pull_request
+    location: architecture/reviews/
+    external_review_required: false
+    purpose: Review evidence and finding resolution history.
+  ExecutableReference:
+    normative_level: advisory
+    lifecycle: [Experimental, Reference, Deprecated]
+    status_authority: Architecture Board
+    numbering_authority: repository_path
+    location: tools/
+    external_review_required: false
+    purpose: Executable validation that implements but does not redefine normative artifacts.
+  Backlog:
+    normative_level: record
+    lifecycle: [Open, Planned, Deferred, Resolved]
+    status_authority: Architecture Board
+    numbering_authority: owning_registry
+    location: backlog/
+    external_review_required: false
+    purpose: Planned work and unresolved questions.
+commit_convention:
+  pull_request_title: "PR-NNNN[LETTER] — Title"
+  merge_method: squash
+  note: Branch protection is the preventive control; repository checks may only audit history post-factum.
