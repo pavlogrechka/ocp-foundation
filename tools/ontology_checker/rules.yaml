@@ -1,4 +1,4 @@
-manifest_version: 0.3.0
+manifest_version: 0.3.1
 authority: reference-only
 normative_source: OCP documents
 rules:
@@ -128,6 +128,9 @@ rules:
 - id: OBJECTIVE_STATEMENT_REQUIRED
   kind: validation
   source: OCP-008 §10 invariant 2
+- id: OBJECTIVE_SUPERSESSION_CYCLE
+  kind: validation
+  source: OCP-008 §10 invariant 6; dataset validation
 - id: OPERATION_ID_REQUIRED
   kind: validation
   source: OCP-004 invariants
@@ -142,7 +145,7 @@ rules:
   source: OCP-004 §7 and OCP-008 §6
 - id: OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED
   kind: validation
-  source: OCP-004 §7 and OCP-008 §10 invariant 10
+  source: OCP-004 §7 and OCP-008 §10 invariant 11
 - id: OPERATION_SELF_PARENT
   kind: validation
   source: OCP-004 composition invariant

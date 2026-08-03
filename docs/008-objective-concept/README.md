@@ -1,10 +1,11 @@
 ---
 Document-ID: OCP-008
 Title: Objective Concept
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, AD-003
+Depends-On: OCP-000, OCP-001, OCP-002, AD-003, P-001
+Uses-Patterns: P-001@0.1.0
 Used-By: Operation Concept, Planning, Coordination Model, Event Model, Result Model
 Defines-Concepts: Objective
 Concept-Depends-On: []
@@ -50,7 +51,7 @@ Objective не є автоматично:
 
 Objective не створює Assignment, command relation, authorization або Operation hierarchy.
 
-## 4. Identity
+## 4. Identity and supersession
 
 Кожен Objective має стабільний непорожній `objective_id`.
 
@@ -60,7 +61,13 @@ Objective identity не залежить від Operation, Organization, авт�
 
 Зміна пробілів, форматування або орфографічне виправлення, що не змінює нормалізованого змісту, може зберігати identity лише як явно класифікована non-semantic editorial correction. Визначення предметної еквівалентності залишається відповідальністю застосовного domain rule.
 
-Objective не може supersede сам себе. Supersession не означає автоматичного оновлення Operation references.
+Objective не може supersede сам себе. Граф `supersedes_objective_ref` є ациклічним і перевіряється на рівні повного dataset.
+
+Supersession може розгалужуватися: кілька нових Objective можуть явно supersede один ширший попередній Objective. Це не створює hierarchy або decomposition semantics.
+
+Overlap і gaps між попереднім та новими Objective дозволені, оскільки Core Objective не визначає temporal effectivity. Попередній і новий Objective залишаються валідними identified records; Core не обчислює, який із них «чинний». Operation references не оновлюються автоматично.
+
+`provenance_ref` нового Objective є authoritative provenance його створення та, коли присутній `supersedes_objective_ref`, рішення про заміну. Окремий replacement-act record у Core не вимагається.
 
 ## 5. Minimal Structure
 
@@ -123,7 +130,7 @@ Objective не залежить від Operation. OCP-004 декларує `Oper
 
 Objective і локальний `ExplicitIntentRecord` є різними представленнями.
 
-На stage `Draft` Operation може тимчасово містити обидва як authoring state. Жодне не має автоматичного пріоритету.
+На stage `Draft` Operation може тимчасово містити обидва як authoring state. Нерезолвлені, але структурно коректні `objective_refs` також дозволені в `Draft`, оскільки referenced Objective може бути створений пізніше. Жодна гілка не має автоматичного пріоритету.
 
 Поза `Draft` активні representations взаємовиключні:
 
@@ -162,11 +169,14 @@ Objective не має полів `achieved`, `success`, `failure`, `completed_at
 3. `created_at` є валідним timestamp.
 4. `provenance_ref` є непорожнім opaque reference і не надає authorization semantics.
 5. Objective не може посилатися на себе через `supersedes_objective_ref`.
-6. Substantive change intended outcome створює новий Objective identity; попередня identity не мутує приховано.
-7. Objective validity не залежить від наявності Operation.
-8. Objective не містить authoritative achievement evaluation.
-9. Supersession не оновлює Operation references автоматично.
-10. Кожен Objective reference, який використовується Operation поза `Draft`, резолвиться однозначно у валідний Objective instance.
+6. Граф `supersedes_objective_ref` між Objective є ациклічним.
+7. Substantive change intended outcome створює новий Objective identity; попередня identity не мутує приховано.
+8. Objective validity не залежить від наявності Operation.
+9. Objective не містить authoritative achievement evaluation.
+10. Supersession не оновлює Operation references автоматично.
+11. Кожен Objective reference, який використовується Operation поза `Draft`, резолвиться однозначно у валідний Objective instance.
+
+Інваріант 6 є graph-level і потребує dataset validation. Інваріант 11 застосовується лише до Operation поза `Draft`.
 
 ## 11. Examples
 
@@ -178,9 +188,13 @@ Objective `OBJ-001` описує створення визначеного бе�
 
 Objective `OBJ-002` змінює intended outcome `OBJ-001` не редакційно, а семантично. `OBJ-002.supersedes_objective_ref = OBJ-001`. Existing Operation references не переписуються автоматично.
 
-### Example C — opaque provenance
+### Example C — split replacement
 
-`provenance_ref = SOURCE-17` забезпечує traceability створення Objective, але OCP-008 не робить SOURCE-17 наказом, authority або approval.
+Objective `OBJ-010` і `OBJ-011` можуть обидва supersede ширший `OBJ-009`. Усі три records зберігають власну identity; Core не виводить hierarchy або temporal effectivity з такого branching.
+
+### Example D — opaque provenance
+
+`provenance_ref = SOURCE-17` забезпечує traceability створення Objective, а для replacement Objective також простежуваність рішення про заміну. OCP-008 не робить SOURCE-17 наказом, authority або approval.
 
 ## 12. Non-Examples
 
@@ -211,9 +225,36 @@ Objective `OBJ-002` змінює intended outcome `OBJ-001` не редакці�
 - automatic conversion з free text;
 - domain-specific Objective taxonomy;
 - automatic propagation через supersession;
-- canonical Objective lifecycle.
+- temporal effectivity або canonical Objective lifecycle.
 
-## 14. Review Target
+## 14. P-001 conformance
+
+OCP-008 invokes `P-001@0.1.0` for the endpoint-free identified Objective record.
+
+### 14.1 Required Elements
+
+- stable identity: `objective_id`;
+- semantic owner: OCP-008 §§1–14;
+- endpoint contract: explicitly endpoint-free; Objective is an assertion of intended outcome, not a relation record;
+- governed kind: one governed Core record kind, `Objective`; no free-form kind field is normative;
+- provenance: `provenance_ref` records attributable creation and, for a superseding Objective, the replacement decision;
+- validation: invariants 10.1–10.11, positive Objective and Operation bootstrap fixtures, and negative supersession-cycle evidence;
+- authority: the Objective instance is authoritative; no lifecycle, effectivity or achievement projection is authoritative in Core.
+
+### 14.2 Selected Optional Module C — Supersession
+
+- superseded record reference: `supersedes_objective_ref`;
+- self-supersession: prohibited by invariant 10.5;
+- acyclicity: required by invariant 10.6 and dataset validation;
+- branching: allowed; multiple successor Objective may supersede one prior Objective;
+- overlap and gaps: allowed because Module A is not selected and Objective has no Core effectivity interval;
+- record effective during overlap: not defined; prior and successor records remain valid identified Objectives;
+- replacement provenance: `provenance_ref` of the new Objective is authoritative; no separate replacement-act record is required;
+- prior history and consumer references: never rewritten automatically.
+
+Modules A and B are intentionally not selected: OCP-008 defines neither temporal effectivity nor lifecycle transition history. P-001 supplies record form only; all Objective semantics remain defined here.
+
+## 15. Review Target
 
 Спробувати спростувати специфікацію випадками, де:
 
@@ -222,12 +263,13 @@ Objective `OBJ-002` змінює intended outcome `OBJ-001` не редакці�
 3. achievement semantics просочуються з Event/Result;
 4. Objective identity залежить від Operation;
 5. substantive change мутує існуючу identity без supersession;
-6. Operation поза `Draft` проходить з нерезолвленим Objective reference;
-7. Objective та `ExplicitIntentRecord` співіснують поза `Draft` без fail-safe помилки;
-8. supersession автоматично переписує споживачів;
-9. Objective relationship model неявно вводить hierarchy або P-001 invocation.
+6. supersession graph утворює цикл або branching не має визначеної семантики;
+7. Operation поза `Draft` проходить з нерезолвленим Objective reference;
+8. Objective та `ExplicitIntentRecord` співіснують поза `Draft` без fail-safe помилки;
+9. supersession автоматично переписує споживачів або мовчки створює effectivity;
+10. Objective relationship model неявно вводить hierarchy або неповне P-001 invocation.
 
-## 15. Open Questions
+## 16. Open Questions
 
 1. Чи потрібна окрема Objective lifecycle після появи Event/Result evidence?
 2. Які domain rules визначають semantic equivalence editorial corrections?
@@ -235,6 +277,6 @@ Objective `OBJ-002` змінює intended outcome `OBJ-001` не редакці�
 4. Як представляти partial achievement та conflicting assessments у Result model?
 5. Чи потрібна окрема taxonomy для outcome, condition та effect?
 
-## 16. Architecture Board Decision
+## 17. Architecture Board Decision
 
 Поточний статус `Under Review`. Architecture Board decision буде зафіксоване після зовнішнього adversarial review PR-0009.

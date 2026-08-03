@@ -157,27 +157,17 @@ def validate_resource(resource: dict[str, Any]) -> ValidationResult:
     return _result(errors)
 
 
-def validate_operation(operation: dict[str, Any]) -> ValidationResult:
-    errors: list[str] = []
-    if not _nonempty(operation.get("operation_id")):
-        errors.append("OPERATION_ID_REQUIRED")
+def validate_operation(
+    operation: dict[str, Any],
+    references: dict[str, Any] | None = None,
+) -> ValidationResult:
+    """Delegate to the single authoritative Operation fixture validator."""
+    from .objective import validate_operation_fixture
 
-    stage = operation.get("lifecycle_stage", "Draft")
-    if stage != "Draft":
-        objective_ok = _nonempty(operation.get("objective_ref"))
-        intent = operation.get("explicit_intent_record") or {}
-        intent_ok = (
-            _nonempty(intent.get("intent_id"))
-            and _has_alnum(intent.get("statement"))
-            and intent.get("validation_status") == "passed"
-            and _nonempty(intent.get("validation_rule_ref"))
-            and _parse_time(intent.get("validated_at")) is not None
-        )
-        if not (objective_ok or intent_ok):
-            errors.append("OPERATION_INTENT_REQUIRED")
-    if operation.get("parent_operation_ref") == operation.get("operation_id"):
-        errors.append("OPERATION_SELF_PARENT")
-    return _result(errors)
+    fixture: dict[str, Any] = {"concept": "Operation", "entity": operation}
+    if references is not None:
+        fixture["references"] = references
+    return validate_operation_fixture(fixture)
 
 
 ASSIGNMENT_PATHS = {
@@ -531,7 +521,7 @@ def validate_fixture(fixture: dict[str, Any]) -> ValidationResult:
     if concept == "Resource":
         return validate_resource(entity)
     if concept == "Operation":
-        return validate_operation(entity)
+        return validate_operation(entity, fixture.get("references"))
     if concept == "Assignment":
         return validate_assignment(entity)
     if concept == "Constraint":

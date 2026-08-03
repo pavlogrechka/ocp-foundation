@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Iterable
 
 from .checker import ValidationResult
 
@@ -13,6 +13,7 @@ OBJECTIVE_ERROR_CODES = frozenset(
         "OBJECTIVE_PROVENANCE_REF_REQUIRED",
         "OBJECTIVE_SELF_SUPERSESSION",
         "OBJECTIVE_STATEMENT_REQUIRED",
+        "OBJECTIVE_SUPERSESSION_CYCLE",
         "OPERATION_INTENT_REPRESENTATION_CONFLICT",
         "OPERATION_OBJECTIVE_REFERENCE_INVALID",
         "OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED",
@@ -20,7 +21,7 @@ OBJECTIVE_ERROR_CODES = frozenset(
 )
 
 
-def _result(errors: list[str]) -> ValidationResult:
+def _result(errors: Iterable[str]) -> ValidationResult:
     return ValidationResult(tuple(dict.fromkeys(errors)))
 
 
@@ -60,6 +61,45 @@ def validate_objective(objective: dict[str, Any]) -> ValidationResult:
         errors.append("OBJECTIVE_PROVENANCE_REF_REQUIRED")
     if objective.get("supersedes_objective_ref") == objective_id and _nonempty(objective_id):
         errors.append("OBJECTIVE_SELF_SUPERSESSION")
+    return _result(errors)
+
+
+def _has_supersession_cycle(graph: dict[str, str]) -> bool:
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(node: str) -> bool:
+        if node in visiting:
+            return True
+        if node in visited:
+            return False
+        visiting.add(node)
+        target = graph.get(node)
+        if target in graph and visit(str(target)):
+            return True
+        visiting.remove(node)
+        visited.add(node)
+        return False
+
+    return any(visit(node) for node in sorted(graph))
+
+
+def validate_objective_dataset(objectives: Iterable[dict[str, Any]]) -> ValidationResult:
+    errors: list[str] = []
+    graph: dict[str, str] = {}
+
+    for objective in objectives:
+        if not isinstance(objective, dict):
+            errors.append("OBJECTIVE_ID_REQUIRED")
+            continue
+        errors.extend(validate_objective(objective).errors)
+        objective_id = objective.get("objective_id")
+        supersedes = objective.get("supersedes_objective_ref")
+        if _nonempty(objective_id) and _nonempty(supersedes):
+            graph[str(objective_id)] = str(supersedes)
+
+    if _has_supersession_cycle(graph):
+        errors.append("OBJECTIVE_SUPERSESSION_CYCLE")
     return _result(errors)
 
 
@@ -113,7 +153,7 @@ def validate_operation_fixture(fixture: dict[str, Any]) -> ValidationResult:
         errors.append("OPERATION_INTENT_REPRESENTATION_CONFLICT")
         return _result(errors)
 
-    if refs_present and refs_valid:
+    if stage != "Draft" and refs_present and refs_valid:
         index = _objective_index(fixture)
         for objective_ref in refs:
             candidates = index.get(objective_ref, [])

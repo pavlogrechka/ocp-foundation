@@ -20,6 +20,7 @@ from .checker import (
 from .objective import (
     OBJECTIVE_ERROR_CODES,
     validate_objective,
+    validate_objective_dataset,
     validate_operation_fixture,
 )
 
@@ -30,8 +31,8 @@ def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
     if concept == "Objective":
         return validate_objective(fixture.get("entity") or {})
-    if concept == "Operation":
-        return validate_operation_fixture(fixture)
+    if concept == "ObjectiveDataset":
+        return validate_objective_dataset(fixture.get("entities") or [])
     return validate_fixture(fixture)
 
 
