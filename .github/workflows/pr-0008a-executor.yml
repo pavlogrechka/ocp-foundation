@@ -19,8 +19,7 @@ jobs:
           source=Path('.github/workflows/pr-0008a-final-runner.yml').read_text()
           block=source.split("          python - <<'PY'\n",1)[1].split("\n          PY",1)[0]
           lines=[line[10:] if line.startswith('          ') else line for line in block.splitlines()]
-          oldpara="During PR-0008 implementation, `concept-dependencies.yaml` is a migration staging record used to exercise graph validation before the same edges are moved into defining-document frontmatter. The migration is governed by AB-053. The checker rejects simultaneous staging and frontmatter dependency sources, and the staging record must be removed before this baseline leaves Draft."
-          replacement='assert oldpara in t; t=t.replace(oldpara,new,1)'
+          replacement='parts=t.splitlines(); matches=[i for i,v in enumerate(parts) if v.startswith("During PR-0008 implementation")]; assert len(matches)==1,matches; parts[matches[0]]=new; t="\\n".join(parts)+("\\n" if t.endswith("\\n") else "")'
           found=False
           for index,line in enumerate(lines):
               if line.startswith('t,n=re.subn('):
@@ -29,8 +28,7 @@ jobs:
                   break
           if not found:
               raise RuntimeError('baseline rewrite statement not found')
-          namespace={'oldpara':oldpara}
-          exec(compile('\n'.join(lines),'pr0008a-migration','exec'),namespace,namespace)
+          exec(compile('\n'.join(lines),'pr0008a-migration','exec'))
           PY
           python -m unittest discover -s tools/ontology_checker/tests -v
           python tools/ontology_checker/check.py --context=pr
