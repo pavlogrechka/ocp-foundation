@@ -19,7 +19,7 @@ jobs:
           source=Path('.github/workflows/pr-0008a-final-runner.yml').read_text()
           block=source.split("          python - <<'PY'\n",1)[1].split("\n          PY",1)[0]
           lines=[line[10:] if line.startswith('          ') else line for line in block.splitlines()]
-          replacement='parts=t.splitlines(); matches=[i for i,v in enumerate(parts) if v.startswith("During PR-0008 implementation")]; assert len(matches)==1,matches; parts[matches[0]]=new; t="\\n".join(parts)+("\\n" if t.endswith("\\n") else "")'
+          replacement='pos=t.index("migration staging record"); start=t.rfind("\\n\\n",0,pos)+2; end=t.find("\\n\\n",pos); assert start>=2 and end>pos,(start,pos,end); t=t[:start]+new+t[end:]'
           found=False
           for index,line in enumerate(lines):
               if line.startswith('t,n=re.subn('):
