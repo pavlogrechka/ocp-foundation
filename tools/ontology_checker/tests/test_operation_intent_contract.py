@@ -60,7 +60,7 @@ class OperationIntentContractTests(unittest.TestCase):
                 mutate(fixture["entity"]["explicit_intent_record"]["validation_records"][0])
                 self.assertEqual(
                     set(validate_reference_fixture(fixture).errors),
-                    {"OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID"},
+                    {"OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID", "OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH"},
                 )
 
     def test_substantive_binding_change_makes_prior_evidence_stale(self) -> None:
@@ -74,8 +74,33 @@ class OperationIntentContractTests(unittest.TestCase):
                 fixture["entity"]["explicit_intent_record"][field] = replacement
                 self.assertEqual(
                     set(validate_reference_fixture(fixture).errors),
-                    {"OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE"},
+                    {"OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE", "OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH"},
                 )
+
+    def test_agreeing_repeated_records_are_order_independent(self) -> None:
+        fixture = valid_explicit_intent_fixture()
+        records = fixture["entity"]["explicit_intent_record"]["validation_records"]
+        repeated = copy.deepcopy(records[0])
+        repeated.update(
+            validation_id="INT-VAL-TEST-002",
+            evaluated_at="2026-08-03T18:01:00Z",
+            evaluator_ref="checker://intent-test-v2-repeat",
+        )
+        records.append(repeated)
+
+        for ordered_records in (records, list(reversed(records))):
+            with self.subTest(order=[record["validation_id"] for record in ordered_records]):
+                candidate = copy.deepcopy(fixture)
+                candidate["entity"]["explicit_intent_record"]["validation_records"] = copy.deepcopy(ordered_records)
+                self.assertTrue(validate_reference_fixture(candidate).valid)
+
+    def test_permissive_projection_cannot_override_failed_evidence(self) -> None:
+        fixture = valid_explicit_intent_fixture()
+        fixture["entity"]["explicit_intent_record"]["validation_records"][0]["result"] = "failed"
+        self.assertEqual(
+            set(validate_reference_fixture(fixture).errors),
+            {"OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH", "OPERATION_INTENT_REQUIRED"},
+        )
 
     def test_materialized_status_cannot_override_evidence(self) -> None:
         fixture = valid_explicit_intent_fixture()

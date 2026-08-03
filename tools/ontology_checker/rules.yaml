@@ -133,16 +133,16 @@ rules:
   source: OCP-008 §10 invariant 6; dataset validation
 - id: OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT
   kind: validation
-  source: OCP-004 §7.2 and §17 invariants 6–7
+  source: OCP-004 §7.2 and §17 invariant 6
 - id: OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID
   kind: validation
   source: OCP-004 §7.2 and §17 invariants 4–5
 - id: OPERATION_EXPLICIT_INTENT_EVIDENCE_MISSING
   kind: validation
-  source: OCP-004 §7.2 and §17 invariants 6–7
+  source: OCP-004 §7.2 and §17 invariant 7
 - id: OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE
   kind: validation
-  source: OCP-004 §7.2 and §17 invariants 6–7
+  source: OCP-004 §7.2 and §17 invariant 7
 - id: OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH
   kind: validation
   source: OCP-004 §7.2 and §17 invariant 8

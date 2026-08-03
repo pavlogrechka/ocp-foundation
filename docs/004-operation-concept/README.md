@@ -162,21 +162,25 @@ ExplicitIntentRecord
   - result: not_evaluated | passed | failed
 ```
 
-`intent_version_ref` та `validation_rule_ref` є exact-version references і повинні містити непорожню identity та version, розділені символом `@`. `input_snapshot_ref` непрозоро ідентифікує точний evaluated input snapshot.
+`intent_version_ref` та `validation_rule_ref` є непрозорими exact-version references. Кожне посилання повинно однозначно розрізняти identity та immutable version; нормативна модель не приписує delimiter або wire encoding. `input_snapshot_ref` непрозоро ідентифікує точний evaluated input snapshot.
 
 Нормалізований `statement` повинен містити щонайменше один символ літери або цифри. Значення, що складаються лише з пробілів, розділових знаків або службових заповнювачів, не є валідним statement.
 
-Для використання explicit intent поза `Draft` має існувати рівно один структурно валідний validation record, який одночасно збігається з поточними:
+Для використання explicit intent поза `Draft` має існувати один або більше структурно валідних validation records, які одночасно збігаються з поточними:
 
 1. `intent_version_ref`;
 2. exact-version `validation_rule_ref`;
 3. `input_snapshot_ref`.
 
-Цей record також повинен містити валідні `validation_id`, `evaluated_at`, `evaluator_ref` і єдиний `result = passed`.
+Усі records із цим exact binding утворюють effective evidence set. Evidence є однозначним, якщо всі exact-binding records мають один і той самий `result`. Повторні immutable records з однаковим result є допустимими; порядок списку та `evaluated_at` не обирають авторитетний record. Якщо exact-binding records містять різні results, evidence є conflicting.
 
-Будь-яка substantive зміна `ExplicitIntentRecord`, версії validation rule або evaluated input snapshot створює нове binding-значення та інвалідовує попередній `passed`. Missing, stale, conflicting або structurally invalid evidence не задовольняє intent invariant і fail-safe робить non-Draft Operation невалідною.
+Кожен record повинен містити валідні `validation_id`, `evaluated_at`, `evaluator_ref` і `result`. Non-Draft explicit-intent branch є валідною лише тоді, коли effective evidence set дає один однозначний `result = passed`.
 
-`validation_status`, якщо матеріалізований, є лише derived non-authoritative projection ефективного validation record. Він повинен дорівнювати авторитетному `result`; stored `passed` без точного evidence binding або всупереч evidence не має нормативної сили.
+`intent_version_ref` позначає immutable version усього binding-relevant змісту explicit intent, включно зі `statement`. Будь-яка substantive зміна statement або іншої binding-властивості, версії validation rule чи evaluated input snapshot повинна створювати нову version/reference value та інвалідовує попередній `passed`. Повторне використання старого version token після зміни змісту порушує цю semantic rule незалежно від того, чи здатний reference checker виявити таке зловживання.
+
+Missing, stale, conflicting або structurally invalid evidence не задовольняє intent invariant і fail-safe робить non-Draft Operation невалідною.
+
+`validation_status`, якщо матеріалізований, є лише derived non-authoritative projection. Якщо effective evidence set має один однозначний result, projection повинна дорівнювати цьому result. Якщо однозначного effective result немає через missing, stale, conflicting або structurally invalid evidence, нормативна projection дорівнює `not_evaluated`; матеріалізований `passed` або `failed` є mismatch. Stored `passed` без точного evidence binding або всупереч evidence не має нормативної сили.
 
 Змістовні критерії достатності визначаються domain validation rule, але validation не означає authorization, approval або command authority.
 
@@ -379,8 +383,8 @@ Event фіксує значущий факт або зміну, пов’яза�
 4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або Result.
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
-7. Explicit intent може використовуватися поза `Draft` лише коли рівно один authoritative validation record має exact binding до поточних intent version, validation rule version та input snapshot і містить `result = passed`.
-8. Missing, stale, conflicting або structurally invalid explicit-intent evidence fail-safe не задовольняє intent invariant; mutable `validation_status` не може зробити Operation більш permissive.
+7. Explicit intent може використовуватися поза `Draft` лише коли один або більше authoritative validation records мають exact binding до поточних intent version, validation rule version та input snapshot, усі дають один однозначний result і цей result дорівнює `passed`.
+8. Missing, stale, conflicting або structurally invalid explicit-intent evidence fail-safe не задовольняє intent invariant; за відсутності однозначного effective result нормативна projection дорівнює `not_evaluated`, а mutable `validation_status` не може зробити Operation більш permissive.
 9. Кожен член plural `objective_refs` є активним affirmative-твердженням pursuit і повинен окремо резолвитися; один валідний Objective не компенсує інший невалідний reference.
 10. Поза `Draft` `objective_refs` і `ExplicitIntentRecord` є взаємовиключними активними представленнями; автоматичної precedence або promotion між ними немає.
 11. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
@@ -400,18 +404,19 @@ Event фіксує значущий факт або зміну, пов’яза�
 11. Assignment не успадковується автоматично через композицію Operation або Resource.
 12. Наявність Established Assignment не означає фактичної участі поза його applicability interval.
 13. Plural `objective_refs` не кодує alternative pursuit, priority, sequence, hierarchy, contribution strength або achievement aggregation.
-14. `validation_status` є derived projection і не є авторитетним доказом без exact-binding validation record.
+14. `validation_status` є derived projection: вона дорівнює однозначному effective result або `not_evaluated`, якщо такого result немає; projection не є авторитетним доказом і не може зробити Operation більш permissive.
+15. `intent_version_ref` позначає immutable version усього binding-relevant змісту explicit intent; substantive зміна, включно зі зміною `statement`, вимагає нової version/reference value.
 
 ## 17. Invariants
 
 1. Кожен Operation instance має рівно одну непорожню стабільну identity.
 2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, або один `ExplicitIntentRecord`; одночасна наявність обох гілок є невалідною.
 3. Кожен член non-Draft `objective_refs` є активним affirmative-твердженням pursuit і однозначно резолвиться у валідний Objective; список не означає вибір будь-якого одного елемента як достатнього.
-4. Non-Draft `ExplicitIntentRecord` містить непорожні `intent_id`, exact-version `intent_version_ref`, змістовний `statement`, exact-version `validation_rule_ref` і непорожній `input_snapshot_ref`.
+4. Non-Draft `ExplicitIntentRecord` містить непорожні `intent_id`, exact-version `intent_version_ref`, змістовний `statement`, exact-version `validation_rule_ref` і непорожній `input_snapshot_ref`; exact-version references однозначно розрізняють identity та immutable version без нормативно визначеного wire encoding.
 5. Кожен validation record містить непорожній `validation_id`, exact `intent_version_ref`, exact `validation_rule_ref`, exact `input_snapshot_ref`, валідний `evaluated_at`, непорожній `evaluator_ref` і один result із `not_evaluated | passed | failed`.
-6. Non-Draft explicit-intent branch є валідною лише коли існує рівно один structurally valid record, що точно збігається з поточними intent version, validation rule version та input snapshot і має `result = passed`.
+6. Non-Draft explicit-intent branch є валідною лише коли один або більше structurally valid records точно збігаються з поточними intent version, validation rule version та input snapshot, усі exact-binding records мають один однозначний result і цей result дорівнює `passed`.
 7. Missing, stale, conflicting або structurally invalid explicit-intent evidence не задовольняє invariant 6 і fail-safe робить non-Draft Operation невалідною.
-8. Матеріалізований `validation_status` є derived non-authoritative projection і дорівнює result єдиного ефективного validation record.
+8. Матеріалізований `validation_status` є derived non-authoritative projection: вона дорівнює однозначному effective result, а за його відсутності — `not_evaluated`; будь-яке інше матеріалізоване значення є mismatch.
 9. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
 10. Жодна Operation не може бути parent або child самої себе.
 11. Граф parent/child між Operation є ациклічним.

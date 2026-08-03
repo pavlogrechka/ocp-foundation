@@ -146,36 +146,33 @@ def _validate_explicit_intent(intent: Any) -> list[str]:
     if not top_level_valid:
         errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID")
 
+    effective_result: str | None = None
     records = intent.get("validation_records")
     if not isinstance(records, list) or not records:
         errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_MISSING")
-        return errors
-
-    if any(not _validation_record_valid(record) for record in records):
+    elif any(not _validation_record_valid(record) for record in records):
         errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_INVALID")
-        return errors
+    elif top_level_valid:
+        exact = [
+            record
+            for record in records
+            if record.get("intent_version_ref") == intent.get("intent_version_ref")
+            and record.get("validation_rule_ref") == intent.get("validation_rule_ref")
+            and record.get("input_snapshot_ref") == intent.get("input_snapshot_ref")
+        ]
+        if not exact:
+            errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE")
+        else:
+            exact_results = {str(record["result"]) for record in exact}
+            if len(exact_results) != 1:
+                errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT")
+            else:
+                effective_result = next(iter(exact_results))
 
-    if not top_level_valid:
-        return errors
-
-    exact = [
-        record
-        for record in records
-        if record.get("intent_version_ref") == intent.get("intent_version_ref")
-        and record.get("validation_rule_ref") == intent.get("validation_rule_ref")
-        and record.get("input_snapshot_ref") == intent.get("input_snapshot_ref")
-    ]
-    if not exact:
-        errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE")
-        return errors
-    if len(exact) != 1:
-        errors.append("OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT")
-        return errors
-
-    effective_result = exact[0]["result"]
-    if "validation_status" in intent and intent.get("validation_status") != effective_result:
+    normative_projection = effective_result or "not_evaluated"
+    if "validation_status" in intent and intent.get("validation_status") != normative_projection:
         errors.append("OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH")
-    if effective_result != "passed":
+    if effective_result is not None and effective_result != "passed":
         errors.append("OPERATION_INTENT_REQUIRED")
     return errors
 
