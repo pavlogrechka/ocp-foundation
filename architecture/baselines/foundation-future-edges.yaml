@@ -1,0 +1,30 @@
+record_version: 0.1.0
+authority: Architecture Board
+edge_semantics: Future planning intent only; never interpreted as a current Concept dependency.
+edges:
+  - from: Operation
+    to: Objective
+    basis: AB-014 and OCP-004 explicit Objective reference
+    planned_cycle: PR-0009
+  - from: Resource
+    to: Capability
+    basis: AB-004
+  - from: Constraint
+    to: Conflict
+    basis: AB-038
+  - from: Organization
+    to: Resource
+    basis: AB-052
+    style: dashed
+  - from: Operation
+    to: Event
+    basis: OCP-000 Event Proposed
+  - from: Organization
+    to: Coordination
+    basis: AB-003 and OCP-000 Coordination Proposed
+  - from: Operation
+    to: State
+    basis: AB-007 and ADR-DRAFT-007
+  - from: Resource
+    to: Readiness
+    basis: AB-007 and ADR-DRAFT-007

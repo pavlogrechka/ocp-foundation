@@ -2,12 +2,15 @@
 from __future__ import annotations
 
 import argparse
+import difflib
+import os
 import sys
 from pathlib import Path
 
 import yaml
 
 from ocp_checker import load_fixture, validate_fixture, validate_repository
+from ocp_checker.concept_graph import validate_and_render_concept_graph
 from ocp_checker.organization import validate_organization, validate_organization_relationship
 
 
@@ -21,12 +24,37 @@ def validate_any_fixture(fixture: dict):
     return validate_fixture(fixture)
 
 
+def resolve_context(requested: str) -> str:
+    if requested in {"pr", "main"}:
+        return requested
+    event = os.environ.get("GITHUB_EVENT_NAME", "")
+    ref = os.environ.get("GITHUB_REF", "")
+    return "main" if event == "push" and ref == "refs/heads/main" else "pr"
+
+
+def first_map_difference(committed: str, generated: str) -> str:
+    diff = difflib.unified_diff(
+        committed.splitlines(),
+        generated.splitlines(),
+        fromfile="committed/foundation-map.md",
+        tofile="generated/foundation-map.md",
+        lineterm="",
+    )
+    for line in diff:
+        if line.startswith(("---", "+++", "@@")):
+            continue
+        return line
+    return "content differs"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate OCP reference YAML fixtures.")
     parser.add_argument("path", nargs="?", default=str(Path(__file__).with_name("fixtures")))
     parser.add_argument("--repo-root", default=str(Path(__file__).resolve().parents[2]))
+    parser.add_argument("--context", choices=("auto", "pr", "main"), default="auto")
     args = parser.parse_args()
 
+    context = resolve_context(args.context)
     root = Path(args.path)
     files = sorted(root.rglob("*.yaml")) if root.is_dir() else [root]
     failures = 0
@@ -42,10 +70,30 @@ def main() -> int:
             print(f"FAIL {path}: {type(exc).__name__}: {exc}")
         failures += 0 if ok else 1
 
-    repo_result = validate_repository(Path(args.repo_root))
+    repo_root = Path(args.repo_root)
+    repo_result = validate_repository(repo_root)
     print(f"{'PASS' if repo_result.valid else 'FAIL'} repository-status-sync errors={list(repo_result.errors)}")
     failures += 0 if repo_result.valid else 1
-    print(f"Checked {len(files)} fixture(s) and repository status sync; failures={failures}")
+
+    graph_result = validate_and_render_concept_graph(repo_root, context=context)
+    print(f"{'PASS' if graph_result.valid else 'FAIL'} concept-graph context={context} errors={list(graph_result.errors)}")
+    failures += 0 if graph_result.valid else 1
+
+    generated_path = repo_root / "architecture/baselines/foundation-map.md"
+    difference = ""
+    try:
+        committed = generated_path.read_text(encoding="utf-8")
+        map_ok = committed == graph_result.rendered_map
+        if not map_ok:
+            difference = first_map_difference(committed, graph_result.rendered_map)
+    except OSError as exc:
+        map_ok = False
+        difference = f"{type(exc).__name__}: {exc}"
+    suffix = f" first_difference={difference!r}" if difference else ""
+    print(f"{'PASS' if map_ok else 'FAIL'} foundation-map-drift{suffix}")
+    failures += 0 if map_ok else 1
+
+    print(f"Checked {len(files)} fixture(s), repository status, Concept graph and generated map; failures={failures}")
     return 1 if failures else 0
 
 
