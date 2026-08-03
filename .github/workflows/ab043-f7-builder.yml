@@ -1,0 +1,53 @@
+name: ab043-f7-builder
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.head_ref == 'agent/ab-043-f7-builder'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout builder branch
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install checker dependency
+        run: python -m pip install -r tools/ontology_checker/requirements.txt
+
+      - name: Materialize F7
+        run: python .ab043/apply_f7.py
+
+      - name: Run full unit suite
+        run: python -m unittest discover -s tools/ontology_checker/tests -v
+
+      - name: Run real-history main-context check
+        run: python tools/ontology_checker/check.py tools/ontology_checker/fixtures --context main
+
+      - name: Commit materialized target files
+        run: |
+          git config user.name "OCP Builder"
+          git config user.email "ocp-builder@example.invalid"
+          git add \
+            .github/workflows/ontology-checker.yml \
+            architecture/artifact-taxonomy.md \
+            architecture/artifact-taxonomy.yaml \
+            tools/ontology_checker/README.md \
+            tools/ontology_checker/ocp_checker/artifact_governance.py \
+            tools/ontology_checker/tests/test_artifact_governance.py
+          if git diff --cached --quiet; then
+            echo "No materialized changes"
+            exit 0
+          fi
+          git commit -m "builder: materialize F7 baseline resolution"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
