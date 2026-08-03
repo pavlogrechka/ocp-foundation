@@ -1,0 +1,95 @@
+name: pr-0008a-final-runner
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/pr-0008a-concept-dependency-migration
+          fetch-depth: 0
+      - run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re, textwrap, sys
+          docs={"docs/003-resource-concept/README.md":[],"docs/004-operation-concept/README.md":[],"docs/005-assignment-concept/README.md":["Resource","Operation"],"docs/006-constraint-concept/README.md":[],"docs/007-organization-concept/README.md":[]}
+          for filename,deps in docs.items():
+              p=Path(filename); t=p.read_text(); m=re.search(r"(?m)^Version: (\d+)\.(\d+)\.(\d+)$",t); assert m,filename
+              a,b,c=map(int,m.groups()); t=t[:m.start()]+f"Version: {a}.{b}.{c+1}"+t[m.end():]
+              t=re.sub(r"(?m)^(Defines-Concepts:.*)$",rf"\1\nConcept-Depends-On: [{', '.join(deps)}]",t,count=1); p.write_text(t)
+          gp=Path("tools/ontology_checker/ocp_checker/concept_graph.py"); gt=gp.read_text(); start=gt.index("def validate_and_render_concept_graph(")
+          fn='''def validate_and_render_concept_graph(repo_root: Path, context: str = "pr") -> ConceptGraphResult:
+              if context not in {"pr", "main"}: raise ValueError("context must be 'pr' or 'main'")
+              errors=[]; registry_path=repo_root/"docs/000-operational-ontology/README.md"; legacy=repo_root/"architecture/baselines/concept-dependencies.yaml"; future_path=repo_root/"architecture/baselines/foundation-future-edges.yaml"
+              if not registry_path.exists(): return ConceptGraphResult(("CONCEPT_GRAPH_REGISTRY_MISSING",),"")
+              if not future_path.exists(): return ConceptGraphResult(("CONCEPT_GRAPH_FUTURE_SOURCE_MISSING",),"")
+              registry=_ontology_registry(registry_path); future=_load_yaml(future_path)
+              if legacy.exists(): errors.append("CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES")
+              graph={}
+              for path in sorted((repo_root/"docs").glob("[0-9][0-9][0-9]-*/README.md")):
+                  md=_read_frontmatter(path); names=[x.strip() for x in str(md.get("Defines-Concepts","")).split(",") if x.strip()]
+                  if not names: continue
+                  if "Concept-Depends-On" not in md: errors.append("CONCEPT_GRAPH_DEPENDENCY_DECLARATION_MISSING"); continue
+                  targets=md.get("Concept-Depends-On")
+                  if not isinstance(targets,list): errors.append("CONCEPT_GRAPH_DEPENDENCY_DECLARATION_INVALID"); continue
+                  for concept in names:
+                      if concept not in registry: errors.append("CONCEPT_GRAPH_UNREGISTERED_NODE")
+                      graph[concept]={str(x) for x in targets}
+                      for target in targets:
+                          if target not in registry: errors.append("CONCEPT_GRAPH_PHANTOM_REFERENCE")
+                  if context=="main" and md.get("Concept-Status")=="Under Review": errors.append("MAIN_CONCEPT_UNDER_REVIEW")
+              if _has_cycle(graph): errors.append("CONCEPT_GRAPH_CYCLE")
+              return ConceptGraphResult(tuple(dict.fromkeys(errors)),_render_map(registry,graph,future))
+          '''
+          gt=gt[:start]+textwrap.dedent(fn); gt=gt.replace("Current-state sections are derived from OCP-000 and the governed Concept dependency record.","Current-state sections are derived from OCP-000 and defining-document `Concept-Depends-On` metadata."); gp.write_text(gt)
+          test=r'''from __future__ import annotations
+          import tempfile, unittest
+          from pathlib import Path
+          from ocp_checker.concept_graph import validate_and_render_concept_graph
+          REGISTRY="""# registry
+          | Concept | Status | Specification |
+          |---|---|---|
+          | Resource | Accepted | OCP-003 |
+          | Operation | Accepted | OCP-004 |
+          | Assignment | Accepted | OCP-005 |
+          """
+          def write(p,c): p.parent.mkdir(parents=True,exist_ok=True); p.write_text(c)
+          class ConceptGraphTests(unittest.TestCase):
+              def make_repo(self,d,status="Accepted",omit=None,legacy=False):
+                  r=Path(tempfile.mkdtemp()); write(r/"docs/000-operational-ontology/README.md",REGISTRY)
+                  for n,doc,concept in ((3,"OCP-003","Resource"),(4,"OCP-004","Operation"),(5,"OCP-005","Assignment")):
+                      dec="" if concept==omit else f"\nConcept-Depends-On: [{', '.join(d[concept])}]"; write(r/f"docs/{n:03d}-concept/README.md",f"---\nDocument-ID: {doc}\nDefines-Concepts: {concept}{dec}\nConcept-Status: {status if concept=='Assignment' else 'Accepted'}\n---\n")
+                  if legacy: write(r/"architecture/baselines/concept-dependencies.yaml","concepts: {}\n")
+                  write(r/"architecture/baselines/foundation-future-edges.yaml","edges: []\n"); return r
+              def deps(self): return {"Resource":[],"Operation":[],"Assignment":["Resource","Operation"]}
+              def test_valid(self): self.assertTrue(validate_and_render_concept_graph(self.make_repo(self.deps())).valid)
+              def test_missing(self): self.assertIn("CONCEPT_GRAPH_DEPENDENCY_DECLARATION_MISSING",validate_and_render_concept_graph(self.make_repo(self.deps(),omit="Resource")).errors)
+              def test_legacy(self): self.assertIn("CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES",validate_and_render_concept_graph(self.make_repo(self.deps(),legacy=True)).errors)
+              def test_phantom(self): d=self.deps(); d["Assignment"]=["Phantom"]; self.assertIn("CONCEPT_GRAPH_PHANTOM_REFERENCE",validate_and_render_concept_graph(self.make_repo(d)).errors)
+              def test_cycle(self): d=self.deps(); d["Resource"]=["Assignment"]; d["Assignment"]=["Resource"]; self.assertIn("CONCEPT_GRAPH_CYCLE",validate_and_render_concept_graph(self.make_repo(d)).errors)
+              def test_contexts(self): r=self.make_repo(self.deps(),status="Under Review"); self.assertNotIn("MAIN_CONCEPT_UNDER_REVIEW",validate_and_render_concept_graph(r,"pr").errors); self.assertIn("MAIN_CONCEPT_UNDER_REVIEW",validate_and_render_concept_graph(r,"main").errors)
+          '''
+          Path("tools/ontology_checker/tests/test_concept_graph.py").write_text(textwrap.dedent(test))
+          bp=Path("architecture/baselines/M1-foundation-baseline.md"); t=bp.read_text().replace("Version: 0.2.1","Version: 0.3.0",1).replace("Status: Draft","Status: Generated",1)
+          new="Current dependencies are declared explicitly in each defining document through `Concept-Depends-On`. An empty list means that the Concept declares no current fundamental Concept dependencies; an absent field is invalid. AB-053 completed the migration from the temporary staging record."
+          t,n=re.subn(r"During PR-0008 implementation, `concept-dependencies\.yaml`.*?leaves Draft\.",new,t,count=1,flags=re.S); assert n==1,n
+          bp.write_text(t.replace("- simultaneous staging and frontmatter dependency sources.","- a legacy staging dependency source after frontmatter migration."))
+          ap=Path("backlog/architecture-backlog.md"); ap.write_text(ap.read_text().replace("| AB-053 | Concept dependency source migration | Planned |","| AB-053 | Concept dependency source migration | Resolved |",1))
+          Path("architecture/baselines/concept-dependencies.yaml").unlink()
+          sys.path.insert(0,str(Path("tools/ontology_checker").resolve())); from ocp_checker.concept_graph import validate_and_render_concept_graph
+          res=validate_and_render_concept_graph(Path("."),"main"); assert res.valid,res.errors; Path("architecture/baselines/foundation-map.md").write_text(res.rendered_map)
+          PY
+          python -m unittest discover -s tools/ontology_checker/tests -v
+          python tools/ontology_checker/check.py --context=pr
+          python tools/ontology_checker/check.py --context=main
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add docs architecture/baselines backlog tools/ontology_checker
+          TREE_SHA=$(git write-tree)
+          git commit -m "PR-0008A — Complete Concept Dependency Source Migration" -m "Atomic migration. Tree: ${TREE_SHA}"
+          git push origin HEAD:agent/pr-0008a-concept-dependency-migration
