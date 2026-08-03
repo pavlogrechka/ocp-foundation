@@ -43,5 +43,14 @@
 | AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay |
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
-| AB-042 | Foundation artifact taxonomy | Under Review | PR-0006A defines normative levels, lifecycle, numbering, location and review lane for OCP, Pattern, AD, ADR, AB, Review, ExecutableReference and Backlog |
+| AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |
 | AB-043 | Foundation checker expansion | Planned | Наступний meta-cycle: validate artifact IDs, Uses-Patterns, AD↔AB synchronization and post-factum process audit |
+| AB-044 | Organizational identity continuity | Open | Визначити continuity through redesignation, merger, split and reorganization |
+| AB-045 | Organization relationship type taxonomy | Open | Визначити governed classes/types and class-to-type consistency rules |
+| AB-046 | Organization lifecycle review | Open | Перевірити lifecycle після реальних fixtures і залежних Coordination use cases |
+| AB-047 | Organization composition and organizational units | Open | Визначити межу Organization, sub-unit, crew and temporary grouping |
+| AB-048 | One Concept — One Responsibility | Proposed | Переглянути після OCP-007 та relationship-record практики |
+| AB-049 | Consolidate OCP Architectural Doctrine | Proposed | Review after 10–12 fundamental Concepts |
+| AB-050 | Explicitly Not Defined section | Proposed | Перевірити як обов’язковий шаблон після OCP-007 |
+| AB-051 | Structural schemes and multiple verticals | Open | Визначити scheme identity, exceptions and cross-scheme interpretation |
+| AB-052 | Organization-to-Organizational-Resource mapping | Open | Визначити explicit mapping without identity collapse |

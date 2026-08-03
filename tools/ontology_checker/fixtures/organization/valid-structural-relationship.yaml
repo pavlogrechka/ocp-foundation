@@ -1,0 +1,25 @@
+case_id: organization-valid-structural-relationship
+concept: OrganizationRelationshipRecord
+expected:
+  valid: true
+entity:
+  relationship_id: ORR-001
+  relationship_class: structural
+  relationship_type_ref: organization-relation://structurally-subordinate-to@1
+  source_organization_ref: ORG-BN-02
+  target_organization_ref: ORG-BDE-01
+  scheme_ref: STRUCTURE-2026-A
+  validity_start: 2026-08-03T00:05:00Z
+  validity_end: null
+  created_at: 2026-08-03T00:00:00Z
+  transition_history:
+    - transition_id: ORT-001
+      relationship_ref: ORR-001
+      from_stage: Draft
+      to_stage: Established
+      occurred_at: 2026-08-03T00:05:00Z
+      provenance_ref: BOARD-REL-001
+  lifecycle_stage: Established
+  established_at: 2026-08-03T00:05:00Z
+  terminal_at: null
+  establishment_provenance_ref: BOARD-REL-001
