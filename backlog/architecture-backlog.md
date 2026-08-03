@@ -15,7 +15,7 @@
 | AB-011 | Взаємозамінність Resource | Open | Описати взаємозамінність без втрати ідентичності екземплярів після Capability і Constraint |
 | AB-012 | Автоматична перевірка нормативних Concept references | Partially Implemented | PR-0006 додає повний rules manifest для emitted checks і CI; duplicate/reference linter залишається до першої Canonical promotion |
 | AB-013 | Машинозчитувані інваріанти | Partially Implemented | PR-0006 реалізує reference subset, lifecycle fixtures і accepted counterexamples; розширювати з кожним Concept cycle |
-| AB-014 | Operational Intent як окремий Concept | Open | Перевірити після Objective Concept |
+| AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
 | AB-016 | Композиція Operation | Open | Визначити правила parent/child, ациклічність і межу з незалежною координацією |
 | AB-017 | Авторизація Operation | Open | Визначити джерела авторизації без передчасного введення Authority, Approval або Policy |
@@ -23,7 +23,7 @@
 | AB-019 | Suspended у lifecycle Operation | Deferred | Переглянути після Constraint, Assignment і State |
 | AB-020 | Operation Template як окремий Concept | Open | Перевірити після стабілізації Operation lifecycle і повторюваних Operation |
 | AB-021 | Формальна derivation участі через Assignment | Resolved | Нормативне визначення в OCP-005 §§8–9; reference implementation у PR-0006 |
-| AB-022 | Validation contract для explicit intent | Open | Визначити спільні Core-вимоги та domain validation rules |
+| AB-022 | Validation contract для explicit intent | Planned | Компактний OCP-004 PR: plural objective_refs semantics за AD-004 §11.3, exact-version/exact-snapshot fail-safe validation contract за §11.4 і fixtures за §8 |
 | AB-023 | Provenance taxonomy для lifecycle і relationship records | Open | Уточнити після Event, Order і Coordination Concept |
 | AB-024 | Автоматична синхронізація Concept status | Resolved | PR-0006 звіряє OCP-000, machine-readable projection OCP-002 і Concept-Status defining documents у CI |
 | AB-025 | Reservation / Allocation як окремий Concept | Open | Визначити межу з Assignment і Constraint |
@@ -44,7 +44,7 @@
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
 | AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |
-| AB-043 | Foundation checker expansion | Planned | Наступний meta-cycle: validate artifact IDs, Uses-Patterns, AD↔AB synchronization and post-factum process audit |
+| AB-043 | Foundation checker expansion | Planned | Після компактного OCP-004 PR: validate artifact IDs, allowed class statuses, AD↔AB decision synchronization, Uses-Patterns and post-factum process audit до AD-005 |
 | AB-044 | Organizational identity continuity | Open | Визначити continuity through redesignation, merger, split and reorganization |
 | AB-045 | Organization relationship type taxonomy | Open | Визначити governed classes/types and class-to-type consistency rules |
 | AB-046 | Organization lifecycle review | Open | Перевірити lifecycle після реальних fixtures і залежних Coordination use cases |
