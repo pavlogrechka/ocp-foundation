@@ -1,12 +1,13 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.0
+Version: 0.2.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
 Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coordination Model, Constraint Model, Domain Models
 Defines-Concepts: Assignment
+Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---

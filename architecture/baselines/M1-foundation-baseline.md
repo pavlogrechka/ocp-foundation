@@ -2,8 +2,8 @@
 Artifact-Class: DerivedProjection
 Artifact-ID: BASELINE-M1
 Title: Foundation Milestone M1 Baseline
-Version: 0.2.1
-Status: Draft
+Version: 0.3.0
+Status: Generated
 Authority: Architecture Board
 Derived-From: OCP-000, OCP-003, OCP-004, OCP-005, OCP-006, OCP-007
 Future-Intent-Source: architecture/baselines/foundation-future-edges.yaml
@@ -38,7 +38,7 @@ The target authority is:
 - Concept registry and statuses in OCP-000;
 - `Defines-Concepts` and `Concept-Depends-On` in defining OCP documents.
 
-During PR-0008 implementation, `concept-dependencies.yaml` is a migration staging record used to exercise graph validation before the same edges are moved into defining-document frontmatter. The migration is governed by AB-053. The checker rejects simultaneous staging and frontmatter dependency sources, and the staging record must be removed before this baseline leaves Draft.
+Current dependencies are declared explicitly in each defining document through `Concept-Depends-On`. An empty list means that the Concept declares no current fundamental Concept dependencies; an absent field is invalid. AB-053 completed the migration from the temporary staging record.
 
 The generator rejects:
 
@@ -47,7 +47,7 @@ The generator rejects:
 - a cycle in the current Concept dependency graph;
 - a generated node not present in OCP-000;
 - a defining Concept left in `Under Review` when validation runs in `main` context;
-- simultaneous staging and frontmatter dependency sources.
+- a legacy staging dependency source after frontmatter migration.
 
 `Under Review` is valid in PR context under the accepted status choreography. It is invalid only in a merged `main` baseline.
 

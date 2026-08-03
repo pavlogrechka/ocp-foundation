@@ -71,7 +71,7 @@ def _render_map(registry: dict[str, str], graph: dict[str, set[str]], future: di
     lines = [
         "# Foundation Concept Map",
         "",
-        "> GENERATED FILE. Current-state sections are derived from OCP-000 and the governed Concept dependency record.",
+        "> GENERATED FILE. Current-state sections are derived from OCP-000 and defining-document `Concept-Depends-On` metadata.",
         "> Future intent is rendered from `foundation-future-edges.yaml` and is not a current dependency.",
         "",
         "## Registered Concepts",
@@ -109,75 +109,24 @@ def _render_map(registry: dict[str, str], graph: dict[str, set[str]], future: di
 
 
 def validate_and_render_concept_graph(repo_root: Path, context: str = "pr") -> ConceptGraphResult:
-    if context not in {"pr", "main"}:
-        raise ValueError("context must be 'pr' or 'main'")
-
-    errors: list[str] = []
-    registry_path = repo_root / "docs/000-operational-ontology/README.md"
-    dependency_path = repo_root / "architecture/baselines/concept-dependencies.yaml"
-    future_path = repo_root / "architecture/baselines/foundation-future-edges.yaml"
-
-    if not registry_path.exists():
-        return ConceptGraphResult(("CONCEPT_GRAPH_REGISTRY_MISSING",), "")
-    if not dependency_path.exists():
-        return ConceptGraphResult(("CONCEPT_GRAPH_DEPENDENCY_SOURCE_MISSING",), "")
-    if not future_path.exists():
-        return ConceptGraphResult(("CONCEPT_GRAPH_FUTURE_SOURCE_MISSING",), "")
-
-    registry = _ontology_registry(registry_path)
-    dependencies = _load_yaml(dependency_path).get("concepts") or {}
-    future = _load_yaml(future_path)
-    if not isinstance(dependencies, dict):
-        return ConceptGraphResult(("CONCEPT_GRAPH_DEPENDENCY_SOURCE_INVALID",), "")
-
-    defining_documents: list[tuple[Path, dict[str, Any]]] = []
-    has_frontmatter_dependency_source = False
-    for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        metadata = _read_frontmatter(path)
-        defining_documents.append((path, metadata))
-        if "Concept-Depends-On" in metadata:
-            has_frontmatter_dependency_source = True
-
-    if dependency_path.exists() and has_frontmatter_dependency_source:
-        errors.append("CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES")
-
-    graph: dict[str, set[str]] = {}
-    for concept, entry in dependencies.items():
-        if concept not in registry:
-            errors.append("CONCEPT_GRAPH_UNREGISTERED_NODE")
-        if not isinstance(entry, dict):
-            errors.append("CONCEPT_GRAPH_DEPENDENCY_ENTRY_INVALID")
-            continue
-        targets = entry.get("depends_on") or []
-        if not isinstance(targets, list):
-            errors.append("CONCEPT_GRAPH_DEPENDENCY_ENTRY_INVALID")
-            continue
-        graph[str(concept)] = {str(target) for target in targets}
-        for target in targets:
-            if target not in registry:
-                errors.append("CONCEPT_GRAPH_PHANTOM_REFERENCE")
-
-    if _has_cycle(graph):
-        errors.append("CONCEPT_GRAPH_CYCLE")
-
-    for _, metadata in defining_documents:
-        names = metadata.get("Defines-Concepts")
-        status = metadata.get("Concept-Status")
-        if not names:
-            continue
-        if context == "main" and status == "Under Review":
-            errors.append("MAIN_CONCEPT_UNDER_REVIEW")
-
-    for concept, entry in dependencies.items():
-        expected_document = str(entry.get("defining_document", "")) if isinstance(entry, dict) else ""
-        found = False
-        for _, metadata in defining_documents:
-            names = [item.strip() for item in str(metadata.get("Defines-Concepts", "")).split(",") if item.strip()]
-            if concept in names and metadata.get("Document-ID") == expected_document:
-                found = True
-                break
-        if not found:
-            errors.append("CONCEPT_GRAPH_DEFINING_DOCUMENT_MISSING")
-
-    rendered = _render_map(registry, graph, future)
-    return ConceptGraphResult(tuple(dict.fromkeys(errors)), rendered)
+    if context not in {"pr", "main"}: raise ValueError("context must be 'pr' or 'main'")
+    errors=[]; registry_path=repo_root/"docs/000-operational-ontology/README.md"; legacy=repo_root/"architecture/baselines/concept-dependencies.yaml"; future_path=repo_root/"architecture/baselines/foundation-future-edges.yaml"
+    if not registry_path.exists(): return ConceptGraphResult(("CONCEPT_GRAPH_REGISTRY_MISSING",),"")
+    if not future_path.exists(): return ConceptGraphResult(("CONCEPT_GRAPH_FUTURE_SOURCE_MISSING",),"")
+    registry=_ontology_registry(registry_path); future=_load_yaml(future_path)
+    if legacy.exists(): errors.append("CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES")
+    graph={}
+    for path in sorted((repo_root/"docs").glob("[0-9][0-9][0-9]-*/README.md")):
+        md=_read_frontmatter(path); names=[x.strip() for x in str(md.get("Defines-Concepts","")).split(",") if x.strip()]
+        if not names: continue
+        if "Concept-Depends-On" not in md: errors.append("CONCEPT_GRAPH_DEPENDENCY_DECLARATION_MISSING"); continue
+        targets=md.get("Concept-Depends-On")
+        if not isinstance(targets,list): errors.append("CONCEPT_GRAPH_DEPENDENCY_DECLARATION_INVALID"); continue
+        for concept in names:
+            if concept not in registry: errors.append("CONCEPT_GRAPH_UNREGISTERED_NODE")
+            graph[concept]={str(x) for x in targets}
+            for target in targets:
+                if target not in registry: errors.append("CONCEPT_GRAPH_PHANTOM_REFERENCE")
+        if context=="main" and md.get("Concept-Status")=="Under Review": errors.append("MAIN_CONCEPT_UNDER_REVIEW")
+    if _has_cycle(graph): errors.append("CONCEPT_GRAPH_CYCLE")
+    return ConceptGraphResult(tuple(dict.fromkeys(errors)),_render_map(registry,graph,future))
