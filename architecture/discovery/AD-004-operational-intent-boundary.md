@@ -1,8 +1,8 @@
 ---
 Decision-ID: AD-004
 Title: Operational Intent Boundary
-Version: 0.3.1
-Status: Under Review
+Version: 0.3.2
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-008
 Applies-To: AB-014, AB-022, Operation intent model
@@ -205,13 +205,13 @@ AD-004 is ready for Architecture Board decision when:
 - no authorization, Objective-composition or achievement semantics are introduced by implication;
 - unresolved semantics are recorded as backlog items rather than hidden in implementation.
 
-## 11. Proposed Architecture Board decision — AD-004B
+## 11. Architecture Board decision — AD-004C
 
-This section is a decision proposal. It does not change AD-004 from `Under Review` to `Accepted` until the Architecture Board explicitly approves it.
+The Architecture Board accepted this decision by act **AD-004C** on **2026-08-03**.
 
 ### 11.1 Selected outcome
 
-Select the explicit sequenced composite:
+The Architecture Board selects the explicit sequenced composite:
 
 ```text
 Outcome A now → separately reviewed sunset decision toward Outcome D
@@ -230,7 +230,7 @@ Outcome D is a target direction, not an automatically effective future state. Re
 
 The current evidence does not establish an independently identifiable domain object that cannot be owned safely by Operation, Objective or a local record.
 
-Upon acceptance of AD-004B, AB-014 is resolved as:
+By this decision, AB-014 is resolved as:
 
 > No separate fundamental `Operational Intent` Concept at this time. Reopening requires new evidence satisfying the independent-identity threshold in §3.
 
@@ -288,15 +288,14 @@ Satisfying these conditions does not activate Outcome D automatically. It author
 
 ### 11.6 Acceptance effect
 
-If the Architecture Board approves AD-004B:
+AD-004C has the following effects:
 
-- AD-004 becomes `Accepted`;
-- AB-014 becomes `Resolved` with the no-Concept verdict in §11.2;
-- AB-022 becomes `Planned` for the downstream OCP-004 contract and executable fixtures;
+- AD-004 is `Accepted`;
+- AB-014 is `Resolved` with the no-Concept verdict in §11.2;
+- AB-022 is `Planned` for the downstream OCP-004 contract and executable fixtures;
 - no new fundamental Concept or current Concept dependency is created;
 - the next normative cycle is the compact OCP-004 revision that codifies both the plural `objective_refs` semantics in §11.3 and the AB-022 validation contract in §11.4, together with the executable fixtures required by §8;
-- Capability discovery remains next in the Wave 2 Concept queue after that compact normative cycle.
+- the AB-043 checker-expansion slice follows that compact normative cycle;
+- Capability discovery remains next in the Wave 2 Concept queue after AB-043.
 
-The acceptance commit must atomically update `Status: Accepted`, AB-014 to `Resolved`, and AB-022 to `Planned`; these changes must not be split into later cleanup commits.
-
-Until explicit approval, the document remains `Under Review`, backlog statuses remain unchanged, and no downstream field model is pre-approved.
+This acceptance act atomically updates `Status: Accepted`, AB-014 to `Resolved`, and AB-022 to `Planned`. No downstream field model beyond the mandates in §§11.3–11.5 is pre-approved.
