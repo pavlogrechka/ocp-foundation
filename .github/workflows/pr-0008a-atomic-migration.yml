@@ -79,12 +79,12 @@ jobs:
               def test_contexts(self): r=self.make_repo(self.deps(),status="Under Review"); self.assertNotIn("MAIN_CONCEPT_UNDER_REVIEW",validate_and_render_concept_graph(r,"pr").errors); self.assertIn("MAIN_CONCEPT_UNDER_REVIEW",validate_and_render_concept_graph(r,"main").errors)
           '''
           Path("tools/ontology_checker/tests/test_concept_graph.py").write_text(textwrap.dedent(test))
-          bp=Path("architecture/baselines/foundation-m1-baseline.md"); t=bp.read_text().replace("Version: 0.2.1","Version: 0.3.0",1).replace("Status: Draft","Status: Generated",1)
+          bp=Path("architecture/baselines/M1-foundation-baseline.md"); t=bp.read_text().replace("Version: 0.2.1","Version: 0.3.0",1).replace("Status: Draft","Status: Generated",1)
           old="During PR-0008 implementation, `concept-dependencies.yaml` is a migration staging record used to exercise graph validation before the same edges are moved into defining-document frontmatter. The migration is governed by AB-053. The checker rejects simultaneous staging and frontmatter dependency sources, and the staging record must be removed before this baseline leaves Draft."
           new="Current dependencies are declared explicitly in each defining document through `Concept-Depends-On`. An empty list means that the Concept declares no current fundamental Concept dependencies; an absent field is invalid. AB-053 completed the migration from the temporary staging record."
           if old not in t: raise RuntimeError("baseline paragraph")
           bp.write_text(t.replace(old,new).replace("- simultaneous staging and frontmatter dependency sources.","- a legacy staging dependency source after frontmatter migration."))
-          ap=Path("architecture/backlog/architecture-backlog.md"); ap.write_text(ap.read_text().replace("| AB-053 | Concept dependency source migration | Planned |","| AB-053 | Concept dependency source migration | Resolved |",1))
+          ap=Path("backlog/architecture-backlog.md"); ap.write_text(ap.read_text().replace("| AB-053 | Concept dependency source migration | Planned |","| AB-053 | Concept dependency source migration | Resolved |",1))
           Path("architecture/baselines/concept-dependencies.yaml").unlink()
           sys.path.insert(0,str(Path("tools/ontology_checker").resolve())); from ocp_checker.concept_graph import validate_and_render_concept_graph
           res=validate_and_render_concept_graph(Path("."),"main"); assert res.valid,res.errors; Path("architecture/baselines/foundation-map.md").write_text(res.rendered_map)
