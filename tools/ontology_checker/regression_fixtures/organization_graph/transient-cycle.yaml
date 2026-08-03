@@ -1,0 +1,25 @@
+case_id: organization-graph-transient-cycle
+expected_error_codes: [ORGANIZATION_STRUCTURAL_CYCLE]
+records:
+  - relationship_id: R-A-B
+    relationship_class: structural
+    relationship_type_ref: rel://structural@1
+    source_organization_ref: ORG-A
+    target_organization_ref: ORG-B
+    scheme_ref: S-1
+    validity_start: 2026-01-01T00:00:00Z
+    validity_end: 2026-03-01T00:00:00Z
+    created_at: 2025-12-01T00:00:00Z
+    transition_history:
+      - {transition_id: T-A-B, relationship_ref: R-A-B, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-01T00:00:00Z, provenance_ref: TEST}
+  - relationship_id: R-B-A
+    relationship_class: structural
+    relationship_type_ref: rel://structural@1
+    source_organization_ref: ORG-B
+    target_organization_ref: ORG-A
+    scheme_ref: S-1
+    validity_start: 2026-02-01T00:00:00Z
+    validity_end: 2026-04-01T00:00:00Z
+    created_at: 2025-12-01T00:00:00Z
+    transition_history:
+      - {transition_id: T-B-A, relationship_ref: R-B-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-02-01T00:00:00Z, provenance_ref: TEST}
