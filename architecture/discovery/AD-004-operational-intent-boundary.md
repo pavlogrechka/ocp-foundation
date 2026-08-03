@@ -1,8 +1,8 @@
 ---
 Decision-ID: AD-004
 Title: Operational Intent Boundary
-Version: 0.1.0
-Status: Discovery
+Version: 0.2.0
+Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-008
 Applies-To: AB-014, AB-022, Operation intent model
@@ -74,6 +74,8 @@ AD-004 does not introduce Authority, Commander, Approver, Order or Policy. Prove
 
 External review must evaluate four admissible outcomes rather than assuming a new Concept.
 
+Outcomes are not required to be mutually exclusive across time. The Architecture Board may select an explicit sequenced composite, for example Outcome A now with a governed sunset trigger toward Outcome D, or Outcome B as a transitional form followed by Outcome D. A sequenced choice must state the transition trigger, migration contract, interim and target authority, executable evidence, and Concept-graph impact at every stage; an unspecified blend of outcomes is not a decision.
+
 ### Outcome A — retain the current dual-branch contract
 
 No new Concept is introduced. Operational intent remains an Operation validity requirement represented by either Objective references or one local `ExplicitIntentRecord`.
@@ -118,6 +120,7 @@ AD-004 intentionally does not define:
 - fields for a future Operational Intent record or Concept;
 - a lifecycle or temporal-effectivity model;
 - Objective composition, hierarchy, order, priority, weighting or contribution semantics;
+- semantics of plural `objective_refs`, including whether the references express joint or conjunctive pursuit, alternative or disjunctive pursuit, or an unordered contextual set;
 - equivalence between an Objective set and an `ExplicitIntentRecord` statement;
 - automatic promotion, conversion or text comparison;
 - authorization or command semantics;
@@ -127,18 +130,27 @@ AD-004 intentionally does not define:
 - storage, API or UI representation;
 - any new current Concept dependency.
 
+The Architecture Board decision must explicitly route plural-Objective semantics to a normative owner: Core Operation, a future Coordination or domain rule, or a restriction that removes the ambiguity. Until that routing is accepted, list membership alone does not imply conjunction, alternative, priority, weighting, contribution or governed composition.
+
 ## 7. AB-022 validation-contract deliverables
 
 Whichever outcome is selected, the downstream normative change must make the explicit-intent validation contract complete rather than leaving `validation_status = passed` as an opaque success flag.
 
-It must define:
+Existing house precedents constrain the downstream design unless an explicit reviewed justification establishes a stricter alternative:
+
+- OCP-006 §§9–12 and Business Rules 5 and 8 bind authoritative evaluation to the exact rule version and input snapshot; missing, stale or contradictory evidence cannot become a permissive success;
+- OCP-001 invariant criterion 10 prohibits a contradictory stored result from producing a more permissive derivation than a missing or `indeterminate` result.
+
+Therefore immutable exact-snapshot validation evidence and fail-safe degradation are the default. A mutable projection may exist only as a derived, non-authoritative view; absence, staleness or conflict must never normalize to `passed` or otherwise make the Operation more permissive.
+
+The downstream contract must define:
 
 1. the authority and version identity of `validation_rule_ref`;
 2. the exact input snapshot evaluated;
 3. the meaning of `not_evaluated`, `passed` and `failed`;
-4. whether validation records are mutable projections or immutable evidence;
+4. the immutable authoritative validation evidence and any derived mutable projection, unless a stricter reviewed alternative is justified;
 5. which changes invalidate or require revalidation;
-6. how stale, missing or conflicting validation fails;
+6. how stale, missing or conflicting validation degrades fail-safe rather than to `passed`;
 7. why validation does not imply authorization;
 8. whether validation belongs to the Operation snapshot, a local identified record or a future independent Concept.
 
@@ -158,7 +170,8 @@ Additional evidence is conditional:
 
 - Outcome B must include P-001 conformance and identified-record counterexamples;
 - Outcome C must include identity, cross-Operation reuse, dependency and supersession fixtures;
-- Outcome D must include a migration fixture proving that removal of the fallback does not silently invalidate accepted non-Draft Operations.
+- Outcome D must include a migration fixture proving that removal of the fallback does not silently invalidate accepted non-Draft Operations;
+- any sequenced composite must prove both its interim state and its transition trigger without weakening accepted Operations silently.
 
 ## 9. Review target
 
@@ -173,21 +186,25 @@ Attempt to falsify the boundary with cases where:
 7. a separate Concept creates a circular dependency with Operation or Objective;
 8. Outcome A preserves two representations whose semantics diverge without a detectable failure;
 9. Outcome D removes the fallback before Objective authoring can cover real operational cases;
-10. a proposed P-001 invocation is incomplete or used only to disguise a semantic container.
+10. a proposed P-001 invocation is incomplete or used only to disguise a semantic container;
+11. plural Objective references imply conjunction or alternative pursuit without an authoritative owner;
+12. a sequenced outcome changes target state without an explicit trigger or migration proof.
 
 ## 10. Exit criteria
 
 AD-004 is ready for Architecture Board decision when:
 
 - all six boundary questions have survived external adversarial review;
-- one of Outcomes A–D is selected or an equally explicit alternative is justified;
+- one of Outcomes A–D, an explicit sequenced composite, or an equally explicit alternative is selected;
+- any sequenced composite has an explicit trigger, migration contract, interim and target authority, evidence, and graph impact;
 - the independent-identity threshold has a clear verdict;
 - AB-014 receives a resolved direction: no Concept, local record or fundamental Concept;
-- AB-022 receives an explicit downstream validation-contract mandate;
+- AB-022 receives an explicit downstream validation-contract mandate constrained by OCP-006 and OCP-001 fail-safe precedents;
+- plural `objective_refs` semantics receive an explicit normative owner or ambiguity-removal rule;
 - proposed dependencies are explicit and acyclic;
 - no authorization, Objective-composition or achievement semantics are introduced by implication;
 - unresolved semantics are recorded as backlog items rather than hidden in implementation.
 
 ## 11. Architecture Board decision
 
-No option is selected yet. Acceptance of this discovery will authorize only the downstream normative work implied by the selected outcome; it will not pre-approve a new Concept, P-001 invocation or OCP field model.
+No option is selected yet. External adversarial boundary review is complete and the document is `Under Review`. Architecture Board acceptance will authorize only the downstream normative work implied by the selected outcome; it will not pre-approve a new Concept, P-001 invocation or OCP field model.
