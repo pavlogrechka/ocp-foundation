@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-004
 Title: Operational Intent Boundary
-Version: 0.2.0
+Version: 0.3.0
 Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-008
@@ -205,6 +205,96 @@ AD-004 is ready for Architecture Board decision when:
 - no authorization, Objective-composition or achievement semantics are introduced by implication;
 - unresolved semantics are recorded as backlog items rather than hidden in implementation.
 
-## 11. Architecture Board decision
+## 11. Proposed Architecture Board decision — AD-004B
 
-No option is selected yet. External adversarial boundary review is complete and the document is `Under Review`. Architecture Board acceptance will authorize only the downstream normative work implied by the selected outcome; it will not pre-approve a new Concept, P-001 invocation or OCP field model.
+This section is a decision proposal. It does not change AD-004 from `Under Review` to `Accepted` until the Architecture Board explicitly approves it.
+
+### 11.1 Selected outcome
+
+Select the explicit sequenced composite:
+
+```text
+Outcome A now → separately reviewed sunset decision toward Outcome D
+```
+
+The interim authoritative model retains the OCP-004 dual-branch contract. A non-Draft Operation uses exactly one active intent representation:
+
+- one or more resolvable `objective_refs`; or
+- one valid local `ExplicitIntentRecord` governed by the AB-022 contract.
+
+No fundamental `Operational Intent` Concept is introduced. No P-001 invocation is authorized for `ExplicitIntentRecord` merely by this decision. The current Concept graph remains unchanged: `Operation → Objective`.
+
+Outcome D is a target direction, not an automatically effective future state. Removing the explicit-intent branch requires a separate externally reviewed Architecture Board decision and normative migration PR.
+
+### 11.2 Independent-identity verdict and AB-014
+
+The current evidence does not establish an independently identifiable domain object that cannot be owned safely by Operation, Objective or a local record.
+
+Upon acceptance of AD-004B, AB-014 is resolved as:
+
+> No separate fundamental `Operational Intent` Concept at this time. Reopening requires new evidence satisfying the independent-identity threshold in §3.
+
+### 11.3 Normative owner and semantics of plural `objective_refs`
+
+OCP-004 is the normative owner of the minimum Core semantics for plural `objective_refs`.
+
+For one Operation snapshot, every member of `objective_refs` is an independent affirmative claim that the Operation pursues that Objective. All listed references are active; the list is not a disjunction from which one Objective may be selected as sufficient.
+
+List membership alone does not encode:
+
+- priority or weighting;
+- sequencing or dependency;
+- hierarchy or decomposition;
+- contribution strength;
+- equivalence between Objectives;
+- aggregation of achievement, success or completion.
+
+Domain or Coordination rules may add explicit structures for those semantics, but they must not reinterpret the bare list silently. Alternative pursuit requires a separately defined explicit representation; it is not inferred from `objective_refs`.
+
+### 11.4 AB-022 mandate
+
+OCP-004 is the normative owner of the downstream explicit-intent validation contract.
+
+The downstream normative PR must require that `passed` is authoritative only when immutable validation evidence binds all of the following:
+
+1. the exact `ExplicitIntentRecord` content or immutable record version;
+2. the exact versioned validation rule identified by `validation_rule_ref`;
+3. the exact input snapshot evaluated;
+4. the evaluation timestamp and attributable evaluator reference;
+5. one unambiguous result from `not_evaluated | passed | failed`.
+
+Any substantive change to the intent record, validation rule version or evaluated input snapshot invalidates the prior `passed` result and requires revalidation.
+
+A mutable status projection may exist only as a derived, non-authoritative view. Missing, stale, conflicting or structurally invalid evidence must fail safe and cannot satisfy the non-Draft Operation intent invariant. Validation remains distinct from authorization, approval or command authority.
+
+The downstream PR must implement the executable evidence required by §8, including negative fixtures for stale, missing and contradictory validation evidence.
+
+### 11.5 Sunset gate toward Outcome D
+
+A sunset review toward Objective-only non-Draft Operations may be opened only when all of the following evidence exists:
+
+1. the AB-022 normative contract and its executable fixtures are merged and green;
+2. a Board-designated corpus of accepted non-Draft Operations using `ExplicitIntentRecord` has a documented migration result with zero unexplained or silently invalidated records;
+3. every migrated record can create or resolve an Objective with attributable provenance while preserving the original explicit intent in audit history;
+4. Objective authoring and validation workflows cover every validation-rule category used by the corpus without loss of required semantics;
+5. a migration dry run proves deterministic mapping, reports all non-migratable cases, and provides an explicit rollback or remediation path.
+
+Satisfying these conditions does not activate Outcome D automatically. It authorizes a separate externally reviewed Board decision and normative PR that must:
+
+- remove or restrict the fallback explicitly;
+- migrate existing accepted snapshots without silent invalidation;
+- update OCP-004 and checker fixtures atomically;
+- record Concept-graph impact, which is expected to remain `Operation → Objective` unless separately justified.
+
+### 11.6 Acceptance effect
+
+If the Architecture Board approves AD-004B:
+
+- AD-004 becomes `Accepted`;
+- AB-014 becomes `Resolved` with the no-Concept verdict in §11.2;
+- AB-022 becomes `Planned` for the downstream OCP-004 contract and executable fixtures;
+- no new fundamental Concept or current Concept dependency is created;
+- the next normative cycle is the compact AB-022 revision of OCP-004;
+- Capability discovery remains next in the Wave 2 Concept queue after that compact normative cycle.
+
+Until explicit approval, the document remains `Under Review`, backlog statuses remain unchanged, and no downstream field model is pre-approved.
