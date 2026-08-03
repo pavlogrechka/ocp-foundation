@@ -2,6 +2,8 @@ name: fix-pr-0008a-generator
 on:
   push:
     branches: [agent/pr-0008a-concept-dependency-migration]
+  pull_request:
+    branches: [main]
 permissions:
   contents: write
 jobs:
