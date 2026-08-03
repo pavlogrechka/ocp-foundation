@@ -2,7 +2,7 @@
 
 This directory contains the first executable reference slice for OCP Foundation.
 
-The checker is **not** a production validator, persistence schema, policy engine, or independent normative source. OCP documents remain authoritative. Code in this directory implements a deliberately limited subset of rules from OCP-003 through OCP-006 so that accepted counterexamples can become repeatable tests.
+The checker is **not** a production validator, persistence schema, policy engine, or independent normative source. OCP documents, accepted architecture decisions and the machine-readable artifact taxonomy remain authoritative. Code in this directory implements a deliberately limited subset of those contracts so that accepted counterexamples can become repeatable tests.
 
 ## Current scope
 
@@ -12,7 +12,9 @@ Implemented validators:
 - Operation: identity, plural Objective resolution, and the accepted non-Draft explicit-intent exact-binding evidence contract;
 - Assignment: authoritative linear transition history, optional materialized lifecycle projections, required Established-lineage fields, applicability interval, and supersession self-reference;
 - Constraint: authoritative linear transition history, optional materialized lifecycle projections, target/predicate/enforcement completeness, validity interval, exact-version evaluation selection, evaluation uniqueness, and contradictory `not_applicable` detection;
-- repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`.
+- repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`;
+- artifact governance: path-derived OCP, Pattern and AD identifiers; taxonomy-allowed statuses; duplicate AB identifiers; accepted AD↔AB synchronization; and exact Pattern invocation resolution;
+- process audit: main-context verification that complete post-baseline Git history contains no merge commit.
 
 Implemented reference derivations:
 
@@ -23,6 +25,46 @@ Implemented reference derivations:
 - `effective_constraint_result`;
 - `constraint_blocks`;
 - `constraint_set_decision`.
+
+## Artifact-governance authority
+
+`architecture/artifact-taxonomy.yaml` is the machine-readable source for artifact classes and the policies implemented by the governance checker.
+
+The checker reads, rather than hardcodes:
+
+- `AB.active_states`, currently `Open`, `Proposed`, `Discovery`, and `Under Review`;
+- `Pattern.version_format`, currently `semver`;
+- `Pattern.invocation_version_policy`, currently `track-current`;
+- the obligation to atomically update all Pattern invokers when a Pattern version changes;
+- the complete-history, post-baseline process-audit scope and governed baseline SHA.
+
+Legacy AD-001 metadata is read from its historical heading and bullet format when YAML frontmatter is absent. This compatibility parser does not authorize new legacy-format AD files.
+
+## Pattern invocation policy
+
+A `Uses-Patterns` invocation uses `P-NNN@x.y.z` checker syntax and must resolve to an existing Pattern whose current `Version` exactly equals the invoked version.
+
+The policy is **track-current**, not historical pinning. A Pattern version change must be accompanied in the same PR by atomic updates to every invoker, with the applicable review lane for affected normative artifacts. Historical versions are not treated as separately resolvable repository artifacts.
+
+Malformed invocation syntax, missing Pattern identity, invalid Pattern semver, and current-version mismatch are distinct validation failures.
+
+## Process-audit boundary
+
+GitHub Rulesets remain the preventive authority for pull-request-only, squash-only and linear-history enforcement. The checker is a post-factum audit.
+
+In `pr` context the process audit is intentionally skipped because GitHub's synthetic pull-request merge ref has two parents and is not repository merge history.
+
+In `main` context the audit:
+
+1. requires a non-shallow repository;
+2. reads the full-SHA `history_audit_baseline` from taxonomy;
+3. requires that baseline to be an ancestor of `HEAD`;
+4. searches `<baseline>..HEAD` for commits with two or more parents;
+5. fails closed when the baseline or Git history cannot be inspected.
+
+Taxonomy `0.4.0` sets the baseline to `fc15d2dfc6d0529735347d8c78dd0e3e5225721d`, the last accepted legacy merge before squash-only enforcement. The baseline and earlier merge commits are historical evidence and are not reclassified as current violations. Any merge commit after that baseline emits `PROCESS_HISTORY_NON_LINEAR`.
+
+The workflow checks out with `fetch-depth: 0`. A shallow clone emits `PROCESS_HISTORY_SHALLOW`; an absent, malformed, unreachable baseline or Git infrastructure failure emits `PROCESS_HISTORY_AUDIT_FAILED`. Neither condition can report PASS. PR CI also checks out the actual proposed head and runs the repository checker explicitly in `main` context, avoiding false evidence from GitHub's synthetic merge ref.
 
 ## Authority and version envelope
 
@@ -57,7 +99,7 @@ Accordingly:
 - if a projection field is present, it must exactly match authoritative transition history;
 - derivations always use projections recomputed from transition history, not independently stored fields.
 
-## Regression fixtures
+## Regression fixtures and governance probes
 
 The suite includes:
 
@@ -65,7 +107,14 @@ The suite includes:
 - an applicable Constraint with a stored `not_applicable` result;
 - a stale permissive result for an older Constraint version below a current blocking result;
 - advisory uncertainty producing `review_required`, not `inadmissible`;
-- valid Established Assignment and Constraint fixtures without materialized projections.
+- valid Established Assignment and Constraint fixtures without materialized projections;
+- duplicate AB identifiers;
+- malformed, missing and stale Pattern invocations;
+- non-semver Pattern versions;
+- a legacy merge at the configured baseline that remains valid;
+- a merge commit after the baseline, including one below `HEAD`, that is rejected;
+- an unreachable baseline and a shallow Git clone that must fail closed;
+- a real-repository proposed-head run in explicit `main` context.
 
 The `not_applicable` case intentionally tests two independent layers:
 
@@ -103,6 +152,7 @@ ISO-8601 timestamps with offsets are normalized to UTC. A naive timestamp withou
 python -m pip install -r tools/ontology_checker/requirements.txt
 python -m unittest discover -s tools/ontology_checker/tests -v
 python tools/ontology_checker/check.py tools/ontology_checker/fixtures
+python tools/ontology_checker/check.py tools/ontology_checker/fixtures --context main
 ```
 
 The CLI reports malformed YAML as a failure for that file and continues checking the remaining fixtures.
@@ -121,4 +171,4 @@ This slice does not yet provide:
 - quantity, capacity, geometry, spectrum, authorization, Conflict, Risk, Readiness, or State semantics;
 - database, API, or UI contracts.
 
-Every additional emitted validation code and derivation must cite its defining OCP source in `rules.yaml`. A meta-test enforces full manifest coverage.
+Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES` participates in the same exact-equality manifest meta-test as the existing checker codes, so adding a governance error without provenance fails CI.
