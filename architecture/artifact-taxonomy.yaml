@@ -1,4 +1,4 @@
-taxonomy_version: 0.3.0
+taxonomy_version: 0.4.0
 authority: Architecture Board
 artifact_classes:
   OCP:
@@ -19,6 +19,9 @@ artifact_classes:
     location: patterns/
     external_review_required: true
     invocation_metadata: Uses-Patterns
+    version_format: semver
+    invocation_version_policy: track-current
+    version_change_requires_atomic_invoker_update: true
     purpose: Reusable modeling contracts without domain semantics.
   AD:
     normative_level: binding
@@ -40,6 +43,7 @@ artifact_classes:
   AB:
     normative_level: record
     lifecycle: [Open, Proposed, Discovery, Deferred, Planned, Under Review, Resolved, Rejected]
+    active_states: [Open, Proposed, Discovery, Under Review]
     status_authority: Architecture Board
     numbering_authority: Architecture Board
     location: backlog/architecture-backlog.md
@@ -83,4 +87,7 @@ artifact_classes:
 commit_convention:
   pull_request_title: "PR-NNNN[LETTER] — Title"
   merge_method: squash
-  note: Branch protection is the preventive control; repository checks may only audit history post-factum.
+  linear_history_required: true
+  history_audit_scope: all_reachable_commits
+  history_audit_requires_complete_history: true
+  note: Branch protection is the preventive control; repository checks audit complete reachable history post-factum.

@@ -23,8 +23,9 @@ from .objective import (
     validate_objective_dataset,
     validate_operation_fixture,
 )
+from .artifact_governance import GOVERNANCE_ERROR_CODES
 
-ERROR_CODES = CORE_ERROR_CODES | OBJECTIVE_ERROR_CODES
+ERROR_CODES = CORE_ERROR_CODES | OBJECTIVE_ERROR_CODES | GOVERNANCE_ERROR_CODES
 
 
 def validate_reference_fixture(fixture):

@@ -1,7 +1,49 @@
-manifest_version: 0.3.2
+manifest_version: 0.4.0
 authority: reference-only
-normative_source: OCP documents
+normative_source: OCP documents and governed artifact taxonomy
 rules:
+- id: AD_BACKLOG_REFERENCE_MISSING
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml AD and AB decision-accounting contract
+- id: AD_BACKLOG_STATUS_UNRESOLVED
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml AB.active_states and accepted AD accounting contract
+- id: ARTIFACT_ID_MISMATCH
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml class location and numbering authority
+- id: ARTIFACT_METADATA_MISSING
+  kind: validation
+  source: OCP-001 artifact metadata governance and architecture/artifact-taxonomy.yaml
+- id: ARTIFACT_STATUS_INVALID
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml class lifecycle contract
+- id: ARTIFACT_TAXONOMY_INVALID
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml machine-readable governance contract
+- id: BACKLOG_ID_DUPLICATE
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml AB numbering authority and OCP-001 identity governance
+- id: PATTERN_REFERENCE_INVALID
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml Pattern invocation metadata and semver contract
+- id: PATTERN_REFERENCE_MISSING
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml Pattern invocation identity contract
+- id: PATTERN_VERSION_INVALID
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml Pattern.version_format
+- id: PATTERN_VERSION_MISMATCH
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml Pattern.invocation_version_policy track-current
+- id: PROCESS_HISTORY_AUDIT_FAILED
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml commit_convention complete-history audit contract
+- id: PROCESS_HISTORY_NON_LINEAR
+  kind: validation
+  source: OCP-001 squash-only governance and architecture/artifact-taxonomy.yaml commit_convention
+- id: PROCESS_HISTORY_SHALLOW
+  kind: validation
+  source: architecture/artifact-taxonomy.yaml commit_convention history_audit_requires_complete_history
 - id: ASSIGNMENT_APPLICABILITY_INTERVAL_INVALID
   kind: validation
   source: OCP-005 §16 invariant 7

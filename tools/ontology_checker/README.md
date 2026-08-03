@@ -2,7 +2,7 @@
 
 This directory contains the first executable reference slice for OCP Foundation.
 
-The checker is **not** a production validator, persistence schema, policy engine, or independent normative source. OCP documents remain authoritative. Code in this directory implements a deliberately limited subset of rules from OCP-003 through OCP-006 so that accepted counterexamples can become repeatable tests.
+The checker is **not** a production validator, persistence schema, policy engine, or independent normative source. OCP documents, accepted architecture decisions and the machine-readable artifact taxonomy remain authoritative. Code in this directory implements a deliberately limited subset of those contracts so that accepted counterexamples can become repeatable tests.
 
 ## Current scope
 
@@ -12,7 +12,9 @@ Implemented validators:
 - Operation: identity, plural Objective resolution, and the accepted non-Draft explicit-intent exact-binding evidence contract;
 - Assignment: authoritative linear transition history, optional materialized lifecycle projections, required Established-lineage fields, applicability interval, and supersession self-reference;
 - Constraint: authoritative linear transition history, optional materialized lifecycle projections, target/predicate/enforcement completeness, validity interval, exact-version evaluation selection, evaluation uniqueness, and contradictory `not_applicable` detection;
-- repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`.
+- repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`;
+- artifact governance: path-derived OCP, Pattern and AD identifiers; taxonomy-allowed statuses; duplicate AB identifiers; accepted AD↔AB synchronization; and exact Pattern invocation resolution;
+- process audit: main-context verification that complete reachable Git history contains no merge commit.
 
 Implemented reference derivations:
 
@@ -23,6 +25,43 @@ Implemented reference derivations:
 - `effective_constraint_result`;
 - `constraint_blocks`;
 - `constraint_set_decision`.
+
+## Artifact-governance authority
+
+`architecture/artifact-taxonomy.yaml` is the machine-readable source for artifact classes and the policies implemented by the governance checker.
+
+The checker reads, rather than hardcodes:
+
+- `AB.active_states`, currently `Open`, `Proposed`, `Discovery`, and `Under Review`;
+- `Pattern.version_format`, currently `semver`;
+- `Pattern.invocation_version_policy`, currently `track-current`;
+- the obligation to atomically update all Pattern invokers when a Pattern version changes;
+- the complete-history, all-reachable-commits process-audit scope.
+
+Legacy AD-001 metadata is read from its historical heading and bullet format when YAML frontmatter is absent. This compatibility parser does not authorize new legacy-format AD files.
+
+## Pattern invocation policy
+
+A `Uses-Patterns` invocation uses `P-NNN@x.y.z` checker syntax and must resolve to an existing Pattern whose current `Version` exactly equals the invoked version.
+
+The policy is **track-current**, not historical pinning. A Pattern version change must be accompanied in the same PR by atomic updates to every invoker, with the applicable review lane for affected normative artifacts. Historical versions are not treated as separately resolvable repository artifacts.
+
+Malformed invocation syntax, missing Pattern identity, invalid Pattern semver, and current-version mismatch are distinct validation failures.
+
+## Process-audit boundary
+
+GitHub Rulesets remain the preventive authority for pull-request-only, squash-only and linear-history enforcement. The checker is a post-factum audit.
+
+In `pr` context the process audit is intentionally skipped because GitHub's synthetic pull-request merge ref has two parents and is not repository merge history.
+
+In `main` context the audit:
+
+1. requires a non-shallow repository;
+2. requires the taxonomy's complete-history policy;
+3. searches every commit reachable from `HEAD` for commits with two or more parents;
+4. fails closed when Git history cannot be inspected.
+
+The workflow therefore checks out with `fetch-depth: 0`. A shallow clone emits `PROCESS_HISTORY_SHALLOW`; a Git infrastructure failure emits `PROCESS_HISTORY_AUDIT_FAILED`. Neither condition can report PASS.
 
 ## Authority and version envelope
 
@@ -57,7 +96,7 @@ Accordingly:
 - if a projection field is present, it must exactly match authoritative transition history;
 - derivations always use projections recomputed from transition history, not independently stored fields.
 
-## Regression fixtures
+## Regression fixtures and governance probes
 
 The suite includes:
 
@@ -65,7 +104,12 @@ The suite includes:
 - an applicable Constraint with a stored `not_applicable` result;
 - a stale permissive result for an older Constraint version below a current blocking result;
 - advisory uncertainty producing `review_required`, not `inadmissible`;
-- valid Established Assignment and Constraint fixtures without materialized projections.
+- valid Established Assignment and Constraint fixtures without materialized projections;
+- duplicate AB identifiers;
+- malformed, missing and stale Pattern invocations;
+- non-semver Pattern versions;
+- a real merge commit below `HEAD`;
+- a shallow Git clone that must fail closed.
 
 The `not_applicable` case intentionally tests two independent layers:
 
@@ -121,4 +165,4 @@ This slice does not yet provide:
 - quantity, capacity, geometry, spectrum, authorization, Conflict, Risk, Readiness, or State semantics;
 - database, API, or UI contracts.
 
-Every additional emitted validation code and derivation must cite its defining OCP source in `rules.yaml`. A meta-test enforces full manifest coverage.
+Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES` participates in the same exact-equality manifest meta-test as the existing checker codes, so adding a governance error without provenance fails CI.

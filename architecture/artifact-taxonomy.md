@@ -38,6 +38,14 @@ The `adr/` registry is frozen for new identifiers. Existing ADR artifacts remain
 
 AB entries track questions, planned actions and Board resolutions. They are records, not independent normative definitions. A resolved AB entry points to the artifact that defines the decision.
 
+For accepted AD decision-accounting checks, the machine-readable `AB.active_states` set is authoritative:
+
+```yaml
+active_states: [Open, Proposed, Discovery, Under Review]
+```
+
+An accepted AD may not leave an explicitly referenced AB entry in one of those active states. `Deferred`, `Planned`, `Resolved` and `Rejected` remain lifecycle values but are not classified as active for this synchronization rule.
+
 ## Patterns
 
 Patterns live under `patterns/` and are `binding-when-invoked`.
@@ -50,7 +58,9 @@ Uses-Patterns: P-001@0.1.0
 
 Invocation means that the artifact must satisfy every Required Element and every obligation of the optional modules it selects. Domain semantics remain in the invoking artifact.
 
-Pattern changes require versioning and the same external-review lane as other normative artifacts because they may affect every invoker.
+Pattern versions use semantic-version syntax. Invocation follows the machine-readable `track-current` policy: every `Uses-Patterns` value must equal the current version declared by the referenced Pattern. A PR that changes a Pattern version must atomically update every invoker and route each affected normative artifact through its required review lane.
+
+This policy prevents silent semantic drift between a Pattern and accepted invokers. Historical pinning is not claimed by the current repository model because historical Pattern versions are not materialized as separately resolvable artifacts.
 
 ## Review records
 
@@ -71,4 +81,6 @@ Review records, backlog bookkeeping and status-only changes dictated by an alrea
 
 ## Enforcement boundary
 
-Repository tooling can validate metadata, references, declared pattern versions and committed evidence. It can audit merge history after the fact. GitHub Rulesets or branch protection are the preventive authority for squash-only merge and required checks.
+Repository tooling validates metadata, references, declared Pattern versions and committed evidence. GitHub Rulesets or branch protection are the preventive authority for squash-only merge and required checks.
+
+The post-factum process audit requires complete Git history and inspects every merge commit reachable from `HEAD`. A shallow repository is an audit failure, not a successful result. Pull-request merge refs are not audited as repository history because the process audit is enabled only in `main` context.
