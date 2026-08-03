@@ -4,6 +4,7 @@ expected:
   valid: false
   error_codes:
     - OPERATION_EXPLICIT_INTENT_EVIDENCE_STALE
+    - OPERATION_EXPLICIT_INTENT_STATUS_MISMATCH
 entity:
   operation_id: OP-INTENT-STALE-001
   lifecycle_stage: Planned
