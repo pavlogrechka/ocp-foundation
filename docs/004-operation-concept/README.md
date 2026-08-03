@@ -1,13 +1,13 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.5.1
+Version: 0.6.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000, OCP-001, OCP-002, OCP-003
+Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008
 Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business Rules, Domain Model
 Defines-Concepts: Operation
-Concept-Depends-On: []
+Concept-Depends-On: [Objective]
 Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
@@ -62,9 +62,9 @@ Operation не визначає сама по собі:
 |---|---|---|
 | Resource | Accepted | елемент, що залучається до Operation |
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
-| Objective | Proposed | представлення бажаного ефекту або мети |
+| Objective | Under Review | intended outcome, condition або effect; OCP-008 |
 | Operational Area | Proposed | просторовий контекст |
-| Constraint | Proposed | обмеження Operation та Assignment |
+| Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
 | Event | Proposed | значущий факт або зміна |
 | Result | Proposed | наслідок або підсумок виконання |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
@@ -91,7 +91,7 @@ Operation не визначає сама по собі:
 Operation
 ├── Identity
 ├── Intent
-│   └── Objective [Proposed]
+│   └── Objective [Under Review]
 ├── Temporal Context
 │   ├── Planned Bounds
 │   └── Actual Bounds
@@ -100,7 +100,7 @@ Operation
 ├── Participation
 │   └── Assignment [Accepted]
 ├── Constraints
-│   └── Constraint [Proposed]
+│   └── Constraint [Accepted]
 └── Outcome
     ├── Event [Proposed]
     └── Result [Proposed]
@@ -112,15 +112,20 @@ Operation
 
 ## 7. Intent and Objective
 
-Operation має операційний намір, представлений одним або більше Objective та/або локальним structured explicit intent record.
+Operation має рівно одне активне представлення операційного наміру поза lifecycle stage `Draft`:
+
+1. один або більше `objective_refs`, кожен з яких однозначно резолвиться у валідний Objective за OCP-008; або
+2. один локальний `ExplicitIntentRecord`, що пройшов змістовну перевірку.
 
 ```text
 Operation pursues Objective
 ```
 
-Objective описує бажаний ефект або мету, але не дорівнює самій Operation.
+Objective описує intended outcome, condition або effect і не дорівнює самій Operation. Нормативна семантика Objective визначена в [OCP-008 — Objective Concept](../008-objective-concept/README.md).
 
-Локальний `ExplicitIntentRecord` не вводиться як фундаментальний Concept. Він є структурою перевірки повноти Operation:
+`objective_refs` є списком непорожніх унікальних Objective identifiers. Для Operation поза `Draft` кожен identifier повинен резолвитися рівно в один валідний Objective instance. Нерезолвлене, неоднозначне або невалідне посилання не задовольняє вимогу операційного наміру.
+
+Локальний `ExplicitIntentRecord` не вводиться як фундаментальний Concept. Він є fallback-структурою перевірки повноти Operation:
 
 ```text
 ExplicitIntentRecord
@@ -133,11 +138,17 @@ ExplicitIntentRecord
 
 Нормалізований `statement` повинен містити щонайменше один символ літери або цифри. Значення, що складаються лише з пробілів, розділових знаків або службових заповнювачів, не є валідним statement.
 
-Для використання explicit intent поза stage `Draft` запис повинен мати `validation_status = passed`, непорожній `validation_rule_ref` і `validated_at`. Змістовні критерії достатності визначаються domain validation rule, на який посилається `validation_rule_ref`.
+Для використання explicit intent поза `Draft` запис повинен мати `validation_status = passed`, непорожній `validation_rule_ref` і валідний `validated_at`. Змістовні критерії достатності визначаються domain validation rule, на який посилається `validation_rule_ref`.
 
-Operation може існувати без валідованого наміру лише на lifecycle stage `Draft`.
+### 7.1 Coexistence and precedence contract
 
-Остаточна семантика Objective і можливого Concept `Operational Intent` буде визначена окремими специфікаціями.
+На stage `Draft` `objective_refs` і `ExplicitIntentRecord` можуть тимчасово співіснувати як authoring state. Жодне представлення не має автоматичного пріоритету, а Draft може не мати жодного з них.
+
+Поза `Draft` співіснування заборонене: Operation повинна обрати рівно одну активну гілку. Якщо присутні і `objective_refs`, і `ExplicitIntentRecord`, snapshot є невалідним незалежно від змістовної узгодженості між ними.
+
+Перехід від `ExplicitIntentRecord` до Objective не є автоматичною promotion. Objective створюється як окремий instance з власною identity та provenance, після чого активний snapshot Operation перемикається на `objective_refs`. Попередній explicit intent може зберігатися лише в audit history поза активними intent fields і не має нормативного пріоритету над Objective.
+
+Operation може існувати без валідованого активного наміру лише на lifecycle stage `Draft`.
 
 ## 8. Temporal Context
 
@@ -329,7 +340,8 @@ Event фіксує значущий факт або зміну, пов’яза�
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
 7. Explicit intent може використовуватися поза `Draft` лише після проходження змістовної перевірки за domain validation rule; Core перевіряє структурний record і результат перевірки, але не замінює предметну оцінку.
-8. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
+8. Поза `Draft` `objective_refs` і `ExplicitIntentRecord` є взаємовиключними активними представленнями; автоматичної precedence або promotion між ними немає.
+9. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
 
 ## 16. Semantic Rules
 
@@ -349,7 +361,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 ## 17. Invariants
 
 1. Кожен Operation instance має рівно одну непорожню стабільну identity.
-2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має щонайменше один resolvable Objective reference або ExplicitIntentRecord, у якому нормалізований statement містить літеру чи цифру, `validation_status = passed`, а `validation_rule_ref` і `validated_at` є непорожніми.
+2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, кожен елемент якого однозначно резолвиться у валідний Objective, або один валідний ExplicitIntentRecord; одночасна наявність обох гілок є невалідною.
 3. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
 4. Жодна Operation не може бути parent або child самої себе.
 5. Граф parent/child між Operation є ациклічним.
@@ -389,7 +401,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 ## 20. Open Questions
 
 1. Чи є Order обов’язковим механізмом авторизації Operation або лише одним із можливих джерел?
-2. Чи потрібен окремий Concept `Operational Intent`, чи достатньо Objective та ExplicitIntentRecord?
+2. Чи потрібен окремий Concept `Operational Intent` для майбутніх domain-моделей, якщо Core уже має взаємовиключні Objective та ExplicitIntentRecord branches?
 3. Чи всі Operation повинні мати Operational Area?
 4. Чи потрібен `Suspended` у канонічному lifecycle?
 5. Як представляти повторювані Operation без змішування шаблону й instance?

@@ -1,0 +1,9 @@
+case_id: objective-valid-001
+concept: Objective
+expected:
+  valid: true
+entity:
+  objective_id: OBJ-001
+  statement: Establish a safe transit corridor
+  created_at: 2026-08-03T03:00:00Z
+  provenance_ref: SOURCE-001

@@ -1,4 +1,4 @@
-manifest_version: 0.2.0
+manifest_version: 0.3.1
 authority: reference-only
 normative_source: OCP documents
 rules:
@@ -113,12 +113,39 @@ rules:
 - id: FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED
   kind: validation
   source: OCP-006 §11 exact-version evaluation contract; PR-0006 fixture envelope
+- id: OBJECTIVE_CREATED_AT_REQUIRED
+  kind: validation
+  source: OCP-008 §10 invariant 3
+- id: OBJECTIVE_ID_REQUIRED
+  kind: validation
+  source: OCP-008 §10 invariant 1
+- id: OBJECTIVE_PROVENANCE_REF_REQUIRED
+  kind: validation
+  source: OCP-008 §10 invariant 4
+- id: OBJECTIVE_SELF_SUPERSESSION
+  kind: validation
+  source: OCP-008 §10 invariant 5
+- id: OBJECTIVE_STATEMENT_REQUIRED
+  kind: validation
+  source: OCP-008 §10 invariant 2
+- id: OBJECTIVE_SUPERSESSION_CYCLE
+  kind: validation
+  source: OCP-008 §10 invariant 6; dataset validation
 - id: OPERATION_ID_REQUIRED
   kind: validation
   source: OCP-004 invariants
 - id: OPERATION_INTENT_REQUIRED
   kind: validation
-  source: OCP-004 explicit-intent invariant
+  source: OCP-004 §17 invariant 2
+- id: OPERATION_INTENT_REPRESENTATION_CONFLICT
+  kind: validation
+  source: OCP-004 §7.1 and §17 invariant 2
+- id: OPERATION_OBJECTIVE_REFERENCE_INVALID
+  kind: validation
+  source: OCP-004 §7 and OCP-008 §6
+- id: OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED
+  kind: validation
+  source: OCP-004 §7 and OCP-008 §10 invariant 11
 - id: OPERATION_SELF_PARENT
   kind: validation
   source: OCP-004 composition invariant

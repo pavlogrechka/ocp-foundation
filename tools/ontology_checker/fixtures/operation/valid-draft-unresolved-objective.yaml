@@ -1,0 +1,9 @@
+case_id: operation-valid-draft-unresolved-objective-001
+concept: Operation
+expected:
+  valid: true
+entity:
+  operation_id: OP-DRAFT-UNRESOLVED-001
+  lifecycle_stage: Draft
+  objective_refs:
+    - OBJ-NOT-CREATED-YET

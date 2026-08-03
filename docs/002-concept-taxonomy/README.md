@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.9.1
+Version: 0.10.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -12,6 +12,7 @@ Concept-Statuses:
   Assignment: Accepted
   Constraint: Accepted
   Organization: Accepted
+  Objective: Accepted
 Last-Review: 2026-08-03
 ---
 
@@ -24,6 +25,7 @@ Concept Categories
 ├── Organization
 ├── Resource
 ├── Operation
+├── Objective
 ├── Environment
 ├── Governance
 ├── Event
@@ -81,7 +83,7 @@ Operation є універсальним контекстом координов�
 Operation
 ├── Identity
 ├── Intent
-│   └── Objective [Proposed]
+│   └── Objective [Accepted]
 ├── Temporal Context
 ├── Spatial Context
 │   └── Operational Area [Proposed]
@@ -93,6 +95,14 @@ Operation
     ├── Event [Proposed]
     └── Result [Proposed]
 ```
+
+## Objective
+
+Concept `Objective` має статус `Accepted` і визначений у [OCP-008 — Objective Concept](../008-objective-concept/README.md) на підставі прийнятої межі AD-003 та рішення Architecture Board по PR-0009.
+
+Objective представляє intended outcome, condition або effect операційної діяльності. Objective має власну identity, не є Operation, Order, Task або `ExplicitIntentRecord`, а оцінка його досягнення належить майбутнім Event/Result моделям.
+
+Objective не має поточної фундаментальної Concept dependency. Operation нормативно залежить від Objective лише через явну `Concept-Depends-On` декларацію OCP-004.
 
 ## Assignment
 
