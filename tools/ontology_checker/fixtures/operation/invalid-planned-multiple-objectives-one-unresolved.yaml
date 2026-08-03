@@ -1,0 +1,18 @@
+case_id: operation-invalid-planned-multiple-objectives-one-unresolved-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED
+references:
+  objectives:
+    - objective_id: OBJ-MULTI-VALID-001
+      statement: Preserve access to the transit corridor
+      created_at: 2026-08-03T17:00:00Z
+      provenance_ref: SOURCE-MULTI-VALID-001
+entity:
+  operation_id: OP-MULTI-INVALID-001
+  lifecycle_stage: Planned
+  objective_refs:
+    - OBJ-MULTI-VALID-001
+    - OBJ-MULTI-MISSING-001

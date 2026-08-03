@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.6.0
+Version: 0.7.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008
@@ -9,7 +9,7 @@ Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business R
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
 Concept-Status: Accepted
-Last-Review: 2026-08-02
+Last-Review: 2026-08-03
 ---
 
 # Operation Concept
@@ -62,7 +62,7 @@ Operation не визначає сама по собі:
 |---|---|---|
 | Resource | Accepted | елемент, що залучається до Operation |
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
-| Objective | Under Review | intended outcome, condition або effect; OCP-008 |
+| Objective | Accepted | intended outcome, condition або effect; OCP-008 |
 | Operational Area | Proposed | просторовий контекст |
 | Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
 | Event | Proposed | значущий факт або зміна |
@@ -91,7 +91,7 @@ Operation не визначає сама по собі:
 Operation
 ├── Identity
 ├── Intent
-│   └── Objective [Under Review]
+│   └── Objective [Accepted]
 ├── Temporal Context
 │   ├── Planned Bounds
 │   └── Actual Bounds
@@ -115,7 +115,7 @@ Operation
 Operation має рівно одне активне представлення операційного наміру поза lifecycle stage `Draft`:
 
 1. один або більше `objective_refs`, кожен з яких однозначно резолвиться у валідний Objective за OCP-008; або
-2. один локальний `ExplicitIntentRecord`, що пройшов змістовну перевірку.
+2. один локальний `ExplicitIntentRecord` з авторитетним immutable validation evidence за цим розділом.
 
 ```text
 Operation pursues Objective
@@ -123,26 +123,66 @@ Operation pursues Objective
 
 Objective описує intended outcome, condition або effect і не дорівнює самій Operation. Нормативна семантика Objective визначена в [OCP-008 — Objective Concept](../008-objective-concept/README.md).
 
-`objective_refs` є списком непорожніх унікальних Objective identifiers. Для Operation поза `Draft` кожен identifier повинен резолвитися рівно в один валідний Objective instance. Нерезолвлене, неоднозначне або невалідне посилання не задовольняє вимогу операційного наміру.
+### 7.1 Semantics of plural `objective_refs`
 
-Локальний `ExplicitIntentRecord` не вводиться як фундаментальний Concept. Він є fallback-структурою перевірки повноти Operation:
+`objective_refs` є списком непорожніх унікальних Objective identifiers. Кожен член списку є незалежним affirmative-твердженням, що ця Operation переслідує відповідний Objective. Усі перелічені Objective активні для snapshot; список не означає вибір будь-якого одного Objective як достатнього.
+
+Для Operation поза `Draft` кожен identifier повинен резолвитися рівно в один валідний Objective instance. Один валідний елемент не компенсує нерезолвлений, неоднозначний або невалідний інший елемент.
+
+Сам факт членства у списку не кодує:
+
+- priority або weighting;
+- sequencing або dependency;
+- hierarchy або decomposition;
+- contribution strength;
+- equivalence між Objective;
+- aggregation achievement, success або completion.
+
+Domain або Coordination rules можуть додавати явні структури для цих семантик, але не можуть мовчки переінтерпретувати bare `objective_refs`. Альтернативне переслідування потребує окремо визначеного явного представлення.
+
+### 7.2 Explicit intent record
+
+Рішення AD-004C не вводить окремий фундаментальний Concept `Operational Intent`. Локальний `ExplicitIntentRecord` залишається Operation-owned fallback-структурою:
 
 ```text
 ExplicitIntentRecord
 - intent_id
+- intent_version_ref
 - statement
-- validation_status: not_evaluated | passed | failed
 - validation_rule_ref
-- validated_at
+- input_snapshot_ref
+- validation_status: not_evaluated | passed | failed  # optional derived projection
+- validation_records:
+  - validation_id
+  - intent_version_ref
+  - validation_rule_ref
+  - input_snapshot_ref
+  - evaluated_at
+  - evaluator_ref
+  - result: not_evaluated | passed | failed
 ```
+
+`intent_version_ref` та `validation_rule_ref` є exact-version references і повинні містити непорожню identity та version, розділені символом `@`. `input_snapshot_ref` непрозоро ідентифікує точний evaluated input snapshot.
 
 Нормалізований `statement` повинен містити щонайменше один символ літери або цифри. Значення, що складаються лише з пробілів, розділових знаків або службових заповнювачів, не є валідним statement.
 
-Для використання explicit intent поза `Draft` запис повинен мати `validation_status = passed`, непорожній `validation_rule_ref` і валідний `validated_at`. Змістовні критерії достатності визначаються domain validation rule, на який посилається `validation_rule_ref`.
+Для використання explicit intent поза `Draft` має існувати рівно один структурно валідний validation record, який одночасно збігається з поточними:
 
-### 7.1 Coexistence and precedence contract
+1. `intent_version_ref`;
+2. exact-version `validation_rule_ref`;
+3. `input_snapshot_ref`.
 
-На stage `Draft` `objective_refs` і `ExplicitIntentRecord` можуть тимчасово співіснувати як authoring state. Жодне представлення не має автоматичного пріоритету, а Draft може не мати жодного з них.
+Цей record також повинен містити валідні `validation_id`, `evaluated_at`, `evaluator_ref` і єдиний `result = passed`.
+
+Будь-яка substantive зміна `ExplicitIntentRecord`, версії validation rule або evaluated input snapshot створює нове binding-значення та інвалідовує попередній `passed`. Missing, stale, conflicting або structurally invalid evidence не задовольняє intent invariant і fail-safe робить non-Draft Operation невалідною.
+
+`validation_status`, якщо матеріалізований, є лише derived non-authoritative projection ефективного validation record. Він повинен дорівнювати авторитетному `result`; stored `passed` без точного evidence binding або всупереч evidence не має нормативної сили.
+
+Змістовні критерії достатності визначаються domain validation rule, але validation не означає authorization, approval або command authority.
+
+### 7.3 Coexistence and precedence contract
+
+На stage `Draft` `objective_refs` і `ExplicitIntentRecord` можуть тимчасово співіснувати як authoring state. Жодне представлення не має автоматичного пріоритету, а Draft може не мати жодного з них. Draft також може містити неповний або ще не evaluated explicit-intent record.
 
 Поза `Draft` співіснування заборонене: Operation повинна обрати рівно одну активну гілку. Якщо присутні і `objective_refs`, і `ExplicitIntentRecord`, snapshot є невалідним незалежно від змістовної узгодженості між ними.
 
@@ -327,7 +367,7 @@ Operation produces Result
 Result evaluates Objective
 ```
 
-`Result evaluates Objective` є робочим зв’язком до прийняття специфікацій Objective і Result.
+`Result evaluates Objective` є робочим зв’язком до прийняття специфікації Result.
 
 Event фіксує значущий факт або зміну, пов’язану з Operation. Event не замінює lifecycle stage, але може бути джерелом його історії або обчислення.
 
@@ -339,9 +379,11 @@ Event фіксує значущий факт або зміну, пов’яза�
 4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або Result.
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
-7. Explicit intent може використовуватися поза `Draft` лише після проходження змістовної перевірки за domain validation rule; Core перевіряє структурний record і результат перевірки, але не замінює предметну оцінку.
-8. Поза `Draft` `objective_refs` і `ExplicitIntentRecord` є взаємовиключними активними представленнями; автоматичної precedence або promotion між ними немає.
-9. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
+7. Explicit intent може використовуватися поза `Draft` лише коли рівно один authoritative validation record має exact binding до поточних intent version, validation rule version та input snapshot і містить `result = passed`.
+8. Missing, stale, conflicting або structurally invalid explicit-intent evidence fail-safe не задовольняє intent invariant; mutable `validation_status` не може зробити Operation більш permissive.
+9. Кожен член plural `objective_refs` є активним affirmative-твердженням pursuit і повинен окремо резолвитися; один валідний Objective не компенсує інший невалідний reference.
+10. Поза `Draft` `objective_refs` і `ExplicitIntentRecord` є взаємовиключними активними представленнями; автоматичної precedence або promotion між ними немає.
+11. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
 
 ## 16. Semantic Rules
 
@@ -357,16 +399,24 @@ Event фіксує значущий факт або зміну, пов’яза�
 10. Нормативні правила участі визначені лише в OCP-005 §§8–9 і не дублюються як інваріанти або незалежні формули Operation.
 11. Assignment не успадковується автоматично через композицію Operation або Resource.
 12. Наявність Established Assignment не означає фактичної участі поза його applicability interval.
+13. Plural `objective_refs` не кодує alternative pursuit, priority, sequence, hierarchy, contribution strength або achievement aggregation.
+14. `validation_status` є derived projection і не є авторитетним доказом без exact-binding validation record.
 
 ## 17. Invariants
 
 1. Кожен Operation instance має рівно одну непорожню стабільну identity.
-2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, кожен елемент якого однозначно резолвиться у валідний Objective, або один валідний ExplicitIntentRecord; одночасна наявність обох гілок є невалідною.
-3. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
-4. Жодна Operation не може бути parent або child самої себе.
-5. Граф parent/child між Operation є ациклічним.
-6. Кожен LifecycleTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
-7. Кожен InterOperationRelationshipAssertion містить валідні `source_operation_id`, `relation_type`, `target_operation_id` і непорожній `provenance_ref`.
+2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, або один `ExplicitIntentRecord`; одночасна наявність обох гілок є невалідною.
+3. Кожен член non-Draft `objective_refs` є активним affirmative-твердженням pursuit і однозначно резолвиться у валідний Objective; список не означає вибір будь-якого одного елемента як достатнього.
+4. Non-Draft `ExplicitIntentRecord` містить непорожні `intent_id`, exact-version `intent_version_ref`, змістовний `statement`, exact-version `validation_rule_ref` і непорожній `input_snapshot_ref`.
+5. Кожен validation record містить непорожній `validation_id`, exact `intent_version_ref`, exact `validation_rule_ref`, exact `input_snapshot_ref`, валідний `evaluated_at`, непорожній `evaluator_ref` і один result із `not_evaluated | passed | failed`.
+6. Non-Draft explicit-intent branch є валідною лише коли існує рівно один structurally valid record, що точно збігається з поточними intent version, validation rule version та input snapshot і має `result = passed`.
+7. Missing, stale, conflicting або structurally invalid explicit-intent evidence не задовольняє invariant 6 і fail-safe робить non-Draft Operation невалідною.
+8. Матеріалізований `validation_status` є derived non-authoritative projection і дорівнює result єдиного ефективного validation record.
+9. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
+10. Жодна Operation не може бути parent або child самої себе.
+11. Граф parent/child між Operation є ациклічним.
+12. Кожен LifecycleTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
+13. Кожен InterOperationRelationshipAssertion містить валідні `source_operation_id`, `relation_type`, `target_operation_id` і непорожній `provenance_ref`.
 
 ## 18. Examples
 
@@ -401,18 +451,17 @@ Event фіксує значущий факт або зміну, пов’яза�
 ## 20. Open Questions
 
 1. Чи є Order обов’язковим механізмом авторизації Operation або лише одним із можливих джерел?
-2. Чи потрібен окремий Concept `Operational Intent` для майбутніх domain-моделей, якщо Core уже має взаємовиключні Objective та ExplicitIntentRecord branches?
-3. Чи всі Operation повинні мати Operational Area?
-4. Чи потрібен `Suspended` у канонічному lifecycle?
-5. Як представляти повторювані Operation без змішування шаблону й instance?
-6. Які точні правила визначають parent/child?
-7. Чи може одна Operation мати декілька незалежних джерел авторизації?
-8. Який мінімальний набір даних потрібен для переходу `Draft → Planned`?
-9. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
-10. Чи має Operation власну Readiness, окрему від Readiness залучених Resource?
-11. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
-12. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
-13. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
+2. Чи всі Operation повинні мати Operational Area?
+3. Чи потрібен `Suspended` у канонічному lifecycle?
+4. Як представляти повторювані Operation без змішування шаблону й instance?
+5. Які точні правила визначають parent/child?
+6. Чи може одна Operation мати декілька незалежних джерел авторизації?
+7. Який мінімальний набір даних потрібен для переходу `Draft → Planned`?
+8. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
+9. Чи має Operation власну Readiness, окрему від Readiness залучених Resource?
+10. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
+11. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
+12. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
 
 ## 21. Deferred Decisions
 
@@ -432,7 +481,6 @@ Event фіксує значущий факт або зміну, пов’яза�
 До окремих рішень Architecture Board відкладаються:
 
 - моделі авторизації, наказів і погоджень;
-- окремий Concept Operational Intent;
 - канонічна модель композиції Operation;
 - канонічна модель conflict і coordination;
 - taxonomy provenance для transition та relationship records;

@@ -1,0 +1,31 @@
+case_id: operation-invalid-planned-explicit-intent-conflicting-evidence-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_EXPLICIT_INTENT_EVIDENCE_CONFLICT
+entity:
+  operation_id: OP-INTENT-CONFLICT-001
+  lifecycle_stage: Planned
+  explicit_intent_record:
+    intent_id: INT-CONFLICT-001
+    intent_version_ref: INT-CONFLICT-001@1
+    statement: Preserve access to the transit corridor
+    validation_rule_ref: RULE-INTENT-001@2
+    input_snapshot_ref: SNAP-INTENT-CONFLICT-001
+    validation_status: passed
+    validation_records:
+      - validation_id: INT-VAL-CONFLICT-001
+        intent_version_ref: INT-CONFLICT-001@1
+        validation_rule_ref: RULE-INTENT-001@2
+        input_snapshot_ref: SNAP-INTENT-CONFLICT-001
+        evaluated_at: 2026-08-03T18:00:00Z
+        evaluator_ref: checker://intent-v2-a
+        result: passed
+      - validation_id: INT-VAL-CONFLICT-002
+        intent_version_ref: INT-CONFLICT-001@1
+        validation_rule_ref: RULE-INTENT-001@2
+        input_snapshot_ref: SNAP-INTENT-CONFLICT-001
+        evaluated_at: 2026-08-03T18:01:00Z
+        evaluator_ref: checker://intent-v2-b
+        result: failed
