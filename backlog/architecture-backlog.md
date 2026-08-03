@@ -13,8 +13,8 @@
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
 | AB-011 | Взаємозамінність Resource | Open | Описати взаємозамінність без втрати ідентичності екземплярів після Capability і Constraint |
-| AB-012 | Автоматична перевірка нормативних Concept references | Partially Implemented | PR-0006 додає повний rules manifest для emitted checks і CI; duplicate/reference linter залишається до першої Canonical promotion |
-| AB-013 | Машинозчитувані інваріанти | Partially Implemented | PR-0006 реалізує reference subset, lifecycle fixtures і accepted counterexamples; розширювати з кожним Concept cycle |
+| AB-012 | Автоматична перевірка нормативних Concept references | Planned | PR-0006 додає повний rules manifest для emitted checks і CI; duplicate/reference linter залишається до першої Canonical promotion |
+| AB-013 | Машинозчитувані інваріанти | Planned | PR-0006 реалізує reference subset, lifecycle fixtures і accepted counterexamples; розширювати з кожним Concept cycle |
 | AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
 | AB-016 | Композиція Operation | Open | Визначити правила parent/child, ациклічність і межу з незалежною координацією |
@@ -23,17 +23,17 @@
 | AB-019 | Suspended у lifecycle Operation | Deferred | Переглянути після Constraint, Assignment і State |
 | AB-020 | Operation Template як окремий Concept | Open | Перевірити після стабілізації Operation lifecycle і повторюваних Operation |
 | AB-021 | Формальна derivation участі через Assignment | Resolved | Нормативне визначення в OCP-005 §§8–9; reference implementation у PR-0006 |
-| AB-022 | Validation contract для explicit intent | Planned | Компактний OCP-004 PR: plural objective_refs semantics за AD-004 §11.3, exact-version/exact-snapshot fail-safe validation contract за §11.4 і fixtures за §8 |
+| AB-022 | Validation contract для explicit intent | Resolved | PR #23: OCP-004 v0.7.0, plural objective_refs semantics, immutable exact-binding evidence, fail-safe projections and executable fixtures merged |
 | AB-023 | Provenance taxonomy для lifecycle і relationship records | Open | Уточнити після Event, Order і Coordination Concept |
 | AB-024 | Автоматична синхронізація Concept status | Resolved | PR-0006 звіряє OCP-000, machine-readable projection OCP-002 і Concept-Status defining documents у CI |
 | AB-025 | Reservation / Allocation як окремий Concept | Open | Визначити межу з Assignment і Constraint |
 | AB-026 | Amendment model для Assignment | Open | Визначити зміни role та applicability після Establishment без переписування історії |
-| AB-027 | Role Taxonomy | Open | Визначити межу Core role codes і domain role namespaces |
+| AB-027 | Role Taxonomy | Open | Визначити межі Core role codes і domain role namespaces |
 | AB-028 | Узгодження lifecycle Operation та Assignment | Open | Визначити правила для незавершених Assignment при Completed, Cancelled або Aborted Operation після Constraint |
 | AB-029 | Кілька applicability intervals в Assignment | Open | Вирішити: один Assignment з кількома інтервалами чи окремий Assignment на інтервал |
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
-| AB-031 | Lifecycle record consistency | Resolved for Assignment | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
-| AB-032 | Canonical rule reference integrity | Resolved as governance rule | OCP-001 вимагає єдине defining location; rules manifest у PR-0006; повний duplicate linter у AB-012 |
+| AB-031 | Lifecycle record consistency | Resolved | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
+| AB-032 | Canonical rule reference integrity | Resolved | OCP-001 вимагає єдине defining location; rules manifest у PR-0006; повний duplicate linter у AB-012 |
 | AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, squash-only, direct/force push і deletion заборонені, enforcement для адміністраторів, checker required |
 | AB-034 | Constraint Concept | Resolved | OCP-006 Accepted рішенням Architecture Board у PR-0005 |
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
@@ -44,7 +44,7 @@
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
 | AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |
-| AB-043 | Foundation checker expansion | Planned | Після компактного OCP-004 PR: validate artifact IDs, allowed class statuses, AD↔AB decision synchronization, Uses-Patterns and post-factum process audit до AD-005 |
+| AB-043 | Foundation checker expansion | Under Review | Validate artifact IDs, class-allowed statuses, accepted AD↔AB routing, exact Uses-Patterns references and post-factum linear-history audit before AD-005 |
 | AB-044 | Organizational identity continuity | Open | Визначити continuity through redesignation, merger, split and reorganization |
 | AB-045 | Organization relationship type taxonomy | Open | Визначити governed classes/types and class-to-type consistency rules |
 | AB-046 | Organization lifecycle review | Open | Перевірити lifecycle після реальних fixtures і залежних Coordination use cases |

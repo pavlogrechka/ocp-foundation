@@ -10,6 +10,7 @@ from pathlib import Path
 import yaml
 
 from ocp_checker import load_fixture, validate_reference_fixture, validate_repository
+from ocp_checker.artifact_governance import validate_artifact_governance, validate_process_audit
 from ocp_checker.concept_graph import validate_and_render_concept_graph
 from ocp_checker.organization import validate_organization, validate_organization_relationship
 
@@ -75,6 +76,14 @@ def main() -> int:
     print(f"{'PASS' if repo_result.valid else 'FAIL'} repository-status-sync errors={list(repo_result.errors)}")
     failures += 0 if repo_result.valid else 1
 
+    artifact_result = validate_artifact_governance(repo_root)
+    print(f"{'PASS' if artifact_result.valid else 'FAIL'} artifact-governance errors={list(artifact_result.errors)}")
+    failures += 0 if artifact_result.valid else 1
+
+    process_result = validate_process_audit(repo_root, context=context)
+    print(f"{'PASS' if process_result.valid else 'FAIL'} process-audit context={context} errors={list(process_result.errors)}")
+    failures += 0 if process_result.valid else 1
+
     graph_result = validate_and_render_concept_graph(repo_root, context=context)
     print(f"{'PASS' if graph_result.valid else 'FAIL'} concept-graph context={context} errors={list(graph_result.errors)}")
     failures += 0 if graph_result.valid else 1
@@ -93,7 +102,10 @@ def main() -> int:
     print(f"{'PASS' if map_ok else 'FAIL'} foundation-map-drift{suffix}")
     failures += 0 if map_ok else 1
 
-    print(f"Checked {len(files)} fixture(s), repository status, Concept graph and generated map; failures={failures}")
+    print(
+        f"Checked {len(files)} fixture(s), repository status, artifact governance, "
+        f"process audit, Concept graph and generated map; failures={failures}"
+    )
     return 1 if failures else 0
 
 
