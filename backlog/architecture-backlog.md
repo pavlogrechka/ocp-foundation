@@ -32,14 +32,16 @@
 | AB-028 | Узгодження lifecycle Operation та Assignment | Open | Визначити правила для незавершених Assignment при Completed, Cancelled або Aborted Operation після Constraint |
 | AB-029 | Кілька applicability intervals в Assignment | Open | Вирішити: один Assignment з кількома інтервалами чи окремий Assignment на інтервал |
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
-| AB-031 | Lifecycle record consistency | Resolved for Assignment | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; поширити патерн на Operation |
+| AB-031 | Lifecycle record consistency | Resolved for Assignment | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
 | AB-032 | Canonical rule reference integrity | Resolved as governance rule | OCP-001 вимагає єдине defining location; rules manifest у PR-0006; повний duplicate linter у AB-012 |
-| AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, direct/force push і deletion заборонені, enforcement для адміністраторів; checker — required status check після merge |
+| AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, squash-only, direct/force push і deletion заборонені, enforcement для адміністраторів, checker required |
 | AB-034 | Constraint Concept | Resolved | OCP-006 Accepted рішенням Architecture Board у PR-0005 |
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
 | AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
 | AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
 | AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay |
-| AB-040 | Executable ontology checker | Under Review | PR-0006: перевірити exact-version selection, manifest completeness, optional projections, fixtures, status sync і CI; після Board approval змінити на Resolved |
-| AB-041 | Relationship as foundation | Discovery | AD-001: обрати між local models, fundamental Relationship Concept або governed modeling pattern до PR-0007 |
+| AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
+| AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
+| AB-042 | Foundation artifact taxonomy | Under Review | PR-0006A defines normative levels, lifecycle, numbering, location and review lane for OCP, Pattern, AD, ADR, AB, Review, ExecutableReference and Backlog |
+| AB-043 | Foundation checker expansion | Planned | Наступний meta-cycle: validate artifact IDs, Uses-Patterns, AD↔AB synchronization and post-factum process audit |
