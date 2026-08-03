@@ -101,7 +101,7 @@ relationship_class
 relationship_type_ref
 source_organization_ref
 target_organization_ref
-scheme_ref [required for structural records]
+scheme_ref [required for structural Established, Closed or Revoked lineage]
 validity_start
 validity_end [optional]
 transition_history
@@ -225,7 +225,7 @@ The finite breakpoint set contains all structural-record timestamps that may cha
 11. If `validity_end` is present, `validity_start < validity_end`.
 12. `created_at` is not later than the first transition timestamp.
 13. `supersedes_relationship_ref`, if present, differs from `relationship_id`.
-14. Structural records contain a non-empty `scheme_ref`.
+14. Structural records in Established, Closed or Revoked lineage contain a non-empty `scheme_ref`.
 15. No effective structural cycle exists within one `scheme_ref` at any time.
 16. No Organization has more than one effective direct structural superior in one `scheme_ref` at any time unless an explicit exception rule exists.
 
