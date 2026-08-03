@@ -1,0 +1,62 @@
+name: AB022 review builder PR v2
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    if: github.head_ref == 'agent/ab-022-review-builder' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Repair builder transport details
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.ab022/apply_review_resolution.py')
+          text = path.read_text(encoding='utf-8')
+          newline_old = 'test_text = test_path.read_text(encoding="utf-8")ntest_text = test_text.replace('
+          newline_new = 'test_text = test_path.read_text(encoding="utf-8")\ntest_text = test_text.replace('
+          if text.count(newline_old) != 1:
+              raise SystemExit(f'expected one transport-newline defect, found {text.count(newline_old)}')
+          text = text.replace(newline_old, newline_new, 1)
+          version_block = '''replace_once(
+              "tools/ontology_checker/rules.yaml",
+              "manifest_version: 0.3.1",
+              "manifest_version: 0.3.2",
+          )
+          '''
+          if text.count(version_block) != 1:
+              raise SystemExit(f'expected one obsolete manifest-version block, found {text.count(version_block)}')
+          path.write_text(text.replace(version_block, '', 1), encoding='utf-8')
+          PY
+      - name: Materialize review resolution
+        run: python .ab022/apply_review_resolution.py
+      - name: Run unit tests
+        run: python -m unittest discover -s tools/ontology_checker/tests -v
+      - name: Validate fixtures and repository projections
+        run: python tools/ontology_checker/check.py tools/ontology_checker/fixtures
+      - name: Commit materialized files
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            docs/004-operation-concept/README.md \
+            tools/ontology_checker/README.md \
+            tools/ontology_checker/ocp_checker/objective.py \
+            tools/ontology_checker/rules.yaml \
+            tools/ontology_checker/tests/test_operation_intent_contract.py \
+            tools/ontology_checker/fixtures/operation/invalid-planned-explicit-intent-missing-evidence.yaml \
+            tools/ontology_checker/fixtures/operation/invalid-planned-explicit-intent-stale-evidence.yaml \
+            tools/ontology_checker/fixtures/operation/invalid-planned-explicit-intent-conflicting-evidence.yaml \
+            tools/ontology_checker/fixtures/operation/invalid-planned-explicit-intent-permissive-projection.yaml \
+            tools/ontology_checker/fixtures/operation/valid-planned-explicit-intent-agreeing-repeat.yaml
+          git commit -m 'build: materialize AB-022 review resolution'
+          git push origin HEAD:${GITHUB_HEAD_REF}
