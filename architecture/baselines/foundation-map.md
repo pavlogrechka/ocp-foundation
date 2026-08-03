@@ -12,7 +12,7 @@
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Proposed |
-| Objective | Proposed |
+| Objective | Under Review |
 | Operation | Accepted |
 | Operational Area | Proposed |
 | Operational Space | Proposed |
@@ -29,6 +29,7 @@
 
 - `Assignment → Operation`
 - `Assignment → Resource`
+- `Operation → Objective`
 
 ## Current isolated defined Concepts
 
@@ -37,7 +38,6 @@
 
 ## Future intent — non-normative
 
-- `Operation ⇢ Objective` — AB-014 and OCP-004 explicit Objective reference
 - `Resource ⇢ Capability` — AB-004
 - `Constraint ⇢ Conflict` — AB-038
 - `Organization ⇢ Resource` (dashed) — AB-052

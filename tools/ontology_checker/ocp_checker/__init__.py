@@ -1,6 +1,6 @@
 from .checker import (
     DERIVATION_RULES,
-    ERROR_CODES,
+    ERROR_CODES as CORE_ERROR_CODES,
     ValidationResult,
     assignment_effective_at,
     constraint_applicable_to,
@@ -17,5 +17,22 @@ from .checker import (
     validate_repository,
     validate_resource,
 )
+from .objective import (
+    OBJECTIVE_ERROR_CODES,
+    validate_objective,
+    validate_operation_fixture,
+)
+
+ERROR_CODES = CORE_ERROR_CODES | OBJECTIVE_ERROR_CODES
+
+
+def validate_reference_fixture(fixture):
+    concept = fixture.get("concept")
+    if concept == "Objective":
+        return validate_objective(fixture.get("entity") or {})
+    if concept == "Operation":
+        return validate_operation_fixture(fixture)
+    return validate_fixture(fixture)
+
 
 __all__ = [name for name in globals() if not name.startswith("_")]

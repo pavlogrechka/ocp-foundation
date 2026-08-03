@@ -18,7 +18,7 @@ from ocp_checker import (  # noqa: E402
     derived_participates_in,
     effective_constraint_result,
     load_fixture,
-    validate_fixture,
+    validate_reference_fixture,
     validate_repository,
 )
 from ocp_checker.organization import validate_organization, validate_organization_relationship  # noqa: E402
@@ -30,7 +30,7 @@ def validate_any_fixture(fixture: dict):
         return validate_organization(fixture.get("entity") or {})
     if concept == "OrganizationRelationshipRecord":
         return validate_organization_relationship(fixture.get("entity") or {})
-    return validate_fixture(fixture)
+    return validate_reference_fixture(fixture)
 
 
 class FixtureContractTests(unittest.TestCase):
@@ -56,7 +56,7 @@ class FixtureContractTests(unittest.TestCase):
         fixture = load_fixture(ROOT / "fixtures/constraint/invalid-applicable-not-applicable.yaml")
         constraint, context = fixture["entity"], fixture["contexts"][0]
         version_ref = fixture["reference"]["constraint_version_ref"]
-        result = validate_fixture(fixture)
+        result = validate_reference_fixture(fixture)
         self.assertIn("CONSTRAINT_NOT_APPLICABLE_CONTRADICTION", result.errors)
         self.assertEqual(effective_constraint_result(constraint, context, version_ref), "indeterminate")
         self.assertEqual(constraint_set_decision([constraint], context, {constraint["constraint_id"]: version_ref}), "inadmissible")
@@ -72,11 +72,102 @@ class FixtureContractTests(unittest.TestCase):
         constraint, context = fixture["entity"], fixture["contexts"][0]
         version_ref = fixture["reference"]["constraint_version_ref"]
         versions = {constraint["constraint_id"]: version_ref}
-        self.assertTrue(validate_fixture(fixture).valid)
+        self.assertTrue(validate_reference_fixture(fixture).valid)
         self.assertEqual(effective_constraint_result(constraint, context, version_ref), "violated")
         self.assertEqual(constraint_set_decision([constraint], context, versions), "inadmissible")
         constraint["evaluation_records"].reverse()
         self.assertEqual(effective_constraint_result(constraint, context, version_ref), "violated")
+
+    def test_objective_bootstrap_operation_uses_resolvable_reference(self) -> None:
+        fixture = load_fixture(ROOT / "fixtures/operation/valid-planned-objective.yaml")
+        self.assertTrue(validate_reference_fixture(fixture).valid)
+
+    def test_objective_and_explicit_intent_conflict_is_fail_safe(self) -> None:
+        fixture = {
+            "concept": "Operation",
+            "references": {
+                "objectives": [
+                    {
+                        "objective_id": "OBJ-003",
+                        "statement": "Preserve access to the route",
+                        "created_at": "2026-08-03T03:15:00Z",
+                        "provenance_ref": "SOURCE-003",
+                    }
+                ]
+            },
+            "entity": {
+                "operation_id": "OP-CONFLICT-001",
+                "lifecycle_stage": "Planned",
+                "objective_refs": ["OBJ-003"],
+                "explicit_intent_record": {
+                    "intent_id": "INT-003",
+                    "statement": "Preserve access to the route",
+                    "validation_status": "passed",
+                    "validation_rule_ref": "RULE-INTENT-001",
+                    "validated_at": "2026-08-03T03:20:00Z",
+                },
+            },
+        }
+        self.assertEqual(
+            set(validate_reference_fixture(fixture).errors),
+            {"OPERATION_INTENT_REPRESENTATION_CONFLICT"},
+        )
+
+    def test_unresolved_objective_reference_fails_closed(self) -> None:
+        fixture = {
+            "concept": "Operation",
+            "entity": {
+                "operation_id": "OP-OBJ-002",
+                "lifecycle_stage": "Planned",
+                "objective_refs": ["OBJ-MISSING"],
+            },
+        }
+        self.assertEqual(
+            set(validate_reference_fixture(fixture).errors),
+            {"OPERATION_OBJECTIVE_REFERENCE_UNRESOLVED"},
+        )
+
+    def test_draft_may_temporarily_hold_both_intent_branches(self) -> None:
+        fixture = {
+            "concept": "Operation",
+            "references": {
+                "objectives": [
+                    {
+                        "objective_id": "OBJ-DRAFT-001",
+                        "statement": "Draft intended outcome",
+                        "created_at": "2026-08-03T03:25:00Z",
+                        "provenance_ref": "SOURCE-DRAFT-001",
+                    }
+                ]
+            },
+            "entity": {
+                "operation_id": "OP-DRAFT-002",
+                "lifecycle_stage": "Draft",
+                "objective_refs": ["OBJ-DRAFT-001"],
+                "explicit_intent_record": {
+                    "intent_id": "INT-DRAFT-001",
+                    "statement": "Draft fallback intent",
+                    "validation_status": "not_evaluated",
+                },
+            },
+        }
+        self.assertTrue(validate_reference_fixture(fixture).valid)
+
+    def test_objective_cannot_supersede_itself(self) -> None:
+        fixture = {
+            "concept": "Objective",
+            "entity": {
+                "objective_id": "OBJ-002",
+                "statement": "Establish a protected transit corridor",
+                "created_at": "2026-08-03T03:05:00Z",
+                "provenance_ref": "SOURCE-002",
+                "supersedes_objective_ref": "OBJ-002",
+            },
+        }
+        self.assertEqual(
+            set(validate_reference_fixture(fixture).errors),
+            {"OBJECTIVE_SELF_SUPERSESSION"},
+        )
 
     def test_core_rules_manifest_is_complete(self) -> None:
         rules = yaml.safe_load((ROOT / "rules.yaml").read_text(encoding="utf-8"))["rules"]

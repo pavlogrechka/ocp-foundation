@@ -1,0 +1,15 @@
+case_id: operation-valid-planned-objective-001
+concept: Operation
+expected:
+  valid: true
+references:
+  objectives:
+    - objective_id: OBJ-001
+      statement: Establish a safe transit corridor
+      created_at: 2026-08-03T03:00:00Z
+      provenance_ref: SOURCE-001
+entity:
+  operation_id: OP-OBJ-001
+  lifecycle_stage: Planned
+  objective_refs:
+    - OBJ-001

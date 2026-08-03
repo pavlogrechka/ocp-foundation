@@ -1,11 +1,7 @@
-record_version: 0.1.0
+record_version: 0.2.0
 authority: Architecture Board
 edge_semantics: Future planning intent only; never interpreted as a current Concept dependency.
 edges:
-  - from: Operation
-    to: Objective
-    basis: AB-014 and OCP-004 explicit Objective reference
-    planned_cycle: PR-0009
   - from: Resource
     to: Capability
     basis: AB-004
