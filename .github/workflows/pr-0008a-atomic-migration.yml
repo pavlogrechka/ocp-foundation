@@ -51,7 +51,7 @@ jobs:
               return ConceptGraphResult(tuple(dict.fromkeys(errors)),_render_map(registry,graph,future))
           '''
           gt=gt[:start]+textwrap.dedent(fn); gt=gt.replace("Current-state sections are derived from OCP-000 and the governed Concept dependency record.","Current-state sections are derived from OCP-000 and defining-document `Concept-Depends-On` metadata."); gp.write_text(gt)
-          test='''from __future__ import annotations
+          test=r'''from __future__ import annotations
           import tempfile, unittest
           from pathlib import Path
           from ocp_checker.concept_graph import validate_and_render_concept_graph
@@ -92,7 +92,7 @@ jobs:
           python -m unittest discover -s tools/ontology_checker/tests -v
           python tools/ontology_checker/check.py --context=pr
           python tools/ontology_checker/check.py --context=main
-          rm .github/workflows/pr-0008a-atomic-migration.yml
+          rm -f .github/workflows/pr-0008a-atomic-migration.yml .github/workflows/fix-pr-0008a-generator.yml
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add -A
