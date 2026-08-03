@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.8.0
+Version: 0.8.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -42,7 +42,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Operational Space | Proposed | — |
 | Operational Area | Proposed | — |
 | Organization | Accepted | OCP-007; Architecture Board approval of PR-0007 |
-| Objective | Under Review | OCP-008; AD-003 boundary accepted |
+| Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
 | Readiness | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
 | State | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
 | Result | Proposed | — |

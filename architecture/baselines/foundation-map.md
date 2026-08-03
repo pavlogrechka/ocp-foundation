@@ -12,7 +12,7 @@
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Proposed |
-| Objective | Under Review |
+| Objective | Accepted |
 | Operation | Accepted |
 | Operational Area | Proposed |
 | Operational Space | Proposed |

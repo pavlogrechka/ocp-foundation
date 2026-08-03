@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-008
 Title: Objective Concept
-Version: 0.2.0
+Version: 0.2.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-003, P-001
@@ -9,7 +9,7 @@ Uses-Patterns: P-001@0.1.0
 Used-By: Operation Concept, Planning, Coordination Model, Event Model, Result Model
 Defines-Concepts: Objective
 Concept-Depends-On: []
-Concept-Status: Under Review
+Concept-Status: Accepted
 Last-Review: 2026-08-03
 ---
 
@@ -279,4 +279,4 @@ Modules A and B are intentionally not selected: OCP-008 defines neither temporal
 
 ## 17. Architecture Board Decision
 
-Поточний статус `Under Review`. Architecture Board decision буде зафіксоване після зовнішнього adversarial review PR-0009.
+Architecture Board прийняла Objective як `Accepted` після зовнішньої реверифікації PR-0009. Це рішення приймає поточну boundary, P-001 conformance, supersession contract, Operation integration і executable evidence як основу подальшої роботи; воно не надає статусу `Canonical` і не визначає відкладені Event/Result, hierarchy, effectivity чи lifecycle semantics.
