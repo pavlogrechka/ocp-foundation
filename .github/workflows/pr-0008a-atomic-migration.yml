@@ -2,6 +2,8 @@ name: pr-0008a-atomic-migration
 on:
   push:
     branches: [agent/pr-0008a-concept-dependency-migration]
+  pull_request:
+    branches: [main]
 permissions:
   contents: write
 jobs:
@@ -10,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: {fetch-depth: 0}
+        with:
+          ref: agent/pr-0008a-concept-dependency-migration
+          fetch-depth: 0
       - name: Apply migration
         run: |
           python - <<'PY'
