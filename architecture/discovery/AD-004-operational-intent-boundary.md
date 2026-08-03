@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-004
 Title: Operational Intent Boundary
-Version: 0.3.0
+Version: 0.3.1
 Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-008
@@ -294,7 +294,9 @@ If the Architecture Board approves AD-004B:
 - AB-014 becomes `Resolved` with the no-Concept verdict in §11.2;
 - AB-022 becomes `Planned` for the downstream OCP-004 contract and executable fixtures;
 - no new fundamental Concept or current Concept dependency is created;
-- the next normative cycle is the compact AB-022 revision of OCP-004;
+- the next normative cycle is the compact OCP-004 revision that codifies both the plural `objective_refs` semantics in §11.3 and the AB-022 validation contract in §11.4, together with the executable fixtures required by §8;
 - Capability discovery remains next in the Wave 2 Concept queue after that compact normative cycle.
+
+The acceptance commit must atomically update `Status: Accepted`, AB-014 to `Resolved`, and AB-022 to `Planned`; these changes must not be split into later cleanup commits.
 
 Until explicit approval, the document remains `Under Review`, backlog statuses remain unchanged, and no downstream field model is pre-approved.
