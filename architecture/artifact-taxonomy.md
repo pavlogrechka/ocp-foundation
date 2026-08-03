@@ -13,6 +13,15 @@ Artifact prefix does not by itself determine authority. Each class has an explic
 - `advisory` — implementation or guidance that does not redefine normative semantics.
 - `record` — evidence, status accounting or backlog history.
 
+## OCP dual status axes
+
+An OCP specification carries two independent status axes when it defines a Concept:
+
+- `Document Status` describes the maturity of the document artifact;
+- `Concept Status` describes the maturity of the Concept defined by that document.
+
+The machine-readable taxonomy therefore declares separate `document_lifecycle` and `concept_lifecycle` fields for the OCP class. A checker must not collapse these into one status value.
+
 ## Decision registries
 
 ### AD — active decision class
@@ -42,6 +51,12 @@ Uses-Patterns: P-001@0.1.0
 Invocation means that the artifact must satisfy every Required Element and every obligation of the optional modules it selects. Domain semantics remain in the invoking artifact.
 
 Pattern changes require versioning and the same external-review lane as other normative artifacts because they may affect every invoker.
+
+## Review records
+
+Review artifacts are records rather than normative definitions. Their lifecycle is `Draft → Final`, but a dedicated status field is optional for existing review files. When absent, the committed review record is interpreted as `Final` unless the file explicitly states that it is provisional.
+
+This compatibility rule avoids retroactively invalidating the existing review archive while still giving future tooling a defined lifecycle.
 
 ## Review lane
 
