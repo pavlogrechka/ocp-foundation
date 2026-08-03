@@ -1,4 +1,4 @@
-taxonomy_version: 0.2.0
+taxonomy_version: 0.3.0
 authority: Architecture Board
 artifact_classes:
   OCP:
@@ -63,6 +63,15 @@ artifact_classes:
     location: tools/
     external_review_required: false
     purpose: Executable validation that implements but does not redefine normative artifacts.
+  DerivedProjection:
+    normative_level: record
+    lifecycle: [Draft, Generated, Archived]
+    status_authority: generator_contract
+    numbering_authority: repository_path
+    location: architecture/baselines/
+    external_review_required: false
+    generated_sections_hand_editable: false
+    purpose: Deterministic projection generated from authoritative repository metadata; curated intent remains in separate record inputs.
   Backlog:
     normative_level: record
     lifecycle: [Open, Planned, Deferred, Resolved]
