@@ -1,12 +1,13 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.5.0
+Version: 0.5.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003
 Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business Rules, Domain Model
 Defines-Concepts: Operation
+Concept-Depends-On: []
 Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---

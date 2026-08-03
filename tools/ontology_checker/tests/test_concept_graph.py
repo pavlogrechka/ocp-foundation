@@ -4,8 +4,6 @@ import tempfile
 import unittest
 from pathlib import Path
 
-import yaml
-
 from ocp_checker.concept_graph import validate_and_render_concept_graph
 
 
@@ -24,70 +22,134 @@ def write(path: Path, content: str) -> None:
 
 
 class ConceptGraphTests(unittest.TestCase):
-    def make_repo(self, dependencies: dict, status: str = "Accepted", add_frontmatter_source: bool = False) -> Path:
+    def make_repo(
+        self,
+        dependencies: dict[str, list[str]],
+        *,
+        status: str = "Accepted",
+        omit_declaration_for: str | None = None,
+        omit_document_id_for: str | None = None,
+        legacy_source: bool = False,
+    ) -> Path:
         root = Path(tempfile.mkdtemp())
         write(root / "docs/000-operational-ontology/README.md", REGISTRY)
-        for number, document, concept in (
+
+        for number, document_id, concept in (
             (3, "OCP-003", "Resource"),
             (4, "OCP-004", "Operation"),
             (5, "OCP-005", "Assignment"),
         ):
-            concept_dependency = "\nConcept-Depends-On: Resource, Operation" if add_frontmatter_source and concept == "Assignment" else ""
+            document_line = (
+                ""
+                if concept == omit_document_id_for
+                else f"Document-ID: {document_id}\n"
+            )
+            dependency_line = (
+                ""
+                if concept == omit_declaration_for
+                else f"Concept-Depends-On: [{', '.join(dependencies[concept])}]\n"
+            )
+            concept_status = status if concept == "Assignment" else "Accepted"
             write(
                 root / f"docs/{number:03d}-concept/README.md",
-                f"---\nDocument-ID: {document}\nDefines-Concepts: {concept}\nConcept-Status: {status if concept == 'Assignment' else 'Accepted'}{concept_dependency}\n---\n",
+                "---\n"
+                f"{document_line}"
+                f"Defines-Concepts: {concept}\n"
+                f"{dependency_line}"
+                f"Concept-Status: {concept_status}\n"
+                "---\n",
+            )
+
+        if legacy_source:
+            write(
+                root / "architecture/baselines/concept-dependencies.yaml",
+                "concepts: {}\n",
             )
         write(
-            root / "architecture/baselines/concept-dependencies.yaml",
-            yaml.safe_dump({"concepts": dependencies}, sort_keys=False),
+            root / "architecture/baselines/foundation-future-edges.yaml",
+            "edges: []\n",
         )
-        write(root / "architecture/baselines/foundation-future-edges.yaml", "edges: []\n")
         return root
 
-    def valid_dependencies(self) -> dict:
+    @staticmethod
+    def valid_dependencies() -> dict[str, list[str]]:
         return {
-            "Resource": {"defining_document": "OCP-003", "depends_on": []},
-            "Operation": {"defining_document": "OCP-004", "depends_on": []},
-            "Assignment": {"defining_document": "OCP-005", "depends_on": ["Resource", "Operation"]},
+            "Resource": [],
+            "Operation": [],
+            "Assignment": ["Resource", "Operation"],
         }
 
     def test_valid_graph_is_deterministic(self) -> None:
         root = self.make_repo(self.valid_dependencies())
         first = validate_and_render_concept_graph(root)
         second = validate_and_render_concept_graph(root)
+
         self.assertTrue(first.valid)
         self.assertEqual(first.rendered_map, second.rendered_map)
         self.assertIn("`Assignment → Operation`", first.rendered_map)
 
+    def test_explicit_empty_dependency_declaration_is_required(self) -> None:
+        root = self.make_repo(
+            self.valid_dependencies(),
+            omit_declaration_for="Resource",
+        )
+        result = validate_and_render_concept_graph(root)
+
+        self.assertIn(
+            "CONCEPT_GRAPH_DEPENDENCY_DECLARATION_MISSING",
+            result.errors,
+        )
+
+    def test_legacy_source_is_rejected_after_migration(self) -> None:
+        root = self.make_repo(self.valid_dependencies(), legacy_source=True)
+        result = validate_and_render_concept_graph(root)
+
+        self.assertIn(
+            "CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES",
+            result.errors,
+        )
+
     def test_phantom_reference_is_rejected(self) -> None:
         dependencies = self.valid_dependencies()
-        dependencies["Assignment"]["depends_on"] = ["Phantom"]
-        root = self.make_repo(dependencies)
-        result = validate_and_render_concept_graph(root)
+        dependencies["Assignment"] = ["Phantom"]
+        result = validate_and_render_concept_graph(self.make_repo(dependencies))
+
         self.assertIn("CONCEPT_GRAPH_PHANTOM_REFERENCE", result.errors)
 
     def test_cycle_is_rejected(self) -> None:
         dependencies = self.valid_dependencies()
-        dependencies["Resource"]["depends_on"] = ["Assignment"]
-        dependencies["Assignment"]["depends_on"] = ["Resource"]
-        root = self.make_repo(dependencies)
-        result = validate_and_render_concept_graph(root)
+        dependencies["Resource"] = ["Assignment"]
+        dependencies["Assignment"] = ["Resource"]
+        result = validate_and_render_concept_graph(self.make_repo(dependencies))
+
         self.assertIn("CONCEPT_GRAPH_CYCLE", result.errors)
 
     def test_under_review_is_allowed_in_pr_context(self) -> None:
-        root = self.make_repo(self.valid_dependencies(), status="Under Review")
+        root = self.make_repo(
+            self.valid_dependencies(),
+            status="Under Review",
+        )
         result = validate_and_render_concept_graph(root, context="pr")
+
         self.assertNotIn("MAIN_CONCEPT_UNDER_REVIEW", result.errors)
 
     def test_under_review_is_rejected_in_main_context(self) -> None:
-        root = self.make_repo(self.valid_dependencies(), status="Under Review")
+        root = self.make_repo(
+            self.valid_dependencies(),
+            status="Under Review",
+        )
         result = validate_and_render_concept_graph(root, context="main")
+
         self.assertIn("MAIN_CONCEPT_UNDER_REVIEW", result.errors)
 
-    def test_staging_and_frontmatter_sources_cannot_coexist(self) -> None:
-        root = self.make_repo(self.valid_dependencies(), add_frontmatter_source=True)
+    def test_defining_document_id_is_required(self) -> None:
+        root = self.make_repo(
+            self.valid_dependencies(),
+            omit_document_id_for="Resource",
+        )
         result = validate_and_render_concept_graph(root)
-        self.assertIn("CONCEPT_GRAPH_MULTIPLE_DEPENDENCY_SOURCES", result.errors)
+
+        self.assertIn("CONCEPT_GRAPH_DEFINING_DOCUMENT_MISSING", result.errors)
 
 
 if __name__ == "__main__":

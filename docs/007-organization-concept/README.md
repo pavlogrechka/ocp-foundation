@@ -1,10 +1,11 @@
 ---
 Document-ID: OCP-007
 Title: Organization Concept
-Version: 0.3.1
+Version: 0.3.2
 Status: Draft
 Concept-Status: Accepted
 Defines-Concepts: Organization
+Concept-Depends-On: []
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-001, P-001
 Uses-Patterns: P-001@0.1.0

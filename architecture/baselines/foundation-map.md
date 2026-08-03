@@ -1,6 +1,6 @@
 # Foundation Concept Map
 
-> GENERATED FILE. Current-state sections are derived from OCP-000 and the governed Concept dependency record.
+> GENERATED FILE. Current-state sections are derived from OCP-000 and defining-document `Concept-Depends-On` metadata.
 > Future intent is rendered from `foundation-future-edges.yaml` and is not a current dependency.
 
 ## Registered Concepts

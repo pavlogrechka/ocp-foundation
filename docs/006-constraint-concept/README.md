@@ -1,12 +1,13 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.2.0
+Version: 0.2.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
 Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Readiness Review, Domain Models, Conflict Engine
 Defines-Concepts: Constraint
+Concept-Depends-On: []
 Concept-Status: Accepted
 Last-Review: 2026-08-02
 ---
