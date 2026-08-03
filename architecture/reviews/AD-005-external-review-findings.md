@@ -7,15 +7,15 @@
 - Decision date: 2026-08-04
 - Merge commit: `41289f4` — Architecture Board opened the Capability discovery cycle by merging revision `0.1.0` without amendments
 - External review verdict: boundary survives adversarial review; findings bind the next AD-005 revision
-- Findings resolution state: **Open** — to be resolved in the next AD-005 revision before the Architecture Board outcome-selection act
+- Findings resolution state: **Addressed in AD-005 v0.2.0 — pending repeated external verification before the Architecture Board outcome-selection act**
 
-The Architecture Board merged the discovery revision to open the cycle, following the AD-004 precedent of iterative discovery revisions (`0.1.0 → … → acceptance act`). No outcome was selected by this merge. Findings below are not resolved by the merge and must be addressed before or together with the outcome-selection decision.
+The Architecture Board merged the discovery revision to open the cycle, following the AD-004 precedent of iterative discovery revisions (`0.1.0 → … → acceptance act`). No outcome was selected by this merge. AD-005 v0.2.0 addresses all findings in one review-resolution revision; closure remains subject to repeated external verification.
 
 ## Finding 1 — Base counterexample list is inexpressible under Outcome A
 
 **Severity:** Moderate.
 
-**Status:** Open — must be resolved before the Board outcome selection, because it distorts the fairness of outcome comparison.
+**Status:** Addressed in AD-005 v0.2.0 — pending repeated external verification.
 
 Two items of the unconditional required-counterexample list in §12 presuppose governed identity and versioning:
 
@@ -24,37 +24,46 @@ Two items of the unconditional required-counterexample list in §12 presuppose g
 
 Outcome A by definition has neither governed identity nor a version contract ("minimal naming or reference convention", "no universal registry"). As written, either Outcome A structurally cannot satisfy the mandatory list — unfairly forcing the selection toward Outcomes B/D — or the items would be silently dropped. Both contradict the document's own principle that "an unspecified blend of outcomes is not a decision".
 
-**Required resolution:** mark the identity/version-dependent counterexamples as conditional on outcomes with governed identity (B, C, D), and give Outcome A its own equivalent — for example, prove that cross-domain reference ambiguity is detectable and rejectable without central identity rather than remaining invisible.
+**Resolution in v0.2.0:** the unconditional list now contains only claim semantics common to outcomes that support holder claims. Namespace and exact-version counterexamples are conditional on Outcomes B, C and D. Outcome A must independently prove that cross-domain ambiguity is detected and rejected without central governed identity.
 
 ## Finding 2 — Qualification ambiguity between §4 and §8
 
 **Severity:** Minor.
 
-**Status:** Open.
+**Status:** Addressed in AD-005 v0.2.0 — pending repeated external verification.
 
 §4 states Capability is not qualification or certification; §8 lists "confidence, level or qualification where a domain requires it" among candidate claim dimensions. The positions are compatible but the boundary is implicit.
 
-**Required resolution:** one sentence — qualification/certification may be an *evidence input* to a holder claim, but is never part of Capability identity and never creates a positive claim automatically.
+**Resolution in v0.2.0:** §8 now states that qualification, certification or accreditation may be evidence input under a domain rule, but are never part of Capability identity and never create an authoritative positive claim automatically.
 
 ## Finding 3 — Missing namespace-collision counterexample
 
 **Severity:** Minor.
 
-**Status:** Open.
+**Status:** Addressed in AD-005 v0.2.0 — pending repeated external verification.
 
 §9 introduces namespaces, but §12 does not test the collision case: the same human-readable name in two namespaces with different semantics must remain two identities; a label match must never substitute for identity resolution.
 
-**Required resolution:** add the counterexample to §12, conditional on governed-identity outcomes.
+**Resolution in v0.2.0:** §12 adds a governed-identity counterexample requiring equal labels in different namespaces to remain distinct identities; label equality cannot substitute for identity resolution.
 
 ## Finding 4 — Holder typing inherits the open Organization ↔ Organizational Resource boundary
 
 **Severity:** Minor (observation).
 
-**Status:** Open.
+**Status:** Addressed in AD-005 v0.2.0 — pending repeated external verification.
 
 §6 names Resource and Organization as candidate claim subjects. A Unit as Organizational Resource sits on both sides of the unresolved AB-006/AB-052 boundary: a claim issued to a "unit" would have an ambiguous subject type. The discovery must not resolve this silently.
 
-**Required resolution:** an explicit sentence that claim-subject typing inherits the open AB-006/AB-052 boundary and will be fixed by a downstream decision, not by this discovery.
+**Resolution in v0.2.0:** §6 explicitly inherits AB-006/AB-052 and requires the downstream Capability decision to bind Organization, Organizational Resource or an explicit mapping without identity collapse.
+
+## Review-resolution revision
+
+- AD-005 revision: `0.2.0`
+- Resolution scope: F1–F4 only
+- Outcome selected: none
+- Concept graph impact: none
+- P-001 invocation: none
+- Required next gate: repeated external adversarial review of the exact v0.2.0 head
 
 ## Verified positives
 
