@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.9.0
+Version: 0.9.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -11,7 +11,7 @@ Concept-Statuses:
   Operation: Accepted
   Assignment: Accepted
   Constraint: Accepted
-  Organization: Under Review
+  Organization: Accepted
 Last-Review: 2026-08-03
 ---
 
@@ -36,7 +36,7 @@ Concept Categories
 
 ## Organization
 
-Concept `Organization` має статус `Under Review` і визначається в [OCP-007 — Organization Concept](../007-organization-concept/README.md).
+Concept `Organization` має статус `Accepted` і визначений у [OCP-007 — Organization Concept](../007-organization-concept/README.md).
 
 Organization представляє сталу організаційну ідентичність. Структурні, оперативні, адміністративні, support і coordination relations моделюються окремими локальними `OrganizationRelationshipRecord` відповідно до AD-001 та P-001; вони не є універсальним фундаментальним Relationship Concept.
 
