@@ -1,8 +1,8 @@
 ---
 Decision-ID: AD-003
 Title: Objective Boundary
-Version: 0.2.0
-Status: Under Review
+Version: 0.2.1
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-004
 Applies-To: Objective Concept and PR-0009
@@ -121,3 +121,7 @@ Boundary discovery is ready for Architecture Board decision when:
 - coexistence and precedence semantics for Objective versus `ExplicitIntentRecord` are explicit PR-0009 deliverables;
 - Objective identity under substantive outcome change is an explicit PR-0009 deliverable;
 - unresolved semantics are recorded as backlog items rather than hidden in the future specification.
+
+## 10. Architecture Board decision
+
+The Architecture Board accepts this boundary as the governing discovery contract for PR-0009. Acceptance authorizes specification work; it does not pre-approve any Objective fields, lifecycle, relationship model, or achievement semantics.
