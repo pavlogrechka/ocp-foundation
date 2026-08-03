@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-005
 Title: Capability Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-007, AD-002
@@ -126,6 +126,8 @@ Default rule for this discovery: **no inheritance, aggregation or transitive pos
 
 The presence of capable members does not by itself prove an organizational Capability. The Capability of a composite Resource is not automatically the union of component capabilities. Any derivation requires an explicit normative owner, conditions and counterexamples.
 
+Claim-subject typing inherits the unresolved `Organization ↔ Organizational Resource` boundary recorded in AB-006 and AB-052. AD-005 does not decide whether a unit is referenced as Organization, Organizational Resource or through an explicit mapping; the downstream Capability decision must bind that subject type without identity collapse.
+
 ## 7. Capability, Readiness, availability and admissibility
 
 AD-002 supplies a mandatory guardrail:
@@ -164,6 +166,8 @@ Candidate claim dimensions include:
 - supersession or withdrawal.
 
 AD-005 does not approve these as fields.
+
+Qualification, certification or accreditation may be evidence input to a holder claim where a domain rule requires it. They are never part of Capability identity and never create an authoritative positive Capability claim automatically.
 
 The downstream model must decide which dimensions are part of identity, which are immutable evidence, which are derived projections and which remain domain-specific.
 
@@ -268,7 +272,7 @@ No downstream specification may infer a positive claim from a type label alone u
 
 The downstream cycle must include executable or mechanically reviewable evidence for the selected outcome.
 
-At minimum:
+At minimum, for every outcome that supports holder claims:
 
 - two Resources of the same type can have different Capability claims;
 - a Resource with a valid Capability claim can be unavailable or unready;
@@ -277,13 +281,14 @@ At minimum:
 - stale, missing or conflicting claim evidence cannot produce an authoritative positive result;
 - an Organization does not automatically inherit the union of member capabilities;
 - a composite Resource and its components do not inherit capabilities bidirectionally by default;
-- a successful Event or Result does not automatically create a standing Capability claim;
-- a domain Capability reference resolves through the selected namespace and version contract;
-- changing a Capability definition does not silently reinterpret historical exact-version claims.
+- a successful Event or Result does not automatically create a standing Capability claim.
 
-Additional evidence is conditional:
+Additional evidence is outcome-specific:
 
-- Outcome A must prove interoperability without a Core Concept or central semantic registry;
+- Outcome A must prove interoperability without a Core Concept or central semantic registry and must detect and reject cross-domain reference ambiguity rather than accepting an unresolved label match;
+- Outcomes B, C and D must prove that a domain Capability reference resolves through the selected governed namespace and exact-version contract;
+- Outcomes B, C and D must prove that changing a Capability definition does not silently reinterpret historical exact-version claims;
+- Outcomes B, C and D must prove that the same human-readable label in two namespaces with different semantics remains two distinct identities and that label equality never substitutes for identity resolution;
 - Outcome B must prove independent reusable definition identity;
 - Outcome C must prove why a local identified claim record is insufficient;
 - Outcome D must prove separation of definition, claim, readiness and authorization and complete P-001 conformance if invoked.
@@ -351,4 +356,4 @@ No outcome is selected by this discovery revision.
 
 AD-005 is `Under Review` and introduces no fundamental Concept, current graph edge, registry implementation, holder claim, P-001 invocation or domain Capability taxonomy.
 
-The next act is external adversarial boundary review. Architecture Board acceptance after that review will authorize only the downstream work implied by the selected outcome.
+The next act is repeated external adversarial review of revision `0.2.0`. Architecture Board outcome selection may occur only after that review confirms that Findings 1–4 are closed; acceptance will authorize only the downstream work implied by the selected outcome.
