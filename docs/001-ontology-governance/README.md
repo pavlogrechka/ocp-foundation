@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-001
 Title: Ontology Governance
-Version: 0.5.0
+Version: 0.6.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000
 Used-By: All OCP specifications and AI development workflows
-Last-Review: 2026-08-02
+Last-Review: 2026-08-03
 ---
 
 # Ontology Governance
@@ -29,6 +29,23 @@ Last-Review: 2026-08-02
 - Рішення Architecture Board про зміну статусу Concept повинно бути відображене в реєстрі OCP-000, OCP-002 і metadata defining document у тому самому PR до merge.
 - Коригувальний цикл не змішується з новим Concept cycle, якщо Architecture Board явно не затвердила виняток і не зафіксувала його в PR.
 
+## Нормативні класи артефактів і review
+
+Машинозчитувана класифікація артефактів визначена в `architecture/artifact-taxonomy.yaml`; пояснення — в `architecture/artifact-taxonomy.md`.
+
+Артефакти класів `binding` і `binding-when-invoked` проходять одну review-смугу:
+
+1. окрема гілка та draft pull request;
+2. зовнішнє adversarial review до рішення Architecture Board;
+3. явне рішення Architecture Board;
+4. squash merge після успішних required checks.
+
+Чисті records — review-файли, backlog accounting і status-only updates, які прямо випливають із уже прийнятої хореографії, — не запускають рекурсивне review самих review.
+
+Pattern є `binding-when-invoked`: артефакт не зобов’язаний використовувати Pattern, але versioned metadata `Uses-Patterns` робить Required Elements та обрані Optional Modules Pattern обов’язковими для цього артефакту. Pattern визначає форму моделювання, а не доменну семантику. Зміни Pattern версіонуються та проходять зовнішнє review.
+
+Нові архітектурні рішення реєструються як `AD` у `architecture/discovery/`. Реєстр `adr/` заморожений для нових номерів; наявні ADR зберігають чинність і завершують уже розпочаті lifecycle.
+
 ## Захист основної гілки
 
 Правило роботи через PR повинно бути забезпечене механічно GitHub Ruleset або branch protection для `main`:
@@ -37,9 +54,12 @@ Last-Review: 2026-08-02
 2. зміна `main` дозволена лише через pull request;
 3. force push і видалення `main` заборонені;
 4. правила застосовуються також до адміністраторів і власників репозиторію;
-5. після появи ontology linter його успішна перевірка є required status check.
+5. після появи ontology linter його успішна перевірка є required status check;
+6. дозволений merge method — squash merge.
 
 Аварійне виправлення також проходить через окрему гілку та PR. Швидкість виправлення не скасовує простежуваність зміни.
+
+Repository checker може аудитувати історію merge лише постфактум. Превентивним контролем merge method і required review залишається GitHub Ruleset або branch protection.
 
 ## Статуси документа і Concept
 
