@@ -34,7 +34,7 @@
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
 | AB-031 | Lifecycle record consistency | Resolved | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
 | AB-032 | Canonical rule reference integrity | Resolved | OCP-001 вимагає єдине defining location; rules manifest у PR-0006; повний duplicate linter у AB-012 |
-| AB-033 | Захист гілки main | Planned | Налаштувати GitHub Ruleset: PR required, squash-only, direct/force push і deletion заборонені, enforcement для адміністраторів, checker required |
+| AB-033 | Захист гілки main | Resolved | Ruleset `Foundation Main Protection` підтверджено під час review PR #25: PR required, linear/squash history, force-push і deletion заборонені, required check `reference-checker`; post-merge main-context check succeeded |
 | AB-034 | Constraint Concept | Resolved | OCP-006 Accepted рішенням Architecture Board у PR-0005 |
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
@@ -44,7 +44,7 @@
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
 | AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |
-| AB-043 | Foundation checker expansion | Under Review | Validate artifact IDs, class-allowed statuses, accepted AD↔AB routing, exact Uses-Patterns references and post-factum linear-history audit before AD-005 |
+| AB-043 | Foundation checker expansion | Resolved | PR #25 merged as `93c04f6`: artifact governance, exact Pattern references, AD↔AB synchronization and post-baseline linear-history audit externally approved and verified against real `main` history |
 | AB-044 | Organizational identity continuity | Open | Визначити continuity through redesignation, merger, split and reorganization |
 | AB-045 | Organization relationship type taxonomy | Open | Визначити governed classes/types and class-to-type consistency rules |
 | AB-046 | Organization lifecycle review | Open | Перевірити lifecycle після реальних fixtures і залежних Coordination use cases |

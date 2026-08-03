@@ -6,13 +6,13 @@
 
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
-| Engineering and governance foundation | 100% | Репозиторій, ADR, governance, registry, review process і versioning створені |
-| Core domain ontology | 40% | Resource, Operation, Assignment і Constraint мають статус Accepted; більшість інших фундаментальних Concept ще не визначена |
-| Operational rules and workflows | 10% | Є invariants, participation та admissibility derivations, але немає завершених coordination, authorization, lifecycle та conflict models |
-| Machine-readable schemas and enforcement | 20% | Є reference checker, exact-version evaluation, YAML fixtures, regression tests, status synchronization і CI; повний duplicate/reference linter та implementation contracts ще відсутні |
-| **Загальна foundation-готовність** | **≈35%** | Перший executable validation loop створено; наступний крок — розширення fixtures і Constraint patterns |
+| Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
+| Core domain ontology | 50% | Resource, Operation, Assignment, Constraint, Organization і Objective Accepted; Capability, Event/Result, Coordination та інші межі ще не визначені |
+| Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection та explicit-intent validation contracts; coordination, authorization, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 40% | Є fixtures, exact manifests, status sync, Concept graph, generated map, artifact governance, Pattern checks і real-history process audit; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈40%** | Foundation Wave 2 має шість Accepted Concepts і governed executable reference layer; наступний decision cycle — Capability boundary |
 
-Відсоток не означає готовність production-системи. Репозиторій поки формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
+Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
 ## Milestone 0 — Engineering Foundation
 
@@ -23,26 +23,29 @@
 - [x] Concept Taxonomy draft
 - [x] ADR registry and ADR-000…ADR-006
 - [x] ADR-DRAFT-007
+- [x] Active AD discovery/decision registry
 - [x] Architecture Board review process established
 - [x] Initial foundation merged after approval
-- [ ] GitHub Ruleset / branch protection mechanically enforced
+- [x] GitHub Ruleset mechanically enforces PR-only, required checker and linear/squash history
+- [x] Post-factum Git history audit with governed legacy baseline
 
 ## Milestone 1 — Core Domain Foundation
 
 - [x] Resource Accepted working description
 - [x] Operation Accepted working description
 - [x] Assignment Accepted working description
-- [x] Constraint Accepted working description — PR-0005
-- [ ] Review ADR-DRAFT-007 after Constraint and first executable fixtures
-- [ ] Organization Model
+- [x] Constraint Accepted working description
+- [x] Organization Accepted working description
+- [x] Objective Accepted working description
+- [x] State/Readiness review mandate and guardrails accepted in AD-002; final Concepts remain Deferred
+- [ ] Capability boundary and registry — next decision cycle (`AD-005`)
+- [ ] Event and Result boundary
 - [ ] Operational Coordination Model
-- [ ] Objective, Event and Result boundary
 - [ ] Operational Area and environment boundary
-- [ ] Capability boundary and registry
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
 
-## Milestone 1A — Early Executable Validation Loop
+## Milestone 1A — Governed Executable Validation Loop
 
 - [x] `PR-0006 — Add Executable Ontology Checker`
 - [x] YAML fixtures for Resource, Operation, Assignment and Constraint
@@ -51,7 +54,7 @@
 - [x] Reference checks for optional materialized projections and authoritative transition histories
 - [x] Exact Constraint version and input snapshot selection independent of YAML record order
 - [x] Complete provenance manifest for emitted validation codes and derivations
-- [x] Meta-test enforcing manifest completeness
+- [x] Meta-test enforcing exact manifest completeness
 - [x] Reference derivations:
   - `assignment_effective_at`
   - `derived_participates_in`
@@ -61,19 +64,26 @@
   - `constraint_blocks`
   - `constraint_set_decision`
 - [x] Cross-document Concept status synchronization check
-- [x] Initial GitHub Actions CI check
-- [x] Checker guidance for subsequent Concept PRs
-- [ ] Graph-wide identity uniqueness and acyclicity checks
-- [ ] Duplicate normative-rule and reference-integrity linter
+- [x] Defining-document Concept dependency graph, phantom-reference and cycle checks
+- [x] Generated Foundation map and CI drift detection
+- [x] OCP-004 exact-binding explicit-intent evidence and fail-safe projection fixtures
+- [x] Artifact ID and taxonomy-status checks
+- [x] Duplicate AB and accepted AD↔AB synchronization checks
+- [x] Pattern semver and `Uses-Patterns` `track-current` checks
+- [x] Full-history checkout and post-baseline non-linear-history audit
+- [x] PR CI validates the actual proposed head in explicit `main` context
+- [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
+- [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
+- [ ] Production validator, persistence and implementation-facing contracts
 
-PR-0006 є reference validation layer, а не production implementation. OCP documents remain authoritative. Expression language, persistence model and production evaluator remain separate decisions.
+The checker is a reference validation layer, not production implementation. OCP documents, accepted decisions and machine-readable taxonomy remain authoritative. Expression language, persistence model and production evaluator remain separate decisions.
 
 ## Milestone 2 — Operational Rules
 
 - [ ] Constraint pattern library
 - [ ] Assignment conflict, exclusivity and capacity rules
 - [ ] Business Rules specification
-- [ ] Operation Lifecycle
+- [ ] Operation Lifecycle completion
 - [ ] Assignment / Operation lifecycle coordination
 - [ ] Coordination Workflows
 - [ ] Visibility, authorization and approval model
@@ -83,7 +93,7 @@ PR-0006 є reference validation layer, а не production implementation. OCP do
 ## Milestone 3 — Machine-Readable Foundation Expansion
 
 - [ ] Machine-readable Concept registry beyond the current status projection
-- [ ] Machine-readable invariants and derivation rules beyond the PR-0006 reference slice
+- [ ] Machine-readable invariants and derivation rules beyond the current reference slice
 - [ ] Full ontology duplicate/reference linter
 - [ ] Constraint expression and evaluator contracts
 - [ ] Example datasets without sensitive information
@@ -92,10 +102,10 @@ PR-0006 є reference validation layer, а не production implementation. OCP do
 
 ## Planned Sequence
 
-1. `PR-0005 — Define Constraint Concept` — completed and Accepted.
-2. `PR-0006 — Add Executable Ontology Checker` — implementation and external review cycle.
-3. Require fixtures for subsequent Concept and corrective cycles where expressible.
-4. Define Constraint patterns for Assignment conflict, exclusivity, capacity and replacement timing.
-5. Review ADR-DRAFT-007 using evidence from Operation, Assignment, Constraint and executable fixtures.
-6. Define Organization and Coordination concepts.
-7. Expand machine-readable schemas and ontology linter before first Canonical promotion.
+1. Close the AB-043 governance cycle: review record, AB-033/AB-043 accounting and current roadmap projection.
+2. Open `AD-005 — Capability Boundary` as a discovery decision before defining Capability fields or registry structure.
+3. After an explicit Board outcome, define the Capability Concept and its Core/domain boundary with executable counterexamples where expressible.
+4. Define Event and Result boundaries, including Objective achievement evidence without collapsing events into lifecycle state.
+5. Define Coordination boundaries and workflows for independent verticals.
+6. Revisit State and Readiness under the AD-002 evidence contract after Capability and Event observations exist.
+7. Continue checker expansion with every accepted Concept cycle and complete the full normative reference linter before first Canonical promotion.

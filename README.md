@@ -21,7 +21,7 @@
 - Operational Ontology;
 - Ontology Governance;
 - Concept Taxonomy;
-- Architecture Decision Records;
+- Architecture Decisions і discovery records;
 - архітектурний backlog;
 - reference checker, схеми та приклади без чутливих даних.
 
@@ -37,23 +37,29 @@
 ## Структура
 
 ```text
-docs/          канонічні специфікації
-adr/           архітектурні рішення
-architecture/  діаграми та архітектурні моделі
-schemas/       машинозчитувані схеми
-tools/         reference checker та інженерні перевірки
-backlog/       відкриті питання та дорожня карта
+docs/                    фундаментальні OCP-специфікації
+architecture/discovery/  активні Architecture Decisions і discovery cycles
+architecture/reviews/    records зовнішнього review та resolution evidence
+patterns/                versioned binding-when-invoked modeling contracts
+adr/                     заморожений історичний ADR registry
+schemas/                 машинозчитувані схеми
+tools/                   reference checker та інженерні перевірки
+backlog/                 відкриті питання та дорожня карта
 ```
 
 ## Статус
 
-**Foundation 0.3 — Executable Validation Foundation.**
+**Foundation Wave 2 — Governed Executable Foundation.**
 
-- Resource, Operation, Assignment і Constraint мають статус `Accepted`;
-- reference ontology checker перевіряє YAML fixtures, exact-version Constraint evaluation, lifecycle projections, status synchronization і прийняті regression counterexamples;
-- GitHub Actions запускає unit tests і fixture validation для pull request та `main`;
-- State і Readiness залишаються Deferred до завершення першого executable validation cycle та перегляду ADR-DRAFT-007;
-- checker не є production validator або незалежним нормативним джерелом;
-- орієнтовна загальна foundation-готовність після прийняття PR-0006: **≈35%**.
+- Resource, Operation, Assignment, Constraint, Organization і Objective мають статус `Accepted`;
+- OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
+- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Concept status synchronization і dependency graph;
+- artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
+- post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
+- GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
+- State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
+- наступний запланований decision cycle — `AD-005 — Capability Boundary`, після нього Event/Result і Coordination boundaries;
+- checker не є production validator, persistence schema або незалежним нормативним джерелом;
+- не-нормативна оцінка загальної foundation-готовності: **≈40%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
