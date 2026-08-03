@@ -36,12 +36,11 @@ jobs:
       - name: Run real-history main-context check
         run: python tools/ontology_checker/check.py tools/ontology_checker/fixtures --context main
 
-      - name: Commit materialized target files
+      - name: Commit materialized non-workflow target files
         run: |
           git config user.name "OCP Builder"
           git config user.email "ocp-builder@example.invalid"
           git add \
-            .github/workflows/ontology-checker.yml \
             architecture/artifact-taxonomy.md \
             architecture/artifact-taxonomy.yaml \
             tools/ontology_checker/README.md \
@@ -51,5 +50,5 @@ jobs:
             echo "No materialized changes"
             exit 0
           fi
-          git commit -m "builder: materialize F7 baseline resolution"
+          git commit -m "builder: materialize F7 baseline resolution [skip ci]"
           git push origin HEAD:${{ github.event.pull_request.head.ref }}
