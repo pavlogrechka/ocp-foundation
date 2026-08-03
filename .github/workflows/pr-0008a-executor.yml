@@ -18,15 +18,17 @@ jobs:
           from pathlib import Path
           source=Path('.github/workflows/pr-0008a-final-runner.yml').read_text()
           block=source.split("          python - <<'PY'\n",1)[1].split("\n          PY",1)[0]
-          lines=[]
-          for line in block.splitlines():
-              lines.append(line[10:] if line.startswith('          ') else line)
-          code='\n'.join(lines)
-          old='t,n=re.subn(r"During PR-0008 implementation, `concept-dependencies\\\\.yaml`.*?leaves Draft\\\\.",new,t,count=1,flags=re.S); assert n==1,n'
+          lines=[line[10:] if line.startswith('          ') else line for line in block.splitlines()]
           replacement='start=t.index("During PR-0008 implementation"); end=t.index("\\n\\nThe generator rejects:",start); t=t[:start]+new+t[end:]'
-          if old not in code:
+          found=False
+          for index,line in enumerate(lines):
+              if line.startswith('t,n=re.subn('):
+                  lines[index]=replacement
+                  found=True
+                  break
+          if not found:
               raise RuntimeError('baseline rewrite statement not found')
-          exec(compile(code.replace(old,replacement,1),'pr0008a-migration','exec'))
+          exec(compile('\n'.join(lines),'pr0008a-migration','exec'))
           PY
           python -m unittest discover -s tools/ontology_checker/tests -v
           python tools/ontology_checker/check.py --context=pr
