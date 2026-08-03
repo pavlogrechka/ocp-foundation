@@ -49,7 +49,7 @@
 | AB-045 | Organization relationship type taxonomy | Open | Визначити governed classes/types and class-to-type consistency rules |
 | AB-046 | Organization lifecycle review | Open | Перевірити lifecycle після реальних fixtures і залежних Coordination use cases |
 | AB-047 | Organization composition and organizational units | Open | Визначити межу Organization, sub-unit, crew and temporary grouping |
-| AB-048 | One Concept — One Responsibility | Accepted in Principle | Переглянути після OCP-007 та relationship-record практики |
+| AB-048 | One Concept — One Responsibility | Proposed | Переглянути після OCP-007 та relationship-record практики |
 | AB-049 | Consolidate OCP Architectural Doctrine | Proposed | Review after 10–12 fundamental Concepts |
 | AB-050 | Explicitly Not Defined section | Proposed | Перевірити як обов’язковий шаблон після OCP-007 |
 | AB-051 | Structural schemes and multiple verticals | Open | Визначити scheme identity, exceptions and cross-scheme interpretation |
