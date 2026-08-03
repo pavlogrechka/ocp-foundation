@@ -1,14 +1,16 @@
-taxonomy_version: 0.1.0
+taxonomy_version: 0.2.0
 authority: Architecture Board
 artifact_classes:
   OCP:
     normative_level: binding
-    lifecycle: [Draft, Accepted, Canonical, Deprecated, Archived]
-    status_authority: Architecture Board
+    document_lifecycle: [Draft, Accepted, Canonical, Deprecated, Archived]
+    concept_lifecycle: [Proposed, Under Review, Accepted, Canonical, Deferred, Deprecated, Archived]
+    document_status_authority: Architecture Board
+    concept_status_authority: Architecture Board
     numbering_authority: Architecture Board
     location: docs/
     external_review_required: true
-    purpose: Domain and ontology specifications.
+    purpose: Domain and ontology specifications with independent document and Concept status axes.
   Pattern:
     normative_level: binding-when-invoked
     lifecycle: [Draft, Accepted, Deprecated, Archived]
@@ -46,6 +48,8 @@ artifact_classes:
   Review:
     normative_level: record
     lifecycle: [Draft, Final]
+    status_field_required: false
+    default_status_when_absent: Final
     status_authority: review_author
     numbering_authority: pull_request
     location: architecture/reviews/
