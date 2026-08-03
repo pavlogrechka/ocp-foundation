@@ -1,10 +1,10 @@
 ---
 Decision-ID: AD-003
 Title: Objective Boundary
-Version: 0.1.0
-Status: Discovery
+Version: 0.2.0
+Status: Under Review
 Owner: Architecture Board
-Depends-On: OCP-004, AD-002, BASELINE-M1
+Depends-On: OCP-004
 Applies-To: Objective Concept and PR-0009
 Review-After: External adversarial boundary review
 ---
@@ -13,7 +13,11 @@ Review-After: External adversarial boundary review
 
 ## 1. What is Objective?
 
-Objective is a candidate fundamental Concept representing an intended outcome, condition, or effect that gives purpose to an Operation.
+Objective is a candidate fundamental Concept representing an intended outcome, condition, or effect of operational activity.
+
+Objective is semantically complete without an existing Operation. An Objective may exist before any Operation is planned and may later be shared by, supported by, or referenced from multiple Operations.
+
+Operation is the primary current consumer considered by this discovery because OCP-004 already defines an `objective_ref` bootstrap branch. Operation is not part of Objective identity or its canonical definition.
 
 This discovery does not yet define Objective fields, lifecycle, hierarchy, achievement semantics, or authorization sources.
 
@@ -29,9 +33,12 @@ Objective is not automatically:
 - a Capability;
 - an Event;
 - a Result;
+- an `ExplicitIntentRecord`;
 - proof that an intended outcome was achieved.
 
 A source that authorizes, requests, or originates an Objective does not become part of Objective identity merely because provenance points to it.
+
+Objective and `ExplicitIntentRecord` are distinct representations. Their coexistence, precedence, conflict handling, and any explicit promotion or replacement rule must be defined by PR-0009 rather than inferred from the current OCP-004 disjunction.
 
 ## 3. Who creates Objective?
 
@@ -71,6 +78,8 @@ AD-003 intentionally does not define:
 - task allocation;
 - direct inheritance from parent Operation or Organization;
 - automatic conversion of intent text into Objective;
+- coexistence or precedence between Objective and `ExplicitIntentRecord`;
+- whether a substantive change of intended outcome preserves Objective identity or requires a new Objective plus supersession;
 - domain-specific objective taxonomies.
 
 Evaluation of achievement belongs to later Event/Result work and must not be embedded into the Objective boundary by implication.
@@ -81,6 +90,13 @@ PR-0009 must include a positive executable fixture in which an Operation outside
 
 This fixture closes the oldest remaining bootstrap branch introduced during the Operation correction cycle.
 
+PR-0009 must also define the coexistence and precedence contract for OCP-004 invariant 2, including:
+
+- whether Objective and `ExplicitIntentRecord` may both be present;
+- the result when they conflict;
+- whether either representation supersedes, promotes, or invalidates the other;
+- whether the existing disjunction remains unchanged or is revised.
+
 ## 8. Review target
 
 Attempt to falsify the boundary by constructing cases where:
@@ -90,7 +106,9 @@ Attempt to falsify the boundary by constructing cases where:
 3. achievement evaluation leaks Event or Result semantics into Objective;
 4. Objective identity depends unnecessarily on Operation;
 5. decomposition creates hidden Assignment, command, or inheritance semantics;
-6. the proposed boundary cannot support the Operation bootstrap fixture without adding an undeclared Concept.
+6. the proposed boundary cannot support the Operation bootstrap fixture without adding an undeclared Concept;
+7. a substantive change of intended outcome makes Objective identity or supersession ambiguous;
+8. Objective and `ExplicitIntentRecord` coexist without a deterministic precedence and conflict contract.
 
 ## 9. Exit criteria
 
@@ -100,4 +118,6 @@ Boundary discovery is ready for Architecture Board decision when:
 - no unresolved blocking boundary finding remains;
 - dependencies proposed for PR-0009 are explicit and acyclic;
 - the bootstrap fixture contract is accepted;
+- coexistence and precedence semantics for Objective versus `ExplicitIntentRecord` are explicit PR-0009 deliverables;
+- Objective identity under substantive outcome change is an explicit PR-0009 deliverable;
 - unresolved semantics are recorded as backlog items rather than hidden in the future specification.
