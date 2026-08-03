@@ -46,6 +46,7 @@ GOVERNANCE_ERROR_CODES = frozenset(
 SEMVER = re.compile(r"^\d+\.\d+\.\d+$")
 PATTERN_REF = re.compile(r"^(P-\d{3})@(\d+\.\d+\.\d+)$")
 AB_REF = re.compile(r"\bAB-\d{3}\b")
+COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
 @dataclass(frozen=True)
@@ -158,11 +159,13 @@ def validate_artifact_governance(repo_root: Path) -> GovernanceResult:
         errors.append(ARTIFACT_TAXONOMY_INVALID)
 
     commit_spec = taxonomy.get("commit_convention") or {}
+    baseline = str(commit_spec.get("history_audit_baseline") or "")
     if (
         commit_spec.get("merge_method") != "squash"
         or commit_spec.get("linear_history_required") is not True
-        or commit_spec.get("history_audit_scope") != "all_reachable_commits"
+        or commit_spec.get("history_audit_scope") != "post_baseline_reachable_commits"
         or commit_spec.get("history_audit_requires_complete_history") is not True
+        or not COMMIT_SHA.fullmatch(baseline)
     ):
         errors.append(ARTIFACT_TAXONOMY_INVALID)
 
@@ -276,12 +279,14 @@ def validate_process_audit(repo_root: Path, context: str) -> GovernanceResult:
 
     taxonomy, _ = _load_taxonomy(repo_root)
     commit_spec = taxonomy.get("commit_convention") if taxonomy else None
+    baseline = str(commit_spec.get("history_audit_baseline") or "") if isinstance(commit_spec, dict) else ""
     if not isinstance(commit_spec, dict) or (
         commit_spec.get("linear_history_required") is not True
-        or commit_spec.get("history_audit_scope") != "all_reachable_commits"
+        or commit_spec.get("history_audit_scope") != "post_baseline_reachable_commits"
         or commit_spec.get("history_audit_requires_complete_history") is not True
+        or not COMMIT_SHA.fullmatch(baseline)
     ):
-        return _result((ARTIFACT_TAXONOMY_INVALID,))
+        return _result((PROCESS_HISTORY_AUDIT_FAILED,))
 
     shallow = _run_git(repo_root, "rev-parse", "--is-shallow-repository")
     if shallow is None:
@@ -292,7 +297,11 @@ def validate_process_audit(repo_root: Path, context: str) -> GovernanceResult:
     if shallow_value != "false":
         return _result((PROCESS_HISTORY_AUDIT_FAILED,))
 
-    merges = _run_git(repo_root, "rev-list", "--min-parents=2", "HEAD")
+    ancestor = _run_git(repo_root, "merge-base", "--is-ancestor", baseline, "HEAD")
+    if ancestor is None:
+        return _result((PROCESS_HISTORY_AUDIT_FAILED,))
+
+    merges = _run_git(repo_root, "rev-list", "--min-parents=2", f"{baseline}..HEAD")
     if merges is None:
         return _result((PROCESS_HISTORY_AUDIT_FAILED,))
     return _result((PROCESS_HISTORY_NON_LINEAR,)) if merges.stdout.strip() else _result(())
