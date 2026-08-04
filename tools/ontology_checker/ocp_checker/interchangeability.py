@@ -19,6 +19,7 @@ INTERCHANGEABILITY_ERROR_CODES = frozenset(
         "INTERCHANGEABILITY_REQUIREMENT_DUPLICATE",
         "INTERCHANGEABILITY_TARGET_UNRESOLVED",
         "INTERCHANGEABILITY_FORBIDDEN_COUPLING",
+        "COORDINATION_REQUIREMENT_OWNER_MISMATCH",
     }
 )
 
@@ -30,6 +31,7 @@ INTERCHANGEABILITY_DERIVATION_RULES = frozenset(
 )
 
 RULE_REF = "resource-interchangeability@1"
+COORDINATION_OWNER_REF = "ocp-coordination-consumer@0.1.0"
 CLAIM_PROJECTIONS = frozenset({"positive", "negative", "indeterminate", "withdrawn"})
 CLAIM_INPUT_STATES = frozenset(
     {"effective", "missing", "stale", "ambiguous", "conflicting", "unresolved"}
@@ -141,6 +143,14 @@ def validate_interchangeability_requirement(requirement: dict[str, Any]) -> Vali
         for key in FORBIDDEN_COUPLING_KEYS
     ):
         errors.append("INTERCHANGEABILITY_FORBIDDEN_COUPLING")
+    return _result(errors)
+
+
+def validate_coordination_requirement(requirement: dict[str, Any]) -> ValidationResult:
+    """Validate the accepted OCP-014 profile without treating caller identity as authority."""
+    errors = list(validate_interchangeability_requirement(requirement).errors)
+    if _nonempty(requirement.get("owner_ref")) != COORDINATION_OWNER_REF:
+        errors.append("COORDINATION_REQUIREMENT_OWNER_MISMATCH")
     return _result(errors)
 
 
