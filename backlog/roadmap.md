@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 70% | Вісім Concepts Accepted; Event occurrence і ObservationRecord прийняті в OCP-010; OutcomeAssessmentRecord, Coordination, Operational Area та Core Boundary лишаються відкритими |
-| Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection, explicit-intent validation та Event evidence boundaries; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 55% | OCP-010 додає Event/Observation validators, exact resolution, supersession evidence та перший integrated scenario з виконуваними cross-Concept derivations; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈46%** | Event став восьмим Accepted Concept, а перший наскрізний scenario довів композиційність foundation; operational rules and workflows лишаються найслабшим напрямом |
+| Core domain ontology | 70% | Вісім Concepts Accepted; Event/Observation прийняті, OutcomeAssessmentRecord проходить review як non-Concept record contract; Coordination, Operational Area та Core Boundary лишаються відкритими |
+| Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection, explicit-intent validation та assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 55% | PR-0013 додає exact-bound assessment validator, snapshots, supersession heads і замінює checker-local scenario probe; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈46%** | OCP-011 ще не Accepted і `Result` registry migration не виконана, тому baseline не підвищується до завершення external review та Board act |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -42,7 +42,7 @@
 - [x] Capability Concept and governed registry contract accepted in `PR-0010 / OCP-009`
 - [x] Event and Result boundary accepted in `AD-006C`: E3 occurrence + observation records, R3 governed assessment records
 - [x] Event occurrence Concept and governed ObservationRecord contract — `AB-055 / OCP-010 / PR-0012`
-- [ ] OutcomeAssessmentRecord contract and Result registry resolution — AB-056
+- [ ] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`, Under Review
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -78,7 +78,8 @@
 - [x] OCP-009 Capability exact-resolution, namespace, supersession and registry≠possession evidence
 - [x] OCP-010 Event identity, ObservationRecord, exact references, supersession and zero-observation evidence
 - [x] First integrated non-sensitive scenario with `derived_participates_in`, `constraint_applicable_to` and `effective_constraint_result`
-- [ ] Normative OutcomeAssessmentRecord executable evidence — AB-056
+- [ ] OCP-011 normative OutcomeAssessmentRecord evidence — implemented in PR-0013, pending external review and Board acceptance
+- [ ] Atomic removal of temporary `Result: Proposed` registry marker — acceptance step of AB-056
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -104,16 +105,17 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Full ontology duplicate/reference linter
 - [ ] Constraint expression and evaluator contracts
 - [x] First integrated non-sensitive scenario spanning Operation, Objective, Assignment, Constraint, Event, observations and assessments — accepted in PR-0012
+- [ ] Replace its temporary assessment envelope with accepted OCP-011 OutcomeAssessmentRecord — implemented in PR-0013, pending review
 - [ ] Additional example datasets without sensitive information
 - [ ] Expanded CI checks for schemas, lifecycle consistency and normative references
 - [ ] Versioned implementation-facing contracts
 
 ## Planned Sequence
 
-1. Define the governed OutcomeAssessmentRecord contract under R3, bind exact target/rule/evidence/evaluator semantics and atomically resolve the `Result: Proposed` registry entry when that contract is accepted.
-2. Replace the OCP-010 checker-local assessment probe with the accepted AB-056 record contract while preserving the integrated scenario and its fail-safe conclusions.
+1. Complete external adversarial review and Architecture Board acceptance of `OCP-011 / PR-0013`: exact target/criterion/evidence/input/evaluator binding, fail-safe evidence matrix and P-001 Module C history.
+2. In the same acceptance act, remove the temporary `Result: Proposed` migration entry from the active Concept registry and generated projections without creating a Result Concept.
 3. Define the holder-specific Capability Claim boundary and record contract; keep Organization claims bound by AB-006/AB-052.
 4. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
 5. Define Coordination boundaries and workflows for independent verticals.
-6. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and Event observations exist.
-7. Continue checker expansion with every accepted Concept cycle and complete the full normative reference linter before first Canonical promotion.
+6. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
+7. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
