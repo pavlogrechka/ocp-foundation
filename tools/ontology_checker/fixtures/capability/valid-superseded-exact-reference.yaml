@@ -1,0 +1,30 @@
+case_id: capability-valid-superseded-exact-reference
+concept: CapabilityReference
+entries:
+  - namespace: sensing
+    capability_id: detect
+    version: v1
+    label: Detect
+    definition: Detect a governed class of observation.
+    namespace_owner_ref: SPEC-SENSING
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-020
+  - namespace: sensing
+    capability_id: detect
+    version: v2
+    label: Detect
+    definition: Detect a governed class of observation with revised semantics.
+    namespace_owner_ref: SPEC-SENSING
+    published_at: 2026-08-04T01:00:00Z
+    provenance_ref: ACT-CAP-021
+    supersedes_capability_ref:
+      namespace: sensing
+      capability_id: detect
+      version: v1
+reference:
+  namespace: sensing
+  capability_id: detect
+  version: v1
+expected:
+  valid: true
+  error_codes: []
