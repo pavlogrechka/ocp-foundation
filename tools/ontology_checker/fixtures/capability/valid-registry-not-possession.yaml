@@ -1,0 +1,24 @@
+case_id: capability-valid-registry-not-possession
+concept: CapabilityReference
+entries:
+  - namespace: communications
+    capability_id: relay
+    version: v1
+    label: Relay
+    definition: Relay communications traffic.
+    namespace_owner_ref: SPEC-COMMS
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-080
+contexts:
+  resources:
+    - resource_id: R-001
+      classification: Technical Resource
+    - resource_id: R-002
+      classification: Technical Resource
+reference:
+  namespace: communications
+  capability_id: relay
+  version: v1
+expected:
+  valid: true
+  error_codes: []
