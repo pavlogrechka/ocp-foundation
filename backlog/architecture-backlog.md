@@ -5,14 +5,14 @@
 | AB-001 | Operational Situation як окремий Concept | Open | Перевірити після базових Concept |
 | AB-002 | Order як фундаментальний Concept | Open | Визначити, чи є Order обов’язковим або одним із можливих джерел авторизації Operation |
 | AB-003 | Погодження між незалежними вертикалями | Open | Включити до Coordination Model |
-| AB-004 | Capability Registry | Discovery | AD-005 визначає межу Capability definition, holder claim, registry authority, domain namespaces, aggregation та evidence перед будь-якою OCP-специфікацією |
+| AB-004 | Capability Registry | Planned | AD-005C: визначити нормативний Capability definition та registry contract для identity, namespace, exact version, supersession і resolution; holder claims залишаються окремим downstream-рішенням |
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
 | AB-007 | State як Concept | Deferred | Переглянути ADR-DRAFT-007 після Constraint, PR-0006 fixtures та стабілізації Accepted Operation і Assignment |
 | AB-008 | Межа Infrastructure Resource / Environment | Open | Перевірити на Position Site, Launch Site і Relay Site |
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
-| AB-011 | Взаємозамінність Resource | Open | Описати взаємозамінність без втрати ідентичності екземплярів після Capability і Constraint |
+| AB-011 | Взаємозамінність Resource | Planned | Після Capability claim model визначити взаємозамінність за exact Capability claims, Constraint results і operational context без втрати Resource identity |
 | AB-012 | Автоматична перевірка нормативних Concept references | Planned | PR-0006 додає повний rules manifest для emitted checks і CI; duplicate/reference linter залишається до першої Canonical promotion |
 | AB-013 | Машинозчитувані інваріанти | Planned | PR-0006 реалізує reference subset, lifecycle fixtures і accepted counterexamples; розширювати з кожним Concept cycle |
 | AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |

@@ -1,8 +1,8 @@
 ---
 Decision-ID: AD-005
 Title: Capability Boundary
-Version: 0.2.0
-Status: Under Review
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-007, AD-002
 Applies-To: AB-004, AB-011, Capability model and registry
@@ -350,10 +350,62 @@ AD-005 is ready for Architecture Board decision when:
 - conditional executable evidence is assigned to a downstream normative owner;
 - unresolved semantics are recorded as backlog items.
 
-## 16. Architecture Board decision
+## 16. Architecture Board decision — AD-005C
 
-No outcome is selected by this discovery revision.
+The Architecture Board accepted this decision by act **AD-005C** on **2026-08-04**, after repeated external verification of AD-005 revision `0.2.0` confirmed Findings F1–F4 as resolved and externally verified.
 
-AD-005 is `Under Review` and introduces no fundamental Concept, current graph edge, registry implementation, holder claim, P-001 invocation or domain Capability taxonomy.
+### 16.1 Selected outcome
 
-The next act is repeated external adversarial review of revision `0.2.0`. Architecture Board outcome selection may occur only after that review confirms that Findings 1–4 are closed; acceptance will authorize only the downstream work implied by the selected outcome.
+The Architecture Board selects **Outcome D — two-layer definition and claim model**.
+
+The independent-identity verdict is positive for the reusable Capability definition: it has identity independent of a particular holder, claim or operational use when governed by an owning namespace, exact version and resolution contract.
+
+This decision does not itself register Capability as a fundamental Concept. A downstream normative specification must define the Capability definition, justify its exact Concept dependencies and perform any Concept-status or graph transition explicitly.
+
+A holder-specific Capability claim remains a separate identified record that binds one subject to one exact Capability definition under governed conditions, provenance, evidence and temporal applicability. The claim is not a fundamental Concept by default. Any use of P-001 requires a separate complete invocation in the downstream normative owner.
+
+### 16.2 Staged holder scope
+
+`Resource` is the initial direct claim-subject type authorized for downstream Capability-claim work.
+
+Organization-specific claims remain deferred until AB-006 and AB-052 bind `Organization`, `Organizational Resource` or an explicit mapping without identity collapse.
+
+No inheritance, aggregation or transitive possession is implied. In particular:
+
+- an Organization does not automatically inherit the union of member or subordinate Resource capabilities;
+- a composite Resource and its components do not inherit Capability bidirectionally by default;
+- a Resource type, Assignment role, successful Event or Result does not create a Capability claim.
+
+### 16.3 Operation requirement boundary
+
+An Operation may express a requirement for an exact Capability definition, but an Operation does not possess Capability and does not grant Capability to an assigned Resource.
+
+The normative owner and representation of Operation Capability requirements remain downstream decisions. This acceptance introduces no requirement field, matching algorithm or current Concept edge.
+
+### 16.4 Registry direction
+
+AB-004 is directed toward a governed registry of reusable Capability definitions rather than a central list of labels.
+
+The downstream registry contract must govern at least identity, namespace ownership, exact versioning, supersession and reference resolution. Domain modules may own specialized Capability definitions under governed namespaces; Core must not become a universal catalog of domain labels.
+
+Registry membership never proves that any Resource or Organization has the Capability and never establishes current readiness, availability, authorization or admissibility.
+
+### 16.5 Resource interchangeability direction
+
+AB-011 is planned as a downstream decision that may evaluate exact Capability claims together with applicable Constraint results and operational context while preserving the identity of each Resource.
+
+Capability similarity or label equality must not collapse distinct Resource identities or authorize automatic substitution.
+
+### 16.6 Acceptance effect
+
+AD-005C has the following effects:
+
+- AD-005 becomes `Accepted` at version `0.3.0`;
+- AB-004 moves `Discovery → Planned` for the normative Capability-definition and registry contract;
+- AB-011 moves `Open → Planned` for the separate Resource-interchangeability decision;
+- AB-006 and AB-052 remain `Open` and continue to bind Organization-holder semantics;
+- no Capability OCP specification, holder-claim schema, registry implementation or domain taxonomy is introduced by this act;
+- no current Concept graph edge or P-001 invocation is introduced;
+- the AD-002 guardrail `Capability ≠ Readiness` and the fail-safe evidence boundary remain mandatory.
+
+The next normative cycle must define the reusable Capability-definition contract and governed registry direction selected here, with executable evidence from §12. Holder-claim semantics and Resource interchangeability remain explicit downstream work and must not be smuggled into that definition cycle.
