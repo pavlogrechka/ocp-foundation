@@ -78,7 +78,7 @@ backlog/                 відкриті питання та дорожня к�
 - artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
-- State і Readiness залишаються `Deferred` як Concepts; `AB-007 / AD-011` виконує окреме evidence-based порівняння двох осей за прийнятим mandate AD-002 без нового State/Readiness authority;
+- State і Readiness залишаються `Deferred` як Concepts; `AB-007 / AD-011 0.2.0` окремо порівнює S0–S2 та R0–R3, мапить усі 15 counterexamples і не створює нового State/Readiness authority;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - не-нормативна оцінка загальної foundation-готовності з Accepted OCP-015 — **≈52%**.

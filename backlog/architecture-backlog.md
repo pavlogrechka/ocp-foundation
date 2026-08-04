@@ -8,7 +8,7 @@
 | AB-004 | Capability Registry | Resolved | PR-0010 / OCP-009: прийнято reusable Capability definition, governed namespace, exact-version resolution і supersession contract; holder claims залишаються окремим downstream-рішенням |
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
-| AB-007 | Межа State та Readiness | Discovery | AD-011 окремо порівнює State- і Readiness-моделі за прийнятим evidence contract AD-002; жоден Concept, record type або positive readiness authority ще не обрано |
+| AB-007 | Межа State та Readiness | Discovery | AD-011 `0.2.0` має окремі S0–S2 і R0–R3 working verdicts, authority map і повний map 15 counterexamples; наступний gate — exact-head external review перед Board selection |
 | AB-008 | Межа Infrastructure Resource / Environment | Open | Перевірити на Position Site, Launch Site і Relay Site |
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |

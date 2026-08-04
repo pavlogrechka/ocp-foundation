@@ -49,7 +49,7 @@
 - [x] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR #49`
 - [x] Governed Coordination consumer profile — `AB-003 / OCP-014`
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
-- [ ] Evidence-based State/Readiness selection — `AB-007 / AD-011` separately compares the two axes under the accepted AD-002 contract
+- [ ] Evidence-based State/Readiness selection — `AB-007 / AD-011` має окремі S0–S2 і R0–R3 comparison verdicts; потрібні external review та окремий Board act
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
@@ -122,6 +122,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Complete the active `AB-007 / AD-011` State and Readiness comparison under the AD-002 evidence contract; Capability claims and outcome assessments now satisfy the roadmap trigger.
+1. Review the active `AB-007 / AD-011` S0–S2 and R0–R3 comparison, then record separate axis verdicts through an explicit Board act.
 2. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
 3. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
