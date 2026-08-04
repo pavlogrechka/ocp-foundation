@@ -55,4 +55,6 @@
 | AB-051 | Structural schemes and multiple verticals | Open | Визначити scheme identity, exceptions and cross-scheme interpretation |
 | AB-052 | Organization-to-Organizational-Resource mapping | Open | Визначити explicit mapping without identity collapse |
 | AB-053 | Concept dependency source migration | Resolved | Перенести current edges з `concept-dependencies.yaml` у `Concept-Depends-On` defining-документів, перемкнути generator і видалити staging source; одночасна наявність обох джерел є помилкою |
-| AB-054 | Event and Result boundary | Discovery | AD-006: розділити occurrence, observation, evidence, evaluation, Result assessment і realized outcome; зберегти межі з Objective achievement, Operation lifecycle, Constraint evaluation, Conflict, Capability, State та Readiness |
+| AB-054 | Event and Result boundary | Resolved | AD-006C: прийнято E3 — occurrence Event + attributable observation records; R3 — governed OutcomeAssessmentRecord без фундаментального Result Concept |
+| AB-055 | Event occurrence та ObservationRecord contract | Planned | Відкрити OCP-010: визначити occurrence identity, zero-observation case, correction boundary, ambiguity handling і governed ObservationRecord contract |
+| AB-056 | OutcomeAssessmentRecord та Result registry resolution | Planned | Визначити exact target/rule/evidence/evaluator binding, history-preserving correction, fail-safe conflict semantics і атомарно розв’язати `Result: Proposed` при прийнятті R3 contract |
