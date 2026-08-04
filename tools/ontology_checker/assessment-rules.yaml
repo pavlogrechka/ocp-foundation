@@ -1,0 +1,100 @@
+manifest_version: 0.1.0
+authority: reference-only
+normative_source: OCP-011 Outcome Assessment Record Contract
+rules:
+  - id: OUTCOME_ASSESSMENT_BINDING_MISMATCH
+    kind: validation
+    source: OCP-011 supersession binding-identity invariant
+  - id: OUTCOME_ASSESSMENT_CONCLUSION_INVALID
+    kind: validation
+    source: OCP-011 conclusion vocabulary invariant
+  - id: OUTCOME_ASSESSMENT_CRITERION_REF_REQUIRED
+    kind: validation
+    source: OCP-011 exact criterion binding invariant
+  - id: OUTCOME_ASSESSMENT_DEFINITIVE_EVIDENCE_UNSAFE
+    kind: validation
+    source: OCP-011 fail-safe evidence and conclusion invariant
+  - id: OUTCOME_ASSESSMENT_EVALUATED_AT_REQUIRED
+    kind: validation
+    source: OCP-011 evaluation-time provenance invariant
+  - id: OUTCOME_ASSESSMENT_EVALUATOR_REQUIRED
+    kind: validation
+    source: OCP-011 attributable evaluator invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_BINDINGS_INVALID
+    kind: validation
+    source: OCP-011 exact evidence binding invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_KIND_UNSUPPORTED
+    kind: validation
+    source: OCP-011 initial evidence-kind boundary
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_REFERENCE_UNRESOLVED
+    kind: validation
+    source: OCP-011 exact evidence reference invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_SNAPSHOT_MISMATCH
+    kind: validation
+    source: OCP-011 evidence snapshot immutability invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_SNAPSHOT_REQUIRED
+    kind: validation
+    source: OCP-011 exact evidence snapshot invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_SNAPSHOT_UNRESOLVED
+    kind: validation
+    source: OCP-011 evidence snapshot resolution invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_STATE_INVALID
+    kind: validation
+    source: OCP-011 evidence-state vocabulary invariant
+  - id: OUTCOME_ASSESSMENT_EVIDENCE_STATE_MISMATCH
+    kind: validation
+    source: OCP-011 evidence-state consistency invariant
+  - id: OUTCOME_ASSESSMENT_ID_REQUIRED
+    kind: validation
+    source: OCP-011 record identity invariant
+  - id: OUTCOME_ASSESSMENT_IDENTITY_DUPLICATE
+    kind: validation
+    source: OCP-011 dataset identity uniqueness invariant
+  - id: OUTCOME_ASSESSMENT_INPUT_SNAPSHOT_REQUIRED
+    kind: validation
+    source: OCP-011 exact input snapshot invariant
+  - id: OUTCOME_ASSESSMENT_INPUT_SNAPSHOT_UNRESOLVED
+    kind: validation
+    source: OCP-011 input snapshot resolution invariant
+  - id: OUTCOME_ASSESSMENT_KIND_REF_REQUIRED
+    kind: validation
+    source: OCP-011 governed assessment-kind invariant
+  - id: OUTCOME_ASSESSMENT_PROVENANCE_REF_REQUIRED
+    kind: validation
+    source: OCP-011 record provenance invariant
+  - id: OUTCOME_ASSESSMENT_RECORDED_AT_REQUIRED
+    kind: validation
+    source: OCP-011 recording-time provenance invariant
+  - id: OUTCOME_ASSESSMENT_RESULT_COUPLING_FORBIDDEN
+    kind: validation
+    source: OCP-011 Result and lifecycle non-equivalence invariant
+  - id: OUTCOME_ASSESSMENT_SELF_SUPERSESSION
+    kind: validation
+    source: OCP-011 P-001 Module C self-supersession invariant
+  - id: OUTCOME_ASSESSMENT_SUPERSESSION_CYCLE
+    kind: validation
+    source: OCP-011 P-001 Module C acyclicity invariant
+  - id: OUTCOME_ASSESSMENT_SUPERSESSION_TARGET_UNRESOLVED
+    kind: validation
+    source: OCP-011 P-001 Module C target-resolution invariant
+  - id: OUTCOME_ASSESSMENT_TARGET_KIND_UNSUPPORTED
+    kind: validation
+    source: OCP-011 initial target-kind boundary
+  - id: OUTCOME_ASSESSMENT_TARGET_REF_REQUIRED
+    kind: validation
+    source: OCP-011 exact target binding invariant
+  - id: OUTCOME_ASSESSMENT_TARGET_UNRESOLVED
+    kind: validation
+    source: OCP-011 exact target resolution invariant
+  - id: OUTCOME_ASSESSMENT_TIME_ORDER_INVALID
+    kind: validation
+    source: OCP-011 evaluation and recording time-order invariant
+  - id: effective_outcome_conclusion
+    kind: derivation
+    source: OCP-011 exact-bound head-set projection
+  - id: outcome_assessment_heads
+    kind: derivation
+    source: OCP-011 P-001 Module C lineage-head derivation
+  - id: resolve_outcome_assessment
+    kind: derivation
+    source: OCP-011 exact assessment identity resolution

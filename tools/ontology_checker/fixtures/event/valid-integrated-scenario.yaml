@@ -110,16 +110,32 @@ scenario:
       recorded_at: 2026-08-04T00:54:00Z
       provenance_ref: ACT-OBS-ASSET-002
       event_ref: EV-ASSET-001
+  evidence_snapshots:
+    - snapshot_ref: SNAP-ASM-ASSET-001
+      evidence_bindings:
+        - evidence_kind_ref: observation-record@1
+          evidence_ref: OBS-ASSET-001
+        - evidence_kind_ref: observation-record@1
+          evidence_ref: OBS-ASSET-002
+  input_snapshots:
+    - INPUT-ASM-ASSET-001
   assessment:
     assessment_id: ASM-ASSET-001
-    target_objective_ref: OBJ-ASSET-001
-    rule_ref: neutral.asset-condition-assessment@1
-    evidence_observation_refs:
-      - OBS-ASSET-001
-      - OBS-ASSET-002
+    assessment_kind_ref: objective-achievement@1
+    target_kind_ref: objective@1
+    target_ref: OBJ-ASSET-001
+    criterion_ref: neutral.asset-condition-assessment@1
+    evidence_bindings:
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASSET-001
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASSET-002
     evidence_snapshot_ref: SNAP-ASM-ASSET-001
+    input_snapshot_ref: INPUT-ASM-ASSET-001
+    evidence_state: conflicting
     evaluator_ref: REVIEWER-ASSET-001
     evaluated_at: 2026-08-04T01:00:00Z
+    recorded_at: 2026-08-04T01:01:00Z
     conclusion: indeterminate
     provenance_ref: ACT-ASM-ASSET-001
 expected:

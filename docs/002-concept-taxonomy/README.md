@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.13.0
+Version: 0.14.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -103,16 +103,20 @@ Operation
 │   └── Constraint [Accepted]
 └── Outcome
     ├── Event [Accepted]
-    └── OutcomeAssessmentRecord [Planned record contract; not a Concept]
+    └── OutcomeAssessmentRecord [Under Review record contract; not a Concept]
 ```
 
-Event не є Operation lifecycle transition або Operation-owned result field. Operation-to-Event relevance залишається explicit downstream relation/reference question і не створює current Concept dependency у цьому циклі.
+Event не є Operation lifecycle transition або Operation-owned result field. Operation-to-Event relevance залишається explicit downstream relation/reference question і не створює current Concept dependency.
+
+OutcomeAssessmentRecord не є Operation child object або success field. Він exact-bind-ить незалежний target, criterion, evidence/input snapshots та evaluator за OCP-011.
 
 ## Objective
 
 Concept `Objective` має статус `Accepted` і визначений у [OCP-008 — Objective Concept](../008-objective-concept/README.md) на підставі прийнятої межі AD-003 та рішення Architecture Board по PR-0009.
 
-Objective представляє intended outcome, condition або effect операційної діяльності. Objective має власну identity, не є Operation, Order, Task або `ExplicitIntentRecord`, а оцінка його досягнення належить майбутньому governed OutcomeAssessmentRecord за AD-006C / AB-056.
+Objective представляє intended outcome, condition або effect операційної діяльності. Objective має власну identity, не є Operation, Order, Task або `ExplicitIntentRecord`.
+
+Оцінка досягнення Objective належить governed OutcomeAssessmentRecord, який проходить review в [OCP-011 — Outcome Assessment Record Contract](../011-outcome-assessment-record/README.md) за AD-006C / AB-056. Objective не отримує mutable authoritative achievement status.
 
 Objective не має поточної фундаментальної Concept dependency. Operation нормативно залежить від Objective лише через явну `Concept-Depends-On` декларацію OCP-004.
 
@@ -126,6 +130,23 @@ Event представляє reusable occurrence або change identity, нез�
 
 Event має `Concept-Depends-On: []`. Current graph не містить `Operation → Event` або `Event → Operation`; такі зв'язки потребують окремого normative owner.
 
+## OutcomeAssessmentRecord
+
+OutcomeAssessmentRecord проходить `Under Review` у OCP-011 як P-001 identified record і **не входить до `Concept-Statuses`**.
+
+Початковий contract:
+
+- target kind — exact Objective;
+- exact assessment kind і criterion;
+- exact Event/ObservationRecord evidence bindings;
+- immutable evidence та input snapshots;
+- attributable evaluator і provenance;
+- fail-safe evidence state та conclusion;
+- history-preserving Module C supersession з дозволеним branching;
+- жодного latest-record truth selection.
+
+AD-006C уже відхилив fundamental Result identity. Історичний `Result: Proposed` marker залишається лише в OCP-000 до acceptance OCP-011, після чого має бути атомарно видалений, а не перенесений у цей taxonomy як Accepted або Deprecated Concept.
+
 ## Assignment
 
 Concept `Assignment` має статус `Accepted` і визначений у [OCP-005](../005-assignment-concept/README.md).
@@ -136,7 +157,7 @@ Assignment є ідентифікованим контекстним зв’яз�
 
 Concept `Constraint` має статус `Accepted` і визначений у [OCP-006](../006-constraint-concept/README.md).
 
-Constraint є ідентифікованою декларативною умовою, яка обмежує допустимість або сумісність операційного context. Constraint violation не є автоматично Event, Conflict, Risk, Readiness або State.
+Constraint є ідентифікованою декларативною умовою, яка обмежує допустимість або сумісність операційного context. Constraint violation не є автоматично Event, Conflict, Risk, Readiness, State або OutcomeAssessmentRecord.
 
 ## Прийнята робоча гіпотеза
 
@@ -168,4 +189,4 @@ Resource + Assignment + Operation Context = Operational Role
 - Чи є State окремою верхньорівневою категорією?
 - Який normative owner визначить Operation-to-Event relevance records?
 - Чи потрібні окремі Concept Reservation, Allocation, Role Taxonomy або Conflict?
-- Як AB-056 атомарно резолвить registry entry `Result` після прийняття OutcomeAssessmentRecord contract?
+- Чи повністю OCP-011 закриває R3, зберігає loaded integrated scenario та дозволяє атомарно видалити migration entry `Result`?

@@ -1,0 +1,26 @@
+case_id: assessment-valid-missing-indeterminate
+concept: OutcomeAssessmentDataset
+objectives:
+  - objective_id: OBJ-ASM-002
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-ASM-002
+    evidence_bindings: []
+input_snapshots: [INPUT-ASM-002]
+assessments:
+  - assessment_id: ASM-002
+    assessment_kind_ref: objective-achievement@1
+    target_kind_ref: objective@1
+    target_ref: OBJ-ASM-002
+    criterion_ref: neutral.condition@1
+    evidence_bindings: []
+    evidence_snapshot_ref: EVIDENCE-ASM-002
+    input_snapshot_ref: INPUT-ASM-002
+    evidence_state: missing
+    evaluator_ref: EVALUATOR-002
+    evaluated_at: 2026-08-04T02:00:00Z
+    recorded_at: 2026-08-04T02:01:00Z
+    conclusion: indeterminate
+    provenance_ref: ACT-ASM-002
+expected:
+  valid: true
+  error_codes: []

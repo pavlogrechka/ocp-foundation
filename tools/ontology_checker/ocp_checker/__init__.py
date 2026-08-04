@@ -38,6 +38,17 @@ from .event import (
     validate_observation,
     validate_observation_dataset,
 )
+from .assessment import (
+    OUTCOME_ASSESSMENT_DERIVATION_RULES,
+    OUTCOME_ASSESSMENT_ERROR_CODES,
+    effective_outcome_conclusion,
+    outcome_assessment_heads,
+    resolve_outcome_assessment,
+    validate_integrated_outcome_scenario,
+    validate_outcome_assessment,
+    validate_outcome_assessment_dataset,
+    validate_outcome_assessment_fixture,
+)
 from .objective import (
     OBJECTIVE_ERROR_CODES,
     validate_objective,
@@ -84,7 +95,11 @@ def validate_reference_fixture(fixture):
     if concept == "EventObservationDataset":
         return validate_event_observation_fixture(fixture)
     if concept == "IntegratedEventScenario":
-        return validate_integrated_event_scenario(fixture)
+        return validate_integrated_outcome_scenario(fixture)
+    if concept == "OutcomeAssessmentRecord":
+        return validate_outcome_assessment(fixture.get("entity") or {})
+    if concept == "OutcomeAssessmentDataset":
+        return validate_outcome_assessment_fixture(fixture)
     if concept == "Objective":
         return validate_objective(fixture.get("entity") or {})
     if concept == "ObjectiveDataset":
