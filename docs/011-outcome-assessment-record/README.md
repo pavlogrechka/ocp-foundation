@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-011
 Title: Outcome Assessment Record Contract
-Version: 0.1.0
+Version: 0.1.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010, AD-006, P-001
@@ -368,13 +368,14 @@ Constraint violation does not create Conflict, Risk або OutcomeAssessmentReco
 2. Assessment authority is determined by exact target, criterion, evidence snapshot, input snapshot, evaluator and time bindings.
 3. Record order, newest timestamp and evaluator count do not select authority.
 4. Missing, stale, ambiguous or conflicting evidence cannot yield an authoritative definitive conclusion by default.
-5. Late evidence creates a new immutable snapshot and new record; prior record is not mutated.
-6. Supersession preserves history and may branch.
-7. Supersession cannot silently change target or criterion binding identity.
-8. Conflicting heads remain visible and project to `indeterminate` unless explicitly reconciled by a new reviewed record lineage.
-9. Operation completion and assessment conclusion are independent.
-10. Assessment does not create Capability, Readiness, authorization, admissibility, Conflict, Risk або State.
-11. No universal fundamental Result Concept is introduced.
+5. Reference checker mechanically derives and cross-checks `missing` and its finite `conflicting` probe from governed bindings; until AB-039 accepts freshness and replay semantics, truth of `stale` and `ambiguous` remains attributable evaluator responsibility, and declared `sufficient` is not proof that evidence is current or unambiguous.
+6. Late evidence creates a new immutable snapshot and new record; prior record is not mutated.
+7. Supersession preserves history and may branch.
+8. Supersession cannot silently change target or criterion binding identity.
+9. Conflicting heads remain visible and project to `indeterminate` unless explicitly reconciled by a new reviewed record lineage.
+10. Operation completion and assessment conclusion are independent.
+11. Assessment does not create Capability, Readiness, authorization, admissibility, Conflict, Risk або State.
+12. No universal fundamental Result Concept is introduced.
 
 ## 16. Invariants
 
@@ -510,6 +511,8 @@ Attempt to falsify OCP-011 with cases where:
 
 ## 23. Architecture Board status
 
-Revision `0.1.0` opens OCP-011 and AB-056 as `Under Review`.
+Revision `0.1.0` opened OCP-011 and AB-056 as `Under Review`.
+
+Revision `0.1.1` resolves external Finding 1 by making the checker trust boundary for self-declared `stale` and `ambiguous` states explicit; the document remains `Draft`, AB-056 remains `Under Review`, and `Result: Proposed` remains unchanged pending repeated external verification and a separate atomic acceptance act.
 
 No Architecture Board acceptance is recorded by this revision. OutcomeAssessmentRecord remains a proposed governed record contract, and the temporary `Result: Proposed` registry entry remains unchanged pending external adversarial review and a separate atomic acceptance act.
