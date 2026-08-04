@@ -183,6 +183,20 @@ cases:
       proposals: [*proposal]
       responses: [*confirm_c, *confirm_b]
 
+  normalized_response_references_replay:
+    expected_outcome: positive
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-NORMALIZED-REFS-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses:
+        - <<: *confirm_b
+          proposal_ref: " PROP-REC-1 "
+          responder_ref: " VERTICAL-B "
+        - *confirm_c
+
   changed_rule_version_fails_safe:
     expected_outcome: indeterminate
     snapshot:

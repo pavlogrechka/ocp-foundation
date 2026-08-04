@@ -272,8 +272,8 @@ def derive_coordination_evidence(snapshot: dict[str, Any]) -> str:
         candidates = [
             item
             for item in responses
-            if item.get("proposal_ref") == proposal.get("proposal_record_id")
-            and item.get("responder_ref") == responder
+            if _text(item.get("proposal_ref")) == _text(proposal.get("proposal_record_id"))
+            and _text(item.get("responder_ref")) == _text(responder)
         ]
         heads = _heads(candidates, "response_record_id", at)
         if len(heads) != 1:

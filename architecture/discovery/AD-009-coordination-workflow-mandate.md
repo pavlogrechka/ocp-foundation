@@ -123,7 +123,8 @@ If the proposal is accepted in this PR after external review:
 - AD-009 becomes `Accepted` at version `0.2.0`;
 - OCP-015 becomes the accepted workflow-evidence boundary;
 - AB-058 becomes `Resolved` for this narrow record-and-projection contract;
-- authorization, visibility policy, negotiation, selection, reservation, conflict resolution and Assignment execution remain unresolved outside AB-058; and
+- authorization remains under AB-017; selection, reservation and allocation remain under AB-025; conflict resolution remains under AB-018 and AB-038; and Assignment lifecycle alignment remains under AB-028;
+- the same acceptance act atomically creates AB-059 for cross-vertical visibility policy and negotiation, consensus or agreement semantics beyond the proposal-response boundary; until that act, those residual questions remain tracked by AB-058; and
 - no new fundamental Concept or Concept graph edge is introduced.
 
 Until that acceptance step, AD-009 remains `Under Review`, OCP-015 remains `Draft`, and AB-058 remains `Open`.
