@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-011
 Title: State and Readiness Evidence Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: AD-002, ADR-DRAFT-007, OCP-003, OCP-004, OCP-005, OCP-006, OCP-007, OCP-010, OCP-011, OCP-012, OCP-013
 Applies-To: AB-007, State, Readiness
-Review-After: External adversarial review of the State and Readiness candidate separation and evidence matrix
+Review-After: External adversarial review of the separate State and Readiness outcome comparison
 ---
 
 # AD-011 — State and Readiness Evidence Boundary
@@ -261,3 +261,165 @@ AD-011 opens AB-007 in `Discovery` for the subsequent decision required by accep
 Revision `0.1.0` does not modify Concept statuses, ADR-DRAFT-007, any accepted OCP contract, the Foundation map, schemas, checker rules or fixtures. It also does not resolve availability, health, authorization, reservation, capacity, Organization composition or Conflict.
 
 The next revision may compare externally reviewed findings and propose separate S and R verdicts. Acceptance still requires exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization before squash merge.
+
+## 17. Comparison method and verdict vocabulary
+
+This revision compares the two axes for external review. It does not select a State outcome, a Readiness outcome, a combined pair, a result vocabulary or a new artifact.
+
+The comparison follows four rules:
+
+1. S0 and R0 are complete no-new-authority controls, not unfinished implementations.
+2. State identity and Readiness conclusion authority are evaluated separately.
+3. A positive-capable outcome must name every owner and fail-safe input it adds; implementation convenience is not evidence.
+4. Every candidate is tested against the same human examples and all fifteen counterexamples in §11, using evidence appropriate to that candidate.
+
+The working verdicts below mean:
+
+- **admissible control** — safe and complete when no shared authority is justified;
+- **leading hypothesis** — the smallest currently plausible positive-capable direction, still subject to explicit evidence gates;
+- **conditional alternative** — admissible only when a concrete consumer demonstrates the extra authority it needs; and
+- **not supported by current evidence** — the candidate may remain reviewable, but the present repository cannot justify selecting it.
+
+These are comparison verdicts for falsification. They are not Architecture Board selections.
+
+## 18. State-axis comparison
+
+The State axis asks whether Core needs a shared independently identifiable subject, a reusable record discipline or neither.
+
+| Outcome | Plain-language effect | Added authority | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| S0 — no shared State abstraction | Consumers name the exact lifecycle, observation, assessment or projection they mean. | None. | Preserves the accepted owner and meaning of every source. | Consumers cannot use one generic Core field for unlike facts. | **Admissible control and current default.** No demonstrated consumer needs a shared State identity. |
+| S1 — constrained state-like record pattern | An invoking specification may reuse obligations for identity, time, provenance, history and fail-safe projection while owning its own vocabulary. | Only the invoking specification's existing record authority; the Pattern adds obligations, not meaning. | Could remove repeated governance text without creating a universal taxonomy. | A broad Pattern may become a generic container or silently translate local lifecycle values. | **Conditional alternative.** Repeated accepted invocations must first prove a stable common obligation set. |
+| S2 — fundamental State Concept | State would have identity independent of its subject and be referenced across domains. | A new Core Concept and its owner. | Could support genuine cross-domain references if an independent subject exists. | A label or dashboard field can masquerade as identity and overwrite simultaneous facts owned by others. | **Not supported by current evidence.** No stable independent identity, continuity or cross-domain reference need has been demonstrated. |
+
+### 18.1 State decision-separating evidence
+
+External review should ask:
+
+- Can a consumer requirement be expressed only by referencing a State identity, rather than the exact source record and context?
+- Which value changes while that alleged identity persists?
+- Which accepted record contracts repeat exactly the same obligations strongly enough to justify S1?
+- Can S1 prohibit vocabulary translation and still be useful?
+- Can S2 represent simultaneous lifecycle, condition and preparedness conclusions without turning them into competing values of one property?
+
+S0 remains correct when those questions have no evidence-backed answer. S1 is not justified by similar field names alone. S2 requires new independent-identity evidence, not a stronger preference for a shared UI vocabulary.
+
+## 19. Readiness-axis comparison
+
+The Readiness axis asks whether Core needs a governed preparedness conclusion and, if so, which narrow owner can state it.
+
+| Outcome | Plain-language effect | Added authority | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| R0 — no shared Readiness authority | Consumers inspect exact inputs and make their own separately governed decisions; Foundation emits no canonical ready conclusion. | None. | Honest whenever no consumer, criterion or freshness authority exists. | Callers may invent incompatible local booleans and present them as Core Readiness. | **Admissible control and current behavior.** It remains binding wherever positive prerequisites are absent. |
+| R1 — governed readiness assessment profile | A named evaluator or rule states one attributable preparedness conclusion for an exact subject, context, criterion, snapshots and time. | Only the exact assessment conclusion selected by a separately accepted contract. | Smallest positive-capable shape; keeps the conclusion contextual and non-mutating. | A generic profile may dilute OCP-011 or collapse Capability, availability, admissibility and authorization into ready. | **Leading hypothesis**, but **not yet selectable**: no concrete consumer, criterion owner, target contract or accepted freshness/replay boundary is complete. |
+| R2 — domain-owned Readiness with Core envelope | A named domain owns meaning while Core governs exact bindings and mismatch rejection. | The domain owns only its exact versioned result. | Preserves legitimate domain-specific preparedness semantics. | Identical labels may hide incompatible criteria and invite invalid cross-domain comparison. | **Conditional alternative.** It needs at least two concrete profiles or one demonstrated interoperability boundary. |
+| R3 — fundamental Readiness Concept | Readiness would be an independently persistent Core entity rather than a conclusion. | A new Core Concept and cross-domain authority. | Could support independent references if preparedness itself has durable identity. | An assessment is reified as an entity, or one global property absorbs unrelated evidence and authorities. | **Not supported by current evidence.** Existing evidence points to a contextual conclusion, not an independently persistent subject. |
+
+### 19.1 Readiness decision-separating evidence
+
+External review should ask:
+
+- Which concrete consumer needs a shared conclusion rather than the exact OCP-006, OCP-011, OCP-012 and OCP-013 inputs?
+- Who owns the preparedness criterion and the rule or evaluator authority?
+- Is the target one Resource, an Organization, another subject or a domain-specific aggregate?
+- Which exact missing, stale or conflicting input blocks a positive result?
+- Can a domain result be exchanged without treating unlike meanings as comparable?
+- What persists independently if R3 is claimed to be a Concept rather than an assessment?
+
+R1 is the smallest plausible positive model because its conclusion remains attributable and contextual. It is deliberately blocked: AB-039 still owns freshness and replay semantics, while Organization targets additionally depend on AB-006 and AB-052. R0 is therefore not temporary permissiveness; it is the current fail-safe result wherever those owners are absent.
+
+## 20. Axis independence and pair behavior
+
+No S/R pair is selected by this comparison. The following combinations illustrate why the axes cannot decide one another:
+
+- **S0 + R0** is the current safe behavior: exact source records remain authoritative and Foundation emits no shared preparedness conclusion.
+- **S0 + R1** could later support a governed readiness assessment without creating a generic State abstraction.
+- **S1 + R0** could standardize repeated record obligations while still declining to create any Readiness authority.
+- **S1 + R1** would require two separate acceptance arguments: repeated record-pattern need and a concrete preparedness contract.
+- **S2 + any R outcome** still needs independent State identity evidence; a Readiness conclusion cannot supply it.
+- **any S outcome + R2/R3** still needs its own domain or identity evidence; State vocabulary cannot supply a criterion owner.
+
+A proposed pair fails if changing State representation changes the meaning of Readiness, or if a Readiness conclusion becomes authority for lifecycle, availability, authorization or a generic State value.
+
+### 20.1 Current Resource and Organization behavior
+
+For the Resource example in §9, every S outcome must preserve the exact accepted inputs. Under R0 there is no governed readiness conclusion. R1–R3 must remain non-positive until the missing freshness, criterion and authority inputs are supplied.
+
+For the Organization example in §10, every R outcome remains non-positive until an accepted Organization-to-Resource mapping and organization-level criterion exist. S1 or S2 cannot be used to aggregate Resource evidence, and R2 cannot invent a domain profile merely because an Organization groups Resources.
+
+## 21. Normative authority accounting
+
+“Unselected” below is an explicit evidence gap, not permission for an implementation to choose an owner.
+
+| Binding or conclusion | Current or candidate owner | Fail-safe obligation |
+|---|---|---|
+| Subject identity | Existing Concept owner; any future R1/R2 contract must exact-bind subject kind and reference | Resource and Organization identities never collapse; an unresolved subject cannot yield a positive conclusion. |
+| Lifecycle history | OCP-004 or OCP-005 for its own subject | Local stages are not translated into shared State or Readiness values. |
+| Observations and occurrence evidence | OCP-010 record authors and Event identity | Observation count, age or existence does not establish freshness or truth by itself. |
+| Objective assessment | OCP-011 evaluator under its accepted target and vocabulary | It cannot be silently retargeted to Resource or Organization Readiness. |
+| Capability claim | OCP-012 claimant | Attribution does not become verified possession, availability or preparedness. |
+| Admissibility | OCP-006 evaluator for one exact context | `admissible` does not become positive Readiness or authorization. |
+| Eligibility | OCP-013 rule plus its governed consumer requirement | `positive` remains directional requirement satisfaction, not Readiness. |
+| Availability | **Unselected** | Absence of a blocking fact cannot manufacture availability. |
+| Preparedness criterion | **Unselected** for a shared R1–R3 conclusion | No positive-capable candidate may infer it from labels or existing result vocabulary. |
+| Freshness and deterministic replay | AB-039, unresolved | Newest timestamp and caller-local age thresholds are not authority. |
+| Readiness evaluator or rule | **Unselected** | Caller identity, source count or an implementation default cannot choose the conclusion. |
+| Organization composition and holder mapping | AB-006 and AB-052 | Resource evidence is not inherited or aggregated into Organization identity. |
+| Authorization, reservation and allocation | AB-017 and AB-025 | No State or Readiness result grants action authority. |
+
+## 22. Mandatory counterexample mapping
+
+Every row maps the complete §11 pressure to both axes. A range such as S0–S2 or R0–R3 means every candidate on that axis must provide the stated behavior.
+
+| # | Pressure | State-axis required behavior | Readiness-axis required behavior | Future executable-evidence owner |
+|---|---|---|---|---|
+| 1 | Positive Capability claim is attributable, not independently verified | **S0–S2:** preserve the claim as its exact source; do not materialize generic possessed State. | **R0:** no conclusion. **R1–R3:** non-positive unless the selected criterion explicitly and legitimately accepts that evidence state. | OCP-012 compatibility plus any selected R contract. |
+| 2 | `admissible` exists without availability or preparedness evidence | **S0–S2:** retain only the OCP-006 contextual decision. | **R0:** no conclusion. **R1–R3:** missing required inputs is non-positive. | OCP-006 compatibility plus selected R contract. |
+| 3 | Assignment is effective while Resource evidence is stale or unavailable | **S0–S2:** Assignment history remains separate from condition evidence. | **R0:** no conclusion. **R1–R3:** stale or missing inputs cannot yield positive. | OCP-005 plus AB-039 and selected R contract. |
+| 4 | Operation is Active or Completed without proven success or preparedness | **S0–S2:** local lifecycle is not universal State. | **R0–R3:** no readiness result follows from Operation stage. | OCP-004 and selected R contract. |
+| 5 | Recent observation is treated as current condition without freshness rule | **S0:** expose exact observation only. **S1/S2:** no current-state projection without an accepted rule. | **R0:** no conclusion. **R1–R3:** non-positive until AB-039-owned semantics are bound. | OCP-010, AB-039 and any selected positive contract. |
+| 6 | Absence of negative evidence becomes positive Readiness | **S0–S2:** absence does not create a state fact. | **R0:** no conclusion. **R1–R3:** positive requires explicit sufficient inputs; closed-world inference is forbidden. | Every selected R contract. |
+| 7 | Evaluators differ because criteria or snapshots differ | **S0–S2:** preserve both contextual records; do not pick a global State winner. | **R0:** report no shared conclusion. **R1–R3:** bind each conclusion to its exact criterion and snapshot. | OCP-011 precedent plus selected R contract. |
+| 8 | Contextual readiness conclusions differ for the same subject and time | **S0–S2:** do not collapse them into one global property. | **R1–R3:** different exact contexts may legitimately differ; R0 emits none. | Selected R contract. |
+| 9 | Newest timestamp or list order selects a superseding assessment | **S0–S2:** only explicit governed history may select a head. | **R1–R3:** invalid or ambiguous lineage is non-positive; R0 emits none. | P-001 invocation if selected, plus the owning OCP. |
+| 10 | Resource evidence is inherited by Organization or sibling Resource | **S0–S2:** preserve separate identities and exact relation evidence. | **R0–R3:** no transfer or aggregation without AB-006/AB-052 contracts. | OCP-007, AB-006, AB-052 and selected R contract. |
+| 11 | Eligibility is reused as authorization, selection, reservation or Assignment action | **S0–S2:** no state-like representation adds those authorities. | **R0–R3:** reject forbidden coupling even if a readiness conclusion is positive. | OCP-013 compatibility, AB-017, AB-025 and AB-028 boundaries. |
+| 12 | One lifecycle vocabulary is translated into generic State and reused elsewhere | **S0:** exact source vocabulary only. **S1:** Pattern must reject semantic translation. **S2:** Concept must prove shared meaning rather than label similarity. | **R0–R3:** translated State labels are not readiness evidence by default. | Every selected S1/S2 owner and selected R contract. |
+| 13 | Unknown domain Readiness code is treated as comparable | **S0–S2:** State representation cannot normalize domain meaning. | **R2:** exact profile mismatch fails closed. **R1/R3:** unknown vocabulary is non-positive. **R0:** no conclusion. | R2 Core envelope and every participating domain profile. |
+| 14 | Missing, stale, ambiguous or conflicting evidence becomes ready or durable negative | **S0–S2:** preserve the evidence gap rather than a global State. | **R1–R3:** return non-positive indeterminate or an explicitly owned review route; R0 emits none. | AB-039 plus every selected R contract. |
+| 15 | One global `state` overwrites health, lifecycle, availability and preparedness | **S0:** no global field. **S1:** Pattern keeps vocabularies owner-scoped. **S2:** must prove independent identity and simultaneous-context behavior. | **R0–R3:** Readiness remains a separate conclusion and cannot overwrite other layers. | Every selected S/R normative owner. |
+
+## 23. Executable-evidence plan by candidate
+
+This comparison does not add checker code. It assigns evidence to the normative owner that would exist only after an outcome is selected.
+
+| Candidate | Required downstream evidence |
+|---|---|
+| S0 | Compatibility regression showing exact lifecycle, observation, assessment and projection sources remain distinct and no generic State field is emitted. |
+| S1 | A separately reviewed Pattern invocation suite proving owner-scoped vocabulary, exact subject/kind binding, effectivity, provenance, history and rejection of cross-owner translation. |
+| S2 | A separate Concept cycle proving identity, lifecycle, reference consumers, simultaneous-context behavior and Concept-graph effect before any schema or fixture is accepted. |
+| R0 | Compatibility regressions showing that positive claims, admissibility, eligibility, effectivity and observations do not manufacture a readiness result. |
+| R1 | A separately accepted assessment contract with exact target, criterion, context, snapshots, evaluator/rule, evidence states, effectivity, provenance, history and all applicable §22 cases. |
+| R2 | A Core envelope plus each named domain profile, with exact domain/version binding, unknown-profile rejection and cross-domain mismatch fixtures. |
+| R3 | A separate Concept cycle proving independent identity and continuity before any positive result contract or graph edge is added. |
+
+If S0 or R0 is later selected, no placeholder schema, record family or checker module is created merely to make the control appear implemented.
+
+## 24. Comparison status and next decision gate
+
+Revision `0.1.0` opened AD-011 and AB-007. Fable reviewed its exact head in two iterations, found one wording defect in the availability boundary, and approved the corrected discovery with green CI. Codex accepted the finding and recommendation; Pavlo authorized the PR; the discovery was squash-merged without changing any Concept status.
+
+Revision `0.2.0` supplies the separate S and R comparisons, pair behavior, authority accounting, complete counterexample map and executable-evidence ownership. It remains `Discovery` and records no Architecture Board selection.
+
+External adversarial review must now determine separately:
+
+1. whether current evidence supports S0, S1 or S2;
+2. whether current evidence supports R0, R1, R2 or R3, or leaves the axis in Discovery;
+3. whether R1 is fairly treated as a leading but presently blocked hypothesis;
+4. whether S0 and R0 are full controls rather than hidden caller-local positive paths;
+5. whether all fifteen counterexamples are fairly mapped to every applicable candidate; and
+6. whether the comparison remains understandable without checker code.
+
+A later Board act must name one outcome per decidable axis. It may select a control, select a positive-capable outcome only with its missing owners resolved, or keep one axis in `Discovery` while deciding the other. The Board act may not create a Pattern, OCP contract, Concept, schema, checker rule or graph edge merely by selecting a direction.
+
+Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and of any later selection act.
