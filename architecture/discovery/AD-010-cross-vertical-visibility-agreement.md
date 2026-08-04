@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-010
 Title: Cross-Vertical Visibility and Agreement Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-014, OCP-015, AD-009, AB-059
 Applies-To: AB-059, cross-vertical visibility, agreement semantics
-Review-After: External adversarial review and Architecture Board outcome selection
+Review-After: A separately accepted mandate names a concrete consumer and legitimate owner for a governed visibility or agreement conclusion
 ---
 
 # AD-010 — Cross-Vertical Visibility and Agreement Boundary
@@ -473,3 +473,42 @@ External adversarial review must now try to falsify the comparison on its exact 
 5. whether either axis still imports receipt, permission, party membership, consensus, authorization, selection, reservation, allocation, Conflict or Assignment authority.
 
 If the evidence does not distinguish models on one axis, that axis remains in `Discovery` even if the other axis is ready for selection. A later Board act must name separate V and A outcomes, including V0 or A0 where appropriate. Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of any selection act.
+
+## 25. Accepted axis selections
+
+The selection records two independent outcomes. It does not create a combined visibility-and-agreement contract.
+
+### 25.1 Visibility axis — V0
+
+AD-010 selects **V0 — publisher envelope only**.
+
+The accepted evidence contains no concrete consumer requirement for a shared visibility-policy conclusion and no accepted owner for a policy version, input set, precedence rule or evaluation result. V1 is therefore not admissible yet despite remaining the smallest positive-capable hypothesis. V2 has no demonstrated need for attributable judgment, and V3 has no accepted domain profile whose meaning must cross the Core boundary.
+
+Under V0, consumers may report exactly whom the OCP-015 publisher named in `visible_to_refs[]`. They may not call that declaration policy compliance, permission, proof of receipt or authorization. Technical access and delivery remain separate facts. No governed visibility result, policy evaluator, disclosure-decision record or domain-policy envelope is introduced.
+
+### 25.2 Agreement axis — A0
+
+AD-010 separately selects **A0 — OCP-015 evidence only**.
+
+The accepted evidence contains no concrete consumer requirement for a canonical agreement conclusion. The party-set owner and agreement-rule owner remain unselected; no additional attributable agreement act beyond OCP-015 responses is demonstrated; and no domain agreement profile is accepted. A1–A3 therefore cannot emit an authoritative shared conclusion.
+
+Under A0, consumers may report each actor's exact attributable response to one exact proposal revision. They may not infer agreement, consensus, approval, authorization or operational commitment from visibility, invitation, response count, unanimity, timestamps or record order. No governed agreement result, party-set record, formation rule, attributable agreement record or domain-agreement envelope is introduced.
+
+### 25.3 Independent and reopenable controls
+
+V0 and A0 are complete no-new-authority controls, not placeholders for schemas or evaluators. Selecting both does not couple the axes: a publisher declaration remains independent of every proposal response, and a response remains independent of visibility policy.
+
+Either axis may be reopened without reopening the other, but only through a separately accepted mandate that supplies the missing decision-separating evidence. That mandate must name a concrete consumer, the exact additional conclusion it needs and a legitimate owner for every new input and result. Implementation convenience, a familiar label or technical data access is not reopening evidence.
+
+## 26. Accepted effect
+
+This selection has the following narrow effect:
+
+- AD-010 is `Accepted` at version `0.3.0` with V0 and A0 recorded separately;
+- AB-059 is `Resolved` for the current evidence because neither axis justifies new shared authority;
+- OCP-015 remains the authoritative proposal, response and publisher-envelope evidence contract;
+- the V0 and A0 obligations in §§20–23 remain compatibility requirements for OCP-015 consumers;
+- no new record family, result vocabulary, evaluator, policy, party-set source, fundamental Concept or Concept graph edge is created; and
+- authorization remains under AB-017; reservation and allocation under AB-025; Assignment lifecycle alignment under AB-028; conflict questions under AB-018 and AB-038; and authentication, access enforcement and consensus remain explicit evidence gaps.
+
+The selection takes effect only through squash merge after exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization. Until that merge, the PR carrying this section is a proposed selection act.
