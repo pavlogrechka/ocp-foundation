@@ -13,6 +13,9 @@ Implemented validators:
 - Assignment: authoritative linear transition history, optional materialized lifecycle projections, required Established-lineage fields, applicability interval, and supersession self-reference;
 - Constraint: authoritative linear transition history, optional materialized lifecycle projections, target/predicate/enforcement completeness, validity interval, exact-version evaluation selection, evaluation uniqueness, and contradictory `not_applicable` detection;
 - Capability: definition structure, exact identity uniqueness, namespace-owner consistency, supersession validation, holder-coupling rejection and exact reference resolution;
+- Event: occurrence identity, exact reference resolution, zero-observation validity and prohibition of embedded observation/truth/achievement semantics;
+- ObservationRecord: attributable record structure, optional exact Event linkage, observation/recording time order, supersession target and cycle validation;
+- integrated Event scenario: composition of current Resource, Operation, Assignment, Constraint, Objective, Event and Observation validators plus a checker-local fail-safe assessment envelope;
 - repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`;
 - artifact governance: path-derived OCP, Pattern and AD identifiers; taxonomy-allowed statuses; duplicate AB identifiers; accepted AD↔AB synchronization; and exact Pattern invocation resolution;
 - process audit: main-context verification that complete post-baseline Git history contains no merge commit.
@@ -26,7 +29,9 @@ Implemented reference derivations:
 - `effective_constraint_result`;
 - `constraint_blocks`;
 - `constraint_set_decision`;
-- `resolve_capability_definition`.
+- `resolve_capability_definition`;
+- `resolve_event`;
+- `observations_for_event`.
 
 ## Artifact-governance authority
 
@@ -112,6 +117,56 @@ The registry validator rejects embedded holder, possession, readiness, availabil
 
 Holder-coupling rejection is a finite key probe, not a semantically complete implementation of OCP-009 invariant 12. Review of normative artifacts remains responsible for detecting unlisted holder-specific semantics, and the probe list may be expanded in later cycles.
 
+## Event and ObservationRecord envelope
+
+OCP-010 defines Event as occurrence identity and invokes P-001 only for ObservationRecord.
+
+Event exact reference fixtures use:
+
+```yaml
+concept: EventReference
+events:
+  - event_id: EV-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-001
+reference:
+  event_ref: EV-001
+```
+
+`resolve_event(events, event_ref)` compares only exact `event_id`. It does not use kind, occurrence time, registration time, description, observation count or list order. Duplicate identities are ambiguous and return `None` regardless of record ordering.
+
+`observations_for_event(observations, event_ref)` returns every structurally valid ObservationRecord with exact matching `event_ref`, sorted only to make reference-test output deterministic. The returned order has no normative truth, recency or priority semantics.
+
+An ObservationRecord without `event_ref` is a valid unresolved attributable assertion. The checker does not manufacture an Event from statement, kind or nearby timestamps. When `event_ref` is present, it must exact-resolve into one valid Event.
+
+Observation supersession preserves history. Self-supersession, unresolved targets and cycles are rejected; branching is allowed and no newest/current/truth winner is derived.
+
+The exact-version syntax `kind@version` is checker-envelope serialization for opaque kind references. OCP-010 does not mandate this wire encoding.
+
+## Integrated non-sensitive scenario envelope
+
+`IntegratedEventScenario` composes existing validators for Objective, Operation, Resource, Assignment and Constraint with Event/Observation validators. It proves that current foundation contracts can coexist in one neutral infrastructure-condition scenario.
+
+The fixture includes a checker-local assessment envelope only to exercise AD-006 fail-safe behavior:
+
+```yaml
+assessment:
+  assessment_id: ASM-001
+  target_objective_ref: OBJ-001
+  rule_ref: neutral.asset-condition-assessment@1
+  evidence_observation_refs: [OBS-001, OBS-002]
+  evidence_snapshot_ref: SNAP-ASM-001
+  evaluator_ref: REVIEWER-001
+  evaluated_at: 2026-08-04T01:00:00Z
+  conclusion: indeterminate
+  provenance_ref: ACT-ASM-001
+```
+
+This envelope is not the normative `OutcomeAssessmentRecord`, does not invoke P-001 and does not resolve AB-056. Its sole purpose is to prove that Operation completion does not imply Objective achievement and that conflicting evidence cannot produce `achieved` or `partial` by default.
+
+The reference conflict probe treats different normalized observation statements in the exact evidence set as conflicting. This is deliberately finite and not a production truth, confidence, semantic-equivalence or source-reliability engine. The AB-056 contract must replace this local probe with reviewed domain semantics.
+
 ## Materialized projections
 
 OCP-005 and OCP-006 allow lifecycle projections to be materialized but do not require them.
@@ -137,6 +192,15 @@ The suite includes:
 - unresolved and duplicate Capability references that fail closed;
 - Capability supersession cycles, namespace-owner conflicts and holder-coupled registry entries;
 - same-type Resource context that does not create a Capability claim;
+- an Event with zero observations;
+- equal-kind, equal-time Events that remain distinct identities;
+- duplicate and unresolved Event references that fail closed;
+- observations with optional unresolved Event linkage;
+- two observations of one Event without observation identity collapse;
+- conflicting observations retained simultaneously;
+- invalid observation time order, self-supersession and supersession cycle;
+- one valid integrated scenario with a completed Operation and `indeterminate` assessment;
+- one negative integrated scenario rejecting positive conclusion from conflicting evidence;
 - duplicate AB identifiers;
 - malformed, missing and stale Pattern invocations;
 - non-semver Pattern versions;
@@ -158,9 +222,12 @@ Each YAML fixture contains:
 
 ```yaml
 case_id: stable-test-id
-concept: Resource | Operation | Assignment | Constraint | Capability | CapabilityRegistry | CapabilityReference
+concept: Resource | Operation | Assignment | Constraint | Capability | CapabilityRegistry | CapabilityReference | Event | EventDataset | EventReference | ObservationRecord | ObservationDataset | EventObservationDataset | IntegratedEventScenario
 reference: {} # checker-only evaluation or exact-resolution metadata when required
 entries: [] # Capability registry dataset when required
+events: [] # Event dataset when required
+observations: [] # ObservationRecord dataset when required
+scenario: {} # integrated non-sensitive reference envelope
 expected:
   valid: true | false
   error_codes: []
@@ -193,8 +260,11 @@ This slice does not yet provide:
 
 - a production or cross-repository Capability registry; OCP-009 support is a local reference dataset and resolver only;
 - holder-specific Capability claims or Resource/Organization possession semantics;
+- a production Event registry, correlation engine, automatic occurrence deduplication or truth-selection model;
+- a normative OutcomeAssessmentRecord contract; the integrated assessment envelope is checker-local pending AB-056;
+- source reliability, confidence, semantic equivalence, causal inference or evidence sufficiency policy;
 - duplicate normative-rule detection;
-- cross-file identity uniqueness beyond the Capability fixture dataset and other currently governed artifact classes;
+- cross-file identity uniqueness beyond the currently governed fixture datasets and artifact classes;
 - full Operation lifecycle validation;
 - a Constraint expression language or production evaluator interface;
 - `relation_scope` evaluation semantics;
@@ -202,4 +272,4 @@ This slice does not yet provide:
 - quantity, capacity, geometry, spectrum, authorization, Conflict, Risk, Readiness, or State semantics;
 - database, API, or UI contracts.
 
-Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES`, `CAPABILITY_ERROR_CODES` and the other checker code sets participate in the same exact-equality manifest meta-test, so adding an error or derivation without provenance fails CI.
+Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES`, `CAPABILITY_ERROR_CODES`, `EVENT_ERROR_CODES` and the other checker code sets participate in the same exact-equality manifest meta-test, so adding an error or derivation without provenance fails CI.
