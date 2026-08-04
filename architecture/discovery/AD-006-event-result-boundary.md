@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-006
 Title: Event and Result Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-006, OCP-008, OCP-009, AD-002
 Applies-To: AB-054, Event model, Result model, Objective achievement evidence
-Review-After: External adversarial boundary review
+Review-After: Repeated external adversarial boundary review
 ---
 
 # AD-006 — Event and Result Boundary
@@ -28,32 +28,32 @@ These uses do not yet decide what Event or Result identifies, whether either has
 
 AD-006 introduces no Event or Result structure, Concept status change, current graph edge, P-001 invocation, lifecycle, API, schema or implementation.
 
-## 2. Boundary question
+## 2. Boundary questions
 
-AD-006 asks two independent questions.
+AD-006 asks two independent questions. The Architecture Board may select different outcomes for Event and Result. Registration of both terms does not prove that both deserve the same ontological status.
 
 ### 2.1 Event question
 
 Should Core model Event as:
 
-1. a real-world occurrence or change with identity independent of any report;
-2. an attributable observation or assertion that something occurred;
-3. a two-layer model separating occurrence identity from observation records;
-4. a governed identified record pattern without a fundamental Event Concept;
-5. domain-local records with no Core Event model?
+1. a real-world occurrence or change with identity independent of any report — E1;
+2. an attributable observation or assertion that something occurred — E2;
+3. a two-layer model separating occurrence identity from observation records — E3;
+4. a governed identified-record pattern without a fundamental Event Concept — E4;
+5. domain-local records with no Core Event model — E5?
 
 ### 2.2 Result question
 
 Should Core model Result as:
 
-1. a realized outcome or effect with independent identity;
-2. an attributable assessment of an Objective, criterion or operational context;
-3. an Operation-owned terminal summary;
-4. a derived conclusion produced from exact evidence and evaluation rules;
-5. a governed identified record pattern without a fundamental Result Concept;
-6. domain-local records with no Core Result model?
+1. a realized outcome or effect with independent identity — R1;
+2. an attributable assessment promoted to a fundamental Result Concept — R2;
+3. a governed attributable assessment record without a fundamental Result Concept — R3;
+4. an Operation-owned terminal summary without independent Result identity — R4;
+5. a derived conclusion recomputed from exact evidence and evaluation rules — R5;
+6. domain-local Result models with no Core Result model — R6?
 
-The Architecture Board may select different outcomes for Event and Result. Registration of both terms does not prove that both deserve the same ontological status.
+The numbering and semantics in this section map one-to-one to the admissible outcomes in §§13–14. No outcome contains an unstated fundamental-versus-record sub-choice.
 
 ## 3. Semantic layers that must remain distinct
 
@@ -77,7 +77,7 @@ A candidate Event occurrence represents a bounded fact that something happened o
 
 A candidate observation record represents an attributable assertion about an occurrence or condition. An observation may be incomplete, delayed, duplicated, mistaken, conflicting or later corrected.
 
-The following statements are mandatory guardrails for this discovery:
+Mandatory guardrails:
 
 - an observation is not automatically the occurrence itself;
 - two reports with similar labels and nearby timestamps are not automatically the same Event;
@@ -92,7 +92,7 @@ The downstream decision must specify whether occurrence deduplication is normati
 
 ## 5. Result boundary
 
-The word `result` is currently overloaded. It may refer to:
+The word `result` is overloaded. It may refer to:
 
 - the realized effect of activity;
 - a conclusion that an Objective was achieved, not achieved, partially achieved or remains indeterminate;
@@ -101,7 +101,7 @@ The word `result` is currently overloaded. It may refer to:
 - a terminal Operation summary;
 - a software function return value.
 
-Only the first two are candidates for a Core Result model in this discovery.
+Only realized effect and attributable assessment are candidates for promotion to a **fundamental Result Concept**. R3–R6 are intentionally non-fundamental alternatives: a governed record, Operation-owned summary, derived-only value or domain-local model may be selected without implying independent Result identity.
 
 A Result must not be inferred solely from:
 
@@ -142,7 +142,7 @@ Examples:
 - a completed Operation may fail to achieve every Objective;
 - a cancelled Operation may still produce relevant Events or partial effects;
 - an aborted Operation may produce a valuable observation;
-- an ongoing Operation may already have provisional or partial Result assessments;
+- an ongoing Operation may already have provisional or partial assessment evidence;
 - a successful Result does not determine the Operation lifecycle stage.
 
 AD-006 does not add Event or Result fields to Operation and does not change OCP-004 lifecycle semantics.
@@ -153,7 +153,7 @@ Parent/child Operation composition remains governed by AB-016. A child Result do
 
 OCP-006 already uses local evaluation records and values such as `satisfied`, `violated`, `not_applicable` or `indeterminate` within its own normative contract.
 
-Those values are not automatically instances of the proposed fundamental Result Concept.
+Those values are not automatically instances of a proposed fundamental Result Concept.
 
 A Constraint violation may be evidence for a later finding or Conflict model, but:
 
@@ -188,6 +188,7 @@ A fundamental Event Concept is justified only if review confirms identity that r
 
 Evidence for independent occurrence identity may include:
 
+- an occurrence exists and remains referenceable even when no observation record exists yet;
 - several independent observations refer to the same occurrence without becoming one observation;
 - the occurrence is referenced by multiple Operations, Objective assessments or audits;
 - correction of one observation does not mutate the occurrence identity;
@@ -233,9 +234,9 @@ The downstream decision must distinguish, where applicable:
 
 AD-006 does not select a canonical timestamp structure or uncertainty model.
 
-However, no selected model may silently equate all timestamps or select truth by the latest record.
+No selected model may silently equate all timestamps or select truth by the latest record.
 
-Corrections must preserve history. A corrected observation or revised Result assessment should normally be a new identified record, amendment or superseding record rather than an in-place rewrite of attributable evidence. Any invocation of P-001 must be complete and versioned.
+Corrections must preserve history. A corrected observation or revised stored assessment should normally be a new identified record, amendment or superseding record rather than an in-place rewrite of attributable evidence. A derived-only outcome must preserve exact snapshots and replayability rather than simulate record supersession. Any invocation of P-001 must be complete and versioned.
 
 Missing, stale, ambiguous or conflicting evidence must not become an authoritative positive Result by default.
 
@@ -271,31 +272,31 @@ Potential graph risks include:
 
 Event identifies the occurrence. Observations are separate local or identified records.
 
-This outcome must prove cross-observation occurrence identity without heuristic truth selection.
+This outcome must prove cross-observation occurrence identity without heuristic truth selection and must support an occurrence with zero observations.
 
 ### E2 — observation/assertion as fundamental Event Concept
 
 Event identifies an attributable observation or report, not the underlying occurrence.
 
-This outcome must explain how multiple reports about one occurrence are related without claiming one hidden occurrence identity.
+This outcome must explain how multiple reports about one possible occurrence are related without claiming one hidden occurrence identity.
 
 ### E3 — two-layer occurrence and observation model
 
 A reusable occurrence identity is separated from attributable observation records.
 
-The Board must decide whether one or both layers are fundamental Concepts and whether the observation layer invokes P-001.
+The Board must decide whether one or both layers are fundamental Concepts and whether the observation layer invokes P-001. Occurrence identity must remain valid with zero observations.
 
 ### E4 — governed record pattern only
 
 Core defines a reusable identified-record contract for domain Event records but does not introduce a fundamental Event Concept.
 
-This outcome must prove interoperability and reference integrity without one Core occurrence identity.
+This outcome must prove interoperability and reference integrity without one Core occurrence identity and must detect, rather than silently resolve, ambiguous cross-domain references.
 
 ### E5 — domain-local Event models
 
 Core introduces neither a Concept nor a universal Event record contract.
 
-This outcome must show that OCP-004, Objective evidence and coordination can operate without ambiguous cross-domain event references.
+This outcome must show that OCP-004, Objective evidence and coordination can operate without ambiguous cross-domain Event references. Label or timestamp similarity may not be used as an implicit Core identity bridge.
 
 ## 14. Admissible Result outcomes
 
@@ -305,29 +306,35 @@ Result identifies an actual outcome or effect independently of assessments.
 
 Assessments are separate records and may disagree about the same Result.
 
-### R2 — Result as attributable assessment record
+### R2 — attributable assessment as fundamental Result Concept
 
-Result identifies an evaluation of one exact target under one exact rule and evidence snapshot.
+Each Result identifies an attributable evaluation of one exact target under one exact rule and evidence snapshot.
 
-It may be a governed local or P-001 record without becoming a fundamental Concept by default.
+This outcome must justify why assessment identity deserves fundamental Concept status rather than a governed record contract.
 
-### R3 — Result as Operation-owned summary
+### R3 — governed assessment record pattern only
+
+Core defines a reusable identified assessment-record contract, potentially through a complete P-001 invocation, but does not introduce a fundamental Result Concept.
+
+This outcome must define endpoints, authority, provenance, exact binding, correction and validation semantics.
+
+### R4 — Operation-owned summary
 
 Result is local to one Operation and summarizes its assessed outcome without independent identity outside that Operation.
 
-This outcome must not collapse lifecycle completion into success.
+This outcome must not collapse lifecycle completion into success and must explain how Objective-specific assessments remain distinct.
 
-### R4 — derived Result only
+### R5 — derived Result only
 
 Result is not stored as an authoritative object; it is recomputed from exact evidence, criteria and snapshots.
 
-This outcome must define replay, freshness, conflict and historical-reference behavior.
+This outcome must define deterministic replay, freshness, conflict, historical-reference behavior and recomputation after late evidence without pretending that a stored assessment was superseded.
 
-### R5 — domain-local Result models
+### R6 — domain-local Result models
 
 Core introduces no Result Concept or universal assessment record.
 
-This outcome must still support Objective achievement evidence without uncontrolled status fields.
+This outcome must still support Objective achievement evidence without uncontrolled status fields and must detect or reject cross-domain ambiguity rather than accepting unresolved positive conclusions.
 
 ## 15. Required downstream deliverables
 
@@ -339,7 +346,7 @@ The selected Event and Result outcomes must define:
 4. allowed targets and references;
 5. provenance and authority;
 6. timestamp distinctions and uncertainty boundary;
-7. correction, amendment or supersession behavior;
+7. correction, amendment, supersession or recomputation behavior;
 8. deduplication and ambiguity behavior;
 9. exact evidence, rule and snapshot binding where evaluations exist;
 10. handling of missing, stale and conflicting evidence;
@@ -351,25 +358,80 @@ The selected Event and Result outcomes must define:
 16. complete P-001 conformance for every invocation;
 17. executable evidence and a non-sensitive integrated example dataset.
 
-## 16. Required executable counterexamples
+## 16. Required executable evidence
 
-The downstream normative owner must include mechanically reviewable evidence for at least these cases:
+Evidence obligations are divided into an unconditional core and outcome-conditional blocks. An outcome is evaluated only against cases expressible under its selected semantic ownership; no option is penalized for declining a layer that it explicitly does not define.
 
-1. a completed Operation whose Objective remains not achieved or indeterminate;
-2. an ongoing Operation with a provisional Result assessment;
-3. one occurrence reported by two sources without automatic identity collapse by label or timestamp proximity;
-4. two conflicting observations where record order and latest timestamp cannot select truth;
-5. distinct occurrence, observation, recording and evaluation times;
-6. a lifecycle transition record that does not automatically become a Core Event;
-7. one Event that is relevant evidence but insufficient to prove Objective achievement;
-8. one Operation pursuing multiple Objectives with different assessment outcomes;
-9. several Operations contributing evidence to one Objective without identity collapse;
-10. stale, missing or conflicting evidence producing no authoritative positive assessment;
-11. late evidence creating a new or superseding assessment rather than mutating history;
-12. a Constraint violation that does not automatically create Conflict or a fundamental Result;
-13. a successful Event or Result that does not automatically create a Capability claim, Readiness or authorization;
-14. a child Operation Result that does not automatically aggregate into a parent Operation;
-15. repeated evaluation under the same exact rule and snapshot being deterministic or explicitly indeterminate.
+### 16.1 Unconditional core — all Event and Result outcomes
+
+Every selected combination must provide mechanically reviewable evidence that:
+
+1. a completed Operation can have an Objective that remains not achieved or indeterminate;
+2. a lifecycle transition record does not automatically become a Core Event;
+3. one Operation may pursue multiple Objectives with different assessment or derived outcomes;
+4. several Operations may contribute evidence to one Objective without identity collapse;
+5. stale, missing or conflicting evidence produces no authoritative positive achievement conclusion;
+6. a Constraint violation does not automatically create Conflict or a fundamental Result;
+7. a successful Event, observation, assessment or derived conclusion does not automatically create a Capability claim, Readiness or authorization;
+8. a child Operation outcome does not automatically aggregate into a parent Operation;
+9. repeated evaluation under the same exact rule and snapshot is deterministic or explicitly indeterminate.
+
+For non-Core outcomes such as E5 or R6, these obligations may be demonstrated through governed integration fixtures or domain-owned records, but the Core boundary must still prevent permissive implicit inference.
+
+### 16.2 Event outcome-conditional evidence
+
+**E1 and E3 must additionally prove:**
+
+- an occurrence can exist with zero observations and retains identity independent of reports;
+- one occurrence may be reported by two sources without collapsing the observation records;
+- conflicting observations do not allow list order, newest timestamp or source count to select truth;
+- occurrence, observation and recording times remain distinct when all are represented.
+
+**E2 must additionally prove:**
+
+- two attributable observations about one possible real-world occurrence remain separate Event identities;
+- Core does not manufacture an unmodeled occurrence identity from label or timestamp similarity;
+- correction preserves attributable observation history.
+
+**E4 must additionally prove:**
+
+- governed domain records resolve through the selected record contract;
+- ambiguous or incompatible cross-domain references are detected and rejected;
+- the absence of a fundamental occurrence identity does not authorize heuristic identity collapse.
+
+**E5 must additionally prove:**
+
+- cross-domain consumers cannot treat equal labels or nearby timestamps as equal Event identities;
+- unresolved domain Event references fail closed or remain explicitly unresolved;
+- OCP-004 and Objective evidence can consume governed domain outputs without a hidden universal Event object.
+
+### 16.3 Result outcome-conditional evidence
+
+**R1 must additionally prove:**
+
+- multiple assessments may refer to one realized outcome without becoming the outcome itself;
+- conflicting assessments do not mutate realized-outcome identity;
+- an Event relevant to the outcome is insufficient by itself to prove Objective achievement.
+
+**R2, R3 and R4 must additionally prove:**
+
+- an ongoing Operation may have a provisional or partial stored assessment without changing lifecycle stage;
+- late evidence creates a new, amended or superseding attributable assessment rather than rewriting prior history;
+- exact target, rule, evidence snapshot and evaluator bindings determine the assessment authority;
+- conflicting stored assessments remain visible and cannot be resolved by record order alone.
+
+**R5 must additionally prove:**
+
+- late evidence creates a new exact input snapshot and a new recomputation result;
+- the historical result remains reproducible from its original snapshot;
+- no stored assessment is invented or mutated;
+- missing, stale or conflicting inputs produce no authoritative positive derivation.
+
+**R6 must additionally prove:**
+
+- uncontrolled domain status fields cannot silently become Core Objective achievement;
+- incompatible or ambiguous cross-domain Result references are detected and rejected;
+- the absence of a universal Result record does not allow lifecycle completion or latest-record heuristics to select a positive conclusion.
 
 ## 17. First integrated non-sensitive scenario
 
@@ -381,13 +443,26 @@ Recommended neutral scenario:
 - one Operation pursuing that Objective;
 - two Resources participating through explicit Assignments;
 - at least one temporal or exclusivity Constraint;
-- two source observations concerning one candidate occurrence;
-- one missing or conflicting evidence item;
-- separate Result assessments for at least two criteria or Objectives;
+- evidence with at least one missing, delayed or conflicting item;
+- Objective-specific assessment or derived outcomes according to the selected R-outcome;
 - Operation lifecycle completion that does not force a successful Result;
 - no coordinates, real units, personal data or operationally sensitive details.
 
-The scenario must exercise cross-Concept references and fail-safe behavior. It must not invent the final Event or Result schema before the Board selects outcomes.
+The Event representation in the scenario is outcome-dependent:
+
+- E1/E3 use occurrence identity and observation records, including the zero-observation case in a dedicated fixture;
+- E2 uses attributable observations without a hidden occurrence object;
+- E4 uses governed domain Event records;
+- E5 uses domain-local evidence with explicit cross-domain ambiguity handling.
+
+The Result representation is likewise outcome-dependent:
+
+- R1 separates realized outcome from assessments;
+- R2–R4 use the selected stored assessment or summary ownership;
+- R5 uses deterministic derivation and replay;
+- R6 uses governed domain-local evidence without creating a Core Result identity.
+
+The scenario must exercise cross-Concept references and fail-safe behavior. It must not invent a schema for a layer rejected by the selected outcomes.
 
 ## 18. What is explicitly not defined
 
@@ -430,15 +505,18 @@ Attempt to falsify the discovery with cases where:
 13. parent/child or multi-Operation aggregation is implied;
 14. proposed graph dependencies become circular;
 15. a P-001 record is used without complete endpoint, authority, provenance and validation contracts;
-16. the selected model cannot support one integrated non-sensitive scenario without hidden fields or domain assumptions.
+16. evidence obligations assume a semantic layer rejected by the selected outcome;
+17. the selected model cannot support one integrated non-sensitive scenario without hidden fields or domain assumptions.
 
 ## 20. Exit criteria
 
 AD-006 is ready for Architecture Board decision when:
 
 - Event and Result receive separate independent-identity verdicts;
-- occurrence, observation, evidence, evaluation and assessment boundaries survive adversarial review;
+- occurrence, observation, evidence, evaluation and assessment boundaries survive repeated adversarial review;
 - explicit Event and Result outcomes are selected or named evidence gaps return the AD to Discovery;
+- the six Result outcomes remain one-to-one across the question, outcome and evidence sections;
+- evidence obligations are outcome-fair and no rejected layer is reintroduced through fixtures;
 - Objective achievement remains independent from Operation lifecycle;
 - Constraint evaluation and future Conflict semantics remain separate;
 - Capability, Readiness and State guardrails are preserved;
@@ -448,10 +526,29 @@ AD-006 is ready for Architecture Board decision when:
 - the integrated non-sensitive scenario contract is accepted;
 - unresolved semantics are recorded in Architecture Backlog.
 
-## 21. Architecture Board decision
+## 21. External review resolution
 
-No Event or Result outcome is selected by revision `0.1.0`.
+External adversarial review of revision `0.1.0` raised:
+
+- **F1 Moderate:** unconditional evidence requirements were not expressible under all outcomes;
+- **F2 Minor:** the Result option lists did not define one consistent decision space;
+- **Suggestion:** add an occurrence-with-zero-observations counterexample for E1/E3.
+
+Revision `0.2.0` addresses them by:
+
+1. splitting §16 into an unconditional core and outcome-conditional Event and Result obligations;
+2. defining six Result outcomes consistently in §§2.2, 5 and 14;
+3. separating fundamental Result candidates R1/R2 from non-fundamental alternatives R3–R6;
+4. defining derived-only late-evidence behavior as recomputation rather than stored-record supersession;
+5. requiring E4/E5 and R6 to detect and reject ambiguity without hidden Core identity;
+6. adding the zero-observation occurrence case to E1/E3 identity and executable evidence.
+
+F1 and F2 are addressed pending repeated external verification of this revision.
+
+## 22. Architecture Board decision
+
+No Event or Result outcome is selected by revision `0.2.0`.
 
 AD-006 remains `Discovery`. It changes no Concept status and introduces no normative model beyond the discovery guardrails and review obligations in this document.
 
-The next act is external adversarial review of the Event and Result boundary and the admissible outcome matrices before any OCP-010 or OCP-011 specification is opened.
+The next act is repeated external adversarial review of the corrected outcome matrices and evidence obligations before Architecture Board outcome selection and before any OCP-010 or OCP-011 specification is opened.
