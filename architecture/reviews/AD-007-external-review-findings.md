@@ -4,10 +4,12 @@
 - Reviewed head: `4c9d4f9` (AD-007 revision `0.1.0`, Status `Discovery`)
 - Review source: external adversarial boundary review provided to Architecture Board
 - Review comment: PR #39 `#issuecomment-5175036101`
+- Repeated verification comments: PR #41 `#issuecomment-5175339679`, `#issuecomment-5175367766`
 - Decision date: 2026-08-04
 - Merge commit: `6e8bd40` — Architecture Board opened the Capability Claim discovery cycle by merging revision `0.1.0` without amendments
-- External review verdict: boundary survives adversarial review; findings bind the next AD-007 revision
-- Findings resolution state: **Open** — to be resolved in the next AD-007 revision before the Architecture Board outcome-selection act
+- Review-resolution head: `1cf2a6e` — AD-007 revision `0.2.0`
+- External review verdict: findings F1–F2 are resolved and externally verified; AD-007 is ready for Architecture Board outcome comparison
+- Findings resolution state: **Resolved and externally verified**
 
 The Architecture Board merged the discovery revision to open the cycle, following the AD-005/AD-006 precedent of iterative discovery revisions. No outcome was selected by this merge. Findings below are not resolved by the merge and must be addressed before or together with the outcome-selection decision.
 
@@ -15,7 +17,7 @@ The Architecture Board merged the discovery revision to open the cycle, followin
 
 **Severity:** Moderate.
 
-**Status:** Open — must be resolved before the Board outcome selection.
+**Status:** Resolved and externally verified in AD-007 v0.2.0.
 
 The §18 list is presented unconditionally ("a downstream normative cycle must prove"), but several items are inexpressible under part of the admissible outcomes:
 
@@ -34,7 +36,7 @@ This is the same structural defect resolved in AD-005 v0.2.0 (F1) and AD-006 v0.
 
 **Severity:** Moderate.
 
-**Status:** Open — must be resolved before the Board outcome selection, because it distorts the fairness of outcome comparison.
+**Status:** Resolved and externally verified in AD-007 v0.2.0.
 
 Outcome C honestly flags the risk of "duplicating OCP-011 without sharing its Objective-only target contract", but the matrix lacks the cheapest assessment-path alternative: **extending accepted OCP-011** with a new target kind (e.g. `capability-holder@1` alongside `objective@1`) instead of a new record family. OCP-011 §4 is designed as an extensible governed vocabulary; this option differs materially from C in the number of contracts, manifests and the shape of the authoritative projection for AB-011. The Board cannot fairly compare C and D without seeing the reuse variant.
 
@@ -53,3 +55,13 @@ Outcome C honestly flags the risk of "duplicating OCP-011 without sharing its Ob
 ## External reviewer verdict
 
 > The claim-layer boundary is the most carefully drawn discovery so far. Both findings are structural, not semantic: F1 closes with the established AD-006 pattern, F2 with adding the reuse option to the matrix. With those amendments, AD-007 is ready for external outcome comparison and the Architecture Board decision.
+
+## Review-resolution verification
+
+AD-007 revision `0.2.0` resolves the findings as follows:
+
+- F1: §18 is split into an unconditional claim-contract core and explicit representation-conditional evidence, including snapshot replayability for derived materialization, domain/Core fixture ownership for Outcome F and P-001 obligations only when invoked;
+- F2: Outcome C-prime compares extension of the accepted OCP-011 target/evidence contract against a dedicated CapabilityAssessmentRecord and names target, conclusion-profile, evidence-kind and projection fit criteria;
+- the systemic recommendation is implemented in OCP-001 revision `0.7.0` as a general outcome-fair discovery-evidence rule.
+
+Repeated external review of exact head `1cf2a6e93a77a9d978dbfe93b9cc533aa90aa149` verified F1 and F2 as resolved and returned **Approved for Architecture Board outcome comparison**. No Capability Claim outcome is selected by this verification.

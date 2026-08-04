@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-001
 Title: Ontology Governance
-Version: 0.6.0
+Version: 0.7.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000
@@ -178,6 +178,16 @@ Concept у статусі `Proposed` або `Deferred` повинен бути �
 Після стабілізації перших взаємозалежних Concept кожен новий або змістовно змінений Concept повинен супроводжуватися машинозчитуваними fixtures настільки рано, наскільки це дозволяє поточний checker.
 
 Контрприклад, прийнятий у review, повинен бути перенесений у regression fixture або executable test, якщо його можна виразити в поточному validation contract.
+
+Discovery artifact, який порівнює кілька outcomes, повинен робити executable evidence outcome-fair:
+
+1. безумовний блок містить лише спільні semantic obligations, виразимі для кожного admissible outcome;
+2. obligations, що припускають конкретний record, derivation, storage, registry, Pattern або domain layer, належать explicit outcome-conditional block;
+3. outcome, який реалізує спільну гарантію іншим механізмом, повинен назвати перевірний semantic equivalent, а не мовчки відкинути obligation;
+4. external-review target повинен перевіряти, чи evidence obligations не припускають layer, відхилений самим outcome;
+5. exit criteria повинні вимагати outcome-fair evidence coverage до Architecture Board selection.
+
+Evidence matrix не може приховано робити один outcome неприйнятним лише тому, що вимагає артефакт або механізм, який цей outcome за визначенням не містить.
 
 Перший reference checker вводиться окремим `PR-0006 — Add Executable Ontology Checker` одразу після Constraint cycle, до подвоєння кількості визначених Core Concept.
 
