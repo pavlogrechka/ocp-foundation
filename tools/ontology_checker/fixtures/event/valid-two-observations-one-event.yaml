@@ -1,0 +1,28 @@
+case_id: event-valid-two-observations-one-event
+concept: EventObservationDataset
+events:
+  - event_id: EV-TWO-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-TWO-001
+    occurred_at: 2026-08-04T00:45:00Z
+observations:
+  - observation_id: OBS-TWO-001
+    observer_ref: SOURCE-A
+    observation_kind_ref: inspection.visual@1
+    statement: The asset condition appears nominal.
+    observed_at: 2026-08-04T00:50:00Z
+    recorded_at: 2026-08-04T00:52:00Z
+    provenance_ref: ACT-OBS-TWO-001
+    event_ref: EV-TWO-001
+  - observation_id: OBS-TWO-002
+    observer_ref: SOURCE-B
+    observation_kind_ref: inspection.instrument@1
+    statement: The asset condition appears nominal.
+    observed_at: 2026-08-04T00:51:00Z
+    recorded_at: 2026-08-04T00:54:00Z
+    provenance_ref: ACT-OBS-TWO-002
+    event_ref: EV-TWO-001
+expected:
+  valid: true
+  error_codes: []
