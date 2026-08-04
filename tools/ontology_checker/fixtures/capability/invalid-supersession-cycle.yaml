@@ -1,0 +1,35 @@
+case_id: capability-invalid-supersession-cycle
+concept: CapabilityReference
+entries:
+  - namespace: sensing
+    capability_id: detect
+    version: v1
+    label: Detect
+    definition: First exact version.
+    namespace_owner_ref: SPEC-SENSING
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-050
+    supersedes_capability_ref:
+      namespace: sensing
+      capability_id: detect
+      version: v2
+  - namespace: sensing
+    capability_id: detect
+    version: v2
+    label: Detect
+    definition: Second exact version.
+    namespace_owner_ref: SPEC-SENSING
+    published_at: 2026-08-04T01:00:00Z
+    provenance_ref: ACT-CAP-051
+    supersedes_capability_ref:
+      namespace: sensing
+      capability_id: detect
+      version: v1
+reference:
+  namespace: sensing
+  capability_id: detect
+  version: v1
+expected:
+  valid: false
+  error_codes:
+    - CAPABILITY_SUPERSESSION_CYCLE
