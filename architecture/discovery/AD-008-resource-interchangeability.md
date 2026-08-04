@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-008
 Title: Resource Interchangeability Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-004, OCP-005, OCP-006, OCP-009, OCP-012, AD-002, AD-007
 Applies-To: AB-011, Resource interchangeability, Resource substitution
-Review-After: External adversarial boundary review
+Review-After: External adversarial outcome comparison
 ---
 
 # AD-008 — Resource Interchangeability Boundary
@@ -297,8 +297,101 @@ AD-008 is ready for Architecture Board decision when:
 - the first consumer scenario can be explained without hidden fields or domain assumptions;
 - unresolved semantics are recorded in Architecture Backlog.
 
-## 17. Discovery status
+## 17. Outcome comparison working analysis
 
-Revision `0.1.0` opens AD-008 in `Discovery` for external adversarial boundary review. AB-011 remains `Planned` while the discovery compares outcomes; this preserves the accepted upstream AD-005C and AD-007C accounting that already names AB-011 as downstream work.
+All five models answer the same narrow question: who, if anyone, may state that one Resource is a candidate substitute for an incumbent Resource or an exact requirement in one bound context. They do not decide availability, Readiness, authorization, selection or replacement execution.
 
-This revision does not select an outcome. Board acceptance requires exact-head external review, resolution of blocking findings, green checks and a separate explicit owner or Board authorization.
+This section is a working comparison for external review. It does not select an outcome.
+
+### 17.1 Human-readable comparison
+
+| Model | What it means in plain language | Main advantage | Main risk | Working assessment |
+|---|---|---|---|---|
+| A — deterministic derived eligibility | A governed rule recomputes the answer from exact requirements, effective Capability claims and candidate-specific Constraint results. | Adds the least new authority and is replayable when every input is governed. | A missing requirement owner or judgment call can be hidden inside code and presented as deterministic. | Leading minimum-authority model if the first consumer can supply a complete governed input envelope. |
+| B — attributable interchangeability assessment | An identified record says who evaluated the candidate, against which target and evidence, and what conclusion they reached. | Preserves accountable judgment, correction and competing assessments. | The assessment may be mistaken for permission to select or replace the Resource. | Strong alternative when legitimate evaluator judgment remains after deterministic checks. |
+| C — derivation plus attributable assessment | A deterministic result is retained as evidence and a separate evaluator records the contextual conclusion. | Makes the difference between computation and judgment explicit. | Introduces two authorities and a reconciliation problem before either is shown to a consumer. | Justified only when the first consumer demonstrably needs both layers. |
+| D — domain-owned decision behind a Core envelope | Core defines safe inputs and fail-closed states, while a domain owns the actual conclusion. | Keeps domain-specific suitability rules outside Core. | Different domains may use the same envelope for incompatible meanings of substitution. | Viable only if the envelope exposes the domain authority and mechanically rejects semantic mismatch. |
+| E — no interchangeability authority | Core exposes claims and Constraint decisions; each consumer decides outside the Foundation model. | Adds no new record or shared decision authority. | Coordination consumers may make incompatible decisions and cannot exchange a reusable conclusion. | Control outcome if no shared invariant or first cross-domain consumer can be demonstrated. |
+
+### 17.2 First consumer scenario
+
+A non-sensitive Coordination scenario provides the comparison pressure:
+
+> A communications Operation has an incumbent relay Resource `relay-A`. A separately governed Coordination consumer asks whether candidate `relay-B` may be considered for the same exact relay requirement during a bound interval. The requirement names exact Capability versions and condition sets. OCP-012 supplies attributable claim projections for `relay-B`; OCP-006 supplies candidate-specific Constraint results for the same evaluation time. An external workflow reports that a replacement candidate is needed, but availability, authorization, final selection and Assignment changes remain outside this decision.
+
+The scenario deliberately does not assume that the current Assignment owns the requirement. Until a normative owner for the exact relay requirement and its condition bindings is accepted, no model may return an authoritative automatic `positive` result. A proposed consumer envelope can be reviewed as evidence, but an implicit role label such as “relay” is insufficient.
+
+For this scenario, every model must explain the following cases:
+
+1. `relay-B` has all exact positive claim inputs and an admissible Constraint decision;
+2. one claim binds the wrong condition set;
+3. the candidate Constraint snapshot is missing or belongs to `relay-A`;
+4. two evaluators disagree despite identical governed input snapshots;
+5. the same candidate is compared in another Operation or at another time;
+6. the comparison is positive but the candidate is unavailable or not authorized;
+7. a consumer attempts to replace `relay-A` by editing its existing Assignment.
+
+Cases 2–3 must not produce `positive`. Cases 5–7 must preserve the original comparison and Assignment history without implying that the Resources share identity.
+
+### 17.3 Authority separation
+
+| Layer | Authoritative input or actor | What it may establish | What it may not establish |
+|---|---|---|---|
+| Capability claim | OCP-012 claimant and claim authority | An attributable statement about one Resource and one exact Capability binding | Objective truth, suitability or substitution |
+| Capability assessment, if required | Future independently governed evaluator path under AD-007C §24.3 | An evidence-based conclusion within its exact assessment contract | Interchangeability, authorization or selection by implication |
+| Constraint evaluation | OCP-006 evaluator and applicable Constraint contract | Candidate-contextual findings and admissibility decision | Capability possession, availability or substitution |
+| Exact requirement | Unselected; must be supplied by a separately accepted consumer contract | The Capability versions, condition sets and operational need against which a candidate is compared | Selection, Assignment mutation or general Resource type meaning |
+| Interchangeability derivation | Model A rule authority, if selected | Reproducible contextual eligibility from governed inputs | Human judgment, authorization, ranking or execution |
+| Interchangeability assessment | Model B or C evaluator, if selected | An attributable contextual conclusion with evidence and provenance | Permission to use or replace a Resource |
+| Domain conclusion | Model D domain authority, if selected | A conclusion within the named domain contract | A universal Core conclusion or cross-domain equivalence |
+| Authorization and selection | Future operational owner outside AD-008 | Permission and choice under its own contract | Rewriting claim, Constraint or interchangeability evidence |
+| Replacement execution | OCP-005 Assignment rules and a future replacement workflow | New governed participation history | Mutation of the existing Assignment's `resource_ref` |
+
+The unselected requirement owner is a decision gate, not a field that an interchangeability implementation may invent. If the Board selects A, B or C, the downstream contract must either select that owner explicitly or keep automatic conclusions `indeterminate`.
+
+### 17.4 Comparison by operational scenario
+
+The Architecture Board should compare models against behavior, not record counts alone.
+
+1. **Complete deterministic envelope.** A has the smallest authority footprint when exact requirements, claim projections, Constraint results and time are complete. B adds value only if accountable judgment remains. C is excessive unless both facts are needed. D and E must explain why a shared deterministic conclusion should remain outside Core.
+2. **Legitimate evaluator judgment.** B keeps one evaluator's conclusion attributable and reviewable. C additionally preserves the deterministic baseline. A must return `review required` rather than encode an undocumented judgment. D may work when the judgment is inherently domain-specific. E leaves consumers without a shared conclusion.
+3. **Disagreement or correction.** B and C can preserve competing or superseded assessments without choosing by time or count. A must produce the same result from the same accepted snapshot and treat rule-version change as a new evaluation context. D must expose domain authority and lifecycle. E offers no shared correction contract.
+4. **Missing requirement owner.** A, B and C remain `indeterminate` or non-authoritative. D is viable only if the named domain is the accepted owner, not merely the current caller. E is the safe control until ownership exists.
+5. **Cross-domain exchange.** A can interoperate when the entire input and rule contract is shared. B and C can carry provenance but still need common target semantics. D must reject unknown domain meanings. E cannot promise that two consumers mean the same thing by a positive local result.
+6. **Historical replay.** A replays exact inputs and rule version. B and C preserve the assessment evidence and correction chain. D must provide equivalent replay guarantees inside its envelope. E can replay claims and Constraints but not the consumer's ungoverned substitution decision.
+
+### 17.5 Working hypothesis for external review
+
+Model A is the leading hypothesis for the first shared contract because it adds the least authority: when the full input envelope is governed, the result is a contextual derivation rather than a standing assertion about either Resource. That preference is conditional on selecting an exact requirement owner and proving that the first consumer needs no legitimate evaluator judgment.
+
+Model B is the strongest alternative. It becomes preferable if the Coordination scenario requires accountable interpretation that cannot be reduced to governed inputs without hiding policy in code. Its record must remain an assessment, not authorization, ranking or replacement instruction.
+
+Model C should be selected only if evidence shows that consumers must retain both a deterministic baseline and a separate accountable judgment. Model D is appropriate only when domain ownership is semantically necessary and cross-domain mismatch can fail closed. Model E remains the valid no-new-authority outcome if no shared consumer contract can justify A–D.
+
+The working hypothesis does not authorize implementation. In particular, absence of a selected requirement owner currently prevents a production-positive path under A, B or C.
+
+### 17.6 Evidence required before selection
+
+External outcome comparison must determine:
+
+- whether the proposed Coordination envelope has, or can narrowly define, an accepted normative owner for exact requirements;
+- whether all positive inputs can be deterministic and replayable at one evaluation time;
+- whether an attributable OCP-012 declaration is sufficient or independent assessment is required;
+- whether any legitimate evaluator judgment remains after claim and Constraint handling;
+- whether a reusable conclusion is required across consumers or Model E is sufficient;
+- whether Model D can reject domain-semantic mismatch rather than merely label its source;
+- whether B or C can preserve disagreement and correction without becoming authorization;
+- whether Model A can version its rule authority without silently changing historical conclusions;
+- which downstream artifact owns executable evidence for every counterexample in §12.
+
+If these questions do not separate A from B, or if the requirement owner remains implicit, AD-008 must remain in `Discovery` rather than convert the working hypothesis into an Architecture Board decision.
+
+## 18. Discovery status
+
+Revision `0.1.0` opened AD-008 in `Discovery` for external adversarial boundary review. Fable reviewed exact head `75e0438`, identified two non-blocking gaps, and approved the boundary after both resolutions were re-reviewed on exact head `290a0fb`.
+
+Revision `0.2.0` adds a human-readable A–E comparison, the first non-sensitive Coordination scenario, an authority-separation table and decision-separating evidence questions. It does not select an outcome or a requirement owner.
+
+AB-011 remains `Planned` while the discovery compares outcomes; this preserves the accepted upstream AD-005C and AD-007C accounting that already names AB-011 as downstream work.
+
+No interchangeability authority, record schema, Concept, graph edge, checker rule, availability model, authorization, selection or replacement workflow is accepted by revision `0.2.0`. Board acceptance requires exact-head external review, resolution of blocking findings, green checks and a separate explicit owner or Board authorization.
