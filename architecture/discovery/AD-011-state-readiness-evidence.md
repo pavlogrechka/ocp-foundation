@@ -58,7 +58,7 @@ These contracts provide more evidence than AD-002 had when its mandate was accep
 | Capability claim | attributable claim about one Resource and exact Capability definition | verified capability, availability or preparedness |
 | admissibility | outcome of applicable Constraint evaluation for one exact context | positive Readiness, selection or authorization |
 | eligibility | directional consumer-owned result for one exact Resource requirement | availability, ranking, selection or replacement |
-| availability | whether a subject may actually be considered for use at a time | defined by this discovery |
+| availability | whether a subject may actually be considered for use at a time | not defined by this discovery; remains a separate future decision |
 | Readiness | candidate preparedness conclusion whose identity and authority remain under review | a synonym for any one accepted input above |
 | operational State | candidate abstraction for condition over time whose independent identity remains unproved | a generic container for unrelated enums |
 | authorization | permission from a separately governed authority | derivable from evidence count or positive inputs |
