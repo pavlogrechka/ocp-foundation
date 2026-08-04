@@ -76,6 +76,29 @@ class CapabilityContractTests(unittest.TestCase):
         self.assertNotIn("claim", resolved)
         self.assertNotIn("claims", resolved)
 
+    def test_duplicate_identity_is_order_independent(self) -> None:
+        fixture = load_fixture(
+            ROOT / "fixtures/capability/invalid-duplicate-identity.yaml"
+        )
+        expected = {
+            "CAPABILITY_IDENTITY_DUPLICATE",
+            "CAPABILITY_REFERENCE_AMBIGUOUS",
+        }
+        orders = (
+            ("original", fixture["entries"]),
+            ("reversed", list(reversed(fixture["entries"]))),
+        )
+        for order, entries in orders:
+            with self.subTest(order=order):
+                candidate = dict(fixture)
+                candidate["entries"] = entries
+                self.assertEqual(
+                    set(validate_reference_fixture(candidate).errors), expected
+                )
+                self.assertIsNone(
+                    resolve_capability_definition(entries, fixture["reference"])
+                )
+
 
 if __name__ == "__main__":
     unittest.main()
