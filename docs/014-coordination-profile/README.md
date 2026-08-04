@@ -1,141 +1,74 @@
 ---
 Document-ID: OCP-014
 Title: Coordination Consumer Profile
-Version: 0.1.0
-Status: Draft
+Version: 0.2.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-004, OCP-006, OCP-009, OCP-012, OCP-013
 Used-By: AB-003, Coordination Workflows
 Last-Review: 2026-08-04
-Review-After: External adversarial review and Architecture Board decision
+Review-After: AB-058 separate Coordination workflow mandate
 ---
 
 # OCP-014 — Coordination Consumer Profile
 
-## 1. Людське пояснення
+## 1. Authority and incorporated contract body
 
-Цей профіль відповідає на вузьке запитання:
+Architecture Board accepts OCP-014 revision `0.2.0` as the first governed Coordination consumer profile and the narrow resolution of AB-003's consumer-identity question.
 
-> Хто має право сформулювати точну потребу координаційного контексту, яку OCP-013 може перевірити для одного candidate Resource?
+The complete externally reviewed contract body is preserved verbatim in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md). Sections 1–9 of that immutable artifact are incorporated into this Accepted specification without semantic alteration. Its frontmatter, Draft wording and §10 remain historical review evidence only; this README governs lifecycle and acceptance.
 
-Відповідь: governed Coordination consumer, визначений цим профілем і прийнятий Architecture Board. Він може описати потребу конкретної Operation або іншого exact coordination context. Він не може через цю потребу оголосити Resource доступним, авторизованим, обраним чи призначеним.
-
-Наприклад, coordination consumer може вимагати exact Capability versions і condition sets для relay participant у визначеній Operation та часовому інтервалі. OCP-013 може повернути `positive` лише як evidence відповідності candidate цій потребі. Окреме рішення все одно потрібне для authorization, selection, reservation та Assignment.
-
-## 2. Вузький мандат Draft
-
-OCP-013 `0.2.0` вимагає, щоб перший Coordination profile:
-
-1. встановив легітимний governed consumer `owner_ref`;
-2. вимагав exact contextual requirement;
-3. не переносив до OCP-013 authority щодо availability, authorization, ranking, selection, replacement або Assignment mutation.
-
-Цей Draft реалізує лише цей мандат. Він не визначає повну Coordination Model, workflow погодження, conflict handling, visibility, command, approval, reservation або lifecycle coordination.
-
-## 3. Governed consumer identity
-
-Після окремого прийняття цього документа Architecture Board, єдиним owner reference цього профілю є:
+The accepted owner reference is:
 
 ```text
 ocp-coordination-consumer@0.1.0
 ```
 
-Цей reference означає нормативний consumer contract, а не Organization, caller, user, service account, incumbent Resource або checker. Draft status ще не надає йому accepted authority.
+It identifies the governed consumer contract that may formulate one exact contextual requirement. It does not identify or authenticate the caller that submits a record.
 
-Owner має право лише формулювати потребу одного exact coordination context у формі OCP-013 `ResourceInterchangeabilityRequirement`. Він не є джерелом об'єктивної Capability truth, Constraint decision або operational permission.
+## 2. Accepted normative baseline
 
-Нова semantics owner contract потребує нової версії. Alias, display name, caller identity або newest-version lookup не замінює exact owner reference.
+Each `CoordinationResourceRequirement` remains an immutable OCP-013 requirement with exact `requirement_id@version`, the accepted owner reference, one exact `context_ref`, effectivity, exact Capability-version and condition-set bindings, and attributable provenance.
 
-## 4. Exact contextual requirement profile
+The profile grants only authority to state the need of that exact context. It does not make a caller, Organization, service account, incumbent Resource or checker authoritative. Actor authentication and authorization require a separate future contract; caller identity cannot supply, replace or override `owner_ref` or any other requirement binding.
 
-Кожна вимога цього профілю має бути окремим immutable OCP-013 record:
+The authority chain remains separated among Architecture Board profile acceptance, the Coordination consumer's requirement, the OCP-012 claimant, the OCP-006 evaluator and the OCP-013 mechanical rule. None inherits another layer's authority.
 
-```text
-CoordinationResourceRequirement
-- requirement_id
-- version
-- owner_ref: ocp-coordination-consumer@0.1.0
-- context_ref
-- effective_from
-- effective_until [optional]
-- capability_bindings[]
-  - capability_ref
-    - namespace
-    - capability_id
-    - version
-  - condition_set_ref
-- provenance_ref
-```
+## 3. Fail-safe exact-owner binding
 
-`requirement_id@version` exact-identifies одну revision. `context_ref` exact-identifies одну Operation або інший окремо governed coordination context. Bare label, Organization identity, operational area, incumbent Assignment або current context не є exact context reference.
+A requirement presented as this profile is authoritative only when `owner_ref` exactly equals `ocp-coordination-consumer@0.1.0`. A missing, aliased, caller-supplied, newest-selected or different owner reference yields no authoritative Coordination requirement; it does not produce a negative conclusion about a Resource.
 
-Owner, context, effectivity, Capability version, condition set або provenance semantics не можна переписати in place. Зміна будь-якого з них потребує нової requirement version. Omitted або unresolved binding fail safe і не може бути доповнений caller default.
+The reference checker now exercises this profile-specific exact-owner invariant. That finite check does not establish actor identity, signature validity, delegation, authorization or operational permission.
 
-## 5. Authority chain
+All other reviewed fail-safe cases remain unchanged: unresolved context, out-of-interval evaluation, inexact Capability or condition bindings, missing provenance, forbidden coupling and caller defaults fail safe.
 
-Authority залишається розділеною:
+## 4. Preserved authority boundary
 
-- Architecture Board приймає або відхиляє цей consumer profile і тим самим вирішує легітимність exact `owner_ref`;
-- coordination consumer формулює лише потребу exact context;
-- OCP-012 claimant відповідає лише за attributable Capability claim;
-- OCP-006 evaluator відповідає лише за candidate-specific Constraint result;
-- OCP-013 rule mechanically derives directional eligibility з exact inputs;
-- окремі майбутні contracts мають визначити authorization, selection, reservation та Assignment action.
+An OCP-013 `positive` result remains directional evidence that one candidate satisfies one exact requirement at one evaluation time. It does not create Resource equality, symmetry, transitivity or a Resource-to-Resource graph edge.
 
-Жодна ланка не успадковує authority іншої. Timestamp, list order, label, record count, incumbent status або newest revision не обирає authoritative input.
+OCP-014 does not define availability, readiness, capacity, authorization, approval, ranking, selection, reservation, allocation, replacement, Assignment mutation, command, control, negotiation, consensus, disagreement handling or a complete Coordination workflow.
 
-## 6. Direction and non-equivalence
+No new fundamental Concept or Concept dependency edge is introduced. Coordination workflow semantics require a separate accepted mandate.
 
-Evaluation зберігає форму:
+## 5. External review evidence
 
-```text
-candidate Resource → exact Coordination requirement
-```
+Fable externally reviewed exact semantic head `32597004d9a39e192dc9566ed5f691d902434dbb` and approved it with two non-blocking observations at iteration 1 of 5. Codex independently accepted the recommendation while preserving the merge gates, and Pavlo explicitly authorized squash merge. The reviewed Draft was squash-merged in PR #51 as `7fef7376246c99aeccf4f4e9c850c2a36f60d659` with green exact-head CI and no unresolved review threads.
 
-`positive` не створює edge між двома Resources. Він не є symmetric або transitive, не змінює Resource identity і не доводить загальну взаємозамінність. Інший context, requirement version, candidate або evaluation time потребує нового evaluation.
+The accepted follow-ups are incorporated here: an executable wrong-owner counterexample now binds this profile's exact accepted owner reference, and the actor-binding clarification explicitly keeps caller authentication and authorization outside the profile.
 
-## 7. Required fail-safe cases
+## 6. Architecture Board decision
 
-Coordination consumer не може вважати requirement придатним для OCP-013 evaluation, якщо:
+On 2026-08-04, Architecture Board:
 
-1. `owner_ref` не дорівнює exact accepted profile version;
-2. `context_ref` відсутній, ambiguous або не exact-resolves;
-3. context поза requirement effectivity interval;
-4. Capability або condition-set binding не exact;
-5. provenance відсутній або не належить revision;
-6. requirement містить availability, authorization, approval, ranking, selection, reservation, replacement чи Assignment-mutation directive;
-7. caller намагається підставити owner, context, incumbent або newest record за замовчуванням.
+1. accepts OCP-014 revision `0.2.0` and activates `ocp-coordination-consumer@0.1.0` as this profile's only exact owner reference;
+2. accepts the exact contextual requirement shape incorporated from the reviewed contract;
+3. requires profile-specific owner mismatch to fail safe without treating caller identity as authority;
+4. preserves separate consumer, claimant, Constraint-evaluator and OCP-013 rule authority;
+5. prohibits any inference of availability, authorization, approval, ranking, selection, reservation, replacement or Assignment mutation;
+6. preserves Resource identity and introduces no new fundamental Concept or Concept graph edge;
+7. resolves AB-003 only for the governed consumer-profile question; the remaining vertical-agreement and workflow scope is tracked by AB-058; and
+8. requires a separate mandate before any Coordination workflow cycle.
 
-Такі випадки дають no authoritative requirement. Вони не стають `negative` щодо Resource.
+## 7. Next normative cycle
 
-## 8. Explicitly not defined
-
-OCP-014 не визначає:
-
-- Coordination як новий fundamental Concept або Concept graph edge;
-- command, control, delegation чи Organization hierarchy;
-- negotiation, approval, consensus або disagreement workflow;
-- shared operational area чи автоматичний обов'язок координуватися;
-- Resource availability, readiness, capacity, reservation або allocation;
-- authorization, ranking, selection чи replacement;
-- Assignment creation, amendment, revocation або lifecycle transition;
-- production schema, API, persistence, UI, service або policy engine.
-
-Ці межі не є прихованими TODO всередині цього профілю. Кожна потребує окремого accepted mandate.
-
-## 9. External review questions
-
-Fable review має спробувати спростувати, що:
-
-1. exact owner reference справді називає governed consumer contract, а не caller-controlled identity;
-2. requirement profile завжди bind-ить один exact context та immutable revision;
-3. Architecture Board acceptance профілю не перетворюється на authorization конкретного Resource;
-4. claimant, Constraint evaluator, OCP-013 rule і coordination consumer зберігають окремі authority;
-5. жодне поле не smuggle-ить availability, authorization, ranking, selection, replacement або Assignment mutation;
-6. directionality не створює Resource equality, symmetry, transitivity або новий graph edge;
-7. fail-safe cases не перетворюються на durable negative про Resource;
-8. текст залишається зрозумілим без checker code.
-
-## 10. Draft status
-
-Revision `0.1.0` є Draft для external adversarial review. Він не активує `ocp-coordination-consumer@0.1.0`, не вирішує AB-003 і не надає production authority. Прийняття потребує exact-head Fable approval, Codex adjudication, green CI та окремої explicit Pavlo/Architecture Board authorization; дозволений merge method — squash.
+OCP-014 does not pre-authorize the next Coordination workflow scope. Under AB-058, the next cycle must first select a separate accepted mandate and may not infer negotiation, approval, conflict handling, visibility, command, reservation or lifecycle semantics from this consumer profile.

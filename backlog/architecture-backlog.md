@@ -4,7 +4,7 @@
 |---|---|---|---|
 | AB-001 | Operational Situation як окремий Concept | Open | Перевірити після базових Concept |
 | AB-002 | Order як фундаментальний Concept | Open | Визначити, чи є Order обов’язковим або одним із можливих джерел авторизації Operation |
-| AB-003 | Погодження між незалежними вертикалями | Planned | OCP-014 Draft: externally review governed consumer identity, exact contextual requirement та explicit non-authority boundary перед будь-яким coordination workflow |
+| AB-003 | Погодження між незалежними вертикалями | Resolved | OCP-014 `0.2.0`: прийнято governed consumer identity, exact contextual requirement та explicit non-authority boundary; будь-який Coordination workflow потребує окремого accepted mandate |
 | AB-004 | Capability Registry | Resolved | PR-0010 / OCP-009: прийнято reusable Capability definition, governed namespace, exact-version resolution і supersession contract; holder claims залишаються окремим downstream-рішенням |
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
@@ -59,3 +59,4 @@
 | AB-055 | Event occurrence та ObservationRecord contract | Resolved | PR-0012 / OCP-010: прийнято occurrence identity, zero-observation validity, P-001 ObservationRecord, fail-closed references і перший integrated non-sensitive scenario; Event став восьмим Accepted Concept |
 | AB-056 | OutcomeAssessmentRecord та Result registry resolution | Resolved | PR-0013 / OCP-011: прийнято exact target/criterion/evidence/input/evaluator binding, P-001 Module C branching, fail-safe evidence matrix та normative integrated-scenario assessment; fundamental Result candidate deregistered після negative identity verdict AD-006C |
 | AB-057 | Holder-specific Capability Claim boundary | Resolved | PR-0014A / OCP-012: прийнято narrowly attributable Resource CapabilityClaimRecord з exact OCP-009 binding, P-001 Modules A/C, history-preserving withdrawal/supersession і fail-safe claim-head projection; assessment та AB-011 selection залишаються окремими рішеннями |
+| AB-058 | Coordination workflows та погодження між незалежними вертикалями | Open | Вибрати окремий вузький mandate для workflow semantics, visibility між незалежними вертикалями та agreement/confirmation model без успадкування authority з OCP-014 |

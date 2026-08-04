@@ -1,0 +1,18 @@
+case_id: valid-coordination-owner
+concept: CoordinationResourceRequirement
+entity:
+  requirement_id: COORD-REQ-001
+  version: v1
+  owner_ref: ocp-coordination-consumer@0.1.0
+  context_ref: OP-COORD-001
+  effective_from: 2026-08-04T00:00:00Z
+  capability_bindings:
+    - capability_ref:
+        namespace: communications
+        capability_id: relay
+        version: v1
+      condition_set_ref: relay-baseline@1
+  provenance_ref: ACT-COORD-REQ-001
+expected:
+  valid: true
+  error_codes: []

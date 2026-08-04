@@ -19,6 +19,7 @@ Implemented validators:
 - OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states and Module C supersession;
 - CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
 - ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
+- OCP-014 CoordinationResourceRequirement exact accepted-owner profile binding;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - artifact governance and complete-history process audit.
@@ -53,7 +54,7 @@ The checker uses exact module manifests:
 - `organization-rules.yaml` — Organization module;
 - `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module;
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
-- `interchangeability-rules.yaml` — draft OCP-013 Resource interchangeability module.
+- `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests.
 
@@ -159,7 +160,7 @@ Matching claim projections for two Resources preserve two Resource identities an
 
 Accepted OCP-013 supplies the separate AB-011 decision. The checker resolves one consumer-owned exact requirement and derives one directional result from exact OCP-012 claim projections plus the OCP-006 decision for the same candidate, context and time.
 
-The checker verifies requirement structure and exact resolution. It cannot establish whether `owner_ref` is the legitimate governed consumer contract; that authority remains with Architecture Board review of the consumer contract. OCP-014 is the first narrow Coordination consumer-profile Draft for that review.
+The checker verifies generic requirement structure and exact resolution. It cannot establish whether an arbitrary `owner_ref` is a legitimate governed consumer contract; that authority remains with Architecture Board review. Accepted OCP-014 supplies one finite profile binding: a `CoordinationResourceRequirement` must use exact owner `ocp-coordination-consumer@0.1.0`, and a different owner fails safe. This check does not authenticate or authorize the caller.
 
 The output vocabulary is `positive`, `negative`, `indeterminate` and `review_required`. Missing, stale, ambiguous, conflicting, mismatched or unknown-version input cannot produce positive. A positive result is contextual eligibility only: it carries no availability, authorization, ranking, selection or Assignment-execution authority.
 

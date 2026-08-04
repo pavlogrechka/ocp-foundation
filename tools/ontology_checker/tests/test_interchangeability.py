@@ -16,8 +16,10 @@ from ocp_checker import (  # noqa: E402
     validate_reference_fixture,
 )
 from ocp_checker.interchangeability import (  # noqa: E402
+    COORDINATION_OWNER_REF,
     INTERCHANGEABILITY_DERIVATION_RULES,
     INTERCHANGEABILITY_ERROR_CODES,
+    validate_coordination_requirement,
     validate_interchangeability_requirement,
 )
 
@@ -128,6 +130,17 @@ class ResourceInterchangeabilityContractTests(unittest.TestCase):
         self.assertEqual(
             set(validate_interchangeability_requirement(requirement).errors),
             {"INTERCHANGEABILITY_FORBIDDEN_COUPLING"},
+        )
+
+    def test_coordination_profile_requires_exact_accepted_owner(self) -> None:
+        requirement = dict(self.fixture["requirements"][0])
+        requirement["owner_ref"] = COORDINATION_OWNER_REF
+        self.assertTrue(validate_coordination_requirement(requirement).valid)
+
+        requirement["owner_ref"] = "caller-controlled-owner@1"
+        self.assertEqual(
+            set(validate_coordination_requirement(requirement).errors),
+            {"COORDINATION_REQUIREMENT_OWNER_MISMATCH"},
         )
 
     def test_interchangeability_manifest_is_complete(self) -> None:

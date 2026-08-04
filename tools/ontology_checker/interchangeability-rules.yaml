@@ -21,6 +21,8 @@ rules:
     source: OCP-013 §8
   - id: INTERCHANGEABILITY_FORBIDDEN_COUPLING
     source: OCP-013 §§4, 13
+  - id: COORDINATION_REQUIREMENT_OWNER_MISMATCH
+    source: OCP-014 §3
   - id: resolve_interchangeability_requirement
     kind: derivation
     source: OCP-013 §8

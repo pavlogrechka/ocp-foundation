@@ -1,0 +1,19 @@
+case_id: invalid-coordination-owner
+concept: CoordinationResourceRequirement
+entity:
+  requirement_id: COORD-REQ-002
+  version: v1
+  owner_ref: caller-controlled-owner@1
+  context_ref: OP-COORD-001
+  effective_from: 2026-08-04T00:00:00Z
+  capability_bindings:
+    - capability_ref:
+        namespace: communications
+        capability_id: relay
+        version: v1
+      condition_set_ref: relay-baseline@1
+  provenance_ref: ACT-COORD-REQ-002
+expected:
+  valid: false
+  error_codes:
+    - COORDINATION_REQUIREMENT_OWNER_MISMATCH
