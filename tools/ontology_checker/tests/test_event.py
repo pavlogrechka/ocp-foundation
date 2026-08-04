@@ -145,7 +145,10 @@ class EventContractTests(unittest.TestCase):
         )
         self.assertEqual(
             set(validate_reference_fixture(fixture).errors),
-            {"SCENARIO_CONFLICTING_EVIDENCE_POSITIVE"},
+            {
+                "OUTCOME_ASSESSMENT_DEFINITIVE_EVIDENCE_UNSAFE",
+                "OUTCOME_ASSESSMENT_EVIDENCE_STATE_MISMATCH",
+            },
         )
 
 
