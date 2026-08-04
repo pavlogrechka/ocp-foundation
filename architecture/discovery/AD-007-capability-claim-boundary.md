@@ -540,6 +540,6 @@ AD-007 is ready for Architecture Board decision when:
 
 Revision `0.1.0` opened AD-007 and AB-057 as `Discovery`.
 
-Revision `0.2.0` addresses external Findings 1–2 and supplemental governance Finding 3 by restoring outcome-fair evidence, adding the OCP-011 reuse alternative and constraining every admissible outcome to the accepted AD-005C separate identified-record mandate. Findings remain open pending repeated external verification of this exact revision.
+Revision `0.2.0` resolves external Findings 1–2 and supplemental governance Finding 3 by restoring outcome-fair evidence, adding the OCP-011 reuse alternative and constraining every admissible outcome to the accepted AD-005C separate identified-record mandate. Repeated external review of resolution head `1cf2a6e` verified all three findings as resolved and approved the boundary for Architecture Board outcome comparison.
 
 No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by revision `0.2.0`.
