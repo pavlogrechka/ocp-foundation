@@ -1,0 +1,23 @@
+case_id: assessment-invalid-result-coupling
+concept: OutcomeAssessmentRecord
+entity:
+  assessment_id: ASM-COUPLED
+  assessment_kind_ref: objective-achievement@1
+  target_kind_ref: objective@1
+  target_ref: OBJ-COUPLED
+  criterion_ref: neutral.condition@1
+  evidence_bindings: []
+  evidence_snapshot_ref: SNAP-COUPLED
+  input_snapshot_ref: INPUT-COUPLED
+  evidence_state: missing
+  evaluator_ref: EVALUATOR-COUPLED
+  evaluated_at: 2026-08-04T02:00:00Z
+  recorded_at: 2026-08-04T02:01:00Z
+  conclusion: indeterminate
+  provenance_ref: ACT-COUPLED
+  result_status: success
+  operation_lifecycle_stage: Completed
+expected:
+  valid: false
+  error_codes:
+    - OUTCOME_ASSESSMENT_RESULT_COUPLING_FORBIDDEN
