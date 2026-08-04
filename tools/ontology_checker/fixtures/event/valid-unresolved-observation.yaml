@@ -1,0 +1,14 @@
+case_id: observation-valid-unresolved-occurrence
+concept: EventObservationDataset
+events: []
+observations:
+  - observation_id: OBS-UNRESOLVED-001
+    observer_ref: SOURCE-UNRESOLVED
+    observation_kind_ref: inspection.report@1
+    statement: A condition change may have occurred.
+    observed_at: 2026-08-04T00:50:00Z
+    recorded_at: 2026-08-04T00:55:00Z
+    provenance_ref: ACT-OBS-UNRESOLVED-001
+expected:
+  valid: true
+  error_codes: []
