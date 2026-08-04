@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 72% | Вісім Concepts Accepted; OCP-012 відкриває review нормативного CapabilityClaimRecord contract; Coordination, Operational Area і Core Boundary лишаються відкритими |
+| Core domain ontology | 72% | Вісім Concepts і governed OCP-012 CapabilityClaimRecord contract Accepted; Resource interchangeability, Coordination, Operational Area і Core Boundary лишаються відкритими |
 | Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation та accepted assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 60% | Draft OCP-012 додає exact-bound CapabilityClaimRecord checker, as-of heads, fail-safe projection і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈51%** | OCP-012 реалізує перший reviewable CapabilityClaimRecord draft; acceptance ще потребує external review та Board act |
+| Machine-readable schemas and enforcement | 60% | Accepted OCP-012 має exact-bound CapabilityClaimRecord checker, as-of heads, fail-safe projection і counterexample fixtures; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈51%** | OCP-012 прийнято як governed non-Concept record contract; наступний ontology hinge — AB-011 Resource interchangeability |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -44,7 +44,7 @@
 - [x] Event occurrence Concept and governed ObservationRecord contract — `AB-055 / OCP-010 / PR-0012`
 - [x] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`
 - [x] Holder-specific Capability Claim boundary accepted in `AD-007C`: Outcome B, a single narrowly attributable CapabilityClaimRecord direction
-- [ ] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — OCP-012 `0.1.0 / Draft` under review
+- [x] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — `AB-057 / OCP-012 / PR-0014A`
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -115,9 +115,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Externally review and accept the OCP-012 holder-specific CapabilityClaimRecord contract; keep registry membership distinct from possession, Readiness, availability, authorization and admissibility.
-2. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
-3. Define Coordination boundaries and workflows for independent verticals.
-4. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
-5. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
-6. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
+2. Define Coordination boundaries and workflows for independent verticals.
+3. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
+4. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
+5. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
