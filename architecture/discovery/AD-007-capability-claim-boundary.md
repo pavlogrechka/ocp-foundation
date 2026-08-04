@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-007
 Title: Capability Claim Boundary
-Version: 0.3.0
-Status: Discovery
+Version: 0.4.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-009, AD-002, AD-005, P-001
 Applies-To: AB-057, AB-011, Capability Claim model, Resource interchangeability
-Review-After: External adversarial boundary review
+Review-After: Downstream CapabilityClaimRecord review
 ---
 
 # AD-007 — Capability Claim Boundary
@@ -597,3 +597,58 @@ Revision `0.2.0` resolves external Findings 1–2 and supplemental governance Fi
 Revision `0.3.0` adds a human-readable working comparison, operational scenarios and decision-separating evidence questions for external outcome review. It does not record an Architecture Board selection.
 
 No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by revision `0.3.0`.
+
+## 24. Architecture Board decision — AD-007C
+
+The Architecture Board accepted this decision by act **AD-007C** on **2026-08-04**, after Fable reviewed the outcome comparison on exact head `86b23f1` and found the evidence sufficient for a Board decision.
+
+### 24.1 Selected outcome
+
+The Architecture Board selects **Outcome B — single CapabilityClaimRecord** as the direction for the first downstream normative contract.
+
+In plain language, one identified record will preserve one attributable claim by a defined claimant about one exact Resource and one exact Capability version, under stated conditions and time. It records what that claimant is authorized to assert. It does not certify that the claim is objectively true or independently verified.
+
+The selected record remains distinct from Resource identity and Capability-definition identity. Its exact endpoints, proposition kind, claimant, authority, evidence, provenance, applicability and history must be governed by the downstream normative owner.
+
+### 24.2 Authority and evaluation boundary
+
+The CapabilityClaimRecord may be authoritative only for its narrow attributable claim proposition. It must not become automatic authority for:
+
+- objective Capability truth or independent verification;
+- Readiness, availability, capacity or current fitness;
+- authorization, qualification or operational admissibility;
+- Assignment eligibility or Operation success;
+- Resource equality or automatic interchangeability.
+
+The downstream contract must define an explicit claimant and a governed claim kind that distinguishes attributable declarations without presenting them as assessments. Evidence attached to a claim supports attribution and interpretation but does not silently turn the record into an independent evaluation.
+
+### 24.3 Assessment path preserved
+
+Outcome D remains the strongest alternative and the forward path if a concrete Foundation consumer later requires an unevaluated declaration and an independent assessment as two first-class authorities.
+
+That future assessment layer may use an OCP-011 profile or a separately governed assessment-record family. Either choice requires its own reviewed decision and must be additive: existing CapabilityClaimRecord history and meaning may not be rewritten.
+
+This act does not select Outcome C, C-prime or D now. It also does not prevent a domain from producing assessment evidence under a separately governed contract.
+
+### 24.4 AB-011 input boundary
+
+AB-011 may consume only a fail-safe projection of applicable CapabilityClaimRecord heads. Missing, stale, ambiguous, conflicting, unresolved or otherwise invalid claim inputs must not produce an authoritative positive input by default.
+
+The projection exposes attributable claim state only. It does not decide whether two Resources are interchangeable, and matching claim projections do not collapse their identities. Any future change from claim-based input to independently assessed input is a separate reviewed decision.
+
+### 24.5 Acceptance effect
+
+AD-007C has the following effects:
+
+- AD-007 becomes `Accepted` at version `0.4.0`;
+- AB-057 moves `Discovery → Planned` for the downstream CapabilityClaimRecord contract;
+- Outcome B becomes the governing direction for that contract, subject to §§24.1–24.4;
+- Outcome D remains the named activation path if a concrete assessment consumer supplies new evidence;
+- AB-011 remains `Planned` and receives only the fail-safe input boundary defined above;
+- AB-006 and AB-052 continue to defer Organization-holder semantics.
+
+### 24.6 Explicit exclusions preserved
+
+AD-007C does not define a CapabilityClaimRecord schema, field list, persistence form, API, lifecycle vocabulary, evidence catalog, condition language, quantitative scale, validator or migration format. It does not invoke P-001, add a Concept dependency or graph edge, admit Organization as a claim subject, or decide Resource interchangeability.
+
+The next normative cycle must define and externally review the CapabilityClaimRecord contract, including executable counterexamples and fail-safe projections, without broadening these accepted boundaries.

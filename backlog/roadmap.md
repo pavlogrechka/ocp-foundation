@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 72% | Вісім Concepts Accepted; вісь AD-006 завершена через Accepted Event/Observation та OutcomeAssessmentRecord; Coordination, Operational Area, Capability Claim і Core Boundary лишаються відкритими |
+| Core domain ontology | 72% | Вісім Concepts Accepted; AD-007C визначає напрям single CapabilityClaimRecord; Coordination, Operational Area, нормативний Capability Claim contract і Core Boundary лишаються відкритими |
 | Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation та accepted assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 58% | OCP-011 додає exact-bound assessment validator, snapshots, supersession heads і нормативний integrated scenario; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈50%** | AB-056 завершено, OCP-011 Accepted, fundamental Result deregistered; наступний dependency hinge — holder-specific Capability Claim boundary |
+| **Загальна foundation-готовність** | **≈50%** | AD-007C приймає межу holder-specific Capability Claim; наступний dependency hinge — нормативний CapabilityClaimRecord contract |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -43,7 +43,8 @@
 - [x] Event and Result boundary accepted in `AD-006C`: E3 occurrence + observation records, R3 governed assessment records
 - [x] Event occurrence Concept and governed ObservationRecord contract — `AB-055 / OCP-010 / PR-0012`
 - [x] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`
-- [ ] Holder-specific Capability Claim boundary and record contract
+- [x] Holder-specific Capability Claim boundary accepted in `AD-007C`: Outcome B, a single narrowly attributable CapabilityClaimRecord direction
+- [ ] Normative CapabilityClaimRecord contract with fail-safe claim-head projection
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
