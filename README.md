@@ -54,13 +54,15 @@ backlog/                 відкриті питання та дорожня к�
 - Resource, Operation, Assignment, Constraint, Organization, Objective і Capability мають статус `Accepted`;
 - OCP-009 визначає reusable Capability definition, governed namespace ownership, exact-version resolution і supersession без holder claims;
 - AB-004 завершено; holder-specific Capability Claim і AB-011 лишаються окремими downstream-рішеннями;
+- `AD-006 / PR-0011` відкриває discovery межі Event і Result без зміни їхнього статусу `Proposed`;
+- AD-006 окремо перевіряє occurrence, observation, evidence, evaluation, realized outcome та Result assessment і не прирівнює їх до Objective achievement, Operation lifecycle або Constraint evaluation;
 - OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
 - reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Concept status synchronization і dependency graph;
 - artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- наступні заплановані boundary cycles — Event/Result, потім holder-specific Capability Claim та Coordination;
+- після AD-006 заплановані integrated non-sensitive scenario, holder-specific Capability Claim та Coordination cycles;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - не-нормативна оцінка загальної foundation-готовності: **≈42%**.
 
