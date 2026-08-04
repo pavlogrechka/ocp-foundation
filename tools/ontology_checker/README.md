@@ -110,6 +110,8 @@ Supersession is validated as an exact same-identity version edge: the target mus
 
 The registry validator rejects embedded holder, possession, readiness, availability, authorization and admissibility assertions. Resource context included in a fixture does not create a Capability claim.
 
+Holder-coupling rejection is a finite key probe, not a semantically complete implementation of OCP-009 invariant 12. Review of normative artifacts remains responsible for detecting unlisted holder-specific semantics, and the probe list may be expanded in later cycles.
+
 ## Materialized projections
 
 OCP-005 and OCP-006 allow lifecycle projections to be materialized but do not require them.
