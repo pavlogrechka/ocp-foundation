@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.11.1
+Version: 0.11.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -13,7 +13,7 @@ Concept-Statuses:
   Constraint: Accepted
   Organization: Accepted
   Objective: Accepted
-  Capability: Under Review
+  Capability: Accepted
 Last-Review: 2026-08-04
 ---
 
@@ -76,7 +76,7 @@ Resource
 
 ## Capability
 
-Concept `Capability` має статус `Under Review` і визначається в [OCP-009 — Capability Concept](../009-capability-concept/README.md) на підставі прийнятого рішення AD-005C.
+Concept `Capability` має статус `Accepted` і визначений у [OCP-009 — Capability Concept](../009-capability-concept/README.md) на підставі прийнятого рішення AD-005C та рішення Architecture Board по PR-0010.
 
 Capability є reusable definition-layer identity, що визначається governed namespace, stable `capability_id` та exact version. Human-readable label не є identity, а registry membership не створює holder claim, Readiness, availability, authorization або admissibility.
 
