@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.9.1
+Version: 0.9.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -52,7 +52,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Risk | Proposed | AB-005; після Constraint |
 | Order | Proposed | AB-002 |
 | Coordination | Proposed | — |
-| Capability | Under Review | OCP-009; AD-005C; PR-0010 external review |
+| Capability | Accepted | OCP-009; AD-005C; Architecture Board approval of PR-0010 |
 
 Статуси в таблиці є статусами Concept, а не статусами документів. `Accepted` означає, що Architecture Board прийняла поточне визначення як основу подальшої роботи; це не означає `Canonical` і не змінює автоматично статус документа.
 
