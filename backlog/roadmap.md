@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 74% | Вісім Concepts та governed OCP-012, OCP-013 і OCP-014 non-Concept contracts Accepted; Resource identity та authority boundaries збережено |
-| Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability і governed Coordination-consumer boundary; workflows, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-014 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈52%** | OCP-014 consumer profile прийнято; Coordination workflow scope потребує окремого mandate |
+| Core domain ontology | 74% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; Resource identity та authority boundaries збережено |
+| Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; visibility, authorization, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈52%** | OCP-015 workflow-evidence contract прийнято; residual visibility та agreement semantics винесено в AB-059 |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -48,7 +48,7 @@
 - [x] Resource interchangeability boundary and Model A direction accepted — `AB-011 / AD-008C`
 - [x] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR #49`
 - [x] Governed Coordination consumer profile — `AB-003 / OCP-014`
-- [ ] Operational Coordination workflows — `AB-058`; AD-009 `0.2.0 / Under Review` і draft OCP-015 проходять external review
+- [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
@@ -87,6 +87,7 @@
 - [x] Atomic removal of temporary `Result: Proposed` registry marker without creating a Result Concept
 - [x] Draft OCP-012 CapabilityClaimRecord exact binding, temporal/supersession history and fail-safe projection fixtures
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
+- [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -100,7 +101,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Business Rules specification
 - [ ] Operation Lifecycle completion
 - [ ] Assignment / Operation lifecycle coordination
-- [ ] Coordination Workflows
+- [x] Coordination proposal-response evidence workflow — `OCP-015`
 - [ ] Visibility, authorization and approval model
 - [ ] Reservation and Allocation decision
 - [ ] Conflict and remediation model
@@ -119,7 +120,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review AD-009 Outcome B and draft OCP-015 proposal/response contract; accept, revise or reject them through an explicit Board decision under AB-058.
+1. Define the residual cross-vertical visibility policy and negotiation, consensus or agreement semantics under AB-059 without turning OCP-015 confirmation into permission.
 2. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
 3. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
 4. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.

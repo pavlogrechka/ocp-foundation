@@ -2,22 +2,22 @@
 Decision-ID: AD-009
 Title: Coordination Workflow Boundary
 Version: 0.2.0
-Status: Under Review
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-014, OCP-013, OCP-012, OCP-006, OCP-005, AB-058
 Applies-To: AB-058, Coordination workflows, inter-vertical agreement
-Review-After: External adversarial review of proposed AD-009A selection
+Review-After: AB-059 cross-vertical visibility and agreement-semantics review
 ---
 
 # AD-009 — Coordination Workflow Boundary
 
-## 1. Proposed mandate
+## 1. Accepted mandate
 
-AB-058 needs one bounded decision before any Coordination workflow is defined. This draft selects the following question for external review:
+AB-058 required one bounded decision before any Coordination workflow could be defined. The accepted decision answers the following question:
 
 > What is the smallest human-readable, replayable workflow contract that lets independent verticals publish, inspect and confirm a coordination proposal while preserving each vertical's authority and without selecting, authorizing, reserving, allocating or mutating an Assignment?
 
-The proposed cycle is deliberately about workflow evidence and agreement boundaries. It is not an implementation plan and does not accept a workflow model by itself.
+The accepted cycle is deliberately about workflow evidence and agreement boundaries. It is not an implementation plan and does not authorize operational action by itself.
 
 ## 2. In scope
 
@@ -106,25 +106,25 @@ Every outcome must prove, in its own form, that:
 
 The comparison fails if an evidence obligation assumes a layer rejected by the outcome being tested.
 
-## 7. Proposed AD-009A selection
+## 7. Accepted AD-009A selection
 
-AD-009A proposes Outcome B: one `CoordinationProposalRecord` revision plus separate `CoordinationResponseRecord` assertions.
+AD-009A selects Outcome B: one `CoordinationProposalRecord` revision plus separate `CoordinationResponseRecord` assertions.
 
 In plain language, one vertical may publish a proposal without writing another vertical's answer. Every invited vertical answers for itself with a separate attributable record. A new proposal revision supersedes rather than rewrites the previous revision. A response may confirm, decline or withdraw only that responder's earlier response. None of those records grants permission, selects a Resource or changes an Assignment.
 
-Outcome B is the leading direction because the mandate requires shared, replayable evidence of publication, disagreement and withdrawal. Outcome D cannot retain that evidence; Outcome A concentrates writers; Outcome C adds a generic ordering authority; Outcome E does not by itself guarantee cross-vertical meaning. The selection remains proposed until exact-head external review and explicit Architecture Board authorization.
+Outcome B is accepted because the mandate requires shared, replayable evidence of publication, disagreement and withdrawal. Outcome D cannot retain that evidence; Outcome A concentrates writers; Outcome C adds a generic ordering authority; Outcome E does not by itself guarantee cross-vertical meaning. Exact-head external review, Codex adjudication and explicit Architecture Board authorization completed this selection.
 
-## 8. Proposed contract and acceptance effect
+## 8. Accepted contract and effect
 
-Draft OCP-015 defines the complete proposed record and projection contract. It invokes P-001 separately for proposal and response records and uses only Modules A and C. It does not use Module B: current state is derived from immutable record heads, not a shared mutable lifecycle field.
+Accepted OCP-015 defines the complete record and projection contract. It invokes P-001 separately for proposal and response records and uses only Modules A and C. It does not use Module B: current state is derived from immutable record heads, not a shared mutable lifecycle field.
 
-If the proposal is accepted in this PR after external review:
+The accepted effect is:
 
-- AD-009 becomes `Accepted` at version `0.2.0`;
-- OCP-015 becomes the accepted workflow-evidence boundary;
-- AB-058 becomes `Resolved` for this narrow record-and-projection contract;
+- AD-009 is `Accepted` at version `0.2.0`;
+- OCP-015 is the accepted workflow-evidence boundary;
+- AB-058 is `Resolved` for this narrow record-and-projection contract;
 - authorization remains under AB-017; selection, reservation and allocation remain under AB-025; conflict resolution remains under AB-018 and AB-038; and Assignment lifecycle alignment remains under AB-028;
-- the same acceptance act atomically creates AB-059 for cross-vertical visibility policy and negotiation, consensus or agreement semantics beyond the proposal-response boundary; until that act, those residual questions remain tracked by AB-058; and
+- the same acceptance act atomically creates AB-059 for cross-vertical visibility policy and negotiation, consensus or agreement semantics beyond the proposal-response boundary; and
 - no new fundamental Concept or Concept graph edge is introduced.
 
-Until that acceptance step, AD-009 remains `Under Review`, OCP-015 remains `Draft`, and AB-058 remains `Open`.
+AD-009 and OCP-015 are `Accepted`, AB-058 is `Resolved`, and residual cross-vertical visibility and agreement-semantics questions are owned by AB-059 without expanding this contract.
