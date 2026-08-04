@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 72% | Вісім Concepts і governed OCP-012 CapabilityClaimRecord contract Accepted; AD-008 відкриває Resource interchangeability discovery без identity collapse |
-| Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation та accepted assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 60% | Accepted OCP-012 має exact-bound CapabilityClaimRecord checker, as-of heads, fail-safe projection і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈51%** | OCP-012 прийнято як governed non-Concept record contract; AB-011 / AD-008 є активним ontology hinge |
+| Core domain ontology | 72% | Вісім Concepts та governed OCP-012 і OCP-013 non-Concept contracts Accepted; Resource interchangeability визначено без identity collapse |
+| Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment і interchangeability fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 60% | Accepted OCP-012 і OCP-013 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈51%** | OCP-013 прийнято як directional eligibility contract; наступний нормативний цикл — Coordination |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -46,7 +46,7 @@
 - [x] Holder-specific Capability Claim boundary accepted in `AD-007C`: Outcome B, a single narrowly attributable CapabilityClaimRecord direction
 - [x] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — `AB-057 / OCP-012 / PR-0014A`
 - [x] Resource interchangeability boundary and Model A direction accepted — `AB-011 / AD-008C`
-- [ ] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR-0016`
+- [x] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR #49`
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -117,8 +117,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Complete AD-008 and resolve AB-011 Resource interchangeability using exact Capability claims, candidate-specific Constraint results and explicit operational context without identity collapse.
-2. Define Coordination boundaries and workflows for independent verticals.
-3. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
-4. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
-5. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Define Coordination boundaries and workflows for independent verticals, beginning with a governed OCP-013 consumer requirement and explicit authority boundary.
+2. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
+3. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
+4. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
