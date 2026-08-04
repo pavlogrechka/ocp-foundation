@@ -188,6 +188,8 @@ conflicting
 
 `declared` означає пряму claimant declaration без окремого evidence set. Вона може бути authoritative як attributable claim, але не як independent verification.
 
+Checker механічно звіряє `declared`/`missing` зі складом evidence-набору та перевіряє консистентність snapshot. До того як AB-039 визначить freshness і replay semantics, правдивість `sufficient`, `stale`, `ambiguous` та `conflicting` залишається attributable відповідальністю recorder'а.
+
 `missing`, `stale`, `ambiguous` і `conflicting` завжди дають non-permissive effective projection `indeterminate`, навіть якщо stored assertion є `positive`.
 
 ### 7.6 Authority, time and provenance

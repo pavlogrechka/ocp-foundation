@@ -145,6 +145,8 @@ The validator rejects embedded Result, Operation lifecycle-success, Objective mu
 
 OCP-012 defines a separate identified record for one claimant's proposition about one exact Resource and one exact OCP-009 Capability version under one condition set. The checker keeps declaration authority narrow: `support_state: declared` records what the claimant said and never marks it independently verified.
 
+The checker mechanically cross-checks `declared`/`missing` against evidence-set composition and verifies snapshot consistency. Until AB-039 defines freshness and replay semantics, the truth of `sufficient`, `stale`, `ambiguous` and `conflicting` remains an attributable recorder responsibility.
+
 The reference slice supports Resource-only holders, exact Capability resolution, half-open effectivity intervals, evidence snapshots and branching supersession. Withdrawal is a successor assertion distinct from negative polarity. `capability_claim_heads` performs as-of replay; `effective_capability_claim` returns `indeterminate` for missing, stale, ambiguous or conflicting support and for disagreeing heads. It never uses newest timestamp, list order, claimant count or source count as authority.
 
 Matching claim projections for two Resources preserve two Resource identities and do not decide AB-011 interchangeability.
