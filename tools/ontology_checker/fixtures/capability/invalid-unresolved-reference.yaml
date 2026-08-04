@@ -1,0 +1,19 @@
+case_id: capability-invalid-unresolved-reference
+concept: CapabilityReference
+entries:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-030
+reference:
+  namespace: mobility
+  capability_id: navigate
+  version: missing
+expected:
+  valid: false
+  error_codes:
+    - CAPABILITY_REFERENCE_UNRESOLVED
