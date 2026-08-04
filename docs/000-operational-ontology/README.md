@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.11.0
+Version: 0.12.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -45,7 +45,7 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
 | Readiness | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
 | State | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
-| Result | Proposed | AD-006C selects governed OutcomeAssessmentRecord; registry resolution remains AB-056 |
+| Result | Proposed | Temporary migration accounting: AD-006C rejected a fundamental Result; OCP-011 / AB-056 is Under Review and must remove this entry atomically on acceptance |
 | Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
 | Spectrum | Proposed | — |
 | Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
@@ -55,6 +55,14 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Capability | Accepted | OCP-009; AD-005C; Architecture Board approval of PR-0010 |
 
 Статуси в таблиці є статусами Concept, а не статусами документів. `Accepted` означає, що Architecture Board прийняла поточне визначення як основу подальшої роботи; це не означає `Canonical` і не змінює автоматично статус документа.
+
+`Result: Proposed` не є позитивним identity verdict. Це тимчасовий migration marker, який зберігається до завершення review OCP-011. AD-006C уже встановив negative independent-identity verdict; acceptance OCP-011 повинна видалити Result з активного Concept registry, а не перевести його в `Accepted` або `Deprecated`.
+
+## Governed assessment records
+
+OCP-011 визначає OutcomeAssessmentRecord як P-001 identified record, а не фундаментальний Concept. Record exact-bind-ить Objective target, criterion, evidence snapshot, input snapshot, evaluator, evaluation time, conclusion і provenance та зберігає correction history через explicit supersession.
+
+Під час зовнішнього review OCP-011 цей contract не є Accepted і не резолвить registry entry Result.
 
 ## Робоче рішення щодо Resource
 
@@ -76,4 +84,4 @@ Operational Ontology веде реєстр понять, їхніх статус
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
 - Межа між Constraint violation та майбутнім Conflict Concept.
-- Нормативний OutcomeAssessmentRecord і атомарна резолюція registry entry `Result` за AB-056.
+- Зовнішня перевірка OCP-011, його fail-safe assessment semantics і атомарне видалення migration entry `Result` за AB-056.
