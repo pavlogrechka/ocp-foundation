@@ -2,7 +2,7 @@
 Decision-ID: AD-008
 Title: Resource Interchangeability Boundary
 Version: 0.3.0
-Status: Discovery
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-004, OCP-005, OCP-006, OCP-009, OCP-012, AD-002, AD-007
 Applies-To: AB-011, Resource interchangeability, Resource substitution
