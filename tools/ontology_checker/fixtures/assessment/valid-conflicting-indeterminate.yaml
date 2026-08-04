@@ -1,0 +1,39 @@
+case_id: assessment-valid-conflicting-indeterminate
+concept: OutcomeAssessmentDataset
+objectives:
+  - objective_id: OBJ-ASM-001
+observations:
+  - observation_id: OBS-ASM-001
+    statement: Condition nominal.
+  - observation_id: OBS-ASM-002
+    statement: Condition degraded.
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-ASM-001
+    evidence_bindings:
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASM-001
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASM-002
+input_snapshots: [INPUT-ASM-001]
+assessments:
+  - assessment_id: ASM-001
+    assessment_kind_ref: objective-achievement@1
+    target_kind_ref: objective@1
+    target_ref: OBJ-ASM-001
+    criterion_ref: neutral.condition@1
+    evidence_bindings:
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASM-001
+      - evidence_kind_ref: observation-record@1
+        evidence_ref: OBS-ASM-002
+    evidence_snapshot_ref: EVIDENCE-ASM-001
+    input_snapshot_ref: INPUT-ASM-001
+    evidence_state: conflicting
+    evaluator_ref: EVALUATOR-001
+    evaluated_at: 2026-08-04T02:00:00Z
+    recorded_at: 2026-08-04T02:01:00Z
+    conclusion: indeterminate
+    provenance_ref: ACT-ASM-001
+expected:
+  valid: true
+  error_codes: []
