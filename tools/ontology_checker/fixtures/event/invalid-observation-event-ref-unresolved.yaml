@@ -1,0 +1,20 @@
+case_id: observation-invalid-event-ref-unresolved
+concept: EventObservationDataset
+events:
+  - event_id: EV-LINK-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-LINK-001
+observations:
+  - observation_id: OBS-LINK-001
+    observer_ref: SOURCE-LINK
+    observation_kind_ref: inspection.report@1
+    statement: A condition change was reported.
+    observed_at: 2026-08-04T00:50:00Z
+    recorded_at: 2026-08-04T00:55:00Z
+    provenance_ref: ACT-OBS-LINK-001
+    event_ref: EV-MISSING-001
+expected:
+  valid: false
+  error_codes:
+    - OBSERVATION_EVENT_REF_UNRESOLVED
