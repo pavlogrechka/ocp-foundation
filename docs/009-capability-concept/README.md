@@ -1,14 +1,14 @@
 ---
 Document-ID: OCP-009
 Title: Capability Concept
-Version: 0.1.0
+Version: 0.1.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-005
 Used-By: Capability Registry, Resource Claim Model, Operation Requirements, Interchangeability Decision
 Defines-Concepts: Capability
 Concept-Depends-On: []
-Concept-Status: Proposed
+Concept-Status: Under Review
 Last-Review: 2026-08-04
 ---
 
