@@ -4,6 +4,8 @@ import sys
 import unittest
 from pathlib import Path
 
+import yaml
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
@@ -13,6 +15,10 @@ from ocp_checker import (  # noqa: E402
     outcome_assessment_heads,
     resolve_outcome_assessment,
     validate_reference_fixture,
+)
+from ocp_checker.assessment import (  # noqa: E402
+    OUTCOME_ASSESSMENT_DERIVATION_RULES,
+    OUTCOME_ASSESSMENT_ERROR_CODES,
 )
 
 
@@ -101,6 +107,23 @@ class OutcomeAssessmentContractTests(unittest.TestCase):
         self.assertEqual(assessment["target_kind_ref"], "objective@1")
         self.assertEqual(assessment["evidence_state"], "conflicting")
         self.assertEqual(assessment["conclusion"], "indeterminate")
+
+    def test_assessment_rules_manifest_is_complete(self) -> None:
+        rules = yaml.safe_load(
+            (ROOT / "assessment-rules.yaml").read_text(encoding="utf-8")
+        )["rules"]
+        validation_ids = {
+            item["id"]
+            for item in rules
+            if item.get("kind", "validation") == "validation"
+        }
+        derivation_ids = {
+            item["id"] for item in rules if item.get("kind") == "derivation"
+        }
+        self.assertEqual(validation_ids, set(OUTCOME_ASSESSMENT_ERROR_CODES))
+        self.assertEqual(
+            derivation_ids, set(OUTCOME_ASSESSMENT_DERIVATION_RULES)
+        )
 
 
 if __name__ == "__main__":
