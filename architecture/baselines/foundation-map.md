@@ -8,7 +8,7 @@
 | Concept | Status |
 |---|---|
 | Assignment | Accepted |
-| Capability | Proposed |
+| Capability | Under Review |
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Proposed |
