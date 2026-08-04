@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-007
 Title: Capability Claim Boundary
-Version: 0.2.0
+Version: 0.3.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-009, AD-002, AD-005, P-001
@@ -536,10 +536,64 @@ AD-007 is ready for Architecture Board decision when:
 - executable evidence is divided into an outcome-independent core and explicit outcome-conditional blocks or semantic equivalents;
 - unresolved Organization-holder semantics remain bound to AB-006 and AB-052.
 
-## 22. Architecture Board status
+## 22. Outcome comparison working analysis
+
+All seven outcomes now answer the same semantic question: how to represent a claim about one Resource and one exact Capability definition as a separately identified, attributable statement. They no longer disagree about whether that claim identity exists. They differ in where the record is materialized, whether a declaration and an assessment share one record, and how much of the contract belongs to Core.
+
+This section is a working comparison for external review. It does not select an outcome.
+
+### 22.1 Human-readable comparison
+
+| Outcome | What it means in plain language | Main advantage | Main risk | Working assessment |
+|---|---|---|---|---|
+| A — Resource-local materialization | The claim remains its own identified record, but is stored or presented with the Resource. | A domain can keep related data together. | Resource updates may appear to rewrite claim history or hide competing claims. | Viable only when the local representation is explicitly secondary to claim identity and history. |
+| B — single CapabilityClaimRecord | One record states the exact holder proposition and carries its authority, evidence and time boundary. | Smallest complete Core contract and clearest starting point for consumers. | A single record may blur “someone asserted this” with “an evaluator verified this.” | Leading simple outcome if its authority is limited to an attributable claim and independent assessment is not silently implied. |
+| C — CapabilityAssessmentRecord | A holder claim exists only as an evaluator's evidence-based conclusion. | Strong fail-safe evidence semantics and an explicit evaluator. | Ordinary declarations disappear or are mislabeled as assessments. | Viable only if the Foundation intentionally excludes unevaluated declarations from the claim model. |
+| C-prime — extend OCP-011 | A Capability-holder assessment reuses the accepted OutcomeAssessmentRecord machinery with a new governed profile. | Reuses snapshots, evidence states, supersession and fail-safe projection rules. | Objective-achievement language and projections may not fit Capability claims and could turn OCP-011 into a generic container. | Viable only after a fit test proves that target, conclusion and authority semantics remain narrow. |
+| D — declaration plus assessment | One record preserves what a claimant asserted; another records how an evaluator assessed it. | Clearest separation of issuer, evaluator and contradictory evidence. | Two contracts, two resolution paths and a harder question about which projection AB-011 may consume. | Strongest semantic alternative when independent evaluation is a first-class Foundation requirement. |
+| E — derived materialization | A deterministic rule produces the identified claim record from exact governed snapshots instead of storing a standing copy. | Avoids a stale mutable claim projection and supports exact replay. | Stable identity, withdrawal and historical attribution become harder to explain and govern. | Viable for domains with strong immutable inputs; risky as the first general Core model. |
+| F — domain-local records with a Core envelope | Domains own claim meaning and records; Core defines only what must be shared safely. | Limits Core scope and permits domain-specific evidence. | Two domains may exchange structurally valid records that do not assert the same proposition. | Viable only if the envelope rejects semantic ambiguity rather than normalizing it. |
+
+### 22.2 Comparison by operational scenario
+
+The Architecture Board should compare outcomes against the following situations rather than against field counts alone.
+
+1. **Declaration without independent evaluation.** A Resource owner asserts a Capability, but no evaluator has reviewed the evidence. B and D preserve that fact directly. C and C-prime must either reject it or name a separate home for it. A, E and F must show which authority owns the attributable statement.
+2. **Independent evaluator disagreement.** Two evaluators reach different conclusions for the same exact Resource, Capability version and conditions. D represents the distinction most directly. B must prove it does not turn assessment disagreement into competing declarations. C and C-prime must keep both assessments visible. Every outcome must refuse an order-based winner.
+3. **Withdrawal without a negative claim.** A claimant withdraws a prior positive assertion. Stored outcomes need history-preserving termination; E needs an exact governed input that changes the derived authority without rewriting the earlier snapshot. No outcome may translate withdrawal into “the Resource lacks the Capability.”
+4. **Historical replay after definition supersession.** A claim about Capability v1 must continue to resolve and replay as a claim about v1 after v2 is published. Current registry state or current evidence must not reinterpret the old record.
+5. **Cross-domain use.** A Core consumer receives a domain-owned claim. F must prove that incompatible proposition or evidence semantics are detected and rejected. The other outcomes must show how domain evidence fits without making Core a universal evidence catalog.
+6. **Future Resource interchangeability.** AB-011 may receive a fail-safe claim projection, but two Resources with matching claims remain different Resources. The outcome must name the input projection without deciding substitution, readiness, availability or admissibility.
+
+### 22.3 Working hypothesis for external review
+
+Outcome B is the current leading hypothesis for the first normative contract because it is the smallest model that directly implements the AD-005C mandate and can be explained without introducing a second assessment family. That preference is conditional: the record must be authoritative only for a narrow attributable claim, not for objective capability truth or independent verification.
+
+Outcome D is the strongest alternative. It becomes preferable if external evidence shows that Foundation consumers must preserve both an unevaluated declaration and an independent assessment as first-class records with different authorities.
+
+Outcome C-prime is a reuse question inside the assessment path, not an automatic replacement for the holder claim. Reuse is justified only if OCP-011 can support a Capability-specific target and conclusion profile without weakening its accepted meaning. A matching field shape is not sufficient evidence.
+
+A, E and F remain useful architectural variants, but each moves important authority away from one obvious Core record location. They should be selected only when their storage, derivation or domain-ownership benefit is demonstrated by a concrete use case that also survives replay, contradiction and cross-domain ambiguity tests.
+
+### 22.4 Evidence required before selection
+
+External outcome comparison must determine:
+
+- whether declarations without independent evaluation are legitimate Foundation inputs;
+- whether AB-011 needs an assessed conclusion or may consume a narrowly attributable claim;
+- whether the OCP-011 conclusion and projection model fits Capability claims without semantic dilution;
+- whether derived identity and withdrawal under E are understandable and deterministic for a human operator;
+- whether the Core envelope under F can reject proposition mismatch mechanically;
+- whether the added authority clarity of D justifies its second record family and resolution path.
+
+If those questions do not separate B from D or reveal a decisive counterexample, AD-007 must remain in Discovery rather than convert implementation preference into a Board decision.
+
+## 23. Architecture Board status
 
 Revision `0.1.0` opened AD-007 and AB-057 as `Discovery`.
 
 Revision `0.2.0` resolves external Findings 1–2 and supplemental governance Finding 3 by restoring outcome-fair evidence, adding the OCP-011 reuse alternative and constraining every admissible outcome to the accepted AD-005C separate identified-record mandate. Repeated external review of resolution head `1cf2a6e` verified all three findings as resolved and approved the boundary for Architecture Board outcome comparison.
 
-No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by revision `0.2.0`.
+Revision `0.3.0` adds a human-readable working comparison, operational scenarios and decision-separating evidence questions for external outcome review. It does not record an Architecture Board selection.
+
+No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by revision `0.3.0`.
