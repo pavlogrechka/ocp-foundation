@@ -78,6 +78,15 @@ from .interchangeability import (
     validate_interchangeability_fixture,
     validate_interchangeability_requirement,
 )
+from .coordination_workflow import (
+    COORDINATION_WORKFLOW_DERIVATION_RULES,
+    COORDINATION_WORKFLOW_ERROR_CODES,
+    derive_coordination_evidence,
+    validate_coordination_proposal,
+    validate_coordination_response,
+    validate_coordination_workflow_dataset,
+    validate_coordination_workflow_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -134,6 +143,8 @@ def validate_reference_fixture(fixture):
         return validate_interchangeability_fixture(fixture)
     if concept == "CoordinationResourceRequirement":
         return validate_coordination_requirement(fixture.get("entity") or {})
+    if concept == "CoordinationWorkflowDataset":
+        return validate_coordination_workflow_fixture(fixture)
     return validate_fixture(fixture)
 
 

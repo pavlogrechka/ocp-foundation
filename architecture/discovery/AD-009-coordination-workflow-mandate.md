@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-009
 Title: Coordination Workflow Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-014, OCP-013, OCP-012, OCP-006, OCP-005, AB-058
 Applies-To: AB-058, Coordination workflows, inter-vertical agreement
-Review-After: External adversarial review and Architecture Board decision
+Review-After: External adversarial review of proposed AD-009A selection
 ---
 
 # AD-009 — Coordination Workflow Boundary
@@ -71,3 +71,59 @@ The next normative PR must include:
 5. an external adversarial review and an explicit Architecture Board decision.
 
 Until those gates pass, this document remains a draft mandate. It pre-authorizes no Coordination workflow cycle and cannot be used as authority for selection, reservation, replacement or Assignment mutation.
+
+## 6. Outcome comparison
+
+The reviewed mandate can be satisfied through materially different authority shapes:
+
+| Outcome | Shape | Benefit | Main risk | Fair evidence form |
+|---|---|---|---|---|
+| A — one mutable workflow object | Proposal, responses and current stage share one object. | Simple read model. | One writer can overwrite another vertical's evidence or hide prior states. | Replay every revision and reject any in-place semantic rewrite. |
+| B — proposal plus response records | One immutable proposal revision is separate from each vertical's attributable response. | Preserves independent authors and allows disagreement without inventing an arbiter. | Requires exact head resolution for two record families. | P-001 identity, effectivity and supersession fixtures for both families. |
+| C — generic event stream | Every proposal and response action is an event in one append-only stream. | Rich audit history. | Stream order can silently become authority, and generic events can hide domain semantics. | Replay from explicit causation and reject timestamp or order as an authority rule. |
+| D — derived only | Current workflow state is derived from OCP-014 requirements and downstream activity. | Adds no stored workflow authority. | Withdrawal, disagreement and attributable confirmation have no shared governed home. | Bound snapshot replay plus an explicit evidence-gap result. |
+| E — domain-local workflows | Each vertical keeps its own workflow and Core exposes only an envelope. | Preserves domain autonomy. | Cross-vertical meaning can drift or collapse confirmation into permission. | Domain fixtures plus ambiguity detect-and-reject at the envelope boundary. |
+
+### 6.1 Unconditional evidence obligations
+
+Every outcome must prove, in its own form, that:
+
+1. revisions do not rewrite earlier evidence;
+2. visibility does not grant permission;
+3. confirmation, decline and withdrawal do not authorize or select anything;
+4. stale, incomplete, conflicting or unresolved evidence never yields a permissive result;
+5. actor and provenance attribution remain visible;
+6. no timestamp, list order, label or record count chooses authority; and
+7. Resource and Assignment identity remain unchanged.
+
+### 6.2 Outcome-conditional obligations
+
+- A must prove authoritative history and mutual-writer isolation despite one stored object.
+- B must prove independent record identity, exact proposal binding, responder-scoped head resolution and history-preserving withdrawal.
+- C must prove causation without treating arrival order or newest timestamp as authority.
+- D must replay an exact snapshot and return an explicit evidence gap where attributable confirmation or withdrawal is unavailable.
+- E must expose domain authority and reject ambiguous cross-domain mappings.
+
+The comparison fails if an evidence obligation assumes a layer rejected by the outcome being tested.
+
+## 7. Proposed AD-009A selection
+
+AD-009A proposes Outcome B: one `CoordinationProposalRecord` revision plus separate `CoordinationResponseRecord` assertions.
+
+In plain language, one vertical may publish a proposal without writing another vertical's answer. Every invited vertical answers for itself with a separate attributable record. A new proposal revision supersedes rather than rewrites the previous revision. A response may confirm, decline or withdraw only that responder's earlier response. None of those records grants permission, selects a Resource or changes an Assignment.
+
+Outcome B is the leading direction because the mandate requires shared, replayable evidence of publication, disagreement and withdrawal. Outcome D cannot retain that evidence; Outcome A concentrates writers; Outcome C adds a generic ordering authority; Outcome E does not by itself guarantee cross-vertical meaning. The selection remains proposed until exact-head external review and explicit Architecture Board authorization.
+
+## 8. Proposed contract and acceptance effect
+
+Draft OCP-015 defines the complete proposed record and projection contract. It invokes P-001 separately for proposal and response records and uses only Modules A and C. It does not use Module B: current state is derived from immutable record heads, not a shared mutable lifecycle field.
+
+If the proposal is accepted in this PR after external review:
+
+- AD-009 becomes `Accepted` at version `0.2.0`;
+- OCP-015 becomes the accepted workflow-evidence boundary;
+- AB-058 becomes `Resolved` for this narrow record-and-projection contract;
+- authorization, visibility policy, negotiation, selection, reservation, conflict resolution and Assignment execution remain unresolved outside AB-058; and
+- no new fundamental Concept or Concept graph edge is introduced.
+
+Until that acceptance step, AD-009 remains `Under Review`, OCP-015 remains `Draft`, and AB-058 remains `Open`.
