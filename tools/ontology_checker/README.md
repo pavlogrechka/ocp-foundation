@@ -121,6 +121,8 @@ Evidence bindings must exact-resolve and exactly equal the immutable set stored 
 
 The finite conflict probe detects disagreement among normalized bound ObservationRecord statements. It is a regression guard, not a production truth, semantic-equivalence or source-reliability engine.
 
+The checker mechanically derives and cross-checks `missing` and the finite `conflicting` probe from current governed bindings; until AB-039 defines freshness and replay semantics, `stale` and `ambiguous` remain evaluator-attributed declarations, so the checker cannot detect `sufficient` asserted over actually stale or ambiguous evidence.
+
 OutcomeAssessmentRecord supersession:
 
 - preserves prior exact resolution;
