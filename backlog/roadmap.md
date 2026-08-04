@@ -8,9 +8,9 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 74% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; Resource identity та authority boundaries збережено |
-| Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; visibility, authorization, reservation і conflict models не завершені |
+| Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈52%** | OCP-015 workflow-evidence contract прийнято; residual visibility та agreement semantics винесено в AB-059 |
+| **Загальна foundation-готовність** | **≈52%** | OCP-015 workflow-evidence contract прийнято; AD-010 окремо фіксує V0/A0 controls без нової visibility-policy чи agreement authority |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -102,6 +102,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Operation Lifecycle completion
 - [ ] Assignment / Operation lifecycle coordination
 - [x] Coordination proposal-response evidence workflow — `OCP-015`
+- [x] Cross-vertical visibility/agreement boundary — `AD-010` selects independent V0/A0 no-new-authority controls
 - [ ] Visibility, authorization and approval model
 - [ ] Reservation and Allocation decision
 - [ ] Conflict and remediation model
@@ -120,7 +121,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Complete AD-010 discovery under AB-059: compare separate visibility-policy and agreement-semantics authorities without turning OCP-015 confirmation into permission, consensus or operational authority.
-2. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
-3. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
-4. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
+2. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
+3. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
