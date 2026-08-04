@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-006
 Title: Event and Result Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-004, OCP-006, OCP-008, OCP-009, AD-002
 Applies-To: AB-054, Event model, Result model, Objective achievement evidence
-Review-After: Repeated external adversarial boundary review
+Review-After: OCP-010 Event and assessment-record external review
 ---
 
 # AD-006 — Event and Result Boundary
@@ -534,7 +534,7 @@ External adversarial review of revision `0.1.0` raised:
 - **F2 Minor:** the Result option lists did not define one consistent decision space;
 - **Suggestion:** add an occurrence-with-zero-observations counterexample for E1/E3.
 
-Revision `0.2.0` addresses them by:
+Revision `0.2.0` addressed them by:
 
 1. splitting §16 into an unconditional core and outcome-conditional Event and Result obligations;
 2. defining six Result outcomes consistently in §§2.2, 5 and 14;
@@ -543,12 +543,88 @@ Revision `0.2.0` addresses them by:
 5. requiring E4/E5 and R6 to detect and reject ambiguity without hidden Core identity;
 6. adding the zero-observation occurrence case to E1/E3 identity and executable evidence.
 
-F1 and F2 are addressed pending repeated external verification of this revision.
+Repeated external review of revision `0.2.0` on head `f89ef61` verified F1 and F2 as resolved, verified adoption of the suggestion, confirmed the `0.1.0 → 0.2.0` version change and approved AD-006 for Architecture Board outcome selection.
 
-## 22. Architecture Board decision
+## 22. Architecture Board decision — AD-006C
 
-No Event or Result outcome is selected by revision `0.2.0`.
+The Architecture Board accepted this decision by act **AD-006C** on **2026-08-04**, after repeated external review approved revision `0.2.0` on head `f89ef61`.
 
-AD-006 remains `Discovery`. It changes no Concept status and introduces no normative model beyond the discovery guardrails and review obligations in this document.
+### 22.1 Selected outcomes
 
-The next act is repeated external adversarial review of the corrected outcome matrices and evidence obligations before Architecture Board outcome selection and before any OCP-010 or OCP-011 specification is opened.
+The Architecture Board selects:
+
+- **E3 — two-layer occurrence and observation model** for the Event axis;
+- **R3 — governed attributable assessment record without a fundamental Result Concept** for the Result axis.
+
+The two outcomes are independent and do not create one combined Event/Result object.
+
+### 22.2 Event identity verdict
+
+The independent-identity verdict is positive for the occurrence layer.
+
+A downstream `Event` Concept shall represent an identified operational occurrence or change whose identity is independent of any single observation, report, Operation, Objective, assessment or storage record.
+
+An Event may have zero, one or multiple observations. Observation count, record order, newest timestamp, label similarity, timestamp proximity or source count does not establish Event identity or truth automatically.
+
+The observation layer is not selected as a separate fundamental Concept. It shall be defined downstream as an attributable identified record with explicit provenance, observation time, recording time, correction or supersession behavior, validation rules and complete P-001 conformance if P-001 is invoked.
+
+No automatic occurrence-deduplication rule is accepted by AD-006C. Any identity assignment, merge or correlation rule requires an explicit normative owner, exact inputs, ambiguity behavior and executable counterexamples.
+
+### 22.3 Result identity verdict
+
+The independent-identity verdict is negative for a fundamental `Result` Concept under the selected model.
+
+Operational result semantics shall be represented by governed attributable assessment records. An assessment evaluates an exact target under an exact criterion or rule using an exact evidence and input snapshot, with attributable evaluator, evaluation time and provenance.
+
+The assessment record is not Operation lifecycle state, Objective identity, Event identity, Constraint evaluation output, Conflict, Risk, Capability, Readiness, authorization, admissibility or State.
+
+A stored assessment may be corrected, amended or superseded only through explicit history-preserving records. Missing, stale, ambiguous or conflicting evidence produces no authoritative positive achievement conclusion by default.
+
+Deterministic derived conclusions may exist as reproducible projections or domain-owned evaluations, but they do not replace attributable assessment records where interpretation, review or human judgment is authoritative.
+
+### 22.4 Observation and assessment record boundary
+
+`ObservationRecord` and `OutcomeAssessmentRecord` are distinct downstream record responsibilities:
+
+- `ObservationRecord` attributes a report or observation to a source and may reference one Event occurrence, an unresolved candidate occurrence or a domain-defined condition;
+- `OutcomeAssessmentRecord` attributes an evaluation to an evaluator and binds its target, criterion or rule, evidence snapshot and evaluation time exactly.
+
+Neither record is a fundamental Concept by this decision. Neither gains authority from list order, newest timestamp, source count or a human-readable success label.
+
+AD-006C does not itself invoke P-001. Each downstream owner that invokes P-001 must provide complete identity, endpoint, authority, provenance, version, correction and validation contracts.
+
+### 22.5 Objective and Operation boundary
+
+Operation completion does not imply Objective achievement.
+
+An Event occurrence does not imply a positive OutcomeAssessmentRecord. An observation does not prove an Event or Objective achievement automatically. A positive assessment does not change Operation lifecycle and does not create Capability, Readiness, authorization, admissibility or State.
+
+One Operation may pursue multiple Objectives with different assessments. Multiple Operations may contribute evidence to one Objective without identity collapse. Child or supporting Operation outcomes do not aggregate automatically.
+
+### 22.6 Concept graph and status impact
+
+AD-006C introduces no current Concept dependency or relation edge.
+
+`Event` remains `Proposed` until a downstream defining specification establishes occurrence identity, invariants, graph dependencies and executable evidence through the OCP-001 review and acceptance choreography.
+
+`Result` remains `Proposed` temporarily as registry and migration accounting. The downstream assessment-record specification must resolve that registry entry atomically when the governed R3 contract is accepted; it must not promote Result to a fundamental Concept without reopening AD-006 with new independent-identity evidence.
+
+The existing non-normative future edge `Operation ⇢ Event` remains planning intent only.
+
+### 22.7 Required downstream artifacts
+
+The accepted direction requires:
+
+1. an Event Concept specification defining occurrence identity and invariants;
+2. a governed `ObservationRecord` contract;
+3. a governed `OutcomeAssessmentRecord` contract for Objective and other explicitly allowed targets;
+4. Objective-achievement integration without adding authoritative achievement state to Objective;
+5. an integrated non-sensitive scenario spanning Operation, Objective, Assignment, Constraint, Event, observations and assessments;
+6. executable evidence from §16.1 plus the E3 and R3 conditional obligations;
+7. explicit resolution of the `Result` registry entry when the R3 record contract is accepted.
+
+### 22.8 Explicit exclusions preserved
+
+AD-006C does not define Event or record fields, a canonical taxonomy or status enum, truth or confidence scales, automatic deduplication, partial-achievement scoring, causal inference, Operation success rules, Conflict, Risk, State, Readiness, Capability-claim evidence policy, authorization, persistence, API, UI or message contracts.
+
+Those topics remain downstream decisions and may not be inferred from the selected E3 or R3 outcomes.
