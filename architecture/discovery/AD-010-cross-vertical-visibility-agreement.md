@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-010
 Title: Cross-Vertical Visibility and Agreement Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-014, OCP-015, AD-009, AB-059
@@ -271,3 +271,205 @@ Fable should try to falsify whether:
 8. conflicting or unresolved inputs fail closed without timestamp, order or majority authority;
 9. domain-owned models expose semantic mismatch; and
 10. the document remains human-readable and does not broaden beyond AB-059.
+
+## 16. Outcome comparison working analysis
+
+This revision compares the two decision axes for external review. It does not select a visibility outcome, an agreement outcome, a combined pair or a result vocabulary.
+
+The comparison uses four rules:
+
+1. V0 and A0 are full no-new-authority controls, not incomplete implementations.
+2. Each non-control model must expose a legitimate owner for every conclusion and input it adds.
+3. A model is compared against observable behavior and counterexamples, not against record count or implementation convenience.
+4. A visibility verdict and an agreement verdict are recorded separately. A strength or weakness on one axis cannot decide the other.
+
+The working verdicts below mean only:
+
+- **admissible control** — safe when no shared conclusion is justified, but intentionally unable to emit one;
+- **leading hypothesis** — the smallest currently plausible shared model, subject to the named evidence gates;
+- **conditional alternative** — admissible only if a concrete need for its additional authority is demonstrated; and
+- **not admissible under the stated condition** — the model fails closed rather than importing an implicit owner or excluded authority.
+
+These are comparison results for falsification. They are not Architecture Board selections.
+
+## 17. First cross-vertical scenario
+
+A non-sensitive scenario supplies the comparison pressure:
+
+> The independent `relay-ops` vertical publishes exact proposal revision `PROP-7-R1` for a shared coordination window. The independent `airspace-control` vertical is an invited responder. The `safety-audit` vertical may inspect some evidence as an observer but is not a party. `relay-ops` declares a visibility envelope containing both other verticals. `airspace-control` confirms R1; `safety-audit` records receipt only. No accepted contract yet says that the declared envelope is permitted by policy or that the response records constitute a governed agreement.
+
+Every model must explain at least these changes without rewriting history:
+
+1. `PROP-7-R2` supersedes R1 but receives no inherited response;
+2. a policy snapshot expires or two policy inputs conflict;
+3. `airspace-control` declines or withdraws its own response;
+4. the observer can inspect evidence but remains outside the party set;
+5. a service account delivers evidence even though no governed visibility conclusion exists;
+6. every invited responder confirms, but no authorization or operational commitment exists; and
+7. the same exact inputs are replayed in a different record order.
+
+The scenario deliberately separates four questions: what the publisher declared, what a recipient technically received, what visibility policy concludes and what agreement evidence supports. No model may answer an unselected question by reusing a label from another layer.
+
+## 18. Visibility-axis comparison and verdicts
+
+All visibility models answer one narrow question: who, if anyone, may state that one exact evidence item is within a governed cross-vertical disclosure boundary for one recipient, context, time and policy snapshot. None grants access, proves delivery or authorizes action.
+
+### 18.1 Human-readable comparison
+
+| Model | Plain-language meaning | Added authority | Main advantage | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| V0 — publisher envelope only | Consumers can report whom the publisher named, but cannot call that declaration policy compliance or permission. | None beyond the publisher's attributable declaration. | Smallest authority footprint; exactly preserves OCP-015. | Independent consumers may need a shared visibility conclusion that V0 deliberately cannot provide. | **Admissible control.** It remains the correct outcome if no shared policy invariant and owner are demonstrated. |
+| V1 — deterministic governed policy evaluation | A versioned rule evaluates exact evidence, publisher, recipient, context, time and policy inputs. | The accepted rule owner may emit one replayable policy result. | Same exact inputs replay to the same result; missing inputs can fail closed mechanically. | Hidden precedence, implicit current policy or an unowned input can masquerade as deterministic authority. | **Leading hypothesis** when every input, precedence rule and policy version has an accepted owner. Otherwise it is **not admissible** and V0 remains the safe control. |
+| V2 — attributable disclosure decision | An accountable actor records its decision for one exact disclosure under one exact policy and context. | That actor may state only its own attributable disclosure conclusion. | Preserves legitimate judgment, provenance, correction and withdrawal. | The record can be mistaken for recipient permission or reused outside its exact context. | **Conditional alternative** when legitimate non-deterministic judgment must be retained. It is not justified merely to cache a V1 result. |
+| V3 — domain-owned policy behind a Core envelope | A named domain evaluates visibility under its own versioned policy while Core governs exact bindings and fail-safe minimums. | The named domain owns only its domain result. | Keeps domain-specific releasability meaning outside Core. | Structurally similar results may carry incompatible meanings across domains. | **Conditional alternative** when domain ownership is essential and profile mismatch is mechanically rejected. It is **not admissible** as an unlabeled Core-wide result. |
+
+### 18.2 Visibility decision-separating evidence
+
+External review should distinguish the models with these questions:
+
+- Is a shared, replayable visibility-policy conclusion required by a concrete cross-vertical consumer, or is V0 sufficient?
+- Can every policy input and precedence rule be exact-bound and governed without evaluator judgment?
+- If judgment remains, does a consumer need the attributable V2 decision later, or only a non-authoritative review request?
+- Does a domain genuinely own different visibility meaning, and can V3 reject rather than normalize cross-domain mismatch?
+- Can the chosen model explain why receipt, successful transport and caller access do not prove its conclusion?
+
+V1 is the current minimum-authority hypothesis for a shared visibility conclusion. That hypothesis fails if the policy owner, exact version, context or precedence rule is implicit. V2 becomes preferable only when accountable judgment is a demonstrated part of the contract. V3 remains viable only for a named domain boundary with explicit mismatch behavior. V0 remains fully valid if no shared conclusion is needed.
+
+## 19. Agreement-axis comparison and verdicts
+
+All agreement models answer a different question: who, if anyone, may state a governed conclusion from exact attributable proposal, response, party-set, effectivity and rule evidence. None creates consensus, approval, authorization or an operational commitment.
+
+### 19.1 Human-readable comparison
+
+| Model | Plain-language meaning | Added authority | Main advantage | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| A0 — OCP-015 evidence only | Consumers may report each actor's exact response, but there is no canonical agreement conclusion. | None beyond existing proposal and response evidence. | Adds no party-set, consensus or shared-conclusion authority. | Consumers may invent incompatible local meanings of “agreement.” | **Admissible control and current default.** It remains correct until a governed shared conclusion and its owner are demonstrated. |
+| A1 — deterministic agreement-evidence projection | A versioned rule tests exact evidence against an exact governed party set and returns a narrowly named evidence result. | The accepted rule owner may emit only the selected evidence conclusion. | Replayable and small when party membership, rule inputs and effectivity are fully governed. | Visibility or response count can silently become party-set or consensus authority. | **Leading hypothesis for a shared conclusion**, but only after the party-set owner, rule owner and result wording are accepted. Without them A1 is **not admissible** and A0 remains the default. |
+| A2 — attributable agreement record | Each actor records only its own act; any shared conclusion has a separately governed formation rule and provenance. | Identified actors may state their own acts; a distinct accepted owner would be required for any shared conclusion. | Can preserve accountable intent, correction, withdrawal and legitimate judgment. | One writer may appear to speak for all parties, or the record may be mistaken for approval or commitment. | **Conditional alternative** when a concrete consumer requires attributable agreement acts beyond OCP-015 responses. It is not justified by confirmation alone. |
+| A3 — domain-owned agreement profile | A named domain owns agreement meaning and lifecycle inside an exact Core interoperability envelope. | The domain owns only the exact profile result. | Supports legitimate domain-specific meaning without making it universal Core semantics. | Identical labels can hide incompatible party, effectivity or withdrawal rules. | **Conditional alternative** when shared Core meaning would be false and exact profile mismatch fails closed. It is **not admissible** as an unlabeled cross-domain conclusion. |
+
+### 19.2 Agreement decision-separating evidence
+
+External review should distinguish the models with these questions:
+
+- Does any accepted consumer require more than a list of attributable OCP-015 responses?
+- Who owns the exact party set, and can it change without being inferred from visibility or transport recipients?
+- Is the desired result a deterministic evidence conclusion, a party's attributable act, or both through separately reviewed layers?
+- Can A1 name a result that cannot reasonably be read as consensus, approval, authorization or commitment?
+- Can A2 prove that each actor speaks only for itself and that correction or withdrawal never rewrites another actor's record?
+- Can A3 reject incompatible domain profiles before a consumer compares their results?
+
+A0 is the current default because OCP-015 already preserves the evidence and no further agreement authority has been accepted. A1 is the current minimum-authority hypothesis only if a concrete consumer needs a shared conclusion and separately accepted owners exist for the party set and rule. A2 requires demonstrated accountable acts not already represented by OCP-015. A3 requires genuinely domain-specific meaning plus exact profile binding.
+
+## 20. Axis independence and pair behavior
+
+No V/A pair is selected by this comparison. Every visibility model can coexist with every agreement model only if both contracts remain independently inspectable.
+
+Examples:
+
+- V1 + A0 may provide a governed visibility conclusion while retaining proposal and response evidence without an agreement conclusion.
+- V0 + A1 may derive a governed agreement-evidence conclusion from evidence already held under a separate access contract while Core adds no visibility-policy conclusion.
+- V2 + A2 creates two attributable records with different owners; neither record may stand in for the other.
+- V3 + A3 may use different domain profiles and versions. A shared domain label does not prove that the profiles or authorities match.
+
+A combined implementation is admissible only if removing either axis changes only that axis's result. If a missing visibility result changes party membership, or a positive agreement result grants visibility, the implementation has coupled the contracts and must fail review.
+
+### 20.1 Fail-safe behavior by axis
+
+| Evidence condition | Visibility-axis behavior | Agreement-axis behavior |
+|---|---|---|
+| Exact complete evidence satisfies the selected contract | V1–V3 may emit only their exact selected visibility result; V0 reports the declaration and `no governed visibility conclusion`. | A1–A3 may emit only their exact selected agreement-evidence result; A0 reports attributable responses and `no governed agreement conclusion`. |
+| Known governed mismatch | A selected rule may return its narrowly defined negative result; it does not revoke evidence or prove access denial. | A selected rule may return its narrowly defined negative result; it does not manufacture disagreement, Conflict or authorization. |
+| Missing required input or owner | `indeterminate` for V1–V3; V0 remains declaration-only. | `indeterminate` for A1–A3; A0 remains evidence-only. |
+| Stale, expired or wrong-version input | A new evaluation context is required; the historical result remains bound to its old snapshot. | A new evaluation context is required; historical responses and results are not rewritten. |
+| Ambiguous, conflicting or unresolved input | Non-permissive `indeterminate`, or `review required` only when the selected contract owns such a route. | Non-permissive `indeterminate`, or `review required` only when the selected contract owns such a route. |
+| Out-of-scope recipient, party, domain or profile | No cross-boundary conclusion; profile mismatch must be explicit. | No shared conclusion; party or profile mismatch must be explicit. |
+| Human judgment is legitimate but no evaluator authority is accepted | `review required` or `no governed conclusion`, never an inferred V2 result. | `review required` or `no governed conclusion`, never an inferred A2 result. |
+
+No state in this table grants temporary access or action. `Negative`, `indeterminate`, `review required` and `no governed conclusion` remain different outcomes.
+
+## 21. Normative authority accounting
+
+The following table accounts for every exact-context obligation from §6. “Unselected” is an explicit evidence gap, not permission for an implementation to choose an owner.
+
+| Binding or result | Visibility-axis owner | Agreement-axis owner | Fail-safe obligation |
+|---|---|---|---|
+| Evidence subject and exact revision | OCP-015 evidence publisher and exact proposal/record identity | OCP-015 proposal and response identities | Zero, multiple or cross-revision matches cannot yield a positive result. |
+| Publisher or asserting actor | Publisher for its own declaration; V2 decision actor for its own record | Each OCP-015 responder or A2 actor speaks only for itself | Caller identity, service accounts and Organization labels cannot replace attribution. |
+| Intended recipients | OCP-015 publisher owns only the declared envelope; V1–V3 need a separately accepted policy owner for a policy conclusion | Not a party-set source | Visibility never establishes party membership. |
+| Intended parties | Not a visibility-policy conclusion | Party-set owner is **unselected** for A1–A3 | A0 remains the default and A1–A3 remain non-authoritative until ownership is accepted. |
+| Operational context or purpose | Selected V1 rule owner, V2 decision profile owner or V3 domain profile owner | Selected A1 rule owner, A2 record profile owner or A3 domain profile owner | An implicit caller context or free-text label is insufficient. |
+| Policy or rule identifier and exact version | None under V0; selected V1/V2/V3 contract under its named owner | None under A0; selected A1/A2/A3 contract under its named owner | “Current” or latest-version lookup cannot reinterpret history. |
+| Evaluation time and effectivity | Selected visibility contract, using exact evidence and policy effectivity | Selected agreement contract, using exact proposal, response, party-set and rule effectivity | Temporal mismatch is `indeterminate`, not positive. |
+| Input evidence snapshot | Selected rule or decision contract must bind the finite OCP-015 and policy inputs | Selected rule or record contract must bind the finite proposal, response, party-set and rule inputs | Record order or later evidence cannot change a historical snapshot. |
+| Provenance | Source record owners plus the selected evaluator or decision actor | Source record owners plus the selected rule/evaluator/actor | Provenance does not become authorization. |
+| Withdrawal or supersession history | OCP-015 for proposal evidence; V2/V3 owner for any added decision lifecycle | OCP-015 for responses; A2/A3 owner for any added record lifecycle | History is appended or superseded, never erased or reassigned. |
+| Visibility result | No governed result under V0; selected V1 rule, V2 actor or V3 domain owns only the exact result | No authority over agreement | A result does not prove delivery, access permission or action authorization. |
+| Agreement result | No authority over agreement | No governed result under A0; selected A1 rule, A2 formation contract or A3 domain owns only the exact result | A result does not establish consensus, approval, commitment or action authorization. |
+
+### 21.1 Excluded authority ledger
+
+| Unresolved question | Separate owner or disposition | Why it stays outside AD-010 |
+|---|---|---|
+| Actor authentication, delegation and signatures | Explicit evidence gap pending a separately accepted identity/security contract | Record attribution does not prove caller identity or delegated authority. |
+| Access permission, enforcement, classification and releasability | Separate future security/access-control contract | A visibility-policy conclusion is semantic evidence, not an enforcement token. |
+| Operation authorization or approval | AB-017 | Visibility and agreement evidence cannot authorize an Operation. |
+| Reservation or allocation | AB-025 | Neither axis selects or reserves a Resource. |
+| Assignment lifecycle change | AB-028 | Neither axis creates, amends or revokes Assignment participation. |
+| Consensus, voting, quorum or arbitration | No owner selected; requires a separate accepted mandate | Response count or an agreement-evidence result cannot manufacture collective decision authority. |
+| Conflict creation or resolution | AB-018 and AB-038 | Decline, mismatch or conflicting evidence is not automatically a Conflict Concept or resolution act. |
+
+## 22. Mandatory counterexample mapping
+
+The complete §11 set is mapped below. A range such as `V0–V3` or `A0–A3` means that every model on that axis must supply the stated behavior; it is not permission to test only one representative model.
+
+| # | Counterexample pressure | Visibility applicability and required verdict | Agreement applicability and required verdict | Downstream executable-evidence owner |
+|---|---|---|---|---|
+| 1 | Publication to an invited responder grants no permission to act | **V0–V3:** preserve publication or the selected visibility result, but expose no permission or authorization field. | **A0–A3:** invitation alone produces no response or agreement conclusion. | OCP-015 compatibility fixture plus every selected V contract. |
+| 2 | An observer can inspect evidence but is not a party | **V0–V3:** observer visibility may be reported under the exact model. | **A0–A3:** observer is excluded unless the independently governed party set includes it; visibility is never party evidence. | Joint V/A boundary fixture owned by the selected contracts; A1–A3 must bind the party-set source. |
+| 3 | R1 is confirmed; R2 inherits nothing | **V0–V3:** a new proposal revision is a new evidence subject and evaluation context. | **A0–A3:** only R1 has the response; R2 cannot be positive from inherited evidence. | OCP-015 exact-revision fixture reused by every selected V/A contract. |
+| 4 | Every invited responder confirms, but no authorization or commitment exists | **V0–V3:** visibility says nothing about response authority or action. | **A0:** reports confirmations only. **A1–A3:** any positive result is narrowly named and explicitly non-authorizing and non-committing. | Every selected A contract, with a forbidden-coupling assertion in the V contract where applicable. |
+| 5 | One required party declines while another confirms | **V0–V3:** both records may remain visible without choosing a winner. | **A0:** reports both facts. **A1–A3:** cannot produce a positive result that requires all parties; no newest/count/majority rule. | OCP-015 mixed-response fixture plus every selected A contract. |
+| 6 | A responder withdraws only its own response | **V0–V3:** withdrawal does not erase previously visible evidence or another actor's records. | **A0–A3:** historical confirmation remains; the current exact snapshot reflects withdrawal without turning it into another actor's decline. | OCP-015 withdrawal fixture; A2/A3 add lifecycle evidence if selected. |
+| 7 | A superseding proposal changes the declared visibility envelope | **V0:** reports each historical declaration. **V1–V3:** evaluate each exact revision and policy snapshot separately; no retroactive erasure. | **A0–A3:** responses and party conclusions remain bound to their exact proposal revision. | OCP-015 proposal-supersession fixture plus every selected V contract. |
+| 8 | Policy inputs are missing, stale, conflicting or wrong-version | **V0:** emits no policy conclusion. **V1–V3:** `indeterminate`, never positive or implicit current-policy fallback. | **A0–A3:** a visibility-policy gap does not alter agreement evidence or results. If an agreement contract has its own missing or mismatched rule/profile input, A1–A3 independently return `indeterminate`. | Each non-control rule/record/profile owner. |
+| 9 | Party set is unresolved or changes | **V0–V3:** no inference from recipients or visible actors. | **A0:** reports evidence without a shared conclusion. **A1–A3:** `indeterminate` until an exact governed party-set snapshot exists; change creates a new context. | Every selected A contract; party-set owner must be accepted before positive fixtures. |
+| 10 | One actor claims that another actor agreed | **V0–V3:** access to the statement does not validate it. | **A0–A3:** never treat it as the other actor's response or act; only each actor's own exact record may speak for it. | OCP-015 actor-binding fixture; A2/A3 add impersonation rejection if selected. |
+| 11 | Two domain profiles reuse a label with incompatible meanings | **V0:** label has no policy authority. **V1/V2:** exact rule/profile mismatch cannot resolve by label. **V3:** must explicitly reject cross-domain mismatch. | **A0:** label has no agreement authority. **A1/A2:** exact rule/profile mismatch fails closed. **A3:** must explicitly reject cross-domain mismatch. | V3/A3 Core-envelope conformance suites; all other selected models test exact version binding. |
+| 12 | Transport exposes data without a governed visibility conclusion | **V0:** technical exposure remains distinct from the declaration. **V1–V3:** receipt or transport success cannot manufacture a positive result. | **A0–A3:** possession or receipt cannot establish party status, response or agreement. | Every selected V contract plus an axis-boundary fixture for the selected A contract. |
+| 13 | A positive visibility result is reused as authorization, selection, reservation or allocation | **V1–V3:** reject forbidden output coupling; **V0:** declaration cannot be upgraded to a positive policy result. | **A0–A3:** no agreement conclusion may be inferred from the visibility result. | Every selected V contract; AB-017 and AB-025 remain downstream owners of their own authority. |
+| 14 | Count, timestamp or list order manufactures agreement | **V0–V3:** no ordering or count authority leaks from visible evidence. | **A0:** reports records only. **A1–A3:** exact rule inputs are order-independent; no newest, majority or count shortcut unless separately accepted. | OCP-015 order fixture plus every selected A contract. |
+| 15 | Exact snapshot replay changes when input order changes | **V0:** declaration projection remains identical. **V1–V3:** exact result is identical for the same snapshot and contract version. | **A0:** evidence projection remains identical. **A1–A3:** exact result is identical for the same snapshot, party set and rule/profile version. | Every selected V/A contract, with permutation fixtures owned by its normative checker. |
+
+## 23. Executable-evidence plan by candidate owner
+
+This discovery does not add checker code. It assigns future evidence so that outcome selection cannot leave a positive authority without a falsification owner.
+
+| Candidate | Required downstream normative owner and evidence |
+|---|---|
+| V0 | OCP-015 compatibility suite: exact declared-envelope projection, revision history, technical-receipt separation and order independence. |
+| V1 | A selected visibility-rule contract: exact policy/input manifest, positive/negative/indeterminate cases, version replay, precedence rejection and all applicable §22 fixtures. |
+| V2 | A selected disclosure-decision profile: actor binding, exact policy/context snapshot, correction/withdrawal history, impersonation rejection and forbidden permission-token reuse. |
+| V3 | A selected Core envelope plus each participating domain profile: exact domain/profile binding, unknown-profile rejection and incompatible-meaning fixtures. |
+| A0 | OCP-015 compatibility suite: exact response attribution, mixed responses, withdrawal, cross-revision rejection and order independence. |
+| A1 | A selected agreement-evidence rule contract: exact party-set and rule manifests, effectivity, deterministic replay, fail-safe states and forbidden consensus/authorization coupling. |
+| A2 | A selected attributable-record profile: self-only actor authority, any separately governed formation rule, immutable history, correction/withdrawal and impersonation rejection. |
+| A3 | A selected Core envelope plus each participating domain profile: exact agreement-profile binding, lifecycle semantics, unknown-profile rejection and cross-domain mismatch fixtures. |
+
+The Architecture Board may select no downstream contract on either axis. In that case V0 or A0 remains the accepted control and no placeholder schema, evaluator or fixture family is created merely to make the repository look complete.
+
+## 24. Comparison status and next decision gate
+
+Revision `0.1.0` opened AD-010 and AB-059 in `Discovery`. Fable reviewed exact head `0ce5544`, found no blocking issue, and recommended acceptance with two non-blocking observations: map all fifteen counterexamples to every applicable model and record separate verdicts for the V and A axes. Codex accepted those observations as obligations of this comparison stage.
+
+Revision `0.2.0` supplies that comparison, the independent-vertical scenario, per-axis working verdicts, exact authority accounting, fail-safe behavior and the full counterexample-to-owner map. It does not record an Architecture Board outcome selection.
+
+External adversarial review must now try to falsify the comparison on its exact head. Before any later selection, the review must determine separately:
+
+1. whether V0 remains sufficient or a concrete consumer justifies V1, V2 or V3;
+2. whether A0 remains sufficient or a concrete consumer justifies A1, A2 or A3;
+3. whether every positive-capable candidate has an accepted owner for all exact inputs and results;
+4. whether the full §22 map is fair to the controls and executable for each applicable model; and
+5. whether either axis still imports receipt, permission, party membership, consensus, authorization, selection, reservation, allocation, Conflict or Assignment authority.
+
+If the evidence does not distinguish models on one axis, that axis remains in `Discovery` even if the other axis is ready for selection. A later Board act must name separate V and A outcomes, including V0 or A0 where appropriate. Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of any selection act.
