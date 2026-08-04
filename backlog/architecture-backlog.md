@@ -5,7 +5,7 @@
 | AB-001 | Operational Situation як окремий Concept | Open | Перевірити після базових Concept |
 | AB-002 | Order як фундаментальний Concept | Open | Визначити, чи є Order обов’язковим або одним із можливих джерел авторизації Operation |
 | AB-003 | Погодження між незалежними вертикалями | Open | Включити до Coordination Model |
-| AB-004 | Capability Registry | Planned | AD-005C: визначити нормативний Capability definition та registry contract для identity, namespace, exact version, supersession і resolution; holder claims залишаються окремим downstream-рішенням |
+| AB-004 | Capability Registry | Resolved | PR-0010 / OCP-009: прийнято reusable Capability definition, governed namespace, exact-version resolution і supersession contract; holder claims залишаються окремим downstream-рішенням |
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
 | AB-007 | State як Concept | Deferred | Переглянути ADR-DRAFT-007 після Constraint, PR-0006 fixtures та стабілізації Accepted Operation і Assignment |
