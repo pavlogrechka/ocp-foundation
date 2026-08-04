@@ -65,8 +65,8 @@ backlog/                 відкриті питання та дорожня к�
 - фундаментальний `Result` відхилено AD-006C і видалено з active Concept registry та generated Foundation map без переходу в Accepted, Deprecated або Archived;
 - вісь AD-006 завершена: occurrence Event + attributable ObservationRecord + governed OutcomeAssessmentRecord;
 - OCP-009 визначає reusable Capability definition, governed namespace ownership, exact-version resolution і supersession без holder claims;
-- AD-007C обрав single CapabilityClaimRecord direction; OCP-012 `0.1.0 / Draft` відкриває human-readable normative contract review без нового Concept або graph edge;
-- draft CapabilityClaimRecord exact-bind-ить Resource, OCP-009 Capability version, claimant, governed claim kind, condition set, authority, evidence/support, time та provenance;
+- AD-007C обрав single CapabilityClaimRecord direction; OCP-012 `0.2.0 / Accepted` реалізує її як governed non-Concept record contract без нового graph edge;
+- CapabilityClaimRecord exact-bind-ить Resource, OCP-009 Capability version, claimant, governed claim kind, condition set, authority, evidence/support, time та provenance;
 - withdrawal не дорівнює negative claim; branching, stale/conflicting support і unresolved inputs fail safe без newest/order/count authority;
 - OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
 - reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, integrated scenario, Concept status synchronization і dependency graph;
@@ -75,8 +75,8 @@ backlog/                 відкриті питання та дорожня к�
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- наступні нормативні цикли — external review/acceptance OCP-012, Resource interchangeability та Coordination;
+- наступні нормативні цикли — AB-011 Resource interchangeability та Coordination;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності з reviewable OCP-012 draft — **≈51%**.
+- не-нормативна оцінка загальної foundation-готовності з Accepted OCP-012 — **≈51%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
