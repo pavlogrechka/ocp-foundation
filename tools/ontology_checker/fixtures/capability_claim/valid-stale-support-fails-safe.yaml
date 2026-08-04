@@ -1,0 +1,40 @@
+case_id: capability-claim-valid-stale-support-fails-safe
+concept: CapabilityClaimDataset
+resources:
+  - resource_id: R-CLAIM-004
+    classifications: [Technical Resource]
+    contains_refs: []
+capabilities:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-001
+observations:
+  - observation_id: OBS-CLM-004
+    statement: Historical navigation demonstration.
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-CLM-004
+    evidence_bindings:
+      - {evidence_kind_ref: observation-record@1, evidence_ref: OBS-CLM-004}
+claims:
+  - claim_id: CLM-004
+    claim_kind_ref: holder-capability@1
+    holder_kind_ref: resource@1
+    holder_ref: R-CLAIM-004
+    capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+    claimant_ref: SOURCE-004
+    condition_set_ref: field-context@1
+    assertion: positive
+    evidence_bindings:
+      - {evidence_kind_ref: observation-record@1, evidence_ref: OBS-CLM-004}
+    evidence_snapshot_ref: EVIDENCE-CLM-004
+    support_state: stale
+    authority_ref: AUTH-004
+    effective_from: 2026-08-04T08:00:00Z
+    recorded_at: 2026-08-04T08:01:00Z
+    provenance_ref: ACT-CLM-004
+expected: {valid: true, error_codes: []}

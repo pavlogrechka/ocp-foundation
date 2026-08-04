@@ -1,0 +1,15 @@
+case_id: capability-claim-invalid-supersession-cycle
+concept: CapabilityClaimDataset
+resources:
+  - {resource_id: R-CLAIM-105, classifications: [Technical Resource], contains_refs: []}
+capabilities:
+  - {namespace: mobility, capability_id: navigate, version: v1, label: Navigate, definition: Navigate safely., namespace_owner_ref: SPEC-MOBILITY, published_at: 2026-08-04T00:00:00Z, provenance_ref: ACT-CAP-001}
+claims:
+  - &claim
+    {claim_id: CLM-105A, claim_kind_ref: holder-capability@1, holder_kind_ref: resource@1, holder_ref: R-CLAIM-105, capability_ref: {namespace: mobility, capability_id: navigate, version: v1}, claimant_ref: SOURCE-105, condition_set_ref: unconditional@1, assertion: positive, evidence_bindings: [], support_state: declared, authority_ref: AUTH-105, effective_from: 2026-08-04T08:00:00Z, recorded_at: 2026-08-04T08:01:00Z, provenance_ref: ACT-CLM-105A, supersedes_claim_ref: CLM-105B}
+  - <<: *claim
+    claim_id: CLM-105B
+    recorded_at: 2026-08-04T09:01:00Z
+    provenance_ref: ACT-CLM-105B
+    supersedes_claim_ref: CLM-105A
+expected: {valid: false, error_codes: [CAPABILITY_CLAIM_SUPERSESSION_CYCLE]}

@@ -1,0 +1,8 @@
+case_id: capability-claim-invalid-organization-holder
+concept: CapabilityClaimDataset
+resources: []
+capabilities:
+  - {namespace: mobility, capability_id: navigate, version: v1, label: Navigate, definition: Navigate safely., namespace_owner_ref: SPEC-MOBILITY, published_at: 2026-08-04T00:00:00Z, provenance_ref: ACT-CAP-001}
+claims:
+  - {claim_id: CLM-103, claim_kind_ref: holder-capability@1, holder_kind_ref: organization@1, holder_ref: ORG-103, capability_ref: {namespace: mobility, capability_id: navigate, version: v1}, claimant_ref: SOURCE-103, condition_set_ref: unconditional@1, assertion: positive, evidence_bindings: [], support_state: declared, authority_ref: AUTH-103, effective_from: 2026-08-04T08:00:00Z, recorded_at: 2026-08-04T08:01:00Z, provenance_ref: ACT-CLM-103}
+expected: {valid: false, error_codes: [CAPABILITY_CLAIM_HOLDER_KIND_UNSUPPORTED, CAPABILITY_CLAIM_HOLDER_UNRESOLVED]}

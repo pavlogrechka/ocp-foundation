@@ -1,0 +1,17 @@
+case_id: capability-claim-invalid-binding-change
+concept: CapabilityClaimDataset
+resources:
+  - {resource_id: R-CLAIM-104A, classifications: [Technical Resource], contains_refs: []}
+  - {resource_id: R-CLAIM-104B, classifications: [Technical Resource], contains_refs: []}
+capabilities:
+  - {namespace: mobility, capability_id: navigate, version: v1, label: Navigate, definition: Navigate safely., namespace_owner_ref: SPEC-MOBILITY, published_at: 2026-08-04T00:00:00Z, provenance_ref: ACT-CAP-001}
+claims:
+  - &claim
+    {claim_id: CLM-104A, claim_kind_ref: holder-capability@1, holder_kind_ref: resource@1, holder_ref: R-CLAIM-104A, capability_ref: {namespace: mobility, capability_id: navigate, version: v1}, claimant_ref: SOURCE-104, condition_set_ref: unconditional@1, assertion: positive, evidence_bindings: [], support_state: declared, authority_ref: AUTH-104, effective_from: 2026-08-04T08:00:00Z, recorded_at: 2026-08-04T08:01:00Z, provenance_ref: ACT-CLM-104A}
+  - <<: *claim
+    claim_id: CLM-104B
+    holder_ref: R-CLAIM-104B
+    recorded_at: 2026-08-04T09:01:00Z
+    provenance_ref: ACT-CLM-104B
+    supersedes_claim_ref: CLM-104A
+expected: {valid: false, error_codes: [CAPABILITY_CLAIM_BINDING_MISMATCH]}

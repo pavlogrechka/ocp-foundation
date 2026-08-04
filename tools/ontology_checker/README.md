@@ -17,6 +17,7 @@ Implemented validators:
 - Event occurrence identity and exact resolution;
 - ObservationRecord attribution, optional Event linkage and Module C supersession;
 - OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states and Module C supersession;
+- CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - artifact governance and complete-history process audit.
@@ -35,7 +36,11 @@ Implemented reference derivations include:
 - `observations_for_event`;
 - `resolve_outcome_assessment`;
 - `outcome_assessment_heads`;
-- `effective_outcome_conclusion`.
+- `effective_outcome_conclusion`;
+- `resolve_capability_claim`;
+- `capability_claim_effective_at`;
+- `capability_claim_heads`;
+- `effective_capability_claim`.
 
 ## Manifest discipline
 
@@ -43,7 +48,8 @@ The checker uses exact module manifests:
 
 - `rules.yaml` — core, governance, Objective, Capability and Event/Observation codes and derivations;
 - `organization-rules.yaml` — Organization module;
-- `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module.
+- `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module;
+- `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests.
 
@@ -55,7 +61,7 @@ A `Uses-Patterns` invocation uses `P-NNN@x.y.z` checker syntax and must resolve 
 
 The repository policy is **track-current**, not historical pinning. A Pattern version change must update all invokers atomically and pass the applicable review lane.
 
-ObservationRecord and OutcomeAssessmentRecord invoke `P-001@0.1.0` with selected Module C supersession. Their domain semantics remain in OCP-010 and OCP-011 respectively.
+ObservationRecord and OutcomeAssessmentRecord invoke `P-001@0.1.0` with selected Module C supersession. CapabilityClaimRecord selects Modules A and C for time-bounded applicability plus history-preserving correction/withdrawal. Their domain semantics remain in OCP-010, OCP-011 and OCP-012 respectively.
 
 ## Authority and exact references
 
@@ -134,6 +140,16 @@ OutcomeAssessmentRecord supersession:
 `outcome_assessment_heads` returns unsuperseded exact-bound records. `effective_outcome_conclusion` returns `indeterminate` when heads disagree or use different evidence/input snapshots. List order does not affect the projection.
 
 The validator rejects embedded Result, Operation lifecycle-success, Objective mutable status, Capability, Readiness, authorization, Conflict, Risk and State convenience fields.
+
+## CapabilityClaimRecord envelope
+
+OCP-012 defines a separate identified record for one claimant's proposition about one exact Resource and one exact OCP-009 Capability version under one condition set. The checker keeps declaration authority narrow: `support_state: declared` records what the claimant said and never marks it independently verified.
+
+The checker mechanically cross-checks `declared`/`missing` against evidence-set composition and verifies snapshot consistency. Until AB-039 defines freshness and replay semantics, the truth of `sufficient`, `stale`, `ambiguous` and `conflicting` remains an attributable recorder responsibility.
+
+The reference slice supports Resource-only holders, exact Capability resolution, half-open effectivity intervals, evidence snapshots and branching supersession. Withdrawal is a successor assertion distinct from negative polarity. `capability_claim_heads` performs as-of replay; `effective_capability_claim` returns `indeterminate` for missing, stale, ambiguous or conflicting support and for disagreeing heads. It never uses newest timestamp, list order, claimant count or source count as authority.
+
+Matching claim projections for two Resources preserve two Resource identities and do not decide AB-011 interchangeability.
 
 ## Integrated non-sensitive scenario
 

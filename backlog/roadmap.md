@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 72% | Вісім Concepts Accepted; AD-007C визначає напрям single CapabilityClaimRecord; Coordination, Operational Area, нормативний Capability Claim contract і Core Boundary лишаються відкритими |
+| Core domain ontology | 72% | Вісім Concepts Accepted; OCP-012 відкриває review нормативного CapabilityClaimRecord contract; Coordination, Operational Area і Core Boundary лишаються відкритими |
 | Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation та accepted assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 58% | OCP-011 додає exact-bound assessment validator, snapshots, supersession heads і нормативний integrated scenario; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈50%** | AD-007C приймає межу holder-specific Capability Claim; наступний dependency hinge — нормативний CapabilityClaimRecord contract |
+| Machine-readable schemas and enforcement | 60% | Draft OCP-012 додає exact-bound CapabilityClaimRecord checker, as-of heads, fail-safe projection і counterexample fixtures; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈51%** | OCP-012 реалізує перший reviewable CapabilityClaimRecord draft; acceptance ще потребує external review та Board act |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -44,7 +44,7 @@
 - [x] Event occurrence Concept and governed ObservationRecord contract — `AB-055 / OCP-010 / PR-0012`
 - [x] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`
 - [x] Holder-specific Capability Claim boundary accepted in `AD-007C`: Outcome B, a single narrowly attributable CapabilityClaimRecord direction
-- [ ] Normative CapabilityClaimRecord contract with fail-safe claim-head projection
+- [ ] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — OCP-012 `0.1.0 / Draft` under review
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -82,6 +82,7 @@
 - [x] First integrated non-sensitive scenario with `derived_participates_in`, `constraint_applicable_to` and `effective_constraint_result`
 - [x] OCP-011 normative OutcomeAssessmentRecord evidence with exact snapshots, fail-safe states and branching supersession
 - [x] Atomic removal of temporary `Result: Proposed` registry marker without creating a Result Concept
+- [x] Draft OCP-012 CapabilityClaimRecord exact binding, temporal/supersession history and fail-safe projection fixtures
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -114,7 +115,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Define the holder-specific Capability Claim boundary and P-001 record contract; keep registry membership distinct from possession, Readiness, availability, authorization and admissibility.
+1. Externally review and accept the OCP-012 holder-specific CapabilityClaimRecord contract; keep registry membership distinct from possession, Readiness, availability, authorization and admissibility.
 2. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
 3. Define Coordination boundaries and workflows for independent verticals.
 4. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.

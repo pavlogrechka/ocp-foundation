@@ -25,6 +25,17 @@ from .capability import (
     validate_capability_reference_fixture,
     validate_capability_registry,
 )
+from .capability_claim import (
+    CAPABILITY_CLAIM_DERIVATION_RULES,
+    CAPABILITY_CLAIM_ERROR_CODES,
+    capability_claim_effective_at,
+    capability_claim_heads,
+    effective_capability_claim,
+    resolve_capability_claim,
+    validate_capability_claim,
+    validate_capability_claim_dataset,
+    validate_capability_claim_fixture,
+)
 from .event import (
     EVENT_DERIVATION_RULES,
     EVENT_ERROR_CODES,
@@ -79,6 +90,10 @@ def validate_reference_fixture(fixture):
         return validate_capability_registry(fixture.get("entities") or [])
     if concept == "CapabilityReference":
         return validate_capability_reference_fixture(fixture)
+    if concept == "CapabilityClaimRecord":
+        return validate_capability_claim(fixture.get("entity") or {})
+    if concept == "CapabilityClaimDataset":
+        return validate_capability_claim_fixture(fixture)
     if concept == "Event":
         return validate_event(fixture.get("entity") or {})
     if concept == "EventDataset":
