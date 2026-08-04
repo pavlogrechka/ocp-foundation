@@ -1,0 +1,13 @@
+case_id: event-invalid-embedded-observation
+concept: Event
+entity:
+  event_id: EV-COUPLING-001
+  event_kind_ref: infrastructure.condition-change@1
+  registered_at: 2026-08-04T01:00:00Z
+  identity_provenance_ref: ACT-EVENT-COUPLING-001
+  observations:
+    - observation_id: OBS-EMBEDDED-001
+expected:
+  valid: false
+  error_codes:
+    - EVENT_OBSERVATION_COUPLING_FORBIDDEN
