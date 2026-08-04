@@ -8,7 +8,7 @@
 | Concept | Status |
 |---|---|
 | Assignment | Accepted |
-| Capability | Proposed |
+| Capability | Accepted |
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Proposed |
@@ -33,6 +33,7 @@
 
 ## Current isolated defined Concepts
 
+- `Capability`
 - `Constraint`
 - `Organization`
 

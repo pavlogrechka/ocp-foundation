@@ -1,0 +1,17 @@
+case_id: capability-invalid-holder-coupling
+concept: Capability
+entity:
+  namespace: communications
+  capability_id: relay
+  version: v1
+  label: Relay
+  definition: Relay communications traffic.
+  namespace_owner_ref: SPEC-COMMS
+  published_at: 2026-08-04T00:00:00Z
+  provenance_ref: ACT-CAP-070
+  resource_refs:
+    - R-001
+expected:
+  valid: false
+  error_codes:
+    - CAPABILITY_HOLDER_COUPLING_FORBIDDEN

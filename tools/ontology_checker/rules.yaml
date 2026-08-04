@@ -1,4 +1,4 @@
-manifest_version: 0.4.0
+manifest_version: 0.5.0
 authority: reference-only
 normative_source: OCP documents and governed artifact taxonomy
 rules:
@@ -227,6 +227,63 @@ rules:
 - id: STATUS_TAXONOMY_MISSING
   kind: validation
   source: OCP-001 Concept status synchronization
+- id: CAPABILITY_DEFINITION_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 3
+- id: CAPABILITY_HOLDER_COUPLING_FORBIDDEN
+  kind: validation
+  source: OCP-009 §11 semantic rule 10 and §12 invariant 12
+- id: CAPABILITY_ID_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 1
+- id: CAPABILITY_IDENTITY_DUPLICATE
+  kind: validation
+  source: OCP-009 §12 invariant 2
+- id: CAPABILITY_LABEL_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 3
+- id: CAPABILITY_NAMESPACE_OWNER_CONFLICT
+  kind: validation
+  source: OCP-009 §12 invariant 6
+- id: CAPABILITY_NAMESPACE_OWNER_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 4
+- id: CAPABILITY_NAMESPACE_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 1
+- id: CAPABILITY_PROVENANCE_REF_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 4
+- id: CAPABILITY_PUBLISHED_AT_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 5
+- id: CAPABILITY_REFERENCE_AMBIGUOUS
+  kind: validation
+  source: OCP-009 §12 invariant 8
+- id: CAPABILITY_REFERENCE_INVALID
+  kind: validation
+  source: OCP-009 §12 invariant 7
+- id: CAPABILITY_REFERENCE_UNRESOLVED
+  kind: validation
+  source: OCP-009 §12 invariant 8
+- id: CAPABILITY_SELF_SUPERSESSION
+  kind: validation
+  source: OCP-009 §12 invariant 9
+- id: CAPABILITY_SUPERSESSION_CYCLE
+  kind: validation
+  source: OCP-009 §12 invariant 10
+- id: CAPABILITY_SUPERSESSION_IDENTITY_MISMATCH
+  kind: validation
+  source: OCP-009 §12 invariant 9
+- id: CAPABILITY_SUPERSESSION_REFERENCE_INVALID
+  kind: validation
+  source: OCP-009 §12 invariant 9
+- id: CAPABILITY_SUPERSESSION_TARGET_UNRESOLVED
+  kind: validation
+  source: OCP-009 §12 invariant 9
+- id: CAPABILITY_VERSION_REQUIRED
+  kind: validation
+  source: OCP-009 §12 invariant 1
 - id: assignment_effective_at
   kind: derivation
   source: OCP-005 §8
@@ -248,3 +305,6 @@ rules:
 - id: effective_constraint_result
   kind: derivation
   source: OCP-006 §11
+- id: resolve_capability_definition
+  kind: derivation
+  source: OCP-009 §8

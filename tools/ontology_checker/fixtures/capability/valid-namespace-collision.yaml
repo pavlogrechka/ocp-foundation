@@ -1,0 +1,26 @@
+case_id: capability-valid-namespace-collision
+concept: CapabilityReference
+entries:
+  - namespace: communications
+    capability_id: relay
+    version: v1
+    label: Relay
+    definition: Relay communications traffic.
+    namespace_owner_ref: SPEC-COMMS
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-010
+  - namespace: logistics
+    capability_id: relay
+    version: v1
+    label: Relay
+    definition: Relay physical supplies between controlled points.
+    namespace_owner_ref: SPEC-LOG
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-011
+reference:
+  namespace: communications
+  capability_id: relay
+  version: v1
+expected:
+  valid: true
+  error_codes: []

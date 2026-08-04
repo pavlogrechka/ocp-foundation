@@ -1,0 +1,30 @@
+case_id: capability-valid-deterministic-resolution
+concept: CapabilityReference
+entries:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-CAP-001
+  - namespace: mobility
+    capability_id: navigate
+    version: v2
+    label: Navigate
+    definition: Navigate through a governed operational environment with revised semantics.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-04T01:00:00Z
+    provenance_ref: ACT-CAP-002
+    supersedes_capability_ref:
+      namespace: mobility
+      capability_id: navigate
+      version: v1
+reference:
+  namespace: mobility
+  capability_id: navigate
+  version: v1
+expected:
+  valid: true
+  error_codes: []

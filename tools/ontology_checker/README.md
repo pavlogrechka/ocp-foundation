@@ -12,6 +12,7 @@ Implemented validators:
 - Operation: identity, plural Objective resolution, and the accepted non-Draft explicit-intent exact-binding evidence contract;
 - Assignment: authoritative linear transition history, optional materialized lifecycle projections, required Established-lineage fields, applicability interval, and supersession self-reference;
 - Constraint: authoritative linear transition history, optional materialized lifecycle projections, target/predicate/enforcement completeness, validity interval, exact-version evaluation selection, evaluation uniqueness, and contradictory `not_applicable` detection;
+- Capability: definition structure, exact identity uniqueness, namespace-owner consistency, supersession validation, holder-coupling rejection and exact reference resolution;
 - repository status synchronization: OCP-000 registry, OCP-002 machine-readable projection, and defining-document `Concept-Status`;
 - artifact governance: path-derived OCP, Pattern and AD identifiers; taxonomy-allowed statuses; duplicate AB identifiers; accepted AD↔AB synchronization; and exact Pattern invocation resolution;
 - process audit: main-context verification that complete post-baseline Git history contains no merge commit.
@@ -24,7 +25,8 @@ Implemented reference derivations:
 - `constraint_applicable_to`;
 - `effective_constraint_result`;
 - `constraint_blocks`;
-- `constraint_set_decision`.
+- `constraint_set_decision`;
+- `resolve_capability_definition`.
 
 ## Artifact-governance authority
 
@@ -89,6 +91,27 @@ The harness trusts `intent_version_ref` to identify an immutable version of all 
 
 When no unambiguous exact-binding effective result exists, the normative projection is `not_evaluated`. A materialized `validation_status: passed` or `failed` is therefore a mismatch and cannot create a more permissive Operation.
 
+## Capability registry reference envelope
+
+OCP-009 defines a structured exact reference:
+
+```yaml
+reference:
+  namespace: mobility
+  capability_id: navigate
+  version: v1
+```
+
+The checker compares all three components by exact string equality. It does not define a delimiter, choose a latest version, use `published_at` as a tie-break, match by label, or redirect a superseded reference to a successor.
+
+Fixture `entries` form the reference registry dataset. `resolve_capability_definition(entries, reference)` returns one valid exact record or `None`. Duplicate exact identities are ambiguous and therefore cannot create an authoritative positive result.
+
+Supersession is validated as an exact same-identity version edge: the target must exist, use the same namespace and `capability_id`, differ by version, and remain acyclic. A superseded historical version remains resolvable by its own exact reference.
+
+The registry validator rejects embedded holder, possession, readiness, availability, authorization and admissibility assertions. Resource context included in a fixture does not create a Capability claim.
+
+Holder-coupling rejection is a finite key probe, not a semantically complete implementation of OCP-009 invariant 12. Review of normative artifacts remains responsible for detecting unlisted holder-specific semantics, and the probe list may be expanded in later cycles.
+
 ## Materialized projections
 
 OCP-005 and OCP-006 allow lifecycle projections to be materialized but do not require them.
@@ -108,6 +131,12 @@ The suite includes:
 - a stale permissive result for an older Constraint version below a current blocking result;
 - advisory uncertainty producing `review_required`, not `inadmissible`;
 - valid Established Assignment and Constraint fixtures without materialized projections;
+- deterministic Capability exact-version resolution;
+- equal Capability labels in different namespaces that remain distinct identities;
+- superseded Capability exact references that do not redirect;
+- unresolved and duplicate Capability references that fail closed;
+- Capability supersession cycles, namespace-owner conflicts and holder-coupled registry entries;
+- same-type Resource context that does not create a Capability claim;
 - duplicate AB identifiers;
 - malformed, missing and stale Pattern invocations;
 - non-semver Pattern versions;
@@ -129,13 +158,14 @@ Each YAML fixture contains:
 
 ```yaml
 case_id: stable-test-id
-concept: Resource | Operation | Assignment | Constraint
-reference: {} # checker-only evaluation metadata when required
+concept: Resource | Operation | Assignment | Constraint | Capability | CapabilityRegistry | CapabilityReference
+reference: {} # checker-only evaluation or exact-resolution metadata when required
+entries: [] # Capability registry dataset when required
 expected:
   valid: true | false
   error_codes: []
 entity: {}
-contexts: [] # optional; used by Constraint fixtures
+contexts: [] # optional; used by Constraint and boundary fixtures
 ```
 
 For invalid fixtures, `error_codes` must equal the complete emitted error set. Unexpected additional errors fail CI.
@@ -161,9 +191,10 @@ The CLI reports malformed YAML as a failure for that file and continues checking
 
 This slice does not yet provide:
 
-- a full machine-readable Concept registry beyond status synchronization;
+- a production or cross-repository Capability registry; OCP-009 support is a local reference dataset and resolver only;
+- holder-specific Capability claims or Resource/Organization possession semantics;
 - duplicate normative-rule detection;
-- cross-file identity uniqueness and graph-wide supersession/composition acyclicity;
+- cross-file identity uniqueness beyond the Capability fixture dataset and other currently governed artifact classes;
 - full Operation lifecycle validation;
 - a Constraint expression language or production evaluator interface;
 - `relation_scope` evaluation semantics;
@@ -171,4 +202,4 @@ This slice does not yet provide:
 - quantity, capacity, geometry, spectrum, authorization, Conflict, Risk, Readiness, or State semantics;
 - database, API, or UI contracts.
 
-Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES` participates in the same exact-equality manifest meta-test as the existing checker codes, so adding a governance error without provenance fails CI.
+Every emitted validation code and derivation must cite its defining source in `rules.yaml`. `GOVERNANCE_ERROR_CODES`, `CAPABILITY_ERROR_CODES` and the other checker code sets participate in the same exact-equality manifest meta-test, so adding an error or derivation without provenance fails CI.

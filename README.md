@@ -51,15 +51,17 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Resource, Operation, Assignment, Constraint, Organization і Objective мають статус `Accepted`;
+- Resource, Operation, Assignment, Constraint, Organization, Objective і Capability мають статус `Accepted`;
+- OCP-009 визначає reusable Capability definition, governed namespace ownership, exact-version resolution і supersession без holder claims;
+- AB-004 завершено; holder-specific Capability Claim і AB-011 лишаються окремими downstream-рішеннями;
 - OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
-- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Concept status synchronization і dependency graph;
+- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Concept status synchronization і dependency graph;
 - artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- наступний запланований decision cycle — `AD-005 — Capability Boundary`, після нього Event/Result і Coordination boundaries;
+- наступні заплановані boundary cycles — Event/Result, потім holder-specific Capability Claim та Coordination;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності: **≈40%**.
+- не-нормативна оцінка загальної foundation-готовності: **≈42%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 50% | Resource, Operation, Assignment, Constraint, Organization і Objective Accepted; Capability, Event/Result, Coordination та інші межі ще не визначені |
+| Core domain ontology | 60% | Сім Concepts Accepted; Capability definition і registry contract завершені, а Event/Result, Coordination, Operational Area та Core Boundary ще не визначені |
 | Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection та explicit-intent validation contracts; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 40% | Є fixtures, exact manifests, status sync, Concept graph, generated map, artifact governance, Pattern checks і real-history process audit; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈40%** | Foundation Wave 2 має шість Accepted Concepts і governed executable reference layer; наступний decision cycle — Capability boundary |
+| Machine-readable schemas and enforcement | 45% | Є fixtures, exact manifests, status sync, Concept graph, generated map, artifact governance, Pattern checks, real-history audit і accepted Capability registry resolver; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈42%** | Foundation Wave 2 має сім Accepted Concepts і governed executable definition/registry layer; найнижча готовність лишається в operational rules and workflows |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -38,7 +38,8 @@
 - [x] Organization Accepted working description
 - [x] Objective Accepted working description
 - [x] State/Readiness review mandate and guardrails accepted in AD-002; final Concepts remain Deferred
-- [ ] Capability boundary and registry — next decision cycle (`AD-005`)
+- [x] Capability boundary and registry direction accepted in `AD-005C`
+- [x] Capability Concept and governed registry contract accepted in `PR-0010 / OCP-009`
 - [ ] Event and Result boundary
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
@@ -72,6 +73,7 @@
 - [x] Pattern semver and `Uses-Patterns` `track-current` checks
 - [x] Full-history checkout and post-baseline non-linear-history audit
 - [x] PR CI validates the actual proposed head in explicit `main` context
+- [x] OCP-009 Capability exact-resolution, namespace, supersession and registry≠possession evidence
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -102,10 +104,10 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Close the AB-043 governance cycle: review record, AB-033/AB-043 accounting and current roadmap projection.
-2. Open `AD-005 — Capability Boundary` as a discovery decision before defining Capability fields or registry structure.
-3. After an explicit Board outcome, define the Capability Concept and its Core/domain boundary with executable counterexamples where expressible.
-4. Define Event and Result boundaries, including Objective achievement evidence without collapsing events into lifecycle state.
-5. Define Coordination boundaries and workflows for independent verticals.
-6. Revisit State and Readiness under the AD-002 evidence contract after Capability and Event observations exist.
+1. Define Event and Result boundaries, including Objective achievement evidence without collapsing events into lifecycle state.
+2. Define the holder-specific Capability Claim boundary and record contract; keep Organization claims bound by AB-006/AB-052.
+3. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
+4. Define Coordination boundaries and workflows for independent verticals.
+5. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and Event observations exist.
+6. Add the first integrated non-sensitive example dataset spanning Operation, Objective, Assignment and Constraint before broad workflow expansion.
 7. Continue checker expansion with every accepted Concept cycle and complete the full normative reference linter before first Canonical promotion.

@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.10.1
+Version: 0.11.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -13,7 +13,8 @@ Concept-Statuses:
   Constraint: Accepted
   Organization: Accepted
   Objective: Accepted
-Last-Review: 2026-08-03
+  Capability: Accepted
+Last-Review: 2026-08-04
 ---
 
 # Concept Taxonomy
@@ -72,6 +73,14 @@ Resource
 ```
 
 `Fuel`, `energy` або інший матеріал як абстрактний тип чи значення кількості не є окремим Resource. Resource у витратній гілці представляє ідентифікований керований запас, партію, контейнер, комплект або іншу облікову одиницю.
+
+## Capability
+
+Concept `Capability` має статус `Accepted` і визначений у [OCP-009 — Capability Concept](../009-capability-concept/README.md) на підставі прийнятого рішення AD-005C та рішення Architecture Board по PR-0010.
+
+Capability є reusable definition-layer identity, що визначається governed namespace, stable `capability_id` та exact version. Human-readable label не є identity, а registry membership не створює holder claim, Readiness, availability, authorization або admissibility.
+
+Capability не має поточної фундаментальної Concept dependency. Non-normative edge `Resource ⇢ Capability` залишається future intent до окремого holder-claim decision.
 
 ## Operation
 
