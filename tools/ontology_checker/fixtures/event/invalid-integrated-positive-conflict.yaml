@@ -1,0 +1,128 @@
+case_id: event-invalid-integrated-positive-conflict
+concept: IntegratedEventScenario
+scenario:
+  objective:
+    objective_id: OBJ-ASSET-002
+    statement: Confirm the condition of a generic infrastructure asset.
+    created_at: 2026-08-04T00:00:00Z
+    provenance_ref: ACT-OBJ-ASSET-002
+  operation:
+    operation_id: OP-ASSET-002
+    lifecycle_stage: Completed
+    objective_refs:
+      - OBJ-ASSET-002
+  resources:
+    - resource_id: R-TEAM-002
+      classifications:
+        - Human Resource
+    - resource_id: R-ASSET-002
+      classifications:
+        - Infrastructure Resource
+  assignments:
+    - assignment_id: ASG-ASSET-003
+      created_at: 2026-08-04T00:05:00Z
+      resource_ref: R-TEAM-002
+      operation_ref: OP-ASSET-002
+      role_specification:
+        role_code: observer
+      applicability_start: 2026-08-04T00:10:00Z
+      transition_history:
+        - transition_id: TR-ASG-ASSET-003
+          assignment_ref: ASG-ASSET-003
+          from_stage: Draft
+          to_stage: Established
+          occurred_at: 2026-08-04T00:10:00Z
+          provenance_ref: ACT-ASG-ASSET-003
+    - assignment_id: ASG-ASSET-004
+      created_at: 2026-08-04T00:05:00Z
+      resource_ref: R-ASSET-002
+      operation_ref: OP-ASSET-002
+      role_specification:
+        role_code: subject
+      applicability_start: 2026-08-04T00:10:00Z
+      transition_history:
+        - transition_id: TR-ASG-ASSET-004
+          assignment_ref: ASG-ASSET-004
+          from_stage: Draft
+          to_stage: Established
+          occurred_at: 2026-08-04T00:10:00Z
+          provenance_ref: ACT-ASG-ASSET-004
+  constraint_version_ref: CON-ASSET-002@1
+  constraint_context:
+    context_id: CTX-ASSET-002
+    subject_refs:
+      - R-ASSET-002
+    operation_context_ref: OP-ASSET-002
+    evaluation_time: 2026-08-04T00:30:00Z
+    input_snapshot_ref: SNAP-CON-ASSET-002
+  constraint:
+    constraint_id: CON-ASSET-002
+    transition_history:
+      - transition_id: TR-CON-ASSET-002
+        constraint_ref: CON-ASSET-002
+        from_stage: Draft
+        to_stage: Established
+        occurred_at: 2026-08-04T00:15:00Z
+        provenance_ref: ACT-CON-ASSET-002
+    target_specification:
+      explicit_subject_refs:
+        - R-ASSET-002
+      operation_context_ref: OP-ASSET-002
+    predicate_specification:
+      predicate_code: access-window
+      predicate_namespace: neutral
+      predicate_version: v1
+      input_contract_ref: INPUT-CON-ASSET-002
+    enforcement_specification:
+      mode: advisory
+      indeterminate_disposition: require_review
+    validity_start: 2026-08-04T00:15:00Z
+    validity_end: 2026-08-04T02:00:00Z
+    evaluation_records:
+      - evaluation_id: EVAL-CON-ASSET-002
+        constraint_ref: CON-ASSET-002
+        constraint_version_ref: CON-ASSET-002@1
+        context_ref: CTX-ASSET-002
+        input_snapshot_ref: SNAP-CON-ASSET-002
+        evaluated_at: 2026-08-04T00:30:00Z
+        result: satisfied
+        evaluator_ref: CHECKER-CONSTRAINT
+  events:
+    - event_id: EV-ASSET-002
+      event_kind_ref: infrastructure.condition-change@1
+      registered_at: 2026-08-04T00:55:00Z
+      identity_provenance_ref: ACT-EVENT-ASSET-002
+      occurred_at: 2026-08-04T00:45:00Z
+  observations:
+    - observation_id: OBS-ASSET-003
+      observer_ref: SOURCE-A
+      observation_kind_ref: inspection.visual@1
+      statement: The asset condition appears nominal.
+      observed_at: 2026-08-04T00:50:00Z
+      recorded_at: 2026-08-04T00:52:00Z
+      provenance_ref: ACT-OBS-ASSET-003
+      event_ref: EV-ASSET-002
+    - observation_id: OBS-ASSET-004
+      observer_ref: SOURCE-B
+      observation_kind_ref: inspection.instrument@1
+      statement: The asset condition appears degraded.
+      observed_at: 2026-08-04T00:51:00Z
+      recorded_at: 2026-08-04T00:54:00Z
+      provenance_ref: ACT-OBS-ASSET-004
+      event_ref: EV-ASSET-002
+  assessment:
+    assessment_id: ASM-ASSET-002
+    target_objective_ref: OBJ-ASSET-002
+    rule_ref: neutral.asset-condition-assessment@1
+    evidence_observation_refs:
+      - OBS-ASSET-003
+      - OBS-ASSET-004
+    evidence_snapshot_ref: SNAP-ASM-ASSET-002
+    evaluator_ref: REVIEWER-ASSET-002
+    evaluated_at: 2026-08-04T01:00:00Z
+    conclusion: achieved
+    provenance_ref: ACT-ASM-ASSET-002
+expected:
+  valid: false
+  error_codes:
+    - SCENARIO_CONFLICTING_EVIDENCE_POSITIVE
