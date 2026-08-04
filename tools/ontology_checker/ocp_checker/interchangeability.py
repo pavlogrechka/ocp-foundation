@@ -237,8 +237,6 @@ def derive_resource_interchangeability(
     decision = constraint.get("decision")
     if decision not in CONSTRAINT_DECISIONS:
         return "indeterminate"
-    if decision == "review_required":
-        return "review_required"
 
     claims = evaluation.get("claim_inputs")
     if not isinstance(claims, list):
@@ -250,7 +248,7 @@ def derive_resource_interchangeability(
             claim_index.setdefault(key, []).append(claim)
 
     saw_negative = decision == "inadmissible"
-    saw_review = False
+    saw_review = decision == "review_required"
     saw_indeterminate = False
     for binding in requirement["capability_bindings"]:
         key = _binding_key(binding)
@@ -274,10 +272,11 @@ def derive_resource_interchangeability(
             saw_indeterminate = True
         elif state != "effective" or projection in {"indeterminate", "withdrawn"}:
             saw_indeterminate = True
-        elif projection == "negative":
-            saw_negative = True
-        elif claim.get("requires_review") is True:
-            saw_review = True
+        else:
+            if projection == "negative":
+                saw_negative = True
+            if claim.get("requires_review") is True:
+                saw_review = True
 
     if saw_indeterminate:
         return "indeterminate"

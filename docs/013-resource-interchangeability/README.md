@@ -97,7 +97,7 @@ Requirement identity є парою `requirement_id@version`. Owner, context, int
 
 ### 7.2 Owner and provenance
 
-`owner_ref` називає окремо governed consumer contract, який має право сформулювати цю operational need. Caller, incumbent Assignment, Capability Registry чи checker не стають owner за замовчуванням. `provenance_ref` зберігає act, яким revision було створено.
+`owner_ref` називає окремо governed consumer contract, який має право сформулювати цю operational need. Caller, incumbent Assignment, Capability Registry чи checker не стають owner за замовчуванням. Checker верифікує лише структуру та exactness requirement; легітимність `owner_ref` як governed consumer contract підтверджує Architecture Board під час review цього consumer contract. Першою такою перевіркою буде Coordination-профіль. `provenance_ref` зберігає act, яким revision було створено.
 
 ### 7.3 Context and time
 
@@ -135,6 +135,7 @@ resolve_interchangeability_requirement(requirements, requirement_ref)
   - projection
   - input_state
   - effective_at
+  - requires_review [optional]
 - constraint_input
   - candidate_ref
   - context_ref
@@ -143,7 +144,7 @@ resolve_interchangeability_requirement(requirements, requirement_ref)
   - decision
 ```
 
-`claim_inputs` є attributable OCP-012 head projection, не independent truth. `constraint_input` має належати тому самому candidate, context і evaluation time. Snapshot incumbent або іншого candidate не можна повторно використати.
+`claim_inputs` є attributable OCP-012 head projection, не independent truth. Optional `requires_review: true` означає, що exact і effective claim input залишає окреме governed judgment поза mechanical rule; воно не маскує missing, stale, ambiguous, conflicting, withdrawn чи mismatched input. `constraint_input` має належати тому самому candidate, context і evaluation time. Snapshot incumbent або іншого candidate не можна повторно використати.
 
 ## 10. Deterministic outcome rule
 
@@ -155,6 +156,8 @@ resolve_interchangeability_requirement(requirements, requirement_ref)
 - `indeterminate` — requirement/owner/snapshot missing, input unresolved, stale, ambiguous, conflicting, withdrawn або mismatched, rule version unknown, чи forbidden coupling attempted.
 
 `indeterminate` і `review_required` не перетворюються на durable negative. `positive` не перетворюється на permission.
+
+Якщо inputs одночасно вказують на кілька outcomes, fail-safe precedence є `indeterminate` > `review_required` > `negative` > `positive`. Тому review request не приховує unresolved або stale input.
 
 ## 11. Replay and change
 

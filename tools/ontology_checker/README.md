@@ -159,6 +159,8 @@ Matching claim projections for two Resources preserve two Resource identities an
 
 Draft OCP-013 supplies the separate AB-011 decision. The checker resolves one consumer-owned exact requirement and derives one directional result from exact OCP-012 claim projections plus the OCP-006 decision for the same candidate, context and time.
 
+The checker verifies requirement structure and exact resolution. It cannot establish whether `owner_ref` is the legitimate governed consumer contract; that authority remains with Architecture Board review of the consumer contract, beginning with the Coordination profile.
+
 The output vocabulary is `positive`, `negative`, `indeterminate` and `review_required`. Missing, stale, ambiguous, conflicting, mismatched or unknown-version input cannot produce positive. A positive result is contextual eligibility only: it carries no availability, authorization, ranking, selection or Assignment-execution authority.
 
 The mandatory-counterexamples fixture covers every AD-008 §12 case and exact rule-version replay. It deliberately preserves Resource and Assignment identities and contains no Resource-to-Resource equality edge.

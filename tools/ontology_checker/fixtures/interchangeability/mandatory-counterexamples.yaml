@@ -89,6 +89,38 @@ cases:
         <<: *constraint_b_admissible
         input_snapshot_ref: SNAP-CONSTRAINT-B-BLOCKED
         decision: inadmissible
+  constraint_review_required:
+    note: Complete inputs preserve an explicit governed review handoff.
+    expected_outcome: review_required
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-CONSTRAINT-REVIEW
+      constraint_input:
+        <<: *constraint_b_admissible
+        input_snapshot_ref: SNAP-CONSTRAINT-B-REVIEW
+        decision: review_required
+  claim_review_required:
+    note: An exact effective claim may explicitly require governed judgment.
+    expected_outcome: review_required
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-CLAIM-REVIEW
+      claim_inputs:
+        - <<: *claim_relay_b
+          requires_review: true
+  stale_claim_precedes_constraint_review:
+    note: An explicit review handoff cannot mask stale claim support.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-STALE-CONSTRAINT-REVIEW
+      claim_inputs:
+        - <<: *claim_relay_b
+          input_state: stale
+      constraint_input:
+        <<: *constraint_b_admissible
+        input_snapshot_ref: SNAP-CONSTRAINT-B-STALE-REVIEW
+        decision: review_required
   missing_claim_support:
     note: Counterexample 4a — missing support fails safe.
     expected_outcome: indeterminate
