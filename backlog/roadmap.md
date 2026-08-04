@@ -10,7 +10,7 @@
 | Core domain ontology | 72% | Вісім Concepts та governed OCP-012 і OCP-013 non-Concept contracts Accepted; Resource interchangeability визначено без identity collapse |
 | Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment і interchangeability fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 60% | Accepted OCP-012 і OCP-013 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈51%** | OCP-013 прийнято як directional eligibility contract; наступний нормативний цикл — Coordination |
+| **Загальна foundation-готовність** | **≈51%** | OCP-013 прийнято; OCP-014 Draft перевіряє перший вузький Coordination consumer profile |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -47,7 +47,7 @@
 - [x] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — `AB-057 / OCP-012 / PR-0014A`
 - [x] Resource interchangeability boundary and Model A direction accepted — `AB-011 / AD-008C`
 - [x] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR #49`
-- [ ] Operational Coordination Model
+- [ ] Operational Coordination Model — перший вузький consumer-profile Draft у `OCP-014`
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
@@ -117,7 +117,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Define Coordination boundaries and workflows for independent verticals, beginning with a governed OCP-013 consumer requirement and explicit authority boundary.
+1. Externally review OCP-014 governed Coordination consumer identity, exact OCP-013 requirement profile and explicit authority boundary before defining workflows.
 2. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
 3. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
 4. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
