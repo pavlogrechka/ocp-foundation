@@ -44,6 +44,15 @@ class CoordinationWorkflowContractTests(unittest.TestCase):
         self.assertEqual(derive_coordination_evidence(positive), "positive")
         self.assertEqual(derive_coordination_evidence(reordered), "positive")
 
+    def test_proposal_and_responder_refs_normalize_whitespace_symmetrically(self) -> None:
+        normalized = self.fixture["cases"]["normalized_response_references_replay"][
+            "snapshot"
+        ]
+        response = normalized["responses"][0]
+        self.assertEqual(response["proposal_ref"], " PROP-REC-1 ")
+        self.assertEqual(response["responder_ref"], " VERTICAL-B ")
+        self.assertEqual(derive_coordination_evidence(normalized), "positive")
+
     def test_positive_evidence_does_not_authorize_or_mutate_assignment(self) -> None:
         snapshot = dict(
             self.fixture["cases"]["all_invited_responders_confirm"]["snapshot"]

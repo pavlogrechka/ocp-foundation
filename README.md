@@ -71,16 +71,16 @@ backlog/                 відкриті питання та дорожня к�
 - AD-008C приймає Model A як напрямок AB-011: deterministic directional eligibility з consumer-owned exact requirement; matching claims не створюють Resource equality, а admissibility, availability, authorization, selection і Assignment execution лишаються окремими шарами;
 - OCP-013 `0.2.0 / Accepted` визначає exact consumer requirement, directional eligibility, fail-safe claim/Constraint bindings, rule-version replay та executable evidence для всіх AD-008 §12 counterexamples;
 - OCP-014 `0.2.0 / Accepted` активує exact governed owner `ocp-coordination-consumer@0.1.0` для одного contextual requirement, fail-safe wrong-owner binding і окрему actor-authorization boundary без workflow authority;
-- AD-009 `0.2.0 / Under Review` і draft OCP-015 пропонують окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
+- AD-009 і OCP-015 `0.2.0 / Accepted` визначають окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
 - OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
-- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, draft Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
+- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
 - assessment module має власний exact `assessment-rules.yaml` manifest за чинним module-manifest precedent;
 - artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- AB-011 / AD-008 Resource interchangeability та AB-003 consumer-profile question завершено через Accepted OCP-013 і OCP-014; залишковий Coordination workflow scope обліковується в AB-058 та проходить review в AD-009/OCP-015;
+- AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності з Accepted OCP-014 — **≈52%**.
+- не-нормативна оцінка загальної foundation-готовності з Accepted OCP-015 — **≈52%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
