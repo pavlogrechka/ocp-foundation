@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 70% | Вісім Concepts Accepted; Event/Observation прийняті, OutcomeAssessmentRecord проходить review як non-Concept record contract; Coordination, Operational Area та Core Boundary лишаються відкритими |
-| Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection, explicit-intent validation та assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 55% | PR-0013 додає exact-bound assessment validator, snapshots, supersession heads і замінює checker-local scenario probe; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈46%** | OCP-011 ще не Accepted і `Result` registry migration не виконана, тому baseline не підвищується до завершення external review та Board act |
+| Core domain ontology | 72% | Вісім Concepts Accepted; вісь AD-006 завершена через Accepted Event/Observation та OutcomeAssessmentRecord; Coordination, Operational Area, Capability Claim і Core Boundary лишаються відкритими |
+| Operational rules and workflows | 17% | Є participation, admissibility, lifecycle projection, explicit-intent validation та accepted assessment fail-safe boundaries; coordination, authorization, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 58% | OCP-011 додає exact-bound assessment validator, snapshots, supersession heads і нормативний integrated scenario; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈50%** | AB-056 завершено, OCP-011 Accepted, fundamental Result deregistered; наступний dependency hinge — holder-specific Capability Claim boundary |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -42,7 +42,8 @@
 - [x] Capability Concept and governed registry contract accepted in `PR-0010 / OCP-009`
 - [x] Event and Result boundary accepted in `AD-006C`: E3 occurrence + observation records, R3 governed assessment records
 - [x] Event occurrence Concept and governed ObservationRecord contract — `AB-055 / OCP-010 / PR-0012`
-- [ ] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`, Under Review
+- [x] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`
+- [ ] Holder-specific Capability Claim boundary and record contract
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -78,8 +79,8 @@
 - [x] OCP-009 Capability exact-resolution, namespace, supersession and registry≠possession evidence
 - [x] OCP-010 Event identity, ObservationRecord, exact references, supersession and zero-observation evidence
 - [x] First integrated non-sensitive scenario with `derived_participates_in`, `constraint_applicable_to` and `effective_constraint_result`
-- [ ] OCP-011 normative OutcomeAssessmentRecord evidence — implemented in PR-0013, pending external review and Board acceptance
-- [ ] Atomic removal of temporary `Result: Proposed` registry marker — acceptance step of AB-056
+- [x] OCP-011 normative OutcomeAssessmentRecord evidence with exact snapshots, fail-safe states and branching supersession
+- [x] Atomic removal of temporary `Result: Proposed` registry marker without creating a Result Concept
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -105,17 +106,16 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Full ontology duplicate/reference linter
 - [ ] Constraint expression and evaluator contracts
 - [x] First integrated non-sensitive scenario spanning Operation, Objective, Assignment, Constraint, Event, observations and assessments — accepted in PR-0012
-- [ ] Replace its temporary assessment envelope with accepted OCP-011 OutcomeAssessmentRecord — implemented in PR-0013, pending review
+- [x] Replace its temporary assessment envelope with Accepted OCP-011 OutcomeAssessmentRecord — PR-0013
 - [ ] Additional example datasets without sensitive information
 - [ ] Expanded CI checks for schemas, lifecycle consistency and normative references
 - [ ] Versioned implementation-facing contracts
 
 ## Planned Sequence
 
-1. Complete external adversarial review and Architecture Board acceptance of `OCP-011 / PR-0013`: exact target/criterion/evidence/input/evaluator binding, fail-safe evidence matrix and P-001 Module C history.
-2. In the same acceptance act, remove the temporary `Result: Proposed` migration entry from the active Concept registry and generated projections without creating a Result Concept.
-3. Define the holder-specific Capability Claim boundary and record contract; keep Organization claims bound by AB-006/AB-052.
-4. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
-5. Define Coordination boundaries and workflows for independent verticals.
-6. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
-7. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Define the holder-specific Capability Claim boundary and P-001 record contract; keep registry membership distinct from possession, Readiness, availability, authorization and admissibility.
+2. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
+3. Define Coordination boundaries and workflows for independent verticals.
+4. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and accepted outcome assessments exist.
+5. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
+6. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.

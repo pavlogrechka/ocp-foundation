@@ -20,7 +20,6 @@
 | Organization | Accepted |
 | Readiness | Deferred |
 | Resource | Accepted |
-| Result | Proposed |
 | Risk | Proposed |
 | Spectrum | Proposed |
 | State | Deferred |
