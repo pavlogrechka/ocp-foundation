@@ -40,7 +40,7 @@
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
 | AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
 | AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
-| AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay |
+| AB-039 | Constraint evaluation freshness and replay | Open | Визначити строк актуальності dynamic evaluation, snapshot contract і deterministic replay; є майбутнім owner для машинної перевірки `stale`/`ambiguous` evidence state в OCP-011 |
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
 | AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |
@@ -57,4 +57,4 @@
 | AB-053 | Concept dependency source migration | Resolved | Перенести current edges з `concept-dependencies.yaml` у `Concept-Depends-On` defining-документів, перемкнути generator і видалити staging source; одночасна наявність обох джерел є помилкою |
 | AB-054 | Event and Result boundary | Resolved | AD-006C: прийнято E3 — occurrence Event + attributable observation records; R3 — governed OutcomeAssessmentRecord без фундаментального Result Concept |
 | AB-055 | Event occurrence та ObservationRecord contract | Resolved | PR-0012 / OCP-010: прийнято occurrence identity, zero-observation validity, P-001 ObservationRecord, fail-closed references і перший integrated non-sensitive scenario; Event став восьмим Accepted Concept |
-| AB-056 | OutcomeAssessmentRecord та Result registry resolution | Under Review | PR-0013 / OCP-011: зовнішньо перевірити exact target/criterion/evidence/input/evaluator binding, P-001 Module C branching, fail-safe evidence matrix, replacement of the checker-local scenario envelope та атомарне видалення migration entry `Result` при acceptance |
+| AB-056 | OutcomeAssessmentRecord та Result registry resolution | Resolved | PR-0013 / OCP-011: прийнято exact target/criterion/evidence/input/evaluator binding, P-001 Module C branching, fail-safe evidence matrix та normative integrated-scenario assessment; fundamental Result candidate deregistered після negative identity verdict AD-006C |
