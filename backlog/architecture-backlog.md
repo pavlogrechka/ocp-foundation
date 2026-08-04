@@ -56,5 +56,5 @@
 | AB-052 | Organization-to-Organizational-Resource mapping | Open | Визначити explicit mapping without identity collapse |
 | AB-053 | Concept dependency source migration | Resolved | Перенести current edges з `concept-dependencies.yaml` у `Concept-Depends-On` defining-документів, перемкнути generator і видалити staging source; одночасна наявність обох джерел є помилкою |
 | AB-054 | Event and Result boundary | Resolved | AD-006C: прийнято E3 — occurrence Event + attributable observation records; R3 — governed OutcomeAssessmentRecord без фундаментального Result Concept |
-| AB-055 | Event occurrence та ObservationRecord contract | Planned | Відкрити OCP-010: визначити occurrence identity, zero-observation case, correction boundary, ambiguity handling і governed ObservationRecord contract |
+| AB-055 | Event occurrence та ObservationRecord contract | Under Review | PR-0012 / OCP-010: зовнішньо перевірити occurrence identity, zero-observation validity, P-001 ObservationRecord, fail-closed references і перший integrated non-sensitive scenario |
 | AB-056 | OutcomeAssessmentRecord та Result registry resolution | Planned | Визначити exact target/rule/evidence/evaluator binding, history-preserving correction, fail-safe conflict semantics і атомарно розв’язати `Result: Proposed` при прийнятті R3 contract |
