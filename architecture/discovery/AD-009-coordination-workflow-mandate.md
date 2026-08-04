@@ -2,7 +2,7 @@
 Decision-ID: AD-009
 Title: Coordination Workflow Boundary
 Version: 0.1.0
-Status: Draft
+Status: Under Review
 Owner: Architecture Board
 Depends-On: OCP-014, OCP-013, OCP-012, OCP-006, OCP-005, AB-058
 Applies-To: AB-058, Coordination workflows, inter-vertical agreement
