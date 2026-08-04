@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-010
 Title: Event Concept
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-008, AD-006, P-001
@@ -9,7 +9,7 @@ Uses-Patterns: P-001@0.1.0
 Used-By: Operation Evidence, Objective Achievement Assessment, Coordination Model, Audit, AB-056
 Defines-Concepts: Event
 Concept-Depends-On: []
-Concept-Status: Under Review
+Concept-Status: Accepted
 Last-Review: 2026-08-04
 ---
 
@@ -333,14 +333,16 @@ ScenarioAssessmentEnvelope
 
 Scenario validator повинен довести:
 
-1. усі сім Accepted Concepts проходять власні чинні validators;
+1. усі сім попередньо Accepted Concepts проходять власні чинні validators;
 2. Operation `Completed` не примушує conclusion `achieved`;
 3. conflicting observations залишаються видимими;
 4. evidence references exact-resolve;
 5. conflicting evidence не дозволяє authoritative positive conclusion;
 6. Event relevance не створює Capability, Readiness, authorization або Conflict;
 7. дві Assignment не collapse-яться в participation без їхніх власних identities;
-8. Constraint result не стає universal Result.
+8. Constraint result не стає universal Result;
+9. кожний Assignment exact-reference existing Resource та scenario Operation і створює effective participation через `derived_participates_in` у evaluation time;
+10. Constraint target/context references exact-resolve у scenario, а `constraint_applicable_to` та `effective_constraint_result` повертають expected governed results.
 
 ## 15. Semantic rules
 
@@ -375,8 +377,10 @@ Scenario validator повинен довести:
 14. Observation supersession graph є acyclic.
 15. Duplicate Event identity або ambiguous Event reference fail closed незалежно від record order.
 16. Integrated scenario з conflicting observations не може мати authoritative positive assessment conclusion.
+17. Integrated scenario Assignment references exact-resolve до scenario Resource та Operation і є effective у scenario evaluation time.
+18. Integrated scenario Constraint target/context references exact-resolve, а applicability/effective-result derivations не можуть бути замінені декоративними fixture fields.
 
-Інваріанти 2, 11, 13–16 є dataset-level або scenario-level.
+Інваріанти 2, 11, 13–18 є dataset-level або scenario-level.
 
 ## 17. Executable evidence
 
@@ -392,7 +396,9 @@ Reference checker повинен містити щонайменше:
 - observation self-supersession and supersession-cycle fixtures;
 - conflicting observations that remain simultaneously visible;
 - integrated neutral scenario with completed Operation and `indeterminate` assessment;
-- negative integrated scenario where conflicting evidence attempts `achieved` and fails closed.
+- negative integrated scenario where conflicting evidence attempts `achieved` and fails closed;
+- negative integrated scenario with dangling Assignment reference;
+- normalization regression for whitespace-equivalent Event and Observation references.
 
 Кожен emitted validation code входить до `ERROR_CODES`, має source у `rules.yaml` і бере участь в exact manifest equality. `resolve_event` та `observations_for_event` входять до `DERIVATION_RULES`.
 
@@ -438,7 +444,7 @@ Observation `OBS-020` не має `event_ref`. Це не створює anonymou
 - endpoint contract: optional directed `event_ref` from ObservationRecord to Event; absence explicitly means unresolved occurrence linkage;
 - governed kind: exact-version `observation_kind_ref`;
 - provenance: `observer_ref`, `observed_at`, `recorded_at`, `provenance_ref`;
-- validation: invariants 16.8–16.15 and executable fixtures in §17;
+- validation: invariants 16.8–16.18 and executable fixtures in §17;
 - authority: ObservationRecord is authoritative only for attributable assertion, never occurrence truth or achievement.
 
 ### 20.2 Selected Optional Module C — Supersession
@@ -495,12 +501,23 @@ Attempt to falsify OCP-010 with cases where:
 7. lifecycle transition or Constraint result becomes Event automatically;
 8. Event implies Objective achievement, Capability, Readiness або Conflict;
 9. P-001 invocation omits endpoint, provenance, authority або supersession obligations;
-10. integrated scenario cannot reuse current Concept validators;
+10. integrated scenario cannot reuse current Concept validators and derivations;
 11. checker-local assessment envelope silently becomes the normative AB-056 contract;
 12. current Concept graph gains an unjustified cycle.
 
-## 24. Architecture Board status
+## 24. Architecture Board decision — PR-0012
 
-Revision `0.1.0` opens OCP-010 and Event as `Under Review` under AB-055.
+Architecture Board прийняла OCP-010 і Concept `Event` **4 серпня 2026 року** після повторного зовнішнього review head `7f00bb0`, яке підтвердило закриття findings F1–F2, відповідність outcome E3 у AD-006C та виконуваність інтегрованого non-sensitive scenario.
 
-No Architecture Board acceptance is recorded by this revision. Event remains non-Canonical, AB-055 remains active, and the PR must pass external adversarial review plus complete checker validation before an atomic acceptance act.
+Рішення Board:
+
+- прийняти occurrence-layer Event identity та governed ObservationRecord contract, визначені OCP-010;
+- встановити `Concept-Status: Accepted` на версії `0.2.0`;
+- завершити AB-055 як `Resolved`;
+- зберегти Event як isolated Concept без current dependency edge;
+- прийняти zero-observation validity, exact `event_id` resolution, відсутність automatic dedup/latest-truth та history-preserving ObservationRecord supersession з дозволеним branching;
+- прийняти інтегрований scenario як перший наскрізний виконуваний доказ композиції восьми Accepted Concepts, де з'єднання перевіряються чинними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` derivations;
+- не вводити Operation-to-Event relation, truth/consensus model, normative OutcomeAssessmentRecord, fundamental Result, Conflict, Risk, State, Readiness, Capability claim, authorization або production schema;
+- залишити AB-056 окремим наступним normative cycle для OutcomeAssessmentRecord та атомарної резолюції registry entry `Result`.
+
+`Accepted` не означає `Canonical`. Подальші зміни Event identity, ObservationRecord authority, supersession contract або occurrence/observation boundary потребують нового явного normative cycle.

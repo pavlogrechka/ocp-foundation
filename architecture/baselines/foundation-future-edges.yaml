@@ -1,4 +1,4 @@
-record_version: 0.3.0
+record_version: 0.4.0
 authority: Architecture Board
 edge_semantics: Future planning intent only; never interpreted as a current Concept dependency.
 edges:
@@ -14,7 +14,7 @@ edges:
     style: dashed
   - from: Operation
     to: Event
-    basis: OCP-010 Event Under Review; relation owner remains unresolved
+    basis: OCP-010 Event Accepted; relation owner remains unresolved
   - from: Organization
     to: Coordination
     basis: AB-003 and OCP-000 Coordination Proposed

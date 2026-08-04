@@ -11,7 +11,7 @@
 | Capability | Accepted |
 | Constraint | Accepted |
 | Coordination | Proposed |
-| Event | Under Review |
+| Event | Accepted |
 | Objective | Accepted |
 | Operation | Accepted |
 | Operational Area | Proposed |
@@ -43,7 +43,7 @@
 - `Resource ⇢ Capability` — AB-004
 - `Constraint ⇢ Conflict` — AB-038
 - `Organization ⇢ Resource` (dashed) — AB-052
-- `Operation ⇢ Event` — OCP-010 Event Under Review; relation owner remains unresolved
+- `Operation ⇢ Event` — OCP-010 Event Accepted; relation owner remains unresolved
 - `Organization ⇢ Coordination` — AB-003 and OCP-000 Coordination Proposed
 - `Operation ⇢ State` — AB-007 and ADR-DRAFT-007
 - `Resource ⇢ Readiness` — AB-007 and ADR-DRAFT-007

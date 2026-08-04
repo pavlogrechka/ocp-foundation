@@ -51,14 +51,14 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Resource, Operation, Assignment, Constraint, Organization, Objective і Capability мають статус `Accepted`;
-- `Event` має статус `Under Review` у `OCP-010 / PR-0012`; occurrence identity відокремлена від attributable ObservationRecord;
-- OCP-010 реалізує AD-006C outcome E3: Event може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
-- ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession;
+- Resource, Operation, Assignment, Constraint, Organization, Objective, Capability і Event мають статус `Accepted`;
+- OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
+- ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
+- AB-055 завершено рішенням Architecture Board по PR-0012; Event є восьмим Accepted Concept і лишається isolated у current Concept graph;
+- PR-0012 містить перший integrated non-sensitive scenario: Objective + Completed Operation + два Resource/Assignment + Constraint + Event + conflicting observations + fail-safe `indeterminate` checker envelope;
+- scenario використовує чинні `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result`, тому його з'єднання є виконуваними, а не декоративними;
 - AD-006C outcome R3 зберігається: normative OutcomeAssessmentRecord належить AB-056, фундаментальний Result Concept не вводиться;
 - `Result` тимчасово лишається `Proposed` до атомарної registry resolution разом із прийняттям R3 contract;
-- AB-054 завершено; AB-055 проходить `Under Review`, AB-056 лишається `Planned`;
-- PR-0012 містить перший integrated non-sensitive scenario: Objective + Completed Operation + два Resource/Assignment + Constraint + Event + conflicting observations + fail-safe `indeterminate` checker envelope;
 - checker-local assessment envelope не є нормативним OutcomeAssessmentRecord і не завершує AB-056;
 - Operation completion не означає Objective achievement; Event, observation або positive assessment не створюють Capability, Readiness, authorization, admissibility, Conflict чи State;
 - OCP-009 визначає reusable Capability definition, governed namespace ownership, exact-version resolution і supersession без holder claims;
@@ -68,8 +68,8 @@ backlog/                 відкриті питання та дорожня к�
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- наступні planned cycles після OCP-010 — OutcomeAssessmentRecord, holder-specific Capability Claim і Coordination;
+- наступні planned cycles — OutcomeAssessmentRecord, holder-specific Capability Claim і Coordination;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності поки лишається **≈42%**, доки Event не пройде acceptance.
+- не-нормативна оцінка загальної foundation-готовності: **≈46%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

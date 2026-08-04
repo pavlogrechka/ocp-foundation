@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.12.0
+Version: 0.13.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -14,7 +14,7 @@ Concept-Statuses:
   Organization: Accepted
   Objective: Accepted
   Capability: Accepted
-  Event: Under Review
+  Event: Accepted
 Last-Review: 2026-08-04
 ---
 
@@ -102,7 +102,7 @@ Operation
 ├── Constraints
 │   └── Constraint [Accepted]
 └── Outcome
-    ├── Event [Under Review]
+    ├── Event [Accepted]
     └── OutcomeAssessmentRecord [Planned record contract; not a Concept]
 ```
 
@@ -118,7 +118,7 @@ Objective не має поточної фундаментальної Concept de
 
 ## Event
 
-Concept `Event` має статус `Under Review` і визначається у [OCP-010 — Event Concept](../010-event-concept/README.md) на підставі прийнятого outcome E3 у AD-006C.
+Concept `Event` має статус `Accepted` і визначений у [OCP-010 — Event Concept](../010-event-concept/README.md) на підставі outcome E3 у AD-006C та рішення Architecture Board по PR-0012.
 
 Event представляє reusable occurrence або change identity, незалежну від конкретного report, observer, Operation, Objective або assessment. Event може мати zero, one або many observations.
 
