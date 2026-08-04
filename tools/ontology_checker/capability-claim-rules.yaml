@@ -1,0 +1,38 @@
+manifest_version: 0.1.0
+authority: reference-only
+normative_source: OCP-012 Capability Claim Record Contract
+rules:
+  - {id: CAPABILITY_CLAIM_ASSERTION_INVALID, kind: validation, source: OCP-012 assertion vocabulary invariant}
+  - {id: CAPABILITY_CLAIM_AUTHORITY_REF_REQUIRED, kind: validation, source: OCP-012 attributable authority invariant}
+  - {id: CAPABILITY_CLAIM_BINDING_MISMATCH, kind: validation, source: OCP-012 P-001 Module C binding invariant}
+  - {id: CAPABILITY_CLAIM_CAPABILITY_REF_INVALID, kind: validation, source: OCP-012 exact OCP-009 reference shape invariant}
+  - {id: CAPABILITY_CLAIM_CAPABILITY_UNRESOLVED, kind: validation, source: OCP-012 exact OCP-009 resolution invariant}
+  - {id: CAPABILITY_CLAIM_CLAIMANT_REQUIRED, kind: validation, source: OCP-012 claimant attribution invariant}
+  - {id: CAPABILITY_CLAIM_CONDITION_SET_REF_REQUIRED, kind: validation, source: OCP-012 exact condition-set binding invariant}
+  - {id: CAPABILITY_CLAIM_EFFECTIVE_FROM_REQUIRED, kind: validation, source: OCP-012 P-001 Module A start-boundary invariant}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_BINDINGS_INVALID, kind: validation, source: OCP-012 exact evidence binding invariant}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_KIND_UNSUPPORTED, kind: validation, source: OCP-012 initial evidence-kind boundary}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_REFERENCE_UNRESOLVED, kind: validation, source: OCP-012 exact evidence reference invariant}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_SNAPSHOT_MISMATCH, kind: validation, source: OCP-012 evidence snapshot immutability invariant}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_SNAPSHOT_REQUIRED, kind: validation, source: OCP-012 evidence snapshot invariant}
+  - {id: CAPABILITY_CLAIM_EVIDENCE_SNAPSHOT_UNRESOLVED, kind: validation, source: OCP-012 evidence snapshot resolution invariant}
+  - {id: CAPABILITY_CLAIM_FORBIDDEN_COUPLING, kind: validation, source: OCP-012 explicit non-equivalence invariant}
+  - {id: CAPABILITY_CLAIM_HOLDER_KIND_UNSUPPORTED, kind: validation, source: OCP-012 Resource-only holder boundary}
+  - {id: CAPABILITY_CLAIM_HOLDER_REF_REQUIRED, kind: validation, source: OCP-012 exact holder binding invariant}
+  - {id: CAPABILITY_CLAIM_HOLDER_UNRESOLVED, kind: validation, source: OCP-012 exact Resource resolution invariant}
+  - {id: CAPABILITY_CLAIM_ID_REQUIRED, kind: validation, source: OCP-012 record identity invariant}
+  - {id: CAPABILITY_CLAIM_IDENTITY_DUPLICATE, kind: validation, source: OCP-012 dataset identity uniqueness invariant}
+  - {id: CAPABILITY_CLAIM_INTERVAL_INVALID, kind: validation, source: OCP-012 P-001 Module A interval invariant}
+  - {id: CAPABILITY_CLAIM_KIND_UNSUPPORTED, kind: validation, source: OCP-012 governed claim-kind invariant}
+  - {id: CAPABILITY_CLAIM_PROVENANCE_REF_REQUIRED, kind: validation, source: OCP-012 record provenance invariant}
+  - {id: CAPABILITY_CLAIM_RECORDED_AT_REQUIRED, kind: validation, source: OCP-012 recording-time invariant}
+  - {id: CAPABILITY_CLAIM_SELF_SUPERSESSION, kind: validation, source: OCP-012 P-001 Module C self-reference invariant}
+  - {id: CAPABILITY_CLAIM_SUPPORT_STATE_INVALID, kind: validation, source: OCP-012 support-state vocabulary invariant}
+  - {id: CAPABILITY_CLAIM_SUPPORT_STATE_MISMATCH, kind: validation, source: OCP-012 support and evidence consistency invariant}
+  - {id: CAPABILITY_CLAIM_SUPERSESSION_CYCLE, kind: validation, source: OCP-012 P-001 Module C acyclicity invariant}
+  - {id: CAPABILITY_CLAIM_SUPERSESSION_TARGET_UNRESOLVED, kind: validation, source: OCP-012 P-001 Module C target-resolution invariant}
+  - {id: CAPABILITY_CLAIM_WITHDRAWAL_TARGET_REQUIRED, kind: validation, source: OCP-012 withdrawal-is-not-negative invariant}
+  - {id: capability_claim_effective_at, kind: derivation, source: OCP-012 P-001 Module A half-open interval derivation}
+  - {id: capability_claim_heads, kind: derivation, source: OCP-012 P-001 Module C as-of head projection}
+  - {id: effective_capability_claim, kind: derivation, source: OCP-012 fail-safe attributable claim projection}
+  - {id: resolve_capability_claim, kind: derivation, source: OCP-012 exact claim identity resolution}

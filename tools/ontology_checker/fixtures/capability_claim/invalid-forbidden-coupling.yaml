@@ -1,0 +1,9 @@
+case_id: capability-claim-invalid-forbidden-coupling
+concept: CapabilityClaimDataset
+resources:
+  - {resource_id: R-CLAIM-106, classifications: [Technical Resource], contains_refs: []}
+capabilities:
+  - {namespace: mobility, capability_id: navigate, version: v1, label: Navigate, definition: Navigate safely., namespace_owner_ref: SPEC-MOBILITY, published_at: 2026-08-04T00:00:00Z, provenance_ref: ACT-CAP-001}
+claims:
+  - {claim_id: CLM-106, claim_kind_ref: holder-capability@1, holder_kind_ref: resource@1, holder_ref: R-CLAIM-106, capability_ref: {namespace: mobility, capability_id: navigate, version: v1}, claimant_ref: SOURCE-106, condition_set_ref: unconditional@1, assertion: positive, evidence_bindings: [], support_state: declared, authority_ref: AUTH-106, effective_from: 2026-08-04T08:00:00Z, recorded_at: 2026-08-04T08:01:00Z, provenance_ref: ACT-CLM-106, readiness: ready}
+expected: {valid: false, error_codes: [CAPABILITY_CLAIM_FORBIDDEN_COUPLING]}

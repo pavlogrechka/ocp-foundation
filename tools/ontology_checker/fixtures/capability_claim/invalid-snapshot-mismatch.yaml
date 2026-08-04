@@ -1,0 +1,15 @@
+case_id: capability-claim-invalid-snapshot-mismatch
+concept: CapabilityClaimDataset
+resources:
+  - {resource_id: R-CLAIM-107, classifications: [Technical Resource], contains_refs: []}
+capabilities:
+  - {namespace: mobility, capability_id: navigate, version: v1, label: Navigate, definition: Navigate safely., namespace_owner_ref: SPEC-MOBILITY, published_at: 2026-08-04T00:00:00Z, provenance_ref: ACT-CAP-001}
+observations:
+  - {observation_id: OBS-107A, statement: Evidence A.}
+  - {observation_id: OBS-107B, statement: Evidence B.}
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-107
+    evidence_bindings: [{evidence_kind_ref: observation-record@1, evidence_ref: OBS-107B}]
+claims:
+  - {claim_id: CLM-107, claim_kind_ref: holder-capability@1, holder_kind_ref: resource@1, holder_ref: R-CLAIM-107, capability_ref: {namespace: mobility, capability_id: navigate, version: v1}, claimant_ref: SOURCE-107, condition_set_ref: unconditional@1, assertion: positive, evidence_bindings: [{evidence_kind_ref: observation-record@1, evidence_ref: OBS-107A}], evidence_snapshot_ref: EVIDENCE-107, support_state: sufficient, authority_ref: AUTH-107, effective_from: 2026-08-04T08:00:00Z, recorded_at: 2026-08-04T08:01:00Z, provenance_ref: ACT-CLM-107}
+expected: {valid: false, error_codes: [CAPABILITY_CLAIM_EVIDENCE_SNAPSHOT_MISMATCH]}
