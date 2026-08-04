@@ -53,3 +53,13 @@ Outcome C honestly flags the risk of "duplicating OCP-011 without sharing its Ob
 ## External reviewer verdict
 
 > The claim-layer boundary is the most carefully drawn discovery so far. Both findings are structural, not semantic: F1 closes with the established AD-006 pattern, F2 with adding the reuse option to the matrix. With those amendments, AD-007 is ready for external outcome comparison and the Architecture Board decision.
+
+## Resolution candidate tracking
+
+AD-007 revision `0.2.0` proposes the following resolution for repeated external verification:
+
+- F1: §18 is split into an unconditional claim-contract core and explicit representation-conditional evidence, including snapshot replayability for derived materialization, domain/Core fixture ownership for Outcome F and P-001 obligations only when invoked;
+- F2: Outcome C-prime compares extension of the accepted OCP-011 target/evidence contract against a dedicated CapabilityAssessmentRecord and names target, conclusion-profile, evidence-kind and projection fit criteria;
+- the systemic recommendation is implemented in OCP-001 revision `0.7.0` as a general outcome-fair discovery-evidence rule.
+
+F1 and F2 remain **Open** until external review verifies the exact AD-007 revision `0.2.0` head. This tracking section records a proposed resolution; it does not close either finding or select an outcome.

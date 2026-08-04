@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-007
 Title: Capability Claim Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-009, AD-002, AD-005, P-001
@@ -17,6 +17,8 @@ AD-005C selected a two-layer model:
 
 1. reusable Capability definition with holder-independent identity;
 2. holder-specific claim as a separate identified record.
+
+That accepted mandate governs the semantic shape of every admissible AD-007 outcome. It does not require one persistence technology, storage location or materialized projection, and it does not invoke P-001 automatically. It does require the holder claim to retain stable identity distinct from Resource identity and Capability-definition identity, with an exact endpoint, provenance, authority and replay contract. A local or derived representation is admissible only as a materialization of that separate identified-record contract. Rejecting separate claim identity would reopen AD-005C and requires an explicit superseding Architecture Board act supported by new evidence; AD-007 does not perform that reopening.
 
 OCP-009 accepted the definition layer and governed registry contract. It intentionally does not define claim identity, claim authority, holder relation, evidence, temporal applicability, lifecycle, correction, withdrawal, effective projection or P-001 invocation.
 
@@ -40,11 +42,11 @@ AD-007 introduces no claim schema, accepted record, current Concept dependency, 
 
 AD-007 asks:
 
-> What governed record or derivation may assert that one exact Resource has, lacks or may provide one exact Capability definition under stated conditions, evidence, authority and time, without turning the assertion into readiness, availability, authorization, admissibility or Resource identity?
+> What separate identified-record contract may assert that one exact Resource has, lacks or may provide one exact Capability definition under stated conditions, evidence, authority and time; which stored, local or derived representation is authoritative for that contract; and how does it avoid turning the assertion into readiness, availability, authorization, admissibility or Resource identity?
 
 The discovery must determine:
 
-1. whether a stored holder claim is needed at all;
+1. whether the mandated identified claim record is stored directly, materialized locally or derived reproducibly from governed snapshots;
 2. whether a claim is a declaration, an evaluation, or a composition of both;
 3. what the claim is authoritative about;
 4. whether positive, negative and indeterminate statements share one model;
@@ -310,13 +312,15 @@ Past successful performance may be evidence. It does not establish permanent fut
 
 External review must compare explicit outcomes.
 
-### Outcome A — Resource-local attribute
+All admissible outcomes preserve the AD-005C semantic mandate: the holder-specific claim remains a separate identified record. Storage and derivation choices may vary, but a Resource field, current view or evidence set cannot replace independent claim identity. The former pure-attribute and no-record forms remain falsification controls only; selecting either would require an explicit reopening of AD-005C before AD-007 outcome selection.
 
-Capability possession is represented as a local attribute or exact Capability reference embedded in Resource.
+### Outcome A — Resource-local materialization of an identified claim record
 
-This outcome avoids a separate record but risks mutable history, missing provenance, no conflicting assertions and collapse of Resource identity with a time-varying claim.
+The separate identified claim record is materialized within or alongside a Resource representation while retaining its own stable claim identity, exact endpoints, provenance, authority and history.
 
-It is admissible only if it can preserve attributable history, exact evidence, temporal applicability, disagreement and fail-safe semantics without turning Resource into an unbounded semantic container.
+This outcome avoids a separate Core claim store but risks mutable history, hidden disagreement and collapse of Resource identity with a time-varying claim projection.
+
+It is admissible only if Resource-local placement is a storage choice rather than the semantic authority: multiple attributable claims remain representable, claim identity does not derive from Resource identity, and Resource mutation cannot rewrite claim history.
 
 ### Outcome B — single CapabilityClaimRecord
 
@@ -328,11 +332,24 @@ Likely P-001 modules to evaluate: A for temporal effectivity, C for supersession
 
 ### Outcome C — CapabilityAssessmentRecord
 
-The holder relation exists only as an attributable evidence-based evaluation conclusion. A dedicated assessment record binds Resource, exact Capability, criterion, snapshots, evaluator and conclusion.
+The holder claim exists as a separate identified attributable evidence-based evaluation record. A dedicated assessment record binds Resource, exact Capability, criterion, snapshots, evaluator and conclusion and is authoritative only for the exact evaluated proposition.
 
 This outcome may provide strong fail-safe semantics but risks calling every declaration an assessment and duplicating OCP-011 without sharing its Objective-only target contract.
 
 It must justify why the term `claim` remains useful and whether declarations without evaluation are excluded or represented elsewhere.
+
+### Outcome C-prime — extend the OCP-011 assessment contract
+
+The holder claim is a separate identified assessment record implemented by extending accepted OCP-011 with a governed Capability-holder target and assessment profile, such as `capability-holder@1`, rather than introducing a new assessment family.
+
+This outcome reuses exact target, criterion, evidence snapshot, input snapshot, evaluator, fail-safe conclusion and Module C machinery. It is admissible only if external comparison proves that:
+
+- the target contract exact-binds one Resource and one exact OCP-009 Capability version without inventing a hidden universal holder Concept;
+- Capability-claim conclusions fit a governed assessment-kind profile without treating `achieved`, `not_achieved` or other Objective vocabulary as universal;
+- evidence kinds and authoritative projections remain semantically narrow;
+- OCP-011 does not become a generic assessment container or silently establish Readiness, authorization, admissibility or Resource interchangeability.
+
+A dedicated CapabilityAssessmentRecord is justified only if those semantics demonstrably do not fit OCP-011 without diluting its accepted evidence and authority contract.
 
 ### Outcome D — declaration plus assessment records
 
@@ -342,15 +359,15 @@ This outcome preserves issuer and evaluator separation and contradictory evidenc
 
 Each record requires its own complete semantic owner and P-001 invocation if selected.
 
-### Outcome E — derived-only holder view
+### Outcome E — derived materialization of an identified claim record
 
-No standing holder claim record is stored. An exact rule derives the current proposition from governed evidence, qualification and snapshots.
+No standing claim materialization is stored. An exact rule produces the separate identified claim record from governed evidence, qualification and immutable snapshots, including a stable derivation identity and attributable authority.
 
-This outcome avoids stale mutable claims but must preserve attribution, replay, historical conclusions, contradictory evidence and deterministic resolution. It must not substitute current data for historical snapshots.
+This outcome avoids stale mutable projections but must preserve attribution, replay, historical conclusions, contradictory evidence and deterministic resolution. It must not substitute current data for historical snapshots or reduce the record to an unidentified current view.
 
 ### Outcome F — domain-local claims with a Core interoperability envelope
 
-Domain specifications own claim semantics. Core defines only exact Resource and Capability endpoints, minimum provenance, fail-safe requirements and cross-domain reference rules.
+Domain specifications own separate identified claim records and their semantics. Core defines only the interoperability envelope: exact Resource and Capability endpoints, stable record identity, minimum provenance, fail-safe requirements and cross-domain reference rules.
 
 This outcome limits Core scope but must prove that AB-011 and cross-domain planning can consume claims without semantic ambiguity or label-based matching.
 
@@ -402,7 +419,7 @@ AD-007 must state which claim projection, if any, AB-011 may treat as authoritat
 
 Any selected outcome must define:
 
-1. claim or derivation identity;
+1. stable identified claim-record identity and authoritative storage or derivation form;
 2. exact Resource and Capability endpoints;
 3. proposition and polarity semantics;
 4. issuer, evaluator and authority roles;
@@ -421,28 +438,34 @@ Any selected outcome must define:
 
 ## 18. Required executable counterexamples
 
-At minimum, a downstream normative cycle must prove:
+Evidence obligations are outcome-fair: the unconditional core covers semantics shared by every admissible outcome, while representation-, ownership- and Pattern-specific obligations apply only when the selected outcome contains that layer. An equivalent must be named where one outcome realizes a shared semantic guarantee through a different mechanism.
 
+### 18.1 Unconditional claim-contract core
+
+Every selected outcome must prove:
+
+- the claim has stable identity distinct from Resource identity and Capability-definition identity;
 - two Resources of the same type may have different claims;
 - one Resource may have a claim for Capability v1 but not v2;
-- supersession of a Capability definition does not rewrite historical claims;
-- registry membership does not create a holder claim;
-- Resource classification does not create a holder claim;
-- Assignment role does not create a holder claim;
-- Operation requirement does not grant Capability;
-- a positive claim does not imply Readiness or availability;
-- a positive claim does not imply authorization or admissibility;
-- missing evidence cannot produce an authoritative positive claim;
-- stale evidence cannot produce an authoritative positive claim;
-- conflicting evidence or claims cannot be resolved by newest timestamp or list order;
-- withdrawal or expiry does not create a negative claim;
+- Capability-definition supersession does not reinterpret an exact historical claim;
+- registry membership, Resource classification, Assignment role and Operation requirement do not create or grant a holder claim;
+- a positive claim does not imply Readiness, availability, authorization or admissibility;
+- missing or stale evidence cannot produce an authoritative positive claim;
+- ambiguous or conflicting evidence cannot produce an authoritative positive claim or select a winner by newest timestamp, issuer count or list order;
 - absence of a claim does not create a negative claim;
 - one successful Event or OutcomeAssessmentRecord does not automatically create a standing claim;
-- composite/component Capability inheritance is absent by default;
-- Organization claim inheritance is absent;
+- composite/component and Organization claim inheritance are absent by default;
 - matching claims do not collapse Resource identities or authorize automatic substitution;
-- malformed, unresolved or ambiguous Resource/Capability references fail closed;
-- selected P-001 manifests exactly cover emitted validation codes and derivations.
+- malformed, unresolved or ambiguous Resource/Capability references fail closed.
+
+### 18.2 Representation-conditional evidence
+
+- Stored or materialized record outcomes must prove that withdrawal or expiry does not create a negative claim, supersession preserves historical exact resolution and contradictory attributable records remain visible.
+- Outcome A must prove that Resource-local placement does not derive claim identity from Resource identity, does not make a mutable attribute authoritative and does not prevent multiple conflicting attributable claims.
+- Outcome E must prove stable derived record identity, historical replay from immutable snapshots and identical conclusions for identical exact inputs; current evidence must not replace historical inputs, and withdrawal, revocation or applicability end must be represented by governed exact inputs without manufacturing a negative claim.
+- Outcome F must provide domain-owned fixtures for claim semantics and Core fixtures that detect and reject missing, ambiguous or incompatible interoperability-envelope bindings.
+- Outcome C-prime must prove the OCP-011 target, conclusion-profile, evidence-kind and projection fit without weakening its accepted fail-safe matrix or turning it into a generic assessment container.
+- Every outcome that invokes P-001 must prove complete Required Elements, selected-module obligations and exact manifest coverage for emitted validation codes and derivations. An outcome that rejects P-001 must not be required to emit P-001 manifests.
 
 ## 19. Explicitly not defined
 
@@ -488,12 +511,16 @@ Attempt to falsify the boundary with cases where:
 16. the model cannot represent two simultaneous contradictory attributable claims without hiding one;
 17. temporal intervals allow an unchecked overlap to manufacture a positive effective claim;
 18. a claim bound to an unresolved or ambiguous Resource/Capability reference remains permissive.
+19. evidence obligations assume a layer rejected by the selected outcome instead of naming an equivalent;
+20. a Resource-local or derived representation removes separate claim identity and silently reopens AD-005C;
+21. an OCP-011 extension reuses field shape while diluting target, conclusion, evidence or authority semantics.
 
 ## 21. Exit criteria
 
 AD-007 is ready for Architecture Board decision when:
 
 - one explicit outcome or sequenced model survives external adversarial review;
+- every admissible outcome conforms to the AD-005C separate identified-record mandate, or an explicit prior reopening act supplies new evidence and supersedes that mandate;
 - the claim proposition and authority are exact;
 - Resource-only initial holder scope remains intact;
 - exact Capability version binding is preserved;
@@ -506,10 +533,13 @@ AD-007 is ready for Architecture Board decision when:
 - boundaries from Readiness, availability, capacity, authorization, admissibility, Assignment and Operation requirements survive review;
 - AB-011 receives a precise authoritative input contract without pre-solving substitution;
 - downstream normative owner, executable fixtures and manifest obligations are named;
+- executable evidence is divided into an outcome-independent core and explicit outcome-conditional blocks or semantic equivalents;
 - unresolved Organization-holder semantics remain bound to AB-006 and AB-052.
 
 ## 22. Architecture Board status
 
-Revision `0.1.0` opens AD-007 and AB-057 as `Discovery`.
+Revision `0.1.0` opened AD-007 and AB-057 as `Discovery`.
 
-No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by this revision.
+Revision `0.2.0` addresses external Findings 1–2 and supplemental governance Finding 3 by restoring outcome-fair evidence, adding the OCP-011 reuse alternative and constraining every admissible outcome to the accepted AD-005C separate identified-record mandate. Findings remain open pending repeated external verification of this exact revision.
+
+No outcome, record schema, P-001 invocation, Concept edge or Resource-interchangeability rule is accepted by revision `0.2.0`.
