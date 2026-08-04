@@ -1,0 +1,11 @@
+case_id: event-valid-zero-observations
+concept: EventObservationDataset
+events:
+  - event_id: EV-ZERO-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-ZERO-001
+observations: []
+expected:
+  valid: true
+  error_codes: []

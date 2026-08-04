@@ -51,22 +51,25 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Resource, Operation, Assignment, Constraint, Organization, Objective і Capability мають статус `Accepted`;
+- Resource, Operation, Assignment, Constraint, Organization, Objective, Capability і Event мають статус `Accepted`;
+- OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
+- ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
+- AB-055 завершено рішенням Architecture Board по PR-0012; Event є восьмим Accepted Concept і лишається isolated у current Concept graph;
+- PR-0012 містить перший integrated non-sensitive scenario: Objective + Completed Operation + два Resource/Assignment + Constraint + Event + conflicting observations + fail-safe `indeterminate` checker envelope;
+- scenario використовує чинні `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result`, тому його з'єднання є виконуваними, а не декоративними;
+- AD-006C outcome R3 зберігається: normative OutcomeAssessmentRecord належить AB-056, фундаментальний Result Concept не вводиться;
+- `Result` тимчасово лишається `Proposed` до атомарної registry resolution разом із прийняттям R3 contract;
+- checker-local assessment envelope не є нормативним OutcomeAssessmentRecord і не завершує AB-056;
+- Operation completion не означає Objective achievement; Event, observation або positive assessment не створюють Capability, Readiness, authorization, admissibility, Conflict чи State;
 - OCP-009 визначає reusable Capability definition, governed namespace ownership, exact-version resolution і supersession без holder claims;
-- AB-004 завершено; holder-specific Capability Claim і AB-011 лишаються окремими downstream-рішеннями;
-- AD-006C приймає E3: `Event` як occurrence-layer Concept direction, відокремлений від attributable ObservationRecord;
-- AD-006C приймає R3: operational result semantics як governed OutcomeAssessmentRecord без фундаментального Result Concept;
-- Event і Result поки залишаються `Proposed`: Event — до OCP-010 acceptance, Result — як тимчасовий registry/migration accounting до прийняття R3 contract;
-- AB-054 завершено; AB-055 планує Event/Observation contract, AB-056 — OutcomeAssessmentRecord і атомарне розв’язання Result registry entry;
-- Operation completion не означає Objective achievement; Event, observation або positive assessment не створюють Capability, Readiness, authorization, admissibility чи State;
 - OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
-- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Concept status synchronization і dependency graph;
+- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Event/Observation references, integrated scenario, Concept status synchronization і dependency graph;
 - artifact-governance slice перевіряє identifiers, taxonomy statuses, duplicate AB records, accepted AD↔AB synchronization і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- наступні заплановані цикли — OCP-010 Event + ObservationRecord, OutcomeAssessmentRecord, integrated non-sensitive scenario, holder-specific Capability Claim і Coordination;
+- наступні planned cycles — OutcomeAssessmentRecord, holder-specific Capability Claim і Coordination;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності: **≈42%**.
+- не-нормативна оцінка загальної foundation-готовності: **≈46%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

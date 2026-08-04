@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.9.2
+Version: 0.11.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -45,8 +45,8 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
 | Readiness | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
 | State | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
-| Result | Proposed | — |
-| Event | Proposed | — |
+| Result | Proposed | AD-006C selects governed OutcomeAssessmentRecord; registry resolution remains AB-056 |
+| Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
 | Spectrum | Proposed | — |
 | Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
 | Risk | Proposed | AB-005; після Constraint |
@@ -76,3 +76,4 @@ Operational Ontology веде реєстр понять, їхніх статус
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
 - Межа між Constraint violation та майбутнім Conflict Concept.
+- Нормативний OutcomeAssessmentRecord і атомарна резолюція registry entry `Result` за AB-056.

@@ -1,0 +1,13 @@
+case_id: event-invalid-unresolved-reference
+concept: EventReference
+events:
+  - event_id: EV-REF-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-REF-001
+reference:
+  event_ref: EV-MISSING-001
+expected:
+  valid: false
+  error_codes:
+    - EVENT_REFERENCE_UNRESOLVED

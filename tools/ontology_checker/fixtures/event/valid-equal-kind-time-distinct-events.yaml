@@ -1,0 +1,16 @@
+case_id: event-valid-equal-kind-time-distinct-events
+concept: EventDataset
+events:
+  - event_id: EV-EQUAL-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-EQUAL-001
+    occurred_at: 2026-08-04T00:45:00Z
+  - event_id: EV-EQUAL-002
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:01:00Z
+    identity_provenance_ref: ACT-EVENT-EQUAL-002
+    occurred_at: 2026-08-04T00:45:00Z
+expected:
+  valid: true
+  error_codes: []

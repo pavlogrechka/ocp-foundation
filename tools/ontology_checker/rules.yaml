@@ -1,4 +1,4 @@
-manifest_version: 0.5.0
+manifest_version: 0.6.0
 authority: reference-only
 normative_source: OCP documents and governed artifact taxonomy
 rules:
@@ -284,6 +284,108 @@ rules:
 - id: CAPABILITY_VERSION_REQUIRED
   kind: validation
   source: OCP-009 §12 invariant 1
+- id: EVENT_ID_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 1
+- id: EVENT_IDENTITY_DUPLICATE
+  kind: validation
+  source: OCP-010 §16 invariants 2 and 15
+- id: EVENT_KIND_REF_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 3
+- id: EVENT_OBSERVATION_COUPLING_FORBIDDEN
+  kind: validation
+  source: OCP-010 §16 invariant 7
+- id: EVENT_OCCURRED_AT_INVALID
+  kind: validation
+  source: OCP-010 §16 invariant 6
+- id: EVENT_PROVENANCE_REF_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 5
+- id: EVENT_REFERENCE_AMBIGUOUS
+  kind: validation
+  source: OCP-010 §8 and §16 invariant 15
+- id: EVENT_REFERENCE_INVALID
+  kind: validation
+  source: OCP-010 §8 exact Event reference contract
+- id: EVENT_REFERENCE_UNRESOLVED
+  kind: validation
+  source: OCP-010 §8 and §16 invariant 15
+- id: EVENT_REGISTERED_AT_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 4
+- id: OBSERVATION_EVENT_REF_AMBIGUOUS
+  kind: validation
+  source: OCP-010 §6.7 and §16 invariant 11
+- id: OBSERVATION_EVENT_REF_UNRESOLVED
+  kind: validation
+  source: OCP-010 §6.7 and §16 invariant 11
+- id: OBSERVATION_ID_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 8
+- id: OBSERVATION_IDENTITY_DUPLICATE
+  kind: validation
+  source: OCP-010 §16 invariant 8
+- id: OBSERVATION_KIND_REF_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_OBSERVED_AT_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_OBSERVER_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_PROVENANCE_REF_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_RECORDED_AT_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_SELF_SUPERSESSION
+  kind: validation
+  source: OCP-010 §16 invariant 13
+- id: OBSERVATION_STATEMENT_REQUIRED
+  kind: validation
+  source: OCP-010 §16 invariant 9
+- id: OBSERVATION_SUPERSESSION_CYCLE
+  kind: validation
+  source: OCP-010 §16 invariant 14
+- id: OBSERVATION_SUPERSESSION_TARGET_UNRESOLVED
+  kind: validation
+  source: OCP-010 §16 invariant 13
+- id: OBSERVATION_TIME_ORDER_INVALID
+  kind: validation
+  source: OCP-010 §16 invariant 10
+- id: SCENARIO_ASSIGNMENT_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_ASSESSMENT_INVALID
+  kind: validation
+  source: OCP-010 §14 checker-local assessment envelope
+- id: SCENARIO_CONFLICTING_EVIDENCE_POSITIVE
+  kind: validation
+  source: OCP-010 §14 and §16 invariant 16
+- id: SCENARIO_CONSTRAINT_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_EVENT_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_EVIDENCE_REFERENCE_UNRESOLVED
+  kind: validation
+  source: OCP-010 §14 exact evidence reference contract
+- id: SCENARIO_OBJECTIVE_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_OBSERVATION_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_OPERATION_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
+- id: SCENARIO_RESOURCE_INVALID
+  kind: validation
+  source: OCP-010 §14 integrated scenario contract
 - id: assignment_effective_at
   kind: derivation
   source: OCP-005 §8
@@ -305,6 +407,12 @@ rules:
 - id: effective_constraint_result
   kind: derivation
   source: OCP-006 §11
+- id: observations_for_event
+  kind: derivation
+  source: OCP-010 §9
 - id: resolve_capability_definition
   kind: derivation
   source: OCP-009 §8
+- id: resolve_event
+  kind: derivation
+  source: OCP-010 §8

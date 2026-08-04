@@ -1,0 +1,18 @@
+case_id: event-invalid-duplicate-identity
+concept: EventReference
+events:
+  - event_id: EV-DUP-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:00:00Z
+    identity_provenance_ref: ACT-EVENT-DUP-001
+  - event_id: EV-DUP-001
+    event_kind_ref: infrastructure.condition-change@1
+    registered_at: 2026-08-04T01:01:00Z
+    identity_provenance_ref: ACT-EVENT-DUP-002
+reference:
+  event_ref: EV-DUP-001
+expected:
+  valid: false
+  error_codes:
+    - EVENT_IDENTITY_DUPLICATE
+    - EVENT_REFERENCE_AMBIGUOUS

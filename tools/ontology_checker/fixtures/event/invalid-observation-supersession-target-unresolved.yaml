@@ -1,0 +1,16 @@
+case_id: observation-invalid-supersession-target-unresolved
+concept: ObservationDataset
+events: []
+observations:
+  - observation_id: OBS-TARGET-001
+    observer_ref: SOURCE-TARGET
+    observation_kind_ref: inspection.report@1
+    statement: A corrected assertion was recorded.
+    observed_at: 2026-08-04T00:50:00Z
+    recorded_at: 2026-08-04T00:55:00Z
+    provenance_ref: ACT-OBS-TARGET-001
+    supersedes_observation_ref: OBS-MISSING-001
+expected:
+  valid: false
+  error_codes:
+    - OBSERVATION_SUPERSESSION_TARGET_UNRESOLVED
