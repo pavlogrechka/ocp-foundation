@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 60% | Сім Concepts Accepted; Capability definition і registry contract завершені, а Event/Result проходять active boundary discovery в AD-006; Coordination, Operational Area та Core Boundary ще не визначені |
+| Core domain ontology | 60% | Сім Concepts Accepted; AD-006C приймає occurrence/observation та assessment-record boundaries, але Event Concept, ObservationRecord і OutcomeAssessmentRecord ще не визначені; Coordination, Operational Area та Core Boundary також лишаються відкритими |
 | Operational rules and workflows | 15% | Є participation, admissibility, lifecycle projection та explicit-intent validation contracts; coordination, authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 45% | Є fixtures, exact manifests, status sync, Concept graph, generated map, artifact governance, Pattern checks, real-history audit і accepted Capability registry resolver; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈42%** | Foundation Wave 2 має сім Accepted Concepts; AD-006 відкриває наступну boundary-смугу, але operational rules and workflows лишаються на 15% |
+| **Загальна foundation-готовність** | **≈42%** | AD-006C зменшує boundary-ризик, але ще не додає Accepted Concept, assessment contract або operational workflow; найнижча готовність лишається в operational rules and workflows |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -40,7 +40,9 @@
 - [x] State/Readiness review mandate and guardrails accepted in AD-002; final Concepts remain Deferred
 - [x] Capability boundary and registry direction accepted in `AD-005C`
 - [x] Capability Concept and governed registry contract accepted in `PR-0010 / OCP-009`
-- [ ] Event and Result boundary — active discovery `AD-006 / PR-0011`
+- [x] Event and Result boundary accepted in `AD-006C`: E3 occurrence + observation records, R3 governed assessment records
+- [ ] Event occurrence Concept and governed ObservationRecord contract — AB-055
+- [ ] OutcomeAssessmentRecord contract and Result registry resolution — AB-056
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
@@ -74,6 +76,7 @@
 - [x] Full-history checkout and post-baseline non-linear-history audit
 - [x] PR CI validates the actual proposed head in explicit `main` context
 - [x] OCP-009 Capability exact-resolution, namespace, supersession and registry≠possession evidence
+- [ ] Event occurrence, ObservationRecord and OutcomeAssessmentRecord executable evidence required by AD-006C
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -98,17 +101,18 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Machine-readable invariants and derivation rules beyond the current reference slice
 - [ ] Full ontology duplicate/reference linter
 - [ ] Constraint expression and evaluator contracts
-- [ ] First integrated non-sensitive scenario spanning Operation, Objective, Assignment and Constraint — required downstream evidence in AD-006
+- [ ] First integrated non-sensitive scenario spanning Operation, Objective, Assignment, Constraint, Event, observations and assessments — required by AD-006C
 - [ ] Additional example datasets without sensitive information
 - [ ] Expanded CI checks for schemas, lifecycle consistency and normative references
 - [ ] Versioned implementation-facing contracts
 
 ## Planned Sequence
 
-1. Complete `AD-006 — Event and Result Boundary`: obtain separate identity verdicts for Event and Result, preserve the occurrence/observation/evidence/evaluation distinction, and select downstream normative owners before opening OCP-010 or OCP-011.
-2. Build the first integrated non-sensitive scenario from accepted Concepts and extend it with Event/Result evidence only after AD-006 selects the model.
-3. Define the holder-specific Capability Claim boundary and record contract; keep Organization claims bound by AB-006/AB-052.
-4. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
-5. Define Coordination boundaries and workflows for independent verticals.
-6. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and Event observations exist.
-7. Continue checker expansion with every accepted Concept cycle and complete the full normative reference linter before first Canonical promotion.
+1. Open OCP-010 for the occurrence-layer Event Concept and define the governed ObservationRecord contract under E3, including zero-observation identity, correction history and ambiguity handling.
+2. Define the governed OutcomeAssessmentRecord contract under R3, bind exact target/rule/evidence/evaluator semantics and atomically resolve the `Result: Proposed` registry entry when that contract is accepted.
+3. Build the first integrated non-sensitive scenario spanning Operation, Objective, Assignment and Constraint, then exercise Event occurrences, conflicting observations and fail-safe Objective assessments.
+4. Define the holder-specific Capability Claim boundary and record contract; keep Organization claims bound by AB-006/AB-052.
+5. Resolve AB-011 Resource interchangeability using exact Capability claims, applicable Constraint results and operational context without identity collapse.
+6. Define Coordination boundaries and workflows for independent verticals.
+7. Revisit State and Readiness under the AD-002 evidence contract after Capability claims and Event observations exist.
+8. Continue checker expansion with every accepted Concept cycle and complete the full normative reference linter before first Canonical promotion.
