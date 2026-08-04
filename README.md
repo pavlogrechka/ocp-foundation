@@ -78,7 +78,7 @@ backlog/                 відкриті питання та дорожня к�
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - State і Readiness залишаються `Deferred` за AD-002 до окремого evidence-based рішення;
-- AB-011 / AD-008 Resource interchangeability та AB-003 consumer-profile question завершено через Accepted OCP-013 і OCP-014; будь-які Coordination workflows потребують окремого mandate;
+- AB-011 / AD-008 Resource interchangeability та AB-003 consumer-profile question завершено через Accepted OCP-013 і OCP-014; залишковий Coordination workflow scope обліковується в AB-058 і потребує окремого mandate;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - не-нормативна оцінка загальної foundation-готовності з Accepted OCP-014 — **≈52%**.
 

@@ -7,7 +7,7 @@ Owner: Architecture Board
 Depends-On: OCP-003, OCP-004, OCP-006, OCP-009, OCP-012, OCP-013
 Used-By: AB-003, Coordination Workflows
 Last-Review: 2026-08-04
-Review-After: Separate Coordination workflow mandate
+Review-After: AB-058 separate Coordination workflow mandate
 ---
 
 # OCP-014 — Coordination Consumer Profile
@@ -66,9 +66,9 @@ On 2026-08-04, Architecture Board:
 4. preserves separate consumer, claimant, Constraint-evaluator and OCP-013 rule authority;
 5. prohibits any inference of availability, authorization, approval, ranking, selection, reservation, replacement or Assignment mutation;
 6. preserves Resource identity and introduces no new fundamental Concept or Concept graph edge;
-7. resolves AB-003 only for the governed consumer-profile question; and
+7. resolves AB-003 only for the governed consumer-profile question; the remaining vertical-agreement and workflow scope is tracked by AB-058; and
 8. requires a separate mandate before any Coordination workflow cycle.
 
 ## 7. Next normative cycle
 
-OCP-014 does not pre-authorize the next Coordination workflow scope. The next cycle must first select a separate accepted mandate and may not infer negotiation, approval, conflict handling, visibility, command, reservation or lifecycle semantics from this consumer profile.
+OCP-014 does not pre-authorize the next Coordination workflow scope. Under AB-058, the next cycle must first select a separate accepted mandate and may not infer negotiation, approval, conflict handling, visibility, command, reservation or lifecycle semantics from this consumer profile.
