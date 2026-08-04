@@ -364,6 +364,8 @@ The Architecture Board should compare models against behavior, not record counts
 
 Model A is the leading hypothesis for the first shared contract because it adds the least authority: when the full input envelope is governed, the result is a contextual derivation rather than a standing assertion about either Resource. That preference is conditional on selecting an exact requirement owner and proving that the first consumer needs no legitimate evaluator judgment.
 
+Model A intentionally does not provide a governed home for the human resolution of `review required`. If a later consumer proves that such a resolution must be retained in Foundation, a separate reviewed decision may add Model B's attributable assessment record for that purpose. Selecting A neither requires nor prevents that additive A-to-B path; until it is accepted, a review result cannot become a shared authoritative interchangeability conclusion.
+
 Model B is the strongest alternative. It becomes preferable if the Coordination scenario requires accountable interpretation that cannot be reduced to governed inputs without hiding policy in code. Its record must remain an assessment, not authorization, ranking or replacement instruction.
 
 Model C should be selected only if evidence shows that consumers must retain both a deterministic baseline and a separate accountable judgment. Model D is appropriate only when domain ownership is semantically necessary and cross-domain mismatch can fail closed. Model E remains the valid no-new-authority outcome if no shared consumer contract can justify A–D.
