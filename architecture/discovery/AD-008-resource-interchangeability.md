@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-008
 Title: Resource Interchangeability Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-003, OCP-004, OCP-005, OCP-006, OCP-009, OCP-012, AD-002, AD-007
 Applies-To: AB-011, Resource interchangeability, Resource substitution
-Review-After: External adversarial outcome comparison
+Review-After: External review of proposed AD-008C outcome selection
 ---
 
 # AD-008 — Resource Interchangeability Boundary
@@ -397,3 +397,80 @@ Revision `0.2.0` adds a human-readable A–E comparison, the first non-sensitive
 AB-011 remains `Planned` while the discovery compares outcomes; this preserves the accepted upstream AD-005C and AD-007C accounting that already names AB-011 as downstream work.
 
 No interchangeability authority, record schema, Concept, graph edge, checker rule, availability model, authorization, selection or replacement workflow is accepted by revision `0.2.0`. Board acceptance requires exact-head external review, resolution of blocking findings, green checks and a separate explicit owner or Board authorization.
+
+## 19. Proposed Architecture Board decision — AD-008C
+
+This section proposes the next Board act. It is not effective while AD-008 remains in `Discovery`. Exact-head external review, resolution of blocking findings, green checks and explicit owner or Board authorization are still required before acceptance.
+
+### 19.1 Proposed selected outcome
+
+AD-008C proposes **Model A — deterministic derived eligibility** for the first shared Resource-interchangeability contract.
+
+In plain language, a governed rule may answer whether one identified Resource is a candidate substitute in one exact context by recomputing the answer from the requirement, the candidate's effective Capability claims and the candidate-specific Constraint decision. The answer is about that comparison only. It is not a statement that the two Resources are equal, generally equivalent, available, authorized, selected or replaced.
+
+Model A is proposed because the reviewed Coordination scenario contains no demonstrated judgment that Foundation must preserve as a separate interchangeability authority. Adding an assessment record before such a consumer exists would create an evaluator and a correction path without evidence that either is needed.
+
+### 19.2 Requirement owner and context boundary
+
+The future AB-011 normative contract must define the exact requirement input consumed by the derivation. That contract, not an existing Assignment, a Resource label, the Capability registry or the derivation rule, owns:
+
+- the requirement's stable identity and version;
+- its exact Capability-version and condition-set bindings;
+- the Operation or other governed consumer context in which it applies;
+- its applicability time or interval; and
+- the provenance needed to resolve the requirement without caller memory.
+
+The owner is therefore the separately reviewed consumer requirement contract selected by AB-011. A Coordination profile may instantiate that contract for the first scenario, but Coordination does not gain authority over general Resource identity, Capability truth, admissibility, authorization or Assignment execution.
+
+Until that downstream contract is accepted, the proposed model has no authoritative automatic `positive` path. A caller-supplied role name, incumbent Assignment or ad hoc list of desired Capabilities is not a governed requirement and must remain `indeterminate`.
+
+### 19.3 Derivation authority and fail-safe outcomes
+
+The downstream rule authority may establish only a reproducible contextual eligibility result from one versioned rule and one complete input snapshot. It must expose enough binding information to replay the result after a requirement, claim, Constraint or rule version changes.
+
+An authoritative `positive` result requires all of the following for the same evaluation context and time:
+
+1. an exactly resolved governed requirement;
+2. exactly resolved candidate Resource and Capability references;
+3. permissive OCP-012 effective claim inputs for every required Capability binding, with claimant and authority attribution preserved;
+4. the applicable OCP-006 candidate-specific Constraint decision and its exact input snapshot; and
+5. no unresolved, ambiguous, stale, conflicting or mismatched required input.
+
+Missing or unresolved requirement ownership, missing snapshots, reference ambiguity, conflicting claim heads, condition mismatch, stale inputs or cross-candidate Constraint reuse must not produce `positive`. A governed mismatch may produce a negative result only under the downstream contract's exact rule. Inputs that cannot be decided mechanically remain `indeterminate` or `review required`; those states must not be collapsed into either positive permission or a durable negative claim about the Resource.
+
+Changing the context, requirement version, time, candidate, claim head, Constraint snapshot or rule version creates a new derivation. It must not rewrite the earlier result or transfer it to another Resource or Assignment.
+
+### 19.4 Assessment activation path
+
+Model B remains the named additive path if a concrete consumer later proves that legitimate evaluator judgment must be retained as a shared Foundation conclusion.
+
+That activation requires a separate reviewed decision. It must define the evaluator, assessment authority, evidence and disagreement or correction semantics without changing historical Model A derivations. A human resolution of `review required` has no shared authoritative interchangeability meaning until that additional contract is accepted.
+
+Models C and D are not proposed because the reviewed scenario does not justify two conclusion authorities or domain-specific substitution semantics. Model E remains the fail-safe behavior wherever the governed requirement or shared invariant needed by Model A is absent.
+
+### 19.5 Downstream evidence mandate
+
+If AD-008C is accepted, the next AB-011 normative cycle must define and externally review the deterministic contract without broadening into availability, authorization, selection or replacement workflow. It must provide executable evidence for every counterexample in §12 and, at minimum, prove:
+
+- directionality by evaluating `A → B` separately from `B → A`;
+- absence of unproved symmetry and transitivity;
+- exact requirement, context, candidate, time, claim, Constraint and rule-version binding;
+- fail-safe behavior for every missing, stale, ambiguous, conflicting or mismatched input;
+- historical replay after any input or rule is superseded;
+- distinct Resource and Assignment identities before and after comparison; and
+- the inability of a positive eligibility result to authorize, select or execute replacement.
+
+The reference checker may provide executable examples, but it is not the normative owner of the rule. The accepted downstream contract remains authoritative.
+
+### 19.6 Proposed acceptance effect
+
+If explicitly authorized and merged after exact-head external approval, AD-008C would have these effects:
+
+- AD-008 would become `Accepted` at version `0.3.0`;
+- Model A would become the governing direction for the first downstream AB-011 contract, subject to §§19.1–19.5;
+- the AB-011 downstream contract would own the exact contextual requirement input and deterministic rule;
+- Model B would remain the separately reviewed activation path for demonstrated evaluator judgment;
+- AB-011 would remain `Planned` until its normative contract and executable evidence are accepted; and
+- the later Coordination cycle would receive only the narrow consumer-profile boundary defined here, not a general substitution or workflow authority.
+
+This proposal does not define a record schema, persistence form, API, production evaluator, availability model, ranking, authorization, selection, reservation, replacement workflow, new Concept or graph edge.
