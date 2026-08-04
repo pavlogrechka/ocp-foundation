@@ -33,6 +33,7 @@
 
 ## Current isolated defined Concepts
 
+- `Capability`
 - `Constraint`
 - `Organization`
 
