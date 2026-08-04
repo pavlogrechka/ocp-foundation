@@ -45,7 +45,8 @@
 - [x] OutcomeAssessmentRecord contract and Result registry resolution — `AB-056 / OCP-011 / PR-0013`
 - [x] Holder-specific Capability Claim boundary accepted in `AD-007C`: Outcome B, a single narrowly attributable CapabilityClaimRecord direction
 - [x] Normative CapabilityClaimRecord contract with fail-safe claim-head projection — `AB-057 / OCP-012 / PR-0014A`
-- [ ] Resource interchangeability boundary discovery — `AB-011 / AD-008`
+- [x] Resource interchangeability boundary and Model A direction accepted — `AB-011 / AD-008C`
+- [ ] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR-0016`
 - [ ] Operational Coordination Model
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification

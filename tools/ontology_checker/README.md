@@ -18,6 +18,7 @@ Implemented validators:
 - ObservationRecord attribution, optional Event linkage and Module C supersession;
 - OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states and Module C supersession;
 - CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
+- ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - artifact governance and complete-history process audit.
@@ -41,6 +42,8 @@ Implemented reference derivations include:
 - `capability_claim_effective_at`;
 - `capability_claim_heads`;
 - `effective_capability_claim`.
+- `resolve_interchangeability_requirement`;
+- `derive_resource_interchangeability`.
 
 ## Manifest discipline
 
@@ -50,6 +53,7 @@ The checker uses exact module manifests:
 - `organization-rules.yaml` — Organization module;
 - `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module;
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
+- `interchangeability-rules.yaml` — draft OCP-013 Resource interchangeability module.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests.
 
@@ -150,6 +154,16 @@ The checker mechanically cross-checks `declared`/`missing` against evidence-set 
 The reference slice supports Resource-only holders, exact Capability resolution, half-open effectivity intervals, evidence snapshots and branching supersession. Withdrawal is a successor assertion distinct from negative polarity. `capability_claim_heads` performs as-of replay; `effective_capability_claim` returns `indeterminate` for missing, stale, ambiguous or conflicting support and for disagreeing heads. It never uses newest timestamp, list order, claimant count or source count as authority.
 
 Matching claim projections for two Resources preserve two Resource identities and do not decide AB-011 interchangeability.
+
+## Resource interchangeability envelope
+
+Draft OCP-013 supplies the separate AB-011 decision. The checker resolves one consumer-owned exact requirement and derives one directional result from exact OCP-012 claim projections plus the OCP-006 decision for the same candidate, context and time.
+
+The checker verifies requirement structure and exact resolution. It cannot establish whether `owner_ref` is the legitimate governed consumer contract; that authority remains with Architecture Board review of the consumer contract, beginning with the Coordination profile.
+
+The output vocabulary is `positive`, `negative`, `indeterminate` and `review_required`. Missing, stale, ambiguous, conflicting, mismatched or unknown-version input cannot produce positive. A positive result is contextual eligibility only: it carries no availability, authorization, ranking, selection or Assignment-execution authority.
+
+The mandatory-counterexamples fixture covers every AD-008 §12 case and exact rule-version replay. It deliberately preserves Resource and Assignment identities and contains no Resource-to-Resource equality edge.
 
 ## Integrated non-sensitive scenario
 
