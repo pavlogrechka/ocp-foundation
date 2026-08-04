@@ -1,0 +1,14 @@
+case_id: observation-invalid-time-order
+concept: ObservationRecord
+entity:
+  observation_id: OBS-TIME-001
+  observer_ref: SOURCE-TIME
+  observation_kind_ref: inspection.report@1
+  statement: The asset condition was observed.
+  observed_at: 2026-08-04T01:10:00Z
+  recorded_at: 2026-08-04T01:05:00Z
+  provenance_ref: ACT-OBS-TIME-001
+expected:
+  valid: false
+  error_codes:
+    - OBSERVATION_TIME_ORDER_INVALID
