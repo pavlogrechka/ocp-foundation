@@ -1,0 +1,236 @@
+case_id: interchangeability-mandatory-counterexamples
+concept: ResourceInterchangeabilityDataset
+expected: {valid: true, error_codes: []}
+resources:
+  - {resource_id: R-A, classifications: [Technical Resource], contains_refs: []}
+  - {resource_id: R-B, classifications: [Technical Resource], contains_refs: []}
+  - {resource_id: R-C, classifications: [Technical Resource], contains_refs: []}
+requirements:
+  - requirement_id: REQ-A
+    version: "1"
+    owner_ref: COORDINATION-REQUIREMENT-CONTRACT-001
+    comparison_target_ref: R-A
+    context_ref: OP-COORD-1@1
+    effective_from: 2026-08-04T08:00:00Z
+    effective_until: 2026-08-04T12:00:00Z
+    capability_bindings:
+      - capability_ref: {namespace: communications, capability_id: relay, version: v1}
+        condition_set_ref: field-context@1
+    provenance_ref: ACT-REQ-A-1
+  - requirement_id: REQ-B
+    version: "1"
+    owner_ref: COORDINATION-REQUIREMENT-CONTRACT-001
+    comparison_target_ref: R-B
+    context_ref: OP-COORD-1@1
+    effective_from: 2026-08-04T08:00:00Z
+    effective_until: 2026-08-04T12:00:00Z
+    capability_bindings:
+      - capability_ref: {namespace: communications, capability_id: relay, version: v1}
+        condition_set_ref: field-context@1
+      - capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+        condition_set_ref: field-context@1
+    provenance_ref: ACT-REQ-B-1
+  - requirement_id: REQ-A-OP2
+    version: "1"
+    owner_ref: COORDINATION-REQUIREMENT-CONTRACT-001
+    comparison_target_ref: R-A
+    context_ref: OP-COORD-2@1
+    effective_from: 2026-08-04T08:00:00Z
+    effective_until: 2026-08-04T12:00:00Z
+    capability_bindings:
+      - capability_ref: {namespace: communications, capability_id: relay, version: v1}
+        condition_set_ref: urban-context@1
+    provenance_ref: ACT-REQ-A-OP2-1
+cases:
+  matching_claims_distinct_resources:
+    note: Counterexample 1 — equal positive inputs preserve R-A and R-B as separate identities.
+    expected_outcome: positive
+    evaluation: &positive_b_to_a
+      evaluation_id: EVAL-B-A-1
+      rule_ref: resource-interchangeability@1
+      requirement_ref: REQ-A@1
+      candidate_ref: R-B
+      context_ref: OP-COORD-1@1
+      evaluation_time: 2026-08-04T09:00:00Z
+      input_snapshot_ref: SNAP-EVAL-B-A-1
+      claim_inputs:
+        - &claim_relay_b
+          holder_ref: R-B
+          capability_ref: {namespace: communications, capability_id: relay, version: v1}
+          condition_set_ref: field-context@1
+          claimant_ref: SOURCE-B
+          claim_head_refs: [CLM-B-RELAY-1]
+          projection: positive
+          input_state: effective
+          effective_at: 2026-08-04T09:00:00Z
+      constraint_input: &constraint_b_admissible
+        candidate_ref: R-B
+        context_ref: OP-COORD-1@1
+        evaluated_at: 2026-08-04T09:00:00Z
+        input_snapshot_ref: SNAP-CONSTRAINT-B-1
+        decision: admissible
+  same_label_different_exact_version:
+    note: Counterexample 2 — label similarity cannot redirect v2 to required v1.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-WRONG-VERSION
+      claim_inputs:
+        - <<: *claim_relay_b
+          capability_ref: {namespace: communications, capability_id: relay, version: v2}
+          claim_head_refs: [CLM-B-RELAY-2]
+  blocking_constraint:
+    note: Counterexample 3 — a positive claim cannot override candidate-specific inadmissibility.
+    expected_outcome: negative
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-BLOCKED
+      constraint_input:
+        <<: *constraint_b_admissible
+        input_snapshot_ref: SNAP-CONSTRAINT-B-BLOCKED
+        decision: inadmissible
+  missing_claim_support:
+    note: Counterexample 4a — missing support fails safe.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-MISSING
+      claim_inputs: []
+  stale_claim_support:
+    note: Counterexample 4b — stale support fails safe.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-STALE
+      claim_inputs:
+        - <<: *claim_relay_b
+          input_state: stale
+  conflicting_claim_heads:
+    note: Counterexample 5 — conflicting heads remain attributable and non-permissive.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-CONFLICT
+      claim_inputs:
+        - <<: *claim_relay_b
+          claim_head_refs: [CLM-B-RELAY-POS, CLM-B-RELAY-NEG]
+          projection: indeterminate
+          input_state: conflicting
+  incumbent_constraint_reused_for_candidate:
+    note: Counterexample 6 — R-A's Constraint result cannot be reused for R-B.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-WRONG-CANDIDATE-SNAPSHOT
+      constraint_input:
+        <<: *constraint_b_admissible
+        candidate_ref: R-A
+        input_snapshot_ref: SNAP-CONSTRAINT-A-1
+  changed_context:
+    note: Counterexample 7 — another Operation binds a different requirement and condition set.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-B-A-OP2
+      requirement_ref: REQ-A-OP2@1
+      context_ref: OP-COORD-2@1
+  b_substitutes_for_a:
+    note: Counterexample 8a — B satisfies A's exact requirement.
+    expected_outcome: positive
+    evaluation: *positive_b_to_a
+  a_does_not_substitute_for_b:
+    note: Counterexample 8b — the reverse comparison is evaluated separately and is negative.
+    expected_outcome: negative
+    evaluation:
+      evaluation_id: EVAL-A-B-1
+      rule_ref: resource-interchangeability@1
+      requirement_ref: REQ-B@1
+      candidate_ref: R-A
+      context_ref: OP-COORD-1@1
+      evaluation_time: 2026-08-04T09:00:00Z
+      input_snapshot_ref: SNAP-EVAL-A-B-1
+      claim_inputs:
+        - holder_ref: R-A
+          capability_ref: {namespace: communications, capability_id: relay, version: v1}
+          condition_set_ref: field-context@1
+          claimant_ref: SOURCE-A
+          claim_head_refs: [CLM-A-RELAY-1]
+          projection: positive
+          input_state: effective
+          effective_at: 2026-08-04T09:00:00Z
+        - holder_ref: R-A
+          capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+          condition_set_ref: field-context@1
+          claimant_ref: SOURCE-A
+          claim_head_refs: [CLM-A-NAV-1]
+          projection: negative
+          input_state: effective
+          effective_at: 2026-08-04T09:00:00Z
+      constraint_input:
+        candidate_ref: R-A
+        context_ref: OP-COORD-1@1
+        evaluated_at: 2026-08-04T09:00:00Z
+        input_snapshot_ref: SNAP-CONSTRAINT-A-1
+        decision: admissible
+  second_candidate_same_requirement:
+    note: Counterexample 9 — R-B and R-C may each satisfy REQ-A without becoming interchangeable.
+    expected_outcome: positive
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-C-A-1
+      candidate_ref: R-C
+      input_snapshot_ref: SNAP-EVAL-C-A-1
+      claim_inputs:
+        - <<: *claim_relay_b
+          holder_ref: R-C
+          claimant_ref: SOURCE-C
+          claim_head_refs: [CLM-C-RELAY-1]
+      constraint_input:
+        <<: *constraint_b_admissible
+        candidate_ref: R-C
+        input_snapshot_ref: SNAP-CONSTRAINT-C-1
+  unavailable_or_unauthorized_is_outside_result:
+    note: Counterexample 10 — positive eligibility conveys neither availability nor authorization.
+    outside_decision: {available: false, authorized: false}
+    expected_outcome: positive
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-NO-AUTHORITY
+  assignment_mutation_is_rejected:
+    note: Counterexample 11 — the derivation cannot carry a replacement instruction.
+    expected_outcome: indeterminate
+    original_assignment: {assignment_id: ASG-A, resource_ref: R-A}
+    proposed_new_assignment: {assignment_id: ASG-B, resource_ref: R-B}
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-MUTATION
+      assignment_mutation: {assignment_id: ASG-A, resource_ref: R-B}
+  implicit_label_is_not_a_requirement:
+    note: Counterexample 12 — a role or type label does not exact-resolve a governed requirement.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-ROLE-LABEL
+      requirement_ref: role:relay
+  condition_set_mismatch:
+    note: Counterexample 13 — a claim under X cannot satisfy a requirement under Y.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-WRONG-CONDITION
+      claim_inputs:
+        - <<: *claim_relay_b
+          condition_set_ref: urban-context@1
+  exact_rule_replay:
+    note: The same exact snapshots and accepted rule version replay the same result.
+    expected_outcome: positive
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-REPLAY
+  changed_rule_version:
+    note: An unknown rule version is a new unresolved derivation context, not a rewrite.
+    expected_outcome: indeterminate
+    evaluation:
+      <<: *positive_b_to_a
+      evaluation_id: EVAL-RULE-V2
+      rule_ref: resource-interchangeability@2

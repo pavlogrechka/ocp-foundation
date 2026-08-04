@@ -67,6 +67,15 @@ from .objective import (
     validate_operation_fixture,
 )
 from .artifact_governance import GOVERNANCE_ERROR_CODES
+from .interchangeability import (
+    INTERCHANGEABILITY_DERIVATION_RULES,
+    INTERCHANGEABILITY_ERROR_CODES,
+    derive_resource_interchangeability,
+    resolve_interchangeability_requirement,
+    validate_interchangeability_dataset,
+    validate_interchangeability_fixture,
+    validate_interchangeability_requirement,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -119,6 +128,8 @@ def validate_reference_fixture(fixture):
         return validate_objective(fixture.get("entity") or {})
     if concept == "ObjectiveDataset":
         return validate_objective_dataset(fixture.get("entities") or [])
+    if concept == "ResourceInterchangeabilityDataset":
+        return validate_interchangeability_fixture(fixture)
     return validate_fixture(fixture)
 
 
