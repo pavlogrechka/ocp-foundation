@@ -20,6 +20,7 @@ Implemented validators:
 - CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
 - ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
 - OCP-014 CoordinationResourceRequirement exact accepted-owner profile binding;
+- draft OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - artifact governance and complete-history process audit.
@@ -45,6 +46,7 @@ Implemented reference derivations include:
 - `effective_capability_claim`.
 - `resolve_interchangeability_requirement`;
 - `derive_resource_interchangeability`.
+- `derive_coordination_evidence`.
 
 ## Manifest discipline
 
@@ -55,6 +57,7 @@ The checker uses exact module manifests:
 - `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module;
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
 - `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
+- `coordination-workflow-rules.yaml` — draft OCP-015 proposal/response record and evidence-projection module.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests.
 
@@ -165,6 +168,14 @@ The checker verifies generic requirement structure and exact resolution. It cann
 The output vocabulary is `positive`, `negative`, `indeterminate` and `review_required`. Missing, stale, ambiguous, conflicting, mismatched or unknown-version input cannot produce positive. A positive result is contextual eligibility only: it carries no availability, authorization, ranking, selection or Assignment-execution authority.
 
 The mandatory-counterexamples fixture covers every AD-008 §12 case and exact rule-version replay. It deliberately preserves Resource and Assignment identities and contains no Resource-to-Resource equality edge.
+
+## Draft Coordination workflow envelope
+
+Draft OCP-015 keeps one proposal revision separate from every invited vertical's response. The checker validates immutable record identity, exact proposal binding, responder scope, temporal effectivity and one-to-one acyclic supersession for both record families.
+
+`derive_coordination_evidence` returns `positive`, `negative`, `withdrawal` or `indeterminate` for one exact snapshot under `coordination-evidence@1`. Missing responses, conflicting heads, stale proposal revisions, malformed lineage or forbidden authorization/selection/Assignment coupling fail safe. Record order, timestamps and response count do not choose authority.
+
+The fixture's actor references are opaque pre-bound test inputs. The checker proves neither actor authentication nor authorization and cannot turn a positive evidence projection into permission, commitment, Resource selection, reservation or Assignment execution.
 
 ## Integrated non-sensitive scenario
 

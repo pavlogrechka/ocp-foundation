@@ -1,0 +1,208 @@
+case_id: coordination-workflow-mandatory-cases
+concept: CoordinationWorkflowDataset
+expected: {valid: true, error_codes: []}
+cases:
+  all_invited_responders_confirm:
+    expected_outcome: positive
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-POSITIVE-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals:
+        - &proposal
+          record_kind: coordination-proposal@1
+          proposal_record_id: PROP-REC-1
+          proposal_id: PROP-1
+          revision: "1"
+          publisher_ref: VERTICAL-A
+          invited_responder_refs: [VERTICAL-B, VERTICAL-C]
+          context_ref: OP-COORD-1@1
+          requirement_refs: [REQ-A@1]
+          visible_to_refs: [VERTICAL-A, VERTICAL-B, VERTICAL-C]
+          disposition: open
+          effective_from: 2026-08-05T09:00:00Z
+          provenance_ref: ACT-PROP-1
+      responses:
+        - &confirm_b
+          record_kind: coordination-response@1
+          response_record_id: RESP-B-1
+          proposal_ref: PROP-REC-1
+          responder_ref: VERTICAL-B
+          response_kind: confirm
+          effective_from: 2026-08-05T09:10:00Z
+          provenance_ref: ACT-RESP-B-1
+        - &confirm_c
+          record_kind: coordination-response@1
+          response_record_id: RESP-C-1
+          proposal_ref: PROP-REC-1
+          responder_ref: VERTICAL-C
+          response_kind: confirm
+          effective_from: 2026-08-05T09:15:00Z
+          provenance_ref: ACT-RESP-C-1
+
+  one_responder_declines:
+    expected_outcome: negative
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-NEGATIVE-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses:
+        - *confirm_b
+        - <<: *confirm_c
+          response_record_id: RESP-C-DECLINE-1
+          response_kind: decline
+          provenance_ref: ACT-RESP-C-DECLINE-1
+
+  missing_response_fails_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-MISSING-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses: [*confirm_b]
+
+  proposal_withdrawal:
+    expected_outcome: withdrawal
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-PROPOSAL-WITHDRAWN-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T11:00:00Z
+      proposals:
+        - *proposal
+        - <<: *proposal
+          proposal_record_id: PROP-REC-2
+          revision: "2"
+          disposition: withdrawn
+          effective_from: 2026-08-05T10:30:00Z
+          supersedes_ref: PROP-REC-1
+          provenance_ref: ACT-PROP-WITHDRAW-2
+      responses: []
+
+  all_responses_withdrawn:
+    expected_outcome: withdrawal
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-RESPONSES-WITHDRAWN-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T11:00:00Z
+      proposals: [*proposal]
+      responses:
+        - *confirm_b
+        - *confirm_c
+        - <<: *confirm_b
+          response_record_id: RESP-B-2
+          response_kind: withdraw
+          effective_from: 2026-08-05T10:30:00Z
+          supersedes_ref: RESP-B-1
+          provenance_ref: ACT-RESP-B-WITHDRAW-2
+        - <<: *confirm_c
+          response_record_id: RESP-C-2
+          response_kind: withdraw
+          effective_from: 2026-08-05T10:35:00Z
+          supersedes_ref: RESP-C-1
+          provenance_ref: ACT-RESP-C-WITHDRAW-2
+
+  response_to_superseded_revision_fails_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-STALE-REVISION-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T11:00:00Z
+      proposals:
+        - *proposal
+        - <<: *proposal
+          proposal_record_id: PROP-REC-2
+          revision: "2"
+          effective_from: 2026-08-05T10:30:00Z
+          supersedes_ref: PROP-REC-1
+          provenance_ref: ACT-PROP-REVISION-2
+      responses: [*confirm_b, *confirm_c]
+
+  expired_response_fails_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-EXPIRED-RESPONSE-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T11:00:00Z
+      proposals: [*proposal]
+      responses:
+        - <<: *confirm_b
+          effective_until: 2026-08-05T10:30:00Z
+        - *confirm_c
+
+  conflicting_response_heads_fail_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-CONFLICTING-HEADS-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T11:00:00Z
+      proposals: [*proposal]
+      responses:
+        - *confirm_b
+        - *confirm_c
+        - <<: *confirm_b
+          response_record_id: RESP-B-2A
+          response_kind: decline
+          effective_from: 2026-08-05T10:30:00Z
+          supersedes_ref: RESP-B-1
+          provenance_ref: ACT-RESP-B-2A
+        - <<: *confirm_b
+          response_record_id: RESP-B-2B
+          response_kind: withdraw
+          effective_from: 2026-08-05T10:31:00Z
+          supersedes_ref: RESP-B-1
+          provenance_ref: ACT-RESP-B-2B
+
+  forbidden_authorization_coupling_fails_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-FORBIDDEN-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      authorization: granted
+      proposals: [*proposal]
+      responses: [*confirm_b, *confirm_c]
+
+  record_order_has_no_authority:
+    expected_outcome: positive
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-ORDER-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses: [*confirm_c, *confirm_b]
+
+  normalized_response_references_replay:
+    expected_outcome: positive
+    snapshot:
+      rule_ref: coordination-evidence@1
+      snapshot_ref: SNAP-NORMALIZED-REFS-1
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses:
+        - <<: *confirm_b
+          proposal_ref: " PROP-REC-1 "
+          responder_ref: " VERTICAL-B "
+        - *confirm_c
+
+  changed_rule_version_fails_safe:
+    expected_outcome: indeterminate
+    snapshot:
+      rule_ref: coordination-evidence@2
+      snapshot_ref: SNAP-RULE-VERSION-2
+      proposal_id: PROP-1
+      evaluation_time: 2026-08-05T10:00:00Z
+      proposals: [*proposal]
+      responses: [*confirm_b, *confirm_c]
