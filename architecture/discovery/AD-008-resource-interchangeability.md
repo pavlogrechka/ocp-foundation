@@ -99,6 +99,8 @@ provenance of the conclusion
 
 The discovery does not yet declare all fields mandatory or choose a schema. It requires each outcome to explain how implicit current context, latest-version lookup and evaluator-local assumptions are prevented.
 
+All time-dependent inputs, including claim effectivity, the Constraint evaluation snapshot and the requirement version, must align to the same bound evaluation time. A mismatch between those temporal planes yields `indeterminate` by default.
+
 Changing the Operation, role, time, requirement version, claim condition set or applicable Constraint snapshot creates a different evaluation context. A prior conclusion must not silently migrate to the new context.
 
 ## 6. Capability input boundary
@@ -223,6 +225,7 @@ Every admissible outcome must explain and assign executable evidence for:
 10. an admissible candidate that is unavailable or unauthorized;
 11. replacement attempted by mutating an existing Assignment's `resource_ref`;
 12. a domain label or Resource type used as an implicit requirement.
+13. a positive claim under condition set `X` evaluated against a requirement that binds condition set `Y`; the result is negative or `indeterminate` under the selected contract, never positive.
 
 These examples must contain no sensitive operational data.
 
