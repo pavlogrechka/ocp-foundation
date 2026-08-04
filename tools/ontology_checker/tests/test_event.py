@@ -90,6 +90,37 @@ class EventContractTests(unittest.TestCase):
         self.assertNotIn("event_ref", observation)
         self.assertEqual(observations_for_event(fixture["observations"], "missing"), ())
 
+    def test_reference_normalization_is_consistent(self) -> None:
+        event = {
+            "event_id": " EV-NORM-001 ",
+            "event_kind_ref": "neutral.test@1",
+            "registered_at": "2026-08-04T01:00:00Z",
+            "identity_provenance_ref": "ACT-EVENT-NORM-001",
+        }
+        reference_fixture = {
+            "concept": "EventReference",
+            "events": [event],
+            "reference": {"event_ref": "EV-NORM-001"},
+        }
+        self.assertTrue(validate_reference_fixture(reference_fixture).valid)
+
+        observations = [
+            {
+                "observation_id": "OBS-NORM-001",
+                "observer_ref": "SOURCE-NORM",
+                "observation_kind_ref": "neutral.test@1",
+                "statement": "A normalized reference is retained.",
+                "observed_at": "2026-08-04T01:01:00Z",
+                "recorded_at": "2026-08-04T01:02:00Z",
+                "provenance_ref": "ACT-OBS-NORM-001",
+                "event_ref": " EV-NORM-001 ",
+            }
+        ]
+        self.assertEqual(
+            len(observations_for_event(observations, "EV-NORM-001")),
+            1,
+        )
+
     def test_integrated_scenario_keeps_completion_separate_from_achievement(self) -> None:
         fixture = load_fixture(
             ROOT / "fixtures/event/valid-integrated-scenario.yaml"
@@ -98,6 +129,15 @@ class EventContractTests(unittest.TestCase):
         scenario = fixture["scenario"]
         self.assertEqual(scenario["operation"]["lifecycle_stage"], "Completed")
         self.assertEqual(scenario["assessment"]["conclusion"], "indeterminate")
+
+    def test_integrated_scenario_rejects_dangling_assignment_reference(self) -> None:
+        fixture = load_fixture(
+            ROOT / "fixtures/event/invalid-integrated-dangling-assignment.yaml"
+        )
+        self.assertEqual(
+            set(validate_reference_fixture(fixture).errors),
+            {"SCENARIO_ASSIGNMENT_INVALID"},
+        )
 
     def test_conflicting_evidence_cannot_produce_positive_conclusion(self) -> None:
         fixture = load_fixture(

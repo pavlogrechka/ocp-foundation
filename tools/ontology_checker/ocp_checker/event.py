@@ -5,6 +5,9 @@ from typing import Any, Iterable
 
 from .checker import (
     ValidationResult,
+    constraint_applicable_to,
+    derived_participates_in,
+    effective_constraint_result,
     validate_assignment,
     validate_constraint,
     validate_operation,
@@ -85,6 +88,12 @@ def _nonempty(value: Any) -> bool:
     return value is not None and bool(str(value).strip())
 
 
+def _normalized_ref(value: Any) -> str | None:
+    if not _nonempty(value):
+        return None
+    return str(value).strip()
+
+
 def _has_alnum(value: Any) -> bool:
     return isinstance(value, str) and any(char.isalnum() for char in value)
 
@@ -143,9 +152,9 @@ def validate_event_dataset(events: Iterable[dict[str, Any]]) -> ValidationResult
             errors.append("EVENT_REFERENCE_INVALID")
             continue
         errors.extend(validate_event(event).errors)
-        event_id = event.get("event_id")
-        if _nonempty(event_id):
-            index.setdefault(str(event_id).strip(), []).append(event)
+        event_id = _normalized_ref(event.get("event_id"))
+        if event_id is not None:
+            index.setdefault(event_id, []).append(event)
 
     if any(len(candidates) > 1 for candidates in index.values()):
         errors.append("EVENT_IDENTITY_DUPLICATE")
@@ -156,15 +165,14 @@ def validate_event_dataset(events: Iterable[dict[str, Any]]) -> ValidationResult
 def resolve_event(
     events: Iterable[dict[str, Any]], event_ref: Any
 ) -> dict[str, Any] | None:
-    if not _nonempty(event_ref):
+    requested = _normalized_ref(event_ref)
+    if requested is None:
         return None
-    requested = str(event_ref).strip()
     candidates = [
         event
         for event in events
         if isinstance(event, dict)
-        and _nonempty(event.get("event_id"))
-        and str(event.get("event_id")).strip() == requested
+        and _normalized_ref(event.get("event_id")) == requested
     ]
     if len(candidates) != 1:
         return None
@@ -195,9 +203,9 @@ def validate_observation(observation: dict[str, Any]) -> ValidationResult:
     if not _nonempty(observation.get("provenance_ref")):
         errors.append("OBSERVATION_PROVENANCE_REF_REQUIRED")
 
-    observation_id = observation.get("observation_id")
-    supersedes = observation.get("supersedes_observation_ref")
-    if _nonempty(observation_id) and supersedes == observation_id:
+    observation_id = _normalized_ref(observation.get("observation_id"))
+    supersedes = _normalized_ref(observation.get("supersedes_observation_ref"))
+    if observation_id is not None and supersedes == observation_id:
         errors.append("OBSERVATION_SELF_SUPERSESSION")
 
     return _result(errors)
@@ -234,28 +242,32 @@ def validate_observation_dataset(
     graph: dict[str, str] = {}
 
     for event in event_entries:
-        if isinstance(event, dict) and _nonempty(event.get("event_id")):
-            event_index.setdefault(str(event.get("event_id")).strip(), []).append(event)
+        if not isinstance(event, dict):
+            continue
+        event_id = _normalized_ref(event.get("event_id"))
+        if event_id is not None:
+            event_index.setdefault(event_id, []).append(event)
 
     for observation in observation_entries:
         if not isinstance(observation, dict):
             errors.append("OBSERVATION_ID_REQUIRED")
             continue
         errors.extend(validate_observation(observation).errors)
-        observation_id = observation.get("observation_id")
-        if _nonempty(observation_id):
-            normalized_id = str(observation_id).strip()
-            observation_index.setdefault(normalized_id, []).append(observation)
-            supersedes = observation.get("supersedes_observation_ref")
-            if _nonempty(supersedes) and str(supersedes).strip() != normalized_id:
-                graph[normalized_id] = str(supersedes).strip()
+        observation_id = _normalized_ref(observation.get("observation_id"))
+        if observation_id is not None:
+            observation_index.setdefault(observation_id, []).append(observation)
+            supersedes = _normalized_ref(
+                observation.get("supersedes_observation_ref")
+            )
+            if supersedes is not None and supersedes != observation_id:
+                graph[observation_id] = supersedes
 
         if "event_ref" in observation and observation.get("event_ref") is not None:
-            event_ref = observation.get("event_ref")
-            if not _nonempty(event_ref):
+            event_ref = _normalized_ref(observation.get("event_ref"))
+            if event_ref is None:
                 errors.append("EVENT_REFERENCE_INVALID")
             else:
-                candidates = event_index.get(str(event_ref).strip(), [])
+                candidates = event_index.get(event_ref, [])
                 if not candidates:
                     errors.append("OBSERVATION_EVENT_REF_UNRESOLVED")
                 elif len(candidates) > 1:
@@ -279,17 +291,22 @@ def validate_observation_dataset(
 def observations_for_event(
     observations: Iterable[dict[str, Any]], event_ref: Any
 ) -> tuple[dict[str, Any], ...]:
-    if not _nonempty(event_ref):
+    requested = _normalized_ref(event_ref)
+    if requested is None:
         return ()
-    requested = str(event_ref).strip()
     matches = [
         observation
         for observation in observations
         if isinstance(observation, dict)
-        and observation.get("event_ref") == requested
+        and _normalized_ref(observation.get("event_ref")) == requested
         and validate_observation(observation).valid
     ]
-    return tuple(sorted(matches, key=lambda item: str(item.get("observation_id"))))
+    return tuple(
+        sorted(
+            matches,
+            key=lambda item: _normalized_ref(item.get("observation_id")) or "",
+        )
+    )
 
 
 def validate_event_reference_fixture(fixture: dict[str, Any]) -> ValidationResult:
@@ -303,15 +320,16 @@ def validate_event_reference_fixture(fixture: dict[str, Any]) -> ValidationResul
 
     errors.extend(validate_event_dataset(events).errors)
     reference = fixture.get("reference") or {}
-    event_ref = reference.get("event_ref")
-    if not _nonempty(event_ref):
+    event_ref = _normalized_ref(reference.get("event_ref"))
+    if event_ref is None:
         errors.append("EVENT_REFERENCE_INVALID")
         return _result(errors)
 
     candidates = [
         event
         for event in events
-        if isinstance(event, dict) and event.get("event_id") == event_ref
+        if isinstance(event, dict)
+        and _normalized_ref(event.get("event_id")) == event_ref
     ]
     if not candidates:
         errors.append("EVENT_REFERENCE_UNRESOLVED")
@@ -335,19 +353,107 @@ def _assessment_valid(assessment: Any) -> bool:
     if not isinstance(assessment, dict):
         return False
     evidence_refs = assessment.get("evidence_observation_refs")
+    normalized_evidence_refs = (
+        [_normalized_ref(item) for item in evidence_refs]
+        if isinstance(evidence_refs, list)
+        else []
+    )
     return (
         _nonempty(assessment.get("assessment_id"))
         and _nonempty(assessment.get("target_objective_ref"))
         and _versioned_ref(assessment.get("rule_ref"))
         and isinstance(evidence_refs, list)
         and bool(evidence_refs)
-        and all(_nonempty(item) for item in evidence_refs)
-        and len(evidence_refs) == len(set(str(item) for item in evidence_refs))
+        and all(item is not None for item in normalized_evidence_refs)
+        and len(normalized_evidence_refs) == len(set(normalized_evidence_refs))
         and _nonempty(assessment.get("evidence_snapshot_ref"))
         and _nonempty(assessment.get("evaluator_ref"))
         and _parse_time(assessment.get("evaluated_at")) is not None
         and assessment.get("conclusion") in ASSESSMENT_CONCLUSIONS
         and _nonempty(assessment.get("provenance_ref"))
+    )
+
+
+def _scenario_assignment_links_valid(
+    assignments: list[dict[str, Any]],
+    resource_ids: set[str],
+    operation_id: str | None,
+    evaluation_time: Any,
+) -> bool:
+    if operation_id is None or _parse_time(evaluation_time) is None:
+        return False
+
+    normalized_assignments: list[dict[str, Any]] = []
+    referenced_resource_ids: list[str] = []
+    for assignment in assignments:
+        resource_ref = _normalized_ref(assignment.get("resource_ref"))
+        operation_ref = _normalized_ref(assignment.get("operation_ref"))
+        if resource_ref not in resource_ids or operation_ref != operation_id:
+            return False
+        normalized = dict(assignment)
+        normalized["resource_ref"] = resource_ref
+        normalized["operation_ref"] = operation_ref
+        normalized_assignments.append(normalized)
+        referenced_resource_ids.append(resource_ref)
+
+    return all(
+        derived_participates_in(
+            normalized_assignments,
+            resource_ref,
+            operation_id,
+            str(evaluation_time),
+        )
+        for resource_ref in referenced_resource_ids
+    )
+
+
+def _scenario_constraint_links_valid(
+    constraint: dict[str, Any],
+    context: dict[str, Any],
+    constraint_version_ref: Any,
+    resource_ids: set[str],
+    operation_id: str | None,
+) -> bool:
+    if operation_id is None or not isinstance(context, dict):
+        return False
+
+    context_id = _normalized_ref(context.get("context_id"))
+    context_operation_ref = _normalized_ref(context.get("operation_context_ref"))
+    raw_subject_refs = context.get("subject_refs")
+    if (
+        context_id is None
+        or context_operation_ref != operation_id
+        or not isinstance(raw_subject_refs, list)
+        or not raw_subject_refs
+    ):
+        return False
+
+    subject_refs = [_normalized_ref(item) for item in raw_subject_refs]
+    if any(item is None or item not in resource_ids for item in subject_refs):
+        return False
+
+    target = constraint.get("target_specification") or {}
+    target_operation_ref = _normalized_ref(target.get("operation_context_ref"))
+    if target_operation_ref is not None and target_operation_ref != operation_id:
+        return False
+
+    raw_target_subjects = target.get("explicit_subject_refs") or []
+    if not isinstance(raw_target_subjects, list):
+        return False
+    target_subjects = [_normalized_ref(item) for item in raw_target_subjects]
+    if any(item is None or item not in resource_ids for item in target_subjects):
+        return False
+
+    if not constraint_applicable_to(constraint, context):
+        return False
+
+    return (
+        effective_constraint_result(
+            constraint,
+            context,
+            str(constraint_version_ref or ""),
+        )
+        != "indeterminate"
     )
 
 
@@ -375,24 +481,64 @@ def validate_integrated_event_scenario(fixture: dict[str, Any]) -> ValidationRes
     if not operation_result.valid:
         errors.append("SCENARIO_OPERATION_INVALID")
 
-    if not isinstance(resources, list) or not resources or any(
-        not isinstance(resource, dict) or not validate_resource(resource).valid
+    resources_structurally_valid = (
+        isinstance(resources, list)
+        and bool(resources)
+        and all(
+            isinstance(resource, dict) and validate_resource(resource).valid
+            for resource in resources
+        )
+    )
+    resource_ids = {
+        resource_id
         for resource in resources
-    ):
+        if isinstance(resource, dict)
+        for resource_id in [_normalized_ref(resource.get("resource_id"))]
+        if resource_id is not None
+    }
+    if not resources_structurally_valid or len(resource_ids) != len(resources):
         errors.append("SCENARIO_RESOURCE_INVALID")
 
-    if not isinstance(assignments, list) or not assignments or any(
-        not isinstance(assignment, dict) or not validate_assignment(assignment).valid
-        for assignment in assignments
+    assignments_structurally_valid = (
+        isinstance(assignments, list)
+        and bool(assignments)
+        and all(
+            isinstance(assignment, dict) and validate_assignment(assignment).valid
+            for assignment in assignments
+        )
+    )
+    operation_id = _normalized_ref(operation.get("operation_id"))
+    evaluation_time = context.get("evaluation_time") if isinstance(context, dict) else None
+    if (
+        not assignments_structurally_valid
+        or not _scenario_assignment_links_valid(
+            assignments,
+            resource_ids,
+            operation_id,
+            evaluation_time,
+        )
     ):
         errors.append("SCENARIO_ASSIGNMENT_INVALID")
 
     contexts = (
-        {str(context.get("context_id")): context}
-        if isinstance(context, dict) and _nonempty(context.get("context_id"))
+        {_normalized_ref(context.get("context_id")): context}
+        if isinstance(context, dict)
+        and _normalized_ref(context.get("context_id")) is not None
         else {}
     )
-    if not validate_constraint(constraint, contexts, constraint_version_ref).valid:
+    constraint_structurally_valid = validate_constraint(
+        constraint, contexts, constraint_version_ref
+    ).valid
+    if (
+        not constraint_structurally_valid
+        or not _scenario_constraint_links_valid(
+            constraint,
+            context,
+            constraint_version_ref,
+            resource_ids,
+            operation_id,
+        )
+    ):
         errors.append("SCENARIO_CONSTRAINT_INVALID")
 
     if not validate_event_dataset(events).valid:
@@ -404,22 +550,31 @@ def validate_integrated_event_scenario(fixture: dict[str, Any]) -> ValidationRes
         errors.append("SCENARIO_ASSESSMENT_INVALID")
         return _result(errors)
 
-    objective_ref = assessment.get("target_objective_ref")
-    if objective_ref != objective.get("objective_id"):
+    objective_ref = _normalized_ref(assessment.get("target_objective_ref"))
+    if objective_ref != _normalized_ref(objective.get("objective_id")):
         errors.append("SCENARIO_ASSESSMENT_INVALID")
 
     observation_index = {
-        str(item.get("observation_id")): item
+        observation_id: item
         for item in observations
-        if isinstance(item, dict) and _nonempty(item.get("observation_id"))
+        if isinstance(item, dict)
+        for observation_id in [_normalized_ref(item.get("observation_id"))]
+        if observation_id is not None
     }
-    evidence_refs = [str(item) for item in assessment["evidence_observation_refs"]]
-    if any(reference not in observation_index for reference in evidence_refs):
+    evidence_refs = [
+        _normalized_ref(item)
+        for item in assessment["evidence_observation_refs"]
+    ]
+    if any(
+        reference is None or reference not in observation_index
+        for reference in evidence_refs
+    ):
         errors.append("SCENARIO_EVIDENCE_REFERENCE_UNRESOLVED")
     else:
         statements = {
             str(observation_index[reference].get("statement", "")).strip().casefold()
             for reference in evidence_refs
+            if reference is not None
         }
         if len(statements) > 1 and assessment.get("conclusion") in POSITIVE_CONCLUSIONS:
             errors.append("SCENARIO_CONFLICTING_EVIDENCE_POSITIVE")
