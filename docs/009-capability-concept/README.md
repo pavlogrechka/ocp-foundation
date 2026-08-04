@@ -1,14 +1,14 @@
 ---
 Document-ID: OCP-009
 Title: Capability Concept
-Version: 0.1.1
+Version: 0.1.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-005
 Used-By: Capability Registry, Resource Claim Model, Operation Requirements, Interchangeability Decision
 Defines-Concepts: Capability
 Concept-Depends-On: []
-Concept-Status: Under Review
+Concept-Status: Accepted
 Last-Review: 2026-08-04
 ---
 
@@ -309,3 +309,18 @@ OCP-009 свідомо не визначає:
 - Який normative owner визначить Operation Capability requirements?
 - Чи потрібна окрема domain policy для заборони нових references на superseded versions?
 - Як AB-011 використовуватиме exact claims і Constraint results без втрати Resource identity?
+
+## 18. Architecture Board decision — PR-0010
+
+Architecture Board прийняла OCP-009 і Concept `Capability` **4 серпня 2026 року** після повторного зовнішнього review head `65e41a8`, яке підтвердило закриття Findings 1–2 та відповідність мандату AD-005C.
+
+Рішення Board:
+
+- прийняти reusable Capability definition та governed registry contract, визначені OCP-009;
+- встановити `Concept-Status: Accepted` на версії `0.1.2`;
+- завершити AB-004 як `Resolved`;
+- зберегти Capability як isolated Concept без current dependency edge;
+- не вводити holder claim, `Resource has Capability`, Organization-holder semantics, Readiness, matching, interchangeability або P-001 invocation;
+- залишити AB-011 та holder-specific Capability Claim окремими downstream-рішеннями.
+
+`Accepted` не означає `Canonical`. Подальші зміни definition identity, namespace governance, exact resolution або supersession contract потребують нового явного normative cycle.
