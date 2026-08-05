@@ -333,7 +333,7 @@ External review must test:
 4. whether declaration-only authority survives without being treated as missing evidence or independent verification;
 5. whether B and C preserve coherent Module C history;
 6. whether D avoids reaching through OCP-012 and duplicating claim semantics;
-7. whether all twenty counterexamples have outcome-fair ownership; and
+7. whether all twenty-one counterexamples have outcome-fair ownership; and
 8. whether the comparison is understandable without checker code.
 
 The discovery may advance to outcome comparison only when no evidence obligation assumes a layer rejected by the outcome it tests. It may advance to a Board selection only after external review closes all Blocking, Major and Moderate findings and every admissible outcome has a falsifiable implementation contract.
