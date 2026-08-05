@@ -98,6 +98,7 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-008 `0.3.0 / Draft` реалізує AD-017B A+D: будь-яка зміна stored normative statement створює новий Objective, display лишається implementation-local, duplicate identity відхиляється, а old Operation/assessment exact-bind prior Objective; AB-063 Resolved без promotion;
 - AD-016F `0.7.0` заново обчислює Objective B/S/C на exact post-implementation baseline: B-item закритий, S-exclusions і C-cleanup обмежені, K8 є лише провідною гіпотезою; окремий AD-016G Board act обов'язковий до будь-якого другого T4 draft;
 - AD-016G `0.8.0` обирає K8 як scope підготовки одного OCP-008/Objective lifecycle draft з atomic projections і bounded OCP-004 `0.8.1` cleanup; сам selection act не змінює жодного status і не авторизує merge draft;
+- AD-016H `0.9.0` фіксує preflight stop через два stale Capability status views у OCP-003/OCP-004, обирає окремий Q1 correction PATCH і ставить K8 на паузу до його завершення без відкликання semantic selection;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 117 non-sensitive fixtures і 164 unit tests;
