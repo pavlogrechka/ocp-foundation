@@ -52,6 +52,7 @@ from .event import (
 from .assessment import (
     OUTCOME_ASSESSMENT_DERIVATION_RULES,
     OUTCOME_ASSESSMENT_ERROR_CODES,
+    derive_outcome_evidence_usability,
     effective_outcome_conclusion,
     outcome_assessment_heads,
     resolve_outcome_assessment,

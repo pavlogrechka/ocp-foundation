@@ -55,10 +55,11 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
-- OCP-011 `0.2.0 / Accepted` реалізує AD-006C outcome R3 через governed `OutcomeAssessmentRecord`, а не fundamental Result Concept;
+- OCP-011 `0.3.0 / Accepted` реалізує AD-006C outcome R3 через governed `OutcomeAssessmentRecord`, а не fundamental Result Concept, і виконує першу AD-012B activation;
 - OutcomeAssessmentRecord invokes `P-001@0.1.0`, exact-bind-ить Objective target, assessment kind, criterion, Event/ObservationRecord evidence, immutable evidence/input snapshots, evaluator, evaluation and recording time, conclusion та provenance;
 - fail-safe matrix дозволяє definitive conclusion лише для `evidence_state: sufficient`; missing, stale, ambiguous або conflicting evidence дозволяє лише `indeterminate`;
-- checker механічно виводить `missing` і finite `conflicting` probe; `AD-012B 0.3.0 / Accepted` обирає contract-local F1+A1 owner-модель з inline historical та derived-only query roles, але OCP-011/012 `stale`/`ambiguous` лишаються attributable до окремих нормативних activations;
+- checker механічно виводить `missing` і finite `conflicting` probe; для exact `objective-achievement@2` OCP-011 додатково exact-bind-ить criterion-local F1/A1 rules, виводить freshness та reference/temporal ambiguity, а для semantic ambiguity зберігає attributable basis;
+- `objective-achievement@1` і всі неактивовані consumers, зокрема OCP-012, лишаються під F0/A0; одна activation не створює global evidence lifetime, freshness field або успадкованого rule;
 - explicit supersession зберігає history, дозволяє branching і не може змінити assessment kind, target або criterion binding identity; newest record, evaluator count і list order не визначають authority;
 - integrated scenario використовує нормативний OCP-011 record contract і продовжує механічно доводити `Completed ≠ achieved`;
 - AB-056 завершено рішенням Architecture Board по PR-0013;
@@ -81,6 +82,6 @@ backlog/                 відкриті питання та дорожня к�
 - AD-011 `0.3.0 / Accepted` окремо приймає S0 і R0 no-new-authority controls; State та Readiness deregistered як Concept candidates після negative current-scope identity verdicts, а R1 лишається окремо gated future direction;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності після вибору AD-012B owner-моделі — **≈55%**.
+- не-нормативна оцінка загальної foundation-готовності після першої OCP-011 F1/A1 activation — **≈56%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

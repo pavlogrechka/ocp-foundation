@@ -1,0 +1,25 @@
+case_id: assessment-invalid-legacy-activation-fields
+concept: OutcomeAssessmentRecord
+entity:
+  assessment_id: ASM-LEGACY-ACTIVATION
+  assessment_kind_ref: objective-achievement@1
+  target_kind_ref: objective@1
+  target_ref: OBJ-LEGACY
+  criterion_ref: neutral.condition@1
+  evidence_bindings: []
+  evidence_snapshot_ref: EVIDENCE-LEGACY
+  input_snapshot_ref: INPUT-LEGACY
+  freshness_rule_ref: objective-achievement-freshness.neutral-condition@1
+  freshness_state: not_applicable
+  ambiguity_rule_ref: objective-achievement-ambiguity.neutral-condition@1
+  ambiguity_state: clear
+  ambiguity_findings: []
+  evidence_state: missing
+  evaluator_ref: EVALUATOR-LEGACY
+  evaluated_at: 2026-08-05T02:00:00Z
+  recorded_at: 2026-08-05T02:01:00Z
+  conclusion: indeterminate
+  provenance_ref: ACT-LEGACY
+expected:
+  valid: false
+  error_codes: [OUTCOME_ASSESSMENT_ACTIVATION_FIELDS_FORBIDDEN]

@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.14.0
+Version: 0.15.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -94,5 +94,5 @@ OutcomeAssessmentRecord не є Operation lifecycle stage, mutable Objective sta
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
 - Межа між Constraint violation та майбутнім Conflict Concept.
-- Freshness і deterministic replay assessment evidence за AB-039.
-- Holder-specific Capability Claim contract та його evidence sufficiency boundary.
+- Наступні contract-local freshness/ambiguity activations після першої OCP-011 activation; AB-039 завершено без глобального evidence lifetime.
+- Evidence sufficiency та окрема F1/A1 activation для Accepted holder-specific CapabilityClaimRecord.

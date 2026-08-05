@@ -9,8 +9,8 @@
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 76% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; AD-011 закриває State/Readiness negative identity decision через окремі S0/R0 controls |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈55%** | AD-012B обирає contract-local F1+A1 owner-модель і representation roles; перша OCP-011 activation ще не реалізована |
+| Machine-readable schemas and enforcement | 63% | OCP-011 має першу exact F1+A1 activation; Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈56%** | OCP-011 виконує першу contract-local F1+A1 activation та завершує AB-039; інші consumers лишаються під F0/A0 до власних reviewed activations |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -89,7 +89,7 @@
 - [x] Draft OCP-012 CapabilityClaimRecord exact binding, temporal/supersession history and fail-safe projection fixtures
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
-- [ ] Machine-verifiable evidence freshness, ambiguity and deterministic replay — `AD-012B 0.3.0` selects F1+A1 with inline/derived roles; `AB-039` is Planned for the first OCP-011 activation
+- [x] First machine-verifiable evidence freshness, ambiguity and deterministic replay activation — `OCP-011 0.3.0` activates F1+A1 for exact `objective-achievement@2`; `AB-039` is Resolved while unactivated consumers remain under F0/A0
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts

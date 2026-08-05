@@ -12,4 +12,4 @@
 10. Як визначаються precedence, override, exception і waiver між Constraint?
 11. Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
 12. Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
-13. Які exact OCP-011 freshness rule, temporal facts і ambiguity dimensions першими активують прийняту `AD-012B` F1+A1 owner-модель? `AB-039` має статус Planned; інші OCP лишаються під F0/A0 до власних reviewed activations.
+13. Який concrete consumer наступним обґрунтує власну F1/A1 activation після OCP-011, і чи кілька accepted contract-local activations покажуть достатньо стабільну спільну форму для окремого Pattern review? До такого рішення кожен неактивований consumer лишається під F0/A0.

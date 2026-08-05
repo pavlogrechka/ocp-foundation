@@ -1,7 +1,22 @@
-manifest_version: 0.1.0
+manifest_version: 0.2.0
 authority: reference-only
 normative_source: OCP-011 Outcome Assessment Record Contract
 rules:
+  - id: OUTCOME_ASSESSMENT_ACTIVATION_FIELDS_FORBIDDEN
+    kind: validation
+    source: OCP-011 objective-achievement@1 attributable boundary
+  - id: OUTCOME_ASSESSMENT_ACTIVATION_REQUIRED
+    kind: validation
+    source: OCP-011 objective-achievement@2 F1/A1 activation binding
+  - id: OUTCOME_ASSESSMENT_ACTIVATION_TIME_INVALID
+    kind: validation
+    source: OCP-011 activated offset-aware replay-time invariant
+  - id: OUTCOME_ASSESSMENT_AMBIGUITY_RULE_INVALID
+    kind: validation
+    source: OCP-011 A1 exact local-rule binding
+  - id: OUTCOME_ASSESSMENT_AMBIGUITY_STATE_MISMATCH
+    kind: validation
+    source: OCP-011 A1 inline ambiguity derivation
   - id: OUTCOME_ASSESSMENT_BINDING_MISMATCH
     kind: validation
     source: OCP-011 supersession binding-identity invariant
@@ -44,6 +59,12 @@ rules:
   - id: OUTCOME_ASSESSMENT_EVIDENCE_STATE_MISMATCH
     kind: validation
     source: OCP-011 evidence-state consistency invariant
+  - id: OUTCOME_ASSESSMENT_FRESHNESS_RULE_INVALID
+    kind: validation
+    source: OCP-011 F1 exact local-rule binding
+  - id: OUTCOME_ASSESSMENT_FRESHNESS_STATE_MISMATCH
+    kind: validation
+    source: OCP-011 F1 inline freshness derivation
   - id: OUTCOME_ASSESSMENT_ID_REQUIRED
     kind: validation
     source: OCP-011 record identity invariant
@@ -53,12 +74,18 @@ rules:
   - id: OUTCOME_ASSESSMENT_INPUT_SNAPSHOT_REQUIRED
     kind: validation
     source: OCP-011 exact input snapshot invariant
+  - id: OUTCOME_ASSESSMENT_INPUT_SNAPSHOT_RULE_MISMATCH
+    kind: validation
+    source: OCP-011 activated immutable rule-input snapshot binding
   - id: OUTCOME_ASSESSMENT_INPUT_SNAPSHOT_UNRESOLVED
     kind: validation
     source: OCP-011 input snapshot resolution invariant
   - id: OUTCOME_ASSESSMENT_KIND_REF_REQUIRED
     kind: validation
     source: OCP-011 governed assessment-kind invariant
+  - id: OUTCOME_ASSESSMENT_KIND_UNSUPPORTED
+    kind: validation
+    source: OCP-011 exact objective-achievement@1/@2 activation boundary
   - id: OUTCOME_ASSESSMENT_PROVENANCE_REF_REQUIRED
     kind: validation
     source: OCP-011 record provenance invariant
@@ -92,6 +119,9 @@ rules:
   - id: effective_outcome_conclusion
     kind: derivation
     source: OCP-011 exact-bound head-set projection
+  - id: derive_outcome_evidence_usability
+    kind: derivation
+    source: OCP-011 F1/A1 exact historical and explicit-query replay
   - id: outcome_assessment_heads
     kind: derivation
     source: OCP-011 P-001 Module C lineage-head derivation
