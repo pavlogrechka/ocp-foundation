@@ -63,6 +63,7 @@
 - [x] AD-016D post-enabling Board selection — G2 inside C/L2, with preparation scope limited to one separately reviewed OCP-009 T4 draft and no merge-authorization transfer
 - [x] First T4 micro-wave — OCP-009/Capability `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.1.0` projections, exact definition-version independence and non-redirecting supersession
 - [x] AD-016F Objective readiness reassessment — fresh B/S/C audit on exact post-OCP-008A evidence finds no current B item, bounds S/C and records K8 only as the leading hypothesis before mandatory AD-016G
+- [x] AD-016G Objective scope selection — K8 selected for preparation of one separately reviewed OCP-008/Objective lifecycle draft with atomic projections, bounded OCP-004 cleanup and no merge-authorization transfer
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -137,6 +138,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare a separate AD-016G Board scope decision that accepts, revises or rejects the AD-016F Objective B/S/C audit and selects K0, K8 or another justified scope; no promotion occurs in that act.
-2. If and only if AD-016G selects K8, prepare one separately reviewed OCP-008/Objective lifecycle draft with its own exact-head authorization, atomic projections and OCP-004 current-state cleanup.
+1. Prepare one separately reviewed OCP-008/Objective lifecycle draft under AD-016G K8, with its own exact-head authorization, atomic projections and OCP-004 `0.8.1` current-state cleanup.
+2. After that proposal completes or fails, require another Board scope act before any third T4 preparation scope; no authorization transfers from K8.
 3. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
