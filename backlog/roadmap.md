@@ -51,7 +51,7 @@
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
-- [ ] Core Boundary specification
+- [ ] Core Boundary specification — `AB-061 / AD-015 0.1.0` Discovery opened; semantic admission and artifact home remain separate unselected axes
 - [ ] Promote stable core descriptions to Canonical
 
 ## Milestone 1A — Governed Executable Validation Loop
@@ -126,4 +126,4 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Open the separately reviewed Core Boundary specification cycle without importing domain geometry, authorization, visibility or sensitive operational data into foundation authority.
+1. Complete the external AD-015A comparison of semantic-admission models G0–G4 and artifact homes H0–H5 before any Core Boundary implementation artifact is selected.
