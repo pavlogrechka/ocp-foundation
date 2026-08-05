@@ -8,7 +8,7 @@
 | Concept | Status |
 |---|---|
 | Assignment | Accepted |
-| Capability | Accepted |
+| Capability | Canonical |
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Accepted |
