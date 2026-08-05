@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.7.0
+Version: 0.8.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-016G Architecture Board scope decision before any OCP-008 or second T4 promotion proposal
+Review-After: Completion or failure of the separately reviewed OCP-008/Objective lifecycle proposal before any third T4 preparation scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -1242,3 +1242,156 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016F will:
 - retain foundation readiness at approximately 68% because no document or Concept lifecycle changes in this audit.
 
 This act changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule, fixture or production authority. Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization apply only to AD-016F. They cannot authorize AD-016G, an OCP-008 lifecycle proposal, OCP-004 cleanup or another T4 candidate.
+
+## 75. AD-016G Board question and exact baseline
+
+AD-016G decides the next preparation scope after the accepted AD-016F audit. It does not perform the Objective lifecycle transition itself.
+
+The exact decision baseline is `main@5396c706191e0d67e6587d8b69edad01867d6be9`, tree `e93e3f0031efd3216aa0230a0f7b51737429b0ff`. On that baseline:
+
+- AD-016 `0.7.0 / Accepted` is blob `a3406bb802d9fe93daa8689c0a4a264223ff0a36`, SHA-256 `92af2218aa3a361aa5e0d6cb63692283c72f61ae6e9ce3e6404965c11ec610dd`;
+- OCP-008 remains `0.3.0 / Draft`, Objective remains `Accepted`, and the defining file remains blob `07756e9129a4f11a826b646831dde01939d89336`, SHA-256 `6965cb2f3fbd695a33b16f5eca061f87b33123ee4321aaa8742f709537e1d2e0`;
+- the accepted audit finds no current Objective B item, seven bounded S rows and six C findings;
+- K8 is the leading hypothesis, while K0, K3, K7, K37 and evidence-triggered KX remain explicit controls; and
+- no second T4 lifecycle proposal is currently authorized.
+
+The Board question is therefore narrow: **does the accepted audit justify preparation of one OCP-008/Objective micro-wave under G2/L2, or should the repository retain hold or choose remediation instead?** Merge history, authoring effort, green CI and the number of completed acts are not reasons to select K8.
+
+## 76. Board treatment of the AD-016F audit
+
+AD-016G accepts the AD-016F classifications as decision input:
+
+1. **B is empty on the exact baseline.** A changed stored statement cannot preserve Objective identity, so the former classifier/equivalence-authority question has no same-identity operation to govern.
+2. **The seven S rows remain exclusions.** Relations, lifecycle/effectivity, amendment/revision, taxonomy, automatic language processing, display and advanced assessment views are not required by a current Objective identity or consumer contract.
+3. **The six C findings are finite.** They consist of stale current/future wording, historical-state bridging, compatibility text, OCP-004 status labels and current-state projections; none requires a new identity or authority decision.
+4. **Current consumers remain exact.** OCP-004 pursues exact Objective IDs, OCP-010 does not turn Event into Objective truth, and OCP-011 exact-targets Objective without mutation or redirect.
+5. **Artifact floors hold.** Direct OCP dependencies are Canonical; P-001 is Accepted and exact-bound; Accepted AD-003 and AD-017 remain decision provenance under their own lifecycle.
+
+Accepting the audit does not make its recommendation self-executing. The Board still owns the scope choice, and a later lifecycle proposal still owns its own exact content, evidence, rollback and merge authorization.
+
+## 77. Commissioned falsification closure
+
+AD-016G attempts all nine AD-016F §71 attacks before selection:
+
+| Attack | Evidence checked | Result |
+|---|---|---|
+| a current consumer must preserve one logical ID across changed text | OCP-004 `objective_refs`, OCP-010 boundaries and OCP-011 `target_ref` use exact immutable IDs; no amendment head is consumed | not demonstrated |
+| strict immutability conflicts with P-001 or Module C | OCP-008 keeps one endpoint-free record identity and uses Module C only for explicit non-redirecting supersession | not demonstrated |
+| a consumer needs semantic migration or rebinding | prior Operation and assessment evidence validate against the prior Objective after two successors exist; no consumer contract selects a successor | not demonstrated |
+| a dependency floor fails | OCP-000/OCP-001/OCP-002 are Canonical and `P-001@0.1.0` is Accepted; no L2 exception is needed | not demonstrated |
+| an S exclusion weakens a current guarantee | every S row names why current consumers do not require it and the separate future gate that would own it | not demonstrated |
+| C cleanup changes identity or authority | each C item is a stale label, current-state projection, compatibility explanation or historical bridge; normative identity remains unchanged | not demonstrated |
+| promotion creates a Concept edge, Concept-graph cycle or current/latest authority | `Concept-Depends-On: []` stays fixed; OCP-004 keeps the only current `Operation → Objective` edge; no selector is introduced | not demonstrated |
+| a valid current dataset needs same-ID mutation | valid evidence uses distinct IDs; duplicate same-ID statements are already invalid and receive no permissive migration | not demonstrated |
+| the migration cannot roll back atomically | defining status, OCP-000/OCP-002, map/accounting and bounded OCP-004 rendering form one enumerated unit with no record-history rewrite | not demonstrated |
+
+All attacks fail on the exact baseline. “Not demonstrated” is deliberately narrower than “impossible”: later concrete evidence invokes the stop and reopening rules below.
+
+## 78. Architecture Board selection — K8
+
+AD-016G selects **K8 — one Objective micro-wave** as the next preparation scope inside the already accepted G2/L2 strategy.
+
+K8 is selected because:
+
+- the candidate-local B set is empty after a separately selected and implemented semantic correction boundary;
+- the stable Objective identity, authority, supersession and replay guarantees can be stated as one readable `1.x` surface;
+- all direct artifact floors are already satisfied without an exception or same-act dependency promotion;
+- the exact consumers need no semantic change or reference migration;
+- the remaining S exclusions and C cleanup are bounded and falsifiable; and
+- the lifecycle/projection unit is finite and can be reviewed and rolled back atomically.
+
+K8 is not selected because Objective is older, more edited, easier to promote, next in a numeric list or supported by more tests. G2 permits one-candidate progression only when candidate-local evidence holds; it does not create a queue or momentum rule.
+
+This selection authorizes preparation of a draft. It does not change OCP-008 or Objective status and does not authorize merge of the later proposal.
+
+## 79. Selected preparation scope
+
+The next proposal may contain only the following lifecycle unit, recomputed against its exact base:
+
+1. OCP-008 `0.3.0 / Draft → 1.0.0 / Canonical` with `Concept-Status: Accepted → Canonical`;
+2. OCP-000 `1.1.0 → 1.2.0` with only the Objective registry row changing `Accepted → Canonical`;
+3. OCP-002 `1.1.0 → 1.2.0` with the exact Objective projection and human-readable current views synchronized;
+4. Foundation map and README current-state/accounting updates;
+5. OCP-004 `0.8.0 → 0.8.1` only to update or remove its two volatile Objective status labels, with no Operation semantic change; and
+6. OCP-008 C cleanup and a new current lifecycle section that preserves historical §§17–18 rather than rewriting them.
+
+The exact versions in items 1–5 assume the §75 baseline. Any intervening `main` change requires recomputation before authoring. The proposal may not silently add another artifact because it appears in the same topological slot.
+
+The selected scope changes no OCP-010/OCP-011 version, P-001 version or invocation, Objective record schema, existing Objective ID, Operation/assessment reference, Concept dependency, graph edge, amendment/revision authority, display schema or production data.
+
+## 80. Mandatory OCP-008 lifecycle proposal contract
+
+The separately reviewed proposal must:
+
+1. exact-anchor its pre-change OCP-008, OCP-000, OCP-002 and OCP-004 inputs by Git blob and SHA-256;
+2. publish one human-readable `1.x` compatibility surface containing all twelve AD-016F §68 guarantees;
+3. state PATCH/MINOR/MAJOR handling without assuming that a later relation or lifecycle addition is automatically compatible;
+4. retain exact `P-001@0.1.0`, endpoint-free form and Optional Module C without new Pattern semantics;
+5. preserve `Concept-Depends-On: []` and the OCP-004-owned `Operation → Objective` edge;
+6. enumerate every Objective status projection and update the authoritative/current set atomically;
+7. bound OCP-004 `0.8.1` to the two status renderings and provide its own compatibility/rollback note;
+8. remove or bridge the six C findings without rewriting historical accepted-act records;
+9. keep all seven S rows explicit and route any reopening to its named owner;
+10. reuse accepted immutable-history evidence and add evidence only for a genuinely new mechanically expressible claim;
+11. include human counterexamples for current/latest selection, status implication, achievement leakage, display write-back, authority transfer and partial rollback; and
+12. state that Canonical is a versioned semantic compatibility promise, not production readiness, truth, authorization, completeness or immutability forever.
+
+Checker status synchronization, L2 and fixtures are structural witnesses only. They cannot approve the `1.x` surface or replace human review.
+
+## 81. Stop, failure and reopening rules
+
+The OCP-008 proposal must stop and return to the Board if authoring or review discovers:
+
+- a current consumer that needs one logical Objective ID across changed stored text;
+- a required amendment/revision identity, current head or semantic-equivalence authority;
+- any OCP-004/OCP-010/OCP-011 semantic change or reference rebinding;
+- a P-001 version/module change or incomplete invocation;
+- C cleanup that changes identity, authority, supersession or achievement behavior;
+- an OCP-004 edit broader than the two status views and their local explanation;
+- an unenumerated Objective status projection or non-atomic migration;
+- a valid current dataset that cannot preserve exact historical values and references;
+- a new Concept dependency, graph edge, display authority or current/latest Objective projection; or
+- a rollback that would require deleting records, merging IDs, redirecting references or rewriting history.
+
+Consumer evidence for same-identity correction routes back through AD-017 §35. A new candidate object or authority routes through OCP-016. A changed repository baseline is recomputed; it is not repaired by copying old version numbers or selecting the newest artifact.
+
+K0 becomes the immediate fallback if any stop condition succeeds. Failure of the draft does not authorize K3, K7, K37 or another lifecycle candidate automatically.
+
+## 82. Alternatives not selected and reopening gates
+
+### 82.1 K0 — hold
+
+K0 is not selected because no current blocker, dependency exception or consumer migration was found. It remains the fail-safe outcome if the later exact proposal cannot satisfy §§79–81. Avoiding a bounded review is not safer if it merely leaves verified compatibility unstated, but schedule pressure is also not evidence against hold.
+
+### 82.2 K3, K7 and K37 — Resource/Organization remediation
+
+These remain legitimate remediation scopes, but they do not disprove Objective readiness. Resource still needs Organizational Resource/Unit identity evidence; Organization still needs continuity, relationship-kind and mapping evidence. Joint discovery may later reduce contradiction risk, but it is not promoted into this rollback unit.
+
+Research may proceed without lifecycle authority. A future preparation scope still requires a new Board act after the selected Objective proposal completes or fails.
+
+### 82.3 KX — reopen amendment/revision outcomes
+
+KX is not selected because no AD-017 §35 consumer evidence exists on the exact baseline. UI preference, spelling frequency, edit count, similarity, newest timestamp, issuer count or implementation convenience cannot reopen B/C. If the exact reopening evidence appears, it stops the lifecycle proposal before any identity migration.
+
+## 83. Migration, rollback and authorization boundary
+
+AD-016G changes no lifecycle state. It selects only the allowed preparation scope.
+
+If later proposed, the migration unit in §79 must move or roll back together. OCP-004 remains Draft and Operation remains Accepted; its PATCH changes only a volatile current-status rendering. OCP-010 and OCP-011 remain byte-unchanged unless a stop condition ends the proposal.
+
+Existing valid Objective records and exact consumer references need no data migration. Invalid duplicate-ID data remains invalid or quarantined; it cannot receive a synthetic current winner. Corrective rollback is a new reviewed act over document/Concept status and all projections, never a history rewrite.
+
+Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization for AD-016G authorize only this selection. The later OCP-008 proposal repeats all four gates on its own exact head. Marking that draft Ready, passing CI or citing this selection does not authorize its merge.
+
+## 84. AD-016G accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016G will:
+
+- set AD-016 to `0.8.0 / Accepted`;
+- select K8 as the next G2/L2 preparation scope;
+- authorize one OCP-008/Objective lifecycle draft plus only the exact projections, accounting and bounded OCP-004 PATCH in §79;
+- retain K0 as fail-safe and the Resource/Organization scopes as separately gated future work;
+- keep AB-062 `Planned`; and
+- retain foundation readiness at approximately 68% because no OCP or Concept lifecycle changes in this selection act.
+
+This act changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule, fixture or production authority. It does not authorize a third T4 scope, OCP-003/OCP-007 promotion, downstream T5–T10 promotion or merge of the selected lifecycle draft.
