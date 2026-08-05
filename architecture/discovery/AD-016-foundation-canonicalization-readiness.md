@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.10.0
+Version: 0.11.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: AD-016J Board selection before any remaining-T4 remediation or lifecycle proposal; then completion or failure of the separately selected scope
+Review-After: Completion or failure of the separately selected AD-018 Resource stable-surface discovery before any OCP-003 lifecycle proposal or another remaining-T4 scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -1663,3 +1663,161 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016I will:
 - retain foundation readiness at approximately 69% because this audit changes no OCP or Concept lifecycle.
 
 This act changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, AB-006/AB-052 status or production authority. Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization apply only to this reassessment. They cannot authorize AD-016J, Resource/Organization discovery, OCP-003/OCP-007 edits, a third T4 lifecycle draft or any downstream T5–T10 act.
+
+## 102. AD-016J Board question and exact baseline
+
+AD-016J decides the next remaining-T4 preparation scope after the accepted AD-016I reassessment. It does not decide the Resource taxonomy/mapping model and does not edit a Concept document.
+
+The exact decision baseline is `main@e381b9b9e6aa1764cb86e1a9ccbb47e4e1d0aed6`, tree `7b1b6f2b8e21cd9090c364d4aae3afe36c8b7920`. On that baseline:
+
+- AD-016 is `0.10.0 / Accepted`, blob `ee9e18ad83262325f519f00968543cea33974778`, SHA-256 `e9125740198fa65d19bfb6b1c08f01a043bc88ae1fb87c9c4370e31104ddf4c9`;
+- OCP-003 remains `0.6.1 / Draft`, Resource remains `Accepted`, and the defining file is unchanged at blob `721cad97a05970b6a089668040faeddd968cfe46`, SHA-256 `a90f651aa81f3f70f316566580d05aeca3be3359b33342ffdb0eb1d579526fbd`;
+- OCP-007 remains `0.3.2 / Draft`, Organization remains `Accepted`, and the defining file is unchanged at blob `543d579f9ce1033ff38d478d1663c71a10b5f118`, SHA-256 `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b`;
+- AD-016I finds no current OCP-004/OCP-005/OCP-012/OCP-013 consumer of `Unit` or Organizational Resource semantics, while one Organization fixture contains the classification value `organization-type://unit@1` without creating Resource-subtype semantics;
+- M0 is the fail-safe, M3 is the leading discovery hypothesis, and M37/M7/ME7 remain explicit alternatives; and
+- no Resource/Organization discovery, OCP edit or third T4 lifecycle proposal is currently authorized.
+
+The Board question is deliberately narrow: **should the repository open one bounded Resource stable-surface discovery, or retain hold / choose a broader Organization-mapping remediation scope?** Completed act count, elapsed effort, file age, CI state, readiness percentage, newest timestamp, record order, issuer count and reviewer count are not reasons to choose M3 or authority rules.
+
+## 103. Board treatment of the AD-016I reassessment
+
+AD-016J accepts the reassessment as decision input with five limits:
+
+1. **The negative consumer sweep is real but bounded.** It shows that current governed consumers use generic Resource identity without the disputed subtype branch. It does not prove that every future consumer can ignore that branch.
+2. **A stable Resource kernel is plausible, not established.** Identity, exact Assignment participation, managed-stock granularity, Capability-claim separation and non-interchangeability implications already stand independently; a future comparison must still decide which surrounding prose belongs to a `1.x` promise.
+3. **The Organization boundary remains open.** `Resource belongs_to Organization`, `Organizational Resource`, `Unit` and example C are not converted into a mapping, exclusion or identity rule by this act.
+4. **Organization is not ready by elimination.** Its continuity, classification, relationship-kind, exception, composition and mapping questions remain separate blockers.
+5. **The recommendation is not self-executing.** AD-016I authorizes no discovery, semantic choice, document edit or lifecycle transition.
+
+Accepting these findings allows the Board to choose a question worth investigating. It does not allow the Board to treat the expected answer as already accepted.
+
+## 104. Commissioned falsification closure
+
+AD-016J attempts every AD-016I §99 attack before selecting a scope:
+
+| Attack | Evidence checked | Board result |
+|---|---|---|
+| a current consumer or valid fixture requires Resource `Unit` / Organizational Resource semantics | exact OCP-004/OCP-005/OCP-012/OCP-013 and fixture sweep; the only `unit` fixture hit is an Organization classification value | not demonstrated |
+| Resource invariant 12.3 requires a closed governed subtype taxonomy | the invariant requires at least one type or classification, while no current rule binds it to the working §5 tree | not demonstrated; exact compatibility remains a discovery obligation |
+| `Resource belongs_to Organization` already creates an unavoidable Concept dependency or mapping guarantee | OCP-003 has `Concept-Depends-On: []`; the Concept graph contains no such edge; §7 supplies no identity, authority or projection rule | not demonstrated |
+| exclusion would weaken Assignment, CapabilityClaimRecord, interchangeability or managed-stock guarantees | current contracts exact-bind generic Resource identity and keep those guarantees independently owned | not demonstrated; each guarantee must be replayed against every future option |
+| a readable `1.x` surface cannot coexist with working taxonomy in the same document | no current evidence proves impossibility; explicit normative/working boundaries are available for comparison | not demonstrated; readability must be attacked with human examples |
+| kernel extraction necessarily creates duplicate authority or dangling references | extraction has not been selected or designed | unresolved option-local risk, not evidence against opening the comparison |
+| AB-006/AB-052 must be resolved before exclusion can even be compared | comparing inclusion and exclusion decides whether those decisions are prerequisites; the discovery itself resolves neither backlog item | not demonstrated |
+| Organization evidence is already sufficient for a narrower M7/ME7 scope | the six §96 blocker classes remain open and existing fixtures decide only finite record/structural properties | not demonstrated |
+| current valid data requires Organization/Resource identity collapse, automatic projection or transitive participation | no current valid fixture or consumer carries that requirement | not demonstrated |
+| the option set assumes the Resource-kernel outcome | M0 remains admissible and the selected discovery must compare inclusion, exclusion, in-place stabilization and extraction symmetrically | not demonstrated |
+
+“Not demonstrated” is narrower than “impossible.” Attacks 2, 4–7 and 10 become mandatory questions inside the discovery because their semantic truth cannot be decided by the current machine suite. Selecting a discovery is justified only because none of the attacks makes that comparison incoherent or unsafe to prepare.
+
+## 105. Architecture Board selection — M3
+
+AD-016J selects **M3 — one Resource stable-surface discovery** as the next preparation scope.
+
+M3 is selected because:
+
+- the current consumer boundary is small enough to audit exactly;
+- the generic Resource identity kernel can be discussed independently without first changing Organization identity;
+- the disputed taxonomy and mapping text is finite, visible and suitable for an outcome-fair comparison;
+- a discovery-only rollback unit is smaller than joint Organization/Resource remediation and changes no governed semantic surface; and
+- failure safely returns to M0 or a separately selected M37 scope rather than producing a permissive mapping.
+
+M3 is not selected because Resource is numerically next, because two Concepts are already Canonical, because the branch is easy to edit, or because negative evidence proves exclusion. It does not preselect explicit exclusion, in-place stabilization, extraction or mapping inclusion.
+
+This Board selection authorizes preparation of one draft discovery record. It changes no OCP, Concept status, backlog resolution, dependency, graph edge or lifecycle state and does not authorize merge of that later discovery.
+
+## 106. Selected preparation scope
+
+The next proposal may prepare one new record:
+
+```text
+architecture/discovery/AD-018-resource-stable-surface.md
+```
+
+AD-018 must compare at least:
+
+| Outcome | Semantic treatment | Required proof |
+|---|---|---|
+| R0 — hold | retain OCP-003 as Draft without defining a `1.x` boundary | identify the evidence gap and a concrete reopening trigger |
+| RI — resolve and include | define the Organizational Resource/Unit mapping as part of the Resource compatibility surface | legitimate identity/mapping owner, AB-006/AB-052 treatment and no Organization identity collapse |
+| RE — explicit exclusion | exclude the working taxonomy and Organization mapping from Resource `1.x` | exact included surface, consumer replay, readable non-implications and no hidden normative residue |
+| RS — in-place stable kernel | keep one document but mark a bounded generic Resource kernel as governed and the remaining taxonomy as non-governed | one unambiguous compatibility owner, section-level boundary and safe versioning behavior |
+| RX — extracted kernel | move the defining stable Resource contract to a separately governed surface | one defining owner, exact references, migration/rollback and no duplicate authority |
+
+The proposal may add only the new discovery record and its discovery/accounting projections in README, backlog and roadmap. It may not edit OCP-003, OCP-007, any consumer, registry, map, schema, checker rule or fixture. It must not mark AB-006, AB-052 or AB-062 Resolved.
+
+AD-018 may recommend an outcome, but it may not select one. A later separately reviewed Board act must accept, revise or reject that recommendation before any OCP-003 edit or lifecycle proposal.
+
+## 107. Mandatory AD-018 discovery contract
+
+The separately reviewed discovery must:
+
+1. exact-anchor the then-current AD-016, OCP-003 and OCP-007 inputs by version, status, Git blob and SHA-256;
+2. classify every current OCP-003 section relevant to `1.x` as proposed stable surface, explicit exclusion, cleanup or unresolved blocker without silently deleting text;
+3. distinguish generic Resource identity from type/classification, composition, Organization membership, operational role, Capability claim, availability and lifecycle projections while preserving Resource-only CapabilityClaimRecord holders, exact OCP-009 Capability version binding and `Capability ≠ Readiness`;
+4. repeat the consumer and fixture sweep across all current Resource users, explicitly accounting for `organization-type://unit@1` and any new hits;
+5. compare R0/RI/RE/RS/RX on the same identity, authority, compatibility, migration, rollback and readability axes;
+6. give outcome-conditional evidence obligations so that hold, inclusion, exclusion and extraction are not tested against a layer they reject;
+7. define falsification targets that can demote the leading option and route unknown/conflicting evidence to hold;
+8. show human examples and counterexamples for Organization/Resource identity, `Unit`, membership, composition, exact Assignment participation, Capability claims, contextual interchangeability and managed consumables; equal claims must not imply equal or interchangeable Resources;
+9. state exactly how AB-006 and AB-052 remain open, are prerequisite, or would be resolved by a later authorized act;
+10. preserve exact current consumer bindings and identify every required consumer migration rather than inferring compatibility from no current hit;
+11. keep the conceptual argument readable without requiring a checker or historical PR context to understand the proposed boundary; and
+12. end with one recommendation plus a mandatory separate Board selection and non-transfer rule.
+
+Machine evidence may witness references, status synchronization, dependencies, graph edges and existing fixture behavior. It cannot decide whether one real-world unit has one identity or two, choose the mapping owner, or make a working taxonomy Canonical.
+
+## 108. Stop, failure and reopening rules
+
+AD-018 must stop and return to the Board before expanding scope if it discovers:
+
+- a current governed consumer that requires Organization/Resource mapping semantics;
+- a generic Resource guarantee that cannot be stated without a closed Core subtype taxonomy;
+- an unavoidable current Concept dependency from Resource to Organization;
+- Organization continuity, classification or relationship authority that must be decided to describe Resource identity;
+- a need to edit OCP-003/OCP-007 or migrate references merely to perform the comparison;
+- a new Concept, Organization Capability claim, automatic projection, identity collapse, inheritance, aggregation or transitive possession rule;
+- an unbounded consumer migration or a second defining Resource authority; or
+- evidence obligations that favor one outcome by assuming its storage, mapping or extraction layer.
+
+M0 becomes the immediate fail-safe when the comparison cannot stay bounded. A demonstrated mapping prerequisite returns to a separately authorized M37 decision; it does not silently widen AD-018. Evidence sufficient for Organization-local work returns to a separately authorized M7/ME7 decision. No failed option transfers authority to another.
+
+## 109. Alternatives not selected and reopening gates
+
+### 109.1 M0 — hold
+
+M0 is not selected because the finite consumer sweep and visible disputed surface justify one reversible comparison. It remains the fallback if AD-018 cannot state a fair option matrix, find one defining owner or preserve human readability.
+
+### 109.2 M37 — joint Organization/Resource mapping
+
+M37 is not selected because no current consumer or graph edge demonstrates that mapping must precede comparison of a generic Resource surface. It must be reconsidered if AD-018 finds a current mapping guarantee, an inseparable identity rule or an RI-leading evidence set.
+
+### 109.3 M7 and ME7 — Organization remediation or extraction
+
+M7 and ME7 are not selected because Organization still has multiple independent blocker classes and a larger authority/migration surface. Research may continue, but no Organization edit or preparation scope is authorized by this act.
+
+### 109.4 MP3 — direct Resource lifecycle proposal
+
+MP3 remains inadmissible. A working-taxonomy label and a negative consumer sweep do not establish the compatibility boundary required for OCP-003 `1.0.0`.
+
+## 110. Migration, rollback and authorization boundary
+
+AD-016J changes only the AD-016 decision record and current repository accounting. It creates no data or semantic migration.
+
+The selected AD-018 proposal is a new discovery record, not an OCP-003 revision. If its evidence fails, rollback consists of rejecting or superseding that proposal; existing Resource, Organization, Assignment, CapabilityClaimRecord and interchangeability semantics remain unchanged.
+
+Merge authorization for AD-016J selects only the M3 preparation scope. AD-018 requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board merge authorization. AD-018 merge authorization, if later granted, still cannot edit OCP-003, choose an outcome or authorize lifecycle preparation. Those are separate acts.
+
+## 111. AD-016J accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016J will:
+
+- set AD-016 to `0.11.0 / Accepted`;
+- accept the AD-016I evidence as bounded decision input;
+- select M3 solely as preparation of one AD-018 Resource stable-surface discovery;
+- keep M0 as the fail-safe and preserve M37/M7/ME7 reopening gates;
+- retain OCP-003 and OCP-007 at `Draft` with their Concepts `Accepted`;
+- keep AB-006, AB-052 and AB-062 open/planned; and
+- retain foundation readiness at approximately 69% because this selection changes no OCP or Concept lifecycle.
+
+This act changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog resolution or production authority. Approval and authorization apply only to this Board selection. They cannot merge AD-018, select RI/RE/RS/RX, edit OCP-003/OCP-007, resolve AB-006/AB-052 or authorize a third T4 lifecycle proposal.
