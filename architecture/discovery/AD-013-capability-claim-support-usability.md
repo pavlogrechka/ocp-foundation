@@ -85,10 +85,11 @@ AD-013 must answer:
 1. Is the protected use OCP-012's own `effective_capability_claim` support projection, a downstream consumer such as OCP-013, or both under separate exact rules?
 2. Does an activated historical claim need an explicit `support_evaluated_at`, or is there another already-governed exact evaluation-time owner?
 3. Should declaration-only and evidence-backed claims remain modes of one exact claim kind or use separate governed claim kinds?
-4. Which temporal fact is admissible for each existing evidence kind?
-5. Which reference, lineage, temporal or semantic-classification ambiguity dimensions can OCP-012 decide mechanically?
-6. How does a later explicit query derive current support usability without changing the historical claim or consulting current data?
-7. Can OCP-013 safely consume an activated OCP-012 projection without inheriting its rule as an interchangeability or authorization rule?
+4. If they remain modes, is `support_mode` stable within one Module C lineage, or may an explicit reviewed transition rule govern a successor's mode change without reinterpreting its predecessor?
+5. Which temporal fact is admissible for each existing evidence kind?
+6. Which reference, lineage, temporal or semantic-classification ambiguity dimensions can OCP-012 decide mechanically?
+7. How does a later explicit query derive current support usability without changing the historical claim or consulting current data?
+8. Can OCP-013 safely consume an activated OCP-012 projection without inheriting its rule as an interchangeability or authorization rule?
 
 ## 5. Terms that must remain distinct
 
@@ -136,7 +137,7 @@ support_mode: declaration-only | evidence-backed
 
 `declaration-only` retains narrow attributable authority and forbids evidence-rule fields. `evidence-backed` requires exact rules, immutable rule inputs, explicit `support_evaluated_at` and inline freshness/ambiguity results. A current view reuses the exact rules and snapshots at an explicit query time.
 
-This preserves one claim proposition form while preventing an evidence rule from reinterpreting a declaration. Its main risk is conditional complexity inside one claim kind.
+This preserves one claim proposition form while preventing an evidence rule from reinterpreting a declaration. It does not yet prove a simpler history model than C: the selected contract must decide whether `support_mode` is stable within one Module C lineage or govern an explicit successor transition that leaves every predecessor's authority unchanged. Its main risk is conditional and transition complexity inside one claim kind.
 
 ### C — separate declaration and evidence-backed claim kinds
 
@@ -255,13 +256,14 @@ If D is selected, OCP-013 must name the exact downstream use and prove that its 
 | 11 | future-dated, timezone-less or incomparable evidence is fresh | non-permissive temporal ambiguity | B/C/D |
 | 12 | cutoff equality differs by implementation | exact inclusive/exclusive behavior | B/C/D |
 | 13 | branching claim lineage selects newest head | preserve branches; `indeterminate` where unresolved | every outcome |
-| 14 | claimant/source count selects authority | no count or majority authority | every outcome |
-| 15 | matching positive claims imply Resource interchangeability | reject identity and AB-011 collapse | every outcome |
-| 16 | Organization is used as direct holder | reject until AB-006/AB-052 decision | every outcome |
-| 17 | withdrawal is converted to negative or stale | preserve distinct assertion semantics | every outcome |
-| 18 | derived replay succeeds after old inputs disappear | fail closed | B/C/D |
-| 19 | fixtures require a claim kind rejected by the selected outcome | outcome-conditional fixtures only | OCP-001 review |
-| 20 | current implicit context replaces exact `condition_set_ref` | reject | every outcome |
+| 14 | a successor flips `support_mode` and reinterprets a declaration as evidence-backed | reject; or apply an explicit reviewed transition rule that preserves the predecessor's authority | B rule contract; C cross-kind rule |
+| 15 | claimant/source count selects authority | no count or majority authority | every outcome |
+| 16 | matching positive claims imply Resource interchangeability | reject identity and AB-011 collapse | every outcome |
+| 17 | Organization is used as direct holder | reject until AB-006/AB-052 decision | every outcome |
+| 18 | withdrawal is converted to negative or stale | preserve distinct assertion semantics | every outcome |
+| 19 | derived replay succeeds after old inputs disappear | fail closed | B/C/D |
+| 20 | fixtures require a claim kind rejected by the selected outcome | outcome-conditional fixtures only | OCP-001 review |
+| 21 | current implicit context replaces exact `condition_set_ref` | reject | every outcome |
 
 No counterexample may pass by turning missing, stale, ambiguous, conflicting, unresolved or incomparable inputs into a more permissive result.
 
@@ -276,7 +278,7 @@ Every outcome must preserve existing OCP-012 exact Capability version, Resource-
 | Outcome | Required executable evidence |
 |---|---|
 | A | fixtures prove current attributable support remains non-permissive where required and checker output never claims machine-derived freshness |
-| B | exact `@1/@2` boundary, declaration/evidence modes, explicit evaluation time, complete rule bindings, inline replay, explicit current query and all applicable §13 pressures |
+| B | exact `@1/@2` boundary, declaration/evidence modes, explicit evaluation time, complete rule bindings, support-mode lineage stability or explicit transition rule, inline replay, explicit current query and all applicable §13 pressures |
 | C | distinct claim-kind authority, cross-kind/non-cross-kind lineage decision, exact replay and no hidden identity collapse |
 | D | consumer-owned exact rule, time and snapshots; inline historical result when retained plus explicit-time derived query; OCP-012 remains unchanged; consumer cannot relabel attributable support as machine-proven |
 | E | only after reopening: domain fixtures plus Core rejection of unknown or incompatible profiles |
@@ -289,7 +291,7 @@ Derived-only current-query replay is the semantic equivalent for a later view. I
 | Outcome | Authority added | Main benefit | Main risk | Current admissibility |
 |---|---|---|---|---|
 | A — F0/A0 | none | safest current contract | leaves support usability attributable | admissible control |
-| B — unified `@2` | OCP-012 local F1/A1 rule plus explicit support time | preserves one claim form and lineage | conditional mode complexity | leading positive hypothesis, not selected |
+| B — unified `@2` | OCP-012 local F1/A1 rule plus explicit support time | preserves one claim form | conditional mode and same-kind transition complexity | leading positive hypothesis, not selected |
 | C — split kinds | separate declaration/evidence authority | clearest trust boundary | fragmented or cross-kind history | admissible alternative, not selected |
 | D — downstream-only | consumer-local rule | maximally use-specific | duplicated or layer-violating interpretation | conditional alternative |
 | E — domain profile | domain semantic owner | local specialization | opaque/incompatible profiles | inadmissible without reopening |
@@ -299,7 +301,7 @@ Derived-only current-query replay is the semantic equivalent for a later view. I
 
 B is the most promising positive direction because OCP-012 itself owns the attributable support projection and existing Module C lineage. A new exact claim-kind version can create a governed activation boundary without mutating `holder-capability@1` history.
 
-Its central unresolved risk is the coexistence of declaration-only and evidence-backed authority in one kind. The model succeeds only if mixed forms are mechanically rejected and `declared` never acquires false evidence authority.
+Its central unresolved risk is the coexistence of declaration-only and evidence-backed authority in one kind, including whether a successor may change mode within one lineage. B has no lineage advantage over C until it proves either mode stability or an explicit transition rule that never changes a predecessor's authority. The model succeeds only if mixed forms and ungoverned mode changes are mechanically rejected and `declared` never acquires false evidence authority.
 
 C is the strongest clarity alternative but must prove a coherent history model when the same claimant later adds evidence. D remains plausible only for a concrete downstream use that does not need OCP-012 to claim machine-derived support.
 
