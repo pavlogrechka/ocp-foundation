@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 83% | Capability є першим Canonical Concept; сім інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
+| Core domain ontology | 84% | Capability та Objective є Canonical; шість інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈68%** | Перший T4 micro-wave встановлює OCP-009/Capability `1.0.0 / Canonical`; новий Board scope act обов'язковий перед другим T4 proposal |
+| **Загальна foundation-готовність** | **≈69%** | Другий T4 micro-wave встановлює OCP-008/Objective `1.0.0 / Canonical`; новий Board scope act обов'язковий перед будь-яким третім T4 proposal |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -66,6 +66,7 @@
 - [x] AD-016G Objective scope selection — K8 selected for preparation of one separately reviewed OCP-008/Objective lifecycle draft with atomic projections, bounded OCP-004 cleanup and no merge-authorization transfer
 - [x] AD-016H K8 preflight repair selection — lifecycle authoring stopped on two stale Capability status views; Q1 selects a separate OCP-003/OCP-004 correction before recomputed K8 work
 - [x] AD-016H Q1 preflight correction — OCP-003 `0.6.1` and OCP-004 `0.8.1` correct only the two stale Capability status views; Resource/Operation semantics, dependencies and Concept statuses remain unchanged
+- [x] Second T4 micro-wave — OCP-008/Objective `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.2.0` projections and bounded OCP-004 `0.8.2` status rendering, with exact historical consumer replay and no achievement authority
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -140,6 +141,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Recompute every K8 input from the post-Q1 `main` and prepare the OCP-008/Objective lifecycle draft; OCP-004 is expected to use `0.8.2` only for its Objective current-state views and local accounting note.
-2. After the lifecycle proposal completes or fails, require another Board scope act before any third T4 preparation scope; no authorization transfers from Q1 or K8.
-3. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
+1. Require another Board scope act before any third T4 preparation scope; no authorization transfers from AD-016G, AD-016H, Q1 or the Objective lifecycle act.
+2. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
+3. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.

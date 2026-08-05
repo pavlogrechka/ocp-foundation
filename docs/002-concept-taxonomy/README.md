@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.1.0
+Version: 1.2.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -12,10 +12,10 @@ Concept-Statuses:
   Assignment: Accepted
   Constraint: Accepted
   Organization: Accepted
-  Objective: Accepted
+  Objective: Canonical
   Capability: Canonical
   Event: Accepted
-Last-Review: 2026-08-05
+Last-Review: 2026-08-06
 ---
 
 # Concept Taxonomy
@@ -154,7 +154,7 @@ Operation є універсальним контекстом координов�
 Operation
 ├── Identity
 ├── Intent
-│   └── Objective [Accepted]
+│   └── Objective [Canonical]
 ├── Temporal Context
 ├── Spatial Context
 │   └── Local Spatial Binding [Operation-owned structure; not a Concept]
@@ -179,7 +179,7 @@ AD-014B відхилив current-scope fundamental identity для `Operational 
 
 ## Objective
 
-Concept `Objective` має статус `Accepted` і визначений у [OCP-008 — Objective Concept](../008-objective-concept/README.md) на підставі прийнятої межі AD-003 та рішення Architecture Board по PR-0009.
+Concept `Objective` має статус `Canonical` і визначений у [OCP-008 — Objective Concept](../008-objective-concept/README.md) на підставі AD-003, AD-017, AD-016G та окремого другого T4 lifecycle act.
 
 Objective представляє intended outcome, condition або effect операційної діяльності. Objective має власну identity, не є Operation, Order, Task або `ExplicitIntentRecord`.
 
@@ -294,3 +294,9 @@ OCP-002 `1.0.0 / Canonical` набуває чинності лише після 
 Окремий T4 lifecycle act exact-sync-ить одну projection value: `Capability: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.0.0 → 1.1.0`.
 
 Projection owner, exact set/value rules, category exclusions і fail-safe mismatch behavior лишаються незмінними. Revision не надає Capability semantics і не змінює status жодного іншого Concept або Proposed marker.
+
+## Revision `1.2.0` — Objective status projection
+
+Окремий другий T4 lifecycle act exact-sync-ить одну projection value: `Objective: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.1.0 → 1.2.0`.
+
+Поряд із frontmatter projection синхронізовано два поточні human-readable views: Objective label у ненормативному Operation decomposition tree та status sentence у секції Objective. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior, `Operation → Objective` edge і status кожного іншого Concept лишаються незмінними.

@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.8.1
+Version: 0.8.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014
@@ -62,7 +62,7 @@ Operation не визначає сама по собі:
 |---|---|---|
 | Resource | Accepted | елемент, що залучається до Operation |
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
-| Objective | Accepted | intended outcome, condition або effect; OCP-008 |
+| Objective | Canonical | intended outcome, condition або effect; OCP-008 |
 | Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
 | Event | Accepted | значущий occurrence або change; OCP-010 |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
@@ -91,7 +91,7 @@ Operation не визначає сама по собі:
 Operation
 ├── Identity
 ├── Intent
-│   └── Objective [Accepted]
+│   └── Objective [Canonical]
 ├── Temporal Context
 │   ├── Planned Bounds
 │   └── Actual Bounds
@@ -567,3 +567,11 @@ AD-011 прийняв S0 і R0: Operation lifecycle не є shared State, а fou
 Revision `0.8.1` виправляє лише volatile current-status rendering у §4: Capability тепер правильно позначено як `Canonical`.
 
 Документ лишається `Draft`, Operation — `Accepted`. Це виправлення не змінює definition, identity, fields, lifecycle, domain semantics, dependencies, Concept status, graph edges або P-001 invocation. Поточні Objective status views у §4 та §6 навмисно не змінені: вони належать окремому, заново обчисленому K8 lifecycle proposal.
+
+## 23. PATCH accounting — v0.8.2
+
+Revision `0.8.2` синхронізує лише два volatile current-status renderings із окремим Objective lifecycle act: §4 row та §6 tree label тепер показують Objective як `Canonical`. Речення §22 про навмисно незмінені Objective views описує межу попереднього `0.8.1` Q1 PATCH і не є поточним status source.
+
+Документ лишається `Draft`, Operation — `Accepted`. `objective_refs`, exact resolution, `ExplicitIntentRecord`, Operation lifecycle, `Operation → Objective` Concept edge, domain semantics і всі інваріанти лишаються незмінними; existing Operation references не потребують rebinding.
+
+Corrective rollback є частиною нового reviewed Objective lifecycle rollback: OCP-004 повертає обидва status renderings разом з OCP-008, OCP-000, OCP-002, generated map і repository accounting. Ізольована зміна одного rendering або переписування Operation/Objective history заборонені.

@@ -12,7 +12,7 @@
 | Constraint | Accepted |
 | Coordination | Proposed |
 | Event | Accepted |
-| Objective | Accepted |
+| Objective | Canonical |
 | Operation | Accepted |
 | Operational Space | Proposed |
 | Order | Proposed |

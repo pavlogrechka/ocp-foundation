@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 1.1.0
+Version: 1.2.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
-Last-Review: 2026-08-05
+Last-Review: 2026-08-06
 ---
 
 # Operational Ontology
@@ -84,7 +84,7 @@ Version OCP-000 не є версією жодного Concept або defining OC
 | Assignment | Accepted | OCP-005; Architecture Board approval of PR-0004 |
 | Operational Space | Proposed | — |
 | Organization | Accepted | OCP-007; Architecture Board approval of PR-0007 |
-| Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
+| Objective | Canonical | OCP-008; AD-003; AD-017; AD-016G; separately authorized T4 act |
 | Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
 | Spectrum | Proposed | — |
 | Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
@@ -181,3 +181,9 @@ Canonical status набуває чинності лише після exact-head 
 Окремий T4 lifecycle act змінює рівно один active registry value: `Capability: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.0.0 → 1.1.0`.
 
 Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Capability semantics: defining authority залишається в OCP-009, а OCP-000 лише відображає окремо авторизований status.
+
+## Revision `1.2.0` — Objective status transition
+
+Окремий другий T4 lifecycle act змінює рівно один active registry value: `Objective: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.1.0 → 1.2.0`.
+
+Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Objective semantics, amendment/revision identity, lifecycle або achievement authority: defining contract залишається в OCP-008, а OCP-000 лише відображає окремо авторизований status.
