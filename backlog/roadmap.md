@@ -10,7 +10,7 @@
 | Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈66%** | T0 OCP-000, T1 OCP-016, T2 OCP-001 і T3 OCP-002 утворюють Canonical registry/routing/governance/projection roots під R4/L2; до reassessment лишається окремий T3 P-001 act |
+| **Загальна foundation-готовність** | **≈67%** | T0–T3 enabling phase завершено: Canonical registry/routing/governance/projection roots і Accepted P-001 `0.1.0` готові до обов'язкового AD-016C reassessment; T4 ще не авторизовано |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -57,6 +57,7 @@
 - [x] T1 OCP-016 routing contract — `1.0.0 / Canonical` with exact accepted-content anchors, stable F/C/E/D/I routes, orthogonal Pattern verdict and no machine admission layer
 - [x] T2 OCP-001 governance contract — `1.0.0 / Canonical` with L2, R4/atomicity/non-transfer rules, human counterexamples and a structural direct-dependency witness
 - [x] T3 OCP-002 Concept-status projection — `1.0.0 / Canonical` with exact defined-Concept set/value synchronization and explicitly non-normative category views
+- [x] T3 P-001 identified-record Pattern — `0.1.0 / Accepted` at the unchanged §§1–10 surface, with six exact primary invokers, explicit reviewed-snapshot treatment and no transfer to T4
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -130,5 +131,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the separate remaining T3 P-001 act through its Accepted Pattern lifecycle with exact reviewed version and atomic invoker handling if that version changes.
-2. After P-001, run mandatory AD-016C reassessment and a separate AD-016D Board act before any T4 promotion PR.
+1. Run the mandatory AD-016C reassessment after the completed T0–T3 enabling phase; recompute rather than copy candidate readiness and blockers.
+2. Use a separate AD-016D Board act to select what, if anything, proceeds next. No T4 promotion PR may precede both gates.
