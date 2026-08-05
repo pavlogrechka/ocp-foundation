@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Capability має статус `Canonical`; Resource, Operation, Assignment, Constraint, Organization, Objective та Event лишаються `Accepted`;
+- Capability та Objective мають статус `Canonical`; Resource, Operation, Assignment, Constraint, Organization та Event лишаються `Accepted`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -74,7 +74,7 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-013 `0.2.0 / Accepted` визначає exact consumer requirement, directional eligibility, fail-safe claim/Constraint bindings, rule-version replay та executable evidence для всіх AD-008 §12 counterexamples;
 - OCP-014 `0.2.0 / Accepted` активує exact governed owner `ocp-coordination-consumer@0.1.0` для одного contextual requirement, fail-safe wrong-owner binding і окрему actor-authorization boundary без workflow authority;
 - AD-009 і OCP-015 `0.2.0 / Accepted` визначають окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
-- OCP-004 `0.8.0` визначає plural Objective references, fail-safe exact-binding explicit intent і zero/one/many Operation-local spatial bindings з exact opaque profile/payload snapshots;
+- OCP-004 `0.8.2` визначає plural Objective references, fail-safe exact-binding explicit intent і zero/one/many Operation-local spatial bindings з exact opaque profile/payload snapshots; два current Objective labels синхронізовано з Canonical status без зміни Operation semantics;
 - spatial binding має identity лише в межах owning Operation, не є Operational Area Concept або P-001 record і не створює Resource equality, Assignment, overlap consequence, coordination, suitability, authorization чи Readiness;
 - reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent/spatial evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
 - assessment module має власний exact `assessment-rules.yaml` manifest за чинним module-manifest precedent;
@@ -95,13 +95,14 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016D `0.5.0` обирає G2 всередині C/L2 і дозволяє підготовку лише окремого OCP-009 T4 draft; merge цього draft, інші T4 кандидати та другий micro-wave потребують власних Board gates;
 - перший T4 act встановлює OCP-009 і Capability `1.0.0 / Canonical` та атомарно оновлює OCP-000/OCP-002 до `1.1.0`; exact definition identity/resolution, non-redirecting supersession, domain admission boundary і всі non-equivalence rules зберігаються без consumer rebinding;
 - AD-016 `0.6.1` зберігає прийнятий AD-016E J8 scope і передає active AB-063 ownership до AD-017 без promotion authority; жоден другий T4 candidate ще не готовий або авторизований;
-- OCP-008 `0.3.0 / Draft` реалізує AD-017B A+D: будь-яка зміна stored normative statement створює новий Objective, display лишається implementation-local, duplicate identity відхиляється, а old Operation/assessment exact-bind prior Objective; AB-063 Resolved без promotion;
+- OCP-008 `1.0.0 / Canonical` стабілізує AD-017B A+D: будь-яка зміна stored normative statement створює новий Objective, display лишається implementation-local, duplicate identity відхиляється, а old Operation/assessment exact-bind prior Objective; lifecycle, hierarchy, amendment, display та advanced assessment extensions лишаються окремо routed;
 - AD-016F `0.7.0` заново обчислює Objective B/S/C на exact post-implementation baseline: B-item закритий, S-exclusions і C-cleanup обмежені, K8 є лише провідною гіпотезою; окремий AD-016G Board act обов'язковий до будь-якого другого T4 draft;
 - AD-016G `0.8.0` обирає K8 як scope підготовки одного OCP-008/Objective lifecycle draft з atomic projections і bounded OCP-004 `0.8.1` cleanup; сам selection act не змінює жодного status і не авторизує merge draft;
 - AD-016H `0.9.0` фіксує preflight stop через два stale Capability status views і обирає окремий Q1 correction PATCH; OCP-003 `0.6.1` та OCP-004 `0.8.1` виправляють лише ці current labels без semantic/status/dependency змін, після чого K8 може бути заново обчислений на новому baseline;
+- другий T4 act встановлює OCP-008/Objective `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.2.0`, OCP-004 до `0.8.2` та current map/accounting без record migration, consumer rebinding, нового graph edge або achievement authority;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 117 non-sensitive fixtures і 164 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після першого T4 micro-wave — **≈68%**; один Concept Canonical, сім лишаються Accepted, а наступний T4 scope потребує нового Board act.
+- не-нормативна оцінка загальної foundation-готовності після другого T4 micro-wave — **≈69%**; два Concepts Canonical, шість лишаються Accepted, а наступний T4 scope потребує нового Board act.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
