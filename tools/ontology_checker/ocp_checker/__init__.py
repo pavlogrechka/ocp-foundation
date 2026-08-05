@@ -65,6 +65,7 @@ from .assessment import (
 from .objective import (
     OBJECTIVE_ERROR_CODES,
     validate_objective,
+    validate_objective_correction_fixture,
     validate_objective_dataset,
     validate_operation_fixture,
 )
@@ -150,6 +151,8 @@ def validate_reference_fixture(fixture):
         return validate_objective(fixture.get("entity") or {})
     if concept == "ObjectiveDataset":
         return validate_objective_dataset(fixture.get("entities") or [])
+    if concept == "ObjectiveCorrectionEvidence":
+        return validate_objective_correction_fixture(fixture)
     if concept == "ResourceInterchangeabilityDataset":
         return validate_interchangeability_fixture(fixture)
     if concept == "CoordinationResourceRequirement":

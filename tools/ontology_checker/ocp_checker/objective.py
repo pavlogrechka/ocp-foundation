@@ -9,6 +9,7 @@ from .checker import ValidationResult
 OBJECTIVE_ERROR_CODES = frozenset(
     {
         "OBJECTIVE_CREATED_AT_REQUIRED",
+        "OBJECTIVE_IDENTITY_DUPLICATE",
         "OBJECTIVE_ID_REQUIRED",
         "OBJECTIVE_PROVENANCE_REF_REQUIRED",
         "OBJECTIVE_SELF_SUPERSESSION",
@@ -101,6 +102,7 @@ def _has_supersession_cycle(graph: dict[str, str]) -> bool:
 def validate_objective_dataset(objectives: Iterable[dict[str, Any]]) -> ValidationResult:
     errors: list[str] = []
     graph: dict[str, str] = {}
+    identity_counts: dict[str, int] = {}
 
     for objective in objectives:
         if not isinstance(objective, dict):
@@ -109,11 +111,48 @@ def validate_objective_dataset(objectives: Iterable[dict[str, Any]]) -> Validati
         errors.extend(validate_objective(objective).errors)
         objective_id = objective.get("objective_id")
         supersedes = objective.get("supersedes_objective_ref")
+        if _nonempty(objective_id):
+            identity = str(objective_id)
+            identity_counts[identity] = identity_counts.get(identity, 0) + 1
         if _nonempty(objective_id) and _nonempty(supersedes):
             graph[str(objective_id)] = str(supersedes)
 
+    if any(count > 1 for count in identity_counts.values()):
+        errors.append("OBJECTIVE_IDENTITY_DUPLICATE")
     if _has_supersession_cycle(graph):
         errors.append("OBJECTIVE_SUPERSESSION_CYCLE")
+    return _result(errors)
+
+
+def validate_objective_correction_fixture(fixture: dict[str, Any]) -> ValidationResult:
+    """Validate immutable Objective history and exact historical consumers."""
+    from .assessment import validate_outcome_assessment_dataset
+
+    errors: list[str] = []
+    objectives = fixture.get("objectives") or []
+    errors.extend(validate_objective_dataset(objectives).errors)
+
+    operation = fixture.get("operation") or {}
+    operation_fixture = {
+        "concept": "Operation",
+        "entity": operation,
+        "references": {"objectives": objectives},
+    }
+    errors.extend(validate_operation_fixture(operation_fixture).errors)
+
+    assessment = fixture.get("assessment") or {}
+    errors.extend(
+        validate_outcome_assessment_dataset(
+            [assessment],
+            objectives=objectives,
+            events=fixture.get("events") or [],
+            observations=fixture.get("observations") or [],
+            evidence_snapshots=fixture.get("evidence_snapshots") or [],
+            input_snapshots=fixture.get("input_snapshots") or [],
+            freshness_rules=fixture.get("freshness_rules") or [],
+            ambiguity_rules=fixture.get("ambiguity_rules") or [],
+        ).errors
+    )
     return _result(errors)
 
 

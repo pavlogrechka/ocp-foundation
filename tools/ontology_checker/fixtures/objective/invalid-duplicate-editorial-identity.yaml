@@ -1,0 +1,15 @@
+case_id: objective-invalid-duplicate-editorial-identity
+concept: ObjectiveDataset
+entities:
+  - objective_id: OBJ-DUPLICATE-EDITORIAL-001
+    statement: Establish safe transit corridor
+    created_at: 2026-08-06T01:00:00Z
+    provenance_ref: ACT-DUPLICATE-EDITORIAL-001
+  - objective_id: OBJ-DUPLICATE-EDITORIAL-001
+    statement: Establish a safe transit corridor
+    created_at: 2026-08-06T01:01:00Z
+    provenance_ref: ACT-DUPLICATE-EDITORIAL-002
+expected:
+  valid: false
+  error_codes:
+    - OBJECTIVE_IDENTITY_DUPLICATE

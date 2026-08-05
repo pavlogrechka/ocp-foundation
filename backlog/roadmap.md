@@ -52,6 +52,7 @@
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
 - [x] Core Boundary specification — `OCP-001 1.0.0 / Canonical + OCP-016 1.0.0 / Canonical` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
+- [x] Objective editorial-correction boundary — `OCP-008 0.3.0` implements AD-017B A+D with immutable stored statements, display exclusion and exact historical consumer replay; `AB-063` Resolved without promotion
 - [ ] Promote stable core descriptions to Canonical — `AB-062 / AD-016B 0.3.0` selects R4 (`F → C`) with L2, limits current preparation to T0–T3 and requires AD-016C reassessment plus AD-016D Board selection before T4; no promotion occurs in this act
 - [x] T0 OCP-000 registry contract — `1.0.0 / Canonical` with independent Proposed rows, explicit authority boundaries and no implicit Concept/graph promotion
 - [x] T1 OCP-016 routing contract — `1.0.0 / Canonical` with exact accepted-content anchors, stable F/C/E/D/I routes, orthogonal Pattern verdict and no machine admission layer
@@ -102,6 +103,7 @@
 - [x] Global primary-artifact identity uniqueness across OCP, Pattern, AD, ADR and AB registries
 - [x] Structured normative-rule and reference-integrity linter for exact `Depends-On`, global manifest rule IDs and resolvable OCP sources
 - [x] OCP-004 Operation-local spatial binding with exact profile/snapshot resolution, immutable transition evidence and fail-safe non-implication fixtures
+- [x] OCP-008 strict statement immutability with duplicate-ID rejection, visible correction branching and prior Operation/assessment replay
 - [ ] Production validator, persistence and implementation-facing contracts
 
 The checker is a reference validation layer, not production implementation. OCP documents, accepted decisions and machine-readable taxonomy remain authoritative. Semantic equivalence or duplication in natural-language normative text remains an external-review obligation; expression language, persistence model and production evaluator remain separate decisions.
@@ -134,6 +136,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the separately reviewed OCP-008 `0.3.0 / Draft` implementation of AD-017B A+D: immutable stored statement, display exclusion and exact historical consumer evidence; do not promote Objective in that act.
-2. After implementation, run a fresh B/S/C audit and require a new Board scope act before any OCP-008/Objective promotion proposal.
-3. Keep OCP-003/OCP-007/OCP-008 at current status until each B item is resolved and a later Board scope act separately authorizes promotion preparation.
+1. Run a fresh B/S/C audit after OCP-008 `0.3.0` resolves AB-063, then require a new Board scope act before any OCP-008/Objective promotion proposal.
+2. Keep OCP-003/OCP-007/OCP-008 at current status until each B item is resolved and a later Board scope act separately authorizes promotion preparation.
