@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-001
 Title: Ontology Governance
-Version: 0.7.0
+Version: 0.8.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000
 Used-By: All OCP specifications and AI development workflows
-Last-Review: 2026-08-03
+Last-Review: 2026-08-05
 ---
 
 # Ontology Governance
@@ -110,7 +110,24 @@ Concept у статусі `Proposed` або `Deferred` повинен бути �
 
 Категорія таксономії може групувати поняття, але для нормативного використання як Concept потребує окремого визначення, статусу та рішення Architecture Board.
 
-Формула, derivation rule, state machine або інший нормативний контракт визначається лише у defining document. Повторення в іншому документі дозволене лише як явно ненормативна ілюстрація, що містить посилання на джерело. Ontology linter повинен виявляти незалежні дублікати нормативних правил.
+Формула, derivation rule, state machine або інший нормативний контракт визначається лише у defining document. Повторення в іншому документі дозволене лише як явно ненормативна ілюстрація, що містить посилання на джерело. Ontology linter повинен виявляти структурні дублікати нормативних rule identifiers; змістовну еквівалентність різних формулювань природною мовою встановлює зовнішнє adversarial review.
+
+## Структурна цілісність нормативних ідентифікаторів і посилань
+
+Канонічні primary artifacts класів `OCP`, `Pattern`, `AD`, `ADR` і `AB` утворюють єдиний машинно перевірний registry. Кожен exact identifier у цьому registry повинен належати рівно одному primary artifact, а identifier у metadata повинен відповідати repository path. Versioned reviewed-contract snapshots тієї самої OCP-специфікації не створюють нової artifact identity і не є окремими registry entries.
+
+Frontmatter `Depends-On` виражає лише пряму залежність одного primary artifact від іншого. Кожне значення повинно:
+
+1. бути exact token одного з форматів `OCP-NNN`, `P-NNN`, `AD-NNN`, `ADR-NNN`, `ADR-DRAFT-NNN` або `AB-NNN`;
+2. exact-resolve до наявного primary artifact;
+3. з'являтися в одному dependency list не більше одного разу;
+4. не посилатися на artifact, якому належить цей list.
+
+`Depends-On: P-NNN` означає залежність від Pattern artifact, але не invokes його obligations. Єдиним invocation authority лишається versioned `Uses-Patterns: P-NNN@x.y.z` за політикою `track-current`.
+
+Rule identifier у `tools/ontology_checker/*rules.yaml` повинен бути глобально унікальним серед core та всіх module manifests. Кожен manifest entry повинен мати валідний identifier, допустимий `kind` і `source`, що починається з exact-resolvable `OCP-NNN`; відсутній `kind` має єдине визначене значення `validation`. Це source binding, а не передання нормативної влади executable manifest. Checker перевіряє exact OCP identifier, але не виводить тотожність семантики з prose, section label або схожості формулювань.
+
+Механічний контроль навмисно обмежений структурованими registry entries, metadata і rule manifests. Виявлення прихованих дубльованих правил, суперечностей або перефразованої семантики у природній мові залишається обов'язком external review; відсутність machine finding не є доказом семантичної унікальності.
 
 ## Перевірка нового поняття
 

@@ -17,7 +17,7 @@ Implemented validators:
 - Event occurrence identity and exact resolution;
 - ObservationRecord attribution, optional Event linkage and Module C supersession;
 - OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states, `objective-achievement@2` F1/A1 activation and Module C supersession;
-- CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
+- CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession, activated F1/A1 evidence replay and fail-safe attributable projection;
 - ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
 - OCP-014 CoordinationResourceRequirement exact accepted-owner profile binding;
 - draft OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
@@ -60,7 +60,7 @@ The checker uses exact module manifests:
 - `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
 - `coordination-workflow-rules.yaml` — draft OCP-015 proposal/response record and evidence-projection module.
 
-Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests.
+Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
 Module manifests do not create independent normative authority. Their `source` fields point back to OCP specifications, decisions or governance contracts.
 
@@ -71,6 +71,14 @@ A `Uses-Patterns` invocation uses `P-NNN@x.y.z` checker syntax and must resolve 
 The repository policy is **track-current**, not historical pinning. A Pattern version change must update all invokers atomically and pass the applicable review lane.
 
 ObservationRecord and OutcomeAssessmentRecord invoke `P-001@0.1.0` with selected Module C supersession. CapabilityClaimRecord selects Modules A and C for time-bounded applicability plus history-preserving correction/withdrawal. Their domain semantics remain in OCP-010, OCP-011 and OCP-012 respectively.
+
+## Structured governance references
+
+The artifact-governance slice builds one primary registry for OCP, Pattern, AD, ADR and AB identifiers. Duplicate primary identities fail closed. Historical reviewed-contract snapshots remain versions of their owning OCP artifact and do not create another primary identity.
+
+Primary-artifact `Depends-On` metadata accepts only exact identifiers in those registries. Unresolved, repeated, malformed and self references are rejected. `Depends-On: P-NNN` records an artifact dependency only; it cannot replace the versioned `Uses-Patterns` invocation contract.
+
+These checks are intentionally structural. They do not infer that two differently worded normative passages are semantically equal or contradictory. External adversarial review retains that responsibility.
 
 ## Authority and exact references
 
@@ -296,7 +304,7 @@ This slice does not provide:
 - criterion expression language or evaluator authorization;
 - quantitative partial-achievement semantics;
 - automatic multi-Objective or multi-Operation aggregation;
-- holder-specific Capability Claims;
+- production holder-claim persistence or API contracts;
 - Constraint-result assessment evidence kind;
 - authorization, Conflict, Risk, Readiness or State semantics;
-- full cross-file identity uniqueness or complete normative duplicate linter.
+- machine-complete semantic duplicate detection in natural-language normative prose.

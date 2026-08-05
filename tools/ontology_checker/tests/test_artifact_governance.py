@@ -15,9 +15,18 @@ sys.path.insert(0, str(ROOT))
 
 from ocp_checker.artifact_governance import (  # noqa: E402
     AD_BACKLOG_STATUS_UNRESOLVED,
+    ARTIFACT_ID_DUPLICATE,
     ARTIFACT_ID_MISMATCH,
     ARTIFACT_STATUS_INVALID,
     BACKLOG_ID_DUPLICATE,
+    DEPENDENCY_REFERENCE_DUPLICATE,
+    DEPENDENCY_REFERENCE_INVALID,
+    DEPENDENCY_REFERENCE_MISSING,
+    DEPENDENCY_SELF_REFERENCE,
+    NORMATIVE_RULE_ID_DUPLICATE,
+    NORMATIVE_RULE_INVALID,
+    NORMATIVE_RULE_SOURCE_INVALID,
+    NORMATIVE_RULE_SOURCE_MISSING,
     PATTERN_REFERENCE_INVALID,
     PATTERN_REFERENCE_MISSING,
     PATTERN_VERSION_INVALID,
@@ -30,7 +39,7 @@ from ocp_checker.artifact_governance import (  # noqa: E402
 )
 
 
-TAXONOMY = """taxonomy_version: 0.4.0
+TAXONOMY = """taxonomy_version: 0.5.0
 artifact_classes:
   OCP:
     document_lifecycle: [Draft, Accepted]
@@ -45,6 +54,18 @@ artifact_classes:
   AB:
     lifecycle: [Open, Proposed, Discovery, Planned, Under Review, Resolved, Deferred, Rejected]
     active_states: [Open, Proposed, Discovery, Under Review]
+reference_integrity:
+  artifact_id_uniqueness_scope: [OCP, Pattern, AD, ADR, AB]
+  dependency_metadata: Depends-On
+  dependency_exact_resolution_required: true
+  dependency_duplicates_forbidden: true
+  dependency_self_reference_forbidden: true
+  dependency_target_classes: [OCP, Pattern, AD, ADR, AB]
+  normative_rule_manifest_glob: tools/ontology_checker/*rules.yaml
+  normative_rule_ids_global_unique: true
+  normative_rule_source_class: OCP
+  normative_rule_default_kind: validation
+  semantic_duplicate_detection: external-review
 commit_convention:
   merge_method: squash
   linear_history_required: true
@@ -88,6 +109,23 @@ class ArtifactGovernanceTests(unittest.TestCase):
     def assert_errors(self, root: Path, expected: set[str]) -> None:
         self.assertEqual(set(validate_artifact_governance(root).errors), expected)
 
+    def add_metadata(self, path: Path, line: str) -> None:
+        text = path.read_text(encoding="utf-8")
+        path.write_text(text.replace("\n---\n", f"\n{line}\n---\n", 1), encoding="utf-8")
+
+    def write_rule_manifest(
+        self, root: Path, name: str, rule_id: str, source: str, kind: str = "validation"
+    ) -> None:
+        path = root / f"tools/ontology_checker/{name}-rules.yaml"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            yaml.safe_dump(
+                {"rules": [{"id": rule_id, "kind": kind, "source": source}]},
+                sort_keys=False,
+            ),
+            encoding="utf-8",
+        )
+
     def test_valid_repository(self) -> None:
         self.assertTrue(validate_artifact_governance(self.make_repo()).valid)
 
@@ -108,6 +146,24 @@ class ArtifactGovernanceTests(unittest.TestCase):
             encoding="utf-8",
         )
         self.assert_errors(root, {ARTIFACT_ID_MISMATCH})
+
+    def test_artifact_identifier_must_be_globally_unique(self) -> None:
+        root = self.make_repo()
+        duplicate = root / "docs/001-duplicate/README.md"
+        duplicate.parent.mkdir()
+        duplicate.write_text(
+            "---\nDocument-ID: OCP-001\nStatus: Draft\n---\n",
+            encoding="utf-8",
+        )
+        self.assert_errors(root, {ARTIFACT_ID_DUPLICATE})
+
+    def test_pattern_identifier_must_be_globally_unique(self) -> None:
+        root = self.make_repo()
+        (root / "patterns/P-001-duplicate.md").write_text(
+            "---\nPattern-ID: P-001\nVersion: 0.1.0\nStatus: Accepted\n---\n",
+            encoding="utf-8",
+        )
+        self.assert_errors(root, {ARTIFACT_ID_DUPLICATE})
 
     def test_accepted_ad_cannot_leave_referenced_backlog_active(self) -> None:
         root = self.make_repo()
@@ -172,6 +228,60 @@ class ArtifactGovernanceTests(unittest.TestCase):
             encoding="utf-8",
         )
         self.assert_errors(root, {PATTERN_VERSION_INVALID})
+
+    def test_exact_dependencies_across_admitted_classes_are_accepted(self) -> None:
+        root = self.make_repo()
+        (root / "adr").mkdir()
+        (root / "adr/ADR-000-sample.md").write_text("# ADR-000 — Sample\n", encoding="utf-8")
+        self.add_metadata(
+            root / "docs/001-sample/README.md",
+            "Depends-On: P-001, AD-001, AB-001, ADR-000",
+        )
+        self.assertTrue(validate_artifact_governance(root).valid)
+
+    def test_dependency_format_must_be_exact(self) -> None:
+        root = self.make_repo()
+        self.add_metadata(root / "docs/001-sample/README.md", "Depends-On: OCP-1")
+        self.assert_errors(root, {DEPENDENCY_REFERENCE_INVALID})
+
+    def test_dependency_target_must_resolve(self) -> None:
+        root = self.make_repo()
+        self.add_metadata(root / "docs/001-sample/README.md", "Depends-On: OCP-999")
+        self.assert_errors(root, {DEPENDENCY_REFERENCE_MISSING})
+
+    def test_dependency_list_cannot_repeat_a_target(self) -> None:
+        root = self.make_repo()
+        self.add_metadata(
+            root / "architecture/discovery/AD-001-sample.md",
+            "Depends-On: OCP-001, OCP-001",
+        )
+        self.assert_errors(root, {DEPENDENCY_REFERENCE_DUPLICATE})
+
+    def test_dependency_cannot_reference_its_own_artifact(self) -> None:
+        root = self.make_repo()
+        self.add_metadata(root / "docs/001-sample/README.md", "Depends-On: OCP-001")
+        self.assert_errors(root, {DEPENDENCY_SELF_REFERENCE})
+
+    def test_normative_rule_identifiers_are_globally_unique(self) -> None:
+        root = self.make_repo()
+        self.write_rule_manifest(root, "first", "SAMPLE_RULE", "OCP-001 §1")
+        self.write_rule_manifest(root, "second", "SAMPLE_RULE", "OCP-001 §2")
+        self.assert_errors(root, {NORMATIVE_RULE_ID_DUPLICATE})
+
+    def test_normative_rule_structure_is_validated(self) -> None:
+        root = self.make_repo()
+        self.write_rule_manifest(root, "sample", "bad-rule", "OCP-001 §1")
+        self.assert_errors(root, {NORMATIVE_RULE_INVALID})
+
+    def test_normative_rule_source_must_start_with_an_exact_ocp_id(self) -> None:
+        root = self.make_repo()
+        self.write_rule_manifest(root, "sample", "SAMPLE_RULE", "section 1")
+        self.assert_errors(root, {NORMATIVE_RULE_SOURCE_INVALID})
+
+    def test_normative_rule_source_ocp_must_resolve(self) -> None:
+        root = self.make_repo()
+        self.write_rule_manifest(root, "sample", "SAMPLE_RULE", "OCP-999 §1")
+        self.assert_errors(root, {NORMATIVE_RULE_SOURCE_MISSING})
 
     def git(self, root: Path, *args: str) -> None:
         env = os.environ.copy()
