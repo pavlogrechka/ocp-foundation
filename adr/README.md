@@ -18,6 +18,6 @@
 | ADR-004 | Question-Driven Architecture | Accepted |
 | ADR-005 | Four Worlds Model | Accepted |
 | ADR-006 | AI Is Design-Time Only | Accepted |
-| ADR-DRAFT-007 | State as a Concept | Draft |
+| ADR-DRAFT-007 | State as a Concept | Superseded |
 
 Жоден Accepted ADR не змінюється без нового ADR, який його уточнює або замінює.

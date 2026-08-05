@@ -1,6 +1,7 @@
 # ADR-DRAFT-007 — State as a Concept
 
-- **Status:** Draft
+- **Status:** Superseded
+- **Superseded-By:** AD-011
 - **Date:** 2026-08-02
 - **Review-After:** Canonical descriptions of Operation and Assignment
 

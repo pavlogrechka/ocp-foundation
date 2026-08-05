@@ -465,7 +465,7 @@ Because S0 and R0 reject shared foundation authority and S2/R3 fail the independ
 
 The removal does not ban the words `state`, `readiness`, `ready`, `condition` or `status`. It prevents an unowned local field or conclusion from masquerading as a registered Core Concept. Accepted local lifecycle stages, observations, assessments and projections retain their exact owners and meanings.
 
-The non-normative future edges `Operation ⇢ State` and `Resource ⇢ Readiness` are removed. ADR-DRAFT-007 remains preserved as historical discovery material but supplies no current ontology authority.
+The non-normative future edges `Operation ⇢ State` and `Resource ⇢ Readiness` are removed. AD-011 supersedes ADR-DRAFT-007, which moves from `Draft` to `Superseded` and remains preserved as historical discovery material without current ontology authority.
 
 ## 27. Accepted effect
 
