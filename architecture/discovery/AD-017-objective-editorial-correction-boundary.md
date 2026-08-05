@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-017
 Title: Objective Editorial-Correction Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-008, OCP-016, P-001, AD-003, AD-016
 Applies-To: AB-063, Objective statement correction, OCP-008 Canonical blocker
-Review-After: External adversarial review of AD-017A before any Architecture Board selection
+Review-After: OCP-008 strict-immutability implementation evidence or concrete B/C reopening evidence
 ---
 
 # AD-017 — Objective Editorial-Correction Boundary
@@ -622,3 +622,191 @@ After exact-head external review, a separate AD-017B Board act may:
 - retain strict immutability and close the positive same-identity correction path.
 
 AD-017A review or merge does not select an outcome. AD-017B requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization. Any later OCP-008 implementation and any promotion-scope act remain separate again.
+
+## 32. Architecture Board decision — AD-017B
+
+AD-017B selects **A with D as an explicit payload/display safeguard**:
+
+- **A — strict immutability:** any change to the stored normative `statement` value creates a new Objective with a new `objective_id`; and
+- **D — display exclusion:** presentation data and rendering operations remain outside the stored normative statement and cannot change Objective identity.
+
+The current OCP-008 permission for a stored orthographic correction to preserve identity is not retained by the selected direction. Its later removal is an OCP-008 implementation change, not an effect of this AD alone.
+
+This decision chooses the semantic direction and authorizes preparation of one separate OCP-008 implementation draft. It does not itself amend OCP-008, create an Objective, migrate a consumer, add executable behavior or authorize Objective promotion.
+
+Until exact-head external review, explicit owner/Architecture Board authorization and squash merge, §§32–41 are a proposal only. Merge authorization for AD-017A cannot select this outcome.
+
+## 33. Selected semantic contract
+
+The later OCP-008 implementation must preserve these rules:
+
+1. The stored normative `statement` value of one Objective record is immutable after creation.
+2. Any changed stored normative value creates a new Objective record and a new `objective_id`, even when an editor believes the change is only spelling or grammar.
+3. A normalization or canonical-input rule, if used, runs before the normative value becomes an Objective and must be exact and attributable. It cannot re-normalize historical records or decide semantic equivalence after storage.
+4. Serialization differences that decode to the same stored normative value do not create a statement change. The selected contract governs the value, not YAML/JSON byte layout.
+5. Wrapping, typography, font, color, layout and other presentation choices may vary outside the Objective record without a correction record or identity change.
+6. Writing a rendered or corrected form back into stored `statement` is a stored-value change and therefore creates a new Objective.
+7. The new Objective may exact-reference the prior Objective through `supersedes_objective_ref`; supersession remains explicit, acyclic, branching and non-redirecting.
+8. Prior and successor Objective records remain independently exact-resolvable. Neither timestamp, record order nor a “current” projection selects one for a consumer.
+9. OCP-004 Operations, OCP-011 assessments and other consumers retain their exact existing Objective references until explicitly changed by their own governed act.
+10. Equal or near-equal statements do not collapse two Objective identities. A domain equivalence opinion may inform a human decision but cannot preserve, merge or redirect Core Objective identity.
+11. Missing provenance or an inability to replay the prior stored value cannot be repaired by treating the newest text as authoritative.
+12. Correction, supersession and display rendering create no achievement, Readiness, availability, admissibility, authorization, approval or universal current-state conclusion.
+
+The selected contract is intentionally conservative. It may create distinct Objective records whose intended meaning appears equal. Core accepts that duplication cost rather than introducing an unproven same-identity correction authority.
+
+## 34. Selection evidence and attack closure
+
+AD-017B relies on the externally reviewed AD-017A comparison:
+
+- current OCP-004 and OCP-011 consumers bind one bare Objective ID;
+- current P-001 conformance gives each Objective record one stable identity and supplies explicit record supersession, not revision heads;
+- no accepted consumer requires one Objective ID to survive a changed stored statement;
+- all twelve scenarios and sixteen counterexamples are satisfied by immutable Objective records plus the display boundary;
+- B and C require additional exact consumer bindings and authority synchronization; and
+- D alone cannot answer a stored typo, negation or numeric change.
+
+The six commissioned attacks close as follows:
+
+1. no current or mandated near-term consumer fails under A+D; editing convenience alone is insufficient;
+2. OCP-008 permits but does not require same-identity correction;
+3. B cannot change visible text through a bare ID without floating historical consumers;
+4. C cannot add immutable revisions while preserving the current one-dimensional P-001 identity and bare-reference contract;
+5. D has no standalone answer for a changed stored typo; and
+6. no smaller complete outcome was found because D adds a boundary invariant, not another semantic authority.
+
+A failed attack in future evidence is a reopening trigger, not permission for the implementation PR to improvise B or C.
+
+## 35. Alternatives not selected and reopening gates
+
+### 35.1 B — identified editorial-amendment record
+
+B is not selected because no current consumer requires stable logical identity across changed stored text, while an amendment record would introduce another identity, provenance/history authority, P-001 decision and exact consumer-state binding.
+
+B may be reopened only when a concrete consumer demonstrates both:
+
+1. a semantic requirement—not editing convenience—to preserve one logical Objective ID across changed stored text; and
+2. an independent need to reference, attribute or govern amendment acts as records.
+
+The reopening evidence must also provide a complete P-001 decision, conflict/branching semantics, exact historical consumer binding and migration from current bare references without a latest-head rule.
+
+### 35.2 C — exact versioned Objective snapshot
+
+C is not selected because it would split logical Objective identity from immutable record identity and migrate every consumer that needs corrected text.
+
+C may be reopened only when multiple concrete consumers require exact revisions under one stable logical Objective ID and can demonstrate:
+
+- one unique record/revision identity compatible with P-001;
+- exact non-floating consumer references;
+- revision branching, rollback and conflict behavior;
+- separation from Objective Module C supersession; and
+- an atomic migration for current Objective, Operation and assessment evidence.
+
+### 35.3 D alone and unversioned mutation
+
+D alone remains incomplete for a stored orthographic change. Unversioned in-place mutation remains inadmissible. Neither may be reopened by UI preference, field count, edit frequency or storage convenience.
+
+## 36. Selected Core Boundary and Pattern result
+
+The selected authority split is deliberately small:
+
+| Candidate object | Selected route | Owner | Result |
+|---|---|---|---|
+| Objective stored-statement immutability | F — existing fundamental Concept invariant | OCP-008 | later OCP-008 clarification; no new Concept |
+| normative-payload/display separation | F for the Objective boundary | OCP-008 | display data is excluded from Objective semantics |
+| display renderer and presentation metadata | I — implementation-local | product/renderer | no Core identity or correction authority |
+
+No Route C amendment record, Route D equivalence rule or Route E equivalence envelope is selected. Domain tools may advise authors before creation, but Core does not consume their result to preserve identity.
+
+The current `P-001@0.1.0` invocation remains exact and unchanged. Objective remains the endpoint-free record, and Optional Module C remains the only selected history module. No Pattern field or obligation is added by implication.
+
+## 37. Selected scenario commitments
+
+| Scenario | Required A+D result |
+|---|---|
+| S1 historical Operation | old Operation keeps the old Objective ID and statement; corrected stored text uses a new ID |
+| S2 UI reflow | renderer changes outside Objective; stored statement and ID remain unchanged |
+| S3 harmless stored typo | new Objective ID, attributable creation and optional explicit supersession |
+| S4 mislabelled negation/number | new Objective ID; label and similarity cannot preserve identity |
+| S5 concurrent corrections | distinct successor Objectives remain visible; no newest winner |
+| S6 rule disagreement | no Core equivalence decision is needed; changed values remain distinct IDs |
+| S7 unavailable rule | each immutable Objective replays without the unavailable equivalence rule |
+| S8 newer rule differs | history is not reclassified; Objective records remain exact |
+| S9 materialized disagreement | exact stored Objective wins; any conflicting convenience view is invalid |
+| S10 bare `objective_id` | resolves exactly one immutable Objective record, never a correction head |
+| S11 rollback | consumer explicitly rebinds to an exact prior/new Objective; no record is deleted or redirected |
+| S12 mixed branch | every changed stored value is a separate successor; branching stays visible |
+
+## 38. Mandatory OCP-008 implementation contract
+
+The separate implementation proposal must:
+
+1. change OCP-008 `0.2.1 → 0.3.0` while retaining document `Draft` and Objective `Accepted`;
+2. start from the exact OCP-008 blob and SHA-256 in §2;
+3. replace the §4 same-identity stored editorial-correction permission with the exact strict-immutability and display-exclusion rules in §33;
+4. clarify `statement` as the immutable stored normative value without standardizing a UI, transport serialization, language model or universal text-normalization algorithm;
+5. retain the minimal Objective fields and add no amendment ID, revision ID, correction head, mutable current statement or latest selector;
+6. retain `supersedes_objective_ref` semantics, prior-record validity, branching, non-redirecting resolution and consumer non-rebinding;
+7. keep `P-001@0.1.0`, endpoint-free form and Optional Module C unchanged and complete;
+8. update invariants, examples, non-examples, review targets and open questions so no prose preserves the rejected positive same-identity path;
+9. add synthetic evidence for a harmless stored typo represented by a new Objective with supersession;
+10. prove that an older Operation and an older outcome assessment continue to resolve the prior Objective after the successor exists;
+11. prove that two correction successors remain visible and cannot be selected by newest timestamp, record order, issuer/editor count or similarity;
+12. reject duplicate same-ID records even when their statements appear editorially equivalent;
+13. add no OCP-004/OCP-011 semantic or version change unless authoring reveals a real consumer incompatibility—in that case the proposal must stop;
+14. resolve AB-063 only after the normative text and executable evidence are accepted together; and
+15. change no Concept status, registry projection, graph edge, other OCP, Pattern version, readiness percentage or promotion scope.
+
+The implementation may refine wording for readability, but it may not weaken “changed stored normative value → new Objective ID” or turn presentation normalization into equivalence authority.
+
+## 39. Migration, rollback and failure handling
+
+The current repository has no stored same-ID correction lineage and needs no data migration for this selection act. Existing Objective, Operation and assessment fixtures keep their current IDs and meanings.
+
+A future dataset containing two historical stored statements under one `objective_id` cannot choose the newest, most frequent or most similar value. A migration may assign distinct Objective identities only through an explicit attributable process that preserves every recoverable historical value and consumer binding. If the prior consumer/value relationship cannot be reconstructed, the data remains invalid or quarantined; it does not receive a permissive synthetic history.
+
+Rollback of the later OCP-008 implementation is an explicit reviewed contract act. It cannot delete successor Objectives, merge IDs, redirect references or resurrect a positive amendment/revision path without reopening §35.
+
+The implementation must stop and return to AD-017 if it discovers:
+
+- a current consumer that cannot preserve historical meaning through exact new Objective IDs;
+- a required amendment or revision identity;
+- an unavoidable OCP-004/OCP-011 reference migration;
+- a P-001 module change;
+- a display normalization that changes stored normative content; or
+- any failure of exact replay under the selected model.
+
+## 40. Selected counterexample results
+
+The sixteen §13 counterexamples resolve under A+D as follows:
+
+1. timestamps never select Objective identity;
+2. record/list order never selects a successor;
+3. editor, reviewer, issuer or tool count has no authority;
+4. similarity and ad hoc hashes cannot merge identities;
+5. one `objective_id` never authorizes overwriting stored statement;
+6. an “editorial” label has no identity effect;
+7. creation/replacement provenance does not become same-identity correction authority;
+8. Module C remains Objective supersession only;
+9. no amendment invoker exists to inherit or omit P-001;
+10. no floating revision/head exists;
+11. a changed stored typo is not display-only;
+12. consumers rebind only through explicit governed changes;
+13. uncertainty creates a new Objective or rejects the attempted mutation;
+14. later rules cannot re-evaluate immutable identity history;
+15. resolving AB-063 does not promote Objective; and
+16. correction/display behavior creates no achievement or authorization conclusion.
+
+## 41. Accepted effect and next gate
+
+When exact-head reviewed, explicitly authorized and merged, AD-017B will:
+
+- set AD-017 to `0.3.0 / Accepted`;
+- select A+D as the Objective correction direction;
+- move AB-063 from `Discovery` to `Planned` for the separate OCP-008 implementation;
+- authorize preparation of one OCP-008 strict-immutability implementation draft under §38; and
+- keep foundation readiness at approximately 68% because no normative OCP blocker is resolved yet.
+
+This act changes no OCP, Concept, Concept status, Pattern invocation, consumer contract, registry row, graph edge, schema, checker rule or fixture. It does not authorize Objective promotion or a second T4 micro-wave.
+
+The later OCP-008 proposal repeats Fable exact-head review, Codex adjudication, green CI and a new explicit Pavlo/Architecture Board authorization. AD-017B authorization cannot transfer to that implementation, its AB-063 resolution, a fresh B/S/C audit or any promotion-scope act.
