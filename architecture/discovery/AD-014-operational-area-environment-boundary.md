@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-014
 Title: Operational Area and Environment Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-002, OCP-003, OCP-004, OCP-005, OCP-006, OCP-007, OCP-014, OCP-015, AD-010
 Applies-To: AB-008, Operational Area candidate, Environment taxonomy category, Infrastructure Resource boundary
-Review-After: external comparison demonstrates an independently identified spatial or environmental owner and complete fail-safe evidence
+Review-After: AD-014B Board selection or new evidence changes the A/B/F weighting or reopens C/D/E
 ---
 
 # AD-014 — Operational Area and Environment Boundary
@@ -359,7 +359,257 @@ AD-014 may leave Discovery only when:
 
 ## 19. Discovery status and next cycle
 
-Revision `0.1.0` opens the boundary and moves AB-008 from `Open` to `Discovery`. It records no preferred outcome.
+Revision `0.1.0` opened the boundary and moved AB-008 from `Open` to `Discovery`. It recorded no preferred outcome. Revision `0.2.0` adds the AD-014A comparison in §§20–30: concrete consumer scenarios, authority accounting and complete A–F counterexample mapping without selecting an outcome.
 
-The next PR should be `AD-014A — Compare Operational Area and Environment Outcomes`. It must add concrete consumer scenarios, authority accounting and complete A–F counterexample mapping without selecting an outcome. A later `AD-014B` Board act may select a direction or retain Discovery. Any OCP amendment, P-001 invocation, Concept registration, graph edge, schema or executable implementation requires a later separately reviewed PR.
+A later `AD-014B` Board act may select a direction or retain Discovery. Any OCP amendment, P-001 invocation, Concept registration, graph edge, schema or executable implementation requires a later separately reviewed PR.
 
+## 20. AD-014A comparison method
+
+Revision `0.2.0` compares A–F without changing the decision status. The comparison uses four questions in order:
+
+1. **Consumer:** what concrete operational question needs a spatial or environmental input?
+2. **Identity:** must the same subject be referenced independently across Operations or histories?
+3. **Authority:** who owns identity, revision, profile, time and provenance?
+4. **Failure:** what non-permissive result is required when an exact input is absent, ambiguous or incomparable?
+
+An outcome receives positive weight only when it closes all four questions with less authority than broader alternatives. Schema convenience, map reuse and query performance do not count as evidence.
+
+No scenario below contains coordinates, unit names, live infrastructure, real routes or operational conditions. Opaque identifiers and synthetic profile versions are sufficient to compare the semantics.
+
+## 21. Concrete consumer scenarios
+
+### S1 — one Operation, two local spatial parts
+
+One planned Operation needs a corridor and a disjoint work area. The planner needs both exact parts replayed with the Operation revision. No other Operation refers to either part by a shared identity.
+
+The consumer needs immutable local spatial binding, not a reusable registry. A is sufficient. B–D add identity without evidence; E lacks accepted derivation inputs; F is relevant only if the local parts are supplied by an exact domain profile.
+
+### S2 — managed Launch Site and its footprint
+
+One exact Launch Site is assigned as an Infrastructure Resource. Its managed-site boundary and an Operation's chosen work area happen to be geometrically equal.
+
+Every outcome must preserve two identities: the Resource and the spatial description. The site Assignment does not assign the area, and the area binding does not assign the site. This scenario separates the boundary but does not require reusable area identity.
+
+### S3 — reused named area with a corrected boundary
+
+Several Operations intentionally refer to the same governed area identity. A later authority corrects its boundary, while earlier Operations must replay the exact old revision.
+
+This is the strongest positive test for B. C is justified only if the area additionally passes the independent lifecycle/relation tests beyond record identity. F can satisfy the scenario when a domain registry legitimately owns the identity and Core accepts the exact profile binding. A can preserve each local snapshot but cannot by itself prove that all snapshots refer to one reusable subject.
+
+### S4 — overlapping independent Operations
+
+Two Operation spatial bindings overlap under one exact geometry rule. They belong to independent verticals and have no accepted coordination or visibility relation.
+
+All outcomes must return only the geometric result owned by that rule. No outcome may create agreement, conflict, Organization relation, authorization, Assignment or shared Operation context. This scenario does not favor a stored area identity.
+
+### S5 — environmental suitability input
+
+A named consumer needs to evaluate whether exact observed conditions are usable for one Operation purpose at one time. Observations may be missing, stale, ambiguous or conflicting.
+
+The consumer needs an exact subject/context reference, condition vocabulary, evidence snapshot, criterion/rule and evaluation time. It does not need a universal Environment identity. A can carry an exact local/domain context binding; F can own the condition vocabulary. B or C can identify an area but cannot decide suitability. D is over-broad unless independent Environment continuity and authority are proven. E cannot derive a positive conclusion from unowned inputs.
+
+### S6 — cross-domain spatial exchange
+
+Two domains exchange references whose labels and shapes appear similar but whose coordinate/profile versions or condition vocabularies differ.
+
+F directly owns exact namespace/profile/version handling and ambiguity rejection. A can preserve opaque exact references but offers no shared equivalence. B can work only if a legitimate Core registry owns both representations. C or D does not solve profile translation merely by creating a Concept.
+
+### S7 — derived Operation footprint
+
+A consumer proposes to derive a footprint from route, assigned Resource locations and Constraint inputs, then replay the result later.
+
+E is the only outcome whose primary role matches the request, but the current foundation has no accepted Resource-location contract, route model, geometry rule owner or complete historical input snapshot. E therefore remains a useful falsification control, not a currently implementable positive direction.
+
+## 22. Consumer-fit comparison
+
+`Strong` means the outcome supplies the scenario with no known missing owner. `Conditional` means a named authority or contract is still required. `Extra` means it can represent the case but adds unsupported identity. `Blocked` means a necessary input or authority is absent.
+
+| Scenario | A local | B record | C Area Concept | D Environment Concept | E derived | F domain envelope |
+|---|---|---|---|---|---|---|
+| S1 local multipart context | **Strong** | Extra | Extra | Extra | Blocked | Conditional |
+| S2 site versus footprint | **Strong** | Conditional | Extra | Extra | Blocked | Conditional |
+| S3 reused corrected area | Conditional | **Strong** | Conditional | Extra | Blocked | **Strong** when domain-owned |
+| S4 overlap without authority | **Strong** | **Strong** | Conditional | Conditional | Conditional | **Strong** |
+| S5 environmental suitability input | Conditional | Conditional | Conditional | Extra | Blocked | **Strong** for vocabulary/input only |
+| S6 cross-domain exchange | Conditional | Conditional | Extra | Extra | Blocked | **Strong** |
+| S7 derived footprint | Conditional snapshot | Conditional stored output | Extra | Extra | Blocked pending inputs | Conditional inputs |
+
+No outcome alone supplies suitability, admissibility or coordination authority. Those conclusions remain owned by a named consumer, exact rule and immutable inputs.
+
+## 23. Identity and responsibility comparison
+
+| Question | A | B | C | D | E | F |
+|---|---|---|---|---|---|---|
+| reusable area identity | none in Core | identified area record | Operational Area Concept | Environment-owned area/context | none; output identity only if separately governed | domain namespace/profile |
+| managed-site identity | OCP-003 Resource | unchanged | unchanged | unchanged | unchanged | unchanged |
+| Operation binding | local immutable snapshot/ref | exact area revision ref | exact Concept/ref revision | exact Environment/context ref | exact derivation snapshot | exact domain profile ref |
+| boundary change | new Operation snapshot | new record revision/correction | Concept-owned lifecycle/revision | Environment-owned revision | new derived result from exact inputs | domain-owned revision |
+| condition observations | external exact evidence | separate from area record | separate from Area Concept | separate records about Environment | exact derivation inputs only | domain-owned vocabulary/evidence |
+| cross-domain equivalence | none inferred | registry mapping only if accepted | not created by Concept status | not created by Concept status | exact rule required | profile translation owned explicitly |
+| primary failure risk | duplicated local descriptions | premature record/registry authority | unnecessary fundamental identity | universal context container | current-state recomputation | fragmentation/profile ambiguity |
+
+## 24. Revision, time and provenance comparison
+
+### 24.1 A — local snapshot authority
+
+The Operation revision owns one exact local binding. A changed boundary creates a new Operation snapshot or explicit local successor; it never mutates historical evidence. “Same area” across Operations has no Core meaning unless another accepted record supplies it.
+
+### 24.2 B — area-record authority
+
+One accepted registry owns stable area ID, exact revision ID, boundary/profile reference, applicability and provenance. Operations bind exact revisions. Branching or correction remains visible; no newest revision is selected implicitly. A full invocation decision must govern history if P-001 is used.
+
+### 24.3 C — Concept authority
+
+The defining OCP must own identity, lifecycle, relationship vocabulary and revision semantics. Geometry remains a representation of the Concept, not its identity. A graph edge from Operation is a separate explicit decision and does not appear merely because C is selected.
+
+### 24.4 D — Environment authority
+
+The defining OCP must explain what remains the same Environment while areas and observed conditions change. It must also prove why separate area records plus evidence cannot express the consumer. Without that proof, D has no legitimate revision owner broad enough for its claimed responsibility.
+
+### 24.5 E — derivation authority
+
+Every result binds exact rule/version, historical input snapshot, evaluation time and provenance. A later query produces another view and never rewrites the old one. Missing historical route, Resource location, Constraint or geometry profile makes replay non-permissive.
+
+### 24.6 F — domain authority
+
+The domain profile owns identity, version, spatial interpretation and condition vocabulary. Core stores only exact profile binding and may reject unknown, ambiguous or incomparable inputs. Core cannot silently translate, merge or choose among domain authorities.
+
+## 25. Normative authority accounting
+
+“None” means no positive Core authority exists; it is not permission for a caller to supply an arbitrary value.
+
+| Binding or conclusion | A | B | C | D | E | F | Fail-safe obligation |
+|---|---|---|---|---|---|---|---|
+| area subject identity | Operation-local only | area registry | defining OCP | Environment defining OCP | none | domain registry/profile | zero/multiple exact resolution rejects |
+| boundary/profile version | local immutable snapshot | exact record revision | Concept representation revision | Environment/context revision | exact input profile | domain profile version | no latest or best-effort fallback |
+| boundary applicability | Operation snapshot purpose/time | record applicability | Concept-owned rule | Environment-owned rule | derivation query/input time | domain profile contract | incomparable time is non-permissive |
+| managed site | OCP-003 Resource | unchanged | unchanged | unchanged | unchanged | unchanged | geometry never rewrites Resource identity |
+| Operation spatial binding | OCP-004 local amendment later required | exact area revision | exact Area reference | exact Environment/context reference | exact derivation result | exact profile reference | bare label is unresolved |
+| geometry interpretation | local exact profile | registry's exact profile | separately governed representation | separately governed representation | exact rule/input profile | domain profile | unknown CRS/profile cannot compare |
+| boundary correction | new local snapshot | explicit successor/revision | Concept lifecycle/revision | Environment lifecycle/revision | new result | domain revision | history preserved; branches visible |
+| condition subject | local exact context ref | exact area ref if selected | exact Area ref | exact Environment ref | exact derivation input | domain context ref | no floating condition statement |
+| condition vocabulary | named consumer/domain | named consumer/domain | named consumer/domain | defining or domain contract | exact rule input | domain profile | label similarity is not equivalence |
+| observation truth | none | none | none | none | none | none | attribution does not select truth |
+| suitability/admissibility | named consumer only | named consumer only | named consumer only | named consumer only | named consumer only | named consumer only | spatial/environment input alone cannot decide |
+| overlap/containment | exact external/local rule | exact rule over revisions | exact rule over representations | exact rule over contexts | derivation rule | domain/profile rule | no social or authority consequence |
+| coordination/visibility | OCP-014/OCP-015/AD-010 | same | same | same | same | same | overlap creates no relation |
+| cross-domain mapping | none | accepted registry mapping | separate mapping contract | separate mapping contract | exact derivation rule | explicit profile mapping | ambiguity rejects; counts do not vote |
+
+## 26. Complete counterexample mapping
+
+Each cell states the outcome-specific mechanism for the corresponding §12 counterexample. A cell does not authorize implementation; it identifies what a later selected contract must prove.
+
+| # | A | B | C | D | E | F |
+|---:|---|---|---|---|---|---|
+| 1 | local area snapshot remains distinct from site Resource | area record ID differs from Resource ID | Area Concept differs from Resource | Environment/context differs from Resource | derived view differs from Resource | domain context ID differs from Resource |
+| 2 | new local footprint snapshot; same Resource | new boundary revision; same Resource | representation revision; same Resource | context revision; same Resource | new derivation input/output; same Resource | domain revision; same Resource |
+| 3 | equal local refs create no Operation relation | shared area ref creates no relation | shared Area creates no relation | shared Environment creates no relation | equal output creates no relation | shared profile ref creates no relation |
+| 4 | overlap result only | overlap result only | overlap result only | overlap result only | derived overlap only | domain overlap only |
+| 5 | snapshot holds two parts | record set holds exact revisions | exact Area refs remain plural | exact context parts remain plural | rule returns explicit multipart output | profile represents multipart binding |
+| 6 | each Operation preserves its snapshot | old/new revisions exact-resolve | Concept history preserves representation | Environment history preserves context revision | old input/output snapshot preserved | old domain revision remains resolvable |
+| 7 | equal local geometry has no shared ID | distinct authority-bound record IDs | identity not derived from geometry | identity not derived from geometry | output identity not derived from shape alone | namespaces prevent collapse |
+| 8 | local ref ambiguity rejects | registry ambiguity rejects | Concept resolution rejects | Environment resolution rejects | input ambiguity rejects | profile ambiguity rejects |
+| 9 | location does not create Assignment | area membership does not create Assignment | Area membership does not create Assignment | Environment membership does not create Assignment | derived membership does not create Assignment | domain membership does not create Assignment |
+| 10 | no automatic invalidity | record relation has no Constraint result | Concept relation has no Constraint result | context relation has no Constraint result | derivation has no admissibility result | domain relation has no Core admissibility result |
+| 11 | named consumer fails closed | named consumer fails closed | named consumer fails closed | Environment identity cannot repair evidence | derivation fails closed | domain evidence envelope fails closed |
+| 12 | immutable local evidence snapshot | separate later evidence/record | observation history separate from Area | observation history separate from Environment | new result, no mutation | domain history preserves old evidence |
+| 13 | unknown local profile rejects | unknown record profile rejects | unknown representation rejects | unknown context representation rejects | unknown input profile rejects | unknown domain profile rejects |
+| 14 | Operation snapshot cannot be reconstructed | stored revision cannot borrow current inputs | Concept history cannot borrow current inputs | Environment history cannot borrow current inputs | replay returns non-permissive | domain replay returns non-permissive |
+| 15 | no label equivalence | mapping must be explicit | Concept name gives no equivalence | Environment name gives no equivalence | exact translation rule required | exact profile mapping required |
+| 16 | shared local area creates no Organization relation | shared record creates none | shared Area creates none | shared Environment creates none | shared view creates none | shared domain context creates none |
+| 17 | input only; named consumer decides | input only | input only | Environment is not decision authority | derived context is not decision authority | domain input is not portable decision authority |
+| 18 | no order/time/size/count authority | no newest/issuer authority | no lifecycle recency winner | no universal-context recency winner | no latest-input substitution | no namespace/source voting |
+
+## 27. Outcome-conditional implementation contracts
+
+This comparison adds no schema, fixture or checker code. A later implementation must satisfy only the selected block plus unconditional §13.
+
+### 27.1 A — Operation-local binding
+
+- amend OCP-004 with an exact immutable local binding and revision/snapshot owner;
+- support one or many spatial parts without requiring reusable identity;
+- exact-bind any opaque geometry/profile version and reject unknown interpretation;
+- demonstrate historical replay and no cross-Operation identity inference;
+- retain Environment as a category/domain input and add no area registry.
+
+### 27.2 B — reusable record
+
+- define record identity, exact revision, boundary/profile, applicability, authority and provenance;
+- choose and completely specify P-001 invocation or a reviewed non-invocation reason;
+- define exact Operation reference, correction/branching and historical replay;
+- keep Resource, area and environmental evidence identities separate;
+- demonstrate why reuse in S3 cannot be satisfied by A or F.
+
+### 27.3 C — Operational Area Concept
+
+- provide evidence for every §6 identity test and a responsibility not exhausted by B;
+- define lifecycle, owner, relations and representation revisions in one defining OCP;
+- synchronize Concept status and graph only in the implementation PR after Board selection;
+- keep condition evidence and consumer conclusions outside Area identity;
+- include negative evidence showing why local/domain models are insufficient.
+
+### 27.4 D — Environment Concept
+
+- provide separate identity evidence for Environment, not merely for one area;
+- define continuity across condition and boundary changes without mutable truth fields;
+- define exact relations to Resource, Operational Area, observations and Constraints;
+- exclude Spectrum, State, Readiness and authorization unless separately decided;
+- prove a concrete consumer that cannot use A, B, C or F.
+
+### 27.5 E — derived view
+
+- first accept every input identity and historical snapshot contract;
+- exact-bind derivation rule/version, geometry/profile, evaluation time and provenance;
+- fail closed for absent, duplicate, stale, ambiguous or incomparable inputs;
+- keep derived output separate from Operation, Resource and Assignment identity;
+- prove replay without current-state lookup or wall clock.
+
+### 27.6 F — domain envelope
+
+- name concrete domain registries/profiles and legitimate owners;
+- exact-bind namespace, identity, profile version and historical interpretation;
+- reject cross-profile ambiguity and make translation a separate exact rule;
+- retain synthetic Core interoperability fixtures without sensitive geometry;
+- define the minimum OCP-004 binding that can carry the domain reference without importing domain semantics.
+
+## 28. Evidence-weighted comparison finding
+
+The current evidence does not justify C or D. Operational Area has not yet demonstrated an independent Core lifecycle or relationship responsibility beyond exact context/revision handling, and Environment has not demonstrated one identity that remains coherent across areas and changing conditions.
+
+E is structurally useful but currently blocked: its proposed route, Resource-location, geometry and historical-input owners are absent.
+
+A is the complete current no-new-identity control. It satisfies S1, preserves the site/area boundary and can carry exact opaque domain inputs, but it does not establish reusable identity for S3.
+
+B is the smallest positive Core-local candidate if external evidence confirms a reusable area authority and exact cross-Operation identity. It should not be selected merely because the product wants a shared map object.
+
+F is the strongest delegation candidate for environment vocabularies and cross-domain spatial profiles. It may be selected instead of B when identity and interpretation are genuinely domain-owned. A later Board act must state whether F fully owns Operation spatial references or complements a narrow A-style local binding; it may not leave two competing authorities implicit.
+
+This comparison records no preferred final outcome. It narrows the admissible Board choice to:
+
+- A, if no reusable identity owner is demonstrated;
+- B, if one Core-governed reusable area record is necessary;
+- F, if domain ownership plus a Core fail-safe envelope is sufficient; or
+- continued Discovery, if evidence cannot distinguish them.
+
+C, D or E require new evidence that closes their explicit gates before selection.
+
+## 29. AD-014A review gate
+
+External review must determine:
+
+1. whether the seven scenarios are concrete enough to separate A, B and F;
+2. whether S3 proves reusable subject identity rather than only shared geometry;
+3. whether B's record direction is fully separated from Concept status and P-001 is not assumed silently;
+4. whether F can be a complete alternative rather than an ungoverned complement to A;
+5. whether C/D are fairly represented despite the present negative evidence;
+6. whether E is blocked for actual missing input owners rather than implementation inconvenience;
+7. whether §§25–27 assign every authority and all eighteen counterexamples without borrowing another outcome's layer;
+8. whether suitability and environmental evidence remain consumer-owned under every outcome;
+9. whether no sensitive data, coordinate standard, Spectrum decision or Core Boundary rule has entered the comparison; and
+10. whether §28 reports evidence weighting without making the Board selection in advance.
+
+## 30. Comparison status and next decision gate
+
+Revision `0.2.0` completes the AD-014A comparison while AD-014 and AB-008 remain `Discovery`. It changes no Concept registry, graph edge, OCP contract, Pattern invocation, schema, checker rule or fixture.
+
+A later `AD-014B` Board act may select A, B or F, retain Discovery, or explicitly reopen C, D or E after new evidence. The Board act must identify the exact authority owner and state whether Operational Area remains unregistered, becomes a non-Concept record direction, or stays domain-owned. It may not implement the selected outcome in the same PR.
