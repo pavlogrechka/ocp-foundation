@@ -50,7 +50,7 @@
 - [x] Governed Coordination consumer profile — `AB-003 / OCP-014`
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
-- [ ] Operational Area and environment boundary
+- [ ] Operational Area and environment boundary — `AB-008 / AD-014` Discovery opened; no identity outcome selected
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
 
