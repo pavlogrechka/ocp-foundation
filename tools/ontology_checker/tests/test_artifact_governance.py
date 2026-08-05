@@ -18,6 +18,7 @@ from ocp_checker.artifact_governance import (  # noqa: E402
     ARTIFACT_ID_DUPLICATE,
     ARTIFACT_ID_MISMATCH,
     ARTIFACT_STATUS_INVALID,
+    ARTIFACT_VERSION_INVALID,
     BACKLOG_ID_DUPLICATE,
     DEPENDENCY_REFERENCE_DUPLICATE,
     DEPENDENCY_REFERENCE_INVALID,
@@ -27,6 +28,7 @@ from ocp_checker.artifact_governance import (  # noqa: E402
     NORMATIVE_RULE_INVALID,
     NORMATIVE_RULE_SOURCE_INVALID,
     NORMATIVE_RULE_SOURCE_MISSING,
+    OCP_VERSION_LIFECYCLE_MISMATCH,
     PATTERN_REFERENCE_INVALID,
     PATTERN_REFERENCE_MISSING,
     PATTERN_VERSION_INVALID,
@@ -42,7 +44,7 @@ from ocp_checker.artifact_governance import (  # noqa: E402
 TAXONOMY = """taxonomy_version: 0.5.0
 artifact_classes:
   OCP:
-    document_lifecycle: [Draft, Accepted]
+    document_lifecycle: [Draft, Accepted, Canonical]
     concept_lifecycle: [Proposed, Accepted]
   Pattern:
     lifecycle: [Draft, Accepted]
@@ -96,7 +98,7 @@ class ArtifactGovernanceTests(unittest.TestCase):
             encoding="utf-8",
         )
         (root / "docs/001-sample/README.md").write_text(
-            "---\nDocument-ID: OCP-001\nStatus: Draft\nDefines-Concepts: Sample\n"
+            "---\nDocument-ID: OCP-001\nVersion: 0.1.0\nStatus: Draft\nDefines-Concepts: Sample\n"
             "Concept-Status: Accepted\nUses-Patterns: P-001@0.1.0\n---\n",
             encoding="utf-8",
         )
@@ -152,7 +154,7 @@ class ArtifactGovernanceTests(unittest.TestCase):
         duplicate = root / "docs/001-duplicate/README.md"
         duplicate.parent.mkdir()
         duplicate.write_text(
-            "---\nDocument-ID: OCP-001\nStatus: Draft\n---\n",
+            "---\nDocument-ID: OCP-001\nVersion: 0.1.0\nStatus: Draft\n---\n",
             encoding="utf-8",
         )
         self.assert_errors(root, {ARTIFACT_ID_DUPLICATE})
@@ -228,6 +230,34 @@ class ArtifactGovernanceTests(unittest.TestCase):
             encoding="utf-8",
         )
         self.assert_errors(root, {PATTERN_VERSION_INVALID})
+
+    def test_ocp_version_must_be_semver(self) -> None:
+        root = self.make_repo()
+        path = root / "docs/001-sample/README.md"
+        path.write_text(
+            path.read_text(encoding="utf-8").replace("Version: 0.1.0", "Version: current"),
+            encoding="utf-8",
+        )
+        self.assert_errors(root, {ARTIFACT_VERSION_INVALID})
+
+    def test_precanonical_ocp_requires_zero_major_version(self) -> None:
+        root = self.make_repo()
+        path = root / "docs/001-sample/README.md"
+        path.write_text(
+            path.read_text(encoding="utf-8").replace("Version: 0.1.0", "Version: 1.0.0"),
+            encoding="utf-8",
+        )
+        self.assert_errors(root, {OCP_VERSION_LIFECYCLE_MISMATCH})
+
+    def test_canonical_ocp_requires_nonzero_major_version(self) -> None:
+        root = self.make_repo()
+        path = root / "docs/001-sample/README.md"
+        text = path.read_text(encoding="utf-8").replace("Status: Draft", "Status: Canonical")
+        path.write_text(text, encoding="utf-8")
+        self.assert_errors(root, {OCP_VERSION_LIFECYCLE_MISMATCH})
+
+        path.write_text(text.replace("Version: 0.1.0", "Version: 1.0.0"), encoding="utf-8")
+        self.assertTrue(validate_artifact_governance(root).valid)
 
     def test_exact_dependencies_across_admitted_classes_are_accepted(self) -> None:
         root = self.make_repo()

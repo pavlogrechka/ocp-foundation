@@ -86,9 +86,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-015B `0.3.0 / Accepted` обирає C3 (`G2 × H2`) для Core Boundary: один primary semantic-authority route, orthogonal Pattern form route і human-readable OCP-001/OCP-016 ownership split;
 - OCP-001 `0.9.0` визначає mandatory Core Boundary trigger, а OCP-016 `0.2.0 / Accepted` маршрутизує candidates до Routes F/C/E/D/I без self-approval, admission registry, numeric score, P-002 або machine authority; AB-061 Resolved;
 - AD-016B `0.3.0 / Accepted` обирає R4 (`F → C`) та L2, обмежує current preparation окремими T0–T3 enabling cycles і вимагає AD-016C reassessment + AD-016D Board selection перед T4; сам акт не змінює OCP/Concept/Pattern status або `1.0.0`;
+- T0 встановлює OCP-000 `1.0.0 / Canonical` як стабільний Concept registry contract, замінює двозначний `Operational Space First` на `Explicit Operational Context` і не змінює статус жодного Concept або graph edge;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 115 non-sensitive fixtures і 152 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після прийняття Core Boundary contract — **≈62%**.
+- reference suite містить 115 non-sensitive fixtures і 155 unit tests;
+- не-нормативна оцінка загальної foundation-готовності після T0 — **≈63%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

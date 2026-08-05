@@ -272,6 +272,12 @@ rules:
 - id: RESOURCE_SELF_CONTAINMENT
   kind: validation
   source: OCP-003 §12 composition invariants
+- id: ARTIFACT_VERSION_INVALID
+  kind: validation
+  source: OCP-001 Versioning
+- id: OCP_VERSION_LIFECYCLE_MISMATCH
+  kind: validation
+  source: OCP-001 Versioning
 - id: STATUS_DEFINING_DOCUMENT_MISSING
   kind: validation
   source: OCP-001 Concept status synchronization
