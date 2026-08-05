@@ -1,0 +1,12 @@
+case_id: operation-invalid-spatial-transition-operation-id-001
+concept: OperationSpatialTransitionEvidence
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_SPATIAL_TRANSITION_ID_MISMATCH
+previous:
+  operation_id: OP-SPATIAL-A
+  lifecycle_stage: Draft
+current:
+  operation_id: OP-SPATIAL-B
+  lifecycle_stage: Draft

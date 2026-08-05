@@ -1,0 +1,34 @@
+case_id: operation-valid-draft-spatial-many-equal-payload-001
+concept: Operation
+expected:
+  valid: true
+  error_codes: []
+references:
+  spatial_representation_profiles:
+    - profile_ref: synthetic.opaque-spatial@1
+      profile_owner_ref: domain://synthetic-spatial
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-SHARED@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/equal-shape@1
+      provenance_ref: ACT-SPATIAL-SHARED
+entity:
+  operation_id: OP-SPATIAL-MANY-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-MANY-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-PART-A
+        binding_version_ref: LOCAL-PART-A@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-SHARED@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-PART-A
+      - binding_id: LOCAL-PART-B
+        binding_version_ref: LOCAL-PART-B@1
+        purpose_ref: transit-corridor@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-SHARED@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-PART-B

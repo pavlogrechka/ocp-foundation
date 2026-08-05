@@ -68,6 +68,12 @@ from .objective import (
     validate_objective_dataset,
     validate_operation_fixture,
 )
+from .spatial import (
+    SPATIAL_ERROR_CODES,
+    validate_operation_spatial_context,
+    validate_operation_spatial_transition,
+    validate_operation_spatial_transition_fixture,
+)
 from .artifact_governance import GOVERNANCE_ERROR_CODES
 from .interchangeability import (
     COORDINATION_OWNER_REF,
@@ -95,6 +101,7 @@ ERROR_CODES = (
     | CAPABILITY_ERROR_CODES
     | EVENT_ERROR_CODES
     | OBJECTIVE_ERROR_CODES
+    | SPATIAL_ERROR_CODES
     | GOVERNANCE_ERROR_CODES
 )
 DERIVATION_RULES = (
@@ -106,6 +113,8 @@ DERIVATION_RULES = (
 
 def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
+    if concept == "OperationSpatialTransitionEvidence":
+        return validate_operation_spatial_transition_fixture(fixture)
     if concept == "Capability":
         return validate_capability(fixture.get("entity") or {})
     if concept == "CapabilityRegistry":

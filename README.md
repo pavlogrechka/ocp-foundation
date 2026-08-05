@@ -74,17 +74,18 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-013 `0.2.0 / Accepted` визначає exact consumer requirement, directional eligibility, fail-safe claim/Constraint bindings, rule-version replay та executable evidence для всіх AD-008 §12 counterexamples;
 - OCP-014 `0.2.0 / Accepted` активує exact governed owner `ocp-coordination-consumer@0.1.0` для одного contextual requirement, fail-safe wrong-owner binding і окрему actor-authorization boundary без workflow authority;
 - AD-009 і OCP-015 `0.2.0 / Accepted` визначають окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
-- OCP-004 v0.7.0 визначає plural Objective references та fail-safe exact-binding evidence contract для локального explicit intent;
-- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
+- OCP-004 `0.8.0` визначає plural Objective references, fail-safe exact-binding explicit intent і zero/one/many Operation-local spatial bindings з exact opaque profile/payload snapshots;
+- spatial binding має identity лише в межах owning Operation, не є Operational Area Concept або P-001 record і не створює Resource equality, Assignment, overlap consequence, coordination, suitability, authorization чи Readiness;
+- reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation intent/spatial evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
 - assessment module має власний exact `assessment-rules.yaml` manifest за чинним module-manifest precedent;
 - artifact-governance slice перевіряє global uniqueness primary OCP/Pattern/AD/ADR/AB identifiers, taxonomy statuses, exact-resolvable non-duplicate `Depends-On`, accepted AD↔AB synchronization, global rule-manifest IDs/source bindings і `Uses-Patterns` за політикою `track-current`;
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - AD-011 `0.3.0 / Accepted` окремо приймає S0 і R0 no-new-authority controls; State та Readiness deregistered як Concept candidates після negative current-scope identity verdicts, а R1 лишається окремо gated future direction;
-- AD-014B `0.3.0 / Accepted` обирає Operation-local spatial binding: managed sites лишаються Infrastructure Resource, Environment — taxonomy category/domain input, а reusable-area record і domain-ownership моделі потребують окремого reopening evidence;
+- AD-014B `0.3.0 / Accepted` обирає Operation-local spatial binding; OCP-004 `0.8.0` реалізує exact local profile/snapshot envelope, завершує AB-008 і видаляє temporary Operational Area marker без нового Concept чи graph edge;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 100 non-sensitive fixtures і 140 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після AD-014B spatial/environment selection — **≈60%**.
+- reference suite містить 115 non-sensitive fixtures і 152 unit tests;
+- не-нормативна оцінка загальної foundation-готовності після OCP-004 spatial implementation — **≈61%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

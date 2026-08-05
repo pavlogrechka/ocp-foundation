@@ -1,0 +1,26 @@
+case_id: operation-invalid-spatial-profile-unresolved-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_SPATIAL_PROFILE_UNRESOLVED
+references:
+  spatial_representation_profiles: []
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@1
+      provenance_ref: ACT-SPATIAL-A
+entity:
+  operation_id: OP-SPATIAL-PROFILE-MISSING-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-PROFILE-MISSING-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-A
+        binding_version_ref: LOCAL-A@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-A

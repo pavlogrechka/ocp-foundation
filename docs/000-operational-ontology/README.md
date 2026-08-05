@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.16.0
+Version: 0.17.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -40,7 +40,6 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Operation | Accepted | OCP-004; Architecture Board approval of PR-0003 |
 | Assignment | Accepted | OCP-005; Architecture Board approval of PR-0004 |
 | Operational Space | Proposed | — |
-| Operational Area | Proposed | — |
 | Organization | Accepted | OCP-007; Architecture Board approval of PR-0007 |
 | Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
 | Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
@@ -60,6 +59,14 @@ AD-006C відхилив фундаментальний Concept `Result`: realiz
 Architecture Board прийняла OCP-011 у PR-0013 і завершила migration accounting, тому тимчасовий рядок `Result: Proposed` видалено з активного Concept registry. Це не перехід у `Accepted`, `Deprecated` або `Archived`; кандидат deregistered після negative identity verdict.
 
 Термін `result` може використовуватися описово або в локальних контрактах, зокрема `Constraint evaluation result`, але таке використання не створює фундаментальний Concept `Result`.
+
+## Negative identity decision for Operational Area
+
+AD-014B обрав Operation-local spatial binding і не підтвердив незалежну Core identity для `Operational Area`. OCP-004 `0.8.0` реалізує zero/one/many local bindings як versioned structured values owning Operation, тому тимчасовий рядок `Operational Area: Proposed` видалено з active Concept registry.
+
+Це не перехід у `Accepted`, `Deprecated` або `Archived`. Назви `area`, `work area`, `corridor`, `route`, `point` чи `spatial context` можуть описувати локальне призначення або opaque domain payload, але не створюють reusable area identity, P-001 record чи graph node.
+
+Managed Position Site, Launch Site і Relay Site лишаються Infrastructure Resource. Environment лишається taxonomy category і можливим domain input, а не фундаментальним Concept або alternative owner для managed-site identity. Reusable area record, fundamental Operational Area/Environment identity чи domain-profile authority можна reopen лише за gates AD-014 §32.
 
 ## Negative identity decisions for State and Readiness
 

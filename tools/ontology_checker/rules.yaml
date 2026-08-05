@@ -1,4 +1,4 @@
-manifest_version: 0.7.0
+manifest_version: 0.8.0
 authority: reference-only
 normative_source: OCP documents and governed artifact taxonomy
 rules:
@@ -233,6 +233,36 @@ rules:
 - id: OPERATION_SELF_PARENT
   kind: validation
   source: OCP-004 §17 invariant 10
+- id: OPERATION_SPATIAL_BINDING_DUPLICATE
+  kind: validation
+  source: OCP-004 §17.2 invariant 4
+- id: OPERATION_SPATIAL_BINDING_VERSION_REUSED
+  kind: validation
+  source: OCP-004 §17.2 invariant 8
+- id: OPERATION_SPATIAL_CONTEXT_INVALID
+  kind: validation
+  source: OCP-004 §17.2 invariants 2–3
+- id: OPERATION_SPATIAL_CONTEXT_VERSION_REUSED
+  kind: validation
+  source: OCP-004 §17.2 invariant 8
+- id: OPERATION_SPATIAL_FORBIDDEN_COUPLING
+  kind: validation
+  source: OCP-004 §17.2 invariants 9–11
+- id: OPERATION_SPATIAL_PROFILE_UNRESOLVED
+  kind: validation
+  source: OCP-004 §17.2 invariant 5
+- id: OPERATION_SPATIAL_SNAPSHOT_PROFILE_MISMATCH
+  kind: validation
+  source: OCP-004 §17.2 invariant 6
+- id: OPERATION_SPATIAL_SNAPSHOT_UNRESOLVED
+  kind: validation
+  source: OCP-004 §17.2 invariant 6
+- id: OPERATION_SPATIAL_TEMPORAL_CONTEXT_INVALID
+  kind: validation
+  source: OCP-004 §17.2 invariant 7
+- id: OPERATION_SPATIAL_TRANSITION_ID_MISMATCH
+  kind: validation
+  source: OCP-004 §17.2 invariant 8
 - id: RESOURCE_CLASSIFICATION_REQUIRED
   kind: validation
   source: OCP-003 §12 invariant 3
