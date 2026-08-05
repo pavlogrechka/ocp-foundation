@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.7.0
+Version: 0.7.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008
@@ -9,7 +9,7 @@ Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business R
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
 Concept-Status: Accepted
-Last-Review: 2026-08-03
+Last-Review: 2026-08-05
 ---
 
 # Operation Concept
@@ -70,10 +70,10 @@ Operation не визначає сама по собі:
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
 | Coordination | Proposed | модель взаємодії між Operation |
 | Capability | Proposed | межа предметної спеціалізації |
-| Readiness | Deferred | не визначається цим документом |
-| State | Deferred | не визначається цим документом |
+| Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Operation |
+| State | не зареєстрований окремо | AD-011 S0; lifecycle Operation не є shared State |
 
-Правила, що залежать від Concept у статусі `Proposed`, є робочими й підлягають уточненню у відповідних специфікаціях. Цей документ не передає нормативну відповідальність незареєстрованим поняттям.
+Правила, що залежать від Concept у статусі `Proposed`, є робочими й підлягають уточненню у відповідних специфікаціях. Цей документ не передає нормативну відповідальність незареєстрованим поняттям; описові слова `state` або `readiness` не створюють shared authority.
 
 ## 5. Identity
 

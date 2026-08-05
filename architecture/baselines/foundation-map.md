@@ -18,11 +18,9 @@
 | Operational Space | Proposed |
 | Order | Proposed |
 | Organization | Accepted |
-| Readiness | Deferred |
 | Resource | Accepted |
 | Risk | Proposed |
 | Spectrum | Proposed |
-| State | Deferred |
 
 ## Current normative dependencies
 
@@ -44,5 +42,3 @@
 - `Organization ⇢ Resource` (dashed) — AB-052
 - `Operation ⇢ Event` — OCP-010 Event Accepted; relation owner remains unresolved
 - `Organization ⇢ Coordination` — AB-003 and OCP-000 Coordination Proposed
-- `Operation ⇢ State` — AB-007 and ADR-DRAFT-007
-- `Resource ⇢ Readiness` — AB-007 and ADR-DRAFT-007

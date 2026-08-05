@@ -1,6 +1,6 @@
 # Open Questions
 
-1. Чи є `State` окремим фундаментальним Concept і чи має `Readiness` незалежну identity або є contextual assessment? Питання проходить окреме порівняння осей у `AB-007 / AD-011` за evidence contract AD-002.
+1. Чи з'явиться нове decision-separating evidence для reopening AD-011: independent State identity або concrete Readiness consumer з legitimate criterion, target і freshness owners? Поточне рішення — S0 + R0 без shared authority.
 2. Чи є `Operational Situation` окремим Concept або проєкцією поточного стану графа?
 3. Як моделювати одночасну штатну, оперативну та координаційну належність?
 4. Які дані можуть бути видимими між незалежними вертикалями у спільній операційній зоні? Це питання проходить Discovery в `AB-059 / AD-010`.

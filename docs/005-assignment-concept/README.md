@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.1
+Version: 0.2.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-02
+Last-Review: 2026-08-05
 ---
 
 # Assignment Concept
@@ -66,10 +66,10 @@ Assignment може бути підставою для перевірки цих
 | Capability | Proposed | може перевіряти відповідність ролі |
 | Constraint | Proposed | може обмежувати одночасні чи часові Assignment |
 | Event | Proposed | можливе джерело історії Assignment |
-| Readiness | Deferred | не виводиться з Assignment автоматично |
-| State | Deferred | не визначається цим документом |
+| Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Assignment |
+| State | не зареєстрований окремо | AD-011 S0; lifecycle Assignment не є shared State |
 
-Поняття зі статусом `Proposed` або `Deferred` використовуються лише в межах явно позначених робочих або відкладених правил.
+Поняття зі статусом `Proposed` використовуються лише в межах явно позначених робочих правил. Описові слова `state` або `readiness` не створюють shared foundation authority.
 
 ## 5. Identity
 
