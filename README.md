@@ -100,6 +100,7 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016G `0.8.0` обирає K8 як scope підготовки одного OCP-008/Objective lifecycle draft з atomic projections і bounded OCP-004 `0.8.1` cleanup; сам selection act не змінює жодного status і не авторизує merge draft;
 - AD-016H `0.9.0` фіксує preflight stop через два stale Capability status views і обирає окремий Q1 correction PATCH; OCP-003 `0.6.1` та OCP-004 `0.8.1` виправляють лише ці current labels без semantic/status/dependency змін, після чого K8 може бути заново обчислений на новому baseline;
 - другий T4 act встановлює OCP-008/Objective `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.2.0`, OCP-004 до `0.8.2` та current map/accounting без record migration, consumer rebinding, нового graph edge або achievement authority;
+- AD-016I `0.10.0` заново оцінює remaining T4 scope: OCP-003/OCP-007 лишаються blocked, M0 — fail-safe, а M3 Resource stable-surface discovery є лише провідною гіпотезою до окремого AD-016J Board selection;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 117 non-sensitive fixtures і 164 unit tests;

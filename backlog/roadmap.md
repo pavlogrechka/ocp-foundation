@@ -67,6 +67,7 @@
 - [x] AD-016H K8 preflight repair selection — lifecycle authoring stopped on two stale Capability status views; Q1 selects a separate OCP-003/OCP-004 correction before recomputed K8 work
 - [x] AD-016H Q1 preflight correction — OCP-003 `0.6.1` and OCP-004 `0.8.1` correct only the two stale Capability status views; Resource/Operation semantics, dependencies and Concept statuses remain unchanged
 - [x] Second T4 micro-wave — OCP-008/Objective `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.2.0` projections and bounded OCP-004 `0.8.2` status rendering, with exact historical consumer replay and no achievement authority
+- [x] AD-016I post-Objective reassessment — OCP-003/OCP-007 remain blocked; M0 stays fail-safe and M3 Resource stable-surface discovery is only a leading hypothesis before mandatory AD-016J selection
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -141,6 +142,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Require another Board scope act before any third T4 preparation scope; no authorization transfers from AD-016G, AD-016H, Q1 or the Objective lifecycle act.
-2. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
-3. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
+1. Prepare a separately reviewed AD-016J Board act that chooses M0, M3, M37, M7, ME7 or another explicitly compared remaining-T4 scope; AD-016I itself authorizes no discovery or lifecycle draft.
+2. If M3 is selected, open only a Resource stable-surface discovery comparing inclusion/mapping, explicit exclusion, in-place stabilization and safe extraction; do not edit or promote OCP-003 in the selection act.
+3. Keep OCP-003 and OCP-007 at current status until their candidate-local blockers are resolved and a later Board act separately authorizes lifecycle preparation.
+4. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
