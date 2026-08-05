@@ -80,6 +80,8 @@ Primary-artifact `Depends-On` metadata accepts only exact identifiers in those r
 
 Every primary OCP document must declare a SemVer `Version`. The checker enforces the mechanically expressible OCP-001 lifecycle boundary: `Draft` and `Accepted` documents use `0.x`, while `Canonical` documents use `1.x` or later. It also enforces the L2 repository-tree witness: a Canonical OCP cannot directly depend on a pre-canonical OCP. A same-act group passes only when every direct OCP dependency is Canonical in the same proposed tree. It does not decide that a document is semantically ready for Canonical status, prove compatibility, authorize an L2 exception or replace the separate Board act and external review.
 
+OCP-002 `Concept-Statuses` is checked as an exact projection of Concepts declared by primary defining OCP metadata: every defined Concept must appear once with the same status, and duplicate keys plus extra category, candidate or non-Concept rows are rejected. OCP-000 may still contain Proposed candidate markers without defining OCPs; they do not enter this projection until a separate governed Concept act creates the defining metadata. The checker witnesses set/value consistency only and does not award a lifecycle status.
+
 These checks are intentionally structural. They do not infer that two differently worded normative passages are semantically equal or contradictory. External adversarial review retains that responsibility.
 
 ## Authority and exact references

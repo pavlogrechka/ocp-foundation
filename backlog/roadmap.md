@@ -10,7 +10,7 @@
 | Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈65%** | T0 OCP-000, T1 OCP-016 і T2 OCP-001 утворюють Canonical registry/routing/governance roots під R4/L2; наступні окремі acts — T3 OCP-002 та P-001 |
+| **Загальна foundation-готовність** | **≈66%** | T0 OCP-000, T1 OCP-016, T2 OCP-001 і T3 OCP-002 утворюють Canonical registry/routing/governance/projection roots під R4/L2; до reassessment лишається окремий T3 P-001 act |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -56,6 +56,7 @@
 - [x] T0 OCP-000 registry contract — `1.0.0 / Canonical` with independent Proposed rows, explicit authority boundaries and no implicit Concept/graph promotion
 - [x] T1 OCP-016 routing contract — `1.0.0 / Canonical` with exact accepted-content anchors, stable F/C/E/D/I routes, orthogonal Pattern verdict and no machine admission layer
 - [x] T2 OCP-001 governance contract — `1.0.0 / Canonical` with L2, R4/atomicity/non-transfer rules, human counterexamples and a structural direct-dependency witness
+- [x] T3 OCP-002 Concept-status projection — `1.0.0 / Canonical` with exact defined-Concept set/value synchronization and explicitly non-normative category views
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -129,5 +130,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare separate T3 acts: stabilize or explicitly exclude the OCP-002 working category tree, and move P-001 only through its own Accepted Pattern lifecycle with atomic invoker handling.
-2. After both T3 acts, run mandatory AD-016C reassessment and a separate AD-016D Board act before any T4 promotion PR.
+1. Prepare the separate remaining T3 P-001 act through its Accepted Pattern lifecycle with exact reviewed version and atomic invoker handling if that version changes.
+2. After P-001, run mandatory AD-016C reassessment and a separate AD-016D Board act before any T4 promotion PR.
