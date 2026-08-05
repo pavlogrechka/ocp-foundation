@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.5.0
+Version: 0.6.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
-Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Completion or failure of the separately reviewed OCP-009 T4 proposal before any second T4 preparation scope
+Applies-To: AB-062, AB-063, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
+Review-After: Resolution of the Objective editorial-correction authority discovery before any second T4 promotion scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -954,3 +954,67 @@ When externally reviewed, explicitly owner-authorized and merged, AD-016D will:
 - change no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule or fixture.
 
 Fable exact-head review, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization are required for AD-016D itself. A later OCP-009 proposal repeats all four gates and requires a separate merge authorization. Until AD-016D merges, G2 and the OCP-009 preparation scope in §§49–53 remain proposals only.
+
+## 55. Post-first-wave baseline — AD-016E
+
+AD-016E evaluates the next scope on `main@4e2cce4540f3598f7ff95b981d5a45962d25d3b1`. OCP-009 and Capability are `1.0.0 / Canonical`; OCP-000 and OCP-002 are `1.1.0 / Canonical`; post-merge CI is green. This is evidence that the first G2 unit completed, not evidence that a second candidate is ready.
+
+The remaining T4 candidates are unchanged semantically:
+
+| Candidate | State | Blocking item |
+|---|---|---|
+| OCP-003 Resource | `0.6.0 / Draft`; Concept `Accepted` | `Organizational Resource` / `Unit` identity and Organization mapping |
+| OCP-007 Organization | `0.3.2 / Draft`; Concept `Accepted` | merger/split continuity, relationship class/type stability and Resource mapping |
+| OCP-008 Objective | `0.2.1 / Draft`; Concept `Accepted` | authority and immutable evidence for same-identity editorial correction |
+
+All three B sets are non-empty. Therefore no second T4 promotion draft is admissible now under G2.
+
+## 56. Remediation-scope comparison
+
+| Option | Scope | Benefit | Main risk | Result |
+|---|---|---|---|---|
+| J0 — hold only | open no remediation cycle | lowest immediate change | blockers remain untested | admissible fallback |
+| J3 — Resource boundary first | resolve AB-006/AB-052 mapping from the Resource side | addresses a central dependency | cannot be decided honestly without Organization identity evidence | premature alone |
+| J7 — Organization boundary first | resolve continuity, relationship kinds and mapping together | attacks the widest T4 surface | several independent decisions create a large rollback unit | not first |
+| J8 — Objective correction discovery first | isolate same-identity correction authority and evidence | one bounded identity question with Canonical roots and Accepted P-001 | a convenience edit path could weaken immutable supersession | leading remediation scope |
+| JE — extract a stable kernel | split OCP-003 or OCP-007 before semantic resolution | may later isolate stable text | can duplicate authority or hide the identity blocker | conditional, not selected |
+
+J8 is preferred because the question is independently falsifiable and does not require deciding Organization/Resource mapping. This is not a readiness ranking and does not authorize Objective promotion.
+
+## 57. Selected preparation scope — Objective correction discovery only
+
+AD-016E selects J8 and authorizes preparation of a separate discovery for the OCP-008 same-identity editorial-correction boundary. The exact input is OCP-008 blob `c1a088aff6e61bf553a100ecb2dd9975a3b67657`, SHA-256 `35f1a24e7f9d085ca3b9a6300d39544d5aa13d660652a34935a38980e96535a2`, at the §55 baseline.
+
+The discovery must compare at least:
+
+1. strict immutability: every stored `statement` change creates a new Objective with explicit supersession;
+2. a separately identified editorial-amendment record while Objective identity remains stable;
+3. an exact versioned Objective snapshot with governed domain equivalence evidence; and
+4. exclusion of display-only formatting from the stored normative statement.
+
+For each outcome it must name authority, provenance, replay, P-001 impact, migration, invalid counterexamples and how semantic change fails safe. A domain label, newest timestamp, record order, editor count or similarity score cannot establish equivalence.
+
+## 58. Non-transfer and stop rules
+
+This act does not authorize editing OCP-008 normative semantics, changing its version/status, promoting Objective, creating an amendment record, invoking another Pattern, or changing any projection or graph edge. Those effects require later comparison, Board selection and exact-head implementation acts.
+
+If discovery shows that same-identity correction cannot preserve immutable replay without new authority, strict immutability remains the fail-safe control. Successful discovery does not make Objective ready; the resolved contract must still undergo a fresh B/S/C audit and a new Board promotion-scope act.
+
+OCP-003 and OCP-007 remediation may be researched, but no promotion draft or identity decision for them is authorized here.
+
+## 59. Counterexamples
+
+1. Capability succeeded, so another T4 candidate must follow — false; G2 has no momentum rule.
+2. Objective has only one named B item, so it is already ready — false; one B item stops promotion.
+3. Spell-check similarity proves semantic equivalence — false without governed authority and replayable evidence.
+4. Same `objective_id` permits in-place statement mutation — false under the current supersession guarantee.
+5. P-001 Module C automatically supplies editorial correction semantics — false; the invoker owns domain meaning.
+6. Green fixtures, newest edit or reviewer count selects an outcome — false.
+7. J8 selection authorizes OCP-008 promotion — false; it authorizes discovery preparation only.
+8. Resolving Objective opens OCP-004 automatically — false; Resource and Operation-local blockers remain.
+
+## 60. AD-016E proposed effect
+
+When exact-head reviewed, explicitly authorized and merged, AD-016E will set AD-016 to `0.6.0 / Accepted`, retain G2/L2 with J0 as fallback, create AB-063 as `Planned`, and authorize only the separate Objective correction discovery. AB-062 remains `Planned`.
+
+It changes no OCP, Concept, Pattern, dependency, registry row, status projection, graph edge, checker rule, fixture or readiness percentage. Authorization of AD-016E cannot transfer to the discovery decision, OCP-008 promotion or any other candidate.

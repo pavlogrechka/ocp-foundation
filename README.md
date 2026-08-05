@@ -94,6 +94,7 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016C `0.4.0` recompute-ить post-enabling readiness: OCP-009 Capability є єдиним T4 кандидатом без current B-item, G2 micro-waves inside C — провідна гіпотеза, але окремий AD-016D Board act ще обов'язковий;
 - AD-016D `0.5.0` обирає G2 всередині C/L2 і дозволяє підготовку лише окремого OCP-009 T4 draft; merge цього draft, інші T4 кандидати та другий micro-wave потребують власних Board gates;
 - перший T4 act встановлює OCP-009 і Capability `1.0.0 / Canonical` та атомарно оновлює OCP-000/OCP-002 до `1.1.0`; exact definition identity/resolution, non-redirecting supersession, domain admission boundary і всі non-equivalence rules зберігаються без consumer rebinding;
+- AD-016E `0.6.0` зберігає G0 для promotion і дозволяє лише discovery OCP-008 editorial-correction authority; жоден другий T4 candidate ще не готовий або авторизований;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 115 non-sensitive fixtures і 161 unit tests;
