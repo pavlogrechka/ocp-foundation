@@ -134,6 +134,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Run the external outcome-fair AD-017A comparison for AB-063 across strict immutability, identified amendment, exact versioned snapshot and display-only exclusion; do not change OCP-008 lifecycle or semantics in the comparison act.
-2. Require a separate AD-017B Board selection before any OCP-008 implementation proposal.
+1. Externally review AD-017A and require a separate AD-017B Board act to select or reject the leading A+D direction; do not change OCP-008 lifecycle or semantics in either comparison or selection accounting.
+2. Require a later separately reviewed implementation act before any OCP-008 contract change, and a fresh B/S/C audit plus Board scope act before promotion preparation.
 3. Keep OCP-003/OCP-007/OCP-008 at current status until each B item is resolved and a later Board scope act separately authorizes promotion preparation.
