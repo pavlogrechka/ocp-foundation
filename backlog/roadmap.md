@@ -52,7 +52,7 @@
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
 - [x] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 0.2.0 / Accepted` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
-- [ ] Promote stable core descriptions to Canonical
+- [ ] Promote stable core descriptions to Canonical — `AB-062 / AD-016 0.1.0` Discovery compares hold, atomic, layered, selective, kernel and enabling-baseline strategies without changing status
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -126,5 +126,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Apply OCP-016 to a canonicalization-readiness review of the Accepted foundation specifications before any `Canonical` status change.
-2. Keep dependency stability, executable evidence and implementation-facing contract gaps explicit; canonicalization requires a separate external review and Architecture Board act with atomic projections.
+1. Complete external comparison of AD-016 outcomes A–F across exact dependency/Pattern status, open-question and semantic-vs-production evidence.
+2. Use a separate AD-016B Board act before any `Canonical` status or `1.0.0` promotion; every promotion remains its own exact-head reviewed cycle with atomic projections.
