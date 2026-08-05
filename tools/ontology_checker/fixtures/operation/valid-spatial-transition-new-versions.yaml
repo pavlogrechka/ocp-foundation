@@ -1,0 +1,44 @@
+case_id: operation-valid-spatial-transition-new-versions-001
+concept: OperationSpatialTransitionEvidence
+expected:
+  valid: true
+  error_codes: []
+references:
+  spatial_representation_profiles:
+    - profile_ref: synthetic.opaque-spatial@1
+      profile_owner_ref: domain://synthetic-spatial
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@1
+      provenance_ref: ACT-SPATIAL-A
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@2
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@2
+      provenance_ref: ACT-SPATIAL-A-CORRECTION
+previous:
+  operation_id: OP-SPATIAL-TRANSITION-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-TRANSITION-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-A
+        binding_version_ref: LOCAL-A@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-A
+current:
+  operation_id: OP-SPATIAL-TRANSITION-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-TRANSITION-CONTEXT@2
+    bindings:
+      - binding_id: LOCAL-A
+        binding_version_ref: LOCAL-A@2
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@2
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-A-CORRECTION

@@ -1,15 +1,15 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.5.1
+Version: 0.6.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000, OCP-001, OCP-002
+Depends-On: OCP-000, OCP-001, OCP-002, AD-014
 Used-By: Operation Concept, Assignment Concept, Organization Model, Capability Model, Domain Model
 Defines-Concepts: Resource
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-02
+Last-Review: 2026-08-05
 ---
 
 # Resource Concept
@@ -109,7 +109,7 @@ Resource
 - `Organization` описує структуру, належність і відносини;
 - `Organizational Resource` описує операційне залучення організаційної одиниці як цілого.
 
-До завершення Organization Concept статус `Unit` у цій гілці залишається відкритим питанням.
+До рішень AB-006 та AB-052 статус `Unit` у цій гілці й точний mapping `Organization ↔ Organizational Resource` залишаються відкритими питаннями.
 
 ### 5.3 Technical Resource
 
@@ -122,6 +122,10 @@ Resource
 Відносно стаціонарний або підготовлений об’єкт, який може використовуватися для забезпечення Operation.
 
 Термін `Position Site` використовується тимчасово, щоб не змішувати інфраструктурний об’єкт із можливим майбутнім поняттям посади.
+
+AD-014B уточнює identity discriminator: конкретний managed Position Site, Launch Site або Relay Site з власною стабільною identity, owner/management boundary та use history є Infrastructure Resource. Його footprint, coverage, навколишня area або environmental conditions є окремими descriptions/inputs і не входять до identity Resource.
+
+Довільний polygon, route, point, named region або condition snapshot не стає Resource лише тому, що використовується в Operation. OCP-004 може exact-bind-ити такий opaque spatial payload локально; рівність payload або geometry не merge-ить Resource з binding і не створює Assignment.
 
 ### 5.5 Consumable Resource
 
@@ -173,16 +177,20 @@ Assignment assigns Resource to Operation
 
 ### Capability and constraints
 
-`Capability` і `Constraint` зареєстровані як Proposed Concept. До їх окремого визначення застосовуються лише робочі гіпотези:
+`Capability` і `Constraint` мають статус Accepted. Resource-specific Capability proposition представляється окремим `CapabilityClaimRecord` за OCP-012; definition та claim не стають властивістю Resource identity.
 
 ```text
-Resource has Capability
+CapabilityClaimRecord targets Resource
 Resource is_subject_to Constraint
 ```
 
+Positive Capability claim не створює Readiness, availability, authorization, selection або Assignment.
+
 ### Spatial and temporal
 
-Resource може мати просторові й часові характеристики. Точна семантика місцезнаходження, доступності та часових інтервалів буде визначена окремими Concept і не встановлюється цим документом.
+Resource може мати просторові й часові характеристики, але цей документ не визначає location model, availability або geometry authority. Operation-local spatial binding за OCP-004 не є Resource location, footprint ownership чи доказом участі.
+
+`Environment` лишається taxonomy category і можливим domain input, а не alternative identity class для managed Infrastructure Resource. Site boundary може змінитися без зміни Resource identity; area, coverage або environmental evidence не успадковує його Assignment.
 
 ## 8. Composition
 
@@ -206,7 +214,7 @@ Resource може бути складеним.
 Identified → Registered → Active → Retired
 ```
 
-`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. Вони можуть бути станами або похідними оцінками й розглядатимуться після Constraint відповідно до `ADR-DRAFT-007`.
+`Available`, `Assigned`, `In Use`, `Unavailable`, `Ready` та подібні значення не фіксуються як етапи життєвого циклу. AD-011 прийняв no-shared-State/no-shared-Readiness controls; availability і Resource-local health/lifecycle projections потребують окремих exact owners і не виводяться з цього lifecycle за implication.
 
 ## 10. Business Rules
 
@@ -273,23 +281,20 @@ Identified → Registered → Active → Retired
 
 ## 15. Open Questions
 
+AD-014B закрив current-scope межу managed infrastructure / Environment: managed site є Resource, а spatial/environment description не є ним за implication. AD-011 окремо прийняв no-shared-Readiness control, OCP-013 визначив contextual interchangeability, а OCP-009/OCP-012 розділили Capability definition і Resource-specific claim.
+
 1. Чи має `Unit` одночасно бути Organization і Resource, чи потрібна окрема проєкція Organization у Resource?
-2. Чи всі інфраструктурні об’єкти є Resource, чи частина з них належить Environment?
-3. Чи потрібен окремий Concept `Resource Group` для тимчасового об’єднання ресурсів?
-4. Якою моделлю описується поточна доступність Resource?
-5. Чи є `Readiness` окремим Concept, спеціалізацією можливого `State`, контекстною оцінкою Resource або похідним результатом щодо конкретного Assignment чи Operation?
-6. Чи потрібні окремі механізми масового створення Assignment для складених Resource?
-7. Як моделюється взаємозамінність однотипних Resource без втрати ідентичності окремих екземплярів?
-8. Де проходить межа між Resource і Capability?
+2. Чи потрібен окремий Concept `Resource Group` для тимчасового об’єднання ресурсів?
+3. Якою моделлю описується поточна доступність Resource?
+4. Чи потрібні окремі механізми масового створення Assignment для складених Resource?
 
 ## 16. Deferred Decisions
 
-Після визначення Assignment залишаються відкладеними:
+Окремими майбутніми рішеннями залишаються:
 
 - модель доступності;
-- онтологічна природа Readiness та її зв’язок із Resource, Assignment, Operation і можливим State;
+- будь-який future Readiness contract після окремого reopening mandate за AD-011;
 - модель поточного використання;
 - конфлікти одночасного призначення;
-- остаточна роль `State`;
-- остаточний lifecycle операційного стану Resource;
+- Resource-local lifecycle/health projections без shared State abstraction;
 - точна модель кількості, резервування і споживання Consumable Resource.

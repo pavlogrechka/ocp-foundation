@@ -1,0 +1,21 @@
+case_id: operation-invalid-spatial-forbidden-coupling-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_SPATIAL_CONTEXT_INVALID
+    - OPERATION_SPATIAL_FORBIDDEN_COUPLING
+entity:
+  operation_id: OP-SPATIAL-COUPLING-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-COUPLING-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-A
+        binding_version_ref: LOCAL-A@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-A
+        authorization_ref: AUTH-001

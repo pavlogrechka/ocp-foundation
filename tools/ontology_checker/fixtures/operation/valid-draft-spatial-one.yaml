@@ -1,0 +1,28 @@
+case_id: operation-valid-draft-spatial-one-001
+concept: Operation
+expected:
+  valid: true
+  error_codes: []
+references:
+  spatial_representation_profiles:
+    - profile_ref: synthetic.opaque-spatial@1
+      profile_owner_ref: domain://synthetic-spatial
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@1
+      provenance_ref: ACT-SPATIAL-A
+entity:
+  operation_id: OP-SPATIAL-ONE-001
+  lifecycle_stage: Draft
+  planned_start: 2026-08-06T09:00:00Z
+  spatial_context:
+    context_version_ref: OP-SPATIAL-ONE-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-WORK-AREA
+        binding_version_ref: LOCAL-WORK-AREA@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: planned-context
+        provenance_ref: ACT-BINDING-A

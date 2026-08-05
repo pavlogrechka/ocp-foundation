@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.16.0
+Version: 0.17.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -96,7 +96,7 @@ Operation
 │   └── Objective [Accepted]
 ├── Temporal Context
 ├── Spatial Context
-│   └── Operational Area [Proposed]
+│   └── Local Spatial Binding [Operation-owned structure; not a Concept]
 ├── Participation
 │   └── Assignment [Accepted]
 ├── Constraints
@@ -109,6 +109,10 @@ Operation
 Event не є Operation lifecycle transition або Operation-owned result field. Operation-to-Event relevance залишається explicit downstream relation/reference question і не створює current Concept dependency.
 
 OutcomeAssessmentRecord не є Operation child object або success field. Він exact-bind-ить незалежний target, criterion, evidence/input snapshots та evaluator за Accepted OCP-011.
+
+AD-014B відхилив current-scope fundamental identity для `Operational Area` і не ввів `Environment` Concept. OCP-004 `0.8.0` представляє spatial context як zero/one/many local versioned bindings owning Operation. Local binding не є P-001 record або graph node; однакові payload, label чи geometry в різних Operation не створюють shared identity.
+
+`Environment` у верхньорівневому дереві лишається **категорією класифікації**, а не зареєстрованим Concept. Environmental conditions можуть бути domain-owned inputs або attributable observations, але не набувають identity, truth, suitability, authorization чи Readiness authority через розташування в taxonomy.
 
 ## Objective
 

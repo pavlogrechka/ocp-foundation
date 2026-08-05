@@ -1,10 +1,10 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.7.1
+Version: 0.8.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008
+Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014
 Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business Rules, Domain Model
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
@@ -29,10 +29,10 @@ Operation є центральним контекстом, у якому OCP по
 - операційний намір і Objective;
 - Resource та Assignment;
 - планові й фактичні часові межі;
-- Operational Area та інші просторові прив’язки;
+- нуль, одну або кілька локальних просторових прив’язок;
 - Constraint;
 - координаційні зв’язки;
-- Event і Result.
+- Event та окремі outcome assessments.
 
 Operation дає змогу відповісти на питання: **що виконується, навіщо, де, коли, ким, за яких умов і з яким результатом**.
 
@@ -63,17 +63,17 @@ Operation не визначає сама по собі:
 | Resource | Accepted | елемент, що залучається до Operation |
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
 | Objective | Accepted | intended outcome, condition або effect; OCP-008 |
-| Operational Area | Proposed | просторовий контекст |
 | Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
-| Event | Proposed | значущий факт або зміна |
-| Result | Proposed | наслідок або підсумок виконання |
+| Event | Accepted | значущий occurrence або change; OCP-010 |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
 | Coordination | Proposed | модель взаємодії між Operation |
-| Capability | Proposed | межа предметної спеціалізації |
+| Capability | Accepted | reusable definition layer; OCP-009 |
 | Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Operation |
 | State | не зареєстрований окремо | AD-011 S0; lifecycle Operation не є shared State |
 
-Правила, що залежать від Concept у статусі `Proposed`, є робочими й підлягають уточненню у відповідних специфікаціях. Цей документ не передає нормативну відповідальність незареєстрованим поняттям; описові слова `state` або `readiness` не створюють shared authority.
+`OutcomeAssessmentRecord` за OCP-011 може оцінювати exact Objective, але не є Concept, дочірнім об’єктом Operation або полем її успіху. Фундаментальний `Result` відхилено AD-006C.
+
+Правила, що залежать від Concept у статусі `Proposed`, є робочими й підлягають уточненню у відповідних специфікаціях. Цей документ не передає нормативну відповідальність незареєстрованим поняттям; описові слова `state`, `readiness`, `area` або `environment` не створюють shared authority.
 
 ## 5. Identity
 
@@ -96,14 +96,14 @@ Operation
 │   ├── Planned Bounds
 │   └── Actual Bounds
 ├── Spatial Context
-│   └── Operational Area [Proposed]
+│   └── Local Spatial Binding [Operation-owned structure]
 ├── Participation
 │   └── Assignment [Accepted]
 ├── Constraints
 │   └── Constraint [Accepted]
 └── Outcome
-    ├── Event [Proposed]
-    └── Result [Proposed]
+    ├── Event [Accepted]
+    └── OutcomeAssessmentRecord [Accepted record contract; not a Concept]
 ```
 
 Назви `Intent`, `Temporal Context`, `Spatial Context`, `Participation`, `Constraints` і `Outcome` у цій структурі є секціями моделі Operation, а не автоматично окремими фундаментальними Concept.
@@ -211,15 +211,55 @@ actual_end
 
 ## 9. Spatial Context
 
-Operation може мати одну чи більше Operational Area, маршрутів, точок або інших просторових прив’язок.
+AD-014B обрав найменшу достатню модель: Operation може мати **нуль, одну або багато локальних просторових прив’язок**. Така прив’язка є versioned structured value всередині exact Operation snapshot, а не окремим `Operational Area` Concept, P-001 record, Resource чи graph node.
 
-```text
-Operation occurs_in Operational Area
+```yaml
+spatial_context:
+  context_version_ref: OP-001-SPATIAL@2
+  bindings:
+    - binding_id: LOCAL-WORK-AREA
+      binding_version_ref: LOCAL-WORK-AREA@2
+      purpose_ref: work-area@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@2
+      temporal_scope: planned-context
+      provenance_ref: ACT-SPATIAL-BINDING-002
 ```
 
-Operational Area є контекстом Operation, а не частиною її ідентичності.
+`binding_id` має identity лише в межах owning Operation. Нормативний subject прив’язки — пара `(operation_id, binding_id)`; однакові локальні IDs, labels, payloads, footprints або geometries у різних Operation не створюють reusable area identity, equality чи cross-Operation relation.
 
-Маршрут або точка без операційного наміру самі по собі не є Operation.
+`context_version_ref` exact-bind-ить увесь активний spatial context Operation. `binding_version_ref` exact-bind-ить binding-relevant зміст конкретної локальної прив’язки. `purpose_ref` є exact profile-owned кодом призначення, наприклад synthetic `work-area@1` або `transit-corridor@1`; Core не тлумачить цей код самостійно.
+
+`representation_profile_ref` повинен однозначно резолвитися в exact domain-owned profile з явним owner. `payload_snapshot_ref` повинен однозначно резолвитися в immutable snapshot з тим самим exact profile, opaque versioned payload reference і provenance. Core валідовує binding/profile/snapshot envelope, але не координати, geometry, CRS, topology, overlap або containment. Fixture-синтаксис `identity@version` є serialization convention checker-а, а не обов’язковим wire format продукту.
+
+```yaml
+spatial_representation_profile:
+  profile_ref: synthetic.opaque-spatial@1
+  profile_owner_ref: domain://synthetic-spatial
+spatial_payload_snapshot:
+  snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@2
+  representation_profile_ref: synthetic.opaque-spatial@1
+  opaque_payload_ref: synthetic://spatial-payload/a@2
+  provenance_ref: ACT-SPATIAL-PAYLOAD-002
+```
+
+Непорожній `profile_owner_ref` забезпечує attribution, але сам по собі не доводить legitimate authority. Її повинен прийняти exact consumer/domain contract і зовнішній review; checker не автентифікує owner і не обирає його з кількох кандидатів.
+
+`temporal_scope` має одне з трьох значень:
+
+- `operation-context` — прив’язка стосується exact owning Operation snapshot без окремого planned/actual твердження;
+- `planned-context` — прив’язка стосується планового контексту і потребує `planned_start` у тому самому Operation snapshot;
+- `actual-context` — прив’язка стосується фактичного контексту і потребує `actual_start` у тому самому Operation snapshot.
+
+Відсутність `spatial_context` або порожній `bindings` є валідним zero-binding станом. Просторова присутність не є універсальною умовою навіть поза `Draft`; конкретний consumer або domain rule може вимагати її лише у власному exact contract.
+
+OCP-004 володіє membership локальної прив’язки в одному Operation context і вибором exact active versions. Domain profile володіє лише інтерпретацією opaque payload. Жоден із цих власників не отримує права виводити cross-Operation spatial identity чи cross-profile equivalence.
+
+Zero або multiple exact profile/snapshot resolutions, unknown profile, profile mismatch, incomplete binding, duplicate local binding, missing matching temporal context чи заборонене semantic coupling роблять spatial envelope non-permissive. Checker не обирає authority за newest timestamp, storage order, source count, issuer count, label similarity або payload similarity.
+
+Substantive зміна context або binding вимагає нових exact version references. Попередній Operation snapshot і його payload snapshot зберігаються в audit history; поточні поля не переписують минулі evidence. Outcome A не вимагає stored withdrawal/supersession lineage: якщо binding потребує independent reference, correction history або lifecycle поза owning Operation, реалізація повинна зупинитися й reopen Outcome B за AD-014 §32.
+
+Просторова прив’язка не створює Assignment, Resource identity/equality, Organization relation, coordination, conflict, visibility, overlap consequence, suitability, admissibility, availability, authorization, selection або Readiness. Маршрут, точка, area чи opaque payload без операційного наміру самі по собі не є Operation.
 
 ## 10. Participation and Assignment
 
@@ -246,13 +286,13 @@ Operation не володіє Resource і не змінює його орган�
 ```text
 Operation pursues Objective
 Operation has Assignment
-Operation occurs_in Operational Area
 Operation is_subject_to Constraint
-Operation produces Result
 Operation generates Event
 ```
 
 Кожен Concept у цих зв’язках має статус, наведений у розділі 4.
+
+Локальна просторова прив’язка не входить до цього списку Concept relationships. Вона належить structured spatial context owning Operation за §9 і не створює graph edge `Operation → Operational Area` або `Operation → Environment`.
 
 ### 11.2 Inter-operation relationships
 
@@ -294,7 +334,7 @@ Operation contains Operation
 Operation is_part_of Operation
 ```
 
-Parent/child використовується лише тоді, коли дочірня Operation є частиною спільного операційного наміру і її виконання або Result впливає на батьківську Operation.
+Parent/child використовується лише тоді, коли дочірня Operation є частиною спільного операційного наміру і її виконання або окремо оцінений outcome впливає на батьківську Operation.
 
 Координація між незалежними Operation не створює parent/child автоматично.
 
@@ -312,7 +352,7 @@ Draft → Planned → Authorized → Active → Completed
                          ↘ Aborted
 ```
 
-Ці значення є lifecycle stages, визначеними локально для Operation. Вони не є значеннями фундаментального Concept `State`, статус якого відкладено в ADR-DRAFT-007.
+Ці значення є lifecycle stages, визначеними локально для Operation. Вони не є значеннями фундаментального Concept `State`; AD-011 прийняв S0 no-shared-State control і superseded історичний ADR-DRAFT-007.
 
 Кожна зафіксована зміна lifecycle представляється локальним structured transition record:
 
@@ -358,29 +398,29 @@ Operation завершена без переходу до фактичного �
 
 Operation припинена після початку фактичного виконання або через неможливість продовження.
 
-Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до Operation Lifecycle після Constraint і перегляду ADR-DRAFT-007.
+Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до окремого Operation Lifecycle contract; вона не створюватиме shared State abstraction без reopening evidence за AD-011.
 
-## 14. Result, Completion and Events
+## 14. Outcome Evidence, Completion and Events
 
-Operation та Result не є тотожними.
+AD-006C відхилив фундаментальний `Result` Concept. Operation описує діяльність, а не mutable success/result object.
 
-Operation описує діяльність, а Result — зафіксований наслідок, ефект або підсумок виконання.
+OutcomeAssessmentRecord за OCP-011 може exact-bind-ити Objective, criterion, evidence/input snapshots, evaluator і conclusion. Він має власну record identity, не є дочірнім полем Operation і не змінює її lifecycle.
 
 ```text
-Operation produces Result
-Result evaluates Objective
+Completed Operation ≠ achieved Objective
+OutcomeAssessmentRecord assesses exact Objective
 ```
 
-`Result evaluates Objective` є робочим зв’язком до прийняття специфікації Result.
+Event за OCP-010 має незалежну occurrence identity. Він може бути exact evidence для окремого assessment або lifecycle provenance, але не є lifecycle stage, Operation-owned result, truth чи автоматичним доказом досягнення.
 
-Event фіксує значущий факт або зміну, пов’язану з Operation. Event не замінює lifecycle stage, але може бути джерелом його історії або обчислення.
+Operation-to-Event relevance лишається explicit downstream reference/relation question. Цей документ не додає `Operation → Event` Concept dependency або graph edge.
 
 ## 15. Business Rules
 
 1. Operation може бути неповною лише на stage `Draft`; критерії повноти для інших stages повинні бути визначені до канонізації lifecycle.
 2. Допустимість переходів lifecycle визначається окремою transition model.
 3. Resource може мати кілька Assignment до різних Operation; допустимість одночасної участі визначається застосовними Constraint.
-4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або Result.
+4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або окремо оціненого outcome.
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
 6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
 7. Explicit intent може використовуватися поза `Draft` лише коли один або більше authoritative validation records мають exact binding до поточних intent version, validation rule version та input snapshot, усі дають один однозначний result і цей result дорівнює `passed`.
@@ -391,7 +431,7 @@ Event фіксує значущий факт або зміну, пов’яза�
 
 ## 16. Semantic Rules
 
-1. Наявність Operation classification не визначає автоматично її Resource, ролі, авторизацію або Result.
+1. Наявність Operation classification не визначає автоматично її Resource, ролі, авторизацію або outcome conclusion.
 2. `Completed` означає завершення виконання, але не означає автоматичного досягнення Objective.
 3. Просторове або часове перекриття Operation не означає автоматично coordination або conflict.
 4. Належність Resource до Organization не означає його участі в Operation.
@@ -406,8 +446,18 @@ Event фіксує значущий факт або зміну, пов’яза�
 13. Plural `objective_refs` не кодує alternative pursuit, priority, sequence, hierarchy, contribution strength або achievement aggregation.
 14. `validation_status` є derived projection: вона дорівнює однозначному effective result або `not_evaluated`, якщо такого result немає; projection не є авторитетним доказом і не може зробити Operation більш permissive.
 15. `intent_version_ref` позначає immutable version усього binding-relevant змісту explicit intent; substantive зміна, включно зі зміною `statement`, вимагає нової version/reference value.
+16. Локальна просторова прив’язка належить рівно одному Operation context і не має reusable Core identity поза ним.
+17. Однаковий profile, payload, label або geometry не робить дві локальні прив’язки одним subject і не пов’язує їхні Operation.
+18. Managed Position Site, Launch Site або Relay Site лишається Infrastructure Resource незалежно від рівності його footprint локальній просторовій прив’язці.
+19. Просторова прив’язка не успадковує Assignment managed site, а Resource у межах payload не отримує Assignment до Operation.
+20. Overlap або containment потребує окремого exact rule та input snapshots; spatial payload сам не створює coordination, conflict, visibility або authority consequence.
+21. Unknown, unresolved, duplicate, ambiguous або profile-incomparable input не може бути замінений current value, best effort чи profile similarity.
+22. Domain profile не є authority для Operation membership, Resource identity, suitability, authorization, selection або Readiness.
+23. Жодне spatial resolution не використовує newest timestamp, record order, source/issuer count, label або area size як правило authority.
 
 ## 17. Invariants
+
+### 17.1 Baseline Operation invariants
 
 1. Кожен Operation instance має рівно одну непорожню стабільну identity.
 2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, або один `ExplicitIntentRecord`; одночасна наявність обох гілок є невалідною.
@@ -423,6 +473,20 @@ Event фіксує значущий факт або зміну, пов’яза�
 12. Кожен LifecycleTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
 13. Кожен InterOperationRelationshipAssertion містить валідні `source_operation_id`, `relation_type`, `target_operation_id` і непорожній `provenance_ref`.
 
+### 17.2 Local spatial-binding invariants
+
+1. Operation може мати zero, one або many локальних spatial bindings; відсутність `spatial_context` або явний empty binding set є валідними, якщо окремий exact consumer contract не вимагає більшого.
+2. Наявний `spatial_context` містить exact-version `context_version_ref` і явний список `bindings`; довільна scalar або incomplete structure є невалідною.
+3. Кожна binding містить local `binding_id`, exact `binding_version_ref` того самого local subject, exact `purpose_ref`, exact `representation_profile_ref`, exact `payload_snapshot_ref`, один `temporal_scope` і непорожній `provenance_ref`.
+4. `binding_id` і `binding_version_ref` у межах одного active spatial context є унікальними; дві active versions одного local subject не вибираються за порядком.
+5. `representation_profile_ref` однозначно резолвиться в exact profile з непорожнім owner reference; zero або multiple candidates є unresolved.
+6. `payload_snapshot_ref` однозначно резолвиться в immutable exact snapshot з тим самим profile, opaque versioned payload reference і provenance; zero/multiple resolution або profile mismatch є невалідним.
+7. `planned-context` потребує `planned_start`, `actual-context` потребує `actual_start`, а `operation-context` не створює окремого temporal assertion.
+8. Spatial transition порівнює snapshots лише тієї самої `operation_id`; substantive зміна context або чинного binding вимагає нових context/binding versions і не переписує previous snapshot.
+9. Local binding не містить `Operational Area`, `Environment`, Resource, Assignment, Organization чи іншої reusable subject identity як прихований Core owner.
+10. Core володіє лише local membership та exact binding/profile/snapshot envelope; profile owner тлумачить opaque payload, але не встановлює cross-Operation identity або equivalence.
+11. Spatial binding не матеріалізує coordinates/geometry у Core fixture і не містить чи не виводить Assignment, Resource equality, coordination, visibility, overlap consequence, suitability, admissibility, availability, authorization, selection або Readiness.
+
 ## 18. Examples
 
 ### Example A — UAV mission
@@ -437,6 +501,10 @@ Event фіксує значущий факт або зміну, пов’яза�
 
 Місія БпС і робота РЕБ можуть бути окремими Operation різних вертикалей. Вони не стають parent/child лише через спільний час або район. Координаційний зв’язок повинен бути встановлений окремо та мати provenance reference.
 
+### Example D — local multipart spatial context
+
+Одна Operation має дві локальні прив’язки — work area і transit corridor — з різними `binding_id`, але одним exact opaque profile. Інша Operation може мати payload з ідентичним synthetic shape; це не створює shared area identity, coordination або authorization. Зміна першого payload створює нові context, binding і payload-snapshot versions, а попередній Operation snapshot лишається відтворюваним.
+
 ## 19. Non-Examples
 
 Не є Operation самі по собі:
@@ -448,25 +516,25 @@ Event фіксує значущий факт або зміну, пов’яза�
 - маршрут без операційного наміру;
 - окрема частота;
 - повідомлення;
-- Result;
+- OutcomeAssessmentRecord;
 - Event;
 - Order;
 - календарний запис без операційного змісту.
 
 ## 20. Open Questions
 
+AD-014B закрив питання, чи кожна Operation повинна мати окремий `Operational Area`: ні. OCP-004 використовує zero/one/many local bindings за §9; reusable area identity можна reopen лише за gates AD-014 §32.
+
 1. Чи є Order обов’язковим механізмом авторизації Operation або лише одним із можливих джерел?
-2. Чи всі Operation повинні мати Operational Area?
-3. Чи потрібен `Suspended` у канонічному lifecycle?
-4. Як представляти повторювані Operation без змішування шаблону й instance?
-5. Які точні правила визначають parent/child?
-6. Чи може одна Operation мати декілька незалежних джерел авторизації?
-7. Який мінімальний набір даних потрібен для переходу `Draft → Planned`?
-8. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
-9. Чи має Operation власну Readiness, окрему від Readiness залучених Resource?
-10. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
-11. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
-12. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
+2. Чи потрібен `Suspended` у канонічному lifecycle?
+3. Як представляти повторювані Operation без змішування шаблону й instance?
+4. Які точні правила визначають parent/child?
+5. Чи може одна Operation мати декілька незалежних джерел авторизації?
+6. Який мінімальний набір даних потрібен для переходу `Draft → Planned`?
+7. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
+8. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
+9. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
+10. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
 
 ## 21. Deferred Decisions
 
@@ -476,12 +544,15 @@ Event фіксує значущий факт або зміну, пов’яза�
 - ексклюзивність і capacity rules;
 - допустимість кількох одночасних ролей.
 
-До перегляду `ADR-DRAFT-007` відкладаються:
+AD-011 прийняв S0 і R0: Operation lifecycle не є shared State, а foundation не видає Operation Readiness. Новий shared State або Readiness contract потребує окремого reopening mandate з доказами, визначеними AD-011 §25.3; superseded ADR-DRAFT-007 не має current ontology authority.
 
-- остаточна модель State;
-- розмежування lifecycle stage, operational status і derived state;
-- онтологічна природа Readiness Operation;
-- правила збереження та обчислення поточного стану.
+До окремого accepted reopening act за AD-014 відкладаються:
+
+- reusable area record або fundamental Operational Area identity;
+- independent correction/lifecycle history поза owning Operation;
+- cross-profile equivalence;
+- geometry, CRS, topology, overlap і containment evaluation;
+- environmental condition vocabulary та suitability assessment.
 
 До окремих рішень Architecture Board відкладаються:
 

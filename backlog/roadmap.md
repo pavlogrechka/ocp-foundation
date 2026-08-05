@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 78% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; AD-014B обирає Operation-local spatial binding без нового Operational Area/Environment Concept, точний OCP-004 contract ще попереду |
+| Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 69% | OCP-011 і OCP-012 мають окремі exact F1+A1 activations; structured artifact/rule identity та `Depends-On` integrity fail closed; production contracts і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈60%** | AD-014B закриває identity/authority selection для spatial/environment boundary; OCP-004 implementation і registry migration лишаються Planned |
+| Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
+| **Загальна foundation-готовність** | **≈61%** | Spatial/environment boundary реалізовано й AB-008 закрито; наступний великий ontology gap — окрема Core Boundary specification |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -50,7 +50,7 @@
 - [x] Governed Coordination consumer profile — `AB-003 / OCP-014`
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
-- [ ] Operational Area and environment boundary — `AD-014B` selects Outcome A; separate OCP-004 local-binding contract and registry cleanup remain under `AB-008 / Planned`
+- [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
 
@@ -93,6 +93,7 @@
 - [x] Capability Claim support-usability activation — `OCP-012 0.3.0` implements the AD-013B unified `holder-capability@2` boundary, reviewed `declaration-only → evidence-backed` transition, exact source-use F1/A1 rules and replay evidence; `AB-060` is Resolved
 - [x] Global primary-artifact identity uniqueness across OCP, Pattern, AD, ADR and AB registries
 - [x] Structured normative-rule and reference-integrity linter for exact `Depends-On`, global manifest rule IDs and resolvable OCP sources
+- [x] OCP-004 Operation-local spatial binding with exact profile/snapshot resolution, immutable transition evidence and fail-safe non-implication fixtures
 - [ ] Production validator, persistence and implementation-facing contracts
 
 The checker is a reference validation layer, not production implementation. OCP documents, accepted decisions and machine-readable taxonomy remain authoritative. Semantic equivalence or duplication in natural-language normative text remains an external-review obligation; expression language, persistence model and production evaluator remain separate decisions.
@@ -125,4 +126,4 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Implement the separately reviewed OCP-004 local spatial-binding contract selected by AD-014B, including exact profile/snapshot semantics, synthetic fail-safe evidence and atomic Operational Area registry cleanup.
+1. Open the separately reviewed Core Boundary specification cycle without importing domain geometry, authorization, visibility or sensitive operational data into foundation authority.

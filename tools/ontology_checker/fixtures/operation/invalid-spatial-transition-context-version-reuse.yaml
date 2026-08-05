@@ -1,0 +1,34 @@
+case_id: operation-invalid-spatial-transition-context-version-reuse-001
+concept: OperationSpatialTransitionEvidence
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_SPATIAL_CONTEXT_VERSION_REUSED
+references:
+  spatial_representation_profiles:
+    - profile_ref: synthetic.opaque-spatial@1
+      profile_owner_ref: domain://synthetic-spatial
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@1
+      provenance_ref: ACT-SPATIAL-A
+previous:
+  operation_id: OP-SPATIAL-CONTEXT-REUSE-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-CONTEXT-REUSE@1
+    bindings: []
+current:
+  operation_id: OP-SPATIAL-CONTEXT-REUSE-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-CONTEXT-REUSE@1
+    bindings:
+      - binding_id: LOCAL-A
+        binding_version_ref: LOCAL-A@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: operation-context
+        provenance_ref: ACT-BINDING-A

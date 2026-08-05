@@ -1,0 +1,11 @@
+case_id: operation-valid-draft-spatial-empty-context-001
+concept: Operation
+expected:
+  valid: true
+  error_codes: []
+entity:
+  operation_id: OP-SPATIAL-ZERO-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-ZERO-CONTEXT@1
+    bindings: []

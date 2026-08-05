@@ -9,7 +9,7 @@ The checker is **not** a production validator, persistence schema, policy engine
 Implemented validators:
 
 - Resource identity and classification;
-- Operation identity, Objective resolution and explicit-intent exact-binding evidence;
+- Operation identity, Objective resolution, explicit-intent evidence and local spatial-binding exact profile/snapshot envelope;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization and OrganizationRelationshipRecord module validation;
@@ -95,6 +95,41 @@ Resolvers use exact normalized identities. They do not select by:
 - fuzzy similarity.
 
 Zero or multiple exact candidates fail closed.
+
+## Operation-local spatial-binding envelope
+
+OCP-004 `0.8.0` implements AD-014B Outcome A without creating `Operational Area` identity. A fixture may omit `spatial_context`, provide an exact empty context, or carry one or many local bindings:
+
+```yaml
+entity:
+  operation_id: OP-SPATIAL-001
+  planned_start: 2026-08-06T09:00:00Z
+  spatial_context:
+    context_version_ref: OP-SPATIAL-001-CONTEXT@1
+    bindings:
+      - binding_id: LOCAL-WORK-AREA
+        binding_version_ref: LOCAL-WORK-AREA@1
+        purpose_ref: work-area@1
+        representation_profile_ref: synthetic.opaque-spatial@1
+        payload_snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+        temporal_scope: planned-context
+        provenance_ref: ACT-BINDING-A
+references:
+  spatial_representation_profiles:
+    - profile_ref: synthetic.opaque-spatial@1
+      profile_owner_ref: domain://synthetic-spatial
+  spatial_payload_snapshots:
+    - snapshot_ref: SYNTH-SPATIAL-SNAPSHOT-A@1
+      representation_profile_ref: synthetic.opaque-spatial@1
+      opaque_payload_ref: synthetic://spatial-payload/a@1
+      provenance_ref: ACT-SPATIAL-A
+```
+
+The checker validates local identity, exact version syntax, unique binding IDs/versions, exact single profile and snapshot resolution, profile agreement, planned/actual context presence and a closed fixture envelope. Spatial payload stays opaque; no coordinates, geometry or sensitive data enter Core fixtures.
+
+`OperationSpatialTransitionEvidence` compares preserved previous/current snapshots. A substantive spatial change must mint a new context version, and changed content for the same local binding must mint a new binding version. The evidence does not introduce P-001 supersession lineage or select a current record by timestamp/order.
+
+Equal payload references in two bindings or Operations remain distinct local subjects. Unknown, absent, duplicate, ambiguous or mismatched profile/snapshot input fails closed. Binding fields for Resource, Assignment, Organization, coordination, conflict, visibility, overlap, suitability, admissibility, availability, authorization, selection and Readiness are rejected; the checker derives none of those conclusions.
 
 ## Event and ObservationRecord envelope
 
@@ -278,6 +313,9 @@ The suite includes, among other cases:
 - branching assessment heads and order-independent `indeterminate` projection;
 - assessment supersession cycle and binding-identity change;
 - forbidden Result/lifecycle coupling;
+- zero/one/many local spatial bindings and equal-payload identity separation;
+- unresolved/duplicate profiles and snapshots, profile mismatch and invalid temporal scope;
+- spatial context/binding version reuse and forbidden authority coupling;
 - valid and invalid integrated scenarios;
 - artifact, Pattern, Concept-status, graph and Git-history governance probes.
 
@@ -306,5 +344,7 @@ This slice does not provide:
 - automatic multi-Objective or multi-Operation aggregation;
 - production holder-claim persistence or API contracts;
 - Constraint-result assessment evidence kind;
+- reusable area identity, geometry/CRS/topology or overlap/containment evaluation;
+- cross-profile spatial equivalence or a production domain-profile registry;
 - authorization, Conflict, Risk, Readiness or State semantics;
 - machine-complete semantic duplicate detection in natural-language normative prose.

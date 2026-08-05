@@ -1,0 +1,12 @@
+case_id: operation-invalid-spatial-context-structure-001
+concept: Operation
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_SPATIAL_CONTEXT_INVALID
+entity:
+  operation_id: OP-SPATIAL-STRUCTURE-001
+  lifecycle_stage: Draft
+  spatial_context:
+    context_version_ref: OP-SPATIAL-STRUCTURE-CONTEXT
+    bindings: not-a-list

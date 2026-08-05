@@ -193,8 +193,10 @@ def _objective_index(fixture: dict[str, Any]) -> dict[str, list[dict[str, Any]]]
 
 
 def validate_operation_fixture(fixture: dict[str, Any]) -> ValidationResult:
+    from .spatial import validate_operation_spatial_context
+
     operation = fixture.get("entity") or {}
-    errors: list[str] = []
+    errors: list[str] = list(validate_operation_spatial_context(fixture).errors)
 
     operation_id = operation.get("operation_id")
     if not _nonempty(operation_id):

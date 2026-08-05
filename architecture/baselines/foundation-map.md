@@ -14,7 +14,6 @@
 | Event | Accepted |
 | Objective | Accepted |
 | Operation | Accepted |
-| Operational Area | Proposed |
 | Operational Space | Proposed |
 | Order | Proposed |
 | Organization | Accepted |
