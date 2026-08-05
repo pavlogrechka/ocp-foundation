@@ -96,6 +96,7 @@ backlog/                 відкриті питання та дорожня к�
 - перший T4 act встановлює OCP-009 і Capability `1.0.0 / Canonical` та атомарно оновлює OCP-000/OCP-002 до `1.1.0`; exact definition identity/resolution, non-redirecting supersession, domain admission boundary і всі non-equivalence rules зберігаються без consumer rebinding;
 - AD-016 `0.6.1` зберігає прийнятий AD-016E J8 scope і передає active AB-063 ownership до AD-017 без promotion authority; жоден другий T4 candidate ще не готовий або авторизований;
 - OCP-008 `0.3.0 / Draft` реалізує AD-017B A+D: будь-яка зміна stored normative statement створює новий Objective, display лишається implementation-local, duplicate identity відхиляється, а old Operation/assessment exact-bind prior Objective; AB-063 Resolved без promotion;
+- AD-016F `0.7.0` заново обчислює Objective B/S/C на exact post-implementation baseline: B-item закритий, S-exclusions і C-cleanup обмежені, K8 є лише провідною гіпотезою; окремий AD-016G Board act обов'язковий до будь-якого другого T4 draft;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 117 non-sensitive fixtures і 164 unit tests;

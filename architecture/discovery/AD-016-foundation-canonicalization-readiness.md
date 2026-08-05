@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.6.1
+Version: 0.7.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Resolution of the Objective editorial-correction authority discovery before any second T4 promotion scope
+Review-After: Separate AD-016G Architecture Board scope decision before any OCP-008 or second T4 promotion proposal
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -1024,3 +1024,221 @@ It changes no OCP, Concept, Pattern, dependency, registry row, status projection
 AD-017 `0.1.0 / Discovery` becomes the active decision owner for AB-063. AD-016 remains the accepted decision provenance for selecting J8 and authorizing discovery preparation, but no longer lists the active backlog item in `Applies-To`.
 
 This `0.6.1` PATCH handoff prevents overlapping active ownership. It changes no J8 scope, OCP-008 rule, Objective status, promotion authority, evidence obligation or non-transfer boundary.
+
+## 62. AD-016F mandate and exact post-implementation baseline
+
+AD-016F performs the fresh blocker/stability/compatibility audit required by §§58 and 60 after the accepted OCP-008A implementation. It does not select a second T4 scope or authorize a promotion draft.
+
+The exact audit baseline is `main@53c00c4489e2aa3c9efc6af6235be573069aee83`, tree `204302b77de6734fb51c454a5764b230ca0bd6b7`. On that baseline:
+
+- OCP-008 is `0.3.0 / Draft`, Objective is `Accepted`, and the defining file is Git blob `07756e9129a4f11a826b646831dde01939d89336`, SHA-256 `6965cb2f3fbd695a33b16f5eca061f87b33123ee4321aaa8742f709537e1d2e0`;
+- AD-017 is `0.3.0 / Accepted`, selects strict stored-statement immutability plus display exclusion, and retains concrete reopening gates for amendment or revision models;
+- AB-063 is `Resolved` by normative text, duplicate-identity rejection and exact historical-consumer evidence;
+- OCP-000, OCP-001 and OCP-002 are Canonical; P-001 is `0.1.0 / Accepted` and OCP-008 remains exact-bound to it;
+- Capability is the only Canonical Concept; Objective and the other six remaining defined Concepts stay Accepted; and
+- the reference suite has 164 unit tests and 117 non-sensitive fixtures, with post-merge `main` CI green.
+
+The successful implementation and green checks are inputs, not a readiness verdict. AD-016F must still ask whether the former B item is actually gone, whether another B item is exposed, which questions can remain outside a `1.x` surface, and what migration the current consumers and projections would require.
+
+## 63. Fresh B/S/C method
+
+AD-016F reuses the classifications in §§23, 34 and 40:
+
+- **B — blocker:** an unresolved identity, authority, dependency or compatibility question that can invalidate the proposed `1.x` guarantee;
+- **S — scoped exclusion:** a named extension that current consumers do not require and that can remain outside `1.x` without weakening the present contract; and
+- **C — cleanup:** stale or misleading text/projection that must be corrected before promotion but does not require a new semantic decision.
+
+The audit applies four controls:
+
+1. no implementation may satisfy an obligation that its selected semantic model rejects;
+2. no fixture, timestamp, commit order, reviewer count or completed prior wave may choose lifecycle status;
+3. a question is not B merely because it is open, and it is not S merely because it is difficult; and
+4. a current consumer incompatibility, unstable authority or hidden migration overrides schedule and stops the candidate.
+
+This structure keeps K0 hold and a future K8 Objective proposal evidence-accessible. It does not make successful A+D evidence a hidden weight that an alternative scope cannot meet.
+
+## 64. Recomputed Objective B item
+
+The previous B item in §40 asked who classifies a same-identity editorial correction and what immutable evidence prevents a semantic change from bypassing supersession. That question no longer exists inside the selected OCP-008 surface because Core no longer permits a changed stored statement to retain the same identity.
+
+The closure is semantic before it is mechanical:
+
+1. one `objective_id` identifies one immutable stored normative statement;
+2. every changed stored value creates another Objective and another `objective_id`;
+3. optional explicit supersession preserves both records, permits branching and never redirects an existing reference;
+4. display transformation remains outside the stored statement, while write-back becomes a stored-value change;
+5. no newest, current, similar or most-supported projection exists; and
+6. Operations and OutcomeAssessmentRecords keep exact historical Objective references until their own governed act changes them.
+
+The checker then witnesses the expressible subset: it rejects duplicate IDs, preserves two visible correction successors, validates the prior Operation and assessment against the prior Objective, and remains valid when Objective order is reversed. The checker does not classify language equivalence or select authority.
+
+No current OCP-004, OCP-010 or OCP-011 consumer requires one logical Objective ID to survive changed stored text. No current dataset or fixture requires an amendment head, revision identity, mutable current statement or consumer rebinding. AD-017B §§35.1–35.2 retain fail-safe reopening gates if such concrete evidence later appears.
+
+**AD-016F therefore finds no current B item inside the OCP-008 `0.3.0` semantic surface.** This is an audit result, not a promotion selection. A newly demonstrated consumer incompatibility or B/C reopening case would replace this result and stop K8.
+
+## 65. Scoped exclusions that may remain outside Objective `1.x`
+
+The following questions are S under the current evidence:
+
+| Scoped extension | Why it does not block the current surface | Required future gate |
+|---|---|---|
+| Objective hierarchy, decomposition, contribution, support, conflict or equivalence relations | no current Objective identity or consumer reference depends on them | separate owner, consumer, route and relation contract; P-001 decision if identified records are used |
+| Objective lifecycle or temporal effectivity | current validity and exact resolution are intentionally independent of a current/effective projection | separate lifecycle model with authority, history, overlap/gap and fail-safe derivation |
+| same-identity amendment or versioned-revision model | current consumers work with immutable exact IDs; A+D deliberately rejects an unproved head | accepted AD-017 reopening evidence and full migration contract |
+| domain taxonomy for outcome, condition and effect | the definition is sufficient without a closed classification tree | domain or later Core taxonomy act with a concrete consumer |
+| automatic free-text conversion, language normalization and semantic equivalence | Core consumes the stored value after any attributable pre-creation rule | separate input/tooling contract; it cannot rewrite Objective history |
+| display metadata and renderer behavior | presentation is deliberately implementation-local | Route I implementation contract if a product needs one; no Core identity authority |
+| advanced achievement/partial-satisfaction views | OCP-011 already owns exact assessment records and fail-safe activation; Objective remains free of mutable achievement state | extension of the exact OCP-011 target/criterion/activation surface, not an Objective status field |
+
+These exclusions must be readable in a future `1.x` compatibility surface. Canonical would not mean that they are solved, forbidden forever or delegated to an unnamed owner.
+
+## 66. Cleanup and current-state projection audit
+
+The audit finds C work, but no new semantic decision:
+
+1. OCP-008 frontmatter still says `Result Model` in `Used-By`; the current owner is OCP-011 OutcomeAssessmentRecord, while fundamental Result identity was rejected.
+2. OCP-008 §§2, 9, 13 and 15–16 still contain future-tense or open-question wording for Event/Result evidence even though OCP-010 and OCP-011 now govern those boundaries.
+3. OCP-008 §§17–18 are historical accepted-act records and must not be rewritten. A future lifecycle section must add a clear current bridge so their former `Draft`/`Accepted` state cannot be mistaken for the post-act state.
+4. A future compatibility section must distinguish the accepted OCP-011 assessment baseline from still-scoped advanced activation, partial-satisfaction and lifecycle questions.
+5. OCP-004 contains two human-readable current-state labels that render Objective as `Accepted` (§3 table and §4 tree). A future Objective status transition must update or remove that volatile status snapshot so the consumer document does not contradict the authoritative projections.
+6. README and the generated Foundation map are current-state projections/accounting and must move atomically with any selected status act; historical AD sections and milestone baselines must not be rewritten.
+
+Items 1–4 are defining-document cleanup and current-history clarification. Item 5 is a non-semantic consumer PATCH or status-decoupling edit, not an OCP-004 promotion and not a change to `Operation → Objective`. It may be included only with explicit atomic migration accounting. None of these items may be ignored as “editorial” if it would leave a human reader with a false current state.
+
+## 67. Stability audit
+
+OCP-008 now has one coherent semantic owner and one compatible record model:
+
+- identity is the stable `objective_id` of one endpoint-free P-001 record;
+- authority is the exact immutable Objective, not a current projection, mutable view or assessment;
+- the minimal fields and validation obligations are explicit;
+- provenance remains attributable creation evidence and never becomes authorization;
+- Module C owns explicit, acyclic, branching, non-redirecting supersession;
+- Objective remains independent of Operation, while Operation owns the only current Concept dependency;
+- Objective carries no achievement, Readiness, availability, admissibility or command conclusion; and
+- the stored/display boundary is explicit and falsifiable.
+
+Recent implementation is not itself stability evidence. The stronger evidence is that AD-017 compared four authority models, commissioned adversarial attacks, selected the least-authority complete model, and the implementation preserved current P-001 and consumer contracts without migration. The remaining open questions no longer change the meaning of an existing Objective record or reference.
+
+The AD-017 reference in OCP-008 is accepted decision provenance. AD-017 exact-anchors the pre-implementation OCP-008 input; it does not create a Concept edge, a floating current-statement authority or an OCP lifecycle exception. AD-003 and AD-017 remain governed by Accepted decision lifecycle rather than an invented Canonical AD status.
+
+## 68. Candidate `1.x` compatibility surface
+
+If a later Board act selects K8, the proposed OCP-008 `1.x` surface must preserve at least:
+
+1. Objective as one identified intended outcome, condition or effect, independent of any Operation;
+2. exact one-record-per-`objective_id` identity and the minimal stored fields;
+3. immutable stored normative `statement`, with every changed value creating a new ID;
+4. decoded-value identity distinct from serialization bytes and display rendering;
+5. attributable non-authorizing provenance;
+6. explicit Module C supersession with self/cycle rejection, visible branching, overlap/gap tolerance and no redirect;
+7. exact historical consumer resolution with no automatic rebinding;
+8. no current/latest Objective derivation and no authority from timestamp, order, similarity or count;
+9. no Objective hierarchy, lifecycle, effectivity, achievement or authorization by implication;
+10. exact `P-001@0.1.0` invocation and endpoint-free form;
+11. `Concept-Depends-On: []`, while OCP-004 continues to own `Operation → Objective`; and
+12. explicit S exclusions and AD-017 reopening gates.
+
+The future proposal must state how PATCH, MINOR and MAJOR changes apply to that surface. In particular, a later additive relation or lifecycle contract is not automatically MINOR: it must follow OCP-016 and use MAJOR if it weakens identity, exact resolution, authority or consumer replay guarantees.
+
+## 69. Dependency, consumer and migration cost
+
+OCP-008's direct OCP dependencies—OCP-000 `1.1.0`, OCP-001 `1.0.0` and OCP-002 `1.1.0`—are Canonical. P-001 is Accepted at the exact invoked `0.1.0`; Accepted AD-003 and AD-017 supply decision provenance under their own artifact lifecycle. L2 therefore needs no exception or same-act dependency promotion.
+
+The exact direct consumers inspected on the §62 baseline are:
+
+| Consumer | Exact baseline | Compatibility result |
+|---|---|---|
+| OCP-004 Operation | `0.8.0 / Draft`, blob `969cacab45e6e3f8b9bcf302786a60a5464a6888` | `objective_refs` resolve exact Objective IDs; no rebinding or semantic change, but the two current-status labels require C cleanup |
+| OCP-010 Event | `0.2.0 / Draft`, blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | Event identity remains independent; no Objective mutation, achievement implication or reference migration |
+| OCP-011 OutcomeAssessmentRecord | `0.3.0 / Accepted`, blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `target_ref` exact-binds `objective@1`; assessment history and activation never mutate or redirect Objective |
+
+On the current baseline, an eventual Objective lifecycle proposal would have this minimum atomic footprint:
+
+1. OCP-008 `0.3.0 / Draft → 1.0.0 / Canonical` and defining `Concept-Status: Accepted → Canonical`;
+2. OCP-000 `1.1.0 → 1.2.0` with only the Objective row changing `Accepted → Canonical`;
+3. OCP-002 `1.1.0 → 1.2.0` with the exact Objective projection and current prose/tree synchronized;
+4. generated Foundation map and README current-state accounting synchronized;
+5. OCP-004 `0.8.0 → 0.8.1` only for a non-semantic status-label update or removal of volatile status rendering, with its own compatibility and rollback note; and
+6. no OCP-010/OCP-011 version, P-001 version, record schema, Objective ID, Operation reference, assessment reference, Concept dependency or graph-edge change.
+
+The exact versions and blobs must be recomputed if `main` changes before a proposal. Existing valid records need no data migration. A duplicate-ID dataset remains invalid or quarantined; promotion cannot synthesize a newest winner, merge IDs or rewrite historical consumer bindings.
+
+Corrective rollback would be a new reviewed act that restores document/Concept status and all current projections together. It cannot roll back strict record immutability, delete Objectives or redirect references by editing only a status projection.
+
+## 70. Outcome-fair scope options for AD-016G
+
+AD-016F compares scope choices without selecting one:
+
+| Option | Next preparation scope | Evidence in favor | Main risk | Audit result |
+|---|---|---|---|---|
+| K0 — hold | authorize no second T4 draft | lowest immediate lifecycle and migration cost | retains a bounded candidate at Draft without new counterevidence | admissible control |
+| K8 — Objective micro-wave | authorize preparation of one OCP-008/Objective lifecycle draft | B is empty; S and C are explicit; L2 and P-001 floors hold; consumers need no semantic migration | a promotion draft may overclaim completeness or hide OCP-004/current-state cleanup | leading hypothesis, not selected |
+| K3 — Resource remediation | prioritize the Organizational Resource/Unit identity boundary | attacks a real remaining T4 blocker | cannot make Resource ready without Organization mapping evidence | admissible remediation, not a promotion alternative for Objective evidence |
+| K7 — Organization remediation | prioritize continuity, relationship kinds and Resource mapping | addresses the widest remaining T4 identity surface | large coupled decision and rollback unit | admissible later comparison, not currently bounded |
+| K37 — joint Resource/Organization discovery | compare the shared mapping boundary before another lifecycle act | may avoid contradictory one-sided decisions | can couple independent continuity and resource-identity questions | admissible discovery only |
+| KX — reopen AD-017 B/C | reconsider amendment or revision authority | valid only if the exact §35 consumer evidence appears | convenience pressure could reintroduce floating history | unsupported on the current baseline |
+
+Every option uses the unconditional repository inventory, artifact floors, non-transfer rules and current consumer evidence. K8 alone additionally bears the complete `1.x`, projection, cleanup, migration and rollback obligations in §§68–69. K0 is not required to fabricate promotion fixtures; K3/K7/K37 are not required to satisfy Objective-specific evidence. This prevents the evidence design from assuming the layer chosen by another option.
+
+## 71. Falsification targets and counterexamples
+
+Before AD-016G may select K8, review must try to demonstrate any of the following:
+
+1. a current consumer must preserve one logical Objective ID across changed stored text;
+2. strict value immutability conflicts with the exact P-001 invocation or Module C;
+3. OCP-004, OCP-010 or OCP-011 needs semantic migration or reference rebinding;
+4. a direct OCP dependency is pre-canonical or a Pattern binding is stale;
+5. the `1.x` surface cannot exclude lifecycle, hierarchy, taxonomy or display without weakening a current guarantee;
+6. the C cleanup changes identity or authority rather than only removing stale current-state language;
+7. promotion would create a Concept dependency, Concept-graph cycle or current/latest Objective authority;
+8. a current valid dataset requires the forbidden same-ID mutation; or
+9. the migration footprint cannot be rolled back atomically without rewriting record history.
+
+If one succeeds, K8 loses its leading position and the proposal stops. The following remain explicit negative controls:
+
+- OCP-008A merged, therefore Objective must be promoted — false;
+- CI and 164 tests decide readiness — false;
+- one resolved B item means every open question is closed — false;
+- Canonical Objective makes Operation, Event or OutcomeAssessmentRecord Canonical — false;
+- Accepted P-001 transfers status or domain semantics to its invoker — false;
+- newest timestamp, record order, similarity, author count or consumer count selects an Objective — false;
+- OCP-004's stale `Accepted` label may remain because it is non-authoritative — false for readable repository consistency;
+- Objective promotion authorizes amendment/revision, lifecycle, hierarchy, display or achievement semantics — false; and
+- authorization of OCP-008A or AD-016F transfers to AD-016G or a lifecycle PR — false.
+
+## 72. AD-016F recommendation
+
+The strongest current hypothesis is **K8: one separately scoped OCP-008/Objective micro-wave inside the already selected G2/L2 strategy**. It is stronger than K0 because no unresolved B item or hidden consumer migration was found, and stronger than K3/K7/K37 as the immediate bounded lifecycle candidate because those scopes still contain identity blockers.
+
+This is a recommendation only. The principal K8 risk is semantic overreach: treating `Canonical` as proof that Objective lifecycle, taxonomy, equivalence, display, achievement or all downstream consumers are complete. The future `1.x` surface and non-implications must make that inference impossible.
+
+AD-016F does not authorize an OCP-008 branch, version/status edit or projection change. A separate AD-016G Board act must decide whether to select K8, retain K0, choose remediation scope or require another comparison.
+
+## 73. Mandatory AD-016G decision contract
+
+AD-016G must:
+
+1. exact-anchor the then-current `main` baseline and recompute any changed version/blob/status facts;
+2. accept, revise or reject each B/S/C finding with evidence;
+3. attempt all nine §71 falsification targets;
+4. select one explicit scope or retain hold without inferring momentum from prior work;
+5. preserve L2, Pattern lifecycle, atomic projections, OCP-016 routing and separate authorization boundaries; and
+6. state the next act, stop conditions, migration unit and non-transfer rule.
+
+If AD-016G selects K8, it may authorize preparation of one OCP-008 lifecycle draft plus only the exact status projections, accounting and bounded OCP-004 PATCH required by §69. That later proposal must independently provide the exact compatibility surface in §68, atomic footprint in §69, C cleanup, human counterexamples, machine evidence appropriate to the claims, rollback accounting, exact-head Fable review, Codex adjudication, green CI and a new explicit Pavlo/Architecture Board merge authorization.
+
+AD-016G must not select K8 if a current consumer requires amendment/revision identity, if OCP-004/OCP-010/OCP-011 needs a semantic change, if P-001 must change, if strict historical replay fails, or if status synchronization cannot remain atomic. In those cases it stops and routes the discovered object through OCP-016 rather than improvising inside a promotion draft.
+
+## 74. AD-016F accounting and effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016F will:
+
+- set AD-016 to `0.7.0 / Accepted`;
+- record that the former OCP-008 B item is closed and no new B item was found on the exact §62 baseline;
+- classify the remaining Objective questions as explicit S exclusions or C cleanup;
+- record K8 as the leading hypothesis while leaving K0 and remediation scopes admissible;
+- keep AB-062 `Planned` and require a separate AD-016G Board decision; and
+- retain foundation readiness at approximately 68% because no document or Concept lifecycle changes in this audit.
+
+This act changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule, fixture or production authority. Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization apply only to AD-016F. They cannot authorize AD-016G, an OCP-008 lifecycle proposal, OCP-004 cleanup or another T4 candidate.
