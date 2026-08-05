@@ -64,6 +64,7 @@
 - [x] First T4 micro-wave — OCP-009/Capability `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.1.0` projections, exact definition-version independence and non-redirecting supersession
 - [x] AD-016F Objective readiness reassessment — fresh B/S/C audit on exact post-OCP-008A evidence finds no current B item, bounds S/C and records K8 only as the leading hypothesis before mandatory AD-016G
 - [x] AD-016G Objective scope selection — K8 selected for preparation of one separately reviewed OCP-008/Objective lifecycle draft with atomic projections, bounded OCP-004 cleanup and no merge-authorization transfer
+- [x] AD-016H K8 preflight repair selection — lifecycle authoring stopped on two stale Capability status views; Q1 selects a separate OCP-003/OCP-004 correction before recomputed K8 work
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -138,6 +139,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare one separately reviewed OCP-008/Objective lifecycle draft under AD-016G K8, with its own exact-head authorization, atomic projections and OCP-004 `0.8.1` current-state cleanup.
-2. After that proposal completes or fails, require another Board scope act before any third T4 preparation scope; no authorization transfers from K8.
-3. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
+1. Prepare one separately reviewed OCP-003 `0.6.1` + OCP-004 `0.8.1` preflight PATCH that corrects only the two stale Capability status views and adds local non-semantic accounting.
+2. After that correction merges, recompute and prepare the OCP-008/Objective lifecycle draft under K8; OCP-004 is then expected to use `0.8.2` only for Objective current-state views.
+3. After the lifecycle proposal completes or fails, require another Board scope act before any third T4 preparation scope; no authorization transfers from Q1 or K8.
+4. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.

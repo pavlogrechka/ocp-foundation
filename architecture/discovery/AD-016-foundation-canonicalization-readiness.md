@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.8.0
+Version: 0.9.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Completion or failure of the separately reviewed OCP-008/Objective lifecycle proposal before any third T4 preparation scope
+Review-After: Preflight Capability-status correction before K8 authoring; then completion or failure of the OCP-008/Objective lifecycle proposal before any third T4 scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -1395,3 +1395,101 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016G will:
 - retain foundation readiness at approximately 68% because no OCP or Concept lifecycle changes in this selection act.
 
 This act changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule, fixture or production authority. It does not authorize a third T4 scope, OCP-003/OCP-007 promotion, downstream T5–T10 promotion or merge of the selected lifecycle draft.
+
+## 85. AD-016H trigger — K8 preflight stop
+
+Authoring the selected K8 lifecycle proposal exposed a pre-existing human-readable current-state defect before any normative OCP edit was made.
+
+AD-016G §81 requires the proposal to stop if OCP-004 needs an edit broader than its two Objective status views. The exact baseline `main@6d4c24808f4f9fbe058e269429de26bfd7efe801`, tree `9b951d1e14b490fca07d1c946d5f9844f5b804b6`, contains:
+
+- OCP-004 §4 row `Capability | Accepted`, although Capability is already Canonical; and
+- OCP-003 current boundary text stating that Capability and Constraint are both Accepted.
+
+Updating either Capability statement inside the K8 atomic unit would exceed the AD-016G §79/§81 boundary. Leaving the statements untouched would knowingly preserve false current prose in documents meant to be read by humans. Therefore K8 authoring stops before a branch is published or a lifecycle head is proposed.
+
+This stop is evidence that the supporting cleanup scope was incomplete. It is not evidence against Objective identity, the empty B set, P-001 conformance, consumer replay or the K8 semantic direction.
+
+## 86. Exact stale-view footprint
+
+The preflight audit distinguishes current prose from historical records:
+
+| Artifact | Exact baseline | Current stale view | Classification |
+|---|---|---|---|
+| OCP-003 Resource | `0.6.0 / Draft`, blob `4e76de5c56c35625a385e001742fffd7f7f76479`, SHA-256 `f5d2815a635e16f4e994b1f4dbb23e064356311a7f498436820c7667c2dfe85b` | §7 says Capability and Constraint are Accepted | C — update only Capability to Canonical |
+| OCP-004 Operation | `0.8.0 / Draft`, blob `969cacab45e6e3f8b9bcf302786a60a5464a6888`, SHA-256 `6690118cfaaa37358d868ec2610c60a3f381906890f4baed034655454f703f1c` | §4 table says Capability is Accepted | C — update only the Capability row |
+
+README, OCP-000, OCP-002 and the generated Foundation map already render Capability as Canonical. OCP-009's lifecycle act, OCP-000/OCP-002 transition sections, OCP-012 accepted-act text and accepted AD records describe the state at their recorded acts; they are history and must not be rewritten as current-prose cleanup.
+
+No `Capability [Accepted]` tree annotation or additional current Capability-status view was found. The two rows above are the complete preflight correction footprint on the exact baseline.
+
+## 87. Repair options
+
+| Option | Repair sequence | Benefit | Main risk | Result |
+|---|---|---|---|---|
+| Q0 — hold K8 indefinitely | make no correction and open no lifecycle draft | no new edit | leaves known false human-readable state and does not test a finite repair | admissible fail-safe, not preferred |
+| Q1 — separate preflight PATCH | correct the two stale Capability views first; then recompute and resume K8 | preserves independent rollback and restores the exact AD-016G Objective-only boundary | adds one separately governed correction cycle | leading repair |
+| Q2 — expand the K8 atomic unit | correct Capability and Objective status views together | fewer PRs | violates the accepted scope, couples an old defect to Objective rollback and obscures which change required which authority | not selected |
+| Q3 — remove consumer-local status rendering generally | redesign current-status prose across consumer OCPs | may prevent future churn | creates a broader governance policy and migration without evidence that all such prose has one role | deferred; requires separate discovery if pursued |
+
+Q1 carries only exact current-prose correction evidence. It does not require the preflight PATCH to prove Objective promotion claims. K8 retains its own complete lifecycle obligations after the correction. Q0 is not required to fabricate correction evidence, and Q3 is not rejected merely because it is broader.
+
+## 88. Architecture Board repair selection — Q1
+
+AD-016H selects **Q1 — a separate preflight PATCH**.
+
+The selected order is:
+
+1. prepare and separately review one non-semantic Capability-status correction for OCP-003 and OCP-004;
+2. merge that correction only after its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization;
+3. recompute all K8 input blobs, versions and current-state renderings on the new `main`; and
+4. prepare the OCP-008/Objective lifecycle draft under the unchanged semantic selection, with its own fresh gates.
+
+K8 is paused, not revoked. Q1 does not authorize either later merge and does not allow Objective changes in the preflight PATCH.
+
+## 89. Mandatory preflight correction contract
+
+The separate correction proposal may change only:
+
+1. OCP-003 `0.6.0 → 0.6.1`, retaining `Draft` and Resource `Accepted`, to change the current sentence from “Capability and Constraint are Accepted” to “Capability is Canonical; Constraint is Accepted”;
+2. OCP-004 `0.8.0 → 0.8.1`, retaining `Draft` and Operation `Accepted`, to change only the Capability status cell `Accepted → Canonical`;
+3. `Last-Review` metadata for those two touched OCPs;
+4. one local PATCH-accounting note in each touched OCP explaining that no domain semantics, dependency or Concept status changed; and
+5. README/backlog/roadmap accounting needed to record completion and the recomputed next step.
+
+It must not change either OCP's definition, identity, fields, lifecycle, Concept dependencies, direct dependencies, Objective views, Resource/Operation status, Capability semantics, graph edge, P-001 invocation, schema, checker rule or fixture.
+
+If another non-historical stale Capability status view is found, if either wording change alters a semantic guarantee, or if a generated/authoritative projection is inconsistent, the correction stops and Q1 returns to the Board.
+
+## 90. K8 resumption contract
+
+After the preflight correction is accepted and merged:
+
+- the K8 selection in §78 remains the semantic preparation mandate;
+- the later proposal recomputes every exact anchor and version from the new `main` rather than copying §79 numbers;
+- OCP-004 is expected to start from `0.8.1` and, if no other change intervenes, move to `0.8.2` only for its two Objective status views and local lifecycle-accounting note;
+- the six-part §79 footprint otherwise remains unchanged; and
+- every §80 obligation and §81 stop condition remains binding.
+
+Completion of Q1 does not itself make Objective Canonical or satisfy lifecycle review. Failure of Q1 activates K0 hold and authorizes no alternative T4 scope.
+
+## 91. Non-transfer and rollback
+
+AD-016H, the preflight correction and the resumed K8 lifecycle proposal are three separate authorization boundaries.
+
+Rollback of the preflight correction is a new reviewed PATCH that restores only the affected prose/version metadata if evidence shows the status rendering was wrong. It does not roll back Capability status, because OCP-000/OCP-002/OCP-009 remain authoritative and unchanged. A rollback that would alter Capability lifecycle or Resource/Operation semantics is outside Q1.
+
+Newest commit, document order, edit count, reviewer count or the existence of an unfinished lifecycle branch cannot bypass any gate. The unpublished stopped branch carries no authority and no proposed state.
+
+## 92. AD-016H accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016H will:
+
+- set AD-016 to `0.9.0 / Accepted`;
+- record the AD-016G stop before any OCP lifecycle edit;
+- select Q1 as a separate preflight correction sequence;
+- pause K8 until the exact two-view correction is accepted and merged;
+- retain K8's semantic selection and K0 as fail-safe;
+- keep AB-062 `Planned`; and
+- retain foundation readiness at approximately 68% because this Board act changes no lifecycle or OCP text.
+
+This act changes no OCP, Concept, Pattern, projection, dependency, registry row, graph edge, schema, checker rule, fixture or production authority. Its merge authorization cannot authorize the correction proposal, resume K8 by itself, merge the later lifecycle proposal or select another T4 scope.
