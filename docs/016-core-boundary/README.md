@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-016
 Title: Core Boundary Admission and Extension Contract
-Version: 0.2.0
-Status: Accepted
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, AD-015
 Used-By: All Core admission, extension, domain-envelope and semantic route reviews
@@ -14,7 +14,7 @@ Review-After: A concrete routed proposal falsifies route completeness or non-ove
 
 ## 1. Authority and incorporated contract body
 
-Architecture Board accepts OCP-016 revision `0.2.0` as the human-readable Core Boundary routing contract selected by AD-015B C3 (`G2 × H2`) and the resolution of AB-061.
+Architecture Board accepted OCP-016 revision `0.2.0` as the human-readable Core Boundary routing contract selected by AD-015B C3 (`G2 × H2`) and the resolution of AB-061.
 
 The complete externally reviewed Draft is preserved verbatim in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md). Sections 1–18 of that immutable artifact are incorporated into this Accepted specification without semantic alteration. Its frontmatter and §19 preserve the pre-acceptance Draft state and next-act wording as historical review evidence only; this README governs current lifecycle and acceptance.
 
@@ -102,3 +102,85 @@ After acceptance, every proposal within the OCP-001 Core Boundary trigger applie
 AB-061 becomes `Resolved`. A future proposal may expose a route or trigger defect, but it must cite a concrete candidate and counterexample and proceed through explicit AD-015 reopening. Implementation preference or desire for machine scoring is not reopening evidence.
 
 This acceptance takes effect only through squash merge after exact-head Fable review, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization. Until that merge, this README is an acceptance candidate and the reviewed `0.1.0 / Draft` remains current.
+
+PR #79 satisfied that Accepted-state gate. The preceding sentence remains historical process evidence and does not make the current T1 lifecycle conditional.
+
+## 11. Canonical baseline and exact content anchors
+
+T1 promotes the current Accepted routing contract without changing its semantic result.
+
+The exact pre-T1 Accepted wrapper is preserved by Git history at `main@f51da17b54eae67e1e29978488813c7165ea95df`:
+
+- Git blob: `66dab8ef737b0d1d7c7dc895980120046540de54`;
+- SHA-256: `a00117db5278f3468728e5f74a3053fef500068fa879aec27be3b4e4e37fc1c9`.
+
+The immutable full reviewed Draft remains [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md):
+
+- Git blob: `3196f09f4a0b99160b42d1d1d27cc5a8387aae27`;
+- SHA-256: `111e676ac750a2bfbe17d34fb1e8d2984af860fd38c856b824b4aff8c261c155`.
+
+Sections 1–10 above retain the Accepted wrapper semantics. Sections 1–18 of the immutable reviewed artifact remain incorporated exactly as stated in §1. Historical Draft/Accepted frontmatter and next-act wording record their original lifecycle state; they cannot override this README's current Canonical frontmatter or §§11–15.
+
+Content hashes are evidence of the reviewed inputs, not semantic authority or a newest-version selector. Git history, exact links and the human-readable incorporation rule establish which body is current.
+
+## 12. Compatibility surface for `1.x`
+
+OCP-016 `1.x` preserves these guarantees:
+
+1. every semantic candidate receives exactly one primary route from the closed set F/C/E/D/I;
+2. the primary routes remain non-overlapping authority locations rather than quality grades;
+3. Pattern remains an orthogonal, exact-versioned form verdict and never a sixth semantic route;
+4. OCP-001 owns the mandatory trigger/choreography, OCP-016 owns routing, each candidate contract owns its semantics and Architecture Board owns admission/status;
+5. Route D remains valid governed work and `not Core ≠ invalid`;
+6. G3 domain-first and G4 consumer-activation safeguards remain mandatory inside the applicable routes;
+7. every positive proposal supplies a human-readable authority ledger, exact dependencies, concrete consumers, evidence and non-implications;
+8. routing never proves evidence, invents an owner, grants status or approves the candidate;
+9. missing, conflicting, ambiguous or unresolved authority/reference evidence remains non-permissive;
+10. route movement and migration preserve historical authority and update normative/generated projections atomically;
+11. the no-projection baseline remains in force until an explicit AD-015 C4/H4/H5 reopening; and
+12. the explicit non-implications in §6 and incorporated §17 remain binding.
+
+After `1.0.0`, SemVer applies at this routing-contract boundary:
+
+- PATCH may correct prose, links, review evidence or examples without changing a route, ledger obligation, authority owner, fail-safe result or non-implication;
+- MINOR may add a compatible example, precedent, counterexample or clarification that leaves every existing route/result interpretable and every previously conforming ledger conforming; and
+- MAJOR is required to add/remove/rename/redefine a primary route, make Pattern a semantic route, change the OCP-001/OCP-016/Board ownership split, add an obligation that invalidates a previously conforming ledger, weaken non-permissive behavior, transfer domain meaning into an envelope, remove a non-implication or authorize a machine projection as admission authority.
+
+A routed candidate, Board act or downstream OCP exact-binds the current OCP-016 version it claims to apply. OCP-016 document version is not the version of any candidate, route result, domain profile or Pattern.
+
+## 13. Canonical OCP-000 dependency and OCP-001 handoff
+
+OCP-016 consumes OCP-000 only as the Canonical registry owner established by T0. A row provides current membership and status; it does not preselect a route:
+
+- `Proposed` does not imply Route F, future admission or semantic ownership;
+- `Accepted` or `Canonical` does not prove that every extension belongs to Route F/C/E;
+- a deregistered negative candidate remains governed by its exact decision/reopening gate; and
+- row order, status recency or registry presence cannot replace the OCP-016 ledger and Board act.
+
+The OCP-001 link remains a one-direction handoff rather than a reverse dependency. OCP-001 depends on OCP-016 and invokes this routing contract after its trigger. OCP-016 does not consume OCP-001 semantics to define F/C/E/D/I, does not trigger itself and does not copy OCP-001 choreography. This preserves L2 without creating an OCP-001 ↔ OCP-016 cycle.
+
+Accepted AD-015 remains the decision dependency for C3 and its reopening gates. AD artifacts have their own lifecycle and require no invented Canonical status.
+
+## 14. Canonical evidence and machine boundary
+
+The current checker can witness OCP-016 identity/path, `1.0.0 / Canonical` version-lifecycle consistency, exact dependency resolution and source-bound structural governance. It cannot decide route fit, legitimate ownership, consumer need, evidence truth, route movement or Board approval.
+
+T1 adds no route field, authority schema, admission registry, score, Pattern, P-002, checker routing rule or fixture. The content-anchor hashes are independently reproducible but do not become a machine admission layer.
+
+Any future proposal for structured route projection must still stop and reopen AD-015 C4/H4/H5. Passing the lifecycle/version checker is necessary structural evidence, never proof that this or another contract deserved Canonical status.
+
+## 15. T1 canonicalization act
+
+T1 establishes OCP-016 `1.0.0 / Canonical` as the stable Core Boundary routing contract.
+
+This act:
+
+- preserves Routes F/C/E/D/I without addition, removal, renaming or changed precedence;
+- preserves Pattern as an orthogonal form verdict;
+- preserves G3/G4 safeguards, authority ledger, fail-safe routing, migration and non-implications;
+- exact-consumes Canonical OCP-000 without importing Concept row status into route selection;
+- preserves the OCP-001 trigger / OCP-016 routing / candidate semantics / Board approval ownership split;
+- changes no Concept, Concept status, Pattern, dependency, registry row, graph edge, schema, checker behavior or fixture; and
+- does not authorize T2 OCP-001 or any downstream promotion.
+
+Canonical status takes effect only after exact-head Fable approval, Codex adjudication, green CI, a new explicit Pavlo/Architecture Board authorization specifically for T1 and squash merge. T0 authorization cannot be reused. Until that merge, this section and frontmatter are a proposed T1 act.

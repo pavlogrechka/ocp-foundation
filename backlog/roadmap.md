@@ -10,7 +10,7 @@
 | Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈63%** | AD-016B R4/L2 Accepted; T0 встановлює перший Canonical registry contract без перенесення status на Concept rows, наступний окремий slot — T1 OCP-016 |
+| **Загальна foundation-готовність** | **≈64%** | T0 OCP-000 і T1 OCP-016 утворюють Canonical registry/routing roots під R4/L2; наступний окремий slot — T2 OCP-001 |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -51,9 +51,10 @@
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
-- [x] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 0.2.0 / Accepted` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
+- [x] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 1.0.0 / Canonical` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
 - [ ] Promote stable core descriptions to Canonical — `AB-062 / AD-016B 0.3.0` selects R4 (`F → C`) with L2, limits current preparation to T0–T3 and requires AD-016C reassessment plus AD-016D Board selection before T4; no promotion occurs in this act
 - [x] T0 OCP-000 registry contract — `1.0.0 / Canonical` with independent Proposed rows, explicit authority boundaries and no implicit Concept/graph promotion
+- [x] T1 OCP-016 routing contract — `1.0.0 / Canonical` with exact accepted-content anchors, stable F/C/E/D/I routes, orthogonal Pattern verdict and no machine admission layer
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -127,5 +128,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the separate T1 OCP-016 cycle against Canonical OCP-000, preserving its exact incorporated baseline and Concept-row independence.
-2. Continue T2–T3 only through separate exact-head reviewed acts; after their completion, run mandatory AD-016C reassessment and a separate AD-016D Board act before T4.
+1. Prepare the separate T2 OCP-001 cycle against Canonical OCP-000/OCP-016, incorporating L2, R4, atomic projection and non-transfer rules without duplicating OCP-016 routing.
+2. Continue T3 only through separate exact-head reviewed acts; after completion, run mandatory AD-016C reassessment and a separate AD-016D Board act before T4.
