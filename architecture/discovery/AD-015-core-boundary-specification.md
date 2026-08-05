@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-015
 Title: Core Boundary Admission and Extension Discovery
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-002, OCP-003, OCP-004, OCP-006, OCP-009, OCP-011, OCP-012, P-001, AD-001, AD-006, AD-010, AD-011, AD-014
 Applies-To: AB-061, Core admission, domain extensions, interoperability envelopes
-Review-After: External comparison of governance models and artifact homes
+Review-After: External review of AD-015A comparison and separate Board selection
 ---
 
 # AD-015 — Core Boundary Admission and Extension Discovery
@@ -426,3 +426,286 @@ AD-015 may leave Discovery only when:
 Revision `0.1.0` opens AD-015 and AB-061 in `Discovery`. It records no preferred `G × H` combination.
 
 A later `AD-015A` comparison should map accepted precedents and counterexamples across both axes. A separate `AD-015B` Board act may select a combination or retain Discovery. Any OCP-001 amendment, OCP-016, P-002, registry, schema, checker rule, Concept status or graph change requires a later separately reviewed PR.
+
+## 20. AD-015A comparison method
+
+Revision `0.2.0` compares the two axes without selecting either one.
+
+The comparison uses five questions in order:
+
+1. **Coverage:** can the model route every accepted precedent and every §13 counterexample?
+2. **Authority:** does it assign only the smallest legitimate semantic authority?
+3. **Failure:** does missing ownership, consumer evidence or exact resolution remain non-permissive?
+4. **Governance:** is there one human-readable defining location and an explicit Board act?
+5. **Cost:** what new synchronization, review or fragmentation burden does the model create?
+
+No numeric score is used. “Strong”, “conditional”, “weak” and “blocked” below summarize evidence, not approval status. A technically easy implementation receives no positive weight unless it closes the semantic and authority questions.
+
+The comparison keeps three decisions separate:
+
+- whether a reusable admission doctrine is needed at all;
+- which semantic model provides the doctrine; and
+- which artifact owns its normative text and any derived projection.
+
+## 21. Concrete admission scenarios
+
+### S1 — repeated product field
+
+Three products expose a field named `coordination_state`, but each UI computes it from different local data. No accepted consumer needs one shared identity or result vocabulary.
+
+The field is implementation-local. Reuse count is not Core evidence. G1 must return non-Core without calling the field invalid; G2 can route it explicitly to the implementation class. G3/G4 add no value unless a real domain or consumer contract appears.
+
+### S2 — specialized domain Capability
+
+A named domain defines an exact versioned Capability specialization. A Core consumer needs to preserve its identity and reject unknown versions but does not interpret the specialized payload.
+
+The domain owns meaning; a Core envelope may own exact reference integrity. G3 is directly applicable, G2 can route the proposal to its envelope class, and G4 is relevant only if the consumer activates a rule/result beyond reference resolution.
+
+### S3 — repeated attributable record form
+
+Several contracts need stable record identity, provenance and history-preserving supersession, but their domain statements differ.
+
+The repeated form may justify P-001 invocation. It does not make the records one Concept or give P-001 their domain vocabulary. G2 distinguishes Pattern form from record semantics; a binary gate must still explain that the Pattern is neither “the domain Concept” nor “outside governance”.
+
+### S4 — realized outcome representation
+
+A consumer needs an attributable conclusion about one exact Objective and evidence snapshot. A generic fundamental `Result` identity is not demonstrated.
+
+Accepted precedent routes this to OutcomeAssessmentRecord rather than a Concept. A viable model must preserve the negative identity verdict while allowing a Core non-Concept contract.
+
+### S5 — local spatial context
+
+An Operation needs two exact opaque spatial payloads, but no reusable area subject exists across Operations.
+
+Accepted precedent routes this to an Operation-owned local structured value. Equal payload does not create shared identity. G2 represents this class directly; G1 must avoid treating “not a Concept” as “not governed”.
+
+### S6 — reusable occurrence identity
+
+Independent observations and assessments need to reference the same occurrence across contexts and history. The occurrence remains identifiable independently of reports.
+
+This is positive fundamental Concept evidence, represented by Event. Domain-first routing cannot deny a genuine shared identity merely because domain occurrence vocabularies also exist.
+
+### S7 — consumer-local evidence activation
+
+One accepted assessment kind needs an exact freshness/ambiguity rule, while other assessment kinds have no legitimate global lifetime.
+
+G4 directly fits the activation. G2 can classify activation as a Core rule contract without global inheritance. The artifact home must keep the baseline contract and consumer-local rule source unambiguous.
+
+### S8 — visibility conclusion without an owner
+
+Product code can determine that bytes were technically exposed, but no accepted policy owner or shared result vocabulary exists.
+
+No model may promote technical access into Core visibility authority. G0 records the negative case locally; G1 rejects Core admission; G2 routes implementation evidence separately; G3/G4 remain blocked until an exact domain/consumer owner exists.
+
+### S9 — useful reference proposed as a graph edge
+
+One OCP mentions another Concept in examples, but the source Concept's identity and invariants do not depend on the target.
+
+The reference does not become a current Concept dependency. G2's object classification separates reference use from graph admission; every model still requires a separate Board act for an edge.
+
+### S10 — machine admission registry
+
+A generated registry records proposal class, owner and review state. Its row says `approved`, but the exact human-readable Board act is missing.
+
+The registry must fail governance validation or remain non-authoritative. H4 can only be a projection; H5 must define synchronization from human authority to machine state, never the reverse.
+
+## 22. Semantic-model comparison
+
+| Model | Coverage | Authority fit | Fail-safe behavior | Main benefit | Main risk | Current evidence |
+|---|---|---|---|---|---|---|
+| G0 — case-by-case | Can represent every decision by writing another AD. | Narrow per decision. | Depends on each AD repeating the doctrine correctly. | No new abstraction or migration. | Review drift, omissions and inconsistent routing recur. | **Admissible control, weak reusable answer.** Existing history proves viability and its cost. |
+| G1 — binary gate | Distinguishes Core from non-Core, but does not route intermediate governed forms. | Simple Board authority. | Can fail closed on incomplete admission claims. | Easy for humans to apply initially. | “Non-Core” can collapse valid records, Patterns, envelopes and local contracts. | **Partial.** Useful first question, insufficient as the whole repository boundary. |
+| G2 — tiered classes | Directly represents all existing artifact/semantic forms. | Authority can remain class-specific. | Ambiguous class or missing owner can reject. | One routing language for Concepts, records, Patterns, envelopes, domains and implementation. | Class bureaucracy or class labels substituting for evidence. | **Strong hypothesis, not selected.** Accepted precedents already occupy every proposed class. |
+| G3 — domain-first envelope | Strong for specialized domain semantics and cross-domain exchange. | Preserves domain ownership and a narrow Core envelope. | Unknown/incompatible profiles reject exactly. | Limits Core growth and false equivalence. | Fragmentation and weak treatment of genuinely shared Concepts/local Core contracts. | **Strong conditional route, weak universal model alone.** |
+| G4 — consumer activation | Strong for rule/result/profile activation under exact consumers. | Prevents local policy becoming global. | Missing consumer/rule/snapshot rejects. | Proven by OCP-011/OCP-012 activation practice. | Profile proliferation and near-duplicate semantics. | **Strong conditional route, not a complete Concept/record admission model alone.** |
+
+### 22.1 Decision-separating observations
+
+1. G0 proves that no new doctrine is logically required, but three repeated outcome-fairness defects and repeated reconstruction of authority ledgers are evidence of governance cost.
+2. G1 captures the essential “implementation reuse is not Core” question, but accepted local values, non-Concept records and Patterns show that binary placement is not enough.
+3. G2 fits the repository's existing forms without changing their authority. That is evidence of coverage, not proof that one taxonomy should govern them.
+4. G3 supplies the strongest safe treatment of domain specialization, but cannot by itself explain Event, local OCP-004 binding or P-001 form ownership.
+5. G4 supplies the strongest safe treatment of consumer-local rule activation, but cannot decide whether a new subject is a Concept, record or domain profile.
+
+The leading comparison question for AD-015B is therefore whether G3 and G4 are independent universal alternatives, explicit routing modes inside G2, or obligations that any selected model must support. AD-015A does not answer it.
+
+## 23. Artifact-home comparison
+
+| Home | Mandatory applicability | Single defining location | Human-readable primacy | Machine projection | Main risk | Current evidence |
+|---|---|---|---|---|---|---|
+| H0 — no new home | Case-by-case only. | No; doctrine is reconstructed from precedents. | Yes, across many ADs. | None required. | Drift and discoverability failure. | **Admissible control.** |
+| H1 — OCP-001 | Automatic governance rule. | Yes, if added once. | Strong. | Existing governance checker may project finite fields later. | OCP-001 becomes an oversized mix of process and semantic classification. | **Viable.** OCP-001 already owns Concept admission and outcome fairness. |
+| H2 — separate OCP | Automatic via one OCP-001 trigger. | Yes, with explicit division from OCP-001. | Strong. | Optional later projection. | Duplicate governance or false self-approval by a “boundary specification”. | **Viable.** Best separation if non-duplication is proven. |
+| H3 — Pattern | Optional until invoked. | Yes for selected form. | Strong. | Exact invocation metadata exists. | Cannot make mandatory governance optional or decide domain meaning/status. | **Blocked as the sole home; conditional for reusable admission-evidence form.** |
+| H4 — registry | Only if a human rule makes it mandatory. | Machine source may be unique but cannot be normative alone. | Weak if used alone. | Native. | Shadow authority, score/status approval and stale state. | **Blocked as sole normative home; viable derived projection.** |
+| H5 — layered | Mandatory trigger plus separate semantic owner. | Yes, if source boundaries are exact. | Strong. | Derived registry/checker possible. | Synchronization burden and duplicated rules across layers. | **Strong hypothesis, not selected.** |
+
+### 23.1 Decision-separating observations
+
+- H0 preserves current authority but leaves the named Core Boundary Test without one definition.
+- H1 has the lowest artifact count and the highest scope-expansion risk.
+- H2 gives semantic admission its own readable document, but must not become an artifact that “admits” candidates without the Board.
+- H3 matches repeated form obligations, not mandatory admission authority. It can supplement another home, not replace it under current Pattern semantics.
+- H4 is valuable only if exact mismatch with the Board act fails closed and the human artifact remains primary.
+- H5 can combine those strengths, but is justified only if H1 or H2 alone cannot supply sufficient review and mechanical integrity.
+
+## 24. G × H compatibility matrix
+
+The matrix identifies structural fit, not approval.
+
+| Model \ Home | H0 | H1 | H2 | H3 | H4 | H5 |
+|---|---|---|---|---|---|---|
+| G0 | **Native control** | Tension: codifying a full reusable test would cease to be G0 | Tension for the same reason | Conditional only for repeated evidence form | Projection cannot replace absent doctrine | Usually excessive; could only improve precedent discovery |
+| G1 | Possible but repeated in every AD | **Strong fit** | **Strong fit** | Blocked as sole mandatory gate | Conditional derived yes/no projection | Viable, probably more layers than a binary gate needs |
+| G2 | Possible but high drift | Viable, with OCP-001 scope risk | **Strong fit** | Partial: Pattern may own evidence form, not class authority | Conditional derived class/status projection | **Strong fit** if synchronization is justified |
+| G3 | Possible per domain AD | Viable as universal domain/envelope rule | **Strong fit** | Partial for envelope form after invocation | Conditional profile/admission projection | **Strong fit** for human rule plus exact profiles |
+| G4 | Possible per activation AD/OCP | Viable as consumer-activation doctrine | **Strong fit** | Partial for reusable activation form | Conditional consumer-profile projection | **Strong fit** if profile proliferation needs mechanical control |
+
+Any `Tension`, `Partial` or `Conditional` combination needs an explicit resolution in AD-015B. `Blocked as sole` does not prohibit using the artifact for a narrower selected sub-responsibility.
+
+## 25. Authority and complexity accounting
+
+| Candidate | New semantic authority | New artifact authority | Synchronization burden | Failure pressure |
+|---|---|---|---|---|
+| G0 × H0 | none beyond each later AD | none | low per artifact, high across history | doctrine omission remains manual-review risk |
+| G1 × H1 | binary admission rule in OCP-001 | no new class | low | valid intermediate governed forms may be mislabeled |
+| G2 × H2 | tiered routing semantics | one later OCP | medium | ambiguous classification must fail review |
+| G2 × H5 | tiered routing plus explicit projections | later OCP and derived registry/checker | high | source duplication or stale projection |
+| G3 × H2/H5 | domain-first/envelope rule | human rule plus optional profiles | medium/high | unknown/incompatible profile must reject |
+| G4 × H2/H5 | consumer activation rule | human rule plus optional consumer projection | medium/high | missing exact consumer/rule must reject |
+
+“New semantic authority” means authority to classify or route an admission claim, not authority over the candidate's domain truth. Every candidate still requires its own Board act and defining contract.
+
+## 26. Accepted-precedent mapping across G0–G4
+
+| §6 precedent | G0 | G1 | G2 | G3 | G4 |
+|---|---|---|---|---|---|
+| eight fundamental Concepts | separate identity AD for each | Core positive, artifact still separate | fundamental Concept class | domain-first exception when shared identity proves necessary | not sufficient; activation cannot create identity |
+| identified record contracts | separate record decision | governed but binary route is underspecified | Core non-Concept record class | domain record plus envelope when semantics remain local | applies only to consumer-local rules over the record |
+| P-001 | separate Pattern decision | neither cleanly Core Concept nor non-Core | binding-when-invoked Pattern class | domain records may invoke it without importing semantics | activation may invoke form only if exact contract selects it |
+| Capability namespaces | handled in AD-005/OCP-009 | Core reference contract, domain semantics outside | envelope/domain classes | direct positive precedent | consumer activation optional, not global |
+| OCP-011/OCP-012 activations | separate act for every activation | Core positive but scope risk remains | Core rule/consumer-profile route | domain owner possible only after reopening | direct positive precedent |
+| Result negative identity | AD-006 exception preserved | non-Concept, but record route unspecified | Core record rather than Concept class | could remain domain-local if no shared assessment contract | activation cannot reverse identity verdict |
+| State/Readiness no authority | AD-011 negative act | non-Core current outcome | domain/local/implementation route pending future evidence | domain profile possible only after reopening | consumer activation possible only after exact mandate |
+| Operational Area/Environment | AD-014 local decision | non-Concept, but local governance underspecified | local structured value/category route | domain spatial profiles remain exact inputs | consumer geometry/suitability rules remain separately gated |
+| visibility/agreement no authority | AD-010 negative act | non-Core current outcome | implementation/domain/consumer route only with owners | named domain policy possible after reopening | exact consumer policy activation possible after reopening |
+| checker/manifests | each OCP cites implementation | non-Core implementation evidence | implementation/derived-projection class | domain fixtures can complement Core evidence | consumer-local executable evidence remains source-bound |
+
+No model may reinterpret a prior negative verdict as invalid domain work. No model may reinterpret an Accepted Concept as evidence that every specialization belongs to Core.
+
+## 27. Counterexample mapping — cases 1–11
+
+| # | Pressure | G0 | G1 | G2 | G3 | G4 |
+|---:|---|---|---|---|---|---|
+| 1 | repeated UI field | reject in case AD/review | non-Core | implementation-local class | domain only if a real owner exists; otherwise implementation | no consumer activation |
+| 2 | incompatible `ready` labels | preserve separate negative/domain decisions | non-Core shared meaning | domain contracts; no shared Readiness class | exact profiles, mismatch rejects | exact consumer criteria only after reopening |
+| 3 | same record shape, different assertions | separate semantic decisions | shape does not make Core meaning | Pattern form separated from record semantics | domain meanings remain namespaced | consumers bind exact kind/profile |
+| 4 | legitimate domain, no cross-domain consumer | keep domain-local | non-Core but valid | governed domain class | direct domain-local outcome; no envelope need proved | no Core activation without consumer |
+| 5 | two consumers need exact shared identity | separate identity AD | candidate Core positive | Concept/record/envelope selected by object class | Core envelope only if domain meaning remains local | activation only if shared need is a rule/result, not subject identity |
+| 6 | taxonomy category mistaken for Concept | reject by OCP-001 precedent | non-Core Concept result | category/local class | domain taxonomy may remain local | activation irrelevant |
+| 7 | record mistaken for Concept | preserve record precedent | Core/non-Core binary insufficient to pick form | Core/domain record class | domain record if meaning local | activation does not create Concept identity |
+| 8 | copied repeated record form | each AD must notice P-001 | binary gate misses invocation choice | Pattern class and exact invocation review | domain contract may invoke P-001 | consumer contract cannot silently copy Pattern obligations |
+| 9 | Pattern smuggles result vocabulary | reject in case review | no Core domain authority follows | Pattern owns form only | domain vocabulary stays profile-owned | exact consumer owns only its result kind |
+| 10 | checker rule lacks owner/source | reject implementation as authority | non-Core/unowned | implementation invalid against missing normative contract | domain checker needs exact domain owner | activation unavailable without exact consumer/rule owner |
+| 11 | shared table treated as identity | reject in case review | non-Core evidence | implementation-local structure | shared storage does not merge domains | shared deployment does not activate semantics |
+
+## 28. Counterexample mapping — cases 12–22
+
+| # | Pressure | G0 | G1 | G2 | G3 | G4 |
+|---:|---|---|---|---|---|---|
+| 12 | unknown/duplicate profile translated | each AD must define rejection | no Core equivalence | envelope/domain route rejects ambiguity | exact zero/multiple resolution rejects | exact consumer cannot activate unknown profile |
+| 13 | newest profile selected | exact caller binding required per decision | non-permissive | no latest-selection in any class | exact version only | consumer activation exact-binds baseline/profile/rule |
+| 14 | domain specialization changes Core parent | separate amendment/reopening act | reject Core compatibility | extension invariant forbids identity/semantic override | profile owns only specialization | activation cannot change baseline identity/results |
+| 15 | accepted negative verdict contradicted | explicit reopening AD | fail admission pending reopening | reopening route before reclassification | domain evidence cannot silently override verdict | consumer activation blocked without reopening mandate |
+| 16 | equal spatial payload becomes area identity | preserve AD-014A outcome | non-Core reusable identity | local structured value route | exact domain profile, no Core subject equivalence | geometry consumer rule cannot create subject identity |
+| 17 | Capability claim becomes Readiness/auth | preserve OCP-012 boundary | reject broader Core conclusion | claim/eligibility/readiness classes stay distinct | domain result cannot masquerade as Core | consumer result exact and non-transitive |
+| 18 | generic assessment extension dilutes semantics | separate comparison act | reject unless shared meaning proved | record extension vs sibling route by target/result/evidence fit | domain assessment remains namespaced | exact consumer activation cannot change baseline vocabulary |
+| 19 | only sensitive evidence can prove admission | retain Discovery/no selection | fail positive gate | evidence-gap/review route | domain evidence remains outside Core; synthetic envelope still required | no activation until non-sensitive conformance evidence exists |
+| 20 | registry says approved, Board act absent | registry ignored | no admission | derived projection mismatch fails | profile publication is not Board admission | consumer row is not activation authority |
+| 21 | count/order/newest selects authority | reject in every case | forbidden gate input | forbidden across all classes | exact owner/version only | exact consumer/rule/snapshot only |
+| 22 | domain-local rejected for not being Core | preserve valid local outcome | “non-Core” explicitly not “invalid” | governed domain class | direct valid outcome | consumer-local contract may coexist without global Core result |
+
+## 29. Evidence ownership and executable boundary
+
+| Evidence | Human-readable owner | Executable evidence owner | Not established |
+|---|---|---|---|
+| candidate object class | selected boundary contract plus candidate AD | structural admission fixture if selected | domain truth or Board approval |
+| Concept identity | candidate defining OCP/AD | Concept status/dependency checker subset | metaphysical proof from a passing test |
+| record vs Pattern form | domain OCP plus invoked Pattern | module fixtures and invocation metadata | shared domain meaning from shared shape |
+| domain profile identity/version | exact domain contract | domain fixtures plus Core ambiguity rejection | cross-profile equivalence |
+| consumer activation | baseline OCP plus exact consumer contract | contract-local rule/profile fixtures | global rule inheritance |
+| implementation placement | product architecture | optional conformance tests | ontology authority |
+| admission status | Architecture Board act | derived consistency check only | approval by registry/checker output |
+
+Foundation fixtures must remain synthetic. A domain may own sensitive operational validation outside this repository, but a Core admission claim still needs non-sensitive conformance evidence for every shared guarantee it asks Foundation to own.
+
+## 30. Candidate combinations for Board comparison
+
+AD-015A reduces the full matrix to six decision-separating combinations without selecting one:
+
+### C0 — G0 × H0: precedent-only control
+
+Continue case-by-case ADs. Improve review guidance informally but create no reusable admission contract.
+
+This is the minimum-change control. It is credible only if external review concludes that repeated doctrine reconstruction is acceptable.
+
+### C1 — G1 × H1: binary gate in OCP-001
+
+Add one mandatory Core/non-Core test to existing governance.
+
+This is the smallest positive reusable contract. It must show where valid records, Patterns, envelopes, local values and domain contracts go after a non-Core result.
+
+### C2 — G2 × H1: tiered routing inside OCP-001
+
+OCP-001 owns both process and admission classes.
+
+This minimizes artifact count but risks making governance too broad and mixing choreography with semantic architecture.
+
+### C3 — G2 × H2: tiered routing in a separate OCP
+
+OCP-001 requires the boundary review; the later OCP owns object classification, authority/evidence questions and migration behavior.
+
+This supplies one readable semantic owner with moderate synchronization. It must prove non-duplication and keep the Board act external to the specification.
+
+### C4 — G2 with G3/G4 routes × H5
+
+A separate OCP defines tiered routing; domain-first envelopes and consumer activations are explicit routes; a derived registry/checker enforces finite structural integrity.
+
+This covers the most accepted precedents but has the highest bureaucracy and shadow-authority risk. It is justified only if C3 cannot express profiles/activations clearly without the extra layer.
+
+### C5 — G3 or G4 × H2 with optional H3/H4 support
+
+Select only one narrow reusable doctrine — domain envelopes or consumer activation — and leave all other admission questions case-by-case.
+
+This is narrower than G2, but cannot claim to be the complete Core Boundary specification unless it explains Concept, record, local-value and implementation routing elsewhere.
+
+## 31. Preferred hypotheses and unresolved proof
+
+AD-015A does not make a Board selection. The current evidence supports this ordering for further review:
+
+- **C3 is the leading minimal complete hypothesis** because it routes every accepted artifact form through one readable semantic owner without requiring a registry or Pattern.
+- **C1 is the leading smaller alternative** if a binary gate plus existing artifact choreography can route intermediate forms without ambiguity.
+- **C4 is the leading mechanically reinforced hypothesis** only if external evidence proves that a separate projection is needed; its additional layers are not free.
+- **C0 remains the honest no-new-contract control.**
+- H3 and H4 remain useful subordinate mechanisms but are not credible sole authority homes under current governance.
+- G3 and G4 remain proven narrow practices; the unresolved question is whether they are top-level models or routes/obligations within a more complete model.
+
+External review must challenge the “minimal complete” claim for C3. In particular, it should try to construct:
+
+1. a valid accepted precedent that C3/G2 cannot route without importing domain semantics;
+2. a reason OCP-001 cannot own the same rule cleanly under C2;
+3. a machine integrity property that truly requires C4 rather than later implementation evidence; and
+4. a smaller combination not represented by C0–C5.
+
+## 32. AD-015A status and next act
+
+Revision `0.2.0` completes the initial comparison while AD-015 and AB-061 remain `Discovery`. It changes no OCP, Pattern, schema, registry, checker rule, Concept status or graph edge.
+
+After external review, a separate `AD-015B` Board act may:
+
+- select one combination;
+- select a stated composition with explicit precedence and source ownership;
+- require another comparison because a viable model is missing; or
+- retain G0/H0 and close the request for a reusable specification.
+
+Implementation remains a later PR even if AD-015B selects H1, H2, H4 or H5.
