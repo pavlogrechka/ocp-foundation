@@ -84,10 +84,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-011 `0.3.0 / Accepted` окремо приймає S0 і R0 no-new-authority controls; State та Readiness deregistered як Concept candidates після negative current-scope identity verdicts, а R1 лишається окремо gated future direction;
 - AD-014B `0.3.0 / Accepted` обирає Operation-local spatial binding; OCP-004 `0.8.0` реалізує exact local profile/snapshot envelope, завершує AB-008 і видаляє temporary Operational Area marker без нового Concept чи graph edge;
 - AD-015B `0.3.0 / Accepted` обирає C3 (`G2 × H2`) для Core Boundary: один primary semantic-authority route, orthogonal Pattern form route і human-readable OCP-001/OCP-016 ownership split;
-- OCP-001 `0.9.0` визначає mandatory Core Boundary trigger, а OCP-016 `0.1.0 / Draft` маршрутизує candidates до Routes F/C/E/D/I без self-approval, admission registry, numeric score, P-002 або machine authority;
+- OCP-001 `0.9.0` визначає mandatory Core Boundary trigger, а OCP-016 `0.2.0 / Accepted` маршрутизує candidates до Routes F/C/E/D/I без self-approval, admission registry, numeric score, P-002 або machine authority; AB-061 Resolved;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 115 non-sensitive fixtures і 152 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після OCP-004 spatial implementation — **≈61%**.
+- не-нормативна оцінка загальної foundation-готовності після прийняття Core Boundary contract — **≈62%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
