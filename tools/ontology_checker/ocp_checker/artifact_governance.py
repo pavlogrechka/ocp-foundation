@@ -12,6 +12,8 @@ import yaml
 ARTIFACT_ID_MISMATCH = "ARTIFACT_ID_MISMATCH"
 ARTIFACT_ID_DUPLICATE = "ARTIFACT_ID_DUPLICATE"
 ARTIFACT_STATUS_INVALID = "ARTIFACT_STATUS_INVALID"
+ARTIFACT_VERSION_INVALID = "ARTIFACT_VERSION_INVALID"
+OCP_VERSION_LIFECYCLE_MISMATCH = "OCP_VERSION_LIFECYCLE_MISMATCH"
 ARTIFACT_METADATA_MISSING = "ARTIFACT_METADATA_MISSING"
 ARTIFACT_TAXONOMY_INVALID = "ARTIFACT_TAXONOMY_INVALID"
 BACKLOG_ID_DUPLICATE = "BACKLOG_ID_DUPLICATE"
@@ -38,6 +40,8 @@ GOVERNANCE_ERROR_CODES = frozenset(
         ARTIFACT_ID_MISMATCH,
         ARTIFACT_ID_DUPLICATE,
         ARTIFACT_STATUS_INVALID,
+        ARTIFACT_VERSION_INVALID,
+        OCP_VERSION_LIFECYCLE_MISMATCH,
         ARTIFACT_METADATA_MISSING,
         ARTIFACT_TAXONOMY_INVALID,
         BACKLOG_ID_DUPLICATE,
@@ -311,10 +315,21 @@ def validate_artifact_governance(repo_root: Path) -> GovernanceResult:
             _register_artifact(artifact_registry, actual, path)
             dependencies.append((actual, metadata.get("Depends-On")))
         status = str(metadata.get("Status") or "")
+        version = str(metadata.get("Version") or "")
         if not status:
             errors.append(ARTIFACT_METADATA_MISSING)
         elif status not in document_allowed:
             errors.append(ARTIFACT_STATUS_INVALID)
+        if not version:
+            errors.append(ARTIFACT_METADATA_MISSING)
+        elif not SEMVER.fullmatch(version):
+            errors.append(ARTIFACT_VERSION_INVALID)
+        else:
+            major = int(version.split(".", 1)[0])
+            if status in {"Draft", "Accepted"} and major != 0:
+                errors.append(OCP_VERSION_LIFECYCLE_MISMATCH)
+            elif status == "Canonical" and major < 1:
+                errors.append(OCP_VERSION_LIFECYCLE_MISMATCH)
         if metadata.get("Defines-Concepts"):
             concept_status = str(metadata.get("Concept-Status") or "")
             if not concept_status:

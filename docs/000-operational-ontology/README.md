@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.17.0
-Status: Draft
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
@@ -17,22 +17,65 @@ Last-Review: 2026-08-05
 
 ## Призначення
 
-Operational Ontology веде реєстр понять, їхніх статусів, зв’язків та інваріантів предметної області OCP.
+Operational Ontology є канонічним людськочитаним реєстром фундаментальних Concept OCP: він фіксує активне ім’я, lifecycle status і посилання на defining specification або рішення.
 
 Онтологія описує реальний операційний світ, а не таблиці бази даних, API, екрани або конкретні технології.
 
 Термін стає канонічним лише після проходження життєвого циклу, визначеного в OCP-001. Сам факт згадування в цьому документі не надає статусу Accepted або Canonical.
 
-## Фундаментальні принципи
+## Власник реєстру та межі повноважень
 
-1. **Operational Space First** — центром моделі є спільний операційний простір.
+OCP-000 володіє лише membership активного Concept registry та зафіксованим status value кожного рядка. Суміжні повноваження залишаються розділеними:
+
+- OCP-001 визначає lifecycle, status choreography, canonicalization і versioning rules;
+- OCP-002 є синхронізованою taxonomy projection, а не другим реєстром;
+- defining OCP володіє identity, responsibility, invariants, exclusions і dependencies конкретного Concept;
+- Accepted AD або ADR володіє рішенням і reopening gates, на які посилається рядок;
+- non-Concept records, rules, profiles і Patterns мають власні defining artifacts; їхня згадка тут не робить їх Concept; і
+- Foundation map є generated projection і не може змінити registry status або створити dependency.
+
+Якщо OCP-000, OCP-002, defining document або generated projection суперечать одне одному, mismatch є governance defect. Жоден споживач не має права вибрати найновіше, перше або найзручніше представлення.
+
+## Сумісність `1.x`
+
+OCP-000 `1.x` гарантує:
+
+1. один активний registry row та унікальне ім’я для кожного candidate або визначеного фундаментального Concept;
+2. явний lifecycle status кожного активного рядка;
+3. одне defining specification/decision reference після positive identity act;
+4. незалежність document status від Concept status;
+5. атомарну синхронізацію OCP-000, OCP-002 і defining document під час Concept status change;
+6. відсутність Concept identity, dependency або authority через саму згадку, порядок рядків чи однакову назву; і
+7. збереження negative identity verdict та deregistration history до явного accepted reopening act.
+
+`Canonical` для OCP-000 означає стабільність цієї registry-моделі, а не завершеність усієї онтології. Реєстр може одночасно містити `Proposed`, `Under Review`, `Accepted`, `Canonical`, `Deferred`, `Deprecated` або `Archived` Concept rows відповідно до OCP-001. Document status OCP-000 не передається жодному рядку.
+
+Після `1.0.0` застосовується така SemVer-інтерпретація разом з OCP-001:
+
+- PATCH виправляє редакційний текст або посилання без зміни membership, status, identity чи registry rule;
+- MINOR додає сумісний candidate/Concept, виконує окремо схвалений status transition, deregister-ить лише pre-acceptance candidate після negative verdict або додає сумісне registry rule;
+- MAJOR несумісно змінює registry authority/status meaning, фундаментальний принцип або identity/name/responsibility уже Canonical Concept, а також видаляє його без lifecycle migration.
+
+Version OCP-000 не є версією жодного Concept або defining OCP. Споживач exact-bind-ить потрібний defining contract окремо.
+
+## Канонічні принципи інтерпретації
+
+1. **Explicit Operational Context** — спільне значення існує лише в явно визначеному governed context із названим semantic owner; foundation не припускає одного універсального container “Operational Space”.
 2. **Operation First** — будь-яка координована активність моделюється як Operation.
 3. **Resource Agnostic** — сили та засоби моделюються через універсальне поняття Resource.
 4. **Separation of Structures** — штатна структура, оперативне підпорядкування й операційна координація є незалежними моделями.
 5. **One Concept — One Name** — кожне прийняте поняття має одну назву та одне місце визначення.
 6. **Knowledge Graph Model** — онтологія є мережею понять і типізованих зв’язків; технологія зберігання не визначається цим документом.
 
-## Початковий реєстр Concept
+Ці принципи спрямовують інтерпретацію реєстру, але не створюють Concept, graph edge, record, profile, result або authorization. У разі деталізації перевагу має exact defining contract у межах його прийнятої відповідальності.
+
+### Межа кандидата Operational Space
+
+Історичний ярлик `Operational Space First` не надавав і не надає фундаментальної identity. У `1.0.0` його замінено точнішим принципом `Explicit Operational Context`, який уже виконується через governed contexts і не потребує нового Concept.
+
+Рядок `Operational Space: Proposed` залишається незалежним candidate marker. Він не має defining specification, нормативної відповідальності, current dependency edge або права бути неявним owner для Operation, spatial bindings, Environment, Coordination чи domain profiles. Його можна перевести з `Proposed` лише через повний OCP-001/OCP-016 cycle та окремий Board act.
+
+## Активний реєстр Concept
 
 | Concept | Status | Specification / Decision |
 |---|---|---|
@@ -51,6 +94,8 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Capability | Accepted | OCP-009; AD-005C; Architecture Board approval of PR-0010 |
 
 Статуси в таблиці є статусами Concept, а не статусами документів. `Accepted` означає, що Architecture Board прийняла поточне визначення як основу подальшої роботи; це не означає `Canonical` і не змінює автоматично статус документа.
+
+`Proposed` row фіксує лише точну назву питання для discovery. Він не обіцяє positive identity, майбутню семантику, місце в graph або наступний status. Candidate може бути уточнений, перейменований, відкладений або deregistered лише через видимий governance act; такі дії не змінюють status інших рядків.
 
 ## Negative identity decision for Result
 
@@ -82,11 +127,15 @@ OCP-011 визначає Accepted `OutcomeAssessmentRecord` як P-001 identifie
 
 OutcomeAssessmentRecord не є Operation lifecycle stage, mutable Objective status, Event truth або універсальним realized outcome. Missing, stale, ambiguous чи conflicting evidence не може створювати definitive conclusion за baseline contract.
 
+Цей абзац є registry guardrail. Нормативним owner полів, інваріантів, lifecycle і future extensions лишається OCP-011.
+
 ## Governed Capability Claim records
 
 OCP-012 визначає Accepted `CapabilityClaimRecord` як P-001 identified record, а не фундаментальний Concept. Record exact-bind-ить Resource holder, одну точну OCP-009 Capability version, claimant, condition set, authority, evidence/support, effectivity та provenance; однакові claims не роблять Resources однаковими або взаємозамінними.
 
 `holder-capability@1` зберігає attributable F0/A0 baseline. `holder-capability@2` явно розділяє declaration-only та evidence-backed modes; лише evidence-backed mode може invoke exact OCP-012-local F1/A1 source-use rules. Така classification не є Capability truth, Readiness, availability, authorization, admissibility або downstream eligibility.
+
+Цей абзац є registry guardrail. Нормативним owner claim semantics, modes, evidence rules і future extensions лишається OCP-012.
 
 ## Робоче рішення щодо Resource
 
@@ -101,10 +150,28 @@ OCP-012 визначає Accepted `CapabilityClaimRecord` як P-001 identified 
 
 Назви моделей не створюють однойменні фундаментальні Concept автоматично.
 
-## Відкриті питання
+## Питання поза compatibility surface `1.0.0`
+
+Наведені питання не мають registry authority й не блокують `1.0.0`, тому що OCP-000 не визначає відповідні identities або contracts. Кожна positive відповідь потребує власного OCP-001/OCP-016 cycle, exact owner, evidence і Board act:
 
 - Межі між Resource та Organization.
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
 - Межа між Constraint violation та майбутнім Conflict Concept.
 - Наступні contract-local freshness/ambiguity activations після окремих OCP-011 і OCP-012 activations; жодна з них не створює глобального evidence lifetime.
+
+## T0 canonicalization act
+
+T0 встановлює OCP-000 `1.0.0 / Canonical` як registry contract і не змінює жодного Concept row, defining OCP, dependency або generated map.
+
+Зокрема, цей act:
+
+- замінює двозначний `Operational Space First` на `Explicit Operational Context` без нового Concept;
+- зберігає `Operational Space`, `Spectrum`, `Risk`, `Order` і `Coordination` у status `Proposed` без semantic authority;
+- зберігає вісім Accepted Concepts у status `Accepted`;
+- не reopen-ить Result, Operational Area, State або Readiness;
+- не приймає OCP-001, OCP-002, OCP-016 або P-001 за implication;
+- не додає graph edge, record family, registry field, production schema або implementation authority; і
+- не авторизує T1 чи будь-який downstream promotion.
+
+Canonical status набуває чинності лише після exact-head Fable approval, Codex adjudication, green CI, окремої явної авторизації Павла/Architecture Board саме для T0 та squash merge. До merge цей розділ і frontmatter є proposed T0 act.
