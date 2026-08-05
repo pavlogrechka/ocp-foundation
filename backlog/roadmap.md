@@ -90,6 +90,7 @@
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
 - [x] First machine-verifiable evidence freshness, ambiguity and deterministic replay activation — `OCP-011 0.3.0` activates F1+A1 for exact `objective-achievement@2`; `AB-039` is Resolved while unactivated consumers remain under F0/A0
+- [ ] Capability Claim support-usability activation boundary — `AD-013 / AB-060` must select the protected use, explicit evaluation-time owner and declaration/evidence claim-kind model before OCP-012 can leave F0/A0
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts

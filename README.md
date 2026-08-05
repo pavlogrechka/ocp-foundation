@@ -60,6 +60,7 @@ backlog/                 відкриті питання та дорожня к�
 - fail-safe matrix дозволяє definitive conclusion лише для `evidence_state: sufficient`; missing, stale, ambiguous або conflicting evidence дозволяє лише `indeterminate`;
 - checker механічно виводить `missing` і finite `conflicting` probe; для exact `objective-achievement@2` OCP-011 додатково exact-bind-ить criterion-local F1/A1 rules, виводить freshness та reference/temporal ambiguity, а для semantic ambiguity зберігає attributable basis;
 - `objective-achievement@1` і всі неактивовані consumers, зокрема OCP-012, лишаються під F0/A0; одна activation не створює global evidence lifetime, freshness field або успадкованого rule;
+- AD-013 / AB-060 відкриває окремий Discovery для OCP-012 claim-support usability: `recorded_at`, claim effectivity і downstream query time не можуть мовчки стати historical support evaluation time;
 - explicit supersession зберігає history, дозволяє branching і не може змінити assessment kind, target або criterion binding identity; newest record, evaluator count і list order не визначають authority;
 - integrated scenario використовує нормативний OCP-011 record contract і продовжує механічно доводити `Completed ≠ achieved`;
 - AB-056 завершено рішенням Architecture Board по PR-0013;
