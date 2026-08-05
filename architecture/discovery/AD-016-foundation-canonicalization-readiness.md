@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: External comparison of promotion units, dependency gates and production-evidence boundaries
+Review-After: External falsification of L2, T0-T10, open-question classifications and the F-to-C hypothesis
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -368,3 +368,215 @@ AD-016 may leave Discovery only when:
 Revision `0.1.0` opens AD-016 and AB-062 in `Discovery`. It creates no preferred outcome and changes no OCP, Concept, Pattern, AD, ADR, AB dependency, registry entry, generated map, checker rule, fixture or graph edge.
 
 A later `AD-016A` comparison should map exact artifacts, dependency waves, open-question classifications and the twenty counterexamples across A–F. A separate `AD-016B` Board act may select a readiness strategy or retain current statuses. Every actual Canonical promotion remains a later separately reviewed PR with exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization.
+
+## 19. AD-016A comparison method
+
+AD-016A compares the six Discovery outcomes on the repository state at `main@37d8b672891b348d1e8446a9513837749e0e8f0f`. The lifecycle inventory is unchanged from §4; this newer base adds the externally reviewed AD-016 Discovery itself.
+
+The comparison uses four tests in order:
+
+1. **authority test** — identify the human-readable owner of every compatibility promise;
+2. **dependency test** — ask whether a candidate can remain compatible while each direct dependency evolves under its current lifecycle;
+3. **surface test** — distinguish the exact `1.x` surface from explicit exclusions and future extensions; and
+4. **migration test** — name the status, version, registry and Pattern references that must change together.
+
+Passing fixtures are evidence within those tests. They do not choose an outcome or erase a semantic blocker. AD-016A makes no lifecycle change and is not an Architecture Board selection.
+
+## 20. Exact artifact readiness audit
+
+The table names the next lifecycle act each artifact class could lawfully receive. It does not authorize that act.
+
+| Artifact or group | Current state | Earliest candidate act | Must move atomically | Current readiness issue |
+|---|---|---|---|---|
+| OCP-000 | `0.17.0 / Draft` | document `1.0.0 / Canonical` | document metadata only; Concept rows keep their own statuses | define the `1.x` registry promise while preserving five Proposed rows; resolve whether “Operational Space First” is a non-identity principle or depends on an undefined Concept |
+| OCP-016 | `0.2.0 / Accepted` | document `1.0.0 / Canonical` | document metadata and exact incorporated baseline | direct OCP-000 dependency must meet the selected floor |
+| OCP-001 | `0.9.0 / Draft` | document `1.0.0 / Canonical` | document metadata and the selected readiness rule | AD-016 dependency/Pattern floors and promotion-unit rules are not yet selected or incorporated |
+| OCP-002 | `0.17.0 / Draft` | document `1.0.0 / Canonical` | document metadata; Concept projections remain independently synchronized | its top-level category tree is explicitly a non-Canonical working hypothesis and needs a clear normative/excluded boundary |
+| P-001 | `0.1.0 / Draft` | Pattern `Accepted` at an exact reviewed version | Pattern metadata and all changed invocations, if the version changes | six current contracts already invoke it, but Pattern acceptance and its current evidence statement still need a dedicated act |
+| OCP-003…OCP-010 | document `Draft`; eight Concepts `Accepted` | paired document `1.0.0 / Canonical` plus Concept `Canonical` | defining document, OCP-000 row and OCP-002 projection | candidate-local identity, lifecycle and deferred-question blockers in §23; exact OCP/Pattern prerequisites |
+| OCP-011…OCP-015 | document `Accepted` | document `1.0.0 / Canonical` | document metadata and exact incorporated contract snapshot | direct OCP dependencies are pre-canonical; later extensions remain outside the accepted baseline |
+
+OCP-016 is listed with the enabling group rather than OCP-011…OCP-015 because OCP-001 directly depends on it. That placement is dependency evidence, not a maturity ranking.
+
+## 21. Lifecycle floors compared
+
+Three direct-OCP dependency floors are credible enough to compare:
+
+| Floor | Rule | Benefit | Failure pressure | AD-016A result |
+|---|---|---|---|---|
+| L0 — current-status floor | exact `Accepted` semantics may support a Canonical dependent even when the dependency document is Draft | smallest number of promotions | current `Depends-On` fields do not bind versions; a breaking `0.x` dependency change can silently alter the dependent's `1.x` promise | insufficient without a new exact-binding mechanism |
+| L1 — Accepted-document floor | every direct OCP dependency must be at least document `Accepted` | separates reviewed contracts from drafts | Accepted remains pre-canonical and does not guarantee `1.x` compatibility | useful interim review floor, insufficient as the final compatibility floor |
+| L2 — Canonical-or-same-act floor | every normative direct OCP dependency is Canonical in an earlier act or moves in the same atomic act | human-readable transitive compatibility and no unversioned Draft dependency laundering | more waves and a longer mixed-state interval | strongest current hypothesis |
+
+AD-016A therefore uses L2 to test topology. A later act may permit an exception only if it proves that the listed dependency is reference-only, removes it from normative `Depends-On`, or introduces a separately governed exact compatibility binding. Repository order, commit recency and a passing downstream test are not such proof.
+
+Artifact-class floors remain distinct:
+
+- an ADR or AD dependency must be `Accepted` and remain governed by its own replacement/reopening rules; it never needs an invented Canonical state;
+- an invoked Pattern must be `Accepted` and exact-version-bound through `Uses-Patterns`; it never needs an invented Canonical state;
+- a Concept promotion requires its defining OCP document to become Canonical in the same act and requires atomic OCP-000/OCP-002 projection updates; and
+- a non-Concept OCP promotion changes no Concept status by implication.
+
+## 22. Strict dependency sequence under L2
+
+The following slots are a topological proof, not a required PR grouping. Artifacts in one slot may still receive separate exact-head promotion PRs.
+
+| Slot | Eligible artifacts | Why not earlier |
+|---:|---|---|
+| T0 | OCP-000 | root OCP dependency is Accepted ADR-000, which has no Canonical lifecycle |
+| T1 | OCP-016 | directly depends on OCP-000 |
+| T2 | OCP-001 | directly depends on OCP-000 and OCP-016 |
+| T3 | OCP-002; P-001 to `Accepted` Pattern status | both depend on OCP-001; P-001 uses its own lifecycle |
+| T4 | OCP-003 Resource; OCP-007 Organization; OCP-008 Objective; OCP-009 Capability | their OCP prerequisites are in T0–T3; OCP-007/OCP-008 also require exact Accepted P-001 |
+| T5 | OCP-004 Operation; OCP-012 CapabilityClaimRecord | OCP-004 needs Resource and Objective; OCP-012 needs Resource, Capability and P-001 |
+| T6 | OCP-005 Assignment; OCP-010 Event | both need Operation; Event also needs Objective and P-001 |
+| T7 | OCP-006 Constraint | needs Assignment as well as Resource and Operation |
+| T8 | OCP-011 OutcomeAssessmentRecord; OCP-013 Resource Interchangeability | OCP-011 needs Constraint and Event; OCP-013 needs Constraint, Assignment and OCP-012 |
+| T9 | OCP-014 Coordination Profile | needs OCP-013 and its Concept/record prerequisites |
+| T10 | OCP-015 Coordination Workflow | needs OCP-014 plus OCP-012/OCP-013 and exact Accepted P-001 |
+
+This sequence demonstrates three things:
+
+1. the graph has a cycle-free promotion path;
+2. F names T0–T3, while C governs the complete T0–T10 strategy; and
+3. F is therefore a useful named phase, but not a distinct terminal readiness model.
+
+An accepted dependency-edge correction may change a slot. It must not be made merely to accelerate promotion.
+
+## 23. Open-question classification by semantic effect
+
+The audit uses:
+
+- **B** — blocker for the named candidate because the answer can change identity, authority, invariant, dependency or wire-significant behavior inside its current scope;
+- **S** — scoped exclusion or future extension already outside the current responsibility; and
+- **C** — stale or completed question requiring cleanup, not a new semantic decision.
+
+| Candidate | B — resolve before promotion | S — may remain explicitly outside `1.x` | C — clean up before final review |
+|---|---|---|---|
+| OCP-000 | compatibility meaning of the “Operational Space First” principle while Operational Space remains Proposed | future Proposed candidates and later compatible registry additions | none identified |
+| OCP-001 | selected dependency floors, promotion units and atomicity rules from AD-016 | production deployment policy outside ontology governance | historical roadmap prose that no longer describes the current checker phase |
+| OCP-002 | whether the top-level category tree is normative, stabilized, or explicitly excluded from the Canonical surface | future categories and Concepts admitted through OCP-016 | projections for already resolved Result, State/Readiness and Operational Area decisions are already current |
+| P-001 | Pattern acceptance evidence and exact version treatment for six current invokers | future optional modules and new domain invokers | §11's future-tense extraction/evidence statement |
+| OCP-003 Resource | `Unit` / Organization / Organizational Resource identity mapping where it affects the current Resource subtype contract | availability, Readiness, Resource Group, quantity/reservation and implementation mechanisms | none identified |
+| OCP-004 Operation | current lifecycle/authorization/composition questions that can change existing stages, transition validity, parent/child or terminal behavior | templates, reusable spatial identity, domain geometry/environment, future State/Readiness and separate conflict models | resolved Operational Area wording is already current |
+| OCP-005 Assignment | amendment, retroactivity, interval and replacement overlap/gap rules that alter present lifecycle/history guarantees | Reservation, quantity, role taxonomy, coordination roles and future availability/Readiness | obsolete reference to reconsidering superseded ADR-DRAFT-007 |
+| OCP-006 Constraint | predicate-expression compatibility, precedence/override/waiver and evaluation-freshness/storage choices where they change current result behavior | future Conflict, quantity/capacity, Readiness and domain geometry/spectrum semantics | none identified |
+| OCP-007 Organization | identity continuity and relationship-class stability; Organization/Resource mapping where it changes current identity | commander/personnel, staff, ownership, domain hierarchy exceptions and implementation contracts | backlog questions already resolved elsewhere must be marked as such rather than carried indefinitely |
+| OCP-008 Objective | semantic-equivalence rules for correction/supersession if they change stable Objective identity | typed relations, separate lifecycle and future outcome taxonomy | Result/assessment questions now owned by Accepted OCP-011 |
+| OCP-009 Capability | compatibility policy for references to superseded exact versions | domain taxonomy, storage/API and Operation requirement semantics | holder claim and AB-011 questions now have OCP-012/OCP-013 owners |
+| OCP-010 Event | none found inside the accepted occurrence/observation identity baseline | temporal interval, kind registry, correlation and Operation-to-Event relation | assessment-target question now owned by Accepted OCP-011 |
+| OCP-011…OCP-016 | no unresolved question found that invalidates each narrow Accepted baseline | named future target kinds, profiles, activations and machine projections remain separate reopening/extension cycles | wrapper language may be editorially normalized during its own readiness audit |
+
+This classification is deliberately stricter than counting headings. A candidate remains blocked by one B item even if every S item is well bounded. A Board act may reclassify an item only with a written compatibility argument.
+
+## 24. Outcome comparison
+
+| Outcome | Dependency coherence | Human compatibility story | Treatment of current blockers | Review/migration pressure | Comparison result |
+|---|---|---|---|---|---|
+| A — hold | preserves the current graph without a new promise | clear only if exact reopening gates are named | safest immediate state, but resolves none | low now; indefinite drift if retained without triggers | admissible control and current execution state, not the leading long-term strategy |
+| B — atomic baseline | coherent only through one very large same-act closure | one baseline is simple after merge | weakest artifact blocks all others or is pressured through | highest review surface, rollback and mixed lifecycle burden; P-001 still cannot become Canonical | not preferred under current evidence |
+| C — dependency-layered waves | strongest under L2 and the T0–T10 proof | each wave states what earlier `1.x` promises it consumes | blockers stay local to the affected wave | more PRs and a visible mixed interval | leading complete strategy |
+| D — selective per artifact | coherent only if every selected artifact still satisfies L2 | difficult without published wave/dependency context | local blockers stay local | smallest PRs, but unconstrained selection launders pre-canonical dependencies | viable only as one-artifact wave granularity inside C |
+| E — stable-kernel extraction | can remove unstable text from a candidate surface | clear if one defining location is preserved | useful for OCP-000/OCP-002 if normative/excluded text cannot be separated in place | restructuring, reference migration and duplicate-authority risk | remedial technique, not a foundation-wide default |
+| F — enabling baseline | closes the shared root prerequisites T0–T3 | strong first-phase explanation | exposes root blockers without pre-approving Concepts | cannot answer what follows by itself | strong first phase of C, not a terminal alternative |
+
+## 25. Counterexample mapping — cases 1–10
+
+| # | A | B | C | D | E | F |
+|---:|---|---|---|---|---|---|
+| 1 | keep statuses | pair blocked | pair in its slot | pair only | exclude or stabilize definition | not reached |
+| 2 | keep statuses | same-act dependency | earlier/same L2 | blocked unless L2 | split only with one owner | roots only |
+| 3 | keep statuses | accept exact P-001 in act | P-001 at T3 | invoker waits | no Pattern bypass | P-001 is explicit root obligation |
+| 4 | reject invented status | reject invented status | Pattern becomes Accepted only | same | same | same |
+| 5 | preserve row statuses | bulk act preserves rows independently | OCP-000 promise separates document/rows | same | registry kernel may exclude candidate semantics | handled at T0 |
+| 6 | named B gate | blocks whole act | blocks candidate wave | blocks candidate | excluded text cannot hide identity question | root B gate if applicable |
+| 7 | scoped exclusions survive | no weakest-member inference | no block when exclusions are honest | same | may remain outside kernel | same |
+| 8 | no production claim | no production claim | semantic wave states limit | same | kernel states limit | enabling baseline states limit |
+| 9 | may retain hold only with exact rationale | may define semantic-only baseline | semantic-only candidate remains possible | same | same | same |
+| 10 | no promotion | weakest member blocks B | weak artifact delays only its wave | selected artifact still meets L2 | split cannot manufacture readiness | downstream not pre-approved |
+
+## 26. Counterexample mapping — cases 11–20
+
+| # | A | B | C | D | E | F |
+|---:|---|---|---|---|---|---|
+| 11 | no new mixed promise | one cut | wave ledger explains mix | must publish L2 context or reject | exact kernel references | explicit enabling/downstream boundary |
+| 12 | no split | no split | no split required | no split required | one owner plus migrated references or reject | no split required |
+| 13 | no version change | atomic metadata/projections | atomic per candidate | atomic per candidate | atomic for kernel owner | atomic enabling documents only |
+| 14 | no implication | explicit Concept acts inside bulk act | paired Concept/document act | paired act | kernel document cannot auto-promote Concept | no downstream Concept promotion |
+| 15 | preserve Proposed rows | preserve rows | preserve rows | preserve rows | registry kernel preserves status field | explicit T0 obligation |
+| 16 | reopening still explicit | bulk act cannot reopen | wave cannot reopen | selection cannot reopen | extraction cannot reopen | enabling act cannot reopen |
+| 17 | domain remains outside | bulk act excludes domain profile | OCP-016 extension route preserved | same | kernel excludes profile authority | same |
+| 18 | forbidden selector | forbidden selector | topology is not authority | per-artifact readiness is evidence-based | extraction is not maturity proof | enabling label is not readiness proof |
+| 19 | no new SemVer claim | one reviewed `1.0.0` cut | each wave states its `1.x` surface | each act does so | old references migrate explicitly | roots define their own surface only |
+| 20 | non-implications stay explicit | stated once and per artifact | stated per wave/artifact | stated per act | stated for kernel only | enabling status does not imply downstream truth/readiness |
+
+All six outcomes can satisfy the counterexamples without a new registry or sensitive data. The deciding difference is not evidence availability; it is the amount and location of compatibility authority each outcome asks one act to carry.
+
+## 27. Semantic and production evidence boundary
+
+For a semantic Canonical act, the repository can require:
+
+- readable identity, responsibility, exclusions and compatibility text;
+- exact direct dependencies and Pattern invocations;
+- atomic lifecycle and projection changes;
+- synthetic positive, negative, ambiguity and replay evidence for mechanically expressible rules;
+- full-history governance checks; and
+- external exact-head falsification plus Board authorization.
+
+It cannot honestly require production deployment, persistence, API, security, scale or observability evidence unless the candidate's own current responsibility promises those properties. Missing production artifacts therefore do not block a narrowly semantic `1.x` contract by default. They do block any text that claims production interoperability or operational fitness.
+
+Outcome A remains free to argue that a particular semantic contract is not useful enough to canonicalize without a production consumer. That argument must identify the affected compatibility promise; “no production API exists” is not an automatic fail rule.
+
+## 28. Decision-separating strategy set
+
+AD-016A reduces the six labels to five Board choices without selecting one:
+
+### R0 — retain A
+
+Keep all current states and name the exact B items that must close before another comparison.
+
+### R1 — select B
+
+Prepare one atomic baseline only after every included artifact independently satisfies the same declared floor and the Pattern lifecycle difference is explicit.
+
+### R2 — select C under L2
+
+Use the T0–T10 topology, with each actual promotion as a separate reviewed act or an explicitly atomic same-slot group.
+
+### R3 — select D as micro-wave C
+
+Allow one-artifact waves, but preserve L2 and the published dependency ledger. Pure unconstrained selective promotion is not admissible.
+
+### R4 — select F → C, with E only where needed
+
+Treat T0–T3 as the enabling phase, then reassess and continue the C topology. Use kernel extraction only when a candidate cannot otherwise state one exact normative surface.
+
+R4 differs from R2 in governance commitment, not graph structure: R4 authorizes only the enabling phase before mandatory reassessment; R2 accepts the whole layered strategy while every promotion still needs its own act.
+
+## 29. Preferred hypothesis and unresolved proof
+
+AD-016A does not make a Board selection. Current evidence supports this ordering for external attack:
+
+- **R4 (`F → C`) is the leading cautious hypothesis.** It resolves shared lifecycle roots first, does not pre-approve a Concept, and requires reassessment before T4.
+- **R2 (complete C under L2) is the leading simpler strategy** if the Board is prepared to commit to the full topology now.
+- **R3 is useful only as PR granularity within C.** Without L2 it creates an unintelligible mixed compatibility surface.
+- **E is a targeted repair**, especially for OCP-000/OCP-002, not evidence that every document needs extraction.
+- **A is the honest current execution state** until a later act selects a strategy and candidate-local B items close.
+- **B has no demonstrated benefit large enough to justify weakest-member and rollback pressure.**
+
+External review should try to falsify the leading hypothesis by constructing:
+
+1. a reason OCP-000 cannot become Canonical while preserving independent Proposed rows;
+2. a reason the OCP-002 working hypothesis cannot be cleanly stabilized or excluded;
+3. a safe current mechanism by which a Canonical dependent can consume a changing unversioned pre-canonical OCP dependency, disproving L2;
+4. a reason P-001 may remain Draft while a Canonical invoker exact-binds it;
+5. a real dependency cycle or omitted artifact in T0–T10;
+6. a candidate for which D is coherent but cannot be expressed as a small C wave;
+7. evidence that a foundation-wide E split reduces rather than duplicates authority; or
+8. a production property already promised by a candidate that the semantic-only boundary incorrectly excludes.
+
+## 30. AD-016A status and next act
+
+Revision `0.2.0` completes the initial comparison while AD-016 and AB-062 remain `Discovery`. It changes no OCP, Concept, Pattern, dependency, registry row, graph edge, schema, checker rule, fixture, status or `1.0.0` version.
+
+After external review, a separate `AD-016B` Architecture Board act may select R0–R4, require another comparison, or state a different composition with exact precedence. Selection does not itself promote any artifact. Every T0–T10 promotion remains a later exact-head reviewed PR with its own human-readable compatibility surface and explicit owner authorization.
