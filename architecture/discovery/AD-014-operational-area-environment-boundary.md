@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-014
 Title: Operational Area and Environment Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-002, OCP-003, OCP-004, OCP-005, OCP-006, OCP-007, OCP-014, OCP-015, AD-010
 Applies-To: AB-008, Operational Area candidate, Environment taxonomy category, Infrastructure Resource boundary
-Review-After: AD-014B Board selection or new evidence changes the A/B/F weighting or reopens C/D/E
+Review-After: OCP-004 local-binding evidence falsifies Outcome A or new evidence satisfies a B/C/D/E/F reopening gate
 ---
 
 # AD-014 — Operational Area and Environment Boundary
@@ -613,3 +613,127 @@ External review must determine:
 Revision `0.2.0` completes the AD-014A comparison while AD-014 and AB-008 remain `Discovery`. It changes no Concept registry, graph edge, OCP contract, Pattern invocation, schema, checker rule or fixture.
 
 A later `AD-014B` Board act may select A, B or F, retain Discovery, or explicitly reopen C, D or E after new evidence. The Board act must identify the exact authority owner and state whether Operational Area remains unregistered, becomes a non-Concept record direction, or stays domain-owned. It may not implement the selected outcome in the same PR.
+
+## 31. Architecture Board decision — AD-014B
+
+The Architecture Board accepts this decision by act **AD-014B** on **2026-08-05**, after Fable reviewed the complete AD-014A comparison on exact head `c5426f8f90bc7636c255b7ccef635cd0a7fef168`, found no defects and recommended merge. Codex independently accepted that verdict, Pavlo authorized the merge, and PR #72 was squash-merged with green post-merge CI.
+
+This act selects the semantic owner and migration direction. It does not amend OCP-004, define a field or wire schema, register or remove a Concept, change the Concept graph, invoke P-001, add a geometry/profile vocabulary, or add checker code or fixtures.
+
+### 31.1 Selected outcome — A
+
+AD-014 selects **Outcome A — Operation-local spatial binding; Environment remains a category**.
+
+The current evidence requires exact replay of spatial context for one Operation but does not demonstrate a reusable Core area subject with an independent lifecycle, registry owner or cross-Operation reference consumer. The binding therefore belongs to the Operation contract and does not create a separately identified Operational Area entity.
+
+An Operation may have zero, one or many local spatial bindings. A binding is an immutable, exact-version part of one Operation's spatial context. Equal label, payload, footprint or geometry in another Operation does not establish shared identity. Changing the binding creates a new exact version or snapshot under the later OCP-004 contract; historical evidence is not overwritten.
+
+This selection gives no truth, suitability, admissibility, coordination, visibility, authorization, Resource selection or Assignment authority to a spatial binding.
+
+### 31.2 Managed infrastructure remains Resource
+
+A concrete managed Position Site, Launch Site or Relay Site remains an Infrastructure Resource when it satisfies OCP-003 identity and management granularity. Its footprint, coverage or surrounding area is a separate description.
+
+Neither direction inherits identity or participation from the other:
+
+- assigning a site Resource does not assign an area or every Resource inside it;
+- binding an Operation to a spatial description does not assign the site;
+- geometric equality does not merge the Resource with the binding; and
+- a site outside a local Operation binding is not automatically invalid, inadmissible or unavailable.
+
+### 31.3 Environment remains category and domain input
+
+`Environment` remains a taxonomy category, not a fundamental Concept or universal context object. Environmental conditions remain exact domain-owned or consumer-owned inputs/evidence with their own spatial/temporal applicability, vocabulary, attribution and provenance.
+
+An observation about a condition does not create Environment identity or truth. A named consumer may later evaluate exact evidence for one purpose, but the result remains a separate assessment or decision and cannot become universal Readiness, availability, authorization or permission.
+
+Spectrum remains a separate Proposed question. AD-014B does not classify Spectrum under Environment and does not define terrain, weather, location, route or coordinate semantics.
+
+### 31.4 A/F authority boundary
+
+Outcome F is not selected because no concrete domain registry, spatial profile owner or accepted cross-domain translation contract is currently named.
+
+The later A implementation may exact-bind an opaque domain-owned **representation profile and payload version**. That profile explains how to interpret the local spatial payload; it does not own a reusable area subject in Core and does not turn A into F silently.
+
+The authority split is exact:
+
+- OCP-004 owns whether one local binding belongs to one Operation context and which exact binding/profile version is active in that context;
+- the named domain profile owns interpretation of its payload vocabulary;
+- neither owner may infer cross-Operation subject identity or cross-profile equivalence; and
+- an unknown, unresolved, duplicated or incomparable profile binding is non-permissive.
+
+A future F reopening must name concrete profile owners, interoperability consumers and an exact translation/ambiguity contract. It must also state whether domain identity replaces the A carrier or is referenced by it; two competing spatial authorities may not coexist implicitly.
+
+## 32. Outcomes not selected and reopening gates
+
+### 32.1 B — reusable record
+
+B remains the smallest positive reopening direction. It may be reconsidered only when evidence names:
+
+1. one reusable area subject referenced independently across multiple Operations;
+2. a legitimate registry and revision authority;
+3. a concrete consumer that local immutable snapshots and domain references cannot satisfy;
+4. exact identity, applicability, provenance and correction semantics; and
+5. a complete P-001 invocation or reviewed reason not to invoke it.
+
+A desire for a shared map object, equal geometry, cache reuse or convenient lookup is insufficient.
+
+### 32.2 C and D — fundamental Concepts
+
+C and D receive negative current-scope identity verdicts. Operational Area has not shown a responsibility beyond local context or a possible identified record. Environment has not shown one stable subject that remains coherent across areas, changing conditions, evidence and domain vocabularies.
+
+Reopening either Concept direction requires every §6 identity test plus a real consumer that A, B and F cannot serve. A taxonomy label or common language term remains insufficient.
+
+### 32.3 E — derived-only view
+
+E is not selected because the foundation lacks accepted Resource-location, route, geometry-rule and historical input-snapshot owners. It may be reconsidered only after those inputs exist independently and the proposed derivation can replay without current-state or wall-clock lookup.
+
+## 33. Selected OCP-004 implementation obligations
+
+The next separately reviewed implementation cycle must amend OCP-004 without creating a new Concept or graph edge. At minimum it must define:
+
+1. an Operation-owned local spatial binding identity scoped to one exact Operation context, not globally reusable area identity;
+2. an exact binding version or immutable payload snapshot;
+3. an exact versioned representation-profile reference and opaque payload reference/value;
+4. zero/one/many cardinality and duplicate handling;
+5. the relation between binding applicability and existing planned/actual temporal context, without making time or spatial presence mandatory for every Draft Operation;
+6. provenance and historical preservation when a binding changes;
+7. fail-safe behavior for absent, unresolved, duplicate, ambiguous, unknown-profile or incomparable input;
+8. explicit non-implications for Assignment, Resource identity, overlap, coordination, visibility, suitability, authorization and Readiness; and
+9. synthetic executable evidence for every applicable §12 case without coordinates or sensitive operational data.
+
+The local structure is not a separate P-001 record. If implementation evidence instead requires independent reference, correction history or lifecycle outside its owning Operation, the implementation must stop and reopen B rather than approximate a record inside A.
+
+No geometry engine is required for the initial Core slice. Core may validate identity, exact profile/version binding, snapshot preservation and non-implication while treating the spatial payload as opaque. A later overlap/containment evaluator requires its own exact rule, input snapshots and authority.
+
+## 34. Registry and accounting transition
+
+Operational Area currently remains a temporary `Proposed` marker in OCP-000, OCP-002, OCP-004 and the generated Foundation map. Under AD-014B it has no positive Concept authority: the selected semantic direction is Operation-local and C has a negative current-scope identity verdict.
+
+The marker is retained only until the separately reviewed OCP-004 implementation can atomically:
+
+- replace stale Concept-shaped wording with the local-binding contract;
+- remove Operational Area from the active Concept registry and generated map;
+- preserve descriptive use of “operational area” without presenting it as a fundamental Concept;
+- update OCP-003's Infrastructure Resource / Environment open question consistently; and
+- add executable evidence and complete status accounting.
+
+This delayed atomic migration follows the established selection→implementation pattern. It is not permission for the temporary marker to acquire fields, graph edges or authority before the migration.
+
+AB-008 moves from `Discovery` to `Planned` for that implementation. It becomes `Resolved` only after the OCP-004 contract, registry cleanup, human review, exact-head CI and owner-authorized merge are complete.
+
+## 35. Accepted effect
+
+This Board act has the following narrow effect:
+
+- AD-014 becomes `0.3.0 / Accepted` and selects Outcome A;
+- managed sites remain OCP-003 Infrastructure Resources while site footprint and Operation spatial context remain separate;
+- Environment remains a taxonomy category/domain input, not a Concept;
+- B remains the gated reusable-record reopening direction;
+- C and D receive negative current-scope independent-identity verdicts;
+- E remains blocked on missing accepted input owners;
+- F remains a separately gated domain-ownership direction, while A may use exact opaque representation profiles without transferring subject identity;
+- AB-008 becomes `Planned` for the separate OCP-004 implementation and registry migration; and
+- no Concept, record family, P-001 invocation, graph edge, schema, geometry standard, checker rule or fixture is created by this act.
+
+Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge. Until that merge, §§31–35 are a proposed Board act rather than an accepted decision.
