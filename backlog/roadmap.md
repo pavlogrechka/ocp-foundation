@@ -52,7 +52,7 @@
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
 - [x] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 0.2.0 / Accepted` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
-- [ ] Promote stable core descriptions to Canonical — `AB-062 / AD-016A 0.2.0` compares A–F, maps a cycle-free T0–T10 sequence and treats `F → C` as the leading hypothesis without selecting it or changing status
+- [ ] Promote stable core descriptions to Canonical — `AB-062 / AD-016B 0.3.0` selects R4 (`F → C`) with L2, limits current preparation to T0–T3 and requires AD-016C reassessment plus AD-016D Board selection before T4; no promotion occurs in this act
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -126,5 +126,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Externally attack AD-016A's L2 dependency floor, T0–T10 topology, open-question classifications and leading `F → C` hypothesis.
-2. Use a separate AD-016B Board act to select R0–R4 before any `Canonical` status or `1.0.0` promotion; every promotion remains its own exact-head reviewed cycle with atomic projections.
+1. Prepare the separate T0 OCP-000 cycle: define its registry `1.x` surface, preserve independent Proposed rows and resolve the “Operational Space First” compatibility blocker before proposing any promotion.
+2. Continue T1–T3 only through separate exact-head reviewed acts; after their completion, run mandatory AD-016C reassessment and a separate AD-016D Board act before T4.
