@@ -62,6 +62,7 @@
 - [x] AD-016C post-enabling reassessment — exact T4–T10 inventory and B/S/C recompute, with G2/OCP-009-first as a recommendation only and AD-016D still mandatory
 - [x] AD-016D post-enabling Board selection — G2 inside C/L2, with preparation scope limited to one separately reviewed OCP-009 T4 draft and no merge-authorization transfer
 - [x] First T4 micro-wave — OCP-009/Capability `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.1.0` projections, exact definition-version independence and non-redirecting supersession
+- [x] AD-016F Objective readiness reassessment — fresh B/S/C audit on exact post-OCP-008A evidence finds no current B item, bounds S/C and records K8 only as the leading hypothesis before mandatory AD-016G
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -136,5 +137,6 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Run a fresh B/S/C audit after OCP-008 `0.3.0` resolves AB-063, then require a new Board scope act before any OCP-008/Objective promotion proposal.
-2. Keep OCP-003/OCP-007/OCP-008 at current status until each B item is resolved and a later Board scope act separately authorizes promotion preparation.
+1. Prepare a separate AD-016G Board scope decision that accepts, revises or rejects the AD-016F Objective B/S/C audit and selects K0, K8 or another justified scope; no promotion occurs in that act.
+2. If and only if AD-016G selects K8, prepare one separately reviewed OCP-008/Objective lifecycle draft with its own exact-head authorization, atomic projections and OCP-004 current-state cleanup.
+3. Keep OCP-003 and OCP-007 at current status until their identity blockers are resolved and a later Board scope act separately authorizes promotion preparation.
