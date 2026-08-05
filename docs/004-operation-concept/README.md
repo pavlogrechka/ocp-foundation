@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.8.0
+Version: 0.8.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014
@@ -9,7 +9,7 @@ Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business R
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
 Concept-Status: Accepted
-Last-Review: 2026-08-05
+Last-Review: 2026-08-06
 ---
 
 # Operation Concept
@@ -67,7 +67,7 @@ Operation не визначає сама по собі:
 | Event | Accepted | значущий occurrence або change; OCP-010 |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
 | Coordination | Proposed | модель взаємодії між Operation |
-| Capability | Accepted | reusable definition layer; OCP-009 |
+| Capability | Canonical | reusable definition layer; OCP-009 |
 | Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Operation |
 | State | не зареєстрований окремо | AD-011 S0; lifecycle Operation не є shared State |
 
@@ -561,3 +561,9 @@ AD-011 прийняв S0 і R0: Operation lifecycle не є shared State, а fou
 - канонічна модель conflict і coordination;
 - taxonomy provenance для transition та relationship records;
 - правила автоматичного завершення або відкликання Assignment після завершення Operation.
+
+## 22. PATCH accounting — v0.8.1
+
+Revision `0.8.1` виправляє лише volatile current-status rendering у §4: Capability тепер правильно позначено як `Canonical`.
+
+Документ лишається `Draft`, Operation — `Accepted`. Це виправлення не змінює definition, identity, fields, lifecycle, domain semantics, dependencies, Concept status, graph edges або P-001 invocation. Поточні Objective status views у §4 та §6 навмисно не змінені: вони належать окремому, заново обчисленому K8 lifecycle proposal.

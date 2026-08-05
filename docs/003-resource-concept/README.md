@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.6.0
+Version: 0.6.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-014
@@ -9,7 +9,7 @@ Used-By: Operation Concept, Assignment Concept, Organization Model, Capability M
 Defines-Concepts: Resource
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-05
+Last-Review: 2026-08-06
 ---
 
 # Resource Concept
@@ -177,7 +177,7 @@ Assignment assigns Resource to Operation
 
 ### Capability and constraints
 
-`Capability` і `Constraint` мають статус Accepted. Resource-specific Capability proposition представляється окремим `CapabilityClaimRecord` за OCP-012; definition та claim не стають властивістю Resource identity.
+`Capability` має статус `Canonical`, а `Constraint` — `Accepted`. Resource-specific Capability proposition представляється окремим `CapabilityClaimRecord` за OCP-012; definition та claim не стають властивістю Resource identity.
 
 ```text
 CapabilityClaimRecord targets Resource
@@ -298,3 +298,9 @@ AD-014B закрив current-scope межу managed infrastructure / Environment
 - конфлікти одночасного призначення;
 - Resource-local lifecycle/health projections без shared State abstraction;
 - точна модель кількості, резервування і споживання Consumable Resource.
+
+## 17. PATCH accounting — v0.6.1
+
+Revision `0.6.1` виправляє лише volatile current-status rendering у §7: Capability тепер правильно позначено як `Canonical`, а Constraint лишається `Accepted`.
+
+Документ лишається `Draft`, Resource — `Accepted`. Це виправлення не змінює definition, identity, working taxonomy, domain semantics, dependencies, Concept status, graph edges або P-001 invocation.
