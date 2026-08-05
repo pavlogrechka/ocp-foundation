@@ -10,7 +10,7 @@
 | Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈61%** | Spatial/environment boundary реалізовано; human-readable OCP-016 Core Boundary Draft переходить до external review без machine admission layer |
+| **Загальна foundation-готовність** | **≈62%** | Human-readable OCP-016 Core Boundary contract Accepted; наступний governance gate — canonicalization-readiness review без передчасної зміни статусів |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -51,7 +51,7 @@
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
-- [ ] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 0.1.0 / Draft` implement AD-015B C3 with five semantic-authority routes and an orthogonal Pattern form route; external review and a separate acceptance act remain
+- [x] Core Boundary specification — `OCP-001 0.9.0 + OCP-016 0.2.0 / Accepted` implement AD-015B C3 with Routes F/C/E/D/I, an orthogonal Pattern form verdict and no machine admission authority
 - [ ] Promote stable core descriptions to Canonical
 
 ## Milestone 1A — Governed Executable Validation Loop
@@ -126,5 +126,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Complete external exact-head review of OCP-001 `0.9.0` and OCP-016 `0.1.0 / Draft`, including all AD-015B §39 obligations and the no-projection stop rule.
-2. Use a separate acceptance act to publish the reviewed OCP-016 contract and resolve AB-061; do not add an admission registry, numeric score or P-002.
+1. Apply OCP-016 to a canonicalization-readiness review of the Accepted foundation specifications before any `Canonical` status change.
+2. Keep dependency stability, executable evidence and implementation-facing contract gaps explicit; canonicalization requires a separate external review and Architecture Board act with atomic projections.
