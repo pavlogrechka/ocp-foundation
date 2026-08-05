@@ -12,4 +12,3 @@
 10. Як визначаються precedence, override, exception і waiver між Constraint?
 11. Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
 12. Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
-13. Які exact OCP-012 F1/A1 rules, per-evidence temporal facts, cutoffs та ambiguity dimensions реалізують прийняту AD-013B unified-mode boundary? `AB-060` має статус Planned; OCP-012 `0.2.0` і `holder-capability@1` лишаються під F0/A0 до окремої reviewed activation.

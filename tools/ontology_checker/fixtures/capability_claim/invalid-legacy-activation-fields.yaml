@@ -1,0 +1,34 @@
+case_id: capability-claim-invalid-legacy-activation-fields
+concept: CapabilityClaimDataset
+resources:
+  - resource_id: R-CLM1-ACTIVATION
+    classifications: [Technical Resource]
+    contains_refs: []
+capabilities:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-05T00:00:00Z
+    provenance_ref: ACT-CAP-001
+claims:
+  - claim_id: CLM1-ACTIVATION
+    claim_kind_ref: holder-capability@1
+    support_mode: declaration-only
+    holder_kind_ref: resource@1
+    holder_ref: R-CLM1-ACTIVATION
+    capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+    claimant_ref: SOURCE-CLM1
+    condition_set_ref: field-context@1
+    assertion: positive
+    evidence_bindings: []
+    support_state: declared
+    authority_ref: AUTH-CLM1
+    effective_from: 2026-08-05T01:00:00Z
+    recorded_at: 2026-08-05T01:01:00Z
+    provenance_ref: ACT-CLM1
+expected:
+  valid: false
+  error_codes: [CAPABILITY_CLAIM_ACTIVATION_FIELDS_FORBIDDEN]
