@@ -1,4 +1,4 @@
-taxonomy_version: 0.4.0
+taxonomy_version: 0.5.0
 authority: Architecture Board
 artifact_classes:
   OCP:
@@ -84,6 +84,18 @@ artifact_classes:
     location: backlog/
     external_review_required: false
     purpose: Planned work and unresolved questions.
+reference_integrity:
+  artifact_id_uniqueness_scope: [OCP, Pattern, AD, ADR, AB]
+  dependency_metadata: Depends-On
+  dependency_exact_resolution_required: true
+  dependency_duplicates_forbidden: true
+  dependency_self_reference_forbidden: true
+  dependency_target_classes: [OCP, Pattern, AD, ADR, AB]
+  normative_rule_manifest_glob: tools/ontology_checker/*rules.yaml
+  normative_rule_ids_global_unique: true
+  normative_rule_source_class: OCP
+  normative_rule_default_kind: validation
+  semantic_duplicate_detection: external-review
 commit_convention:
   pull_request_title: "PR-NNNN[LETTER] — Title"
   merge_method: squash

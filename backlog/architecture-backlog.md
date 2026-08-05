@@ -13,7 +13,7 @@
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
 | AB-011 | Взаємозамінність Resource | Resolved | PR #49 / OCP-013: прийнято consumer-owned exact requirement, deterministic directional eligibility, fail-safe replay і всі AD-008 §12 counterexamples без availability, authorization, selection чи replacement authority |
-| AB-012 | Автоматична перевірка нормативних Concept references | Planned | PR-0006 додає повний rules manifest для emitted checks і CI; duplicate/reference linter залишається до першої Canonical promotion |
+| AB-012 | Автоматична перевірка нормативних Concept references | Resolved | OCP-001 `0.8.0` і artifact taxonomy `0.5.0` вимагають global uniqueness primary artifact/rule IDs, exact-resolvable `Depends-On` та exact OCP source binding; semantic duplicate prose залишається external-review obligation, а не машинно доведеним reference property |
 | AB-013 | Машинозчитувані інваріанти | Planned | PR-0006 реалізує reference subset, lifecycle fixtures і accepted counterexamples; розширювати з кожним Concept cycle |
 | AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
@@ -33,7 +33,7 @@
 | AB-029 | Кілька applicability intervals в Assignment | Open | Вирішити: один Assignment з кількома інтервалами чи окремий Assignment на інтервал |
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
 | AB-031 | Lifecycle record consistency | Resolved | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
-| AB-032 | Canonical rule reference integrity | Resolved | OCP-001 вимагає єдине defining location; rules manifest у PR-0006; повний duplicate linter у AB-012 |
+| AB-032 | Canonical rule reference integrity | Resolved | OCP-001 вимагає єдине defining location; PR-0006 додає source-bound manifests, а OCP-001 `0.8.0` та taxonomy `0.5.0` механічно забороняють duplicate rule IDs і unresolved structured sources |
 | AB-033 | Захист гілки main | Resolved | Ruleset `Foundation Main Protection` підтверджено під час review PR #25: PR required, linear/squash history, force-push і deletion заборонені, required check `reference-checker`; post-merge main-context check succeeded |
 | AB-034 | Constraint Concept | Resolved | OCP-006 Accepted рішенням Architecture Board у PR-0005 |
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |

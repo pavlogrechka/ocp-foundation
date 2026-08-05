@@ -79,6 +79,16 @@ Artifacts whose taxonomy class is `binding` or `binding-when-invoked` require:
 
 Review records, backlog bookkeeping and status-only changes dictated by an already accepted lifecycle do not recursively require review of the review itself.
 
+## Structured identity and reference integrity
+
+The primary registries for `OCP`, `Pattern`, `AD`, `ADR` and `AB` share one mechanically audited identity boundary. An exact identifier may resolve to only one primary artifact. A versioned reviewed-contract snapshot remains evidence for the same OCP artifact; it does not mint another registry identity.
+
+`Depends-On` accepts only exact identifiers from those five classes. Every target must resolve, duplicate targets and self-reference are forbidden, and free-form prose is not an admissible dependency token. A Pattern dependency identifies the Pattern artifact but does not invoke it: only exact versioned `Uses-Patterns` metadata carries invocation authority.
+
+Rule identifiers in `tools/ontology_checker/*rules.yaml` are globally unique across the core and module manifests. Each rule source begins with an exact resolvable OCP identifier. An omitted rule `kind` has the single declared default `validation`. A manifest remains advisory executable evidence and cannot become an independent normative source.
+
+These checks establish structural integrity, not semantic equivalence between natural-language statements. Detecting a copied, paraphrased or conflicting normative rule in prose remains an external-review obligation. The checker must not present the absence of a structural error as proof that prose contains no semantic duplicate.
+
 ## Enforcement boundary
 
 Repository tooling validates metadata, references, declared Pattern versions and committed evidence. GitHub Rulesets or branch protection are the preventive authority for squash-only merge and required checks.

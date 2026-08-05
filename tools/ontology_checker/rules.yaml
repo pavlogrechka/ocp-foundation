@@ -1,49 +1,76 @@
-manifest_version: 0.6.0
+manifest_version: 0.7.0
 authority: reference-only
 normative_source: OCP documents and governed artifact taxonomy
 rules:
 - id: AD_BACKLOG_REFERENCE_MISSING
   kind: validation
-  source: architecture/artifact-taxonomy.yaml AD and AB decision-accounting contract
+  source: OCP-001 artifact taxonomy AD and AB decision-accounting contract
 - id: AD_BACKLOG_STATUS_UNRESOLVED
   kind: validation
-  source: architecture/artifact-taxonomy.yaml AB.active_states and accepted AD accounting contract
+  source: OCP-001 artifact taxonomy AB.active_states and accepted AD accounting contract
+- id: ARTIFACT_ID_DUPLICATE
+  kind: validation
+  source: OCP-001 structured artifact identity uniqueness contract
 - id: ARTIFACT_ID_MISMATCH
   kind: validation
-  source: architecture/artifact-taxonomy.yaml class location and numbering authority
+  source: OCP-001 structured artifact identity and repository-path contract
 - id: ARTIFACT_METADATA_MISSING
   kind: validation
   source: OCP-001 artifact metadata governance and architecture/artifact-taxonomy.yaml
 - id: ARTIFACT_STATUS_INVALID
   kind: validation
-  source: architecture/artifact-taxonomy.yaml class lifecycle contract
+  source: OCP-001 artifact taxonomy lifecycle contract
 - id: ARTIFACT_TAXONOMY_INVALID
   kind: validation
-  source: architecture/artifact-taxonomy.yaml machine-readable governance contract
+  source: OCP-001 machine-readable artifact-taxonomy governance contract
 - id: BACKLOG_ID_DUPLICATE
   kind: validation
-  source: architecture/artifact-taxonomy.yaml AB numbering authority and OCP-001 identity governance
+  source: OCP-001 AB numbering authority and structured identity governance
+- id: DEPENDENCY_REFERENCE_DUPLICATE
+  kind: validation
+  source: OCP-001 structured Depends-On uniqueness contract
+- id: DEPENDENCY_REFERENCE_INVALID
+  kind: validation
+  source: OCP-001 structured Depends-On exact-token contract
+- id: DEPENDENCY_REFERENCE_MISSING
+  kind: validation
+  source: OCP-001 structured Depends-On exact-resolution contract
+- id: DEPENDENCY_SELF_REFERENCE
+  kind: validation
+  source: OCP-001 structured Depends-On self-reference prohibition
+- id: NORMATIVE_RULE_ID_DUPLICATE
+  kind: validation
+  source: OCP-001 global rule-manifest identity contract
+- id: NORMATIVE_RULE_INVALID
+  kind: validation
+  source: OCP-001 rule-manifest structural contract
+- id: NORMATIVE_RULE_SOURCE_INVALID
+  kind: validation
+  source: OCP-001 exact OCP rule-source binding contract
+- id: NORMATIVE_RULE_SOURCE_MISSING
+  kind: validation
+  source: OCP-001 resolvable OCP rule-source binding contract
 - id: PATTERN_REFERENCE_INVALID
   kind: validation
-  source: architecture/artifact-taxonomy.yaml Pattern invocation metadata and semver contract
+  source: OCP-001 Pattern invocation metadata and semver contract
 - id: PATTERN_REFERENCE_MISSING
   kind: validation
-  source: architecture/artifact-taxonomy.yaml Pattern invocation identity contract
+  source: OCP-001 Pattern invocation identity contract
 - id: PATTERN_VERSION_INVALID
   kind: validation
-  source: architecture/artifact-taxonomy.yaml Pattern.version_format
+  source: OCP-001 Pattern version-format contract
 - id: PATTERN_VERSION_MISMATCH
   kind: validation
-  source: architecture/artifact-taxonomy.yaml Pattern.invocation_version_policy track-current
+  source: OCP-001 Pattern invocation track-current contract
 - id: PROCESS_HISTORY_AUDIT_FAILED
   kind: validation
-  source: architecture/artifact-taxonomy.yaml commit_convention complete-history audit contract
+  source: OCP-001 complete-history audit contract
 - id: PROCESS_HISTORY_NON_LINEAR
   kind: validation
   source: OCP-001 squash-only governance and architecture/artifact-taxonomy.yaml commit_convention
 - id: PROCESS_HISTORY_SHALLOW
   kind: validation
-  source: architecture/artifact-taxonomy.yaml commit_convention history_audit_requires_complete_history
+  source: OCP-001 complete-history audit shallow-repository prohibition
 - id: ASSIGNMENT_APPLICABILITY_INTERVAL_INVALID
   kind: validation
   source: OCP-005 §16 invariant 7
@@ -151,7 +178,7 @@ rules:
   source: OCP-006 §6.4 and §19 temporal invariants
 - id: FIXTURE_CONCEPT_UNSUPPORTED
   kind: validation
-  source: PR-0006 fixture contract
+  source: OCP-001 executable-validation fixture boundary
 - id: FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED
   kind: validation
   source: OCP-006 §11 exact-version evaluation contract; PR-0006 fixture envelope
