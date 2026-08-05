@@ -9,7 +9,7 @@
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
 | AB-007 | Межа State та Readiness | Resolved | AD-011 `0.3.0` окремо приймає S0 і R0 no-new-authority controls; State/Readiness deregistered як Concept candidates, а R1 можна reopen лише через окремий mandate з concrete consumer та legitimate criterion/target/freshness owners |
-| AB-008 | Межа Infrastructure Resource / Environment | Open | Перевірити на Position Site, Launch Site і Relay Site |
+| AB-008 | Межа Infrastructure Resource / Environment | Discovery | AD-014 `0.1.0` порівнює Operation-local, identified-record, Concept, derived-only і domain-envelope outcomes для Operational Area / Environment без зміни Resource identity або Concept graph |
 | AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
 | AB-011 | Взаємозамінність Resource | Resolved | PR #49 / OCP-013: прийнято consumer-owned exact requirement, deterministic directional eligibility, fail-safe replay і всі AD-008 §12 counterexamples без availability, authorization, selection чи replacement authority |
