@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-012
 Title: Evidence Freshness and Replay Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-011, OCP-001, OCP-004, OCP-006, OCP-010, OCP-011, OCP-012, OCP-013, OCP-015, P-001
 Applies-To: AB-039, evidence freshness, evidence ambiguity, deterministic replay
-Review-After: External adversarial review of the comparative revision before any Board selection
+Review-After: Accepted contract-local invocations demonstrate stable shared obligations, a concrete domain boundary requires profiles, or a consumer needs an independently referenced usability record
 ---
 
 # AD-012 — Evidence Freshness and Replay Boundary
@@ -537,3 +537,95 @@ External adversarial review must now determine separately:
 A later `AD-012B` Board act may select one outcome per decidable semantic axis and an explicit representation by role, or keep any axis in `Discovery`. A selection act may not itself create a Pattern, record family, domain profile, schema, checker rule, fixture or graph edge. Each such normative artifact requires its own accepted contract and evidence cycle.
 
 Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and of any later selection act.
+
+## 26. Architecture Board decision — AD-012B
+
+The Architecture Board accepts this decision by act **AD-012B** on **2026-08-05**, after Fable reviewed the complete comparison on exact head `ef07392d2a3d9c4f0f2d0e474849cf10b2592ec7`, found no defects and recommended merge. Codex independently accepted that verdict, Pavlo authorized the merge, and PR #63 was squash-merged with green post-merge CI.
+
+This act selects semantic owners and representation roles. It does not define a freshness duration, ambiguity vocabulary or executable rule.
+
+### 26.1 Freshness axis — F1
+
+AD-012 selects **F1 — contract-local versioned freshness rule** as the positive freshness direction.
+
+Freshness is use-relative. Each consuming normative contract that needs machine-derived temporal usability must own or exact-reference the rule for its own decision. Its separately reviewed activation must bind:
+
+1. the protected consumer and exact use;
+2. each evidence kind and exact evidence reference;
+3. the temporal fact measured for each kind;
+4. the exact evaluation time;
+5. the exact rule identity and version;
+6. all rule inputs and immutable snapshots;
+7. cutoff equality, precision and incomparable-time behavior; and
+8. the evaluator or deterministic rule authority.
+
+No global duration, default timestamp or universal evidence lifetime is selected. OCP-004, OCP-006, OCP-011, OCP-012, OCP-013 and OCP-015 may therefore own different rules where their decisions differ. Shared field names do not make those rules interchangeable.
+
+F0 remains the mandatory behavior for any consuming semantics that are not already governed by a narrow accepted local rule and have not completed an explicit F1 activation. In that scope, Core may preserve an attributable `stale` or equivalent statement and enforce non-permissive downstream handling, but it must not present the statement as machine-derived. This is a governed activation boundary, not a caller-selectable fallback.
+
+OCP-004's accepted binding-change rule is a narrow pre-existing contract-local rule: it may mechanically classify prior explicit-intent validation evidence as stale after a substantive binding change. AD-012B neither downgrades that rule nor extends it to age, ObservationRecord, assessment evidence or claim support.
+
+### 26.2 Ambiguity axis — A1
+
+AD-012 separately selects **A1 — contract-local ambiguity rules** as the positive ambiguity direction.
+
+Each activated consuming contract must name the dimensions it can decide, the exact rule and inputs for each dimension, and the non-permissive behavior for unresolved meaning. Reference ambiguity, lineage ambiguity, criterion ambiguity, temporal ambiguity, semantic-classification ambiguity and conflict remain distinct unless that contract explicitly governs their relationship.
+
+Accepted Core structure may continue to detect finite defects such as zero or multiple exact-reference targets, duplicate identity, version mismatch, snapshot mismatch and invalid or unresolved lineage where the owning contract defines them. A1 does not authorize Core to infer semantic equivalence, contradiction or preference from text, labels, timestamps, record order, majority or count.
+
+A0 remains the mandatory behavior outside an accepted A1 activation. Structural defects may be detected mechanically; semantic ambiguity remains an exact attributable statement and cannot yield a permissive downstream result. As with F1, implementations cannot silently opt into A1 because a convenient heuristic exists.
+
+### 26.3 Accepted representation roles
+
+The Board selects two explicit, non-competing roles:
+
+- **inline consuming result for historical classification** — an activated immutable assessment or evaluation records the exact rule/profile, inputs, evaluation time and classification needed by the decision it protects; correction or supersession preserves history under that consuming contract; and
+- **derived-only view for a new current query** — a selected deterministic rule may project usability from exact immutable inputs and an explicit query time without storing one standing `fresh` or `ambiguous` property on the evidence identity.
+
+The roles do not select two authorities. The consuming contract owns both the historical result and any derived query semantics. A derived view must fail closed when its exact historical rule or inputs are unavailable and must never consult current repository state, latest rule versions or wall clock implicitly. A historical record never mutates merely because a later query classifies the same evidence differently.
+
+A separate identified usability record is not accepted by this act. No demonstrated consumer needs independent reference, attribution or correction history beyond the consuming result, and a generic record would overlap OCP-011. If new evidence later justifies that role, it requires a separate Board reopening plus a full P-001 invocation or an explicit reviewed reason not to invoke P-001.
+
+Domain-local representation is not selected because no concrete F3/A3 profile boundary has been demonstrated.
+
+### 26.4 Alternatives and reopening gates
+
+F2 and A2 remain conditional future directions. They may be reconsidered only after multiple accepted contract-local activations demonstrate the same stable obligation form and show that a Pattern reduces real normative drift without owning domain meaning, durations or comparison rules.
+
+F3 and A3 may be reconsidered only when a concrete domain profile cannot be represented safely through an F1/A1 exact reference and a Core interoperability envelope has a demonstrated consumer. Unknown or mismatched profiles must remain non-permissive.
+
+A global freshness field on an evidence identity remains inadmissible. Implementation convenience, repeated field names, one domain example or a desire to share code is not reopening evidence.
+
+### 26.5 Downstream activation plan
+
+AB-039 moves from `Discovery` to `Planned` for the first contract-local activation. OCP-011 is the first target because it already exact-binds criterion, evidence/input snapshots, evaluator and evaluation time and explicitly identifies `stale` and `ambiguous` as attributable until AB-039 supplies an owner.
+
+That downstream OCP-011 cycle must, in one separately reviewed normative revision:
+
+- define or exact-reference one complete F1 rule contract for its protected use;
+- name the A1 dimensions it can actually decide and preserve attributable handling for every other semantic dimension;
+- keep `stale` distinct from false evidence or a negative Objective conclusion;
+- keep `fresh` distinct from truth, reliability, sufficiency, availability, Readiness and authorization;
+- preserve exact historical replay and the inline/derived role split; and
+- add outcome-appropriate executable fixtures for all applicable §23 pressures.
+
+OCP-011 and OCP-012 versions and Accepted statuses do not change through AD-012B. Their current `stale`/`ambiguous` trust boundaries remain binding until each contract completes its own reviewed activation. OCP-012, OCP-006 and other consumers may later activate F1/A1 independently; one contract's rule never becomes their default.
+
+AB-039 may move from `Planned` to `Resolved` when the first complete OCP-011 activation is accepted with executable evidence. Unactivated consumers remain explicitly under F0/A0 after that accounting transition and require their own reviewed amendment before claiming machine-derived semantics.
+
+### 26.6 Accepted effect and exclusions
+
+AD-012B has the following narrow effects:
+
+- AD-012 becomes `Accepted` at version `0.3.0`;
+- F1 and A1 become the selected positive owner models;
+- F0 and A0 remain mandatory per-contract behavior wherever no narrow accepted local rule or separately accepted activation exists;
+- inline historical classification and derived-only current projection are selected as distinct representation roles;
+- AB-039 moves `Discovery → Planned` for the first OCP-011 activation; and
+- the comparison, authority accounting and twenty counterexample obligations in §§17–24 remain binding guidance for every activation.
+
+This act does not create a Concept, Pattern, record family, P-001 invocation, domain profile, rule identifier, duration, time ontology, ambiguity code, schema, checker derivation, fixture or graph edge. It does not reopen AD-011 R0, define Readiness, verify Capability possession, change Resource identity, grant authorization or decide source reliability.
+
+Newest timestamp, record order, source count, evaluator count, claimant count, caller identity and current wall clock remain forbidden substitutes for authority.
+
+This selection takes effect only through squash merge after exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization. Until that merge, the PR carrying §26 is a proposed Board act.

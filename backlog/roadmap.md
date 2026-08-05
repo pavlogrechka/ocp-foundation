@@ -10,7 +10,7 @@
 | Core domain ontology | 76% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; AD-011 закриває State/Readiness negative identity decision через окремі S0/R0 controls |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈54%** | AD-011 закриває найстаріший Deferred Concept boundary; AB-039 / AD-012 тепер досліджує machine-verifiable freshness, ambiguity та replay без передчасного rule owner |
+| **Загальна foundation-готовність** | **≈55%** | AD-012B обирає contract-local F1+A1 owner-модель і representation roles; перша OCP-011 activation ще не реалізована |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -89,7 +89,7 @@
 - [x] Draft OCP-012 CapabilityClaimRecord exact binding, temporal/supersession history and fail-safe projection fixtures
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
-- [ ] Machine-verifiable evidence freshness, ambiguity and deterministic replay boundary — `AB-039 / AD-012 0.2.0` compares F0–F3, A0–A3 and representation variants before Board selection
+- [ ] Machine-verifiable evidence freshness, ambiguity and deterministic replay — `AD-012B 0.3.0` selects F1+A1 with inline/derived roles; `AB-039` is Planned for the first OCP-011 activation
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -123,5 +123,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review the active `AB-039 / AD-012 0.2.0` F0–F3, A0–A3 and representation comparison, then record any supported selections through an explicit Board act.
+1. Implement the first separately reviewed OCP-011 activation of the accepted `AD-012B` F1+A1 contract-local model, with exact replay bindings and applicable counterexample fixtures.
 2. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.

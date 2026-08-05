@@ -12,4 +12,4 @@
 10. Як визначаються precedence, override, exception і waiver між Constraint?
 11. Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
 12. Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
-13. Як визначається freshness evaluation для dynamic inputs і deterministic replay? Питання проходить Discovery в `AB-039 / AD-012`; exact use, rule owner, ambiguity dimensions і representation ще не обрані.
+13. Які exact OCP-011 freshness rule, temporal facts і ambiguity dimensions першими активують прийняту `AD-012B` F1+A1 owner-модель? `AB-039` має статус Planned; інші OCP лишаються під F0/A0 до власних reviewed activations.
