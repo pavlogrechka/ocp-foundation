@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.15.0
+Version: 0.16.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -75,6 +75,12 @@ OCP-011 визначає Accepted `OutcomeAssessmentRecord` як P-001 identifie
 
 OutcomeAssessmentRecord не є Operation lifecycle stage, mutable Objective status, Event truth або універсальним realized outcome. Missing, stale, ambiguous чи conflicting evidence не може створювати definitive conclusion за baseline contract.
 
+## Governed Capability Claim records
+
+OCP-012 визначає Accepted `CapabilityClaimRecord` як P-001 identified record, а не фундаментальний Concept. Record exact-bind-ить Resource holder, одну точну OCP-009 Capability version, claimant, condition set, authority, evidence/support, effectivity та provenance; однакові claims не роблять Resources однаковими або взаємозамінними.
+
+`holder-capability@1` зберігає attributable F0/A0 baseline. `holder-capability@2` явно розділяє declaration-only та evidence-backed modes; лише evidence-backed mode може invoke exact OCP-012-local F1/A1 source-use rules. Така classification не є Capability truth, Readiness, availability, authorization, admissibility або downstream eligibility.
+
 ## Робоче рішення щодо Resource
 
 `Actor` не є окремим фундаментальним Concept. Людина, екіпаж, розрахунок, технічний засіб або інший залучений елемент моделюється як Resource. Його операційна роль визначається через Assignment.
@@ -94,5 +100,4 @@ OutcomeAssessmentRecord не є Operation lifecycle stage, mutable Objective sta
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.
 - Межа між Constraint violation та майбутнім Conflict Concept.
-- Наступні contract-local freshness/ambiguity activations після першої OCP-011 activation; AB-039 завершено без глобального evidence lifetime.
-- Evidence sufficiency та окрема F1/A1 activation для Accepted holder-specific CapabilityClaimRecord.
+- Наступні contract-local freshness/ambiguity activations після окремих OCP-011 і OCP-012 activations; жодна з них не створює глобального evidence lifetime.

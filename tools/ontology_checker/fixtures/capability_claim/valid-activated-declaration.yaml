@@ -1,0 +1,32 @@
+case_id: capability-claim-valid-activated-declaration
+concept: CapabilityClaimDataset
+resources:
+  - resource_id: R-CLM2-DECLARED
+    classifications: [Technical Resource]
+    contains_refs: []
+capabilities:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-05T00:00:00Z
+    provenance_ref: ACT-CAP-001
+claims:
+  - claim_id: CLM2-DECLARED
+    claim_kind_ref: holder-capability@2
+    support_mode: declaration-only
+    holder_kind_ref: resource@1
+    holder_ref: R-CLM2-DECLARED
+    capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+    claimant_ref: SOURCE-CLM2
+    condition_set_ref: field-context@1
+    assertion: positive
+    evidence_bindings: []
+    support_state: declared
+    authority_ref: AUTH-CLM2
+    effective_from: 2026-08-05T01:00:00Z
+    recorded_at: 2026-08-05T01:01:00Z
+    provenance_ref: ACT-CLM2-DECLARED
+expected: {valid: true, error_codes: []}

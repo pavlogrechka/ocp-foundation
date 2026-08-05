@@ -160,7 +160,11 @@ The validator rejects embedded Result, Operation lifecycle-success, Objective mu
 
 OCP-012 defines a separate identified record for one claimant's proposition about one exact Resource and one exact OCP-009 Capability version under one condition set. The checker keeps declaration authority narrow: `support_state: declared` records what the claimant said and never marks it independently verified.
 
-The checker mechanically cross-checks `declared`/`missing` against evidence-set composition and verifies snapshot consistency. OCP-012 has not completed its own F1/A1 activation, so `sufficient`, `stale`, `ambiguous` and `conflicting` remain attributable recorder responsibility even though AB-039 is resolved by the separate OCP-011 activation.
+`holder-capability@1` retains the F0/A0 baseline: the checker cross-checks support/evidence shape and snapshots, while `sufficient`, `stale`, `ambiguous` and `conflicting` remain attributable recorder statements. Activation fields on that legacy kind are rejected.
+
+Exact `holder-capability@2` requires an explicit `declaration-only` or `evidence-backed` mode. Declaration-only carries no external evidence or evidence-rule fields. Evidence-backed mode exact-binds the OCP-012 source use, a governed evidence expectation, immutable evidence and rule-input snapshots, `support_evaluated_at`, condition-local F1/A1 rule versions and inline states. The checker replays Event `occurred_at`, ObservationRecord `observed_at` or OutcomeAssessmentRecord `evaluated_at` only when the exact local rule selects that fact.
+
+The only accepted mode-changing Module C edge is same-assertion `declaration-only → evidence-backed`. Reverse and polarity-changing transitions reject; predecessors and branches remain visible. `derive_capability_claim_support_usability` reproduces historical classification or accepts a later explicit query time without mutating the claim. Missing rules, snapshots or historical evidence fail closed, and an activated positive projection requires complete exact validation context.
 
 The reference slice supports Resource-only holders, exact Capability resolution, half-open effectivity intervals, evidence snapshots and branching supersession. Withdrawal is a successor assertion distinct from negative polarity. `capability_claim_heads` performs as-of replay; `effective_capability_claim` returns `indeterminate` for missing, stale, ambiguous or conflicting support and for disagreeing heads. It never uses newest timestamp, list order, claimant count or source count as authority.
 

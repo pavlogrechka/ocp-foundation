@@ -1,0 +1,95 @@
+case_id: capability-claim-valid-activated-temporal-ambiguity
+concept: CapabilityClaimDataset
+resources:
+  - resource_id: R-CLM2-FUTURE
+    classifications: [Technical Resource]
+    contains_refs: []
+capabilities:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-05T00:00:00Z
+    provenance_ref: ACT-CAP-001
+observations:
+  - observation_id: OBS-CLM2-FUTURE
+    observer_ref: SOURCE-EVIDENCE
+    observation_kind_ref: capability-demonstration.field@1
+    statement: Future-dated input.
+    observed_at: 2026-08-05T02:00:01Z
+    recorded_at: 2026-08-05T02:00:02Z
+    provenance_ref: ACT-OBS-CLM2-FUTURE
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-CLM2-FUTURE
+    evidence_bindings:
+      - {evidence_kind_ref: observation-record@1, evidence_ref: OBS-CLM2-FUTURE}
+evidence_expectations:
+  - expectation_ref: holder-capability-evidence.field-context@1
+    protected_use_ref: capability-claim-source-projection@1
+    protected_claim_kind_ref: holder-capability@2
+    protected_support_mode: evidence-backed
+    condition_set_ref: field-context@1
+    admitted_evidence_kinds: [event@1, observation-record@1, outcome-assessment-record@1]
+    minimum_evidence_count: 1
+input_snapshots:
+  - snapshot_ref: INPUT-CLM2-FUTURE
+    protected_use_ref: capability-claim-source-projection@1
+    protected_claim_kind_ref: holder-capability@2
+    protected_support_mode: evidence-backed
+    evidence_expectation_ref: holder-capability-evidence.field-context@1
+    condition_set_ref: field-context@1
+    freshness_rule_ref: holder-capability-freshness.field-context@1
+    ambiguity_rule_ref: holder-capability-ambiguity.field-context@1
+freshness_rules:
+  - rule_ref: holder-capability-freshness.field-context@1
+    protected_use_ref: capability-claim-source-projection@1
+    protected_claim_kind_ref: holder-capability@2
+    protected_support_mode: evidence-backed
+    condition_set_ref: field-context@1
+    evaluation_time_source: support_evaluated_at
+    comparison_precision: microsecond
+    evidence_policies:
+      - {evidence_kind_ref: event@1, temporal_fact_ref: event-occurred-at@1, max_age_seconds: 3600, cutoff: inclusive}
+      - {evidence_kind_ref: observation-record@1, temporal_fact_ref: observation-observed-at@1, max_age_seconds: 600, cutoff: inclusive}
+      - {evidence_kind_ref: outcome-assessment-record@1, temporal_fact_ref: assessment-evaluated-at@1, max_age_seconds: 1800, cutoff: inclusive}
+    missing_temporal_fact: indeterminate
+    future_temporal_fact: indeterminate
+    incomparable_temporal_fact: indeterminate
+ambiguity_rules:
+  - rule_ref: holder-capability-ambiguity.field-context@1
+    protected_use_ref: capability-claim-source-projection@1
+    protected_claim_kind_ref: holder-capability@2
+    protected_support_mode: evidence-backed
+    condition_set_ref: field-context@1
+    machine_dimensions: [reference@1, temporal@1]
+    attributable_dimensions: [semantic-classification@1]
+claims:
+  - claim_id: CLM2-FUTURE
+    claim_kind_ref: holder-capability@2
+    support_mode: evidence-backed
+    evidence_expectation_ref: holder-capability-evidence.field-context@1
+    holder_kind_ref: resource@1
+    holder_ref: R-CLM2-FUTURE
+    capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+    claimant_ref: SOURCE-CLM2
+    condition_set_ref: field-context@1
+    assertion: positive
+    evidence_bindings:
+      - {evidence_kind_ref: observation-record@1, evidence_ref: OBS-CLM2-FUTURE}
+    evidence_snapshot_ref: EVIDENCE-CLM2-FUTURE
+    input_snapshot_ref: INPUT-CLM2-FUTURE
+    freshness_rule_ref: holder-capability-freshness.field-context@1
+    freshness_state: indeterminate
+    ambiguity_rule_ref: holder-capability-ambiguity.field-context@1
+    ambiguity_state: ambiguous
+    ambiguity_findings:
+      - {dimension_ref: temporal@1, reason_ref: temporal-fact-future@1, basis: rule-derived}
+    support_state: ambiguous
+    support_evaluated_at: 2026-08-05T02:00:00Z
+    authority_ref: AUTH-CLM2
+    effective_from: 2026-08-05T01:00:00Z
+    recorded_at: 2026-08-05T02:01:00Z
+    provenance_ref: ACT-CLM2-FUTURE
+expected: {valid: true, error_codes: []}

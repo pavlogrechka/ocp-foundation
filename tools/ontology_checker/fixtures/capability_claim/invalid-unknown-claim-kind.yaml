@@ -1,0 +1,33 @@
+case_id: capability-claim-invalid-unknown-claim-kind
+concept: CapabilityClaimDataset
+resources:
+  - resource_id: R-CLM3
+    classifications: [Technical Resource]
+    contains_refs: []
+capabilities:
+  - namespace: mobility
+    capability_id: navigate
+    version: v1
+    label: Navigate
+    definition: Navigate through a governed operational environment.
+    namespace_owner_ref: SPEC-MOBILITY
+    published_at: 2026-08-05T00:00:00Z
+    provenance_ref: ACT-CAP-001
+claims:
+  - claim_id: CLM3-UNKNOWN
+    claim_kind_ref: holder-capability@3
+    holder_kind_ref: resource@1
+    holder_ref: R-CLM3
+    capability_ref: {namespace: mobility, capability_id: navigate, version: v1}
+    claimant_ref: SOURCE-CLM3
+    condition_set_ref: field-context@1
+    assertion: positive
+    evidence_bindings: []
+    support_state: declared
+    authority_ref: AUTH-CLM3
+    effective_from: 2026-08-05T01:00:00Z
+    recorded_at: 2026-08-05T01:01:00Z
+    provenance_ref: ACT-CLM3
+expected:
+  valid: false
+  error_codes: [CAPABILITY_CLAIM_KIND_UNSUPPORTED]

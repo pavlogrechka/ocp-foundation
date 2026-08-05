@@ -30,6 +30,7 @@ from .capability_claim import (
     CAPABILITY_CLAIM_ERROR_CODES,
     capability_claim_effective_at,
     capability_claim_heads,
+    derive_capability_claim_support_usability,
     effective_capability_claim,
     resolve_capability_claim,
     validate_capability_claim,

@@ -9,8 +9,8 @@
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 76% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; AD-011 закриває State/Readiness negative identity decision через окремі S0/R0 controls |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 63% | OCP-011 має першу exact F1+A1 activation; Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈57%** | AD-013B обирає unified OCP-012 activation boundary і forward mode transition; точні F1/A1 rules та fixtures ще не реалізовані |
+| Machine-readable schemas and enforcement | 66% | OCP-011 і OCP-012 мають окремі exact F1+A1 activations; OCP-012–OCP-015 зберігають exact-bound fail-safe projections; production contracts і повний normative linter відсутні |
+| **Загальна foundation-готовність** | **≈58%** | OCP-012 реалізує unified `holder-capability@2`, forward-only mode transition, exact source-use F1/A1 rules і replay fixtures |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -90,7 +90,7 @@
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
 - [x] First machine-verifiable evidence freshness, ambiguity and deterministic replay activation — `OCP-011 0.3.0` activates F1+A1 for exact `objective-achievement@2`; `AB-039` is Resolved while unactivated consumers remain under F0/A0
-- [ ] Capability Claim support-usability activation — `AD-013B 0.3.0` selects Outcome B, OCP-012 source use and reviewed `declaration-only → evidence-backed` transition; `AB-060` is Planned for the exact F1/A1 implementation
+- [x] Capability Claim support-usability activation — `OCP-012 0.3.0` implements the AD-013B unified `holder-capability@2` boundary, reviewed `declaration-only → evidence-backed` transition, exact source-use F1/A1 rules and replay evidence; `AB-060` is Resolved
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -124,5 +124,4 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Implement the separately reviewed OCP-012 activation selected by `AD-013B`, with exact `holder-capability@2` modes, forward transition, F1/A1 rules, replay bindings and applicable counterexample fixtures.
-2. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
