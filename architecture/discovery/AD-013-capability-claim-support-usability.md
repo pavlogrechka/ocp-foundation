@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-013
 Title: Capability Claim Support Usability Activation Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: AD-005, AD-007, AD-008, AD-012, OCP-001, OCP-009, OCP-010, OCP-011, OCP-012, OCP-013, P-001
 Applies-To: AB-060, CapabilityClaimRecord support freshness, ambiguity and replay
-Review-After: external boundary review and outcome-fair evidence comparison
+Review-After: external adversarial review of the comparative revision before any Board selection
 ---
 
 # AD-013 — Capability Claim Support Usability Activation Boundary
@@ -340,6 +340,227 @@ The discovery may advance to outcome comparison only when no evidence obligation
 
 ## 19. Discovery status and next act
 
-Revision `0.1.0` opens `AD-013 / AB-060` in `Discovery`. It records no preferred Board outcome beyond the non-normative working hypothesis in §16.
+Revision `0.1.0` opened `AD-013 / AB-060` in `Discovery`. It recorded no preferred Board outcome beyond the non-normative working hypothesis in §16. Its exact-head external review completed in PR #66; all findings were resolved before owner-authorized squash merge.
 
-The next PR after external review should resolve findings in AD-013 itself. A later comparison/selection act may select A, B, C or D, or keep the question in Discovery. No OCP-012 version or status changes until a separate activation implementation is reviewed, approved, authorized and squash-merged.
+Revision `0.2.0` adds comparison only. Findings against that comparison must be resolved in AD-013 itself before a later selection act may choose A, B, C or D, or keep the question in Discovery. No OCP-012 version or status changes until a separate activation implementation is reviewed, approved, authorized and squash-merged.
+
+## 20. Comparative revision scope and method
+
+Revision `0.1.0` was exact-head reviewed through three iterations in PR #66. Fable's Moderate lineage-fairness finding and Minor counterexample-count finding were accepted and resolved before owner-authorized squash merge. Revision `0.2.0` now compares the admissible outcomes. It does not select one.
+
+The comparison follows seven rules:
+
+1. A is a complete no-new-authority control, not a failed implementation of B, C or D.
+2. B, C and D must each name the protected use, historical evaluation-time owner, current-query owner and exact semantic boundary.
+3. Declaration-only authority is tested independently from evidence-backed support.
+4. B receives no lineage advantage merely because both modes share a claim kind; C receives no clarity advantage merely because it uses different kinds.
+5. Every outcome is tested against the same human scenarios and all twenty-one §13 counterexamples using evidence expressible for that outcome.
+6. E and F remain gated falsification controls. Comparison cannot silently reopen AD-012B or create independent usability identity.
+7. Similar fields, one checker implementation or storage convenience are not decision-separating evidence.
+
+The working verdicts below mean:
+
+- **admissible control** — safe and complete while no positive activation is justified;
+- **leading hypothesis** — the smallest currently plausible positive direction, still subject to a Board choice and exact implementation evidence;
+- **conditional alternative** — viable only if its additional history or consumer boundary is explicitly selected and proven; and
+- **gated control** — not an admissible final outcome in AD-013 without a separate reopening act.
+
+These are comparison verdicts, not Architecture Board selections.
+
+## 21. Protected-use and evaluation-time comparison
+
+The outcomes differ first in the question they protect. An evaluation time owned by one layer cannot be borrowed by another.
+
+| Outcome | Protected historical use | Historical evaluation-time owner | Current-query owner | Main authority risk | Working verdict |
+|---|---|---|---|---|---|
+| A — OCP-012 F0/A0 | attributable claim and fail-safe head projection | none added; no machine-derived claim-support evaluation | existing `as_of_time` selects applicable heads only | an implementation may present attributed `sufficient` as machine-proven | **Admissible control and current default.** |
+| B — unified `holder-capability@2` | OCP-012's own evidence-backed attributable projection | explicit OCP-012 `support_evaluated_at` under exact local rules | OCP-012 explicit-time derived support view | conditional modes or a successor transition may change authority by implication | **Leading positive hypothesis.** |
+| C — split claim kinds | OCP-012's evidence-backed kind under a uniform authority envelope | explicit OCP-012 support evaluation time for the evidence-backed kind | OCP-012 explicit-time derived support view | cross-kind history may fragment or silently weaken Module C identity | **Conditional clarity alternative.** |
+| D — downstream-only | one exact consumer's use of the accepted OCP-012 projection | none in OCP-012; the downstream record owns only its own evaluation time | the same named consumer under an explicit query contract | consumer may reach through the projection and duplicate or relabel OCP-012 semantics | **Conditional use-specific alternative.** |
+
+OCP-013 already owns `evaluation_time` for one directional eligibility evaluation. That makes a D-style consumer rule expressible, but the time remains OCP-013's. It cannot become a historical OCP-012 `support_evaluated_at`, and it cannot convert attributable `sufficient` into machine-proven support.
+
+B and C protect OCP-012's own projection. Therefore both need a new exact claim-kind contract that owns support evaluation time, per-evidence temporal facts, rule versions, snapshots and inline results. `recorded_at`, effectivity and a downstream evaluation time remain inadmissible substitutes.
+
+## 22. Human scenario comparison
+
+The following scenarios expose what a user would see before checker details.
+
+| Scenario | A — F0/A0 | B — unified `@2` | C — split kinds | D — downstream-only |
+|---|---|---|---|---|
+| claimant makes a direct declaration with no evidence | attributable `declared`; freshness not applicable | explicit `declaration-only`; evidence-rule fields forbidden | declaration kind with no evidence authority | unchanged OCP-012 declaration; consumer may preserve attribution or require review |
+| first claim is evidence-backed | attributable support state; no machine-derived freshness | `evidence-backed` mode exact-binds rule, time and snapshots | evidence-backed kind exact-binds rule, time and snapshots | OCP-012 remains attributable; named consumer evaluates only its exact use |
+| the same claimant later adds evidence to a declaration | new record without machine-derived mode transition | explicit mode-stable lineage treatment or reviewed same-kind transition; predecessor never changes meaning | separate lineage or reviewed cross-kind transition; predecessor never changes meaning | source claim history remains unchanged; consumer creates a new evaluation |
+| claimant corrects evidence-backed support | ordinary successor with attributable support | same-mode successor preserves binding identity and exact replay | evidence-backed-kind successor preserves binding identity and exact replay | new consumer evaluation; no source mutation |
+| claimant withdraws a proposition | explicit successor withdrawal, never negative | withdrawal remains assertion semantics, not support failure | withdrawal remains assertion semantics within the applicable kind/lineage contract | downstream result cannot manufacture source withdrawal |
+| two correction branches remain live | visible branches; projection fails safe | branches remain visible within the selected mode/transition contract | branches remain visible within each governed kind and any reviewed cross-kind rule | consumer binds exact heads or returns non-permissive result |
+| a later user asks whether support is usable now | no machine-derived freshness; attributable history remains | new explicit-time OCP-012 view replays exact historical rule and snapshot | new explicit-time evidence-backed-kind view replays its exact historical rule and snapshot | named consumer evaluates at its own explicit time and context |
+| two consumers use the same evidence differently | distinct attributable consumer uses | one OCP-012 source-use classification may feed both, but neither consumer may reuse it as its own freshness conclusion | one evidence-backed-kind source classification may feed both, but neither consumer may reuse it as its own freshness conclusion | each consumer owns a separate rule; results are not portable by label |
+
+No row turns evidence-backed support into verified Capability possession. No row turns a direct declaration into missing evidence.
+
+## 23. Outcome-by-outcome comparison verdicts
+
+| Outcome | Positive evidence already present | Decision-separating gap | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| A — preserve F0/A0 | accepted OCP-012 already preserves attribution, exact bindings, history and fail-safe projection | no machine-derived support usability | least authority and no migration | attributable thresholds remain non-portable | **Admissible control.** Mandatory wherever a positive contract is incomplete. |
+| B — unified `@2` | OCP-012 owns the proposition, support vocabulary, evidence snapshots and Module C history | select the support-mode lineage rule and complete per-evidence temporal/ambiguity rules | one exact claim-kind contract can expose the declaration/evidence boundary without a second record family | conditional schema and same-kind transitions may hide authority changes | **Leading positive hypothesis.** Smallest Core-local activation if its transition contract is explicit. |
+| C — split kinds | each kind can have a uniform authority envelope | prove how declaration and evidence-backed histories relate without silent cross-kind supersession | most visible trust boundary for humans and validators | duplicated kind handling, fragmented heads or a weakened Module C identity rule | **Conditional alternative.** Prefer only if uniform-kind clarity materially outweighs history cost. |
+| D — downstream-only | OCP-013 demonstrates exact consumer, context, evaluation time, snapshots and fail-safe combination | name a concrete consumer rule that does not reinterpret source support | maximally use-relative; OCP-012 remains stable | evidence interpretation may be duplicated across consumers or moved to the wrong layer | **Conditional alternative.** No generic downstream rule is justified. |
+| E — domain profile | no concrete domain profile or Core interoperability need exists | explicit AD-012 reopening plus profile owner and compatibility evidence | local specialization | opaque or falsely comparable meanings | **Gated control.** Not selectable by AD-013. |
+| F — separate record | no independent-reference, correction-history or shared-consumer need exists | Board reopening, independent identity and full P-001 evidence | independent reference/history if ever justified | overlaps OCP-012 and turns use-relative usability into a standing object | **Gated control.** Not selectable by AD-013. |
+
+B remains the leading hypothesis because OCP-012 already owns the exact proposition and support projection that would be protected. This is not a Board decision. If B cannot state a safe mode-transition rule or complete temporal owner, A remains correct; C or D may become preferable only through their own decision-separating evidence.
+
+A B/C activation would answer only whether support is usable for OCP-012's own attributable projection under its exact rule. It would not answer whether the same source input is usable for every downstream consumer. Any additional consumer-specific conclusion remains a separate D-style rule and cannot be imported from OCP-012 by label.
+
+## 24. B–C lineage and mode comparison
+
+B and C share the same underlying history question: what happens when one claimant first declares a proposition and later supports it with evidence? The kind spelling does not answer that question.
+
+| Sub-option to be decided | Binding treatment | Late-evidence behavior | Projection obligation | Main falsifier |
+|---|---|---|---|---|
+| B with mode-stable lineages | `support_mode` is part of the binding preserved by Module C | a declaration and later evidence-backed record occupy distinct mode-specific lineages | OCP-012 must preserve or explicitly reconcile both applicable heads without treating either as a correction of the other | identical-kind storage still produces fragmented proposition history |
+| B with reviewed same-kind transition | `support_mode` may change only through an explicit allowed transition under `holder-capability@2` | successor may become evidence-backed while predecessor remains declaration-only historically | transition provenance and replay must prove that old authority never changes and field presence cannot trigger the transition | transition silently upgrades the predecessor or permits an ungoverned downgrade |
+| C with separate lineages | claim kind remains Module C binding identity | later evidence starts a separate evidence-backed lineage | OCP-012 must expose both exact histories without pretending one superseded the other | consumers cannot determine which history expresses the current attributable proposition |
+| C with reviewed cross-kind transition | OCP-012 explicitly narrows an exception to the existing same-kind successor rule | successor changes kind under a separately reviewed transition contract | resolver and replay preserve old kind, new kind, transition basis and branches | exception weakens exact kind identity or becomes a generic cross-kind rewrite |
+
+These are sub-options within B and C, not additional AD-013 outcomes. A later Board act that selects B or C must select one explicit lineage treatment. It may not defer the choice to storage code.
+
+B's potential advantage is one governed kind and resolver family, not automatically one lineage. C's potential advantage is a visible trust boundary, not automatically safer history. A valid selection must show the same late-evidence, correction, withdrawal and branching examples in both human prose and executable fixtures.
+
+## 25. Temporal and ambiguity contract comparison
+
+### 25.1 Temporal owner
+
+| Evidence kind | B/C historical temporal fact | D consumer use | Forbidden substitution |
+|---|---|---|---|
+| `event@1` | exact `occurred_at` only when the OCP-012 rule names occurrence as the measured fact | consumer may measure occurrence only under its own exact rule | Event recording or claim recording time |
+| `observation-record@1` | exact `observed_at` under the selected OCP-012 rule | consumer may measure observation time under its own exact rule | observation `recorded_at` or arrival order |
+| `outcome-assessment-record@1` | exact assessment `evaluated_at` as an input fact, followed by a separate claim-support evaluation | consumer may measure the exact assessment evaluation for its use | inherited OCP-011 freshness or claim `recorded_at` |
+
+B and C require explicit `support_evaluated_at` for a stored historical classification. D uses the consuming contract's own evaluation time and stores no machine-derived OCP-012 historical classification. Every positive rule must bind precision, cutoff equality and non-permissive handling of missing, future-dated, timezone-less or incomparable time. No numeric duration is selected here.
+
+### 25.2 Ambiguity owner
+
+| Dimension | A | B/C | D |
+|---|---|---|---|
+| exact reference and snapshot | accepted structural rejection | accepted structural baseline plus exact selected rule/snapshot bindings | consumer rejects its unresolved exact input |
+| claim lineage | accepted branching visibility and fail-safe projection | selected mode/kind transition contract additionally owns its named lineage cases | consumer binds exact heads; it cannot choose a source winner |
+| temporal comparability | attributable unless structurally invalid | exact OCP-012 local temporal rule may derive named ambiguity | exact consumer rule may derive ambiguity only for its use |
+| semantic relevance or source reliability | attributable | remains attributable unless a later separately governed rule owns one finite dimension | remains outside the consumer's mechanical rule unless explicitly accepted |
+| conflict | finite accepted claim-head conflict remains non-permissive | exact local rules may add only named decidable cases | consumer preserves source conflict and may add its own input conflict |
+
+No ambiguity rule chooses authority by newest timestamp, record order, claimant count, source count, issuer count or majority.
+
+## 26. Normative authority accounting
+
+“Unselected” means the implementation must fail closed; it is not permission for a caller or checker to choose.
+
+| Binding or conclusion | A | B | C | D | Fail-safe obligation |
+|---|---|---|---|---|---|
+| protected projection | accepted attributable OCP-012 projection | OCP-012 evidence-backed `@2` mode | OCP-012 evidence-backed exact kind | named downstream consumer only | another layer's result is not portable by label |
+| declaration/evidence boundary | accepted support-state contract | exact `support_mode` contract | exact claim-kind contract | source boundary remains OCP-012 | direct declaration never becomes missing or verified |
+| lineage identity/transition | accepted same-kind binding | selected B mode-stability or transition rule | selected C separate-lineage or cross-kind rule | source OCP-012 history unchanged | no implicit transition by field presence, time or order |
+| evidence kind/reference | accepted OCP-012 bindings | OCP-012 local rule and snapshot | OCP-012 evidence-backed kind and snapshot | exact consumer input contract | zero, multiple, wrong-kind or mismatched input is non-permissive |
+| evidence temporal fact | none selected | exact OCP-012 rule per kind | exact OCP-012 rule per kind | exact named consumer rule | no recording/effectivity fallback |
+| historical evaluation time | none | explicit OCP-012 `support_evaluated_at` | explicit evidence-backed-kind support time | none in OCP-012; consumer owns only its own time | downstream time cannot rewrite source history |
+| current query time | existing claim-head `as_of_time` only | explicit OCP-012 derived query | explicit OCP-012 derived query | explicit consumer query | current wall clock is never implicit |
+| freshness/ambiguity rule version | none selected | exact OCP-012 local binding | exact OCP-012 evidence-backed-kind binding | exact consumer-local binding | unknown or latest-only rule fails closed |
+| immutable inputs | accepted evidence snapshot | evidence plus rule-input snapshots | evidence plus rule-input snapshots | consumer input snapshot | current data cannot replace historical inputs |
+| claimant authority | accepted `claimant_ref` + `authority_ref` | unchanged | unchanged | unchanged source attribution | support usability does not prove truth |
+| downstream eligibility | OCP-013 | OCP-013 after consuming exact source projection | OCP-013 after consuming exact source projection | named consumer, if selected | no availability, authorization, ranking, selection or Assignment mutation |
+
+Exact OCP-009 Capability version and `condition_set_ref` remain binding in every column.
+
+## 27. Mandatory counterexample mapping
+
+Every row maps the complete §13 pressure to A–D. E and F remain gated; any future reopening must additionally satisfy every applicable row without borrowing another outcome's fixtures.
+
+| # | A — F0/A0 | B — unified `@2` | C — split kinds | D — downstream-only |
+|---|---|---|---|---|
+| 1 | no support evaluation is derived from `recorded_at` | explicit `support_evaluated_at`; reject substitution | explicit evidence-backed-kind support evaluation time; reject substitution | consumer uses its own time; source remains unchanged |
+| 2 | effectivity only selects applicable claims | support rule keeps effectivity and freshness separate | evidence-backed-kind rule keeps effectivity and freshness separate | consumer keeps source effectivity distinct from input usability |
+| 3 | attributable history never recomputes | current view is a new explicit-time derivation | evidence-backed-kind current view is a new explicit-time derivation | new consumer evaluation only |
+| 4 | preserve distinct attributable consumer uses | exact-bind the OCP-012 source use; divergent consumer uses require separate downstream rules | exact-bind the evidence-backed source use; divergent consumer uses require separate downstream rules | each consumer owns a separate exact rule |
+| 5 | `declared` remains attributable and freshness-not-applicable | declaration-only mode forbids evidence rule | declaration kind forbids evidence rule | consumer cannot mark absence of evidence stale |
+| 6 | support label never verifies Capability | derived support remains non-verifying | evidence-backed-kind support remains non-verifying | consumer result remains use-specific and attributable to inputs |
+| 7 | OCP-011 state is merely exact evidence input | claim rule separately evaluates the selected assessment fact | evidence-backed-kind rule separately evaluates the selected assessment fact | consumer separately evaluates its exact use |
+| 8 | exact historical OCP-009 version remains | `@2` cannot redirect Capability version | no split claim kind may redirect Capability version | consumer exact-binds source version |
+| 9 | replay preserves attributable record | exact historical rule and snapshots only | exact evidence-backed-kind rule and snapshots only | exact consumer rule and snapshot only |
+| 10 | no positive machine conclusion is claimed | missing rule/time/snapshot/evidence is non-permissive | missing evidence-backed-kind binding is non-permissive | missing consumer binding is non-permissive |
+| 11 | no machine-derived fresh result | temporal rule rejects or returns ambiguity | evidence-backed-kind temporal rule rejects or returns ambiguity | consumer rule fails closed |
+| 12 | no implicit cutoff exists | exact rule states equality and precision | exact evidence-backed-kind rule states equality and precision | exact consumer rule states them |
+| 13 | accepted branches remain visible | selected mode/transition rule preserves branches | selected kind/transition rule preserves branches | consumer binds exact heads or returns non-permissive result |
+| 14 | no mode exists to flip | ungoverned mode flip rejects; reviewed transition preserves predecessor | ungoverned cross-kind rewrite rejects; reviewed rule preserves predecessor | source mode/kind never changes through consumer evaluation |
+| 15 | no count-based authority | claimant/source/issuer count remains irrelevant | claimant/source/issuer count remains irrelevant | claimant/source/issuer count remains irrelevant |
+| 16 | existing OCP-013 boundary remains | activated support is only one exact input | evidence-backed-kind support is only one exact input | consumer result remains directional eligibility, never Resource equality |
+| 17 | Organization holder rejects | `@2` remains Resource-only | all claim kinds remain Resource-only | consumer cannot legalize an invalid source holder |
+| 18 | withdrawal remains assertion semantics | rule cannot turn it into negative or stale | evidence-backed-kind rule cannot turn it into negative or stale | consumer preserves withdrawn input as non-permissive |
+| 19 | no derived historical replay is claimed | missing old rule/input fails closed | evidence-backed-kind replay fails closed on missing old rule/input | consumer replay fails closed |
+| 20 | only A-compatible fixtures apply | B fixtures require the selected B sub-option | C fixtures require the selected C sub-option | D fixtures belong to the named consumer; OCP-012 stays unchanged |
+| 21 | exact bound conditions remain | query exact-binds historical `condition_set_ref` | evidence-backed-kind query exact-binds historical `condition_set_ref` | consumer context cannot replace the source condition binding |
+
+No row may pass by turning missing, stale, ambiguous, conflicting, unresolved, incomparable or structurally invalid inputs into a more permissive result.
+
+## 28. Outcome-conditional implementation contracts
+
+This comparison adds no checker code or fixtures. A later selection must prove only the block that matches the selected outcome.
+
+### 28.1 A — no-new-authority control
+
+- preserve `holder-capability@1`, accepted support vocabulary and current projection;
+- prove that checker outputs do not claim machine-derived support freshness or semantic ambiguity;
+- retain non-permissive behavior for `missing`, `stale`, `ambiguous`, `conflicting`, invalid or unresolved inputs;
+- add no placeholder rule, time field, kind, record or migration.
+
+### 28.2 B — unified `holder-capability@2`
+
+- exact `@1/@2` boundary and no rewrite of `@1` history;
+- exact protected OCP-012 source use; no claim of downstream-use portability;
+- mechanically disjoint `declaration-only` and `evidence-backed` shapes;
+- explicit selection of mode-stable lineage or reviewed same-kind transition;
+- explicit `support_evaluated_at`, exact per-evidence temporal facts, rule versions, evidence and rule-input snapshots;
+- inline historical states plus explicit-time derived query replay;
+- rejection of mixed forms, implicit mode inference and ungoverned mode changes;
+- all applicable §13 cases, including withdrawal, branching, late evidence and two-consumer divergence.
+
+### 28.3 C — split claim kinds
+
+- exact declaration and evidence-backed kind contracts within the existing record family;
+- exact protected OCP-012 source use; no claim of downstream-use portability;
+- explicit selection of separate lineages or a narrowly reviewed cross-kind transition;
+- uniform authority envelope per kind and no inference from whichever fields are present;
+- complete support-time, rule, snapshot, inline history and current-query obligations for the evidence-backed kind;
+- deterministic head projection that does not hide a declaration or evidence-backed branch;
+- all applicable §13 cases and proof that the trust-boundary clarity outweighs duplicated kind/history handling.
+
+### 28.4 D — named downstream consumer
+
+- name the concrete accepted consumer and exact protected decision;
+- leave OCP-012 `holder-capability@1`, support states and historical authority unchanged under F0/A0;
+- exact-bind consumer rule, context, evaluation time, claim heads and immutable input snapshot;
+- store an inline result only if the consumer claims historical authority for it; otherwise expose only an explicit-time derived result;
+- forbid reaching through an attributable projection to relabel source `sufficient` as machine-proven support;
+- prove that duplicated evidence interpretation is required and cannot be expressed by consuming a future OCP-012 activation.
+
+E requires a separate AD-012 reopening with a concrete domain profile. F requires a Board reopening, independent identity evidence and a full P-001 invocation or reviewed reason not to invoke it. Neither receives implementation fixtures from AD-013A.
+
+## 29. Comparison status and next decision gate
+
+Revision `0.2.0` supplies protected-use comparison, human scenarios, B/C lineage sub-options, temporal and ambiguity ownership, authority accounting, a complete mapping of all twenty-one counterexamples and outcome-conditional implementation contracts. AD-013 remains `Discovery`; AB-060 remains `Discovery`; no outcome is selected.
+
+External adversarial review must now determine:
+
+1. whether B is fairly identified as the smallest positive Core-local direction while A remains the complete current control;
+2. whether B's mode-stable and reviewed-transition sub-options expose every lineage cost that C also carries;
+3. whether C's visible trust boundary provides decision-separating value beyond schema spelling;
+4. whether OCP-013 or another concrete consumer supplies enough evidence for D without reaching through OCP-012;
+5. whether historical and current-query roles have legitimate, separate evaluation-time owners;
+6. whether declared authority survives unchanged in every admissible outcome;
+7. whether §§26–28 map all authority and every counterexample without assuming a rejected layer; and
+8. whether the comparison remains understandable without checker code.
+
+A later `AD-013B` Board act may select A, B, C or D, or retain the question in Discovery. If it selects B or C, it must also choose the explicit lineage sub-option and protected OCP-012 use. If it selects D, it must name the concrete downstream consumer and exact decision. The selection act may not itself amend OCP-012, create a claim kind, schema, rule, fixture, Pattern, record family, Concept or graph edge.
+
+Any selected activation requires a later separately reviewed OCP-012 or named-consumer implementation PR with its own version, normative contract, executable evidence and owner authorization. Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and every later act.

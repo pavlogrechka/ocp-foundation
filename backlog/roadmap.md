@@ -90,7 +90,7 @@
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
 - [x] First machine-verifiable evidence freshness, ambiguity and deterministic replay activation — `OCP-011 0.3.0` activates F1+A1 for exact `objective-achievement@2`; `AB-039` is Resolved while unactivated consumers remain under F0/A0
-- [ ] Capability Claim support-usability activation boundary — `AD-013 / AB-060` must select the protected use, explicit evaluation-time owner and declaration/evidence claim-kind model before OCP-012 can leave F0/A0
+- [ ] Capability Claim support-usability activation boundary — `AD-013 0.2.0 / AB-060` compares A–D, B/C lineage sub-options, protected use and explicit evaluation-time ownership before a separate Board selection
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -124,5 +124,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Implement the first separately reviewed OCP-011 activation of the accepted `AD-012B` F1+A1 contract-local model, with exact replay bindings and applicable counterexample fixtures.
+1. Review the `AD-013 0.2.0` Capability Claim support-usability comparison, then record any supported outcome and lineage treatment through a separate `AD-013B` Board act.
 2. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
