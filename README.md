@@ -81,9 +81,10 @@ backlog/                 відкриті питання та дорожня к�
 - post-factum process audit перевіряє повну Git-історію після governed legacy baseline і fail-closed для shallow, malformed або unreachable evidence;
 - GitHub Actions запускає unit tests, fixture validation і перевірку фактичного proposed head у `main`-контексті;
 - AD-011 `0.3.0 / Accepted` окремо приймає S0 і R0 no-new-authority controls; State та Readiness deregistered як Concept candidates після negative current-scope identity verdicts, а R1 лишається окремо gated future direction;
+- AD-014B `0.3.0 / Accepted` обирає Operation-local spatial binding: managed sites лишаються Infrastructure Resource, Environment — taxonomy category/domain input, а reusable-area record і domain-ownership моделі потребують окремого reopening evidence;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 100 non-sensitive fixtures і 140 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після OCP-001 reference-integrity amendment — **≈59%**.
+- не-нормативна оцінка загальної foundation-готовності після AD-014B spatial/environment selection — **≈60%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
