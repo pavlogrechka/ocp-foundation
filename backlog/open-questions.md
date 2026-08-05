@@ -12,4 +12,4 @@
 10. Як визначаються precedence, override, exception і waiver між Constraint?
 11. Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
 12. Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
-13. Який concrete consumer наступним обґрунтує власну F1/A1 activation після OCP-011, і чи кілька accepted contract-local activations покажуть достатньо стабільну спільну форму для окремого Pattern review? До такого рішення кожен неактивований consumer лишається під F0/A0.
+13. Чи має OCP-012 активувати F1/A1 для власної claim-support projection через unified або split claim-kind boundary, чи exact downstream consumer повинен володіти окремою usability rule? `AD-013 / AB-060` досліджує це без `recorded_at` або effectivity fallback; до рішення OCP-012 лишається під F0/A0.
