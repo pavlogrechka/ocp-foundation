@@ -12,4 +12,4 @@
 10. Як визначаються precedence, override, exception і waiver між Constraint?
 11. Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
 12. Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
-13. Як визначається freshness evaluation для dynamic inputs і deterministic replay?
+13. Як визначається freshness evaluation для dynamic inputs і deterministic replay? Питання проходить Discovery в `AB-039 / AD-012`; exact use, rule owner, ambiguity dimensions і representation ще не обрані.
