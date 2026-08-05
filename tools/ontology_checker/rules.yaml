@@ -185,6 +185,9 @@ rules:
 - id: OBJECTIVE_CREATED_AT_REQUIRED
   kind: validation
   source: OCP-008 §10 invariant 3
+- id: OBJECTIVE_IDENTITY_DUPLICATE
+  kind: validation
+  source: OCP-008 §10 invariant 12; dataset validation
 - id: OBJECTIVE_ID_REQUIRED
   kind: validation
   source: OCP-008 §10 invariant 1

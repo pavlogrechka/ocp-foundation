@@ -1,0 +1,45 @@
+case_id: objective-valid-strict-correction-consumers
+concept: ObjectiveCorrectionEvidence
+objectives:
+  - objective_id: OBJ-CORRECTION-001
+    statement: Establish safe transit corridor
+    created_at: 2026-08-06T00:00:00Z
+    provenance_ref: ACT-OBJ-CORRECTION-001
+  - objective_id: OBJ-CORRECTION-002
+    statement: Establish a safe transit corridor
+    created_at: 2026-08-06T00:10:00Z
+    provenance_ref: ACT-OBJ-CORRECTION-002
+    supersedes_objective_ref: OBJ-CORRECTION-001
+  - objective_id: OBJ-CORRECTION-003
+    statement: Establish the safe transit corridor
+    created_at: 2026-08-06T00:11:00Z
+    provenance_ref: ACT-OBJ-CORRECTION-003
+    supersedes_objective_ref: OBJ-CORRECTION-001
+operation:
+  operation_id: OP-CORRECTION-001
+  lifecycle_stage: Planned
+  objective_refs:
+    - OBJ-CORRECTION-001
+evidence_snapshots:
+  - snapshot_ref: EVIDENCE-CORRECTION-001
+    evidence_bindings: []
+input_snapshots:
+  - INPUT-CORRECTION-001
+assessment:
+  assessment_id: ASM-CORRECTION-001
+  assessment_kind_ref: objective-achievement@1
+  target_kind_ref: objective@1
+  target_ref: OBJ-CORRECTION-001
+  criterion_ref: neutral.correction-history@1
+  evidence_bindings: []
+  evidence_snapshot_ref: EVIDENCE-CORRECTION-001
+  input_snapshot_ref: INPUT-CORRECTION-001
+  evidence_state: missing
+  evaluator_ref: EVALUATOR-CORRECTION-001
+  evaluated_at: 2026-08-06T00:20:00Z
+  recorded_at: 2026-08-06T00:21:00Z
+  conclusion: indeterminate
+  provenance_ref: ACT-ASM-CORRECTION-001
+expected:
+  valid: true
+  error_codes: []
