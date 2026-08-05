@@ -78,7 +78,7 @@ The artifact-governance slice builds one primary registry for OCP, Pattern, AD, 
 
 Primary-artifact `Depends-On` metadata accepts only exact identifiers in those registries. Unresolved, repeated, malformed and self references are rejected. `Depends-On: P-NNN` records an artifact dependency only; it cannot replace the versioned `Uses-Patterns` invocation contract.
 
-Every primary OCP document must declare a SemVer `Version`. The checker enforces the mechanically expressible OCP-001 lifecycle boundary: `Draft` and `Accepted` documents use `0.x`, while `Canonical` documents use `1.x` or later. It does not decide that a document is semantically ready for Canonical status, prove that a version change is compatible, or replace the separate Board act and external review.
+Every primary OCP document must declare a SemVer `Version`. The checker enforces the mechanically expressible OCP-001 lifecycle boundary: `Draft` and `Accepted` documents use `0.x`, while `Canonical` documents use `1.x` or later. It also enforces the L2 repository-tree witness: a Canonical OCP cannot directly depend on a pre-canonical OCP. A same-act group passes only when every direct OCP dependency is Canonical in the same proposed tree. It does not decide that a document is semantically ready for Canonical status, prove compatibility, authorize an L2 exception or replace the separate Board act and external review.
 
 These checks are intentionally structural. They do not infer that two differently worded normative passages are semantically equal or contradictory. External adversarial review retains that responsibility.
 

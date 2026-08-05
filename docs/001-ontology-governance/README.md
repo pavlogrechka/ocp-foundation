@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-001
 Title: Ontology Governance
-Version: 0.9.0
-Status: Draft
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-016, AD-015
 Used-By: All OCP specifications and AI development workflows
@@ -236,7 +236,7 @@ Discovery artifact, який порівнює кілька outcomes, повин�
 
 Evidence matrix не може приховано робити один outcome неприйнятним лише тому, що вимагає артефакт або механізм, який цей outcome за визначенням не містить.
 
-Перший reference checker вводиться окремим `PR-0006 — Add Executable Ontology Checker` одразу після Constraint cycle, до подвоєння кількості визначених Core Concept.
+Reference checker, введений `PR-0006 — Add Executable Ontology Checker`, реалізує поточний структурний validation slice. Його наявність і зелений результат не розширюють semantic authority та не замінюють external review або рішення Architecture Board.
 
 ## Версіонування
 
@@ -256,3 +256,114 @@ Evidence matrix не може приховано робити один outcome �
 - PATCH — редакційні або сумісні уточнення без зміни контракту;
 - MINOR — сумісне додавання понять, зв’язків або правил;
 - MAJOR — несумісна зміна фундаментальної моделі, перейменування або видалення канонічного Concept.
+
+## Канонічна governance-поверхня `1.x`
+
+OCP-001 `1.0.0` стабілізує не всі майбутні рішення Foundation, а спосіб, у який вони набувають нормативної сили. Для кожної сумісної версії `1.x` зберігаються такі гарантії:
+
+1. Architecture Board лишається єдиним owner статусів документів і Concept; merge, checker або reviewer count не надають статус самі по собі.
+2. Document Status і Concept Status лишаються незалежними осями.
+3. Binding-зміна проходить окрему гілку, draft PR, зовнішнє adversarial review, явний Board act, required checks і squash merge.
+4. Core Boundary trigger та review-хореографія визначаються тут, а semantic routes F/C/E/D/I — лише в exact current OCP-016; candidate не може схвалити себе.
+5. Кожен primary artifact, normative rule і direct dependency має одну exact-resolvable identity та одне defining location.
+6. Canonical OCP виконує direct-OCP dependency floor L2, визначений нижче.
+7. Status, version, registry, taxonomy, defining-document і Pattern-invocation проєкції змінюються атомарно в межах свого promotion act.
+8. Pattern лишається `binding-when-invoked`, має окремий lifecycle і імпортується лише exact `Uses-Patterns` binding за політикою `track-current`.
+9. Discovery evidence лишається outcome-fair, а прийняті машинно виразимі контрприклади стають regression evidence.
+10. Repository checker лишається advisory structural witness: він не визначає semantic readiness, truth, legitimate authority або Board approval.
+11. Кожна lifecycle дія має явні non-implications, migration/rollback accounting та окрему authorization boundary.
+12. Невизначеність object class, owner, consumer, exact contract або route зупиняє admission; permissive default заборонений.
+
+Для OCP-001 після `1.0.0`:
+
+- PATCH може уточнювати prose, приклади або evidence без нової obligation чи зміни сумісного результату;
+- MINOR може додавати сумісну governance obligation, artifact class handling або структурну перевірку, не послаблюючи дванадцять гарантій;
+- MAJOR потрібен, щоб змінити Board authority, незалежність status axes, OCP-001/OCP-016 ownership split, L2 floor, atomic projection contract, Pattern invocation authority, fail-safe admission boundary або дозволити machine evidence діяти як approval.
+
+`Canonical` означає стабільну versioned governance-поверхню. Воно не означає production readiness, authorization, truth, універсальну повноту або незмінність назавжди.
+
+## Direct OCP dependency floor — L2
+
+`Depends-On` позначає нормативну пряму залежність primary artifact. Для OCP у статусі `Canonical` кожна direct dependency класу OCP повинна бути:
+
+1. уже `Canonical` у попередньому accepted act; або
+2. переведена в `Canonical` у тому самому атомарному act і в тому самому proposed repository tree.
+
+Кожен artifact у same-act group все одно подає власну compatibility surface, readiness evidence, migration і rollback boundary. Топологічна допустимість є необхідною, але не достатньою підставою канонізації.
+
+Draft або merely Accepted OCP не може постачати Canonical OCP неверсіоновану рухому semantic dependency. Виняток потребує окремої reviewed зміни, яка або:
+
+- доводить, що reference ненормативний, і видаляє його з `Depends-On`; або
+- вводить human-readable exact compatibility-binding contract, що зберігає спожиту семантику незалежно від document lifecycle, разом із явним machine representation для цього винятку.
+
+До появи такого representation checker fail-safe відхиляє direct Canonical-to-pre-canonical OCP dependency. Виняток не виводиться з commit SHA, зеленого CI, document order, version recency, reviewer/issuer count, deployment count або популярності downstream consumer.
+
+Artifact-class floors не зливаються з OCP lifecycle:
+
+- Accepted ADR та AD керуються replacement/reopening, а не вигаданим Canonical status;
+- invoked Pattern повинен бути Accepted і exact-version-bound; його current lifecycle не має Canonical status;
+- Canonical Concept рухається разом із Canonical defining OCP та точними OCP-000/OCP-002 projections;
+- promotion non-Concept OCP не змінює Concept status за implication.
+
+## Атомарні lifecycle acts і authorization boundary
+
+Окремий artifact є default promotion unit. Групування дозволене лише тоді, коли proposal доводить, що same-act atomicity зменшує, а не приховує review та rollback risk.
+
+| Promotion target | Мінімальний атомарний набір |
+|---|---|
+| OCP document без Concept-status зміни | `Version`, `Status`, readable compatibility surface, exact direct dependencies, evidence та repository accounting |
+| Concept | defining OCP document, OCP-000 row, OCP-002 projection, defining metadata та будь-яка generated current-state projection |
+| Pattern | Pattern status/version і кожен exact `Uses-Patterns` invoker, якщо version змінюється |
+| Non-Concept record OCP | document contract і evidence; жодна Concept projection не змінюється за implication |
+| Corrective rollback | новий reviewed PR, що повертає весь узгоджений набір; partial edit або history rewrite заборонені |
+
+Fable approval, Codex adjudication, green CI та Pavlo/Architecture Board authorization повинні стосуватися exact proposed head. Змістовна зміна після такого рішення потребує нового exact-head review й authorization. Дозвіл на один promotion act не переноситься на наступний slot, artifact або follow-up PR.
+
+Lifecycle effect виникає лише після authorized squash merge. Позначення PR як Ready, reviewer recommendation чи зміна frontmatter у незмердженій гілці самі по собі не змінюють стан `main`.
+
+## Поточна R4-хореографія Foundation
+
+[AD-016B §§31–37](../../architecture/discovery/AD-016-foundation-canonicalization-readiness.md) обрав R4 (`F → C`) з L2 як обмежену Foundation migration, а не як загальний semantic route:
+
+1. T0 OCP-000 і T1 OCP-016 завершені окремими Canonical acts;
+2. цей T2 пропонує окрему канонізацію OCP-001;
+3. T3 OCP-002 і T3 P-001 лишаються двома окремими promotion acts зі своїми lifecycle floors;
+4. після T0–T3 AD-016C повинен заново обчислити post-enabling baseline, topology, blockers і migration cost;
+5. окремий AD-016D Board act є обов’язковим до першого T4 promotion PR.
+
+Завершення roots, зелений CI, витрачений час, schedule pressure або кількість уже виконаних slots не доводять готовність T4. Discovery чи remediation T4 blockers дозволені, але не надають promotion authority.
+
+AD-016B є decision provenance цієї migration. Він не додається до `Depends-On` OCP-001: AD-016 уже нормативно залежить від OCP-001, а після інкорпорації L2 та lifecycle rules їхнім defining owner стає цей документ. Зворотний edge створив би цикл і дублювання authority.
+
+## Machine evidence і fail-safe контрприклади
+
+Reference checker механічно перевіряє identity/path, artifact lifecycle vocabulary, SemVer/status consistency, exact dependency resolution, Pattern bindings, Concept-status synchronization, rule-source integrity та complete-history constraints. Для L2 він додатково відхиляє Canonical OCP, що прямо залежить від OCP у pre-canonical status у тому самому proposed tree.
+
+Ця перевірка доводить лише структурний факт. Вона не доводить semantic compatibility, sufficient evidence, production quality, legitimate owner або чинність Board act.
+
+Обов’язкові людські контрприклади для promotion review:
+
+1. Canonical OCP прямо залежить від Draft OCP — L2 порушено, навіть якщо всі тести зелені.
+2. Два OCP переходять у Canonical в одному tree, але один не має власної compatibility surface — same-act group неприйнятний.
+3. Canonical OCP посилається на Accepted AD — OCP floor не вигадує для AD статус Canonical.
+4. OCP invokes Draft Pattern або stale Pattern version — OCP readiness не обходить Pattern lifecycle чи `track-current`.
+5. Concept defining document змінено без синхронних OCP-000/OCP-002 projections — promotion неатомарний.
+6. Non-Concept OCP стає Canonical, а його читач виводить Canonical status для пов’язаного Concept — implication хибна.
+7. Checker, newest commit/timestamp, record order або reviewer/issuer count обирає authority — рішення недійсне.
+8. Authorization T2 повторно використовується для T3 — non-transfer boundary порушено.
+9. Candidate або його machine registry сам обирає OCP-016 route чи admission — self-approval заборонений.
+10. Після помилки відкат змінює лише один authoritative projection — repository лишається governance-defective до атомарної корекції.
+
+## T2 canonicalization act
+
+Pre-T2 OCP-001 `0.9.0 / Draft` baseline має Git blob `effad195632e466a503b1f630f822453bf05005d` і SHA-256 `b9de3dcfe1477d352162bd115e05bd9fc80ccdb2533f161387ad6528673f4fbe`. T2 зберігає його чинні governance obligations, прибирає застаріле future-tense твердження про ще не створений checker і додає описану вище `1.x`-поверхню.
+
+Direct dependencies лишаються exact і cycle-free:
+
+- OCP-000 `1.0.0 / Canonical` постачає registry membership/status contract;
+- OCP-016 `1.0.0 / Canonical` постачає semantic routing contract після trigger;
+- AD-015 `0.3.0 / Accepted` лишається decision source для обраного C3 ownership split.
+
+T2 атомарно змінює лише OCP-001 document version/status, readable governance contract, L2 structural witness та repository accounting. Він не змінює Concept/Pattern status, OCP-000 row, OCP-002 projection, OCP-016 route, dependency edge, domain contract, schema або production authority.
+
+OCP-001 `1.0.0 / Canonical` набуває чинності лише після Fable approval exact head, Codex adjudication, green CI, окремої явної Pavlo/Architecture Board authorization саме для T2 та squash merge. Авторизація T1 не може бути повторно використана. До merge цей розділ і frontmatter є proposed T2 act; merge T2 не авторизує T3.

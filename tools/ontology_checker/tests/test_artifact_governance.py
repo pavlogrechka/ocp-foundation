@@ -20,6 +20,7 @@ from ocp_checker.artifact_governance import (  # noqa: E402
     ARTIFACT_STATUS_INVALID,
     ARTIFACT_VERSION_INVALID,
     BACKLOG_ID_DUPLICATE,
+    CANONICAL_OCP_DEPENDENCY_PRECANONICAL,
     DEPENDENCY_REFERENCE_DUPLICATE,
     DEPENDENCY_REFERENCE_INVALID,
     DEPENDENCY_REFERENCE_MISSING,
@@ -257,6 +258,36 @@ class ArtifactGovernanceTests(unittest.TestCase):
         self.assert_errors(root, {OCP_VERSION_LIFECYCLE_MISMATCH})
 
         path.write_text(text.replace("Version: 0.1.0", "Version: 1.0.0"), encoding="utf-8")
+        self.assertTrue(validate_artifact_governance(root).valid)
+
+    def test_canonical_ocp_cannot_depend_on_precanonical_ocp(self) -> None:
+        root = self.make_repo()
+        source = root / "docs/001-sample/README.md"
+        text = source.read_text(encoding="utf-8")
+        text = text.replace("Version: 0.1.0", "Version: 1.0.0")
+        text = text.replace("Status: Draft", "Status: Canonical")
+        source.write_text(text.replace("\n---\n", "\nDepends-On: OCP-002\n---\n", 1), encoding="utf-8")
+        target = root / "docs/002-dependency/README.md"
+        target.parent.mkdir()
+        target.write_text(
+            "---\nDocument-ID: OCP-002\nVersion: 0.1.0\nStatus: Draft\n---\n",
+            encoding="utf-8",
+        )
+        self.assert_errors(root, {CANONICAL_OCP_DEPENDENCY_PRECANONICAL})
+
+    def test_same_act_canonical_ocp_dependencies_satisfy_l2(self) -> None:
+        root = self.make_repo()
+        source = root / "docs/001-sample/README.md"
+        text = source.read_text(encoding="utf-8")
+        text = text.replace("Version: 0.1.0", "Version: 1.0.0")
+        text = text.replace("Status: Draft", "Status: Canonical")
+        source.write_text(text.replace("\n---\n", "\nDepends-On: OCP-002\n---\n", 1), encoding="utf-8")
+        target = root / "docs/002-dependency/README.md"
+        target.parent.mkdir()
+        target.write_text(
+            "---\nDocument-ID: OCP-002\nVersion: 1.0.0\nStatus: Canonical\n---\n",
+            encoding="utf-8",
+        )
         self.assertTrue(validate_artifact_governance(root).valid)
 
     def test_exact_dependencies_across_admitted_classes_are_accepted(self) -> None:

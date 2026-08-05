@@ -14,6 +14,7 @@ ARTIFACT_ID_DUPLICATE = "ARTIFACT_ID_DUPLICATE"
 ARTIFACT_STATUS_INVALID = "ARTIFACT_STATUS_INVALID"
 ARTIFACT_VERSION_INVALID = "ARTIFACT_VERSION_INVALID"
 OCP_VERSION_LIFECYCLE_MISMATCH = "OCP_VERSION_LIFECYCLE_MISMATCH"
+CANONICAL_OCP_DEPENDENCY_PRECANONICAL = "CANONICAL_OCP_DEPENDENCY_PRECANONICAL"
 ARTIFACT_METADATA_MISSING = "ARTIFACT_METADATA_MISSING"
 ARTIFACT_TAXONOMY_INVALID = "ARTIFACT_TAXONOMY_INVALID"
 BACKLOG_ID_DUPLICATE = "BACKLOG_ID_DUPLICATE"
@@ -42,6 +43,7 @@ GOVERNANCE_ERROR_CODES = frozenset(
         ARTIFACT_STATUS_INVALID,
         ARTIFACT_VERSION_INVALID,
         OCP_VERSION_LIFECYCLE_MISMATCH,
+        CANONICAL_OCP_DEPENDENCY_PRECANONICAL,
         ARTIFACT_METADATA_MISSING,
         ARTIFACT_TAXONOMY_INVALID,
         BACKLOG_ID_DUPLICATE,
@@ -305,6 +307,8 @@ def validate_artifact_governance(repo_root: Path) -> GovernanceResult:
     ocp_spec = classes.get("OCP") or {}
     document_allowed = _status_set(ocp_spec, "document_lifecycle")
     concept_allowed = _status_set(ocp_spec, "concept_lifecycle")
+    ocp_statuses: dict[str, str] = {}
+    ocp_dependencies: list[tuple[str, Any]] = []
     for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
         metadata = _metadata(path, "OCP")
         expected_id = f"OCP-{path.parent.name[:3]}"
@@ -314,7 +318,10 @@ def validate_artifact_governance(repo_root: Path) -> GovernanceResult:
         if actual:
             _register_artifact(artifact_registry, actual, path)
             dependencies.append((actual, metadata.get("Depends-On")))
+            ocp_dependencies.append((actual, metadata.get("Depends-On")))
         status = str(metadata.get("Status") or "")
+        if actual:
+            ocp_statuses[actual] = status
         version = str(metadata.get("Version") or "")
         if not status:
             errors.append(ARTIFACT_METADATA_MISSING)
@@ -336,6 +343,13 @@ def validate_artifact_governance(repo_root: Path) -> GovernanceResult:
                 errors.append(ARTIFACT_METADATA_MISSING)
             elif concept_status not in concept_allowed:
                 errors.append(ARTIFACT_STATUS_INVALID)
+
+    for source_id, value in ocp_dependencies:
+        if ocp_statuses.get(source_id) != "Canonical" or value is None:
+            continue
+        for ref in _iter_invocations(value):
+            if ref.startswith("OCP-") and ocp_statuses.get(ref) not in {None, "Canonical"}:
+                errors.append(CANONICAL_OCP_DEPENDENCY_PRECANONICAL)
 
     ad_allowed = _status_set(classes.get("AD") or {})
     for path in sorted((repo_root / "architecture/discovery").glob("AD-[0-9][0-9][0-9]-*.md")):
