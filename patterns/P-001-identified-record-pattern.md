@@ -2,7 +2,7 @@
 Pattern-ID: P-001
 Title: Identified Record Pattern
 Version: 0.1.0
-Status: Draft
+Status: Accepted
 Normative-Level: binding-when-invoked
 Owner: Architecture Board
 Depends-On: AD-001, OCP-001
@@ -139,6 +139,73 @@ A conforming invoking artifact documents:
 
 ## 11. Current evidence
 
-P-001 is extracted from repeated, independently reviewed structures in Assignment and Constraint and is intended for explicit invocation by Organization relationship records after PR-0006A is accepted.
+P-001 was extracted from independently reviewed identified-record structures and is now invoked by six current contracts. Those contracts exercise endpoint-bearing and endpoint-free records, temporal effectivity, transition history, supersession and explicit authority boundaries without moving their domain meaning into this Pattern.
 
 Similarity of implementation helpers alone does not justify a new pattern. Future patterns require repeated independent use, stable form, demonstrated drift reduction and absence of domain semantics.
+
+## 12. Accepted `0.1.0` compatibility surface
+
+Acceptance stabilizes the form already defined in §§1–10 at exact version `0.1.0`. It does not make P-001 Canonical, because Pattern lifecycle has no `Canonical` status, and it does not make invocation mandatory.
+
+For an exact `P-001@0.1.0` invocation:
+
+1. the seven Required Elements in §4 are binding;
+2. Optional Modules A–D are binding only when the invoker selects them;
+3. the invoker owns its field mapping, domain semantics, endpoint meaning, allowed kinds and domain-specific invariants;
+4. an omitted module creates no permission to use its fields or semantics silently;
+5. no stored convenience field, timestamp, record order, issuer count or record count gains authority unless the invoker explicitly defines it; and
+6. P-001 creates no universal record kind, fundamental Concept, Concept graph edge, domain authority or machine admission decision.
+
+A future change to a Required Element, Optional Module or invocation obligation requires an explicit Pattern version change and external review. Under the repository's `track-current` policy, that change must update every current invoker atomically. The same act must explicitly classify immutable reviewed snapshots and, if their historical pins are to remain unchanged, amend the checker policy rather than creating a silent exception.
+
+## 13. Exact invoker evidence ledger
+
+The six current primary invokers all bind exact `P-001@0.1.0`:
+
+| Invoker | Identified record form | Selected modules |
+|---|---|---|
+| OCP-007 | OrganizationTransitionRecord | B |
+| OCP-007 | OrganizationRelationshipRecord | A, B, C |
+| OCP-008 | endpoint-free Objective record | C |
+| OCP-010 | ObservationRecord; Event itself does not invoke P-001 | C |
+| OCP-011 | OutcomeAssessmentRecord | C |
+| OCP-012 | CapabilityClaimRecord | A, C |
+| OCP-015 | separate CoordinationProposalRecord and CoordinationResponseRecord invocations | A, C for each form |
+
+Immutable reviewed-contract snapshots for OCP-011, OCP-012 and OCP-015 preserve the same exact `0.1.0` historical binding. Because this acceptance act does not change the Pattern version or §§1–10 obligations, every primary invocation and historical snapshot remains exact; no invoker migration is required.
+
+The ledger is human-readable review evidence, not a second invocation registry. Structured `Uses-Patterns` metadata and the repository checker remain authoritative for reference completeness.
+
+## 14. Mechanical and review boundary
+
+Repository checks enforce the Pattern identifier, allowed lifecycle status, SemVer syntax, dependency resolution, exact `Uses-Patterns` syntax and the `track-current` version rule. They do not prove that an invoker has mapped all seven Required Elements correctly, selected every semantically used module, preserved a non-permissive authority boundary or kept domain meaning outside the Pattern.
+
+External review therefore remains responsible for those semantic questions. At minimum it must try to falsify the invocation with a missing Required Element, an undeclared module, an ambiguous authority split, a permissive fallback or domain semantics hidden in generic record form.
+
+## 15. Acceptance counterexamples
+
+The following conclusions are invalid:
+
+1. `Accepted` means `Canonical` or creates a stronger Pattern lifecycle state.
+2. One accepted Pattern makes every relation or assertion a P-001 record.
+3. Shared P-001 form makes two record families semantically equivalent.
+4. A timestamp, newest record, storage order, issuer count or record count selects authority by default.
+5. An invoker may use temporal, transition or supersession fields without selecting the corresponding module.
+6. P-001 may supply domain meaning that the invoker has not defined.
+7. A future Pattern version may merge before all current invokers and historical-snapshot treatment are explicit in the same reviewed act.
+8. Completion of this T3 act authorizes any T4 promotion.
+
+## 16. T3 acceptance act
+
+The reviewed pre-acceptance baseline is Git blob `6750b65944c25a637fcfc621c8ccebde165e1604` with SHA-256 `af4de9980efdac3ed06b24d3d959a55eb418d4acc53832a05440b4f4711e0215`.
+
+This act changes only the Pattern lifecycle status from `Draft` to `Accepted` and replaces the stale future-tense evidence statement with §§11–15. It keeps:
+
+- version `0.1.0` and the complete §§1–10 form unchanged;
+- `binding-when-invoked` scope;
+- direct dependencies on Accepted AD-001 and Canonical OCP-001;
+- all six primary invokers and three reviewed snapshots at exact `P-001@0.1.0`;
+- domain authority in each invoking artifact; and
+- every existing Concept, Concept status and Concept graph edge unchanged.
+
+Architecture Board authorization for this act is separate from the T3 OCP-002 act and does not transfer to AD-016C, AD-016D or any T4 proposal. After acceptance, the T0–T3 enabling phase is complete, but AD-016C must recompute the readiness comparison and a separate AD-016D Board act must select what, if anything, proceeds next.
