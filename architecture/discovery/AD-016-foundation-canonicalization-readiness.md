@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.3.0
+Version: 0.4.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Completion of the T0-T3 enabling phase and mandatory reassessment before T4
+Review-After: Separate AD-016D Architecture Board decision before any T4 promotion proposal
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -715,3 +715,148 @@ This Board act has the following narrow effects:
 - no OCP, Concept, Pattern, dependency, registry row, graph edge, schema, checker rule, fixture, status or `1.0.0` version is changed by this act.
 
 Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge. Until that merge, §§31–37 are a proposed Board act rather than an accepted decision.
+
+## 38. AD-016C reassessment mandate and exact baseline
+
+AD-016C recomputes the remaining readiness question on exact post-enabling baseline `main@645b22b27be8ff004bd98e4b918403335f300278`. It does not copy the pre-enabling conclusions in §§20–29 as current facts.
+
+The completed enabling phase provides:
+
+- OCP-000, OCP-016, OCP-001 and OCP-002 at `1.0.0 / Canonical`;
+- P-001 at `0.1.0 / Accepted`, with six current primary invokers and unchanged exact bindings;
+- L2 enforced mechanically for direct OCP dependencies;
+- eight `Accepted` Concepts and no `Canonical` Concept;
+- five `Accepted` non-Concept contracts, OCP-011 through OCP-015;
+- a cycle-free direct dependency graph; and
+- 161 unit tests plus 115 non-sensitive fixtures as mechanically expressible evidence.
+
+These facts remove the shared root blockers. They do not prove any T4 candidate ready, select a first wave or transfer the authorizations used for T0–T3.
+
+## 39. Exact remaining lifecycle inventory
+
+| Slot | Artifact | Current document state | Concept state | Current L2 position |
+|---:|---|---|---|---|
+| T4 | OCP-003 Resource | `0.6.0 / Draft` | `Accepted` | root OCP dependencies are Canonical |
+| T4 | OCP-007 Organization | `0.3.2 / Draft` | `Accepted` | root OCP dependencies are Canonical; P-001 is Accepted and exact-bound |
+| T4 | OCP-008 Objective | `0.2.1 / Draft` | `Accepted` | root OCP dependencies are Canonical; P-001 is Accepted and exact-bound |
+| T4 | OCP-009 Capability | `0.1.2 / Draft` | `Accepted` | root OCP dependencies are Canonical |
+| T5 | OCP-004 Operation | `0.8.0 / Draft` | `Accepted` | waits for Resource and Objective |
+| T5 | OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted` | not a Concept | waits for Resource and Capability; P-001 is ready |
+| T6 | OCP-005 Assignment | `0.2.2 / Draft` | `Accepted` | waits for Resource and Operation |
+| T6 | OCP-010 Event | `0.2.0 / Draft` | `Accepted` | waits for Operation and Objective; P-001 is ready |
+| T7 | OCP-006 Constraint | `0.2.2 / Draft` | `Accepted` | waits for Resource, Operation and Assignment |
+| T8 | OCP-011 OutcomeAssessmentRecord | `0.3.0 / Accepted` | not a Concept | waits for Operation, Constraint, Objective and Event; P-001 is ready |
+| T8 | OCP-013 Resource Interchangeability | `0.2.0 / Accepted` | not a Concept | waits for Resource, Assignment, Constraint and OCP-012 |
+| T9 | OCP-014 Coordination Profile | `0.2.0 / Accepted` | not a Concept | waits for T4–T8 semantic dependencies |
+| T10 | OCP-015 Coordination Workflow | `0.2.0 / Accepted` | not a Concept | waits for Assignment, Constraint and OCP-012–OCP-014; P-001 is ready |
+
+No dependency edge changed during T0–T3, so the remaining T4–T10 topology in §22 is still cycle-free and topologically correct. Earlier-slot eligibility remains necessary, not sufficient.
+
+## 40. Recomputed blocker, scope and cleanup audit
+
+The B/S/C meanings remain those in §23. This table is the current audit and supersedes §23 only for post-enabling decisions.
+
+| Candidate | B — must resolve before its promotion | S — may remain explicitly outside `1.x` | C — cleanup required, not a new decision |
+|---|---|---|---|
+| OCP-003 Resource | whether `Organizational Resource` and `Unit` are Resource identities, projections or only working taxonomy; the answer affects current subtype and identity text | availability, Resource Group, quantity/reservation and implementation mechanisms | none identified |
+| OCP-007 Organization | identity continuity through merger/split/reorganization; stable class/type rules for current relationship records; Organization/Resource mapping wherever it changes identity | commander/personnel, staff, ownership, domain hierarchy exceptions and implementation contracts | replace the obsolete phrase “Coordination as a future Concept” and distinguish unresolved AB items from completed downstream contracts |
+| OCP-008 Objective | who classifies a same-identity editorial correction and what immutable evidence prevents semantic change from bypassing supersession | typed relations, separate lifecycle, outcome taxonomy and domain equivalence policies outside Core | Event/Result future-tense and the assessment question now owned by OCP-010/OCP-011 |
+| OCP-009 Capability | **none found inside the current definition/registry surface** | Operation requirement owner, domain taxonomy, and any domain policy that forbids new use of an exactly resolvable superseded version | holder-claim and AB-011 questions now owned by OCP-012/OCP-013 |
+| OCP-004 Operation | authorization source, parent/child rules, minimum Planned data, lifecycle/terminal behavior and unfinished-Assignment alignment where they alter current transitions or composition | templates, reopened reusable spatial identity, domain geometry/environment and separate Conflict/Readiness models | wording that still defers work to already existing Constraint and superseded ADR-DRAFT-007 stages |
+| OCP-012 CapabilityClaimRecord | none found inside the narrow accepted attributable-claim baseline | independent assessment, Organization holders and new claim kinds remain separately gated | historical “AB-011 next” wording must be reconciled with Accepted OCP-013 without rewriting the recorded act |
+| OCP-005 Assignment | amendment and retroactivity; interval multiplicity; replacement overlap/gap; terminal Operation alignment where they alter lifecycle/history | Reservation, quantity, role taxonomy, coordination roles and availability/Readiness | obsolete reconsideration reference to superseded ADR-DRAFT-007 |
+| OCP-010 Event | none found inside the occurrence/ObservationRecord baseline | interval, kind registry, correlation and Operation-to-Event relation | AB-056/OutcomeAssessmentRecord future-tense now owned by Accepted OCP-011 |
+| OCP-006 Constraint | predicate compatibility; precedence/override/waiver; evaluation freshness and stored-versus-derived authority where they alter result behavior | future Conflict, quantity/capacity and domain geometry/spectrum semantics | stale deferrals to PR-0006 and superseded ADR-DRAFT-007 |
+| OCP-011 OutcomeAssessmentRecord | none found inside the narrow accepted assessment baseline | new target/criterion kinds and future activations | none identified; historical act text remains clearly separated from current revision |
+| OCP-013 Resource Interchangeability | none found inside the narrow accepted directional-eligibility baseline | additional consumers and separate selection/replacement workflows | “next Coordination profile” language is now completed by OCP-014 |
+| OCP-014 Coordination Profile | none found inside the narrow accepted consumer-profile baseline | future workflows, authority and agreement semantics | AB-058 next-cycle language is complete through OCP-015 |
+| OCP-015 Coordination Workflow | none found inside the narrow accepted evidence baseline | future authority, visibility or agreement extensions remain separately gated | AB-059 next-cycle language is complete through AD-010 |
+
+The changed OCP-009 classification is evidence-based, not momentum-based. Its exact resolver already preserves a superseded Capability version without redirect, while a domain policy may separately forbid new references. The unresolved policy therefore does not change Core identity or exact resolution and is S, not B. Holder claims and Resource interchangeability now have accepted separate owners and are C cleanup in OCP-009.
+
+## 41. L2 and exact-binding audit
+
+L2 did not create a dependency cycle or force a mixed-lifecycle exception during T0–T3. It exposed a real distinction:
+
+- a current normative `Depends-On` consumes the dependency artifact as a changing semantic authority; and
+- a claim that only one stable fragment is consumed needs either removal of an unnecessary dependency or a separately governed exact compatibility binding.
+
+No remaining candidate currently proves that its listed dependency is reference-only. The waiting edges are therefore not classified as avoidable merely because they delay promotion. A candidate-local remediation may narrow an edge, but it must name the consumed semantics and pass external review; green tests, exact commits or current wording are insufficient.
+
+L2 should remain the comparison floor unless AD-016D receives concrete counterevidence. The first T4 candidate identified below already satisfies L2 without an exception, so weakening the floor would not reduce its cost.
+
+## 42. Stable-kernel extraction audit
+
+T0 OCP-000 and T3 OCP-002 achieved readable stable surfaces in place. E was not required and no second normative owner was created.
+
+For the remaining candidates:
+
+- OCP-009 has one coherent definition/registry surface and does not need E;
+- OCP-003 is the first named E candidate if its working taxonomy cannot be explicitly excluded or stabilized in place, because the `Organizational Resource` branch currently touches identity text;
+- OCP-007 may justify a later Concept-kernel/relationship-contract split only if one defining location and exact migrated references are demonstrated; extraction cannot hide unresolved Organization identity continuity; and
+- OCP-008 should first resolve its editorial-correction authority in place because extraction would not remove that identity question.
+
+E remains a repair with a falsifiable trigger, not a maturity label or default document-shortening exercise.
+
+## 43. Semantic and production evidence boundary after enabling
+
+The remaining contracts promise semantic identity, authority, lifecycle, exact-reference and derivation behavior. They do not promise a production API, persistence model, authentication, deployment, scale, observability or domain-complete vocabulary.
+
+Missing production evidence is therefore not a blocker unless a promotion proposal adds such a promise. Conversely, executable fixtures do not settle a B item about identity or authority. Every future compatibility surface must say which claims are human-reviewed, which are mechanically witnessed and which remain explicitly out of scope.
+
+## 44. Compatibility and migration cost of the first credible T4 wave
+
+OCP-009 Capability is the only T4 candidate with no recomputed B item. A one-candidate T4 micro-wave would require an atomic proposal with:
+
+1. OCP-009 `0.1.2 / Draft → 1.0.0 / Canonical`;
+2. Capability `Accepted → Canonical` in its defining metadata, the OCP-000 registry row and the exact OCP-002 status projection;
+3. a readable `1.x` surface preserving exact `(namespace, capability_id, version)` identity, one namespace owner, exact resolution, history-preserving supersession and every non-equivalence with holder possession, Readiness, availability, authorization and interchangeability;
+4. cleanup of resolved holder-claim and AB-011 questions without importing OCP-012/OCP-013 authority;
+5. explicit retention of domain policy over whether new references may use an exactly resolvable superseded version;
+6. no P-001, Concept dependency, graph-edge, schema, fixture or downstream document-version change; and
+7. rollback as the same atomic document/status/projection unit.
+
+OCP-009 directly depends only on Canonical OCP-000/OCP-001/OCP-002 and Accepted AD-005. Its current consumers do not bind the OCP document version, and its Capability references already bind exact Capability definition versions. The migration cost is therefore four normative projections plus repository accounting, not data migration or consumer rebinding.
+
+The main risk is semantic overreach: treating exact resolution of a superseded version as universal permission for new use. The promotion surface must preserve exact resolution while leaving admission policy with the governed domain consumer.
+
+## 45. Post-enabling strategy options
+
+AD-016C compares five fair next-step options without selecting one:
+
+| Option | Next action | Benefit | Main risk | Reassessment result |
+|---|---|---|---|---|
+| G0 — hold | retain all T4 states and remediate blockers | lowest immediate lifecycle risk | leaves the one unblocked candidate idle without new evidence | admissible control |
+| G1 — full T4 slot | wait until OCP-003/OCP-007/OCP-008 blockers close, then promote all four | one visible Concept wave | couples independent rollback and lets three blocked candidates govern one ready candidate | not preferred |
+| G2 — D-sized micro-waves inside C | let AD-016D authorize one separately reviewed candidate at a time under L2, starting with OCP-009 if its promotion evidence holds | preserves topology, local blockers and rollback | mixed T4 interval needs clear public accounting | leading hypothesis |
+| G3 — E repair before T4 | extract a stable kernel for a named blocked candidate first | may isolate a genuinely stable surface | duplicate authority or hiding a B item | conditional for OCP-003/OCP-007, unnecessary for OCP-009 |
+| G4 — reopen strategy or L2 | require new compatibility evidence before any T4 | correct if enabling exposed a contradiction | weakens safeguards for schedule or sunk cost without present counterevidence | no current trigger found |
+
+G2 is not unconstrained selective promotion. It is the D-sized execution granularity already permitted inside the selected C topology: every candidate must satisfy L2, its own B/S/C audit, atomic projections, exact-head review and separate authorization.
+
+## 46. Falsification targets and stop rules
+
+External review should try to demonstrate:
+
+1. an unresolved OCP-009 question that changes its current identity, registry authority or exact resolver;
+2. a direct OCP-009 dependency below the L2 floor;
+3. a downstream reference that must migrate when the OCP document moves to `1.0.0`;
+4. a hidden Pattern invocation or Concept dependency edge in the proposed first wave;
+5. a reason superseded-version domain admission must be owned by Core resolution;
+6. a safe OCP-003, OCP-007 or OCP-008 `1.x` surface that disproves the named B item without silently excluding current normative text;
+7. an avoidable L2 edge with an already governed exact compatibility binding;
+8. a topology cycle or omitted remaining artifact;
+9. a production property already promised by the first candidate but excluded from its evidence plan;
+10. a reason G2 cannot be represented as C micro-wave granularity;
+11. an E split that preserves one defining owner and is necessary before OCP-009; or
+12. any inference based on completed-root count, elapsed time, green CI, reviewer count or sunk cost.
+
+If targets 1–5 succeed, OCP-009 is not a credible first wave and G0 or remediation becomes leading. If target 7 or 10 succeeds, AD-016D must reopen the floor or strategy explicitly. No failed test may be converted into a permissive default, and no passing test may erase a semantic B item.
+
+## 47. AD-016C recommendation and next act
+
+Revision `0.4.0` records the AD-016C reassessment and recommends **G2 — D-sized micro-waves inside C, with OCP-009 Capability as the first candidate for a separate T4 promotion act**. G0 remains the honest control; E remains conditional for named blocked candidates.
+
+This recommendation is not an Architecture Board selection and does not authorize OCP-009 or any other T4 proposal. A separate AD-016D act must accept, reject or amend the recommendation and state exact preparation scope. Authorization to merge AD-016C accepts only this comparison; it cannot be reused for AD-016D or a promotion act.
+
+AD-016C changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule or fixture. AB-062 remains `Planned`. Until AD-016C and AD-016D are separately reviewed, authorized and merged, no T4 artifact may enter a promotion PR.

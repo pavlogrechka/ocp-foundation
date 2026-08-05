@@ -91,9 +91,10 @@ backlog/                 відкриті питання та дорожня к�
 - T2 встановлює OCP-001 `1.0.0 / Canonical` як стабільний governance contract, інкорпорує L2, R4/atomicity/non-transfer boundaries і додає fail-safe structural witness без дублювання OCP-016 routes;
 - перший T3 act встановлює OCP-002 `1.0.0 / Canonical` як exact Concept-status projection contract; category/subtype/decomposition views явно ненормативні, а extra projection fail-safe відхиляється;
 - окремий T3 act приймає P-001 `0.1.0 / Accepted` без зміни §§1–10 або invoker versions; шість primary contracts лишаються exact-bound, Pattern не стає Canonical і не переносить доменну семантику;
+- AD-016C `0.4.0` recompute-ить post-enabling readiness: OCP-009 Capability є єдиним T4 кандидатом без current B-item, G2 micro-waves inside C — провідна гіпотеза, але окремий AD-016D Board act ще обов'язковий;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 115 non-sensitive fixtures і 161 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після завершення T0–T3 enabling phase — **≈67%**; AD-016C reassessment і окремий AD-016D Board act лишаються обов'язковими перед T4.
+- не-нормативна оцінка загальної foundation-готовності після завершення T0–T3 enabling phase — **≈67%**; AD-016C не підвищує lifecycle readiness сам по собі, а окремий AD-016D Board act лишається обов'язковим перед T4.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
