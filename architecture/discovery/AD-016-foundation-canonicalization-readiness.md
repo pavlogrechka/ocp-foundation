@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.4.0
+Version: 0.5.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-016D Architecture Board decision before any T4 promotion proposal
+Review-After: Completion or failure of the separately reviewed OCP-009 T4 proposal before any second T4 preparation scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -860,3 +860,97 @@ Revision `0.4.0` records the AD-016C reassessment and recommends **G2 — D-size
 This recommendation is not an Architecture Board selection and does not authorize OCP-009 or any other T4 proposal. A separate AD-016D act must accept, reject or amend the recommendation and state exact preparation scope. Authorization to merge AD-016C accepts only this comparison; it cannot be reused for AD-016D or a promotion act.
 
 AD-016C changes no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule or fixture. AB-062 remains `Planned`. Until AD-016C and AD-016D are separately reviewed, authorized and merged, no T4 artifact may enter a promotion PR.
+
+## 48. Architecture Board selection proposal — AD-016D
+
+AD-016D uses the accepted AD-016C comparison as its evidence input. Fable reviewed exact AD-016C head `895b138864cf395410f639615bef7a2a40827ef8`, reproduced the inventory and executable checks, found zero findings and approved the comparison. Codex accepted that verdict, Pavlo authorized AD-016C only, and PR #88 was squash-merged as `b0ae0636d01a5e35c87bc4620314e6491b3b89d5` with byte-identical reviewed/merged tree `70546fc7272a41882cbb339bd4a9660edfead135` and green post-merge CI.
+
+That evidence does not select G2 by itself. The Architecture Board selects only through separate explicit authorization and merge of an exact-head reviewed AD-016D proposal.
+
+This act decides preparation scope. It does not change an OCP or Concept lifecycle, merge a T4 promotion, resolve a candidate-local blocker or transfer authorization to a later PR.
+
+## 49. Selected direction — G2 inside C/L2
+
+AD-016D selects **G2 — D-sized micro-waves inside the existing C topology under L2**.
+
+The selected rule is:
+
+1. one candidate may be prepared only when its own B set is empty;
+2. every earlier normative OCP dependency must already be Canonical or move in the same justified atomic act;
+3. document and Concept lifecycle projections move together where the candidate defines a Concept;
+4. each micro-wave has its own readable compatibility surface, rollback unit, exact-head review and owner authorization;
+5. a successful candidate does not confer readiness or authorization on a sibling or downstream candidate; and
+6. mixed lifecycle inside one topological slot must remain visible in repository accounting.
+
+G2 is not unconstrained selective promotion. The published T4–T10 topology, L2 floor, B/S/C audit and one-candidate authorization boundary remain binding.
+
+## 50. Authorized preparation scope — OCP-009 only
+
+AD-016D authorizes preparation of one separate draft proposal for the OCP-009 Capability document/Concept pair. It authorizes neither Ready state nor merge of that proposal.
+
+The exact pre-promotion baseline is:
+
+- repository: `main@b0ae0636d01a5e35c87bc4620314e6491b3b89d5`;
+- OCP-009 Git blob: `b28219bffef4e527507d495c34dded5c2fb79346`;
+- OCP-009 SHA-256: `119a26424b4c62140446fee6eca8d9baf68b2cd875e565321d63b1cc8064ddbb`;
+- document: `0.1.2 / Draft`;
+- Capability Concept: `Accepted` in the defining metadata and OCP-000/OCP-002 projections;
+- direct dependencies: Canonical OCP-000/OCP-001/OCP-002 and Accepted AD-005; and
+- Pattern invocation and Concept dependencies: none.
+
+Preparation authority does not include OCP-003 Resource, OCP-007 Organization or OCP-008 Objective. Discovery or remediation of their B items may proceed, but no promotion draft for those candidates is authorized by this act.
+
+## 51. Mandatory OCP-009 proposal contract
+
+The separate T4 proposal must carry one atomic, human-readable act that:
+
+1. changes OCP-009 `0.1.2 / Draft → 1.0.0 / Canonical`;
+2. changes Capability `Accepted → Canonical` in the defining metadata, OCP-000 registry row and exact OCP-002 projection;
+3. preserves exact Capability identity as `(namespace, capability_id, version)` and never introduces latest-version, timestamp, record-order, publisher-count or popularity authority;
+4. preserves one namespace owner, exact fail-closed resolution, historical exact-version resolution and non-redirecting supersession;
+5. states explicitly that exact resolution of a superseded version is not permission or domain admission for new use;
+6. keeps holder claims in OCP-012, Resource interchangeability in OCP-013 and Operation requirements with a future exact owner;
+7. preserves `Capability ≠ holder possession, Readiness, availability, capacity, authorization, admissibility, Assignment eligibility or Resource interchangeability`;
+8. cleans resolved holder-claim and AB-011 questions without rewriting their accepted downstream authorities;
+9. changes no P-001 invocation, Concept dependency, graph edge, checker rule, fixture, consumer document version or Capability definition version;
+10. provides explicit status/projection rollback as the inverse of the same atomic unit; and
+11. includes human counterexamples plus the existing executable evidence for mechanically expressible exact-resolution claims.
+
+If authoring or review reveals a B item, required consumer rebinding, hidden semantic change or L2 violation, the proposal must stop and return to G0/remediation. The Board may not waive that stop because AD-016D named OCP-009 first.
+
+## 52. Alternatives and reopening gates
+
+AD-016D does not select:
+
+- **G0 as the active direction** because one candidate currently passes the recomputed gates; G0 remains the mandatory fallback on failed evidence;
+- **G1 full T4 slot** because three candidates retain independent B items and one combined rollback unit would create weakest-member pressure;
+- **G3 as a prerequisite** because OCP-009 has one coherent defining surface and does not need extraction; E remains available only for a named later candidate under the §42 safeguards; or
+- **G4 reopening of R4/L2** because AD-016C found no cycle, exception need or exact-binding counterexample that would reduce the first candidate's cost.
+
+G2 or L2 must be reopened if the OCP-009 proposal exposes a required pre-canonical OCP dependency, a compatibility promise that cannot survive one-candidate rollback, or an unavoidable same-slot atomicity requirement. Schedule, authoring effort, green CI, reviewer count or completed-root count is not reopening evidence.
+
+## 53. Boundary after the first micro-wave
+
+Even if OCP-009 later becomes Canonical:
+
+- OCP-003, OCP-007 and OCP-008 retain their current statuses and B items;
+- OCP-012 still cannot satisfy L2 until OCP-003 Resource is Canonical or an exact candidate-local dependency correction is separately accepted;
+- no downstream T5–T10 artifact gains promotion authority;
+- Capability claims do not become Capability truth, Readiness or Resource interchangeability; and
+- one Canonical Concept does not make the remaining seven Concepts Canonical, less important or implicitly compatible.
+
+Before any second T4 promotion proposal, the Board must issue a new explicitly scoped act against the then-current inventory and blockers. A successful OCP-009 merge is evidence for that act, not authorization of it.
+
+## 54. AD-016D accounting and proposed effect
+
+When externally reviewed, explicitly owner-authorized and merged, AD-016D will:
+
+- set AD-016 to `0.5.0 / Accepted`;
+- select G2 micro-waves inside C/L2;
+- authorize preparation of one OCP-009 T4 draft only;
+- retain G0 as the fail-safe fallback and E as a named candidate-local repair;
+- keep AB-062 `Planned`;
+- require a new Board scope act before a second T4 promotion proposal; and
+- change no OCP, Concept, Pattern, status projection, dependency, registry row, graph edge, schema, checker rule or fixture.
+
+Fable exact-head review, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization are required for AD-016D itself. A later OCP-009 proposal repeats all four gates and requires a separate merge authorization. Until AD-016D merges, G2 and the OCP-009 preparation scope in §§49–53 remain proposals only.

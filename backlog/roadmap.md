@@ -10,7 +10,7 @@
 | Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈67%** | T0–T3 enabling phase завершено; AD-016C recompute називає OCP-009 першим credible T4 кандидатом, але AD-016D Board selection і сам T4 act ще не авторизовані |
+| **Загальна foundation-готовність** | **≈67%** | AD-016D обирає G2 і дозволяє підготовку OCP-009 T4 draft; lifecycle не змінюється до окремого exact-head promotion act |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -59,6 +59,7 @@
 - [x] T3 OCP-002 Concept-status projection — `1.0.0 / Canonical` with exact defined-Concept set/value synchronization and explicitly non-normative category views
 - [x] T3 P-001 identified-record Pattern — `0.1.0 / Accepted` at the unchanged §§1–10 surface, with six exact primary invokers, explicit reviewed-snapshot treatment and no transfer to T4
 - [x] AD-016C post-enabling reassessment — exact T4–T10 inventory and B/S/C recompute, with G2/OCP-009-first as a recommendation only and AD-016D still mandatory
+- [x] AD-016D post-enabling Board selection — G2 inside C/L2, with preparation scope limited to one separately reviewed OCP-009 T4 draft and no merge-authorization transfer
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -132,5 +133,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Run the separate AD-016D Board act over the AD-016C comparison; select, reject or amend G2 and its proposed OCP-009-first scope.
-2. Only if AD-016D authorizes preparation, open a separate exact-head T4 promotion proposal. AD-016C/AD-016D authorization cannot transfer to that merge.
+1. Prepare the separate OCP-009 T4 proposal against the exact AD-016D baseline; preserve definition identity, exact resolution, non-redirecting supersession and every non-equivalence boundary.
+2. After success or failure of that proposal, require a new Board scope act before any second T4 promotion proposal. AD-016D authorization cannot transfer to either merge.
