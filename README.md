@@ -58,7 +58,7 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-011 `0.2.0 / Accepted` реалізує AD-006C outcome R3 через governed `OutcomeAssessmentRecord`, а не fundamental Result Concept;
 - OutcomeAssessmentRecord invokes `P-001@0.1.0`, exact-bind-ить Objective target, assessment kind, criterion, Event/ObservationRecord evidence, immutable evidence/input snapshots, evaluator, evaluation and recording time, conclusion та provenance;
 - fail-safe matrix дозволяє definitive conclusion лише для `evidence_state: sufficient`; missing, stale, ambiguous або conflicting evidence дозволяє лише `indeterminate`;
-- checker механічно виводить `missing` і finite `conflicting` probe; `stale` та `ambiguous` залишаються attributable evaluator assertions до прийняття freshness/replay semantics в AB-039;
+- checker механічно виводить `missing` і finite `conflicting` probe; `stale` та `ambiguous` залишаються attributable evaluator assertions, а `AB-039 / AD-012` порівнює freshness, ambiguity та replay owners без передчасного threshold або checker authority;
 - explicit supersession зберігає history, дозволяє branching і не може змінити assessment kind, target або criterion binding identity; newest record, evaluator count і list order не визначають authority;
 - integrated scenario використовує нормативний OCP-011 record contract і продовжує механічно доводити `Completed ≠ achieved`;
 - AB-056 завершено рішенням Architecture Board по PR-0013;
