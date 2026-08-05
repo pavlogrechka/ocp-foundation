@@ -1,11 +1,11 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.6.0
+Version: 0.6.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
-Applies-To: AB-062, AB-063, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
+Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
 Review-After: Resolution of the Objective editorial-correction authority discovery before any second T4 promotion scope
 ---
 
@@ -1018,3 +1018,9 @@ OCP-003 and OCP-007 remediation may be researched, but no promotion draft or ide
 When exact-head reviewed, explicitly authorized and merged, AD-016E will set AD-016 to `0.6.0 / Accepted`, retain G2/L2 with J0 as fallback, create AB-063 as `Planned`, and authorize only the separate Objective correction discovery. AB-062 remains `Planned`.
 
 It changes no OCP, Concept, Pattern, dependency, registry row, status projection, graph edge, checker rule, fixture or readiness percentage. Authorization of AD-016E cannot transfer to the discovery decision, OCP-008 promotion or any other candidate.
+
+## 61. AD-017 handoff accounting
+
+AD-017 `0.1.0 / Discovery` becomes the active decision owner for AB-063. AD-016 remains the accepted decision provenance for selecting J8 and authorizing discovery preparation, but no longer lists the active backlog item in `Applies-To`.
+
+This `0.6.1` PATCH handoff prevents overlapping active ownership. It changes no J8 scope, OCP-008 rule, Objective status, promotion authority, evidence obligation or non-transfer boundary.
