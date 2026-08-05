@@ -278,6 +278,9 @@ rules:
 - id: OCP_VERSION_LIFECYCLE_MISMATCH
   kind: validation
   source: OCP-001 Versioning
+- id: CANONICAL_OCP_DEPENDENCY_PRECANONICAL
+  kind: validation
+  source: OCP-001 Direct OCP dependency floor — L2
 - id: STATUS_DEFINING_DOCUMENT_MISSING
   kind: validation
   source: OCP-001 Concept status synchronization
