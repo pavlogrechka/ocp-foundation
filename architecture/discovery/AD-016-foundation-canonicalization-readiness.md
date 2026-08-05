@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: External falsification of L2, T0-T10, open-question classifications and the F-to-C hypothesis
+Review-After: Completion of the T0-T3 enabling phase and mandatory reassessment before T4
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -580,3 +580,138 @@ External review should try to falsify the leading hypothesis by constructing:
 Revision `0.2.0` completes the initial comparison while AD-016 and AB-062 remain `Discovery`. It changes no OCP, Concept, Pattern, dependency, registry row, graph edge, schema, checker rule, fixture, status or `1.0.0` version.
 
 After external review, a separate `AD-016B` Architecture Board act may select R0–R4, require another comparison, or state a different composition with exact precedence. Selection does not itself promote any artifact. Every T0–T10 promotion remains a later exact-head reviewed PR with its own human-readable compatibility surface and explicit owner authorization.
+
+## 31. Architecture Board decision — AD-016B
+
+The Architecture Board accepts this decision by act **AD-016B** on **2026-08-05**, after Fable reviewed the complete AD-016A comparison on exact head `d596788f6f7683e7a31e37b553e50a99737c830b`, independently verified the inventory, L2 argument, T0–T10 topology, open-question classifications and twenty-by-six counterexample matrix, found no defects and recommended merge. Codex independently accepted that verdict, Pavlo authorized the merge, and PR #81 was squash-merged with exact tree identity and green post-merge CI.
+
+This act selects a canonicalization strategy and dependency floor. It does not make any OCP or Concept Canonical, make P-001 Accepted, change a version to `1.0.0`, resolve a candidate-local blocker, amend a dependency, create a registry or schema, add a graph edge, or change checker behavior.
+
+### 31.1 Selected strategy — R4 (`F → C`)
+
+AD-016 selects **R4 — the F enabling phase followed by the C dependency-layered strategy, with E available only where a candidate needs a clean normative/excluded split**.
+
+F is not a separate terminal model. It names the shared-root phase T0–T3 of the same dependency graph governed by C. R4 is selected instead of committing to complete R2 because the evidence is sufficient to stabilize the enabling roots, but §23 still identifies candidate-local blockers that must be audited before any T4 Concept/document pair moves.
+
+The selected strategy therefore has a mandatory governance boundary:
+
+1. complete separately reviewed T0–T3 acts;
+2. preserve the exact post-enabling baseline;
+3. run a new AD-016C comparison against the remaining T4–T10 artifacts and their then-current blockers; and
+4. require a separate AD-016D Board act before the first T4 promotion.
+
+Successful T0–T3 completion is evidence for reassessment, not proof that any downstream Concept or non-Concept contract is ready.
+
+## 32. Selected lifecycle floor — L2
+
+AD-016B selects **L2 — Canonical-or-same-act** for normative direct OCP dependencies:
+
+- a Canonical OCP may depend normatively only on an OCP already Canonical or promoted in the same atomic act;
+- a same-act group must still give every included artifact its own readiness evidence and compatibility surface;
+- a Draft or merely Accepted OCP cannot supply an unversioned changing semantic dependency to a `1.x` promise; and
+- topological eligibility is necessary but never sufficient for promotion.
+
+An exception requires a separate reviewed change that proves one of two conditions:
+
+1. the reference is non-normative and is removed from `Depends-On`; or
+2. a human-readable exact compatibility-binding contract preserves the consumed semantics independently of the dependency's document lifecycle.
+
+No exception may be inferred from a commit SHA, current test success, document order, version recency, reviewer count or downstream popularity.
+
+Artifact-class floors remain those established in §21:
+
+- Accepted ADR and AD decisions remain governed by replacement/reopening, not an invented Canonical status;
+- an invoked Pattern must be Accepted and exact-version-bound, never Canonical under the current Pattern lifecycle;
+- a Canonical Concept moves atomically with its defining Canonical document and OCP-000/OCP-002 projections; and
+- a non-Concept OCP promotion changes no Concept status by implication.
+
+## 33. Authorized strategy scope — T0 through T3
+
+AD-016B authorizes preparation of the following promotion cycles in dependency order. It does not authorize their merge or lifecycle effects.
+
+| Slot | Candidate cycle | Required gate before its promotion act |
+|---:|---|---|
+| T0 | OCP-000 | define the stable registry `1.x` surface; preserve independent Proposed rows; resolve whether “Operational Space First” is a non-identity principle or an undefined semantic dependency |
+| T1 | OCP-016 | exact-bind its incorporated human baseline and consume Canonical OCP-000 without importing Concept-row status |
+| T2 | OCP-001 | incorporate the selected L2 rule, R4 choreography, atomic projection requirements and separate-Board-act boundary without duplicating OCP-016 routing |
+| T3 | OCP-002 | stabilize or explicitly exclude the working-hypothesis category tree while preserving exact Concept projections |
+| T3 | P-001 | receive a separate Pattern acceptance act at an exact reviewed version; update every invocation atomically if that version changes |
+
+Each row is its own default PR. Same-slot grouping is allowed only when the proposal proves that atomicity reduces rather than hides review and rollback risk.
+
+The T0 act is the next cycle. It must remain a Draft until its exact compatibility surface and blockers are reviewed. AD-016B does not pre-authorize `OCP-000 1.0.0 / Canonical`; owner authorization of this selection PR cannot be reused as authorization of T0.
+
+## 34. Blocker, exclusion and evidence rules
+
+The B/S/C classification in §23 remains binding review input:
+
+- one unresolved B item stops its candidate even if every test passes;
+- an S item may remain only when the `1.x` contract states the exclusion and later change can follow SemVer plus OCP-016 without changing current guarantees;
+- a C item must be cleaned up so readers do not mistake completed work for an unresolved semantic question; and
+- a checker result cannot change B, S or C classification.
+
+Every T0–T3 proposal must carry:
+
+1. one readable compatibility surface;
+2. exact direct dependencies and artifact-class floors;
+3. explicit non-implications, including `Canonical ≠ production-ready, authorized, true, complete or immutable`;
+4. migration and rollback accounting for status, version, registry projections and Pattern invocations;
+5. human counterexamples plus executable evidence for mechanically expressible claims; and
+6. separate Fable exact-head review, Codex adjudication, green CI and Pavlo or Board authorization.
+
+Missing production API, persistence, security, scale or deployment evidence is not an automatic blocker for a narrowly semantic contract. A candidate that promises such a property must prove it or remove the promise from the proposed surface.
+
+## 35. Mandatory post-enabling reassessment
+
+After T0–T3, AD-016C must recompute rather than copy:
+
+- exact document, Concept, Pattern and dependency states;
+- the remaining T4–T10 topology;
+- every candidate-local B/S/C classification;
+- whether L2 created avoidable coupling or exposed missing exact-binding needs;
+- whether E was required and preserved one defining location;
+- semantic versus production evidence boundaries; and
+- the compatibility and migration cost of the first proposed T4 wave.
+
+AD-016C may recommend continuing C, using D-sized micro-waves inside C, applying E to a named candidate, retaining current states or reopening the strategy. It may not infer continuation from schedule, sunk cost, number of completed roots or green CI.
+
+No T4 artifact may enter a promotion PR before the AD-016C comparison and separate AD-016D Board decision are merged. Discovery or remediation work on T4 blockers may proceed, but it grants no promotion authority.
+
+## 36. Alternatives not selected and reopening gates
+
+### 36.1 R0 — indefinite hold
+
+R0 is not selected as the strategy because the root blockers are finite and the T0–T3 dependency path is testable. The repository nevertheless remains at its current statuses until each later act is separately authorized. R0 may be reconsidered if T0 cannot state a stable registry surface without resolving currently unowned identity or authority questions.
+
+### 36.2 R1 — atomic foundation baseline
+
+R1 is not selected because P-001 has a distinct lifecycle, candidate maturity is uneven and one large act would couple rollback and weakest-member pressure across all artifacts. It may be reconsidered only if later evidence proves a compatibility property that cannot survive layered promotion and shows how every included artifact remains independently reviewable.
+
+### 36.3 R2 — commit now to complete C
+
+R2 is not selected because T4–T10 candidate-local blockers have not yet been audited against a completed enabling baseline. It may be selected after AD-016C if that audit shows that the full remaining topology can be governed without another strategic branch.
+
+### 36.4 R3 — selective promotion
+
+Unconstrained D/R3 remains rejected because it can launder pre-canonical dependency semantics. One-artifact PRs remain available as micro-waves inside L2/C; PR size does not create a different dependency strategy.
+
+### 36.5 E — stable-kernel extraction
+
+E remains a conditional repair, not a default restructuring mandate. A candidate may use it only when in-place normative/excluded labeling cannot state one compatibility surface. The split must preserve one defining location and exact reference migration; convenience or shorter prose is insufficient.
+
+L2 itself may be reopened only by the exact compatibility-binding evidence described in §32. A weaker floor cannot be selected merely because T0–T3 takes longer than expected.
+
+## 37. Accounting and accepted effect
+
+This Board act has the following narrow effects:
+
+- AD-016 becomes `0.3.0 / Accepted`;
+- R4 (`F → C`) becomes the selected canonicalization-readiness strategy;
+- L2 becomes the selected direct-OCP dependency floor;
+- preparation authority covers only T0–T3, with T0 OCP-000 as the next separately reviewed cycle;
+- AD-016C reassessment and a separate AD-016D Board act become mandatory before T4;
+- E remains an explicit candidate-local repair with one-owner safeguards;
+- AB-062 moves `Discovery → Planned` for the T0–T3 enabling phase; and
+- no OCP, Concept, Pattern, dependency, registry row, graph edge, schema, checker rule, fixture, status or `1.0.0` version is changed by this act.
+
+Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge. Until that merge, §§31–37 are a proposed Board act rather than an accepted decision.
