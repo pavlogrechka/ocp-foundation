@@ -1,10 +1,10 @@
 ---
 Document-ID: OCP-001
 Title: Ontology Governance
-Version: 0.8.0
+Version: 0.9.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000
+Depends-On: OCP-000, OCP-016, AD-015
 Used-By: All OCP specifications and AI development workflows
 Last-Review: 2026-08-05
 ---
@@ -45,6 +45,36 @@ Last-Review: 2026-08-05
 Pattern є `binding-when-invoked`: артефакт не зобов’язаний використовувати Pattern, але versioned metadata `Uses-Patterns` робить Required Elements та обрані Optional Modules Pattern обов’язковими для цього артефакту. Pattern визначає форму моделювання, а не доменну семантику. Зміни Pattern версіонуються та проходять зовнішнє review.
 
 Нові архітектурні рішення реєструються як `AD` у `architecture/discovery/`. Реєстр `adr/` заморожений для нових номерів; наявні ADR зберігають чинність і завершують уже розпочаті lifecycle.
+
+## Обов’язковий Core Boundary review
+
+[AD-015B §§33–40](../../architecture/discovery/AD-015-core-boundary-specification.md) обрав tiered semantic-authority routing у окремому human-readable OCP. OCP-001 володіє лише автоматичним trigger і review-хореографією; повний семантичний тест визначає [OCP-016 §§3–18](../016-core-boundary/README.md). Ці правила не дублюються між документами.
+
+Core Boundary review є обов’язковим, якщо proposal створює або змістовно розширює хоча б один із таких об’єктів чи повноважень:
+
+- фундаментальний Concept або current Concept dependency;
+- Core non-Concept record, rule, consumer activation або local structured value;
+- Pattern чи його обов’язкову reusable form;
+- Core interoperability envelope над domain-owned semantics;
+- domain-local contract, який має бути представлений або exact-referenced у Foundation;
+- implementation structure, яку proposal подає як спільну семантику;
+- machine-readable registry, status projection, score або checker behavior, що може бути помилково сприйнятий як admission authority;
+- route movement, reopening, retirement, deregistration або іншу зміну вже прийнятої semantic authority.
+
+Чисте редакційне виправлення, Review record або backlog accounting не запускає новий Core Boundary decision, доки воно не змінює семантичний owner, route, status, dependency, accepted scope чи нормативний результат.
+
+Після trigger автор proposal повинен:
+
+1. явно назвати candidate objects до вибору repository artifacts і відокремити semantic candidates від Pattern form proposal;
+2. застосувати чинну exact version OCP-016;
+3. запропонувати один primary semantic-authority route для кожного semantic candidate та, окремо, будь-яке Pattern creation/invocation;
+4. подати authority ledger, concrete consumers, exact dependencies, evidence, non-implications і migration/reopening effect;
+5. пройти external adversarial review; і
+6. отримати явний Architecture Board act для admission, rejection, reopening або status change.
+
+OCP-001 не визначає semantic route і не приймає candidate. OCP-016 не запускає review і не надає status. Candidate contract не може схвалити себе. Checker, registry, checklist total, newest timestamp, record order, issuer/source/deployment count або majority не замінюють Board act.
+
+Якщо object class, legitimate owner, concrete consumer, exact version/profile або route лишається неоднозначним, proposal залишається Discovery чи поза Core; неоднозначність не дозволяє permissive default.
 
 ## Захист основної гілки
 
