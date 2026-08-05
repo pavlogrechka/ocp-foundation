@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-012
 Title: Evidence Freshness and Replay Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: AD-011, OCP-001, OCP-004, OCP-006, OCP-010, OCP-011, OCP-012, OCP-013, OCP-015, P-001
 Applies-To: AB-039, evidence freshness, evidence ambiguity, deterministic replay
-Review-After: External adversarial review of the freshness, ambiguity and representation candidates
+Review-After: External adversarial review of the comparative revision before any Board selection
 ---
 
 # AD-012 — Evidence Freshness and Replay Boundary
@@ -311,10 +311,229 @@ These hypotheses do not pre-approve a Pattern, record family, OCP extension, dur
 
 ## 16. Discovery status and accounting
 
-AD-012 moves AB-039 from `Open` to `Discovery` and supplies the first explicit candidate space for freshness, ambiguity and replay ownership.
+Revision `0.1.0` moved AB-039 from `Open` to `Discovery` and supplied the first explicit candidate space for freshness, ambiguity and replay ownership.
 
 Revision `0.1.0` does not change any Concept or document status, OCP version, P-001 invocation, Foundation map, Concept dependency, schema, checker rule or fixture. Existing OCP-011 and OCP-012 fail-safe matrices remain authoritative: declared `stale` or `ambiguous` cannot support a permissive conclusion, but the checker does not yet claim general proof of those states.
 
 AD-011 remains closed at S0/R0. AD-012 does not reopen Readiness; a future R1 proposal would still need a concrete consumer, exact preparedness criterion, target contract and evaluator/rule authority in addition to any accepted freshness/replay semantics.
 
-The next revision may incorporate external findings and compare the candidates in greater detail. Any Board selection and any downstream normative contract require separate exact-head Fable review, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization before squash merge.
+Revision `0.1.0` was exact-head reviewed, adjudicated, owner-authorized and squash-merged through PR #62. Revision `0.2.0` adds comparison only. Any Board selection and any downstream normative contract require separate exact-head Fable review, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization before squash merge.
+
+## 17. Comparison method and verdict vocabulary
+
+This revision compares the freshness axis, ambiguity axis and representation variants for external review. It does not select an owner model, a threshold, an ambiguity vocabulary, a representation or a downstream artifact.
+
+The comparison follows five rules:
+
+1. F0 and A0 are complete no-new-authority controls, not unfinished implementations.
+2. Freshness ownership, ambiguity ownership and representation are evaluated separately.
+3. A machine-derived outcome must name every normative owner, exact input and fail-safe branch it adds.
+4. Every candidate is tested against the same human examples and all twenty counterexamples in §10, using evidence expressible for that candidate.
+5. Similar fields or labels are not evidence of shared semantics, and implementation convenience is not decision-separating evidence.
+
+The working verdicts below mean:
+
+- **admissible control** — safe and complete while no shared derivation authority is justified;
+- **leading hypothesis** — the smallest currently plausible positive direction, still subject to explicit evidence gates;
+- **conditional alternative** — admissible only when a concrete consumer demonstrates the additional owner or representation it needs; and
+- **not supported by current evidence** — review may falsify or revive the candidate, but the present repository cannot justify selecting it.
+
+These are comparison verdicts, not Architecture Board selections.
+
+## 18. Freshness-axis comparison
+
+The freshness axis asks who may decide that exact evidence is temporally usable for one exact use.
+
+| Outcome | Plain-language effect | Added authority | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| F0 — attributable classification only | Core preserves an exact recorder or evaluator statement and enforces non-permissive downstream behavior without claiming to derive freshness. | None beyond the existing record authority. | Honest when no governed temporal rule exists. | Different evaluators may use incompatible unstated thresholds and the statement may not be portable. | **Admissible control and current default.** |
+| F1 — contract-local versioned rule | Each consumer owns or exact-references the temporal rule for its own decision. | The consuming contract owns only its exact rule, temporal fact, cutoff and result. | Fits the use-relative nature of freshness and existing exact-binding contracts. | Rule shapes may drift or duplicate across OCPs. | **Leading hypothesis.** Selection still needs at least one complete concrete rule shape and evidence that local variation is intentional. |
+| F2 — reusable Pattern obligations | A Pattern standardizes the form of freshness evaluation while each invoker owns meaning and permitted evidence. | Shared record or evaluation obligations, but no shared duration or domain meaning. | Could reduce repeated governance and replay defects across consumers. | A generic Pattern may silently become the rule owner or a universal time policy. | **Conditional alternative.** Repeated accepted invocations must first demonstrate a stable common form. |
+| F3 — domain profiles with Core envelope | A domain defines the rule; Core exact-binds the profile and rejects unknown or incompatible meanings. | Each named domain profile owns its exact meaning; Core owns only envelope validation. | Preserves irreducibly domain-specific timing. | Opaque profiles may be transportable but not safely comparable. | **Conditional alternative.** It needs a concrete domain boundary and an interoperability need that F1 cannot express. |
+
+### 18.1 Freshness decision-separating evidence
+
+External review should ask:
+
+- Which exact consumer needs a machine-derived freshness conclusion now?
+- Which temporal fact does that consumer legitimately measure for each evidence kind?
+- Can OCP-006, OCP-011 and OCP-012 use one stable obligation form without sharing thresholds or evidence meaning?
+- Which real domain rule cannot be represented as a contract-local exact reference?
+- Does a claimed reusable form reduce normative duplication, or merely move it behind generic names?
+- Can cutoff equality, late arrival, missing time and incomparable time fail closed without inventing a universal time ontology?
+
+F1 is the smallest positive hypothesis because the accepted contracts already bind exact criteria, contexts, snapshots and evaluation times. It is not selected merely because those fields exist. F0 remains correct wherever the concrete rule owner or inputs are absent.
+
+### 18.2 Accepted-consumer fit
+
+The accepted contracts expose repeated replay form, but not one demonstrated freshness meaning:
+
+| Contract | Exact decision already owned | Freshness boundary exposed | Comparison consequence |
+|---|---|---|---|
+| OCP-004 | whether explicit intent is valid for one exact Operation revision and validation binding | a substantive binding change makes prior validation evidence stale | Strong F1 evidence: the Operation contract owns what changed. It does not define age for ObservationRecord or claim support. |
+| OCP-006 | whether one exact Constraint is satisfied for one context, snapshot and model time | dynamic inputs may cease to be usable for a later evaluation | Strong F1 evidence and shared replay form; the predicate and context still own input meaning. |
+| OCP-010 | occurrence and attributable observation facts with distinct times | it provides possible temporal facts but no usability threshold | It is an evidence provider, not a general F owner. A consumer must name which fact it measures. |
+| OCP-011 | Objective outcome under one criterion, evidence/input snapshots and evaluation time | `stale` remains attributable and non-permissive until AB-039 | Strong F1 target and possible F2 form evidence; criterion-specific evidence meaning must remain local. |
+| OCP-012 | holder-specific Capability claim with exact support, conditions and effectivity | stale support cannot project positive, but Core does not derive staleness | Strong F1 target with semantics distinct from Objective assessment; freshness never verifies possession. |
+| OCP-013 | directional eligibility for one exact consumer requirement and context | current eligibility may depend on exact current claim projections and Constraint inputs | It may own freshness for its consumer inputs, but cannot rewrite the source claim or assessment. |
+| OCP-015 | one exact proposal/response evidence projection | snapshots preserve replay, but response age does not grant authorization or agreement | It demonstrates replay obligations without yet demonstrating a shared freshness rule. |
+
+This spread supports F1 as the least-authority positive direction. It also supplies material for testing F2, but repeated fields alone do not yet prove a Pattern: temporal facts, positive criteria and evidence kinds differ materially.
+
+## 19. Ambiguity-axis comparison
+
+The ambiguity axis asks which uncertainty Core can detect structurally and who may interpret unresolved meaning.
+
+| Outcome | Plain-language effect | Added authority | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|---|
+| A0 — structural detection plus attributable semantic state | Core rejects finite structural defects; semantic ambiguity remains an exact attributable statement. | None beyond accepted structural contracts and the recorder or evaluator. | Avoids pretending that generic code understands domain meaning. | A bare label may be too opaque to replay why an evaluator was uncertain. | **Admissible control and current default.** |
+| A1 — contract-local ambiguity rules | Each consumer names the ambiguity dimensions it can detect and exact-binds their rules. | The consuming contract owns only its named reference, lineage, criterion, temporal or semantic dimensions. | Makes relevant cases auditable without a universal semantic engine. | Reason vocabularies and comparison rules may drift between contracts. | **Leading hypothesis.** Selection needs a bounded dimension set and examples separating ambiguity, conflict and legitimate divergence. |
+| A2 — reusable ambiguity obligations | A Pattern standardizes reason, candidate-interpretation, input and fail-safe obligations while invokers own semantic comparison. | Shared structural obligations, not shared interpretation. | Could make attributed and derived uncertainty consistently auditable. | Common reason codes may be mistaken for common domain meaning. | **Conditional alternative.** Stable repeated obligations must be demonstrated first. |
+| A3 — domain profiles with Core envelope | Domains own semantic detection while Core validates exact profile binding and incompatibility. | Each domain profile owns its dimensions and rules; Core owns envelope rejection. | Preserves meanings that cannot be interpreted in Core. | Callers may compare identical labels from incompatible profiles. | **Conditional alternative.** It needs concrete domain semantics and safe transport requirements. |
+
+### 19.1 Ambiguity decision-separating evidence
+
+External review should ask:
+
+- Which ambiguities are fully expressible from accepted exact-reference, snapshot and lineage structures?
+- Which consumer needs more than an attributable `ambiguous` state to audit or replay the decision?
+- Can named dimensions distinguish unresolved interpretation from ordinary evaluator disagreement and context-specific conclusions?
+- Which obligations repeat across contracts without moving their comparison rules into Core?
+- Can an unknown reason or profile remain non-permissive without being normalized by label?
+
+A1 is the smallest positive hypothesis for named machine-verifiable dimensions. A0 remains binding wherever semantic comparison lacks a governed owner. A1 does not authorize Core to infer semantic equivalence from text, counts or timestamps.
+
+### 19.2 Structural and semantic boundary
+
+The current repository supports a narrower structural baseline than a generic `ambiguous` label may suggest:
+
+| Core can detect when the owning accepted structure defines it | Core cannot infer without a new exact owner |
+|---|---|
+| zero or multiple exact-reference targets | whether two resolved records mean the same thing |
+| duplicate identity | whether two statements are substantively equivalent |
+| wrong or incompatible exact version binding | which domain version should win |
+| evidence/input snapshot mismatch | whether different snapshots are equally sufficient |
+| invalid, cyclic or unresolved supersession lineage | whether one legitimate branch is semantically preferable |
+| multiple unsuperseded heads where the owning contract defines non-permissive projection | whether evaluator disagreement is ambiguity, conflict or valid contextual divergence |
+| malformed or missing structurally required fields | which temporal fact, criterion or interpretation the caller intended |
+
+A1 may name and test some right-column dimensions inside a specific consuming contract. A2 or A3 would still need separate proof that a shared obligation or domain profile adds value without claiming a universal semantic engine.
+
+## 20. Representation comparison
+
+Representation cannot supply missing freshness or ambiguity authority. It records or projects a conclusion whose owner must already be selected.
+
+| Variant | Plain-language effect | Main benefit | Main risk | Separate working verdict |
+|---|---|---|---|---|
+| inline consuming result | The consuming assessment or evaluation records its exact rule/profile, inputs, time and classification in the same immutable snapshot-bound artifact. | Smallest historical form; keeps classification attached to the decision it protects. | Repeated bindings and vocabulary may drift across consuming contracts. | **Leading historical representation** if F1/A1 or another governed owner is selected. Existing F0/A0 attributable states may also remain inline. |
+| separate identified record | A usability assessment has independent identity, attribution, endpoints and correction or supersession history. | Supports a governed reference to the same exact use-specific conclusion when that conclusion needs history of its own. | Overlaps OCP-011, creates another assessment family and can turn use-relative freshness into a standing property. | **Not supported by current evidence; conditional alternative only.** It needs a concrete independent-reference or correction-history consumer and, if selected, a full P-001 invocation or explicit reason not to invoke it. |
+| derived-only view | A deterministic rule evaluates exact immutable inputs for an explicit query time without storing a standing current flag. | Avoids mutable `fresh: true` state and cleanly separates historical replay from a new current query. | Historical replay fails if old rule versions or inputs disappear; implementations may consult current state. | **Leading projection alternative**, but only under a selected rule-owning outcome with durable exact inputs and fail-closed unavailability. It cannot turn F0/A0 into machine proof. |
+| domain-local record or derivation | A domain owns storage or derivation and Core validates only the selected envelope. | Keeps irreducible domain representation outside Core. | Core may transport but cannot compare opaque results safely. | **Conditional alternative** coupled to a justified F3 and/or A3 envelope. |
+
+A global freshness field on an evidence identity is not admissible: the same evidence may be usable for one exact use and stale for another. A later Board act may select different representations for historical conclusions and current projections, but each role and authority must be explicit rather than treated as an implementation choice.
+
+## 21. Axis independence and combination behavior
+
+No F/A/representation combination is selected by this comparison. The following combinations expose the independent gates:
+
+- **F0 + A0 + inline attributable states** is the current safe behavior. Core preserves the statement and enforces the accepted fail-safe matrix without claiming semantic derivation.
+- **F1 + A1 + inline result** is the smallest currently plausible positive combination. Each consuming contract owns its exact freshness and ambiguity rules in the historical decision.
+- **F1 + A0** may derive temporal usability while leaving semantic ambiguity attributable; machine-verifiable freshness does not create a semantic comparison engine.
+- **F0 + A1** may detect governed ambiguity dimensions while leaving temporal usability attributable; ambiguity rules do not create a freshness threshold.
+- **F2 and/or A2** require separate proof that repeated obligations are stable. Choosing one reusable axis does not justify the other.
+- **F3 and/or A3** require exact domain/profile/version binding. A domain freshness profile does not automatically own ambiguity, and identical labels remain incomparable without an accepted mapping.
+- **derived-only** may serve a new query under F1–F3 or A1–A3 only when the exact historical rule and inputs are resolvable. It does not replace the immutable historical consuming result.
+- **a separate record** may be combined with any selected semantic owner only after independent identity and consumer evidence is demonstrated. Its existence never makes the classification authoritative.
+
+A combination fails if representation changes semantic ownership, if one global value is attached to the evidence identity, or if missing authority is filled by newest timestamp, record order, count, caller identity or current wall clock.
+
+## 22. Normative authority accounting
+
+“Unselected” below is an explicit evidence gap, not permission for an implementation to choose an owner.
+
+| Binding or conclusion | Current or candidate owner | Fail-safe obligation |
+|---|---|---|
+| protected consumer and exact use | accepted consuming contract; exact positive owner unselected | A classification from another use is not portable by label. |
+| evidence kind and exact reference | accepted evidence and consuming contracts | Missing, unresolved or wrong-kind evidence is non-permissive. |
+| temporal fact measured | unselected under F0; exact consuming rule, Pattern invocation or domain profile under F1–F3 | Code cannot silently choose occurrence, observation, recording, effectivity or receipt time. |
+| evaluation time | exact consuming record or derived query contract | Current wall clock cannot replace the recorded time during replay. |
+| cutoff and boundary behavior | unselected under F0; exact versioned F1–F3 owner if selected | Missing equality, precision or incomparable-time behavior cannot yield positive usability. |
+| freshness rule/profile version | unselected under F0; exact F1–F3 owner if selected | Latest available rule cannot replace the exact historical version. |
+| ambiguity dimensions and comparison rules | finite accepted structure plus attributable evaluator under A0; exact A1–A3 owner if selected | Structural, semantic and conflict states cannot be collapsed or resolved by count or recency. |
+| evidence and input snapshots | accepted consuming contract and any selected Pattern/profile invocation | Current evidence cannot replace the exact historical snapshot. |
+| evaluator or deterministic rule authority | accepted consuming contract; otherwise unselected | Caller identity and number of evaluators do not create authority. |
+| historical stored conclusion | its accepted record contract | The record remains immutable; correction preserves explicit history. |
+| current projection | selected exact rule plus explicit query time and inputs | It is a new evaluation, not mutation or automatic invalidation of history. |
+| record effectivity | invoking contract under P-001 Module A | Effectivity does not become evidence freshness. |
+| source reliability, truth, sufficiency, availability, Readiness and authorization | their own governed owners, outside this decision | `fresh` cannot be promoted into any of these conclusions. |
+
+## 23. Mandatory counterexample mapping
+
+Every row maps the complete §10 pressure to all three comparison dimensions. A range means every candidate in that range must preserve the stated behavior.
+
+| # | Pressure | Freshness-axis required behavior | Ambiguity-axis required behavior | Representation required behavior | Future executable-evidence owner |
+|---|---|---|---|---|---|
+| 1 | Same evidence is fresh for one criterion and stale for another | **F0:** preserve separate attributable uses. **F1–F3:** exact-bind each use and rule. | **A0–A3:** legitimate rule-specific divergence is not ambiguity by itself. | No global evidence flag; every stored or derived result binds its exact use. | Selected F owner plus each consuming contract. |
+| 2 | Old Event remains historically relevant but not current-condition evidence | **F0–F3:** historical validity and new temporal usability remain separate. | **A0–A3:** the two questions are not conflicting interpretations. | Historical result stays immutable; current reuse is a new stored or derived evaluation. | OCP-010 plus selected consumer/F owner. |
+| 3 | Code silently chooses among occurrence, observation and recording time | **F0:** no machine-derived positive claim. **F1–F3:** name the exact temporal fact per evidence kind. | **A0:** leave unresolved meaning attributable. **A1–A3:** classify named temporal ambiguity only under an exact rule/profile. | Preserve the selected binding; storage location cannot choose it. | Selected F/A owner. |
+| 4 | Late arrival looks recent by recording time | **F0–F3:** never substitute newest time; the rule states whether age, delay, both or neither matters. | **A0–A3:** missing temporal interpretation remains unresolved, not silently normalized. | Record or derivation preserves every exact time input used. | Selected F owner and evidence contract. |
+| 5 | Future-dated, timezone-less or incomparable time is treated as fresh | **F0:** no Core derivation. **F1–F3:** explicit comparability and non-permissive failure. | **A0:** reject structural invalidity where expressible. **A1–A3:** exact-bind any temporal-ambiguity rule. | No representation normalizes or guesses missing semantics. | Selected F/A owner plus schema only after selection. |
+| 6 | Cutoff equality differs between implementations | **F0:** no implicit cutoff. **F1–F3:** bind inclusive/exclusive equality and precision behavior. | **A0–A3:** missing boundary semantics stays unresolved and non-permissive. | Rule version and boundary inputs remain replayable. | Selected F owner. |
+| 7 | Wall clock replaces evaluation time during replay | **F0–F3:** replay uses the recorded exact time. | **A0–A3:** no ambiguity path licenses time substitution. | Derived queries require explicit time; stored history never recomputes silently. | Every selected consuming/derivation contract. |
+| 8 | Current evidence or latest rule replaces historical bindings | **F0:** replay the exact attributable record. **F1–F3:** replay exact rule and snapshots. | **A0–A3:** mismatch or unresolved binding is non-permissive. | Inline/separate history retains exact references; derived-only fails if they are unavailable. | Every selected owner. |
+| 9 | Historical assessment changes merely because time passed | **F0–F3:** historical conclusion remains valid for its recorded use and time. | **A0–A3:** age alone does not make its meaning ambiguous. | Never mutate history; create a new evaluation or query. | Existing record contract plus selected consumer. |
+| 10 | Missing rule, version, time or snapshot yields positive usability | **F0:** cannot claim machine-proven positive freshness. **F1–F3:** fail closed. | **A0–A3:** missing interpretation authority cannot become resolved. | No fallback to defaults, current state or standing flags. | Every selected owner. |
+| 11 | `stale` becomes false evidence or a negative domain conclusion | **F0–F3:** stale means unusable for the exact temporal use only. | **A0–A3:** no ambiguity rule changes that meaning. | Preserve freshness state separately from evidence truth and domain conclusion. | Every consuming contract. |
+| 12 | `fresh` becomes truth, reliability, availability, Readiness or authorization | **F0–F3:** freshness supplies none of those authorities. | **A0–A3:** absence of ambiguity supplies none either. | No stored or derived projection upgrades the conclusion. | Downstream domain owners and compatibility fixtures. |
+| 13 | Two exact references resolve but their semantic meaning cannot be distinguished | **F0–F3:** temporal usability cannot resolve semantic equivalence. | **A0:** preserve attributable semantic uncertainty. **A1–A3:** use only an exact governed semantic dimension/profile. | Preserve candidate references or the exact attributable statement; do not choose by order. | Selected A owner. |
+| 14 | Legitimate context-specific conclusions are mislabeled ambiguous or conflicting | **F0–F3:** retain each exact use and rule. | **A0–A3:** distinguish different contexts from unresolved interpretation and conflict. | Separate exact contexts remain independently replayable. | Selected A owner plus consuming contracts. |
+| 15 | Conflict is resolved by recency, majority or count | **F0–F3:** those signals add no freshness authority. | **A0–A3:** no winner without an explicit governed comparison or lineage rule. | Representation preserves conflicting candidates and provenance. | Selected A owner and lineage contract. |
+| 16 | Branching supersession is collapsed into one newest head | **F0–F3:** freshness cannot choose a head. | **A0:** accepted structure detects unresolved branching where defined. **A1–A3:** named lineage rule/profile must fail closed. | Separate records preserve branches; inline/derived consumers exact-bind the chosen governed head or remain non-permissive. | P-001 invoker or exact owning contract. |
+| 17 | Unknown domain profile is treated as compatible | **F3:** reject unknown/mismatched profile versions. **F0–F2:** do not reinterpret a domain label as local authority. | **A3:** reject unknown/mismatched profiles. **A0–A2:** do not normalize them by label. | Domain-local representation carries exact envelope bindings. | Core envelope plus each named domain profile. |
+| 18 | Derived-only history cannot reproduce because old inputs disappeared | **F0–F3:** missing historical inputs is non-permissive. | **A0–A3:** unavailability is not resolved by current interpretations. | Derived-only fails closed; inline or separate history must retain resolvable exact snapshots. | Selected derivation and retention contract. |
+| 19 | Separate usability record changes bindings under one identity | **F0–F3:** rule, evidence and use bindings remain immutable for that identity. | **A0–A3:** changed meaning requires explicit correction/supersession, never silent reinterpretation. | A selected separate record needs full identity and branching-history evidence; otherwise it is inadmissible. | P-001 invocation or explicitly justified record contract. |
+| 20 | Evidence assumes a layer rejected by the candidate | **F0–F3:** each candidate proves only its own owner model. | **A0–A3:** structural, contract, Pattern and domain blocks remain separate. | Inline, separate, derived and domain fixtures are conditional on the selected representation. | OCP-001 outcome-fair review plus each selected owner. |
+
+No row may pass by turning missing, stale, ambiguous, conflicting, unresolved, incomparable or structurally invalid inputs into a more permissive result.
+
+## 24. Executable-evidence plan by candidate
+
+This comparison adds no checker code or fixtures. It assigns future evidence only to the normative owner that would exist after selection.
+
+| Candidate | Required downstream evidence |
+|---|---|
+| F0 | Compatibility fixtures show that attributable `stale` or equivalent states remain non-permissive and checker output never claims a machine-proven threshold. |
+| F1 | Each selected consuming contract tests exact use, evidence kind, temporal fact, rule/version, evaluation time, snapshots, cutoff equality, incomparable inputs and historical replay. |
+| F2 | A separately reviewed Pattern and every invocation prove complete bindings, stable shared obligations, local semantic ownership and absence of a universal duration. |
+| F3 | Each domain owns semantic fixtures; the Core envelope rejects unknown, mismatched and incomparable domain/profile versions. |
+| A0 | Core fixtures cover only named finite structural cases and preserve attributable semantic uncertainty without overclaiming. |
+| A1 | Each selected contract tests every named dimension, legitimate contextual divergence, unresolved interpretation and conflict separately. |
+| A2 | A separately reviewed Pattern proves shared reason/input/provenance obligations while every invoker owns semantic comparison. |
+| A3 | Each domain owns semantic ambiguity fixtures; the Core envelope rejects unknown and incompatible profiles. |
+| inline result | The consuming record cannot detach the classification from its exact rule, evidence, input snapshots, context and evaluation time. |
+| separate record | A full identity, provenance, endpoint, correction, supersession and branching suite proves independent consumer need and prevents binding changes under one identity. |
+| derived-only view | Same exact inputs reproduce the same result; missing historical rules or inputs fail closed and current data or wall clock is never consulted implicitly. |
+| domain-local representation | Domain fixtures prove local storage/derivation; Core fixtures validate exact envelope bindings without comparing opaque meanings. |
+
+If F0 or A0 is later selected, no placeholder rule, Pattern, profile, record family or checker module is created merely to make the control appear implemented.
+
+## 25. Comparison status and next decision gate
+
+Revision `0.1.0` opened `AB-039 / AD-012` in Discovery. Fable approved its exact head with zero findings, Codex accepted the verdict, Pavlo authorized merge, and PR #62 was squash-merged with green post-merge CI.
+
+Revision `0.2.0` supplies separate F0–F3 and A0–A3 working verdicts, representation comparison, combination behavior, authority accounting, a complete map of all twenty counterexamples and outcome-conditional executable-evidence ownership. It remains `Discovery` and records no Architecture Board selection.
+
+External adversarial review must now determine separately:
+
+1. whether F1 is fairly identified as the smallest positive freshness hypothesis while F0 remains the full current control;
+2. whether A1 is fairly identified as the smallest positive ambiguity hypothesis while A0 remains the full current control;
+3. whether current evidence demonstrates a stable cross-contract form for F2 or A2;
+4. whether any concrete domain boundary justifies F3 or A3;
+5. whether inline history and derived-only current projection are distinguished without silently selecting both;
+6. whether a separate identified record is correctly withheld absent an independent-reference or correction-history consumer;
+7. whether every authority in §22 and all twenty counterexamples in §23 are mapped fairly; and
+8. whether the comparison remains understandable without checker code.
+
+A later `AD-012B` Board act may select one outcome per decidable semantic axis and an explicit representation by role, or keep any axis in `Discovery`. A selection act may not itself create a Pattern, record family, domain profile, schema, checker rule, fixture or graph edge. Each such normative artifact requires its own accepted contract and evidence cycle.
+
+Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and of any later selection act.

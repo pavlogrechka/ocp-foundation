@@ -89,7 +89,7 @@
 - [x] Draft OCP-012 CapabilityClaimRecord exact binding, temporal/supersession history and fail-safe projection fixtures
 - [x] OCP-014 exact governed owner binding and wrong-owner fail-safe fixture
 - [x] OCP-015 proposal/response exact binding, history-preserving withdrawal, fail-safe projection and symmetric reference-normalization evidence
-- [ ] Machine-verifiable evidence freshness, ambiguity and deterministic replay boundary — `AB-039 / AD-012` in Discovery
+- [ ] Machine-verifiable evidence freshness, ambiguity and deterministic replay boundary — `AB-039 / AD-012 0.2.0` compares F0–F3, A0–A3 and representation variants before Board selection
 - [ ] Cross-file identity uniqueness beyond the currently governed artifact classes
 - [ ] Full duplicate normative-rule and reference-integrity linter across all normative artifacts
 - [ ] Production validator, persistence and implementation-facing contracts
@@ -123,5 +123,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Complete the active `AB-039 / AD-012` comparison of freshness, ambiguity and replay owner models before selecting a normative contract or checker derivation.
+1. Review the active `AB-039 / AD-012 0.2.0` F0–F3, A0–A3 and representation comparison, then record any supported selections through an explicit Board act.
 2. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
