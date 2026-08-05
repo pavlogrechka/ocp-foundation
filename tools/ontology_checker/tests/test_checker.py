@@ -194,6 +194,80 @@ class FixtureContractTests(unittest.TestCase):
             )
             self.assertTrue(validate_repository(root).valid)
 
+    def test_repository_status_sync_rejects_missing_taxonomy_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n|---|---|---|\n| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses: {}\n---\n", encoding="utf-8"
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(set(validate_repository(root).errors), {"STATUS_TAXONOMY_MISSING"})
+
+    def test_repository_status_sync_rejects_mismatched_taxonomy_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n|---|---|---|\n| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Proposed\n---\n", encoding="utf-8"
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(set(validate_repository(root).errors), {"STATUS_MISMATCH"})
+
+    def test_repository_status_sync_rejects_extra_taxonomy_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n|---|---|---|\n| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Accepted\n  Environment: Proposed\n---\n",
+                encoding="utf-8",
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(set(validate_repository(root).errors), {"STATUS_TAXONOMY_EXTRA"})
+
+    def test_repository_status_sync_rejects_duplicate_taxonomy_projection(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n|---|---|---|\n| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Accepted\n  Resource: Accepted\n---\n",
+                encoding="utf-8",
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(set(validate_repository(root).errors), {"STATUS_TAXONOMY_DUPLICATE"})
+
 
 if __name__ == "__main__":
     unittest.main()

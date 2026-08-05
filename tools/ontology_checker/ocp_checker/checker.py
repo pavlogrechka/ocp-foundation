@@ -57,6 +57,8 @@ ERROR_CODES = frozenset(
         "FIXTURE_CONSTRAINT_VERSION_REF_REQUIRED",
         "STATUS_REGISTRY_MISSING",
         "STATUS_TAXONOMY_MISSING",
+        "STATUS_TAXONOMY_DUPLICATE",
+        "STATUS_TAXONOMY_EXTRA",
         "STATUS_DEFINING_DOCUMENT_MISSING",
         "STATUS_MISMATCH",
     }
@@ -542,6 +544,33 @@ def _read_frontmatter(path: Path) -> dict[str, Any]:
     return loaded if isinstance(loaded, dict) else {}
 
 
+def _concept_status_projection_has_duplicates(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        return False
+    end = text.find("\n---\n", 4)
+    if end == -1:
+        return False
+    try:
+        root = yaml.compose(text[4:end])
+    except yaml.YAMLError:
+        return False
+    if not isinstance(root, yaml.nodes.MappingNode):
+        return False
+
+    projections = [
+        value
+        for key, value in root.value
+        if getattr(key, "value", None) == "Concept-Statuses"
+    ]
+    if len(projections) > 1:
+        return True
+    if not projections or not isinstance(projections[0], yaml.nodes.MappingNode):
+        return False
+    keys = [getattr(key, "value", None) for key, _ in projections[0].value]
+    return len(keys) != len(set(keys))
+
+
 def _ontology_registry(path: Path) -> dict[str, str]:
     rows: dict[str, str] = {}
     for line in path.read_text(encoding="utf-8").splitlines():
@@ -565,6 +594,8 @@ def validate_repository(repo_root: Path) -> ValidationResult:
 
     registry = _ontology_registry(registry_path)
     taxonomy = _read_frontmatter(taxonomy_path).get("Concept-Statuses") or {}
+    if _concept_status_projection_has_duplicates(taxonomy_path):
+        errors.append("STATUS_TAXONOMY_DUPLICATE")
     if not isinstance(taxonomy, dict):
         taxonomy = {}
 
@@ -593,5 +624,9 @@ def validate_repository(repo_root: Path) -> ValidationResult:
             errors.append("STATUS_MISMATCH")
         if taxonomy_status is not None and str(taxonomy_status) != status:
             errors.append("STATUS_MISMATCH")
+
+    for concept in taxonomy:
+        if concept not in defining:
+            errors.append("STATUS_TAXONOMY_EXTRA")
 
     return _result(errors)

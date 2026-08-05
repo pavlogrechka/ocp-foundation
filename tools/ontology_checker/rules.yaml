@@ -292,7 +292,13 @@ rules:
   source: OCP-001 Concept status synchronization
 - id: STATUS_TAXONOMY_MISSING
   kind: validation
-  source: OCP-001 Concept status synchronization
+  source: OCP-002 Exact Concept status projection
+- id: STATUS_TAXONOMY_DUPLICATE
+  kind: validation
+  source: OCP-002 Exact Concept status projection
+- id: STATUS_TAXONOMY_EXTRA
+  kind: validation
+  source: OCP-002 Exact Concept status projection
 - id: CAPABILITY_DEFINITION_REQUIRED
   kind: validation
   source: OCP-009 §12 invariant 3
