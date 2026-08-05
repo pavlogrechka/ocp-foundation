@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-017
 Title: Objective Editorial-Correction Boundary
-Version: 0.1.0
+Version: 0.2.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-008, OCP-016, P-001, AD-003, AD-016
 Applies-To: AB-063, Objective statement correction, OCP-008 Canonical blocker
-Review-After: External adversarial outcome comparison before any Architecture Board selection
+Review-After: External adversarial review of AD-017A before any Architecture Board selection
 ---
 
 # AD-017 — Objective Editorial-Correction Boundary
@@ -351,3 +351,274 @@ AD-017 may leave Discovery only when:
 Revision `0.1.0` moves AB-063 from `Planned` to `Discovery` and records no preferred outcome. A later AD-017A may perform the evidence comparison without selecting an outcome. A later AD-017B may select A, B, C, D or a justified combination, or retain strict immutability and close the positive path.
 
 Any OCP-008 amendment, new record contract, P-001 invocation, consumer migration, schema, fixture, Concept-status change, graph edge or promotion proposal requires a later separately reviewed and authorized PR. Authorization of this discovery cannot transfer to any of those acts.
+
+## 20. AD-017A comparison method
+
+Revision `0.2.0` compares A–D against the exact post-discovery baseline `main@bd2581be95566089b68478d2b8c6c35bfcf6a80f`. OCP-008 remains the same blob and SHA-256 recorded in §2.
+
+The comparison asks five questions in order:
+
+1. **Replay:** can an audit recover the exact normative statement used by a historical consumer?
+2. **Identity:** what remains one Objective, and what immutable object changes?
+3. **Authority:** who owns classification, evidence, conflict and the authoritative text?
+4. **Consumer impact:** can current bare Objective references remain exact, or must they migrate?
+5. **Rollback:** can the outcome reverse a correction without floating references or rewritten history?
+
+`Strong` below means the outcome answers the scenario using accepted authority and no unresolved migration. `Conditional` means a named rule, record or reference contract is still missing. `Adjunct` means the outcome helps but cannot answer the stored-statement case alone. `Blocked alone` means the outcome requires another outcome for that scenario.
+
+No outcome receives credit for UI convenience, common database practice, field count, document size or implementation familiarity.
+
+## 21. Current consumer and executable baseline
+
+The repository currently exposes one identity dimension for Objective.
+
+| Surface | Exact current behavior | Consequence for correction |
+|---|---|---|
+| OCP-008 record | `objective_id` identifies the endpoint-free P-001 record that contains one `statement` | there is no amendment ID, revision ID or correction head |
+| OCP-004 Operation | each `objective_refs[]` member is one bare Objective identifier and must resolve to exactly one valid Objective instance | the Operation snapshot does not bind a separate statement revision |
+| OCP-011 assessment | `target_kind_ref: objective@1` plus `target_ref` exact-binds one Objective identifier | assessment identity preserves its target ID, not a later text revision |
+| P-001 Module C | `supersedes_objective_ref` preserves prior Objective records and allows visible branching | it supplies substantive replacement history, not same-identity correction |
+| Objective checker | indexes records by `objective_id`, rejects duplicate/invalid resolution and validates supersession cycles | it has no current-statement, amendment or revision projection |
+| synthetic fixtures | exercise exact Objective resolution and supersession safety | no fixture proves a same-identity stored correction model |
+
+The absence of a correction fixture does not prove that positive correction is impossible. It does mean B and C cannot claim compatibility from existing evidence.
+
+There is one unavoidable reference result: if corrected text becomes visible through the same bare `objective_id`, an old consumer silently sees new text; if corrected text does not become visible through that ID, a later consumer needs another exact binding to request it. B and C must therefore define a consumer migration or an equivalent immutable snapshot binding. A does not introduce that ambiguity because changed stored text receives a new Objective ID.
+
+## 22. Scenario-by-scenario findings
+
+### S1 — historical Operation before a spelling correction
+
+A keeps the Operation bound to the old Objective and requires an explicit new reference for corrected text. B needs the Operation or its immutable evidence to bind an exact amendment state; otherwise the bare ID floats. C needs an exact Objective revision. D protects display-only changes but sends a changed stored spelling to A, B or C.
+
+### S2 — whitespace-only UI reflow
+
+D directly separates rendering from normative payload. A also remains safe when the renderer changes outside the stored record. B and C add history that the scenario does not need.
+
+Whitespace already stored inside the normative payload is not automatically display-only. Removing it after storage requires an exact normalization rule and cannot rely on visual similarity.
+
+### S3 — harmless stored typo
+
+A creates a new Objective and explicit supersession. B can preserve logical identity only with an exact amendment record, equivalence result and consumer binding. C can preserve logical identity through an exact immutable revision. D alone cannot handle the changed stored payload and must fail to A or a selected positive mechanism.
+
+This is the strongest positive use case for B or C, but the repository contains no current consumer requirement that the same `objective_id` survive it.
+
+### S4 — a negation or number is changed but labelled editorial
+
+A creates a new Objective regardless of the label. B and C must reject identity preservation when the exact rule does not prove equivalence. D cannot move the changed token into display metadata. This scenario defeats edit distance, token count and spelling-tool success as authority.
+
+### S5 — two corrections from one baseline
+
+A produces visible Objective successors; neither wins by time. B must expose amendment branching or conflict and require an exact selected head. C must expose revision branching or conflict and prohibit a floating latest revision. D alone falls back to A.
+
+### S6 — two applicable equivalence rules disagree
+
+A requires no equivalence decision because both changed statements receive new identities. B and C must return a non-permissive conflict. D cannot erase the disagreement by calling the difference presentational.
+
+### S7 — the historical rule version is unavailable
+
+A replays both Objective records without that rule. B and C cannot preserve same identity for the affected correction because its decision is unreplayable. D handles only unchanged normative payload.
+
+### S8 — a newer rule would classify the old correction differently
+
+A does not reclassify history. B and C must retain the original exact rule/version and inputs; a new evaluation creates new attributable evidence rather than rewriting the old result. D does not create re-evaluation authority.
+
+### S9 — a materialized current statement disagrees with history
+
+A has no authoritative current-statement projection and exact record resolution wins. B and C must reject the materialized field when it differs from their declared history or derivation. D cannot use rendered text as an override.
+
+### S10 — a consumer supplies only `objective_id`
+
+A resolves one immutable record. Under B, the contract must state whether the bare ID means the base record or is insufficient for corrected text; it cannot mean the newest amendment. Under C, a consumer that requires corrected text must supply an exact revision and the bare ID is incomplete. D remains exact only while normative payload is unchanged.
+
+### S11 — rollback after a consumer used the correction
+
+A preserves all Objectives and requires an explicit consumer rebind; the prior Objective remains exact-resolvable. B records an explicit new amendment or withdrawal under one exact lineage, never deletion. C records an exact new revision or explicit branch. D can roll back presentation without normative effect but sends stored changes to another outcome.
+
+### S12 — substantive replacement and alleged correction branch together
+
+A represents both as distinct Objective successors and preserves the branch. B must keep the amendment branch separate from the new-Objective supersession branch and define consumer choice explicitly. C must distinguish same-Objective revision from new-Objective supersession. D cannot decide the stored change.
+
+## 23. Consumer-fit matrix
+
+This matrix contains all 48 scenario/outcome cells. A rating is not an implementation authorization.
+
+| Scenario | A strict | B amendment | C revision | D display boundary |
+|---|---|---|---|---|
+| S1 historical Operation | **Strong** | Conditional: amendment-state binding | Conditional: revision migration | Adjunct; stored change exits D |
+| S2 UI reflow | **Strong** when display is external | Extra | Extra | **Strong** |
+| S3 stored typo | **Strong**, new ID | Conditional positive path | Conditional positive path | Blocked alone; fallback required |
+| S4 mislabelled semantic edit | **Strong**, new ID | Conditional exact rejection | Conditional exact rejection | Blocked alone; cannot hide token |
+| S5 concurrent corrections | **Strong**, visible successors | Conditional branch/head contract | Conditional branch/revision contract | Blocked alone; fallback required |
+| S6 rule disagreement | **Strong**, no equivalence needed | Conditional conflict rejection | Conditional conflict rejection | Blocked alone |
+| S7 unavailable rule | **Strong**, records replay | Conditional, same identity rejected | Conditional, same identity rejected | Adjunct only |
+| S8 newer rule differs | **Strong**, no reclassification | Conditional exact historical pin | Conditional exact historical pin | Adjunct only |
+| S9 materialized disagreement | **Strong**, record authority | Conditional projection check | Conditional projection check | Adjunct; renderer cannot override |
+| S10 bare `objective_id` | **Strong** | Conditional: base or incomplete, never latest | Conditional: exact revision required | **Strong** only if payload unchanged |
+| S11 rollback | **Strong**, explicit rebind/history | Conditional new lineage act | Conditional new exact revision | Adjunct for presentation only |
+| S12 mixed branch | **Strong**, Objective branching | Conditional dual-layer separation | Conditional revision/supersession separation | Blocked alone |
+
+The matrix shows two different facts. A is the only currently complete stored-change model because it uses accepted Objective identity and supersession. D is the strongest common representation safeguard, but not a complete stored-change model. B and C remain viable hypotheses, not currently complete contracts.
+
+## 24. Identity, authority and replay comparison
+
+| Question | A strict | B amendment | C revision | D display boundary |
+|---|---|---|---|---|
+| authoritative normative text | one immutable Objective record | deterministic base-plus-exact-amendment state | one exact immutable Objective revision | unchanged stored Objective payload |
+| Objective identity after stored change | new `objective_id` | stable logical Objective ID | stable logical Objective ID | no answer; stored change exits D |
+| additional identity | none | amendment record ID | Objective revision ID | none |
+| equivalence owner | none required for identity | exact domain rule/result | exact domain rule/result | none for external rendering |
+| historical consumer binding | existing bare Objective ID | bare ID plus exact amendment state/snapshot | logical ID plus exact revision | existing bare ID while payload is unchanged |
+| conflicts/branching | existing Objective supersession branch | amendment heads or explicit conflict, no newest | revision heads or explicit conflict, no latest | outside D; fallback outcome handles it |
+| rollback | explicit old/new Objective reference | new attributable amendment/withdrawal act | new exact revision/branch | presentation rollback only |
+| P-001 impact | current Objective Module C unchanged | separate complete invocation decision | remap Objective record identity/history | none |
+| current consumer migration | none | required for corrected-text replay | required | none for display only |
+| primary risk | duplicate semantic Objectives and authoring cost | dual authority and incomplete head selection | identity redefinition and broad migration | false claim that presentation solves stored correction |
+
+“Stable logical Objective ID” in B or C is not free continuity. It is a new rule that must coexist with immutable record identity and exact consumer evidence.
+
+## 25. P-001 and consumer migration proof
+
+### 25.1 A
+
+The existing Objective record remains the P-001 record. A correction creates another conforming Objective and may use the already selected Module C. OCP-004 and OCP-011 continue to bind exact `objective_id` values. No schema or fixture migration is logically required.
+
+### 25.2 B
+
+The amendment is an independently identified assertion about one Objective and crosses the P-001 applicability threshold through identity, provenance and correction history. A later positive contract must either invoke exact P-001 completely or give an externally reviewed reason for a different form.
+
+An amendment cannot alter what every old bare `objective_id` means without rewriting consumer history. Therefore a positive B contract needs one of:
+
+- an exact amendment-state reference in each consumer snapshot that uses corrected text; or
+- an immutable consumer-side Objective statement snapshot with an exact derivation back to amendment history.
+
+“Resolve the latest amendment” is not a third option.
+
+### 25.3 C
+
+C makes the logical Objective different from the immutable P-001 revision record. It must add a stable revision identity or exact composite identity, then update every corrected-text consumer to bind it. Treating several rows with the same `objective_id` as distinct records violates current unique resolution; treating one mutable row as several revisions violates immutable replay.
+
+### 25.4 D
+
+D requires no new record or Pattern invocation. It must define which representation data is never part of the stored normative statement. It may not normalize away a stored token after the fact merely because a renderer treats the token as insignificant.
+
+## 26. Core Boundary route and authority cost
+
+| Outcome | Route F effect | Additional route | Authority synchronization | Reopening pressure |
+|---|---|---|---|---|
+| A | narrow OCP-008 invariant: all stored changes create new Objective | none | one Objective record authority | low; current consumers and P-001 remain exact |
+| B | OCP-008 must define how amendment affects Objective text | Route C amendment record; Route D rule, with E only if an envelope is proved | base record, amendment history, domain result and consumer snapshot | high if any layer can select a head independently |
+| C | OCP-008 must split logical identity from revision-record identity | Route D equivalence rule; E only if exact Core binding is proved | Objective, revision, domain result and every consumer reference | high because current P-001 and consumer contracts change |
+| D | OCP-008 defines normative-payload exclusion only | Route I renderer | stored payload remains sole semantic authority | low as adjunct; unresolved if claimed as standalone stored correction |
+
+All routes remain hypotheses until AD-017B. A route count is not a score, but every additional authority must have a concrete consumer and fail-safe synchronization rule.
+
+## 27. Complete counterexample mapping
+
+Each cell states how the outcome must defeat the corresponding §13 counterexample. The table contains all 64 cells.
+
+| # | A strict | B amendment | C revision | D display boundary |
+|---:|---|---|---|---|
+| 1 | exact Objective ID, never time | exact amendment binding, never newest | exact revision, never newest | unchanged payload, never render time |
+| 2 | record order irrelevant | head/conflict derived explicitly | branch/revision exact | render order irrelevant |
+| 3 | counts cannot change identity | counts cannot select amendment | counts cannot select revision | display-tool count irrelevant |
+| 4 | new ID regardless of similarity | exact domain result required | exact domain result required | no ad hoc normalization |
+| 5 | prior record never overwritten | base plus immutable amendments | immutable revisions | stored payload unchanged |
+| 6 | label has no effect; new ID | exact rule/result required | exact rule/result required | label cannot move stored data to display |
+| 7 | creation/replacement provenance only | separate correction provenance | revision-specific provenance | no correction provenance needed for render |
+| 8 | Module C used only for Objective supersession | separate amendment modules explicit | revision history mapped explicitly | no amendment/revision semantics |
+| 9 | no new invoker | full independent invocation decision | current invocation remapped, not inherited | no invocation |
+| 10 | one exact record, no head | exact amendment state, no latest | exact revision, no latest | no revision exists |
+| 11 | changed stored typo creates new ID | typo remains stored and governed | typo remains stored and governed | cannot call stored typo display-only |
+| 12 | consumers rebind explicitly | consumers bind exact amendment state | consumers bind exact revision | display change needs no rebind |
+| 13 | new ID on uncertainty | conflict/missing rejects same identity | conflict/missing rejects same identity | stored ambiguity exits D |
+| 14 | no equivalence re-evaluation | original exact rule/result preserved | original exact rule/result preserved | renderer cannot reclassify stored history |
+| 15 | no promotion implication | no promotion implication | no promotion implication | no promotion implication |
+| 16 | no new conclusion authority | amendment is correction evidence only | revision is representation only | renderer is implementation only |
+
+## 28. Outcome-conditional executable plan
+
+AD-017A adds no fixture because no outcome has been selected. A later implementation must add only the selected block plus the unconditional evidence in §14.
+
+### 28.1 A
+
+- add a synthetic harmless-typo pair with two Objective IDs and explicit supersession;
+- prove an older Operation and assessment still resolve the prior Objective;
+- prove branching successors have no newest winner; and
+- keep the existing Objective/P-001/reference schemas unchanged unless another reviewed need appears.
+
+### 28.2 B
+
+- define and validate amendment identity, exact target/baseline, before/after evidence, rule/result/provenance and authoritative derivation;
+- test missing, conflicting, branching, withdrawal/rollback and materialized-view mismatch;
+- complete the separate P-001 decision; and
+- add exact consumer snapshot evidence showing which amendment state was used.
+
+### 28.3 C
+
+- define and validate logical Objective identity, immutable revision identity and exact revision resolution;
+- migrate Operation and assessment consumers that use corrected text;
+- test missing, duplicate, branching, conflicting and floating-latest failures; and
+- distinguish same-Objective revision from new-Objective Module C supersession.
+
+### 28.4 D
+
+- demonstrate several renderings of one byte-/payload-identical normative statement;
+- prove renderer metadata cannot enter Objective identity or overwrite `statement`;
+- reject a stored spelling or token change as display-only; and
+- combine with the selected stored-change outcome when any such case remains in scope.
+
+Executable coverage cannot select the outcome. A green implementation of B or C would prove only that one proposed contract was implemented, not that its additional authority was necessary.
+
+## 29. Evidence-weighted comparison finding
+
+Current evidence establishes:
+
+1. Historical replay is a real requirement because Operation and assessment consumers bind Objective by bare ID.
+2. No current consumer requires the same Objective ID to survive a changed stored statement.
+3. A closes all twelve scenarios with accepted Objective identity, P-001 Module C and explicit consumer rebinds.
+4. D is a valuable common invariant because pure rendering should never enter normative history, but D alone cannot close the stored orthographic case already named by OCP-008.
+5. B can preserve same logical identity, but only by adding a second identified authority plus exact consumer correction-state evidence.
+6. C provides the clearest positive revision replay, but changes the current P-001 identity model and every corrected-text consumer reference.
+
+Therefore **A with D as its explicit payload/display safeguard is the leading minimal complete hypothesis for AD-017B**. This is not a selection. It is the hypothesis that adds the least new authority while satisfying all current consumers and counterexamples.
+
+B becomes justified if external evidence identifies a consumer that must preserve logical Objective identity across changed stored text and independently needs an attributable amendment record. C becomes justified if the same need exists and exact immutable revisions are required across several consumers. D alone becomes complete only if the stored orthographic-correction permission is removed or every demonstrated same-identity case is proven to leave normative payload unchanged.
+
+External review must attack the leading hypothesis by constructing:
+
+1. a current or necessarily near-term consumer that A+D cannot satisfy without relying only on editing convenience;
+2. an accepted mandate that requires identity preservation rather than merely permits it;
+3. a B model that changes visible corrected text without floating old bare references or adding an exact consumer binding;
+4. a C model that preserves current P-001 record identity and bare consumer compatibility without a floating latest revision;
+5. a D-only answer for the stored-typo scenario; and
+6. an omitted smaller outcome that preserves replay with less authority than A+D.
+
+If any attack succeeds, AD-017B must not select A+D without resolving it.
+
+## 30. Outcome-fairness closure audit
+
+| Fairness question | A | B | C | D |
+|---|---|---|---|---|
+| own feasible evidence block | yes, immutable records/supersession | yes, conditional amendment lineage | yes, conditional exact revisions | yes, unchanged-payload/render separation |
+| semantic replay equivalent | exact Objective ID | exact amendment state plus base | exact Objective revision | unchanged normative payload; stored change delegated |
+| Pattern obligation assumes rejected layer | no | separate invocation only if selected | remapping only if selected | no Pattern layer |
+| consumer migration charged explicitly | none | yes | yes | none for display-only |
+| fail-safe on absent equivalence | new Objective | reject same-identity amendment effect | reject same-identity revision effect | exit D to strict outcome |
+| main weakness stated without disqualification by design | identity duplication/cost | dual authority/branching | identity split/migration | incomplete for stored change |
+
+The §16 falsification target remains closed: no unconditional evidence assumes the amendment, revision, domain or display layer of a competing outcome. B and C receive credit for replay only through their own exact equivalents; A is not penalized for rejecting a same-identity edit path; D is not asked for lineage it does not contain.
+
+## 31. AD-017A status and next act
+
+Revision `0.2.0` completes the initial A–D comparison while AD-017 and AB-063 remain `Discovery`. It changes no OCP-008 text/version/status, Objective status, P-001 invocation, consumer reference, Concept, registry row, graph edge, schema, checker rule, fixture or readiness percentage.
+
+After exact-head external review, a separate AD-017B Board act may:
+
+- select A with D as a representation safeguard;
+- select B or C after closing its authority and migration gates;
+- select another explicit composition with non-overlapping precedence;
+- require another comparison because a viable outcome is missing; or
+- retain strict immutability and close the positive same-identity correction path.
+
+AD-017A review or merge does not select an outcome. AD-017B requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization. Any later OCP-008 implementation and any promotion-scope act remain separate again.
