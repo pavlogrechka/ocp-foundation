@@ -282,7 +282,7 @@ Fixtures also reject a declared inline state that disagrees with derivation, a r
 
 ## 15. OCP-011A amendment and accepted effect
 
-Revision `0.3.0` defines the OCP-011 activation submitted through the separate review required by AD-012B §26.5. Its accepted effect is to:
+Revision `0.3.0` defines the OCP-011 activation submitted through the separate review required by AD-012B §26.5. Its accepted effect:
 
 1. activates F1/A1 only for exact `objective-achievement@2`;
 2. preserves F0/A0 for `objective-achievement@1` and every other unactivated consumer;
