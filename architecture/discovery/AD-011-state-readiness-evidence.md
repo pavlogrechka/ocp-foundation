@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-011
 Title: State and Readiness Evidence Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-002, ADR-DRAFT-007, OCP-003, OCP-004, OCP-005, OCP-006, OCP-007, OCP-010, OCP-011, OCP-012, OCP-013
 Applies-To: AB-007, State, Readiness
-Review-After: External adversarial review of the separate State and Readiness outcome comparison
+Review-After: A separately accepted mandate supplies new State identity evidence or a concrete Readiness consumer with legitimate criterion, target and freshness owners
 ---
 
 # AD-011 — State and Readiness Evidence Boundary
@@ -423,3 +423,63 @@ External adversarial review must now determine separately:
 A later Board act must name one outcome per decidable axis. It may select a control, select a positive-capable outcome only with its missing owners resolved, or keep one axis in `Discovery` while deciding the other. The Board act may not create a Pattern, OCP contract, Concept, schema, checker rule or graph edge merely by selecting a direction.
 
 Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and of any later selection act.
+
+## 25. Accepted axis selections
+
+The Architecture Board records two independent no-new-authority outcomes. Selecting them together does not make State and Readiness one decision or one model.
+
+### 25.1 State axis — S0
+
+AD-011 selects **S0 — no shared State abstraction**.
+
+The reviewed evidence shows no stable State identity that persists independently of a subject, local lifecycle, observation, assessment, criterion, context or time. No demonstrated consumer needs to reference one shared State subject instead of the exact accepted source record. Simultaneous lifecycle, condition, availability and preparedness statements remain owned by different contracts and cannot be reduced to values of one global property.
+
+S1 is not selected because the repository has not demonstrated a repeated set of accepted state-like record invocations that justifies another Pattern without creating a generic container. S2 receives a negative independent-identity verdict under the current evidence.
+
+Under S0, each accepted owner keeps its own lifecycle, observation, assessment and projection vocabulary. The word `state` may still be used descriptively or inside an explicitly owned local contract; that use does not create a shared foundation Concept or translate one owner's vocabulary into another's.
+
+### 25.2 Readiness axis — R0
+
+AD-011 separately selects **R0 — no shared Readiness authority**.
+
+The reviewed evidence contains no concrete consumer requirement, accepted preparedness criterion owner, accepted Resource or Organization target contract, readiness evaluator or rule owner, availability contract, or complete freshness/replay boundary. Capability claims, admissibility, eligibility, Assignment effectivity, observations and assessments therefore cannot manufacture a Foundation-authoritative `ready` conclusion.
+
+R1 remains the smallest plausible positive-capable direction but is not accepted by this act. It may be reconsidered only after a separate mandate names the concrete consumer, exact conclusion, criterion owner, target contract and evaluator/rule authority and binds the required AB-039 freshness/replay semantics. Organization targets additionally require the AB-006/AB-052 mapping boundary. R2 has no demonstrated domain profiles or interoperability pressure. R3 receives a negative independent-identity verdict under the current evidence.
+
+Under R0, consumers may inspect exact accepted inputs and make decisions under their own separately governed authority. They may not expose a caller-local boolean as Core Readiness or infer it from absence of negative evidence.
+
+### 25.3 Independent reopening
+
+Either axis may be reopened without reopening the other. Reopening requires a separately accepted mandate and new decision-separating evidence:
+
+- State reopening must demonstrate stable independent identity, an owner and a real cross-contract reference consumer that exact source records cannot satisfy.
+- Readiness reopening must name a concrete consumer, exact preparedness conclusion and legitimate owners for its criterion, target, inputs, freshness/replay and evaluator or rule.
+
+Implementation convenience, a dashboard field, a familiar label, a caller-local threshold or a new data source is not sufficient reopening evidence.
+
+## 26. Concept registry effect
+
+AD-002 kept State and Readiness `Deferred` only until a later evidence-based decision selected or rejected the candidates. AD-011 is that decision.
+
+Because S0 and R0 reject shared foundation authority and S2/R3 fail the independent-identity test, `State` and `Readiness` are removed from the active OCP-000 Concept registry and generated Foundation map. This is not a transition to `Accepted`, `Deprecated` or `Archived`; both candidates are deregistered after negative current-scope identity and authority verdicts.
+
+The removal does not ban the words `state`, `readiness`, `ready`, `condition` or `status`. It prevents an unowned local field or conclusion from masquerading as a registered Core Concept. Accepted local lifecycle stages, observations, assessments and projections retain their exact owners and meanings.
+
+The non-normative future edges `Operation ⇢ State` and `Resource ⇢ Readiness` are removed. AD-011 supersedes ADR-DRAFT-007, which moves from `Draft` to `Superseded` and remains preserved as historical discovery material without current ontology authority.
+
+## 27. Accepted effect
+
+This selection has the following narrow effect:
+
+- AD-011 is `Accepted` at version `0.3.0` with S0 and R0 recorded separately;
+- AB-007 is `Resolved` for the current evidence;
+- State and Readiness are deregistered as Concept candidates without creating replacement Concepts;
+- OCP-000 and OCP-002 stop presenting State or Readiness as active registry or taxonomy questions;
+- OCP-004, OCP-005 and OCP-006 retain their accepted local meanings while removing stale `Deferred` registry labels;
+- the S0 and R0 compatibility obligations in §§20–23 remain binding guidance for consumers;
+- R1 remains a gated future direction, not an accepted assessment profile, result vocabulary or positive authority; and
+- no Pattern, OCP record contract, schema, checker derivation, result vocabulary or Concept graph edge is introduced.
+
+Availability, freshness/replay, Organization composition, authorization, reservation, allocation and Assignment execution remain owned by their separate backlog and accepted-contract boundaries. Newest timestamp, list order, evaluator count, source count or caller identity cannot supply any missing authority.
+
+This selection takes effect only through squash merge after exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization. Until that merge, the PR carrying §§25–27 is a proposed Board act.

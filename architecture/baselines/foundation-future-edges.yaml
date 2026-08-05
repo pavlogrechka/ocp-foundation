@@ -1,4 +1,4 @@
-record_version: 0.4.0
+record_version: 0.5.0
 authority: Architecture Board
 edge_semantics: Future planning intent only; never interpreted as a current Concept dependency.
 edges:
@@ -18,9 +18,3 @@ edges:
   - from: Organization
     to: Coordination
     basis: AB-003 and OCP-000 Coordination Proposed
-  - from: Operation
-    to: State
-    basis: AB-007 and ADR-DRAFT-007
-  - from: Resource
-    to: Readiness
-    basis: AB-007 and ADR-DRAFT-007

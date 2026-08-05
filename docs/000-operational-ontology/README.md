@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 0.13.0
+Version: 0.14.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
-Last-Review: 2026-08-04
+Last-Review: 2026-08-05
 ---
 
 # Operational Ontology
@@ -43,8 +43,6 @@ Operational Ontology веде реєстр понять, їхніх статус
 | Operational Area | Proposed | — |
 | Organization | Accepted | OCP-007; Architecture Board approval of PR-0007 |
 | Objective | Accepted | OCP-008; AD-003 boundary and Architecture Board approval of PR-0009 |
-| Readiness | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
-| State | Deferred | ADR-DRAFT-007; після Constraint та стабілізації Operation і Assignment |
 | Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
 | Spectrum | Proposed | — |
 | Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
@@ -62,6 +60,14 @@ AD-006C відхилив фундаментальний Concept `Result`: realiz
 Architecture Board прийняла OCP-011 у PR-0013 і завершила migration accounting, тому тимчасовий рядок `Result: Proposed` видалено з активного Concept registry. Це не перехід у `Accepted`, `Deprecated` або `Archived`; кандидат deregistered після negative identity verdict.
 
 Термін `result` може використовуватися описово або в локальних контрактах, зокрема `Constraint evaluation result`, але таке використання не створює фундаментальний Concept `Result`.
+
+## Negative identity decisions for State and Readiness
+
+AD-011 окремо прийняв S0 і R0. Поточний foundation не має shared State abstraction і не видає shared Readiness conclusion.
+
+`State` не має доведеної identity незалежно від subject, локального lifecycle, observation, assessment, criterion, context або time. `Readiness` за поточними evidence є можливою contextual conclusion, але не має accepted consumer, criterion owner, target contract, evaluator/rule authority або complete freshness/replay boundary.
+
+Тому рядки `State: Deferred` і `Readiness: Deferred` видалено з active Concept registry. Це не перехід у `Accepted`, `Deprecated` або `Archived`. Терміни можуть лишатися описовими або domain-owned, але не створюють Core Concept чи positive authority. Reopening регулюється AD-011 §25.3.
 
 ## Governed assessment records
 
@@ -84,7 +90,6 @@ OutcomeAssessmentRecord не є Operation lifecycle stage, mutable Objective sta
 
 ## Відкриті питання
 
-- Остаточна онтологічна природа State і Readiness.
 - Межі між Resource та Organization.
 - Канонічна модель Operational Situation.
 - Канонічна модель погодження між незалежними вертикалями.

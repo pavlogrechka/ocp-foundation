@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 0.15.0
+Version: 0.16.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -15,7 +15,7 @@ Concept-Statuses:
   Objective: Accepted
   Capability: Accepted
   Event: Accepted
-Last-Review: 2026-08-04
+Last-Review: 2026-08-05
 ---
 
 # Concept Taxonomy
@@ -186,7 +186,6 @@ Resource + Assignment + Operation Context = Operational Role
 - Межа Organization / Organizational Resource.
 - Organization identity continuity.
 - Taxonomy organization relationship kinds.
-- Чи є State окремою верхньорівневою категорією?
 - Який normative owner визначить Operation-to-Event relevance records?
 - Чи потрібні окремі Concept Reservation, Allocation, Role Taxonomy або Conflict?
 - Які additional target/evidence kinds та freshness rules мають розширити Accepted OCP-011?

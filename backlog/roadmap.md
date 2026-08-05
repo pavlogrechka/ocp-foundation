@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 74% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; Resource identity та authority boundaries збережено |
+| Core domain ontology | 76% | Вісім Concepts та governed OCP-012–OCP-015 non-Concept contracts Accepted; AD-011 закриває State/Readiness negative identity decision через окремі S0/R0 controls |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 61% | Accepted OCP-012–OCP-015 мають exact-bound reference checks, fail-safe projections і counterexample fixtures; production contracts і повний normative linter відсутні |
-| **Загальна foundation-готовність** | **≈52%** | OCP-015 workflow-evidence contract прийнято; AD-010 окремо фіксує V0/A0 controls без нової visibility-policy чи agreement authority |
+| **Загальна foundation-готовність** | **≈54%** | AD-011 закриває найстаріший Deferred Concept boundary без створення State або Readiness authority; наступний evidence hinge — AB-039 |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -37,7 +37,7 @@
 - [x] Constraint Accepted working description
 - [x] Organization Accepted working description
 - [x] Objective Accepted working description
-- [x] State/Readiness review mandate and guardrails accepted in AD-002; final Concepts remain Deferred
+- [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
 - [x] Capability boundary and registry direction accepted in `AD-005C`
 - [x] Capability Concept and governed registry contract accepted in `PR-0010 / OCP-009`
 - [x] Event and Result boundary accepted in `AD-006C`: E3 occurrence + observation records, R3 governed assessment records
@@ -49,7 +49,7 @@
 - [x] Normative deterministic Resource interchangeability contract and executable evidence — `AB-011 / OCP-013 / PR #49`
 - [x] Governed Coordination consumer profile — `AB-003 / OCP-014`
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
-- [ ] Evidence-based State/Readiness selection — `AB-007 / AD-011` має окремі S0–S2 і R0–R3 comparison verdicts; потрібні external review та окремий Board act
+- [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [ ] Operational Area and environment boundary
 - [ ] Core Boundary specification
 - [ ] Promote stable core descriptions to Canonical
@@ -122,6 +122,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review the active `AB-007 / AD-011` S0–S2 and R0–R3 comparison, then record separate axis verdicts through an explicit Board act.
-2. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
-3. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.
+1. Define assessment freshness and deterministic replay semantics under AB-039, including machine-verifiable `stale`/`ambiguous` states.
+2. Continue checker expansion with every accepted Concept or governed-record cycle and complete the full normative reference linter before first Canonical promotion.

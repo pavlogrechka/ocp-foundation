@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.2.1
+Version: 0.2.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -9,7 +9,7 @@ Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Read
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-02
+Last-Review: 2026-08-05
 ---
 
 # Constraint Concept
@@ -82,11 +82,11 @@ Constraint може бути джерелом derivation для цих моде�
 | Event | Proposed | можливе evidence або trigger повторного оцінювання |
 | Risk | Proposed | не виводиться автоматично з порушення |
 | Conflict | не зареєстрований окремо | порушення Constraint не канонізує Conflict |
-| Readiness | Deferred | може залежати від оцінювань, але не визначається тут |
-| State | Deferred | evaluation outcome не є фундаментальним State |
+| Readiness | не зареєстрований окремо | AD-011 R0; Constraint decision не є Readiness |
+| State | не зареєстрований окремо | AD-011 S0; evaluation outcome не є shared State |
 | Order | Proposed | можливе provenance джерело, але не обов’язкове |
 
-Поняття зі статусом `Proposed` або `Deferred` не отримують нормативної відповідальності через цей документ.
+Поняття зі статусом `Proposed` не отримують нормативної відповідальності через цей документ. Описові слова `state` або `readiness` не створюють shared foundation authority.
 
 ## 5. Identity
 
