@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.0.0
+Version: 1.1.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -13,7 +13,7 @@ Concept-Statuses:
   Constraint: Accepted
   Organization: Accepted
   Objective: Accepted
-  Capability: Accepted
+  Capability: Canonical
   Event: Accepted
 Last-Review: 2026-08-05
 ---
@@ -48,7 +48,7 @@ OCP-002 `1.x` гарантує:
 7. non-Concept record, local structure, Pattern, rule, profile або category label не входить до `Concept-Statuses`; і
 8. усі category/subtype/decomposition/relation trees нижче є ненормативними curated views, явно виключеними з `1.x` compatibility surface.
 
-`Canonical` стабілізує projection contract, а не поточний status кожного Concept назавжди. OCP-002 `1.0.0 / Canonical` не робить вісім projected `Accepted` Concepts канонічними й не приймає жоден Proposed registry candidate.
+`Canonical` стабілізує projection contract, а не поточний status кожного Concept назавжди. OCP-002 `1.0.0 / Canonical` не робить projected Concepts канонічними за implication і не приймає жоден Proposed registry candidate; кожна пізніша status change лишається окремим атомарним lifecycle act.
 
 Після `1.0.0`:
 
@@ -138,7 +138,7 @@ Resource
 
 ## Capability
 
-Concept `Capability` має статус `Accepted` і визначений у [OCP-009 — Capability Concept](../009-capability-concept/README.md) на підставі прийнятого рішення AD-005C та рішення Architecture Board по PR-0010.
+Concept `Capability` має статус `Canonical` і визначений у [OCP-009 — Capability Concept](../009-capability-concept/README.md) на підставі AD-005C, первинного прийняття PR-0010 та окремого T4 lifecycle act за AD-016D.
 
 Capability є reusable definition-layer identity, що визначається governed namespace, stable `capability_id` та exact version. Human-readable label не є identity, а registry membership не створює holder claim, Readiness, availability, authorization або admissibility.
 
@@ -266,13 +266,13 @@ Resource + Assignment + Operation Context = Operational Role
 1. `Environment: Proposed` додається без defining OCP або `Resource` повторюється двічі — extra/duplicate projection відхиляється; category view і YAML overwrite не створюють authority.
 2. Defining document оголошує Concept, але projection key відсутній — lifecycle act неатомарний.
 3. OCP-000, OCP-002 і defining metadata містять різні status values — mismatch не вирішується timestamp, file order або majority.
-4. OCP-002 стає Canonical, а вісім `Accepted` rows інтерпретуються як `Canonical` — document status не передається Concept.
+4. OCP-002 стає Canonical, а його projected rows інтерпретуються як `Canonical` — document status не передається Concept.
 5. `Person` або `Unit` із Resource view використовується як Core subtype identity — illustration не надає inheritance semantics.
 6. Operation decomposition використовується для створення implicit `Operation → Event` edge — view не є graph authority.
 7. OutcomeAssessmentRecord додається до `Concept-Statuses`, бо має Accepted contract — non-Concept record не стає Concept.
 8. Checker проходить, а category placement використовується як Board admission — machine success не є semantic act.
 9. Авторизація цього OCP-002 act повторно використовується для P-001 — два T3 lifecycle acts мають окремі gates.
-10. Завершення OCP-002 або обох T3 acts автоматично відкриває T4 — AD-016C recomputation і AD-016D Board act лишаються обов’язковими.
+10. Завершення OCP-002 або обох T3 acts автоматично відкриває T4 — хибно; AD-016C/AD-016D були окремими gates, а прийнятий AD-016D дозволяє лише OCP-009 preparation без merge transfer.
 
 ## T3 OCP-002 canonicalization act
 
@@ -285,6 +285,12 @@ Direct dependencies задовольняють L2:
 - OCP-000 `1.0.0 / Canonical` постачає registry membership/status;
 - OCP-001 `1.0.0 / Canonical` постачає lifecycle, atomicity та authorization choreography.
 
-Цей act зберігає exact вісім `Accepted` projection rows і не змінює OCP-000, defining metadata або generated map. Він додає fail-safe extra-row validation та regression evidence, але не створює Concept, category registry, inheritance, graph edge, schema, route або production authority.
+На T3 baseline цей act зберіг exact вісім `Accepted` projection rows і не змінив OCP-000, defining metadata або generated map. Він додав fail-safe extra-row validation та regression evidence, але не створив Concept, category registry, inheritance, graph edge, schema, route або production authority. Пізніші окремі lifecycle acts можуть змінювати projected status за Canonical contract вище.
 
 OCP-002 `1.0.0 / Canonical` набуває чинності лише після Fable approval exact head, Codex adjudication, green CI, окремої явної Pavlo/Architecture Board authorization саме для цього T3 OCP-002 act та squash merge. Авторизація T2 не може бути повторно використана. До merge цей розділ і frontmatter є proposed act; merge не авторизує окремий T3 P-001 act і не відкриває T4.
+
+## Revision `1.1.0` — Capability status projection
+
+Окремий T4 lifecycle act exact-sync-ить одну projection value: `Capability: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.0.0 → 1.1.0`.
+
+Projection owner, exact set/value rules, category exclusions і fail-safe mismatch behavior лишаються незмінними. Revision не надає Capability semantics і не змінює status жодного іншого Concept або Proposed marker.

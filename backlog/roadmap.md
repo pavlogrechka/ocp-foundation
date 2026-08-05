@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 82% | Вісім Concepts і governed OCP-012–OCP-015 contracts Accepted; OCP-004 реалізує AD-014B local spatial binding і завершує Operational Area registry migration без нового Concept |
+| Core domain ontology | 83% | Capability є першим Canonical Concept; сім інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈67%** | AD-016D обирає G2 і дозволяє підготовку OCP-009 T4 draft; lifecycle не змінюється до окремого exact-head promotion act |
+| **Загальна foundation-готовність** | **≈68%** | Перший T4 micro-wave встановлює OCP-009/Capability `1.0.0 / Canonical`; новий Board scope act обов'язковий перед другим T4 proposal |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -60,6 +60,7 @@
 - [x] T3 P-001 identified-record Pattern — `0.1.0 / Accepted` at the unchanged §§1–10 surface, with six exact primary invokers, explicit reviewed-snapshot treatment and no transfer to T4
 - [x] AD-016C post-enabling reassessment — exact T4–T10 inventory and B/S/C recompute, with G2/OCP-009-first as a recommendation only and AD-016D still mandatory
 - [x] AD-016D post-enabling Board selection — G2 inside C/L2, with preparation scope limited to one separately reviewed OCP-009 T4 draft and no merge-authorization transfer
+- [x] First T4 micro-wave — OCP-009/Capability `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.1.0` projections, exact definition-version independence and non-redirecting supersession
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -133,5 +134,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the separate OCP-009 T4 proposal against the exact AD-016D baseline; preserve definition identity, exact resolution, non-redirecting supersession and every non-equivalence boundary.
-2. After success or failure of that proposal, require a new Board scope act before any second T4 promotion proposal. AD-016D authorization cannot transfer to either merge.
+1. Recompute the remaining T4 inventory after OCP-009 and issue a new Board scope act before any second T4 promotion proposal.
+2. Keep OCP-003 Resource, OCP-007 Organization and OCP-008 Objective at current status until each named B item is resolved or explicitly excluded through its own reviewed compatibility act.

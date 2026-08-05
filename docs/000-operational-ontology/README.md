@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 1.0.0
+Version: 1.1.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
@@ -91,7 +91,7 @@ Version OCP-000 не є версією жодного Concept або defining OC
 | Risk | Proposed | AB-005; після Constraint |
 | Order | Proposed | AB-002 |
 | Coordination | Proposed | — |
-| Capability | Accepted | OCP-009; AD-005C; Architecture Board approval of PR-0010 |
+| Capability | Canonical | OCP-009; AD-005C; AD-016D; separately authorized T4 act |
 
 Статуси в таблиці є статусами Concept, а не статусами документів. `Accepted` означає, що Architecture Board прийняла поточне визначення як основу подальшої роботи; це не означає `Canonical` і не змінює автоматично статус документа.
 
@@ -175,3 +175,9 @@ T0 встановлює OCP-000 `1.0.0 / Canonical` як registry contract і н
 - не авторизує T1 чи будь-який downstream promotion.
 
 Canonical status набуває чинності лише після exact-head Fable approval, Codex adjudication, green CI, окремої явної авторизації Павла/Architecture Board саме для T0 та squash merge. До merge цей розділ і frontmatter є proposed T0 act.
+
+## Revision `1.1.0` — Capability status transition
+
+Окремий T4 lifecycle act змінює рівно один active registry value: `Capability: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.0.0 → 1.1.0`.
+
+Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Capability semantics: defining authority залишається в OCP-009, а OCP-000 лише відображає окремо авторизований status.

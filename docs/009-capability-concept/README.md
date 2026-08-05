@@ -1,15 +1,15 @@
 ---
 Document-ID: OCP-009
 Title: Capability Concept
-Version: 0.1.2
-Status: Draft
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-005
 Used-By: Capability Registry, Resource Claim Model, Operation Requirements, Interchangeability Decision
 Defines-Concepts: Capability
 Concept-Depends-On: []
-Concept-Status: Accepted
-Last-Review: 2026-08-04
+Concept-Status: Canonical
+Last-Review: 2026-08-05
 ---
 
 # Capability Concept
@@ -303,12 +303,16 @@ OCP-009 свідомо не визначає:
 - automatic migration або redirect;
 - P-001 invocation.
 
-## 17. Open Questions
+## 17. Governed extensions and completed routing
 
-- Який identified record та Pattern invocation використовуватиме holder-specific Capability claim?
-- Який normative owner визначить Operation Capability requirements?
-- Чи потрібна окрема domain policy для заборони нових references на superseded versions?
-- Як AB-011 використовуватиме exact claims і Constraint results без втрати Resource identity?
+Питання, які були відкритими у версії `0.1.2`, тепер мають явні межі:
+
+- OCP-012 визначає holder-specific CapabilityClaimRecord з exact OCP-009 binding; claim не входить до Capability definition і не invokes P-001 від імені OCP-009;
+- OCP-013 визначає directional Resource interchangeability для exact consumer requirement; однакові Capability claims не роблять Resources тотожними або взаємозамінними автоматично;
+- exact owner Operation Capability requirements лишається окремим майбутнім contract і не виводиться з definition registry; і
+- domain policy може заборонити нові references на superseded Capability version, але не змінює Core exact resolution і не переписує історичні references.
+
+Це routing завершених і відкладених відповідальностей, а не імпорт downstream authority до OCP-009.
 
 ## 18. Architecture Board decision — PR-0010
 
@@ -324,3 +328,90 @@ Architecture Board прийняла OCP-009 і Concept `Capability` **4 серп
 - залишити AB-011 та holder-specific Capability Claim окремими downstream-рішеннями.
 
 `Accepted` не означає `Canonical`. Подальші зміни definition identity, namespace governance, exact resolution або supersession contract потребують нового явного normative cycle.
+
+## 19. Canonical compatibility surface `1.x`
+
+OCP-009 `1.x` стабілізує reusable Capability definition і governed registry contract у §§1–16. Воно гарантує:
+
+1. exact Capability identity є трійкою `(namespace, capability_id, version)`;
+2. label, holder, Operation, Assignment, claim, timestamp або registry order не входять до identity;
+3. кожен namespace має одного governed `namespace_owner_ref` у межах registry dataset;
+4. exact reference або резолвиться рівно в один валідний record тієї самої version, або не дає authoritative result;
+5. resolver не обирає latest, не redirect-ить до successor і не виправляє reference евристично;
+6. supersession зберігає обидві exact identities, історичну resolution та ациклічний same-definition lineage;
+7. registry membership не створює holder possession, Resource relation, Readiness, availability, capacity, authorization, admissibility або Assignment eligibility;
+8. CapabilityClaimRecord, Resource interchangeability та Operation requirements зберігають окремих normative owners; і
+9. Capability лишається isolated fundamental Concept з `Concept-Depends-On: []`.
+
+Canonical означає стабільну human-readable compatibility promise. Воно не означає production API, storage, distribution, universal taxonomy, truth, current usability, authorization, completeness або незмінність назавжди.
+
+Для document lifecycle:
+
+- PATCH може уточнювати prose, examples або links без зміни гарантій вище;
+- MINOR може додати сумісну optional registry information або явно routed extension, якщо old exact records/references і всі дев'ять гарантій зберігаються; і
+- MAJOR потрібен для зміни identity key, namespace authority, exact-resolution behavior, supersession semantics, definition/claim split або будь-якої non-equivalence boundary.
+
+## 20. Independent version axes and admission boundary
+
+OCP document version `1.0.0` не є значенням `CapabilityReference.version` і не переверсіоновує жоден Capability definition record. Capability definition version лишається opaque exact token під authority його namespace owner; OCP-009 не нав'язує SemVer або спільний clock цим records.
+
+Core exact resolution і domain admission відповідають на різні питання:
+
+```text
+Core resolution: which exact governed definition does this reference name?
+Domain admission: may this consumer create or accept this reference for this use?
+```
+
+Якщо `v2` supersedes `v1`, reference на `v1` продовжує exact-resolve-итися у `v1`. Це не дозволяє нове використання `v1`, не забороняє його і не обирає `v2`. Exact domain consumer може окремо прийняти policy, що забороняє нові `v1` references, але така policy не mutates registry history і не стає Core resolver authority.
+
+## 21. Dependencies and evidence boundary
+
+OCP-009 прямо залежить від:
+
+- OCP-000 `1.1.0 / Canonical` для registry membership/status contract та синхронного Capability row;
+- OCP-001 `1.0.0 / Canonical` для governance, L2 та atomic lifecycle rules;
+- OCP-002 `1.1.0 / Canonical` для exact Concept-status projection та синхронного Capability value; і
+- AD-005 `0.3.0 / Accepted` як decision source двошарової Capability моделі.
+
+Жоден direct OCP dependency не є pre-canonical, тому L2 виконується без exception або same-act dependency promotion. OCP-009 не invokes P-001 і не має Concept dependency.
+
+Existing checker rules and fixtures механічно перевіряють duplicate identity, exact resolution, namespace collision/ownership, unresolved references, supersession target/cycle, historical non-redirect, holder coupling та registry-not-possession. Вони не доводять legitimate namespace ownership, semantic quality definition, domain admission, holder truth, Readiness або production fitness. Ці питання лишаються human/domain review boundaries.
+
+## 22. Atomic migration and rollback
+
+T4 migration є одним узгодженим lifecycle unit:
+
+1. OCP-009 document `0.1.2 / Draft → 1.0.0 / Canonical`;
+2. defining `Concept-Status: Accepted → Canonical`;
+3. OCP-000 `1.0.0 → 1.1.0`, де Capability row змінюється `Accepted → Canonical`;
+4. OCP-002 `1.0.0 → 1.1.0`, де exact Capability projection змінюється `Accepted → Canonical`; і
+5. generated current-state Foundation map та repository accounting синхронізуються з тими самими authoritative values.
+
+Цей act не змінює Capability definition version, downstream document version, OCP-012 exact definition binding, P-001 invocation, Concept dependency, graph edge, checker rule, fixture, schema або production data. Existing exact Capability references не потребують rebinding.
+
+Corrective rollback, якщо буде потрібний, проходить новий reviewed PR і повертає document/Concept status та всі projections разом. Partial projection edit або history rewrite заборонені.
+
+## 23. Human counterexamples
+
+1. Два records мають label `Relay`, тому це одна Capability — хибно без exact triple equality.
+2. Capability є в registry, тому Resource володіє нею — хибно; потрібен окремий attributable claim contract.
+3. `v2` supersedes `v1`, тому reference на `v1` повертає `v2` — хибно; resolver повертає exact `v1`.
+4. `v1` exact-resolves, тому новий consumer зобов'язаний його допустити — хибно; admission належить exact domain policy.
+5. Найновіший `published_at`, registry order або найбільша кількість publishers обирає version — хибно.
+6. OCP-009 має version `1.0.0`, тому всі Capability definitions отримують version `1.0.0` — хибно; це незалежні version axes.
+7. Canonical Capability доводить Readiness, availability, capacity, authorization або admissibility holder-а — хибно.
+8. Два Resources мають однакові claims, тому вони тотожні або взаємозамінні — хибно; OCP-013 потребує exact directional consumer context.
+9. Capability Canonical, тому Organization holder claims дозволені — хибно; OCP-012 initial holder boundary лишається Resource-only.
+10. OCP-012 invokes P-001, тому OCP-009 теж invokes його — хибно; Pattern invocation не переноситься між owners.
+11. Один Concept стає Canonical, тому сім інших Accepted Concepts змінюють status або compatibility — хибно.
+12. Green checker або reviewer count обирає lifecycle status — хибно; статус виникає лише через exact-head review, Board authorization і merge.
+
+## 24. T4 canonicalization act
+
+Pre-T4 OCP-009 `0.1.2 / Draft` baseline має Git blob `b28219bffef4e527507d495c34dded5c2fb79346` і SHA-256 `119a26424b4c62140446fee6eca8d9baf68b2cd875e565321d63b1cc8064ddbb` на `main@b0ae0636d01a5e35c87bc4620314e6491b3b89d5`.
+
+Sections 1–16 and the historical PR-0010 act in §18 remain semantically unchanged. Section 17 updates only responsibility routing after OCP-012/OCP-013, and §§19–23 make the existing compatibility, evidence and migration boundaries explicit.
+
+When exact-head reviewed, separately owner-authorized and squash-merged, this act makes OCP-009 `1.0.0 / Canonical` and Capability the first `Canonical` fundamental Concept. The other seven defined Concepts remain `Accepted`; all Proposed candidate markers remain unchanged.
+
+Authorization of AD-016D allowed preparation only and cannot authorize this merge. This T4 act requires fresh Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization on its exact head. Its merge will not authorize OCP-003, OCP-007, OCP-008, OCP-012, any second T4 micro-wave or any T5–T10 promotion.

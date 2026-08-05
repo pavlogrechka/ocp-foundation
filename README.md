@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Resource, Operation, Assignment, Constraint, Organization, Objective, Capability і Event мають статус `Accepted`;
+- Capability має статус `Canonical`; Resource, Operation, Assignment, Constraint, Organization, Objective та Event лишаються `Accepted`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -93,9 +93,10 @@ backlog/                 відкриті питання та дорожня к�
 - окремий T3 act приймає P-001 `0.1.0 / Accepted` без зміни §§1–10 або invoker versions; шість primary contracts лишаються exact-bound, Pattern не стає Canonical і не переносить доменну семантику;
 - AD-016C `0.4.0` recompute-ить post-enabling readiness: OCP-009 Capability є єдиним T4 кандидатом без current B-item, G2 micro-waves inside C — провідна гіпотеза, але окремий AD-016D Board act ще обов'язковий;
 - AD-016D `0.5.0` обирає G2 всередині C/L2 і дозволяє підготовку лише окремого OCP-009 T4 draft; merge цього draft, інші T4 кандидати та другий micro-wave потребують власних Board gates;
+- перший T4 act встановлює OCP-009 і Capability `1.0.0 / Canonical` та атомарно оновлює OCP-000/OCP-002 до `1.1.0`; exact definition identity/resolution, non-redirecting supersession, domain admission boundary і всі non-equivalence rules зберігаються без consumer rebinding;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 115 non-sensitive fixtures і 161 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після завершення T0–T3 enabling phase — **≈67%**; AD-016D визначає лише preparation scope, а OCP-009 лишається `0.1.2 / Draft` до окремого акта.
+- не-нормативна оцінка загальної foundation-готовності після першого T4 micro-wave — **≈68%**; один Concept Canonical, сім лишаються Accepted, а наступний T4 scope потребує нового Board act.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
