@@ -60,7 +60,7 @@ backlog/                 відкриті питання та дорожня к�
 - fail-safe matrix дозволяє definitive conclusion лише для `evidence_state: sufficient`; missing, stale, ambiguous або conflicting evidence дозволяє лише `indeterminate`;
 - checker механічно виводить `missing` і finite `conflicting` probe; для exact `objective-achievement@2` OCP-011 додатково exact-bind-ить criterion-local F1/A1 rules, виводить freshness та reference/temporal ambiguity, а для semantic ambiguity зберігає attributable basis;
 - `objective-achievement@1` і всі неактивовані consumers, зокрема OCP-012, лишаються під F0/A0; одна activation не створює global evidence lifetime, freshness field або успадкованого rule;
-- AD-013 `0.2.0` / AB-060 порівнює OCP-012 F0/A0 control, unified `holder-capability@2`, split claim kinds і downstream-only activation; `recorded_at`, claim effectivity і downstream query time не можуть мовчки стати historical support evaluation time;
+- AD-013B `0.3.0 / Accepted` обирає unified `holder-capability@2` з explicit declaration/evidence modes, reviewed forward same-kind transition та OCP-012-local F1/A1 owner-моделлю; OCP-012 лишається `0.2.0 / Accepted` під F0/A0 до окремої activation;
 - explicit supersession зберігає history, дозволяє branching і не може змінити assessment kind, target або criterion binding identity; newest record, evaluator count і list order не визначають authority;
 - integrated scenario використовує нормативний OCP-011 record contract і продовжує механічно доводити `Completed ≠ achieved`;
 - AB-056 завершено рішенням Architecture Board по PR-0013;
@@ -83,6 +83,6 @@ backlog/                 відкриті питання та дорожня к�
 - AD-011 `0.3.0 / Accepted` окремо приймає S0 і R0 no-new-authority controls; State та Readiness deregistered як Concept candidates після negative current-scope identity verdicts, а R1 лишається окремо gated future direction;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- не-нормативна оцінка загальної foundation-готовності після першої OCP-011 F1/A1 activation — **≈56%**.
+- не-нормативна оцінка загальної foundation-готовності після вибору AD-013B activation boundary — **≈57%**.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

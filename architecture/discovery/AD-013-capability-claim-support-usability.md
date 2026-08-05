@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-013
 Title: Capability Claim Support Usability Activation Boundary
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-005, AD-007, AD-008, AD-012, OCP-001, OCP-009, OCP-010, OCP-011, OCP-012, OCP-013, P-001
 Applies-To: AB-060, CapabilityClaimRecord support freshness, ambiguity and replay
-Review-After: external adversarial review of the comparative revision before any Board selection
+Review-After: OCP-012 activation evidence falsifies the unified-mode transition, or a concrete downstream consumer proves that source-local support usability is insufficient
 ---
 
 # AD-013 — Capability Claim Support Usability Activation Boundary
@@ -564,3 +564,127 @@ External adversarial review must now determine:
 A later `AD-013B` Board act may select A, B, C or D, or retain the question in Discovery. If it selects B or C, it must also choose the explicit lineage sub-option and protected OCP-012 use. If it selects D, it must name the concrete downstream consumer and exact decision. The selection act may not itself amend OCP-012, create a claim kind, schema, rule, fixture, Pattern, record family, Concept or graph edge.
 
 Any selected activation requires a later separately reviewed OCP-012 or named-consumer implementation PR with its own version, normative contract, executable evidence and owner authorization. Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge of this comparison and every later act.
+
+## 30. Architecture Board decision — AD-013B
+
+The Architecture Board accepts this decision by act **AD-013B** on **2026-08-05**, after Fable reviewed the complete AD-013A comparison on exact head `1669688f2d906fb7fe40012eff42ed20fa04dd38`, found no defects and recommended merge. Codex independently accepted that verdict, Pavlo authorized the merge, and PR #67 was squash-merged with green post-merge CI.
+
+This act selects the protected use, claim-kind direction, support-mode lineage treatment and semantic owner model. It does not amend OCP-012, create `holder-capability@2`, define a duration or activate checker authority.
+
+### 30.1 Selected outcome — B
+
+AD-013 selects **Outcome B — one activated `holder-capability@2` with explicit support mode**.
+
+The protected use is narrow: whether exact evidence support is usable for OCP-012's own attributable Capability Claim projection under one exact OCP-012 rule. The result remains authority only for that source projection. It is not Capability truth, independent verification, Readiness, availability, authorization, admissibility, selection or Resource interchangeability, and it is not automatically portable as a downstream consumer's freshness conclusion.
+
+One exact claim kind is preferred because OCP-012 already owns one proposition form, evidence snapshot contract and fail-safe head projection. A mutually exclusive mode contract can expose the declaration/evidence trust boundary without creating a second record family or requiring a cross-kind successor exception.
+
+`holder-capability@1` remains unchanged under F0/A0. `holder-capability@2` is only a selected implementation direction until a separately reviewed OCP-012 revision defines it with executable evidence.
+
+### 30.2 Selected support modes and lineage treatment
+
+The future `holder-capability@2` contract must require one explicit mode:
+
+```text
+support_mode: declaration-only | evidence-backed
+```
+
+The shapes are mechanically disjoint:
+
+- `declaration-only` preserves narrow claimant attribution, carries no external evidence set and has freshness semantically not applicable; for a non-withdrawn proposition its support state is `declared`, while evidence-rule, rule-input and support-evaluation fields are forbidden; and
+- `evidence-backed` declares external evidence as the intended support basis and admits `sufficient`, `missing`, `stale`, `ambiguous` or `conflicting`; it exact-binds the governed evidence expectation, resolved evidence and immutable snapshots required by its state, the selected rule/version, explicit support evaluation time and inline classification.
+
+Mode is never inferred from field presence, evidence count, support-state label, record order or timestamp. A mixed or incomplete shape is non-permissive.
+
+AD-013B selects the **reviewed same-kind transition** sub-option. Within one `holder-capability@2` Module C lineage:
+
+1. an explicit successor may transition `declaration-only → evidence-backed` only when it preserves claim kind, Resource holder, exact OCP-009 Capability version, claimant, exact condition set and assertion;
+2. the successor must supply the complete evidence-backed expectation, rule, state-appropriate snapshots, evaluation time and provenance required by the accepted implementation contract; a late-evidence transition to `sufficient` must bind the actual evidence set;
+3. the predecessor remains exact-resolvable and remains historically declaration-only; the successor never rewrites or upgrades its authority;
+4. a mode transition cannot be inferred merely because evidence fields appear and cannot be combined silently with an assertion-polarity correction;
+5. `evidence-backed → declaration-only` supersession is not accepted because dropping evidence could bypass stale, missing or ambiguous fail-safe handling; and
+6. branching transitions remain visible and no timestamp, storage order, claimant/source count or newest head selects a winner.
+
+A later evidence-less declaration may exist only under the ordinary exact record/head rules; it does not erase or outrank an evidence-backed head. Withdrawal remains separate assertion semantics and cannot be used as a hidden mode downgrade or converted to negative or stale.
+
+The mode-stable-lineage sub-option is not selected. It would force a later evidence-backed proposition into a separate same-kind lineage and then require a new reconciliation rule for two applicable histories. Current evidence favors one explicit forward transition that preserves the predecessor over permanent lineage fragmentation.
+
+### 30.3 Selected F1/A1 activation boundary
+
+For the evidence-backed mode, AD-013B selects an OCP-012-local specialization of the accepted AD-012B **F1 contract-local freshness** and **A1 contract-local ambiguity** models.
+
+The later OCP-012 activation must exact-bind:
+
+1. the protected OCP-012 source projection and exact claim kind;
+2. each evidence kind and exact evidence reference;
+3. the temporal fact measured for each evidence kind;
+4. an explicit `support_evaluated_at` distinct from claim effectivity and `recorded_at`;
+5. the exact freshness and ambiguity rule identities and versions;
+6. immutable evidence and rule-input snapshots;
+7. precision, cutoff equality and missing, future-dated, timezone-less or incomparable-time behavior; and
+8. the deterministic rule or attributable evaluator authority.
+
+The admissible candidate temporal facts remain Event `occurred_at`, ObservationRecord `observed_at` and OutcomeAssessmentRecord `evaluated_at` only when the exact OCP-012 rule names the fact for its protected use. OCP-011 freshness never transfers automatically to claim support.
+
+OCP-012 may mechanically decide only named dimensions whose complete inputs it owns, including exact-reference, snapshot, selected lineage, selected temporal-comparability and already governed finite-conflict cases. Evidence relevance, source reliability, substantive condition equivalence and semantic support remain attributable unless a later separately reviewed exact rule proves one bounded dimension.
+
+This act selects no numeric cutoff, universal duration, default temporal fact, general trust score or semantic-equivalence engine. If the OCP-012 activation cannot supply a legitimate exact rule and owner, the evidence-backed positive activation cannot be accepted and F0/A0 remains mandatory.
+
+### 30.4 Accepted historical and current-query roles
+
+AD-013B selects the two AD-012B representation roles for the evidence-backed mode:
+
+- **inline historical classification** — the immutable claim successor records its exact rules, snapshots, `support_evaluated_at`, classification, findings and provenance for the source projection it protects; and
+- **derived-only current view** — OCP-012 may replay those exact rules and immutable inputs at a new explicit query time without storing a standing current freshness property.
+
+The derived view does not mutate the historical support state, change assertion polarity, expire the claim, select a newest rule or consult current repository state implicitly. Missing historical rules, snapshots or evidence fail closed.
+
+Neither role makes the source classification portable to OCP-013 or another consumer by label. A consumer that needs a different use-specific temporal conclusion owns a separate exact rule and may not relabel OCP-012's source result as its own.
+
+### 30.5 Alternatives and reopening gates
+
+Outcome A remains the mandatory behavior for `holder-capability@1`, declaration-only mode and every evidence-backed path that lacks an accepted complete activation. It adds no placeholder rule or field.
+
+Outcome C is not selected because separate kinds do not resolve the late-evidence history question: they either fragment the proposition or require the cross-kind exception that B avoids. C may be reconsidered only if implementation evidence shows that mechanically disjoint modes cannot keep the authority boundary understandable or safe.
+
+Outcome D is not selected as the primary activation because OCP-012 already owns the source proposition and fail-safe support projection. OCP-013 may consume a future activated source projection but cannot borrow its result as consumer-local freshness. D may be reconsidered for a named accepted consumer only if that consumer proves a distinct protected decision, exact evaluation-time owner and a rule that cannot be satisfied by consuming OCP-012 without reaching through or relabeling source semantics.
+
+Outcome E remains gated by a separate AD-012 reopening with a concrete domain profile and interoperability consumer. Outcome F remains gated by independent-identity evidence, a Board reopening and a full P-001 invocation or explicit reviewed reason not to invoke it.
+
+The forbidden reverse mode transition may be reconsidered only with new evidence that it cannot bypass non-permissive evidence states and that it preserves coherent head projection. Storage convenience is not reopening evidence.
+
+### 30.6 Downstream activation plan
+
+AB-060 moves from `Discovery` to `Planned` for one separately reviewed OCP-012 activation.
+
+That implementation cycle must:
+
+- revise OCP-012 from its current `0.2.0 / Accepted` baseline without rewriting `holder-capability@1` history;
+- define `holder-capability@2`, its disjoint mode shapes and the exact forward mode-transition contract;
+- define complete F1/A1 rules for the protected source use, including evaluation time, per-evidence temporal facts, rule versions, snapshots and fail-safe branches;
+- preserve direct declaration, withdrawal, assertion correction, late evidence, branching and exact historical replay;
+- expose inline historical and explicit-time derived roles without a standing evidence freshness property;
+- prove non-portability to OCP-013 and preserve every Capability, Resource identity and authority exclusion; and
+- add outcome-appropriate executable evidence for all applicable twenty-one §13 counterexamples.
+
+OCP-012 remains `0.2.0 / Accepted` and unchanged through AD-013B. AB-060 may move `Planned → Resolved` only after the complete OCP-012 activation is exact-head reviewed, accepted, owner-authorized and squash-merged with green post-merge CI.
+
+### 30.7 Accepted effect and exclusions
+
+AD-013B has the following narrow effects:
+
+- AD-013 becomes `0.3.0 / Accepted`;
+- Outcome B becomes the selected claim-support usability direction;
+- the protected use is OCP-012's own attributable source projection;
+- the reviewed same-kind `declaration-only → evidence-backed` transition becomes the selected lineage treatment;
+- OCP-012-local F1/A1 ownership and inline historical plus explicit-time derived roles become the selected activation model;
+- A remains the binding control outside a later accepted evidence-backed activation; and
+- AB-060 moves `Discovery → Planned` for the OCP-012 implementation cycle.
+
+This act does not create or amend a Concept, Pattern, record family, P-001 invocation, OCP-012 claim kind, rule identifier, duration, schema, checker derivation, fixture or graph edge. It does not introduce Organization claims, change the eight Accepted Concepts, reopen AB-011, make Resources equal or interchangeable, define Capability assessment, verify possession, define Readiness, grant availability or authorization, rank or select a Resource, or mutate an Assignment.
+
+Exact OCP-009 Capability version binding, exact `condition_set_ref`, fail-safe evidence semantics, Resource-only direct holder, `Capability ≠ Readiness`, withdrawal ≠ negative and attribution ≠ truth remain binding.
+
+Newest timestamp, record order, claimant count, source count, issuer count, majority, caller identity and current wall clock remain forbidden substitutes for authority.
+
+This selection takes effect only through squash merge after exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization. Until that merge, the PR carrying §30 is a proposed Board act.
