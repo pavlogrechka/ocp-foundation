@@ -40,7 +40,7 @@
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
 | AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
 | AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
-| AB-039 | Evidence freshness, ambiguity and deterministic replay | Planned | AD-012B `0.3.0` обирає F1+A1 contract-local ownership, inline historical та derived-only query roles; перша нормативна activation — OCP-011, а до неї `stale`/`ambiguous` лишаються attributable |
+| AB-039 | Evidence freshness, ambiguity and deterministic replay | Resolved | OCP-011 `0.3.0` активує F1+A1 для exact `objective-achievement@2`: criterion-local temporal rules, named reference/temporal ambiguity, inline historical state, explicit-time query replay і fail-safe fixtures; `@1` та інші consumers лишаються під F0/A0 до власних reviewed activations |
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |
 | AB-042 | Foundation artifact taxonomy | Resolved | PR-0006A merged; artifact taxonomy, P-001 invocation and normative review lane accepted |

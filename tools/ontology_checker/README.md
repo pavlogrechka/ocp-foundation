@@ -16,7 +16,7 @@ Implemented validators:
 - Capability definition identity, namespace, supersession and exact resolution;
 - Event occurrence identity and exact resolution;
 - ObservationRecord attribution, optional Event linkage and Module C supersession;
-- OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states and Module C supersession;
+- OutcomeAssessmentRecord exact target/criterion/evidence/input/evaluator binding, fail-safe evidence states, `objective-achievement@2` F1/A1 activation and Module C supersession;
 - CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession and fail-safe attributable projection;
 - ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
 - OCP-014 CoordinationResourceRequirement exact accepted-owner profile binding;
@@ -40,6 +40,7 @@ Implemented reference derivations include:
 - `resolve_outcome_assessment`;
 - `outcome_assessment_heads`;
 - `effective_outcome_conclusion`;
+- `derive_outcome_evidence_usability`;
 - `resolve_capability_claim`;
 - `capability_claim_effective_at`;
 - `capability_claim_heads`;
@@ -135,7 +136,13 @@ Evidence bindings must exact-resolve and exactly equal the immutable set stored 
 
 The finite conflict probe detects disagreement among normalized bound ObservationRecord statements. It is a regression guard, not a production truth, semantic-equivalence or source-reliability engine.
 
-The checker mechanically derives and cross-checks `missing` and the finite `conflicting` probe from current governed bindings; until AB-039 defines freshness and replay semantics, `stale` and `ambiguous` remain evaluator-attributed declarations, so the checker cannot detect `sufficient` asserted over actually stale or ambiguous evidence.
+For `objective-achievement@1`, the checker mechanically derives and cross-checks `missing` and the finite `conflicting` probe; `stale` and `ambiguous` remain evaluator-attributed F0/A0 declarations.
+
+Exact `objective-achievement@2` activates the OCP-011 F1/A1 envelope. Its record and immutable input snapshot exact-bind one criterion-local freshness rule plus one ambiguity rule. The checker derives inline `freshness_state`, `ambiguity_state` and findings from exact Event/ObservationRecord temporal facts and offset-aware `evaluated_at`, using explicit microsecond comparison precision and integer-second cutoffs, then cross-checks `evidence_state`. Unknown rules, mismatched snapshots, missing evidence, future/incomparable time and declared-state disagreement fail closed.
+
+`derive_outcome_evidence_usability` replays the historical record without wall clock or current-state lookup. An optional explicit query time creates a new view and never mutates the historical record. The non-sensitive 600/3600-second fixture policies belong only to their exact reference criterion and are not defaults.
+
+`effective_outcome_conclusion` fails closed to `indeterminate` for an activated head unless the caller supplies the complete exact Objective, evidence, snapshot and rule context. A structurally valid record alone is not activation authority.
 
 OutcomeAssessmentRecord supersession:
 
@@ -153,7 +160,7 @@ The validator rejects embedded Result, Operation lifecycle-success, Objective mu
 
 OCP-012 defines a separate identified record for one claimant's proposition about one exact Resource and one exact OCP-009 Capability version under one condition set. The checker keeps declaration authority narrow: `support_state: declared` records what the claimant said and never marks it independently verified.
 
-The checker mechanically cross-checks `declared`/`missing` against evidence-set composition and verifies snapshot consistency. Until AB-039 defines freshness and replay semantics, the truth of `sufficient`, `stale`, `ambiguous` and `conflicting` remains an attributable recorder responsibility.
+The checker mechanically cross-checks `declared`/`missing` against evidence-set composition and verifies snapshot consistency. OCP-012 has not completed its own F1/A1 activation, so `sufficient`, `stale`, `ambiguous` and `conflicting` remain attributable recorder responsibility even though AB-039 is resolved by the separate OCP-011 activation.
 
 The reference slice supports Resource-only holders, exact Capability resolution, half-open effectivity intervals, evidence snapshots and branching supersession. Withdrawal is a successor assertion distinct from negative polarity. `capability_claim_heads` performs as-of replay; `effective_capability_claim` returns `indeterminate` for missing, stale, ambiguous or conflicting support and for disagreeing heads. It never uses newest timestamp, list order, claimant count or source count as authority.
 

@@ -1,0 +1,20 @@
+case_id: assessment-invalid-unknown-assessment-kind
+concept: OutcomeAssessmentRecord
+entity:
+  assessment_id: ASM-UNKNOWN-KIND
+  assessment_kind_ref: objective-achievement@3
+  target_kind_ref: objective@1
+  target_ref: OBJ-UNKNOWN-KIND
+  criterion_ref: neutral.condition@1
+  evidence_bindings: []
+  evidence_snapshot_ref: EVIDENCE-UNKNOWN-KIND
+  input_snapshot_ref: INPUT-UNKNOWN-KIND
+  evidence_state: missing
+  evaluator_ref: EVALUATOR-UNKNOWN-KIND
+  evaluated_at: 2026-08-05T02:00:00Z
+  recorded_at: 2026-08-05T02:01:00Z
+  conclusion: indeterminate
+  provenance_ref: ACT-UNKNOWN-KIND
+expected:
+  valid: false
+  error_codes: [OUTCOME_ASSESSMENT_KIND_UNSUPPORTED]
