@@ -134,5 +134,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Recompute the remaining T4 inventory after OCP-009 and issue a new Board scope act before any second T4 promotion proposal.
-2. Keep OCP-003 Resource, OCP-007 Organization and OCP-008 Objective at current status until each named B item is resolved or explicitly excluded through its own reviewed compatibility act.
+1. Prepare the AB-063 Objective editorial-correction authority discovery selected by AD-016E; do not change OCP-008 lifecycle or semantics in that discovery act.
+2. Keep OCP-003/OCP-007/OCP-008 at current status until each B item is resolved and a later Board scope act separately authorizes promotion preparation.
