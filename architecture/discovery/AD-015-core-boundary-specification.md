@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-015
 Title: Core Boundary Admission and Extension Discovery
-Version: 0.2.0
-Status: Discovery
+Version: 0.3.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-002, OCP-003, OCP-004, OCP-006, OCP-009, OCP-011, OCP-012, P-001, AD-001, AD-006, AD-010, AD-011, AD-014
 Applies-To: AB-061, Core admission, domain extensions, interoperability envelopes
-Review-After: External review of AD-015A comparison and separate Board selection
+Review-After: OCP-016 implementation evidence falsifies the G2 routing contract, H2 ownership split or no-projection baseline
 ---
 
 # AD-015 — Core Boundary Admission and Extension Discovery
@@ -709,3 +709,168 @@ After external review, a separate `AD-015B` Board act may:
 - retain G0/H0 and close the request for a reusable specification.
 
 Implementation remains a later PR even if AD-015B selects H1, H2, H4 or H5.
+
+## 33. Architecture Board decision — AD-015B
+
+The Architecture Board accepts this decision by act **AD-015B** on **2026-08-05**, after Fable reviewed the complete AD-015A comparison on exact head `947677114b85766cb011c3ac3b8361df598fb18d`, found no defects and recommended merge. Codex independently accepted that verdict, Pavlo authorized the merge, and PR #76 was squash-merged with green post-merge CI.
+
+This act selects a reusable semantic-routing model and its human-readable artifact home. It does not create or amend OCP-001 or OCP-016, define an admission schema, create a Pattern or registry, add checker code or fixtures, admit or remove a Concept, change Concept status, or add a graph edge.
+
+### 33.1 Selected combination — C3 (`G2 × H2`)
+
+AD-015 selects **C3 — tiered admission and extension routing in a separate Core Boundary OCP**.
+
+The evidence supports a reusable routing contract because the repository already governs more than a binary Core/non-Core distinction: fundamental Concepts, Core non-Concept records and local values, binding-when-invoked Patterns, Core envelopes over domain-owned semantics, valid domain-local contracts and implementation-local structures all exist. Reconstructing those distinctions from precedent in every review has produced repeated drift.
+
+A separate human-readable OCP is selected because semantic object classification, authority boundaries and migration behavior are substantial enough to obscure OCP-001's process-governance role. OCP-001 remains the mandatory trigger and review owner; the separate OCP owns the reusable semantic test. Neither document approves a candidate by itself.
+
+C3 is the smallest compared combination that covers every accepted precedent and mandatory counterexample without requiring a registry, checker projection or optional Pattern invocation as governance authority.
+
+## 34. Selected G2 routing contract
+
+### 34.1 One primary semantic-authority route
+
+Every admission proposal must identify exactly one primary semantic-authority route for each candidate object:
+
+1. **fundamental Core Concept or dependency** — Core owns stable subject identity or an identity/invariant dependency after a separate positive Board act;
+2. **Core non-Concept contract** — Core owns shared semantics for a record, rule, consumer activation or local structured value without granting fundamental Concept identity;
+3. **Core interoperability envelope** — Core owns exact profile/reference resolution and fail-safe exchange guarantees while a named domain owns the referenced meaning;
+4. **governed domain-local contract** — a named domain owns the meaning and lifecycle; Core does not claim cross-domain equivalence or a shared envelope;
+5. **implementation-local structure** — software owns the representation and no shared semantic artifact is admitted.
+
+These are authority routes, not quality grades. Domain-local and implementation-local results are not invalid merely because they are not Core. A Core envelope is not a weaker copy of domain semantics, and a Core non-Concept contract is not a provisional Concept.
+
+One act may review several candidate objects, but each object must receive its own route and authority ledger. A label such as `Core`, `domain` or `record` is never sufficient evidence for the route.
+
+### 34.2 Pattern is an orthogonal form route
+
+G2's original six-class list included **binding-when-invoked Pattern**. AD-015B makes its relationship to the semantic routes explicit: Pattern selection is a secondary form decision, not a competing semantic owner.
+
+A candidate in the Core non-Concept, Core-envelope or domain-local route may invoke an Accepted Pattern when it needs that reusable modeling form. The invocation exact-binds the Pattern and imports only its stated form obligations. It does not transfer subject identity, vocabulary, truth, authority or admission status.
+
+No proposal invokes a Pattern merely by resembling an existing record shape. Mandatory Core Boundary governance cannot be implemented as an optional Pattern invocation.
+
+### 34.3 Routing is not approval
+
+The selected OCP may determine what evidence and authority questions apply to a candidate. It may not decide that the evidence is true, create an owner or consumer, or grant Accepted status.
+
+Positive admission still requires:
+
+- a human-readable candidate contract;
+- named legitimate owners and concrete consumers for every positive guarantee;
+- exact dependencies and version bindings;
+- an explicit Architecture Board act;
+- outcome-appropriate human evidence plus executable evidence for every mechanically expressible obligation; and
+- complete atomic accounting when registries, status projections or graph views change.
+
+Missing ownership, unresolved exact references, conflicting routes or evidence that depends on an unselected layer remain non-permissive.
+
+## 35. Placement of G3 and G4
+
+AD-015B does not select G3 or G4 as universal top-level models. It accepts their proven safeguards as conditional routing obligations inside G2.
+
+### 35.1 G3 domain-first obligation
+
+Specialized semantics remain in the governed domain-local route unless a concrete consumer proves either:
+
+- a minimal Core envelope that preserves domain ownership and exact profile/version ambiguity rejection; or
+- independently reusable Core identity or semantics that pass the full Concept or non-Concept admission path.
+
+Domain popularity, repeated labels, deployment count or implementation reuse never prove the move. A Core envelope owns interoperability guarantees only; it cannot translate unknown profiles by similarity or import domain truth.
+
+### 35.2 G4 consumer-activation obligation
+
+A positive-capable rule, result vocabulary or profile is active only under its exact accepted consumer contract. Consumer activation may occur in the Core non-Concept, Core-envelope or domain-local route according to who owns the protected use.
+
+Activation cannot create subject identity, change a baseline contract, become global policy, inherit into another consumer, or transfer by matching labels. Missing exact consumer, rule, input snapshot or evaluator authority rejects the positive path.
+
+These obligations give C3 the safe domain and consumer behavior found in accepted precedents without selecting C4's additional registry/checker layer.
+
+## 36. Selected H2 ownership and precedence
+
+The later implementation must preserve one defining owner for each responsibility:
+
+| Responsibility | Defining owner |
+|---|---|
+| mandatory Core Boundary trigger, review choreography and reference integrity | OCP-001 |
+| semantic-authority routes, required authority/evidence questions, route movement and migration safeguards | separate Core Boundary OCP, provisionally OCP-016 |
+| candidate identity, vocabulary, invariants, results and lifecycle | candidate's accepted defining OCP or named domain contract |
+| reusable modeling-form obligations | exact Accepted Pattern invoked by the candidate contract |
+| admission, rejection, reopening and status change | explicit Architecture Board act |
+| finite consistency checks, if later authorized | derived checker implementation tied to an exact human-readable rule |
+
+OCP-001 must point to the separate OCP rather than duplicate its routing table. The Core Boundary OCP must point back to OCP-001 for governance procedure rather than defining a second approval process. A candidate contract may satisfy the selected route but cannot declare itself admitted.
+
+The human-readable artifacts are primary. AD-015B selects no admission registry, score, generated status field or mandatory checker projection. Any later projection needs a separately reviewed source mapping and must fail on mismatch with the human Board act; it can never be the source of approval.
+
+The selected contract applies prospectively to new proposals and amendments that broaden shared semantics or authority. It does not silently reclassify accepted historical artifacts. A contradiction with an accepted decision requires an explicit reopening act.
+
+## 37. Route movement, negative results and migration
+
+A candidate may move between routes only through evidence and governance appropriate to the destination:
+
+- implementation-local → domain-local requires a named domain owner and defining contract;
+- domain-local → Core envelope requires a concrete interoperability consumer, exact profile/version contract and ambiguity rejection;
+- domain-local or envelope → Core semantics requires evidence that Core owns the shared meaning rather than only transport;
+- non-Concept → fundamental Concept requires the complete independent-identity test and a separate Board act;
+- Core → domain-local, retired or deregistered requires an explicit Board act and atomic cleanup of every normative and generated projection.
+
+Movement is forward from an exact reviewed baseline; it never rewrites the authority of historical versions. Existing exact references remain interpretable or receive an explicit governed migration. Equal payload, similar label, shared storage or copied shape does not merge identities or routes.
+
+A negative Core verdict leaves valid domain or implementation work available in its legitimate route. Reopening requires new evidence that closes the prior gate. Newest timestamp, document order, issuer count, source count, deployment count, majority or checker status cannot select a route or authority.
+
+## 38. Alternatives not selected and reopening gates
+
+### 38.1 C0 and C1
+
+C0 is not selected because accepted history demonstrates recurring review drift when the doctrine must be reconstructed case by case. It may be reconsidered only if the implementation shows that a reusable contract adds no stable guidance and materially worsens review quality.
+
+C1 is not selected because a binary result cannot by itself distinguish valid domain-local contracts, Core envelopes, non-Concept Core contracts, local structured values and optional Pattern form. It may be reconsidered only with a complete routing explanation that preserves those distinctions outside the binary gate without restoring case-by-case ambiguity.
+
+### 38.2 C2
+
+C2 remains the nearest artifact-home alternative. It may be reconsidered if OCP-016 implementation proves that the OCP-001/OCP-016 ownership split necessarily duplicates normative rules, creates contradictory precedence or makes the human review materially harder. Lower artifact count alone is insufficient.
+
+### 38.3 C4 and machine projection
+
+C4 is not selected because external review found no integrity property that requires a mandatory registry/checker projection now. A later derived projection may be proposed only after a concrete synchronization or omission failure is demonstrated. It must name its exact human source and reject stale, missing, duplicate or contradictory state.
+
+### 38.4 C5, H3 and H4
+
+C5 is not selected because domain-first and consumer-activation doctrines alone do not route Concepts, dependencies, records, local values, Patterns and implementation structures.
+
+H3 remains available only when a particular accepted candidate needs reusable form. H4 remains available only as a separately authorized derived projection. Neither can become the sole home of mandatory boundary governance.
+
+## 39. Separate OCP implementation obligations
+
+The next separately reviewed implementation cycle must amend OCP-001 and introduce the separate human-readable Core Boundary contract, provisionally OCP-016. At minimum it must:
+
+1. define the automatic trigger for new or broadened Concept, dependency, record, rule, local-value, Pattern, envelope, domain-contract and machine-projection proposals;
+2. define the five primary semantic-authority routes and the orthogonal Pattern form route in language usable without checker code;
+3. distinguish Core semantics, Core envelope, domain-local meaning and implementation representation without overlap;
+4. require one authority ledger, concrete consumers, exact dependencies and explicit non-implications for every positive proposal;
+5. preserve G3 domain-first and G4 consumer-activation safeguards inside the selected routing model;
+6. define fail-safe handling for missing owner, ambiguous route, unresolved version/profile, conflicting authority and prior-decision contradiction;
+7. define reopening, route movement, historical-reference preservation and atomic migration behavior;
+8. include human-readable examples covering all accepted precedent forms and all twenty-two §13 counterexamples;
+9. state exactly which finite structural obligations, if any, existing checker facilities can validate without creating semantic or Board authority; and
+10. update backlog, roadmap and governance references atomically.
+
+The initial implementation must not add an admission registry, numeric score or P-002. It may use existing checker capabilities only for finite consistency against the human contract. If executable implementation would require new structured authority fields or a new projection, the cycle must stop and reopen C4/H4/H5 rather than add them silently.
+
+No existing candidate is grandfathered into a new status by the OCP implementation. No Concept, dependency or candidate contract becomes Accepted merely because it appears as an example or passes a structural check.
+
+## 40. Accepted effect
+
+This Board act has the following narrow effects:
+
+- AD-015 becomes `0.3.0 / Accepted`;
+- C3 (`G2 × H2`) becomes the selected Core Boundary direction;
+- exactly one primary semantic-authority route plus an optional Pattern form route becomes the selected routing shape;
+- G3 domain-first and G4 consumer activation become conditional obligations inside G2, not independent universal models;
+- human-readable OCP-001 plus a separate Core Boundary OCP become the selected ownership split;
+- machine registry/checker projection remains unselected and non-authoritative;
+- AB-061 moves `Discovery → Planned` for the separate OCP implementation; and
+- no OCP, Pattern, schema, registry, checker rule, fixture, Concept status, dependency or graph edge is created or changed by this act.
+
+Exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo or Architecture Board authorization remain mandatory before squash merge. Until that merge, §§33–40 are a proposed Board act rather than an accepted decision.

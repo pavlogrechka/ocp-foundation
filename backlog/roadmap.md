@@ -51,7 +51,7 @@
 - [x] Operational Coordination workflow-evidence boundary — `AB-058 / AD-009 / OCP-015`
 - [x] Evidence-based State/Readiness selection — `AB-007 / AD-011`; S0 and R0 no-new-authority controls
 - [x] Operational Area and environment boundary — `OCP-004 0.8.0` implements AD-014B Outcome A, resolves `AB-008` and removes the temporary Operational Area registry marker without a new Concept or graph edge
-- [ ] Core Boundary specification — `AB-061 / AD-015A 0.2.0` compares semantic-admission models G0–G4 and artifact homes H0–H5; both axes remain unselected pending external review and a separate AD-015B Board act
+- [ ] Core Boundary specification — `AB-061 / AD-015B 0.3.0` selects C3 (`G2 × H2`) for a separate human-readable OCP; implementation remains Planned and no machine admission registry is selected
 - [ ] Promote stable core descriptions to Canonical
 
 ## Milestone 1A — Governed Executable Validation Loop
@@ -126,5 +126,5 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Obtain external review of the completed AD-015A comparison of semantic-admission models G0–G4 and artifact homes H0–H5.
-2. Use a separate AD-015B Board act to select a combination, request more comparison, or retain G0/H0; do not introduce the implementation artifact in the selection PR.
+1. Obtain external review and Board authorization for the AD-015B C3 (`G2 × H2`) selection without introducing its implementation artifact.
+2. In a separate cycle, amend OCP-001 and introduce the human-readable Core Boundary contract provisionally numbered OCP-016; do not add an admission registry, numeric score or P-002.
