@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.14.0
+Version: 0.15.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-016N Board selection on the post-Resource remaining-T4 reassessment before any Organization discovery, lifecycle proposal or T5 topology reopening
+Review-After: Separate AD-019 Organization stable-surface discovery and later Board selection before any OCP-007 edit, lifecycle proposal or T5 topology reopening
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -2533,3 +2533,199 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016M will:
 - retain foundation readiness at approximately 70% because this reassessment changes no OCP or Concept lifecycle.
 
 This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Approval and authorization apply only to AD-016M evidence. They cannot select O7D, create or merge AD-016N/AD-019, edit or promote OCP-007, resolve an Organization backlog item, reopen T5 or authorize downstream work.
+
+## 147. AD-016N Board question and exact baseline
+
+AD-016N decides only the next preparation scope after the accepted AD-016M reassessment. It does not decide the Organization identity, continuity, classification, relationship-kind, scheme, exception, composition or Resource-mapping model, and it does not edit OCP-007.
+
+The exact decision baseline is `main@77b195f89d67960f8659c071bf073473dac1e722`, tree `b094c27cb7e8b06567bc6949aae5551afe4e3d28`, after the separately authorized AD-016M merge. Its decision inputs are:
+
+| Input | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016M | `0.14.0 / Accepted` | blob `8ce2ebd4eeb5c6eddf03d687e25bda261b303a0c` | `1b52094a303f76a2ca73b3057eb01a4a3c3612aecfd6c6b3d0543030c130fe87` |
+| OCP-003 Resource | `1.0.0 / Canonical`; Resource `Canonical` | blob `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` |
+| OCP-007 Organization | `0.3.2 / Draft`; Organization `Accepted` | blob `543d579f9ce1033ff38d478d1663c71a10b5f118` | `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b` |
+| OCP-000 registry | `1.3.0 / Canonical`; Organization `Accepted` | blob `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
+| OCP-001 governance | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 projection | `1.3.0 / Canonical`; Organization `Accepted` | blob `3b676afcff63ac4b600fb382a67283d67f766c7f` | `e0112f751b7922904d7217c76102cc8d5e3382ce49f13d94e99c31af1275669e` |
+| OCP-016 Core Boundary | `1.0.0 / Canonical` | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| P-001 | `0.1.0 / Accepted`; exact OCP-007 invocation | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| OCP-014 Coordination profile | `0.2.0 / Accepted`; no Organization-name authority | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+| OCP-015 Coordination workflow | `0.2.0 / Accepted`; no Organization-name authority | blob `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
+| foundation map | Organization `Accepted`; dashed future mapping only | blob `38011129ab9bf2e0362df2255a57fa15d3c90e54` | `f8af51e97e193820d24323cd0db5262d4fe0d353cb93c9bec910834e3e7b70e8` |
+| architecture backlog | AB-006/044–047/051/052 Open; AB-062 Planned | blob `127dd0d46f7b025b7461da30935eeb3ef0315b49` | `a7848e5b8042fc1eda953236f097081766c71c20766fb3b4ebc001493c36fd81` |
+| Organization checker | reference-only structural validator | blob `b099095ed1ee3bb652d320994b235a574c8691f6` | `7e1890443abe4f92abd2a5e823ebbc9aa61b34a6471e76e5f176dc49068a0276` |
+| Organization rules manifest | `0.2.0`; OCP-007 sources | blob `fd8b1c629ff24f5c07c0b2c9bb7c048c6f91c4ba` | `f33a4dadfe9d98e34698c4c99548a0d15980c35129d74729414ec3b9ae3b90d7` |
+| Organization primary fixtures | three files | tree `cefa81c9030ac3da8971a68a107d55c7565e6a3c` | recursive manifest `01fff80b7c2f9c1c94a7c830834d49968afb8886c2dba1e4779ec2032da6c44c` |
+| Organization graph regressions | three files | tree `7936aa998c610429e1aa7c15cb92e45558200d0a` | recursive manifest `861ac4bb3e115bd85e1130692ca98d60d071ce46cc7272acbf4857f920e7fd9d` |
+| complete fixture set | 119 non-sensitive fixtures | tree `fe02d8a9f5d302ff35ddceda0477f7722e861629` | recursive manifest `737d961afffd0e64981021b186861d690b49218dd8a155a5acdef0389e7efd67` |
+
+The Board question is narrow: **should the repository prepare one outcome-fair Organization stable-surface discovery, retain hold, or select another explicitly compared scope?** OCP-007 being the sole remaining T4 candidate is topology evidence, not authority. Three completed T4 acts, recent Resource work, green CI, readiness percentage, file order, newest timestamp and reviewer agreement cannot select the answer.
+
+## 148. Board treatment of the AD-016M K/B/S/C audit
+
+AD-016N accepts every §140 classification as bounded decision input; none is converted into a semantic verdict:
+
+| Surface | Board treatment | Limit carried into discovery |
+|---|---|---|
+| independent Organization identity and relation/name/commander non-identity | accept K candidate | continuity events remain unresolved and may defeat the kernel |
+| authoritative transition history and projections | accept K candidate | AB-046 must be tested against the selected compatibility surface |
+| local identified OrganizationRelationshipRecord and class non-implications | accept K candidate | type, scheme and exception authority remain unresolved |
+| merger/split/reorganization/redesignation continuity | accept B | no stable-identity promise may hide these events through silence |
+| required classification-reference authority and resolution | accept B | required fields need legitimate owner, version and ambiguity treatment |
+| relationship class/type alignment and kind governance | accept B | version-looking syntax is not semantic authority |
+| scheme identity, cross-scheme interpretation and multiple-superior exception | accept B | the prose/checker mismatch must be resolved or explicitly bounded fail-safe |
+| composition and organizational-unit identity | retain B-or-S decision | discovery must compare stabilization with explicit exclusion |
+| Organization/Resource mapping and Organization Capability holders | accept S candidate | AB-006/AB-052 remain Open; exclusion is reversible, not permanent prohibition |
+| commander/personnel, ownership, delegation, Readiness/State and implementation surfaces | accept S candidate | named reopening owners are required; no authority follows from labels or counts |
+| completed Coordination wording cleanup | accept C | cleanup cannot carry Organization semantic authority |
+
+The empty direct-consumer surface reduces immediate migration pressure but closes no B item. Green structural evidence verifies current finite rules only. It cannot select continuity, classification, relationship-kind, scheme, exception, composition or mapping authority.
+
+## 149. Commissioned falsification closure
+
+AD-016N re-attempts all twelve §144 targets on the unchanged semantic baseline:
+
+| Attack | Evidence checked | Board result |
+|---|---|---|
+| a direct normative OCP-007 consumer or Organization Concept edge was missed | repository frontmatter/graph sweep; AD provenance and negative prose separated from normative consumers | not demonstrated; zero direct normative consumers and zero Concept edges |
+| continuity events can remain a truthful `1.x` exclusion | stable-ID guarantee against OCP-007 §19 and AB-044 | not demonstrated; must remain an independent discovery axis |
+| required `classification_refs` may stay opaque without owner/resolution rules | invariant 15.2 and all current checker/rule sources | not demonstrated; syntax/presence is insufficient |
+| five classes plus versioned type syntax already stabilize relationship meaning | OCP-007 class table and `organization.py` syntax-only validation | not demonstrated; AB-045 remains B |
+| multiple-superior exceptions can be removed or fail-closed without authority comparison | invariant 16.16 against unconditional checker rejection at line 156 | not established; both fail-closed removal and governed exception remain fair options |
+| `scheme_ref` can stay opaque without scheme identity or cross-scheme rules | current required fields, fixtures and graph checks | not demonstrated; structural checks do not resolve scheme identity |
+| current lifecycle fixtures close AB-046 | three primary fixtures and transition/projection tests | not demonstrated; finite paths are evidence, not full compatibility authority |
+| composition/unit identity must be B rather than an explicit exclusion | OCP-007 prose, Resource separation and consumer sweep | not demonstrated; B and S remain outcome-fair alternatives |
+| Canonical Resource requires Organization mapping | OCP-003 exclusions, OCP-012 Resource-only holder rule and graph/consumer sweep | not demonstrated; mapping remains separately governed |
+| extraction preserves one owner, exact P-001 invocation and references without migration | current one-file/P-001 ownership and prospective split boundary | unresolved option-local burden; no extraction is selected |
+| the no-T5-bypass rule causes concrete compatibility harm | dependency floors and empty Organization consumer surface | not demonstrated; local schedule readiness is not strategy harm |
+| evidence design preselects repair, extraction, mapping or topology reopening | O0/O7D/O7R/O7E/O37/O5/O7P obligations and fail-safe controls | not demonstrated; each option retains conditional burdens |
+
+“Not demonstrated” is narrower than “impossible.” Targets 2–10 become mandatory AD-019 questions because this selection cannot decide their semantic truth. No target supports direct O7R, O7E, O37, O5 or O7P preparation; none makes a bounded discovery incoherent. Unknown or conflicting evidence returns to O0.
+
+## 150. Architecture Board selection — O7D
+
+AD-016N selects **O7D — prepare one outcome-fair Organization stable-surface discovery**.
+
+O7D is selected because:
+
+- four blocker groups are explicit, independently falsifiable and visible in current human-readable text;
+- the zero direct-consumer surface permits comparison before any migration or compatibility choice is forced;
+- a discovery can keep identity continuity, classification authority, relationship-kind authority, scheme/exception authority, composition and mapping as separate axes;
+- in-place repair, extraction, mapping inclusion, explicit exclusion and hold can be compared without editing OCP-007; and
+- failure safely returns to O0 or a separately authorized scope rather than creating a permissive identity or exception rule.
+
+O7D is not selected because Organization is the last T4 item, because Resource is Canonical, because three T4 acts are complete, because CI is green, because readiness is approximately 70%, or because Fable and Codex agree. It does not preselect an in-place kernel, relationship repair, extraction, mapping exclusion/inclusion, composition treatment, fail-closed scheme rule or later lifecycle proposal.
+
+This selection authorizes preparation of one discovery record only. It changes no OCP, Concept, backlog status, dependency, graph edge, schema, checker, fixture or lifecycle state and does not authorize merge of that later discovery.
+
+## 151. Selected preparation scope
+
+The next proposal may prepare one new record:
+
+```text
+architecture/discovery/AD-019-organization-stable-surface.md
+```
+
+The proposal may add only that record and its discovery/accounting projections in:
+
+```text
+README.md
+backlog/architecture-backlog.md
+backlog/roadmap.md
+```
+
+AD-019 may update only AB-062's note to point to the active discovery. AB-006, AB-044–AB-047, AB-051 and AB-052 remain `Open`; it may cite them but not change their statuses or silently rewrite their questions. OCP-007, every other OCP, all Concepts, P-001, the registry, taxonomy, foundation map, schemas, checker, rules and fixtures remain byte-unchanged.
+
+The discovery must use a two-level comparison rather than collapse independent questions into one preferred package:
+
+1. **top-level authority/layout outcomes:** hold; one in-place bounded Organization contract; in-place identity kernel plus separately bounded local relationship surface under one defining owner; extraction with one defining owner and exact P-001/reference accounting; or a mapping-inclusive scope with legitimate Resource/Organization owners;
+2. **orthogonal semantic treatments:** continuity included versus explicitly excluded; classification governed versus opaque/excluded; class/type alignment; scheme identity and cross-scheme behavior; fail-closed structural rules versus governed exceptions; composition/unit stabilization versus exclusion; and Resource mapping included versus excluded.
+
+AD-019 may recommend one combined outcome. It may not select it, edit OCP-007, create a Concept, add a graph edge, introduce Organization Capability claims, resolve a backlog item or authorize lifecycle. A later separately reviewed Board act must accept, revise or reject the recommendation.
+
+## 152. Mandatory AD-019 discovery contract
+
+The separately reviewed AD-019 must:
+
+1. exact-anchor the then-current AD-016, OCP-007, Canonical Resource, OCP-000/OCP-001/OCP-002/OCP-016, P-001, OCP-014/OCP-015, foundation map, relevant backlog rows, Organization checker/rules, both Organization fixture trees and the full fixture manifest;
+2. reproduce the direct-consumer and Concept-edge sweep, distinguishing normative dependencies, AD provenance, negative prose and future dashed map views;
+3. map every current OCP-007 section and required field to proposed stable kernel, explicit exclusion, cleanup or unresolved blocker without silently deleting accepted semantics;
+4. compare top-level layouts and every orthogonal treatment in §151 on the same identity, authority, compatibility, migration, rollback, evidence and human-readability axes;
+5. preserve one defining owner for every normative rule/result/status and prove exact P-001 Module A/B/C invocation treatment under each stored-record layout;
+6. state truthful continuity treatment for merger, split, reorganization and redesignation without newest-record, timestamp, order, issuer count, reviewer count or majority authority;
+7. identify legitimate classification, relationship-type, scheme and exception owners, exact version/resolution behavior and ambiguity handling—or state an explicit exclusion whose required fields remain honest;
+8. compare fail-closed removal of the multiple-superior exception with a governed exception contract and explain the current invariant-16.16/checker-line-156 mismatch;
+9. keep Organization distinct from Resource, retain Resource-only CapabilityClaimRecord holders and exact OCP-009 Capability version binding, preserve `Capability ≠ Readiness`, and add no Assignment/participation implication, inheritance, aggregation, transitive possession or interchangeability inference;
+10. give outcome-conditional executable evidence: current structural replay for retained layers, explicit detect-and-reject witnesses for forbidden ambiguity, and human-only evidence labels where the checker cannot express authority or real-world continuity;
+11. include scenarios and counterexamples for stable identity, continuity events, duplicate/conflicting classifications, class/type disagreement, cross-scheme edges, multiple superiors with and without legitimate exception, organizational units, Resource mapping and name/commander non-authority;
+12. preserve no current consumer migration as a baseline result while identifying every option that would require reference, record, Pattern, checker, fixture or projection migration;
+13. route the current foundation-contract question through OCP-016 Route C while testing Route F only for a genuinely distinct extracted boundary; no route may self-approve its artifact class;
+14. define falsification targets able to demote the leading option and make unknown/conflicting evidence fail to hold rather than to a permissive rule;
+15. remain readable to a human without checker code, PR history or an unstated product model; and
+16. end with one recommendation plus a mandatory separate Board selection, exact allowed next artifact and non-transfer rule.
+
+Machine evidence may witness structure, references, transitions, projections, graph properties and current fixture behavior. It cannot decide real-world identity continuity, choose a classification/type/scheme/exception authority, infer mapping from names or make an outcome Accepted.
+
+## 153. Stop, failure and reopening rules
+
+AD-019 must stop and return to the Board before expanding scope if it discovers:
+
+- a current governed consumer or Concept edge requiring immediate Organization migration;
+- an Organization stable surface that cannot be compared without editing OCP-007, OCP-003, P-001, consumers, checker, rules or fixtures;
+- two defining owners for one Organization rule, record family, projection or status;
+- inseparable Organization/Resource identity that requires joint mapping authority merely to state Organization identity;
+- an unbounded classification, relationship-type, scheme or exception registry;
+- a need for a new Concept, graph edge, Organization Capability claim, Assignment implication, identity collapse, inheritance, aggregation, transitive possession or interchangeability rule;
+- evidence obligations that assume the in-place, extraction, mapping, exception or storage layer rejected by another outcome; or
+- an authority decision based on newest timestamp, record order, issuer/reviewer count, majority, CI, readiness or completed effort.
+
+O0 is the immediate fail-safe. Concrete evidence for direct repair returns to a separately authorized O7R decision; an honest extraction prerequisite returns to O7E; inseparable mapping returns to O37; concrete topology harm returns to O5. No failed option transfers authority to another.
+
+## 154. Alternatives not selected and reopening gates
+
+### 154.1 O0 — hold
+
+O0 is not selected because the finite blocker groups and bounded evidence surface justify one reversible comparison. It remains the fallback if AD-019 cannot keep the axes independent, name one owner or stay human-readable.
+
+### 154.2 O7R — direct Organization remediation
+
+O7R is not selected because the current evidence identifies questions, not legitimate semantic answers. It reopens only when a separately reviewed comparison establishes an exact bounded repair with authority and rollback.
+
+### 154.3 O7E — extraction-first
+
+O7E is not selected because current one-file and P-001 ownership is coherent, while a split may duplicate authority or strand continuity. Extraction remains an AD-019 option and reopens only with one-owner, exact-reference and no-hidden-migration proof.
+
+### 154.4 O37 — joint Organization/Resource mapping
+
+O37 is not selected because Canonical Resource explicitly excludes mapping and no current Organization consumer requires it. It reopens if AD-019 demonstrates that Organization's own truthful stable surface is inseparable from mapping under legitimate owners of both sides.
+
+### 154.5 O5 — topology reopening
+
+O5 is not selected because local readiness of OCP-004/OCP-012 and absence of Organization consumers show schedule flexibility, not concrete harm from the accepted no-bypass strategy. It reopens only through a separate Board act with compatibility evidence.
+
+### 154.6 O7P — direct OCP-007 lifecycle proposal
+
+O7P remains inadmissible on the current baseline. Four live blocker groups prevent an honest `1.x` compatibility promise; being the sole remaining T4 candidate cannot waive them.
+
+## 155. Migration, rollback and authorization boundary
+
+AD-016N changes only the AD-016 decision record and current accounting. It creates no data, reference, record, Pattern or semantic migration.
+
+The selected AD-019 proposal is a new discovery record, not an OCP-007 revision. If its comparison fails, rollback consists of rejecting or superseding that proposal; current Organization and OrganizationRelationshipRecord identities, histories, projections, references and fixtures remain unchanged. No newest record may replace a conflicted authority during rollback.
+
+Merge authorization for AD-016N selects only O7D preparation scope. AD-019 requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization. AD-019 merge authorization, if later granted, still cannot select an outcome, edit OCP-007, resolve backlog, change topology or authorize lifecycle. Those are separate acts.
+
+## 156. AD-016N accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016N will:
+
+- set AD-016 to `0.15.0 / Accepted`;
+- accept AD-016M's K/B/S/C and falsification evidence as bounded decision input;
+- select O7D solely as preparation of one AD-019 Organization stable-surface discovery;
+- keep O0 as fail-safe and preserve O7R/O7E/O37/O5/O7P reopening gates;
+- retain OCP-007 at `0.3.2 / Draft` and Organization at `Accepted`;
+- keep AB-006, AB-044–AB-047, AB-051 and AB-052 `Open`, and AB-062 `Planned`; and
+- retain foundation readiness at approximately 70% because this selection changes no OCP or Concept lifecycle.
+
+This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Approval and authorization apply only to AD-016N. They cannot create or merge AD-019, select an Organization outcome, edit or promote OCP-007, resolve an Organization backlog item, reopen T5 or authorize downstream work.
