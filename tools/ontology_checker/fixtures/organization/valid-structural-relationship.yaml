@@ -2,6 +2,15 @@ case_id: organization-valid-structural-relationship
 concept: OrganizationRelationshipRecord
 expected:
   valid: true
+validation_scope_ref: OCP-007-PRIMARY-FIXTURE-SCOPE
+references:
+  organizations:
+    - {organization_id: ORG-BN-02}
+    - {organization_id: ORG-BDE-01}
+  relationship_kind_profiles:
+    - kind_ref: organization-relation://structurally-subordinate-to@1
+      profile_owner_ref: domain-profile-owner://example-organization-model@1
+      relationship_class: structural
 entity:
   relationship_id: ORR-001
   relationship_class: structural

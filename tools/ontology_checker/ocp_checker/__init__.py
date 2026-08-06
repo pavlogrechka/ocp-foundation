@@ -75,6 +75,21 @@ from .spatial import (
     validate_operation_spatial_transition,
     validate_operation_spatial_transition_fixture,
 )
+from .organization import (
+    ORGANIZATION_DERIVATION_RULES,
+    ORGANIZATION_ERROR_CODES,
+    graph_breakpoints,
+    organization_established_at,
+    organization_relationship_effective_at,
+    organization_relationship_successor_ids,
+    validate_organization,
+    validate_organization_dataset,
+    validate_organization_dataset_fixture,
+    validate_organization_graph,
+    validate_organization_q2_fixture,
+    validate_organization_relationship,
+    validate_organization_relationship_fixture,
+)
 from .artifact_governance import GOVERNANCE_ERROR_CODES
 from .interchangeability import (
     COORDINATION_OWNER_REF,
@@ -114,6 +129,14 @@ DERIVATION_RULES = (
 
 def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
+    if concept == "Organization":
+        return validate_organization(fixture.get("entity") or {})
+    if concept == "OrganizationRelationshipRecord":
+        return validate_organization_relationship_fixture(fixture)
+    if concept == "OrganizationDataset":
+        return validate_organization_dataset_fixture(fixture)
+    if concept == "OrganizationQ2ContractDataset":
+        return validate_organization_q2_fixture(fixture)
     if concept == "OperationSpatialTransitionEvidence":
         return validate_operation_spatial_transition_fixture(fixture)
     if concept == "Capability":
