@@ -108,6 +108,7 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016K `0.12.0 / Accepted` виконує fresh post-remediation Resource audit: current semantic B-item у bounded kernel не виявлено, N3 ten-file lifecycle proposal є лише рекомендацією, а AD-016L лишається окремим Board gate;
 - AD-016L `0.13.0 / Accepted` обирає N3 лише як підготовку exact ten-file OCP-003/Resource governance-lifecycle proposal з трьома consumer status-view PATCHes; жоден status у selection act не змінюється;
 - третій T4 act встановлює OCP-003/Resource `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.3.0`, OCP-004 до `0.8.3`, OCP-005/OCP-006 до `0.2.3` та current map/accounting; OCP-007, AB-006/AB-052, fixtures, checker і Resource operational lifecycle не змінюються;
+- AD-016M `0.14.0 / Accepted` заново оцінює post-Resource remaining-T4 boundary: OCP-007 є єдиним T4 кандидатом, але continuity, classification, class/type та scheme/exception authority лишаються B; O7D є лише discovery-рекомендацією до окремого AD-016N Board selection;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 119 non-sensitive fixtures і 164 unit tests;
