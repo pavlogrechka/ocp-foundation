@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-019
 Title: Organization Stable-Surface Discovery
-Version: 0.1.0
-Status: Discovery
+Version: 0.2.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-016, OCP-000, OCP-001, OCP-002, OCP-003, OCP-007, OCP-016, P-001
-Applies-To: AB-006, AB-044, AB-045, AB-046, AB-047, AB-051, AB-052, AB-062
-Review-After: Separate AD-019A Board selection before any OCP-007 edit, extraction, mapping act, lifecycle proposal or T5 topology reopening
+Applies-To: AB-062, Organization stable-surface remediation
+Review-After: Completion or failure of the selected OCP-007 remediation; then a fresh blocker/stability audit before any lifecycle proposal or T5 topology reopening
 ---
 
 # AD-019 — Organization Stable-Surface Discovery
@@ -759,3 +759,395 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-019 will:
 - change no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture or production authority.
 
 Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization apply only to this discovery record. They cannot select Q2, merge AD-019A, edit OCP-007, change checker/rules/fixtures, resolve Organization backlog, introduce mapping or Organization Capability holders, promote Organization, reopen T5 or authorize downstream work.
+
+## 28. AD-019A Board question and exact baseline
+
+AD-019A decides whether the externally reviewed discovery justifies one Organization stable-surface remediation direction. It does not perform that remediation, change an OCP or Concept status, resolve an Organization backlog item, create a mapping or authorize T5.
+
+The exact decision baseline is `main@f6b492f3086359778618e3dbe6ea3d465a2f512b`, tree `962095efd9d8db67b3e17064e5d6672671294ae4`. On that baseline:
+
+- AD-019 is `0.1.0 / Discovery`, blob `bff6194feaef6dc2ec90b65d41630545f6c479a2`, SHA-256 `8f6b8df7d1661182a6f0f15d42af8144cc832f62303c0b7b52127bc16354dd3c`;
+- the architecture backlog is blob `71aab5bc0ff57d82b52778037a8c7a1fcd4c299a`, SHA-256 `0723888d65341fdc2ef3a443d38fd7360c2931612f64ebd8609d9dc9fc7a90a3`;
+- the current README projection is blob `ead0d17b80235a93279b4981d3518d966567daec`, SHA-256 `e7dae8d6db3043a55692b46850d0e7867a8af24f3c05f04b7618a10383c3fd3a`;
+- the current roadmap projection is blob `70e6fe01d4a136f942090bc3928d2d05708e2c49`, SHA-256 `5fe3e47a1d3db85e0b17e7196a52f2960c284b3aa1cfac157173ef522c748fc9`;
+- the other nineteen semantic and executable anchors in §2 remain byte-identical; the exact baseline-to-baseline diff contains only AD-019 and its three accounting projections;
+- OCP-007 remains `0.3.2 / Draft`, Organization remains `Accepted`, P-001 remains `0.1.0 / Accepted`, and the six Organization fixtures plus 119-fixture manifest remain unchanged;
+- the post-merge consumer sweep finds zero direct normative OCP-007 consumers, zero Organization Concept edges and five AD provenance dependencies: AD-005, AD-011, AD-014, AD-018 and AD-019; and
+- no OCP-007, checker, rules, fixture, remediation or lifecycle act is authorized.
+
+Fable independently reproduced all twenty discovery anchors, both ledgers, the executable absence claims, H0–H4 completeness, the nine-axis space, all 25 scenarios, all 28 counterexamples and the outcome-fair evidence structure. Iteration 2 approved exact head `39361d7209b51803bd4b17423a8efad483c0034c` with zero findings after the §8.1 baseline/proposed-tree count was made explicit. The authorized discovery merged byte-identically as `f6b492f3086359778618e3dbe6ea3d465a2f512b`, and `main` CI succeeded.
+
+The Board question is narrow: **does current evidence justify Q2 as the direction for one bounded OCP-007 remediation proposal, or must one or more layout/axis choices return to hold or another treatment?** File age, T4 order, authoring effort, review agreement, readiness percentage, hashes and green CI are not selection evidence.
+
+## 29. Board treatment of the discovery
+
+AD-019A accepts the discovery with these limits:
+
+1. **The stable material is real but not monolithic.** Exact Organization identity/history and the local relationship-record form are independently readable candidates; continuity, classification, kind, scheme/exception and Module C gaps cannot enter a stable promise merely because they share OCP-007.
+2. **The consumer surface is empty, not irrelevant.** Zero direct OCP consumers and zero Concept edges reduce migration pressure but do not create semantic authority.
+3. **The R axis is an independent discovered blocker.** Exact endpoint/target resolution and P-001 Module C branching, overlap/gap, effectivity and replacement attribution are not supplied by the current record or Pattern.
+4. **The current checker is an honest but partial witness.** It proves the finite lifecycle/projection and structural graph rules listed in §8.2 while proving none of the absence claims in §8.3.
+5. **The five layouts and nine axes are complete for this decision.** External attempts to construct a sixth authority home or tenth independent axis reduced to an existing treatment.
+6. **Q2 is not inherited from discovery approval.** It remains selectable only because its individual choices survive the commissioned attacks below.
+7. **Every selected input boundary remains fail-safe.** An arbitrary producer string, `@` delimiter, label, source count, timestamp, record order or reviewer statement cannot stand in for exact resolution or legitimate ownership.
+8. **Selection remains preparation-only.** A future remediation must prove its exact owner, resolver, migration and executable shape on its own reviewed head.
+
+These results justify one remediation direction only while every non-waivable stop in §§35–40 remains enforceable.
+
+## 30. Board disposition of the discovery ledgers
+
+### 30.1 OCP-007 section disposition
+
+| Section | AD-019A disposition |
+|---|---|
+| §1 Purpose | accept K with H2: one OCP-007 owner, two explicitly bounded surfaces |
+| §2 Definition | accept the independent Organization definition; revise continuity to C2 exact-ID/non-derivation |
+| §3 Boundary | accept identity and non-implications; replace required classification authority with K3; retain mapping/holder/authority exclusions |
+| §4 Identity | accept name/commander/location/relation independence; remove any implication that the ID decides merger, split, reorganization or redesignation |
+| §5 Organization structure | accept identity, display, history and projections; make `classification_refs` optional K3 annotations rather than lifecycle prerequisites |
+| §6 Organization lifecycle | accept Y1 as record recognition/existence only; require complete path evidence and no operational reading |
+| §7 OrganizationTransitionRecord | accept the local P-001 Module B form; keep material-event continuity outside the record |
+| §8 Relationship decision | accept the local non-Concept relationship responsibility under the same OCP-007 owner |
+| §9 Relationship structure | accept the identified record only after T2/S1/R1 exactness is supplied; current delimiter/presence checks are insufficient |
+| §10 Initial classes | accept the five coarse non-equivalent class behaviors; reject a closed Core taxonomy and require T2 exact kind-to-class agreement |
+| §11 Relationship lifecycle | accept Y1 record recognition/existence paths; require terminal-path evidence and no real-world authority inference |
+| §12 Derivations | accept history-derived effectivity and complete breakpoint sweep; define S1 validation scope and R1 branch behavior explicitly |
+| §13 Business rules | accept the identity/class/non-implication rules after kind resolution and Module C completion; no current-head projection is added |
+| §14 Semantic rules | accept class non-implications and fail-safe unknown behavior; remove rule 9's ownerless exception under E1 |
+| §15 Organization invariants | accept after classification requiredness is removed and dataset identity ambiguity rejects |
+| §16 Relationship invariants | accept after duplicate/endpoints/kind/partition/E1/supersession obligations become exact and executable |
+| §17 P-001 conformance | accept exact existing invocation; OCP-007 must fill every selected semantic slot and Pattern supplies none |
+| §18 Examples | retain as human evidence only; examples cannot admit owners, kinds, schemes or exceptions |
+| §19 Explicit exclusions | accept C2/K3/U0/M0 and inherited exclusions; remove stale Coordination cleanup and any contradictory continuity overclaim |
+| §20 Open questions | retain all Organization backlog visibility; AD-019A resolves none of those items |
+| §21 Review target | retain as falsification evidence; it carries no semantic authority |
+
+Every prior B item is either assigned a selected treatment with a named stop condition or remains an explicit exclusion. No B item is silently relabelled K.
+
+### 30.2 Organization-field disposition
+
+| Field | Selected treatment |
+|---|---|
+| `organization_id` | exact non-empty identity, unique within the governed dataset/resolution scope; duplicate or ambiguous identity rejects |
+| `classification_refs` | retained for compatibility as optional opaque K3 annotations; the field name does not make a value resolvable or authoritative |
+| `display_name` | optional human designation with no identity, continuity, hierarchy or authority effect |
+| `transition_history` | authoritative Y1 record lifecycle history under exact P-001 Module B |
+| `created_at` | attributable creation time only; never priority or continuity authority |
+| `lifecycle_stage` / `established_at` / `retired_at` | optional projections exactly equal to history |
+| `establishment_provenance_ref` | optional exact history projection; attribution only, not actor/continuity/authorization authority |
+
+### 30.3 Relationship-field disposition
+
+| Field | Selected treatment |
+|---|---|
+| `relationship_id` | exact unique record identity within the governed dataset; duplicate ambiguity rejects |
+| `relationship_class` | one closed coarse OCP-007 behavior family; not a full kind taxonomy |
+| `relationship_type_ref` | exact T2 reference resolved once through a separately owned versioned kind profile and required to agree with `relationship_class`; syntax alone never admits it |
+| `source_organization_ref` / `target_organization_ref` | directed endpoints that each resolve exactly once to an Organization in the declared resolution scope |
+| `scheme_ref` | S1 opaque partition key compared by exact decoded equality only inside one declared validation dataset/scope |
+| `validity_start` / `validity_end` | P-001 Module A half-open effectivity, independent for every relationship record/branch |
+| `transition_history` | authoritative Y1 record lifecycle history under Module B |
+| `created_at` | creation time only; never branch, head or authority priority |
+| lifecycle/time/provenance projections | optional values exactly equal to authoritative history |
+| `supersedes_relationship_ref` | R1 exact history link with explicit branching/overlap/gap and no redirect, winner or current-head meaning |
+
+### 30.4 Transition-field disposition
+
+| Field | Selected treatment |
+|---|---|
+| `transition_id` | exact identity unique in its governed transition dataset; duplicate ambiguity rejects |
+| `organization_ref` / `relationship_ref` | exact same-subject reference and no implicit external rebinding |
+| `from_stage` / `to_stage` | one allowed Y1 record-recognition path step |
+| `occurred_at` | non-decreasing occurrence time; never newest-winner authority |
+| `provenance_ref` | required attributable provenance; it cannot authorize continuity, exception, establishment or branch selection by itself |
+
+## 31. Commissioned falsification closure
+
+AD-019A re-attempts all twenty-seven AD-019 §24 attacks:
+
+| # | Evidence rechecked | Board result |
+|---:|---|---|
+| 1 | exact consumer/dependency sweep on the merged baseline | zero OCP consumers, zero Concept edges and exactly five AD provenance records; missed consumer/edge not demonstrated |
+| 2 | current OCP prose, fixtures and repository references | no consumer requiring real-world material-event continuity demonstrated |
+| 3 | scenarios 3–5 and C2 failure behavior | exact-ID history remains truthful while material-event identity returns unresolved; contradiction not demonstrated |
+| 4 | current Organization fields, fixtures and consumers | no identity/lifecycle guarantee requiring classification meaning demonstrated |
+| 5 | Established/Retired shape under optional annotation replay | no incompatible weakening demonstrated; absence cannot erase identity/history |
+| 6 | repository-wide owner/profile search | no ready K2 envelope or concrete shared classification consumer demonstrated |
+| 7 | P-001 kind obligations versus current delimiter check | T2 remains possible only through an exact external kind-profile envelope; inability to define that envelope is a remediation stop, not permission to keep current strings |
+| 8 | current relationship consumer sweep | no type-specific consumer beyond the coarse shared class behaviors demonstrated |
+| 9 | T3 control and migration burden | no proof that collapsing the pair into an OCP-local vocabulary is strictly smaller or safer than an exact T2 envelope |
+| 10 | S1 exact dataset/scope equality | collision or hidden cross-scope equivalence is avoided by scope-local comparison; failure not demonstrated |
+| 11 | consumer and fixture sweep | no need for governed cross-scheme identity or interpretation demonstrated |
+| 12 | OCP/checker/prose sweep | no legitimate multiple-superior exception owner or consumer demonstrated |
+| 13 | current graph regressions | E1 matches all executable evidence; invalidation of a current valid case not demonstrated |
+| 14 | Organization and relationship lifecycle paths | no current consumer requiring a broader semantic lifecycle demonstrated; missing path evidence is carried into remediation |
+| 15 | one-owner H2/P-001 boundary | duplicate/endpoint/Module C completion can remain local to the relationship surface; contrary evidence not demonstrated |
+| 16 | branching, overlap/gap and effectivity scenarios | R1 adds no head, redirect or conflict winner; unowned selection rule not demonstrated |
+| 17 | successor establishment provenance | sufficient for non-authorizing replacement attribution; stronger authority is neither claimed nor demonstrated as required |
+| 18 | identity, structural and `unit@1` scenarios | composition/unit identity is not required for truthful current Organization or relationship semantics |
+| 19 | Canonical OCP-003 and zero mapping consumers | Resource does not require M1 for Organization's stable surface |
+| 20 | complete section/field relocation ledger | one OCP-007 owner with two explicit surfaces remains readable; duplicate hidden owner not demonstrated |
+| 21 | extraction/P-001/reference-home analysis | no evidence makes H3 necessary; in-place boundary remains sufficient |
+| 22 | OCP-016 route audit | Route C remains correct for local records; no independent Route F identity for extraction exists |
+| 23 | bounded Q2 contract | no unbounded registry, new Concept, graph edge, Organization holder or joint Resource edit is required; appearance of one stops remediation |
+| 24 | external construction attempts | no sixth layout or tenth independent semantic axis demonstrated |
+| 25 | unconditional/layout/axis evidence tables | no obligation assumes a layer rejected by another outcome |
+| 26 | exact current checker/rules/fixtures | implementation claims no stronger authority than §8 reports |
+| 27 | discovery diff and merge tree | discovery completed without OCP/checker/rule/fixture edits |
+
+“Not demonstrated” remains narrower than “impossible.” Attacks 7, 15, 20 and 23 become non-waivable authoring/review stops. If any succeeds, Q2 loses authority and H0 is the immediate fallback; the proposal cannot silently substitute T3, extraction, a registry, mapping or a new Concept.
+
+## 32. Architecture Board selection — Q2
+
+AD-019A selects the complete Q2 direction without changing its axes:
+
+```text
+Q2 := H2 + C2 + K3 + T2 + S1 + E1 + Y1 + R1 + U0 + M0
+```
+
+In human terms, the selected direction is:
+
+- one OCP-007 owner with a clearly bounded Organization identity/lifecycle surface and local relationship-record surface;
+- exact-ID reference continuity without automatic real-world continuity decisions;
+- optional opaque classification annotations outside identity and lifecycle;
+- an exact externally owned relationship-kind profile that agrees with one coarse OCP-007 class;
+- dataset-scoped opaque structural partitions;
+- unconditional rejection of multiple direct structural superiors in one partition;
+- finite history-based record recognition/existence lifecycle;
+- exact endpoint/target resolution plus history-only branching supersession;
+- explicit exclusion of composition/unit identity and Organization/Resource mapping; and
+- every inherited Resource, Capability, Assignment, Readiness, authority and interchangeability boundary unchanged.
+
+Q2 is selected because each component has an independent evidence basis and an explicit failure path. It is not selected because it was the preliminary recommendation, because Fable approved discovery, because OCP-007 is the remaining T4 candidate, because the diff can be small or because green tests prefer it.
+
+H0 remains the immediate fail-safe. Q2 authorizes preparation of one remediation draft only. It neither makes the selected semantics effective nor authorizes merge of that draft.
+
+## 33. Selected Organization identity/lifecycle contract
+
+The future remediation must make the Organization surface readable without reference to checker code or this decision history. It must establish all of the following together:
+
+1. `organization_id` identifies one represented Organization exactly within a declared dataset/resolution scope and rejects duplicate or ambiguous identities.
+2. Existing exact historical references remain bound to that ID; they are never redirected to a newer, similar or more-supported record.
+3. Display name, commander, personnel, location, current relationships and classification annotations cannot create, merge, split or replace Organization identity.
+4. Merger, split, reorganization and constitutive redesignation are material-event continuity questions for which Core makes no automatic same-ID/new-ID decision.
+5. Missing, conflicting or ownerless material-event evidence returns an unresolved continuity result; same name, shared personnel, newest record or source count supplies no default.
+6. `classification_refs` remains serially compatible but becomes optional opaque K3 annotation. Core does not resolve its values or derive identity, lifecycle, hierarchy, role, mapping, Capability, Readiness or authority from them.
+7. Draft/Established/Retired/Cancelled describe record recognition/existence only. Established never means active, participating, available, ready, admissible or authorized.
+8. Exact P-001 Module B OrganizationTransitionRecord history is authoritative; optional lifecycle/time/provenance projections must equal it.
+9. Every allowed path, terminal state, duplicate transition ID and projection mismatch has executable evidence.
+10. Transition and establishment provenance is attributable but grants no actor authority, continuity decision or precedence by itself.
+11. Historical exact references remain valid after Retired; Cancelled means the record was not established, not that a different Organization identity wins.
+12. Universal parent/children fields, composition, unit identity, Resource mapping and Organization Capability holders remain explicitly excluded.
+
+The surface must state C2 positively: exact reference stability is a useful Core guarantee even when real-world institutional continuity is unresolved. It must not imply that unresolved continuity is unimportant.
+
+## 34. Selected OrganizationRelationshipRecord contract
+
+The future remediation must establish all of the following together:
+
+1. `relationship_id` and every relationship transition ID are unique within the declared validation dataset; duplicates reject without order dependence.
+2. Each directed source/target reference resolves exactly once to an Organization in the declared resolution scope. Zero or multiple matches reject.
+3. The five `relationship_class` values remain coarse, mutually non-equivalent OCP-007 behavior families. They do not become a complete relationship taxonomy.
+4. Each normative `relationship_type_ref` resolves exactly once to one versioned kind profile supplied by a legitimate external/domain owner context. The profile declares exactly one compatible coarse class.
+5. Missing, duplicate, unknown, incomparable or class-mismatched kind-profile resolution rejects. A delimiter, fixture value or producer-declared label does not create ownership.
+6. OCP-007 owns only the T2 interoperability envelope and coarse class-level shared behavior; the exact profile owner owns the kind's specialized meaning. If that one-owner split cannot be stated without a registry or duplicate authority, remediation stops.
+7. A structural `scheme_ref` is an S1 opaque partition key. It is compared by exact decoded equality only inside one declared validation dataset/scope and creates no cross-scope or cross-scheme equivalence.
+8. Directed endpoints, half-open validity, authoritative lifecycle history and exact projections remain under P-001 Modules A and B.
+9. The complete structural breakpoint sweep rejects every effective cycle. Every multiple-direct-superior case in one exact partition rejects under E1; there is no exception field, waiver or bypass.
+10. `supersedes_relationship_ref` resolves exactly once, never targets self, remains acyclic and records history only.
+11. One predecessor may have explicit successor branches. Overlap and gaps are allowed; every branch retains independent effectivity and lifecycle.
+12. Supersession never redirects an old reference, elects a current head or selects a winner by time, storage order, provenance, issuer/reviewer count, majority or branch count.
+13. Successor establishment-transition provenance attributes the replacement decision but does not authorize it or resolve branch conflicts by itself.
+14. Structural, operational, administrative, support and coordination records remain distinct; no class implies another, composition, command, ownership, Assignment or mapping.
+15. Unknown class/kind/scope/effectivity evidence fails safe. No record defaults to non-structural merely to avoid a graph rule.
+
+The exact external kind-profile envelope is the principal Q2 risk. The remediation must show a finite synthetic resolver context and a human-readable ownership boundary. It may not create a Core kind registry merely because the checker needs test data.
+
+## 35. Selected Core Boundary and Pattern result
+
+| Responsibility | Selected route | Owner/result |
+|---|---|---|
+| fundamental Organization identity | F — existing Concept boundary | OCP-007 remains the single defining artifact; C2 limits material-event claims |
+| Organization record lifecycle | C — local identified record | OCP-007 owns semantics and invokes exact P-001 Module B |
+| OrganizationRelationshipRecord | C — local identified record | OCP-007 owns record/class/shared graph semantics and invokes exact P-001 A/B/C |
+| specialized relationship-kind meaning | D by default; E envelope only for exact shared interoperability | named external/domain profile owner; OCP-007 owns only exact resolution/class agreement |
+| structural partition | C — local validation context | OCP-007 owns S1 scope-local equality only, not scheme identity |
+| multiple-superior treatment | C — shared fail-closed invariant | E1 unconditional rejection; no exception authority selected |
+| classification annotation | D/I carried value | no Core semantic owner or identity/lifecycle effect under K3 |
+| material-event continuity decision | not selected | exact C2 non-derivation; future owner requires a separate act |
+| composition/unit semantics | not selected | U0 exclusion under AB-047 |
+| Organization/Resource mapping | not selected | M0 exclusion under AB-006/AB-052 |
+
+No new Concept, graph edge, Pattern, mapping record, Organization Capability-holder extension, Core taxonomy, kind registry, scheme registry or exception profile is selected. OCP-007 retains `Concept-Depends-On: []`. P-001 stays `0.1.0 / Accepted`; its form does not supply Organization, kind, partition, continuity or exception meaning.
+
+## 36. Mandatory OCP-007 remediation contract
+
+The separately reviewed remediation proposal must:
+
+1. exact-anchor AD-019, OCP-007, P-001, OCP-016, Canonical OCP-003, OCP-009/OCP-012/OCP-013/OCP-014/OCP-015, the zero-consumer/zero-edge/five-AD sweeps, Organization checker/rules/tests, both Organization fixture trees and the complete fixture manifest;
+2. change OCP-007 `0.3.2 → 0.4.0` while retaining document `Draft`, Organization `Accepted`, current `Depends-On` and `Concept-Depends-On: []`;
+3. reorganize OCP-007 into one explicit Organization identity/lifecycle surface, one explicit local relationship-record surface, shared inherited boundaries and a visible deferred/excluded surface—without creating a second defining artifact;
+4. provide a line-by-line relocation ledger from every §30.1 section and every §30.2–§30.4 field to selected rule, selected exclusion, cleanup, example or historical record;
+5. implement all twelve §33 guarantees in human-readable prose before describing executable evidence;
+6. retain current `classification_refs` values as compatible optional opaque annotations, remove their Established/Retired requiredness and forbid semantic inference from presence, absence, equality or disagreement;
+7. implement the exact T2 kind-profile resolver envelope in §34.4–§34.6 without adding a Core registry or treating fixture profiles as normative owners; if no legitimate external/domain owner boundary can be stated, stop and return to H0;
+8. define S1's validation dataset/scope and exact partition-key equality; prohibit cross-dataset, cross-scope and cross-key inference;
+9. remove the ownerless multiple-superior exception from prose and enforce E1 unconditionally with one named reopening gate;
+10. define Y1 for both Organization and relationship paths, including every terminal/historical-reference behavior and explicit non-Readiness/non-availability language;
+11. complete R1 identity, endpoint, transition, target, cycle, branching, overlap/gap, independent effectivity and successor-attribution semantics with no redirect/head/winner projection;
+12. preserve exact P-001 Module B and A/B/C invocation; complete every semantic slot locally and add no Pattern responsibility;
+13. update only the Organization-specific checker module, Organization rules manifest and dedicated Organization tests, plus the minimal checker routing/import glue needed for dataset validation; no unrelated checker rule may change;
+14. preserve all six current Organization fixtures unless an exact selected-rule migration is recorded, and add a finite manifest-complete synthetic evidence set for these seventeen mechanical groups: optional/no classification, opaque equal classifications, duplicate Organization IDs, duplicate transition IDs, lifecycle terminal paths/projections, missing/duplicate kind profiles, kind/class mismatch, missing/ambiguous endpoints, duplicate relationship IDs, exact partition scope, transient/all-time cycles, unconditional multiple superiors, unresolved/ambiguous supersession targets, supersession cycles, valid branching overlap, valid branching gaps/independent effectivity and record-order-independent no-head behavior;
+15. map every new/changed validation or derivation identifier exactly once in `organization-rules.yaml` and make rule completeness fail closed;
+16. update human-readable checker documentation and only the mechanical fixture/test-count projections produced by the bounded evidence set;
+17. keep OCP-003, OCP-009, OCP-012–OCP-015, registries, taxonomy, foundation map, P-001, every Concept status and all non-Organization checker semantics byte-unchanged;
+18. include all twenty-five §18 scenarios and twenty-eight §19 counterexamples with selected results in prose or exact references;
+19. state data/reference migration, version compatibility, rollback and failure handling without deleting records, rebinding exact references, inventing transitions or choosing a newest winner;
+20. preserve U0/M0, Resource-only CapabilityClaimRecord holders, exact OCP-009 binding, `Capability ≠ Readiness`, OCP-013 directionality and every Assignment/authority/interchangeability non-implication;
+21. limit edits to OCP-007, the Organization checker/rules/tests and fixture directories, human-readable checker documentation, root README and the AB-062/roadmap projections; any need for another OCP, Concept projection, schema, graph or backlog-status edit stops the proposal; and
+22. state that remediation completion or failure triggers a fresh exact blocker/stability/consumer/Pattern/route/migration audit and another Board act before any OCP-007 `1.0.0`, Organization lifecycle transition or T5 proposal.
+
+Machine evidence is required for the mechanically expressible parts of C2/K3/T2/S1/E1/Y1/R1/U0/M0. Legitimacy of external kind ownership and real-world continuity remain human-review boundaries; they cannot be marked executable by proxy.
+
+## 37. Selected scenario results
+
+| # | Scenario | Required Q2 result |
+|---:|---|---|
+| 1 | display-name change | same exact Organization ID; name history/meaning is not identity authority |
+| 2 | commander and relationship changes | same exact ID unless a separately governed continuity decision says otherwise |
+| 3 | merger without a continuity owner | unresolved material-event identity; no automatic survivor ID |
+| 4 | split into two represented entities | no automatic ID reuse or branch winner; exact new/retained identities require external decision evidence |
+| 5 | conflicting same-ID/new-ID redesignation evidence | unresolved; no newest, majority or similar-ID selection |
+| 6 | Established Organization without classification | valid under K3 when identity/history are otherwise valid |
+| 7 | equal `organization-type://unit@1` annotations | two distinct Organizations; no unit/composition/mapping inference |
+| 8 | K2 reference with zero/two/incomparable owners | K2 is not selected; K3 carries no classification meaning and makes no resolution claim |
+| 9 | resolved kind declares a different class | relationship rejects with exact mismatch evidence |
+| 10 | version-looking kind without resolver/owner | relationship rejects; `@` is syntax only |
+| 11 | opposite structural edges in different partition keys | no cross-key cycle inference; neither key proves cross-scheme equivalence |
+| 12 | transient structural cycle | rejects through the complete breakpoint sweep |
+| 13 | two direct superiors in one partition | rejects unconditionally under E1 |
+| 14 | producer supplies an exception label | no effect; no E2 owner/profile exists |
+| 15 | simultaneous structural and operational records | two distinct records and meanings; neither collapses into the other |
+| 16 | duplicate Organization or relationship ID | dataset rejects independent of order |
+| 17 | endpoint or supersession target resolves zero/many | dataset rejects fail-safe |
+| 18 | two overlapping successor branches | both branches remain visible with independent effectivity; no winner/head projection |
+| 19 | provenance proposed as actor authorization | rejected; attribution alone grants no authority |
+| 20 | Retired Organization with historical references | references continue to resolve to the same exact ID; Retired is not deletion |
+| 21 | `unit@1` without composition/mapping | remains an opaque annotation only |
+| 22 | related Organization and Resource without mapping | both identities remain; no projection is synthesized |
+| 23 | Organization named as Capability holder | rejected by unchanged Resource-only OCP-012 contract |
+| 24 | equal labels/relations offered as interchangeability evidence | rejected; OCP-013 remains Resource-specific and directional |
+| 25 | Organization name/caller offered as Coordination authority | rejected by OCP-014/OCP-015 and Q2 non-authority rules |
+
+## 38. Selected counterexample results
+
+All twenty-eight AD-019 §19 counterexamples remain rejected under Q2:
+
+1. remaining-T4 position does not select stabilization;
+2. Canonical Resource does not require Organization mapping;
+3. same name or commander does not decide post-event identity;
+4. newest record or most common ID does not win continuity conflict;
+5. stable exact ID does not define merger/split continuity;
+6. a currently required label does not give Core its meaning;
+7. `@` syntax does not prove a legitimate owner or resolver;
+8. checker-accepted text does not acquire governed kind behavior;
+9. similar class/kind labels do not prove agreement;
+10. equal classifications do not create identity, equivalence or interchangeability;
+11. equal partition strings from different scopes do not establish one scheme;
+12. different partition keys do not authorize a cross-partition inference;
+13. exception labels, reviewer comments and source counts do not authorize multiple superiors;
+14. green graph tests do not prove scheme or exception authority;
+15. structural subordination creates no composition, command, control or Resource ownership;
+16. membership creates no Assignment, participation or Capability claim;
+17. `unit@1` creates neither Resource nor unit identity;
+18. equal Organization assertions create no Resource interchangeability result;
+19. moving prose does not create a legitimate owner or Concept;
+20. one file does not make every section one compatibility surface;
+21. P-001 supplies no kind, partition, continuity or exception meaning;
+22. non-empty endpoint strings do not prove exact endpoint resolution;
+23. supersession creates no redirect or current head;
+24. newest successor, source count or provenance does not win a branch conflict;
+25. provenance alone authorizes no establishment, continuity or exception;
+26. Established creates no activity, availability, Readiness, authorization or participation;
+27. AD-019/AD-019A acceptance does not edit or implement OCP-007; and
+28. review, CI and owner authorization do not transfer to remediation.
+
+## 39. Alternatives not selected and reopening gates
+
+### 39.1 Layout alternatives
+
+- **H0 — hold** is not selected because the verified finite Q2 direction can be prepared under one owner without current consumer/reference migration. H0 becomes immediate fallback whenever a §36 or §40 stop fires.
+- **H1 — monolithic in-place contract** is not selected because independent continuity, classification, kind, partition/exception and record-integrity burdens would be hidden behind the weakest unresolved member. It may reopen only if an exact proposal proves every axis inseparable under one compatibility promise.
+- **H3 — extraction** is not selected because no current consumer, identity or one-owner defect requires reference-home or P-001 invocation transfer. It may reopen only when an attempted H2 remediation proves two readable surfaces cannot coexist without duplicate authority.
+- **H4 — mapping-inclusive scope** is not selected because Canonical Resource and all current consumers permit M0. It may reopen only through concrete mapping-consumer evidence and a separate AB-006/AB-052 owner/identity act.
+
+### 39.2 Axis alternatives
+
+- **C0/C1:** C0 remains H0 only. C1 may reopen through a legitimate material-event decision owner, exact lineage identity, branching/conflict and provenance contract.
+- **K0/K1/K2:** K0 remains H0 only. K1 requires evidence that Core owns a closed taxonomy. K2 classification requires named external owners plus a concrete shared classification consumer; neither is present.
+- **T0/T1/T3:** T0 remains H0 only. T1 requires a proved complete Core kind registry. T3 may reopen only if the exact T2 envelope cannot be built and a separate comparison proves an OCP-local vocabulary and migration are smaller and semantically sufficient.
+- **S0/S2/S3:** S0 remains H0 only. S2 requires a shared governed scheme consumer/owner. S3 requires proof that one universal structural graph preserves multiple verticals.
+- **E0/E2:** E0 is internally contradictory and inadmissible. E2 requires a concrete legitimate exception consumer, versioned owner, effectivity and conflict contract.
+- **Y0/Y2/Y3:** Y0 remains H0 only. Y2 requires a current consumer and exact additional stages/meaning. Y3 requires proof that historical exact identity remains useful without lifecycle.
+- **R0/R2:** R0 remains H0 only. R2 requires an exact migration that removes Module C/supersession without reinterpreting or losing current history.
+- **U1:** may reopen only under AB-047 through an explicit composition/unit identity, direction, lifecycle, graph and non-inheritance act.
+- **M1:** may reopen only under AB-006/AB-052 with legitimate owners of both identities, exact absence/ambiguity behavior and no Assignment/Capability inheritance.
+
+No alternative gains authority automatically from Q2 failure. A stop returns to H0 and requires a fresh Board comparison before another treatment is prepared.
+
+## 40. Migration, rollback and failure handling
+
+AD-019A itself changes no Organization or relationship record, consumer reference, checker behavior or lifecycle state.
+
+The selected remediation is expected to preserve data mechanically:
+
+- every `organization_id`, `relationship_id`, transition ID and historical exact reference remains unchanged;
+- current `classification_refs` values remain replayable as optional opaque annotations;
+- current class values remain coarse OCP-007 labels;
+- current type values must either resolve through the exact T2 fixture/profile context or be reported as unresolved—never silently admitted;
+- current `scheme_ref` values remain byte-preserved and gain only the narrower S1 dataset-local equality meaning;
+- current lifecycle and effectivity histories are not invented, reordered or rewritten;
+- existing supersession links remain historical inputs and gain no redirect/head meaning; and
+- no Organization/Resource mapping, composition, Capability holder, Assignment or authority projection is synthesized.
+
+Any type value that cannot satisfy T2 is migration evidence, not a reason to fabricate an owner. The remediation must list every affected fixture/value and either provide an exact legitimate test profile or stop. It cannot silently reinterpret T2 as T3.
+
+Rollback of the later remediation must revert OCP-007, all Organization checker/rules/tests/documentation changes, Organization fixtures and mechanical count projections as one unit. It must not delete records, merge identities, rebind exact references, restore an ownerless exception, invent classifications/transitions or elect a newest branch.
+
+The remediation stops and returns to H0/Board if it discovers:
+
+- a direct normative OCP-007 consumer or Organization Concept edge omitted by AD-019;
+- a current dependency on real-world continuity, required classification meaning, governed cross-scheme identity or a multiple-superior exception;
+- no legitimate external/domain boundary capable of owning T2 kind profiles;
+- a need for a Core registry, new Concept, Pattern, graph edge, mapping record, Organization Capability holder or joint Resource edit;
+- exact endpoint/target resolution or Module C semantics that cannot remain under the one OCP-007 relationship owner;
+- a need to choose a current head, redirect, newest record, majority or issuer/reviewer count;
+- two plausible defining Organization or relationship surfaces;
+- unreadable normative prose whose meaning depends on checker code or PR history;
+- an OCP/checker/schema/backlog-status edit outside §36.21; or
+- any non-replayable data/reference migration.
+
+The proposal may not widen itself because the discovered edit appears small. Stop evidence must be recorded and reviewed before another direction is authored.
+
+## 41. Authorization boundary
+
+AD-019A selects only Q2 as the preparation direction and authorizes authoring one exact §36 remediation draft.
+
+The OCP-007 remediation requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board merge authorization. AD-019A authorization cannot merge that remediation, change OCP-007/Organization lifecycle, resolve AB-006/AB-044–AB-047/AB-051/AB-052/AB-062, create mapping or reopen T5.
+
+After remediation completes or fails, a fresh audit must recompute blockers, stable surfaces, consumers, exact P-001/route ownership, executable evidence, migration and lifecycle readiness. A later Board act may then authorize another preparation step or retain hold. No authorization transfers across these gates.
+
+## 42. Accepted effect and next gate
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-019A will:
+
+- set AD-019 to `0.2.0 / Accepted`;
+- select Q2 (`H2 + C2 + K3 + T2 + S1 + E1 + Y1 + R1 + U0 + M0`) as the Organization stable-surface remediation direction;
+- authorize preparation of one OCP-007 `0.4.0 / Draft` remediation under §36;
+- retain H0 as immediate fail-safe and preserve every alternative reopening gate in §39;
+- keep OCP-007 at `0.3.2 / Draft`, Organization at `Accepted`, P-001 unchanged, AB-006/AB-044–AB-047/AB-051/AB-052 `Open`, AB-062 `Planned` and readiness at approximately 70%; and
+- change no OCP, Concept, Concept status, Pattern, dependency, registry row, taxonomy projection, foundation-map edge, schema, checker rule, fixture, backlog status or production authority.
+
+AB-006, AB-044–AB-047, AB-051 and AB-052 remain the active backlog owners of mapping, continuity, kind, lifecycle, composition and scheme questions. Once AD-019 becomes Accepted, they no longer appear in its `Applies-To` metadata because this selection neither resolves them nor takes over their active ownership. This metadata handoff changes no question, status, scope or future reopening gate.
+
+Authorization applies only to AD-019A. It cannot implement Q2, merge the OCP-007 remediation, admit an external kind owner, create a registry or mapping, introduce Organization Capability holders, promote Organization or authorize any lifecycle/T5 act.

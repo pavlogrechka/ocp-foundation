@@ -110,10 +110,10 @@ backlog/                 відкриті питання та дорожня к�
 - третій T4 act встановлює OCP-003/Resource `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.3.0`, OCP-004 до `0.8.3`, OCP-005/OCP-006 до `0.2.3` та current map/accounting; OCP-007, AB-006/AB-052, fixtures, checker і Resource operational lifecycle не змінюються;
 - AD-016M `0.14.0 / Accepted` заново оцінює post-Resource remaining-T4 boundary: OCP-007 є єдиним T4 кандидатом, але continuity, classification, class/type та scheme/exception authority лишаються B; O7D є лише discovery-рекомендацією до окремого AD-016N Board selection;
 - AD-016N `0.15.0 / Accepted` обирає O7D лише як підготовку окремого outcome-fair AD-019 Organization stable-surface discovery; selection не редагує OCP-007, не обирає semantic outcome, не вирішує Organization backlog і не відкриває T5;
-- AD-019 `0.1.0 / Discovery` порівнює H0–H4 authority layouts та незалежні continuity/classification/kind/scheme/exception/lifecycle/P-001-record-integrity/composition/mapping axes; Q2 є лише провідною гіпотезою до окремого AD-019A Board selection;
+- AD-019A `0.2.0 / Accepted` обирає Q2 (`H2 + C2 + K3 + T2 + S1 + E1 + Y1 + R1 + U0 + M0`) лише як напрям підготовки одного OCP-007 `0.4.0 / Draft` remediation: одна human-readable authority з двома bounded surfaces, exact kind-profile envelope, fail-safe identity/record resolution і explicit composition/mapping exclusions; implementation та lifecycle лишаються окремими воротами;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 119 non-sensitive fixtures і 164 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після третього T4 micro-wave — **≈70%**; три Concepts Canonical, п’ять лишаються Accepted, а AD-019A та кожен наступний remediation/lifecycle act потребують власних Board gates.
+- не-нормативна оцінка загальної foundation-готовності після третього T4 micro-wave — **≈70%**; три Concepts Canonical, п’ять лишаються Accepted, а OCP-007 remediation та кожен наступний audit/lifecycle act потребують власних Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
