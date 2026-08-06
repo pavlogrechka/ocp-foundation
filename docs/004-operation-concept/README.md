@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.8.2
+Version: 0.8.3
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014
@@ -60,7 +60,7 @@ Operation не визначає сама по собі:
 
 | Concept | Status | Використання в OCP-004 |
 |---|---|---|
-| Resource | Accepted | елемент, що залучається до Operation |
+| Resource | Canonical | елемент, що залучається до Operation |
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
 | Objective | Canonical | intended outcome, condition або effect; OCP-008 |
 | Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
@@ -575,3 +575,11 @@ Revision `0.8.2` синхронізує лише два volatile current-status 
 Документ лишається `Draft`, Operation — `Accepted`. `objective_refs`, exact resolution, `ExplicitIntentRecord`, Operation lifecycle, `Operation → Objective` Concept edge, domain semantics і всі інваріанти лишаються незмінними; existing Operation references не потребують rebinding.
 
 Corrective rollback є частиною нового reviewed Objective lifecycle rollback: OCP-004 повертає обидва status renderings разом з OCP-008, OCP-000, OCP-002, generated map і repository accounting. Ізольована зміна одного rendering або переписування Operation/Objective history заборонені.
+
+## 24. PATCH accounting — v0.8.3
+
+Revision `0.8.3` синхронізує лише volatile current-status rendering Resource у §4 з окремим Resource lifecycle act: row тепер показує Resource як `Canonical`. Last-Review уже має дату цього lifecycle cycle; ця accounting note завершує bounded PATCH.
+
+Документ лишається `Draft`, Operation — `Accepted`. Resource reference, Assignment ownership, Operation fields/lifecycle, domain semantics, dependencies, Concept status, graph edges, P-001 invocation і всі інваріанти лишаються незмінними; existing Operation data не потребують rebinding.
+
+Corrective rollback повертає цей status rendering разом з OCP-003, OCP-000, OCP-002, двома іншими consumer views, generated map і repository accounting через новий reviewed act. Ізольована зміна row або переписування Operation/Resource history заборонені.

@@ -1,13 +1,13 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.2.0
+Version: 1.3.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
 Used-By: Domain Model, Knowledge Graph, Architecture
 Concept-Statuses:
-  Resource: Accepted
+  Resource: Canonical
   Operation: Accepted
   Assignment: Accepted
   Constraint: Accepted
@@ -107,7 +107,7 @@ Organization представляє сталу організаційну іде
 
 ## Resource
 
-Прийнята чернетка Concept `Resource` визначена в [OCP-003 — Resource Concept](../003-resource-concept/README.md).
+Concept `Resource` має статус `Canonical` і визначений у [OCP-003 — Resource Concept](../003-resource-concept/README.md) на підставі AD-014, AD-018A, AD-016L та окремого третього T4 lifecycle act.
 
 ```text
 Resource
@@ -300,3 +300,9 @@ Projection owner, exact set/value rules, category exclusions і fail-safe mismat
 Окремий другий T4 lifecycle act exact-sync-ить одну projection value: `Objective: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.1.0 → 1.2.0`.
 
 Поряд із frontmatter projection синхронізовано два поточні human-readable views: Objective label у ненормативному Operation decomposition tree та status sentence у секції Objective. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior, `Operation → Objective` edge і status кожного іншого Concept лишаються незмінними.
+
+## Revision `1.3.0` — Resource status projection
+
+Окремий третій T4 lifecycle act exact-sync-ить одну projection value: `Resource: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.2.0 → 1.3.0`.
+
+Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Resource. Ненормативне curated subtype tree лишається байт-ідентичним і не отримує Core taxonomy, inheritance, mapping або authority. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior і status кожного іншого Concept лишаються незмінними.

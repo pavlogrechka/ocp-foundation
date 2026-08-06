@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Capability та Objective мають статус `Canonical`; Resource, Operation, Assignment, Constraint, Organization та Event лишаються `Accepted`;
+- Capability, Objective та Resource мають статус `Canonical`; Operation, Assignment, Constraint, Organization та Event лишаються `Accepted`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -104,12 +104,13 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016J `0.11.0` обирає M3 лише як підготовку окремого AD-018 Resource stable-surface discovery з outcome-fair R0/RI/RE/RS/RX comparison; OCP-003/OCP-007, AB-006/AB-052 та lifecycle state не змінюються;
 - AD-018 `0.1.0 / Discovery` порівнює R0/RI/RE/RS/RX на exact Resource consumer і fixture evidence; RS in-place stable kernel є лише провідною гіпотезою до окремого AD-018A Board selection, без OCP-правок або taxonomy authority;
 - AD-018A `0.2.0 / Accepted` обирає RS лише як підготовку окремої OCP-003 `0.7.0 / Draft` remediation: один normative stable kernel, explicit exclusions і non-governed working catalog; OCP/Concept lifecycle та AB-006/AB-052 не змінюються;
-- OCP-003 `0.7.0 / Draft` реалізує RS в одному defining document: normative Resource kernel, explicit deferred boundary і non-governed classification catalog; Resource лишається `Accepted`, direct consumers/checker незмінні, а дві synthetic fixtures перевіряють лише opaque-classification envelope;
+- OCP-003 `1.0.0 / Canonical` стабілізує RS bounded Resource contract: §§1–12 positive kernel, §13 exclusions і non-governed §14 catalog; exact OCP-009 binding, `Capability ≠ Readiness`, Organization separation та directional interchangeability збережено без data migration або semantic consumer change;
 - AD-016K `0.12.0 / Accepted` виконує fresh post-remediation Resource audit: current semantic B-item у bounded kernel не виявлено, N3 ten-file lifecycle proposal є лише рекомендацією, а AD-016L лишається окремим Board gate;
 - AD-016L `0.13.0 / Accepted` обирає N3 лише як підготовку exact ten-file OCP-003/Resource governance-lifecycle proposal з трьома consumer status-view PATCHes; жоден status у selection act не змінюється;
+- третій T4 act встановлює OCP-003/Resource `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.3.0`, OCP-004 до `0.8.3`, OCP-005/OCP-006 до `0.2.3` та current map/accounting; OCP-007, AB-006/AB-052, fixtures, checker і Resource operational lifecycle не змінюються;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 119 non-sensitive fixtures і 164 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після другого T4 micro-wave — **≈69%**; два Concepts Canonical, шість лишаються Accepted, а наступний T4 scope потребує нового Board act.
+- не-нормативна оцінка загальної foundation-готовності після третього T4 micro-wave — **≈70%**; три Concepts Canonical, п’ять лишаються Accepted, а наступний T4 scope потребує нового Board act.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

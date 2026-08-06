@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.2
+Version: 0.2.3
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-05
+Last-Review: 2026-08-06
 ---
 
 # Assignment Concept
@@ -60,7 +60,7 @@ Assignment може бути підставою для перевірки цих
 
 | Concept | Status | Використання в OCP-005 |
 |---|---|---|
-| Resource | Accepted | елемент, що залучається |
+| Resource | Canonical | елемент, що залучається |
 | Operation | Accepted | контекст залучення |
 | Organization | Proposed | не створює Assignment автоматично |
 | Capability | Proposed | може перевіряти відповідність ролі |
@@ -479,3 +479,11 @@ Assignment у stage `Established` із довільно заповненим `te
 - amendment model;
 - quantity model для Consumable Resource;
 - provenance taxonomy.
+
+## 21. PATCH accounting — v0.2.3
+
+Revision `0.2.3` синхронізує лише volatile current-status rendering Resource у §4 з окремим Resource lifecycle act: row тепер показує Resource як `Canonical`. Review date і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Assignment — `Accepted`. `resource_ref`, exact Resource binding, Assignment identity/lifecycle, participation derivation, role semantics, dependencies, Concept status, graph edges, P-001 invocation і всі інваріанти лишаються незмінними; existing Assignment records не потребують rebinding.
+
+Corrective rollback повертає цей status rendering разом з OCP-003, OCP-000, OCP-002, двома іншими consumer views, generated map і repository accounting через новий reviewed act. Ізольована зміна row або переписування Assignment/Resource history заборонені.
