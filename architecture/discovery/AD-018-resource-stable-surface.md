@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-018
 Title: Resource Stable-Surface Discovery
-Version: 0.1.0
-Status: Discovery
+Version: 0.2.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-003, OCP-007, OCP-016, AD-014, AD-016
-Applies-To: AB-006, AB-052, AB-062, Resource 1.x compatibility boundary
-Review-After: External comparison and a separate Architecture Board selection before any OCP-003 edit or lifecycle proposal
+Applies-To: AB-062, Resource stable-surface remediation
+Review-After: Completion or failure of the selected OCP-003 stable-kernel remediation; then a fresh blocker/stability audit before any lifecycle proposal
 ---
 
 # AD-018 — Resource Stable-Surface Discovery
@@ -483,3 +483,260 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-018 will:
 - change no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture or production authority.
 
 Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization apply only to this discovery record. They cannot select RS, merge AD-018A, edit OCP-003/OCP-007, resolve AB-006/AB-052, change Resource/Organization status or authorize a third T4 lifecycle act.
+
+## 23. AD-018A Board question and exact baseline
+
+AD-018A decides whether the externally reviewed comparison justifies one Resource remediation direction. It does not perform that remediation or a lifecycle transition.
+
+The exact decision baseline is `main@685748bb4adfe7fee47355fc216025bf56588181`, tree `512dc62a8ca5f6ce3f1d0c44a543eb7fd43ebe75`. On that baseline:
+
+- AD-018 is `0.1.0 / Discovery`, blob `d86ca094de8c4f8bf03d53e7274aec7bbe2a0935`, SHA-256 `871976e4e4e07385f4b40402c17d03bb65b8994e2367241b2758f44b6d913a2f`;
+- OCP-003 remains `0.6.1 / Draft`, Resource remains `Accepted`, blob `721cad97a05970b6a089668040faeddd968cfe46`, SHA-256 `a90f651aa81f3f70f316566580d05aeca3be3359b33342ffdb0eb1d579526fbd`;
+- OCP-007 remains `0.3.2 / Draft`, Organization remains `Accepted`, blob `543d579f9ce1033ff38d478d1663c71a10b5f118`, SHA-256 `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b`;
+- all six direct OCP-003 consumer blobs, the Resource validator and the minimal Resource fixture remain byte-identical to §2;
+- external review independently reproduced every anchor, confirmed the six-consumer set, verified the three-rule validator, accepted the K/B/S/C ledger and found no sixth treatment; and
+- no Resource remediation or lifecycle proposal is currently authorized.
+
+The Board question is narrow: **does current evidence justify an in-place stable-kernel remediation, or should Resource remain held / use another authority arrangement?** File age, completed-wave count, authoring effort, CI state, fixture count and readiness percentage are not selection evidence.
+
+## 24. Board treatment of the discovery
+
+AD-018A accepts the discovery with these limits:
+
+1. **The direct-consumer set is complete for the current baseline.** OCP-004/005/006/012/013/014 consume OCP-003; none requires `Unit`, Organizational Resource, §9 lifecycle stages or a closed subtype hierarchy.
+2. **Classification use is real but semantically narrow.** Current prose and fixtures use familiar labels, while the validator enforces only non-empty identity, at least one non-empty classification value and no self-containment.
+3. **Stable semantics are scattered.** Managed-site and managed-stock identity rules sit inside working taxonomy and cannot be lost through blanket exclusion.
+4. **The mapping boundary is still open.** `Organization ≠ Resource`; no current edge, mapping owner or `Unit` identity decision exists.
+5. **The lifecycle boundary is still open.** The current stage sequence has no authoritative transition/history contract and cannot enter the stable kernel by appearance alone.
+6. **The RS recommendation is not self-executing.** It identifies a bounded remediation hypothesis; the later proposal must prove that one file can remain unambiguous.
+
+These findings justify selecting a remediation direction only if every commissioned attack below remains closed.
+
+## 25. Commissioned falsification closure
+
+AD-018A re-attempts all fourteen AD-018 §19 attacks:
+
+| Attack | Evidence checked | Board result |
+|---|---|---|
+| direct consumer requires `Unit` / Organizational Resource | exact six-consumer sweep, including incorporated OCP-014 body | not demonstrated |
+| valid fixture relies on §5 parent/child membership | flat classification values and three-rule validator | not demonstrated |
+| Resource identity fails when classification meaning is opaque/domain-owned | every current resolver exact-binds `resource_id`; labels do not select identity | not demonstrated |
+| direct consumer relies on broader subtype meaning | OCP-004 uses only accepted managed-site identity; OCP-005 label is illustrative; OCP-006/014 use exact subject/context | not demonstrated |
+| `belongs_to` creates a current compatibility guarantee | OCP-003 has no Concept dependency or mapping contract; graph remains edge-free | not demonstrated |
+| managed-site/managed-stock semantics cannot survive taxonomy exclusion | both can be relocated as identity rules without governing the tree | not demonstrated; relocation proof is mandatory in remediation |
+| consumer requires §9 lifecycle as authoritative state | no direct consumer or fixture resolves those stages | not demonstrated |
+| RS necessarily creates two semantic owners in one file | one defining OCP with explicit stable/excluded/working sections is coherent as a proposal | not demonstrated; readability remains a stop condition |
+| RX is necessary | no reference-home or owner split is required by current consumers | not demonstrated |
+| RI has a legitimate ready mapping owner | AB-006/AB-052 and OCP-007 continuity/classification questions remain open | not demonstrated |
+| sixth treatment exists | deletion, domain delegation, one-way projection, annex and hold reduce to existing outcomes | not demonstrated |
+| evidence assumes a rejected layer | unconditional obligations are mechanism-neutral; every outcome has an explicit equivalent | not demonstrated |
+| checker claims stronger classification semantics | `validate_resource` has exactly the three structural rules stated in §7.2 | not demonstrated |
+| discovery required an OCP edit to obtain evidence | AD-018 completed with one new record and accounting only | not demonstrated |
+
+“Not demonstrated” remains narrower than “impossible.” Attacks 6 and 8 are deliberately carried into the remediation contract: the implementation must prove relocation completeness and human-readable single ownership. If either succeeds during authoring or review, RS stops and R0 becomes immediate fallback.
+
+## 26. Architecture Board selection — RS
+
+AD-018A selects **RS — in-place stable Resource kernel** as the remediation direction.
+
+RS is selected because:
+
+- one existing OCP-003 owner already defines generic Resource identity;
+- current consumers and fixtures can replay without closed-taxonomy meaning;
+- stable managed-infrastructure and managed-consumable rules can be preserved rather than discarded;
+- unresolved mapping, lifecycle, relationship, availability and quantity surfaces can remain visible under explicit exclusions;
+- no consumer/reference-home migration justifies RX; and
+- failure can roll back one OCP-003 proposal without changing any Resource instance or consumer reference.
+
+RS is not selected because it is the smallest diff, because Resource is next in T4, because familiar labels seem intuitive, or because green fixtures approve the surface. It is selected as the smallest authority arrangement that can preserve the verified stable rules and expose the unresolved ones honestly.
+
+This decision authorizes preparation of one OCP-003 remediation draft. It changes no OCP or Concept status and does not authorize merge of that draft.
+
+## 27. Selected stable-kernel contract
+
+The future OCP-003 remediation must create one unmistakable structure inside the single defining document.
+
+### 27.1 Normative stable kernel
+
+The kernel must preserve:
+
+1. one non-empty stable Resource identity at a declared management granularity;
+2. identity independence from type/classification, role, Assignment, Capability claim, availability, Readiness and interchangeability result;
+3. at least one non-empty classification value without claiming a closed Core hierarchy; specialized meaning requires an exact external owner/profile;
+4. discrete subject/group identity and managed stock/lot/container/kit identity at their declared granularities;
+5. managed infrastructure identity distinct from geometry, area, route, coverage and environment payload;
+6. managed consumable identity distinct from quantity, reservation, consumption and material kind;
+7. exact Assignment ownership of participation and operational role;
+8. separate component identity plus no Assignment inheritance through composition;
+9. Resource-only CapabilityClaimRecord holders, exact OCP-009 Capability version binding and `Capability ≠ Readiness`;
+10. no claim inheritance, aggregation or transitive possession through Organization membership or Resource composition;
+11. OCP-013 directional, contextual interchangeability without equality, symmetry or transitivity; and
+12. domain-specific classification admission only through OCP-016 under a legitimate owner.
+
+### 27.2 Explicit exclusions/deferred surface
+
+The stable kernel must explicitly exclude:
+
+- a closed or exhaustive Core Resource subtype taxonomy;
+- Organization/Organizational Resource/`Unit` identity or mapping;
+- authoritative `belongs_to`, `may_be_part_of` or `may_contain` record semantics;
+- the current general lifecycle sequence until one exact transition/history/provenance owner is selected;
+- location, availability, health, Readiness and current-use authority;
+- quantity, reservation, consumption and capacity models;
+- Resource Group identity and bulk-Assignment mechanisms; and
+- any Organization Capability claim, automatic projection, identity collapse, inheritance, aggregation or transitive possession.
+
+### 27.3 Working classification catalog
+
+The current §5 labels may remain only in a clearly marked working catalog or examples area that:
+
+- is non-exhaustive and outside the stable compatibility promise;
+- cannot define identity, hierarchy, equivalence, Capability or role;
+- names domain ownership where known and otherwise remains illustrative;
+- preserves current labels as compatible opaque values rather than reinterpreting them; and
+- cannot override the normative kernel or exclusions.
+
+Stable managed-site and managed-stock rules must be moved to the kernel before the catalog is marked non-governed. A cross-reference alone is insufficient if the only normative wording remains inside the catalog.
+
+## 28. Selected Core Boundary and Pattern result
+
+| Responsibility | Selected route | Owner/result |
+|---|---|---|
+| generic Resource identity and stable invariants | F — existing fundamental Concept boundary | OCP-003 remains the single defining artifact |
+| minimal classification binding | F — Resource-local structural invariant | non-empty value required; no specialized meaning imported |
+| specialized classification meaning | D by default; E only after a concrete shared envelope decision | named domain owner/profile; no Core promotion by occurrence |
+| working classification catalog | D/I descriptive surface | no Core semantic authority |
+| Organization/Resource mapping | not selected | remains open under AB-006/AB-052; no route C/F object created |
+
+No new Concept, Concept dependency, graph edge, identified mapping record, profile registry or extraction artifact is selected. OCP-003 continues to invoke no Pattern. P-001 is not added or inherited.
+
+## 29. Mandatory OCP-003 remediation contract
+
+The separately reviewed proposal must:
+
+1. exact-anchor AD-018, OCP-003, OCP-007, the six direct consumers, Resource validator and affected fixtures;
+2. change OCP-003 `0.6.1 → 0.7.0` while retaining document `Draft`, Resource `Accepted`, current `Depends-On` and `Concept-Depends-On: []`;
+3. reorganize OCP-003 into the exact three surfaces in §27 without creating a second defining location;
+4. provide a line-by-line relocation ledger from every §6 K/B/S/C row to kernel, exclusion, working catalog, cleanup or historical record;
+5. preserve all twelve §27.1 guarantees in human-readable prose and explicit invariants/non-implications;
+6. keep every §27.2 exclusion visible with its exact future owner/reopening gate where known;
+7. retain current classification strings as valid opaque values and prohibit Core hierarchy/equivalence inference from them;
+8. preserve the AD-014 managed-site and managed-stock identity rules outside the non-governed catalog;
+9. replace or qualify §2/§3 Organization-belonging prose, §5.3 Capability/type wording and §7 informal relation code so none asserts an unowned mapping or authority;
+10. remove the §9 lifecycle sequence from the stable surface or mark it explicitly non-normative/deferred; it may not gain record semantics in this proposal;
+11. preserve exact Assignment, CapabilityClaimRecord, OCP-009 binding and OCP-013 consumer behavior without consumer edits;
+12. keep OCP-007, OCP-004/005/006/012/013/014, registries, taxonomy projections, graph and checker code byte-unchanged;
+13. preserve the existing Resource fixture and add exactly two synthetic fixtures: one valid Resource with a non-§5 namespaced classification value, and one invalid Resource with no non-empty classification;
+14. update only the mechanical fixture-count/accounting projections required by those two fixtures;
+15. include all twelve §14 scenarios and eighteen §15 counterexamples as prose or exact references with selected RS results;
+16. state PATCH/MINOR/MAJOR handling for the future stable surface without claiming lifecycle readiness;
+17. define atomic rollback of OCP-003, the two fixtures and accounting without rewriting Resource data; and
+18. state that remediation completion triggers a fresh blocker/stability audit and another Board act before any `1.0.0` proposal.
+
+If any required consumer or checker-code change appears, the proposal stops. It may not widen itself because the discovered edit seems small.
+
+## 30. Selected scenario results
+
+| Scenario | Required RS result |
+|---|---|
+| two equally classified assets | two distinct Resource identities; label equality has no merge effect |
+| one crew in two Operations | two exact Assignments; classification does not define either role |
+| composite and component | two Resource identities; composition representation remains deferred |
+| composite assigned, component not | no inherited Assignment or participation |
+| managed site and equal geometry | managed site remains Resource; payload remains Operation-local description |
+| fuel stock quantity changes | same managed-stock Resource unless a separately owned identity rule says otherwise; quantity is not identity |
+| battalion without mapping | Organization remains exact; no Organizational Resource exists by implication |
+| unknown domain classification | valid non-empty opaque classification; Core does not interpret hierarchy/equivalence |
+| equal positive claims | distinct Resources; exact directional requirement still decides eligibility |
+| future retired Resource | historical exact references remain; this remediation defines no lifecycle authority |
+| current `Technical Resource` fixture | continues to validate as an opaque value, not a Canonical subtype |
+| Organization `unit@1` fixture | remains Organization classification evidence only |
+
+## 31. Selected counterexample results
+
+All eighteen AD-018 §15 counterexamples remain rejected under RS:
+
+1. fixture frequency does not Canonicalize a subtype;
+2. checker acceptance does not govern label meaning;
+3. equal classifications do not create equality/interchangeability;
+4. equal claims do not create replacement authority;
+5. membership does not create participation;
+6. composition does not inherit Assignment;
+7. Organization `Unit` classification does not create Resource identity;
+8. informal `belongs_to` prose creates no edge or mapping;
+9. `Active` creates no availability/Readiness/authorization;
+10. geometry does not become managed-site identity;
+11. quantity does not become Resource or force identity change by itself;
+12. catalog exclusion cannot discard stable site/stock rules;
+13. one file does not make every section equally normative;
+14. extraction does not create legitimate ownership by itself;
+15. time, order, source/issuer count and majority do not select meaning;
+16. no P-001 invocation is inherited;
+17. Resource remediation/promotion cannot promote its consumers; and
+18. AD-018/AD-018A acceptance cannot implement RS or authorize lifecycle.
+
+## 32. Alternatives not selected and reopening gates
+
+### 32.1 R0 — hold
+
+R0 is not selected because current evidence supports a finite, reversible single-document remediation. It becomes immediate fallback if §29 cannot be satisfied without scope widening, duplicate authority or unreadable normativity.
+
+### 32.2 RI — include mapping
+
+RI is not selected because no current consumer needs it and no legitimate mapping owner/continuity contract is ready. It may reopen only through concrete mapping-consumer evidence plus a separately reviewed AB-006/AB-052 authority and identity proposal. Same label, shared referent or Organization classification is insufficient.
+
+### 32.3 RE — blanket explicit exclusion
+
+RE is not selected because stable infrastructure and consumable rules currently sit inside the working section. It may reopen if RS cannot produce one readable owner and an exact RE proposal preserves every stable embedded guarantee through a complete relocation ledger.
+
+### 32.4 RX — extraction
+
+RX is not selected because no consumer requires a new artifact home and extraction adds reference/owner migration. It may reopen only when an attempted RS remediation proves that one file cannot provide an unambiguous stable/working boundary.
+
+No alternative gains authority from RS failure automatically. The Board must select any reopened scope separately.
+
+## 33. Migration, rollback and failure handling
+
+AD-018A itself changes no Resource data or consumer reference. The selected remediation is expected to require no data migration:
+
+- every `resource_id` remains unchanged;
+- current classification strings remain valid opaque values;
+- Assignment, CapabilityClaimRecord, Constraint and interchangeability references remain exact;
+- no Organization projection or mapping is synthesized; and
+- no lifecycle history is invented.
+
+The two new fixtures are regression evidence only and carry synthetic non-sensitive identifiers. They cannot define domain label meaning.
+
+Rollback of the later remediation must revert OCP-003, both fixtures and their count/accounting projections as one unit. It must not delete Resources, merge identities, rebind consumers, reinterpret prior labels or restore normative-looking mapping/lifecycle prose without review.
+
+The remediation stops and returns to the Board if it discovers:
+
+- a seventh direct normative consumer or changed consumer requirement;
+- a current dependency on closed taxonomy membership or `Unit` mapping;
+- a need to edit OCP-007 or any direct consumer;
+- a need to change checker code, schema, Concept dependency or graph edge;
+- stable site/stock semantics that cannot be relocated completely;
+- two plausible defining Resource surfaces inside the same file;
+- a lifecycle, composition or classification authority that must be selected rather than excluded; or
+- any data/reference migration beyond opaque-label replay.
+
+## 34. Authorization boundary
+
+AD-018A selects only the RS remediation direction and authorizes preparation of one exact §29 draft.
+
+The OCP-003 remediation requires its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board merge authorization. Its merge authorization, if granted, still cannot promote OCP-003/Resource or authorize a lifecycle act.
+
+After remediation completes or fails, a fresh audit must recompute blockers, stable surface, consumer compatibility, executable evidence, L2/Pattern floors and migration. A later Board act may then authorize a lifecycle proposal or retain hold. No authorization transfers across these gates.
+
+## 35. Accepted effect and next gate
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-018A will:
+
+- set AD-018 to `0.2.0 / Accepted`;
+- select RS as the Resource stable-surface remediation direction;
+- authorize preparation of one OCP-003 `0.7.0 / Draft` stable-kernel proposal under §29;
+- retain Resource at `Accepted`, OCP-007 at `Draft`/Organization `Accepted`, AB-006/AB-052 `Open` and AB-062 `Planned`;
+- keep R0 as immediate fail-safe and preserve RI/RE/RX reopening gates; and
+- retain foundation readiness at approximately 69% because this selection changes no OCP or Concept lifecycle.
+
+This act changes no OCP, Concept, Concept status, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Authorization applies only to AD-018A. It cannot merge the OCP-003 remediation, add its fixtures, resolve AB-006/AB-052, promote Resource or authorize another T4 lifecycle act.
