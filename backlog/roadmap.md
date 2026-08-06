@@ -10,7 +10,7 @@
 | Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; новий Board scope act обов'язковий перед наступним remaining-T4 proposal |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; AD-016N дозволяє лише окремий AD-019 Organization discovery без semantic або lifecycle authority |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -76,6 +76,7 @@
 - [x] AD-016L Resource lifecycle scope selection — N3 authorizes preparation of one exact ten-file proposal with OCP-002 prose sync and three PATCH-only consumer views; selection itself changes no lifecycle state
 - [x] Third T4 micro-wave — OCP-003/Resource `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.3.0` projections and PATCH-only OCP-004/005/006 Resource status views, with no semantic consumer change, migration or excluded-surface authority
 - [x] AD-016M post-Resource reassessment — OCP-007 is the sole remaining-T4 candidate; continuity, classification, class/type and scheme/exception authority remain blocked, O7D leads only as a discovery hypothesis before separate AD-016N selection
+- [x] AD-016N Organization discovery scope selection — O7D authorizes preparation of one outcome-fair AD-019 discovery across independent identity, classification, relationship-kind, scheme/exception, composition and mapping axes; no semantic outcome, OCP edit or topology change is selected
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -150,8 +151,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review and decide AD-016N on the exact AD-016M baseline: select O0/O7D/O7R/O7E/O37/O5/O7P without editing OCP-007, changing lifecycle or reopening T5 by implication.
-2. If O7D is selected, prepare a separate outcome-fair AD-019 discovery across Organization identity, classification, relationship-kind, scheme/exception, composition and mapping axes; no semantic outcome or lifecycle authority transfers.
+1. Prepare one separate outcome-fair AD-019 discovery on the exact AD-016N baseline across Organization identity, classification, relationship-kind, scheme/exception, composition and mapping axes; no semantic outcome or lifecycle authority transfers.
+2. Require a separate Board selection after AD-019 before any OCP-007 remediation, extraction, mapping act or lifecycle proposal.
 3. Keep OCP-007/Organization at current status and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve exact questions.
 4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
 5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
