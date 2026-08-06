@@ -69,6 +69,7 @@
 - [x] Second T4 micro-wave — OCP-008/Objective `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.2.0` projections and bounded OCP-004 `0.8.2` status rendering, with exact historical consumer replay and no achievement authority
 - [x] AD-016I post-Objective reassessment — OCP-003/OCP-007 remain blocked; M0 stays fail-safe and M3 Resource stable-surface discovery is only a leading hypothesis before mandatory AD-016J selection
 - [x] AD-016J remaining-T4 scope selection — M3 authorizes preparation of one separate AD-018 Resource stable-surface discovery; it selects no semantic outcome and changes no OCP, Concept status or backlog resolution
+- [x] AD-018 Resource stable-surface discovery — exact consumer/fixture audit and outcome-fair R0/RI/RE/RS/RX comparison; RS is a leading hypothesis only and R0 remains fail-safe
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -143,7 +144,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare one separately reviewed AD-018 Resource stable-surface discovery comparing R0 hold, RI mapping inclusion, RE explicit exclusion, RS in-place stable kernel and RX extraction; do not edit OCP-003/OCP-007 or resolve AB-006/AB-052 in that proposal.
-2. After AD-018 completes or fails, require a separate Board act to choose a semantic outcome or return to M0/M37/M7/ME7; discovery merge does not authorize an OCP edit.
-3. Keep OCP-003 and OCP-007 at current status until their candidate-local blockers are resolved and another Board act separately authorizes lifecycle preparation.
-4. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
+1. Prepare a separately reviewed AD-018A Board act that accepts/revises the surface ledger, re-attempts all falsification targets and selects R0, RI, RE, RS, RX or a newly proved complete alternative; do not edit OCP-003/OCP-007 in the selection act.
+2. If RS or another positive remediation is selected, require a separate OCP-003 remediation proposal with its own exact-head review and authorization; remediation is not lifecycle promotion.
+3. After remediation completes or fails, perform a fresh blocker/stability audit and require another Board act before any OCP-003 `1.0.0` proposal.
+4. Keep OCP-007 at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
+5. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
