@@ -105,6 +105,7 @@ backlog/                 відкриті питання та дорожня к�
 - AD-018 `0.1.0 / Discovery` порівнює R0/RI/RE/RS/RX на exact Resource consumer і fixture evidence; RS in-place stable kernel є лише провідною гіпотезою до окремого AD-018A Board selection, без OCP-правок або taxonomy authority;
 - AD-018A `0.2.0 / Accepted` обирає RS лише як підготовку окремої OCP-003 `0.7.0 / Draft` remediation: один normative stable kernel, explicit exclusions і non-governed working catalog; OCP/Concept lifecycle та AB-006/AB-052 не змінюються;
 - OCP-003 `0.7.0 / Draft` реалізує RS в одному defining document: normative Resource kernel, explicit deferred boundary і non-governed classification catalog; Resource лишається `Accepted`, direct consumers/checker незмінні, а дві synthetic fixtures перевіряють лише opaque-classification envelope;
+- AD-016K `0.12.0 / Accepted` виконує fresh post-remediation Resource audit: current semantic B-item у bounded kernel не виявлено, N3 ten-file lifecycle proposal є лише рекомендацією, а AD-016L лишається окремим Board gate;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 119 non-sensitive fixtures і 164 unit tests;

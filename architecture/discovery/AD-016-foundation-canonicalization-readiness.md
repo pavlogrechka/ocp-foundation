@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.11.0
+Version: 0.12.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Completion or failure of the separately selected AD-018 Resource stable-surface discovery before any OCP-003 lifecycle proposal or another remaining-T4 scope
+Review-After: Separate AD-016L Board decision on the post-remediation Resource audit before any OCP-003 lifecycle proposal or another remaining-T4 scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -1821,3 +1821,296 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016J will:
 - retain foundation readiness at approximately 69% because this selection changes no OCP or Concept lifecycle.
 
 This act changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog resolution or production authority. Approval and authorization apply only to this Board selection. They cannot merge AD-018, select RI/RE/RS/RX, edit OCP-003/OCP-007, resolve AB-006/AB-052 or authorize a third T4 lifecycle proposal.
+
+## 112. AD-016K mandate and exact post-remediation baseline
+
+AD-018A required a fresh blocker/stability audit after the separately authorized OCP-003 remediation. PR #105 has now merged OCP-003 `0.7.0 / Draft` with one normative Resource kernel, explicit exclusions, a non-governed working catalog and two bounded fixtures. That completion is a trigger for reassessment, not momentum toward `1.0.0`.
+
+AD-016K asks one narrow question:
+
+> Does the exact post-remediation evidence justify placing one bounded OCP-003/Resource lifecycle proposal before the Board, or must the repository hold, repair the remediation, reopen joint Organization work or change the authority arrangement first?
+
+This audit does not answer that Board question. It recomputes the evidence on `main@03ead2fbb85f4a58d3afc57f5999c05c2464f374`, tree `604b5aa8eeaefb79346286bdb83c6bf4e47575ff`.
+
+### 112.1 Governing and candidate anchors
+
+| Input | Exact state | Git blob | SHA-256 |
+|---|---|---|---|
+| AD-016 | `0.11.0 / Accepted` | `97f3e32453f13bf183c14d3f36e2dbc7132ed8da` | `fb1fdeda1e38932f6982c61e09eb87de38455a97cbcca86e994ff92a72248692` |
+| AD-018 | `0.2.0 / Accepted` | `e4aa8d261587e393e9da87663e3c247a3cb0518c` | `ac39ff8848c78380513ddf1a76412ce58272c41cef4525b7e45d906b86fd95e7` |
+| OCP-003 Resource | `0.7.0 / Draft`; Resource `Accepted` | `1f0fb356f5393add8fc3dfbdf6fe62bfb8251ac8` | `ffbe08088f86d716182017f19951d89546106bda08633819bbaac9c293d48d73` |
+| OCP-007 Organization | `0.3.2 / Draft`; Organization `Accepted` | `543d579f9ce1033ff38d478d1663c71a10b5f118` | `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b` |
+| AD-014 managed-site boundary | `0.3.0 / Accepted` | `4e9aad5631d6990c4eb77d9b9060c5a107ba0e1a` | `dedc3c9e7e3e63a4f969faa55e63206f725aac0830301959ab84bc953ec14544` |
+| OCP-000 registry | `1.2.0 / Canonical` | `05f697ea3aa7adaebfb23c0a6be1312a100a2dba` | `5912df3f5d291d9f2dd14201bbbe009a9c4321f2690bad9a6dc73dd564edb225` |
+| OCP-001 governance | `1.0.0 / Canonical` | `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 status projection | `1.2.0 / Canonical` | `ce00db657e65ac31f88dbea1a2bc88aec6cbf2f4` | `90ebfa9c43e77f673daa41eed45bc40acd0dc1a5ccfeb9f7e0f24a7b27a40911` |
+| OCP-016 Core Boundary | `1.0.0 / Canonical` | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| P-001 identified-record Pattern | `0.1.0 / Accepted` | `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+
+Hashes identify reviewed bytes. File recency, commit order, completed-act count and hash equality do not select authority or lifecycle.
+
+### 112.2 Direct consumers and executable anchors
+
+| Input | Exact state | Git blob | SHA-256 |
+|---|---|---|---|
+| OCP-004 Operation | `0.8.2 / Draft` | `f95acdec469baa8c44885853c055ad2fa326ac57` | `de9e786759af436c71a7cd56ed834f27e3b52cb1f479dd56d9164a8babfd5b2e` |
+| OCP-005 Assignment | `0.2.2 / Draft` | `f50daff2f69898264f5a166c919f1299050ff456` | `aa39c06ed076cfd8e6efd4f7f5a4547f3f579fb3d608667ebc05c0d7dabbcf74` |
+| OCP-006 Constraint | `0.2.2 / Draft` | `5ae9245740b82e981880563287b3986574df4bfb` | `dc8b3249c9c4d1b003b9cd8132430c2145be3cf5d566ba9e0d154a23056d68cc` |
+| OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted` | `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-013 interchangeability | `0.2.0 / Accepted` | `658a291b4c3b9a0229aba09d485c1137723fe70b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` |
+| OCP-014 Coordination profile | `0.2.0 / Accepted` | `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+| Resource validator | three structural rules | `03586af0f94187b4e620076b3a29348025f26e40` | `45f68314e2b66b54facc786f0fb976d3ec98871400fbbb7a210808d86082db96` |
+| core rules manifest | Resource sources remain OCP-003 §12 | `063e2f94f8548fc349aa4918aa5583e6977decf2` | `a99d23637abb49149eb7d6a6ab9891d45f2317ff006b52251aee81519695ad0b` |
+| complete fixture set | 119 non-sensitive files | tree `fe02d8a9f5d302ff35ddceda0477f7722e861629` | recursive `git ls-tree` manifest `737d961afffd0e64981021b186861d690b49218dd8a155a5acdef0389e7efd67` |
+
+The exact current projection anchors are OCP-000 blob `05f697ea…`, OCP-002 blob `ce00db65…` and generated foundation-map blob `60d5ceae8ed5a2a81b240268b27fcce4ee53fed0`, SHA-256 `5674a0832fd4919d12435307979a4a1ac1fc22fa60d5d9cfd939dd18735326b6`. All render Resource as `Accepted`.
+
+## 113. Audit discipline and non-selection boundary
+
+AD-016K treats the merged remediation as evidence to attack, not a decision to continue. The following are explicitly not reasons to prepare a lifecycle proposal:
+
+- PR #105 was approved without findings;
+- the remediation was expensive or recent;
+- all tests are green;
+- Resource is the next remaining T4 item;
+- two other Concepts are already Canonical;
+- the repository reports approximately 69% readiness; or
+- a classification label is familiar or frequent.
+
+The audit separates five questions:
+
+1. **semantic stability** — is the positive Resource identity promise finite and human-readable?
+2. **exclusion honesty** — are unresolved surfaces visible without leaking authority?
+3. **consumer compatibility** — can all direct consumers replay without semantic edits or rebinding?
+4. **governance floors** — do L2, Pattern and Core Boundary rules hold independently?
+5. **migration/atomicity** — is the full lifecycle footprint finite and reversible?
+
+An answer of “yes” to all five supports only a recommendation. AD-016L remains the decision gate.
+
+## 114. Remediation completion evidence and its limits
+
+The merged OCP-003 proposal satisfies all eighteen AD-018A §29 obligations on exact head `0c84263e367dd5cc004a21e81244571149c7fffb`, tree `604b5aa8eeaefb79346286bdb83c6bf4e47575ff`:
+
+- §§1–12 contain the positive kernel;
+- §13 names exclusions and reopening owners;
+- §14 is a non-governed opaque-value catalog;
+- §17 relocates every one of the seventeen AD-018 §6 K/B/S/C rows;
+- §15 carries all twelve scenarios and eighteen counterexamples;
+- §16 exact-anchors the evidence and adds exactly two fixtures; and
+- §§18–19 define versioning, rollback, fresh-audit and stop rules.
+
+Fable independently reproduced every anchor, all 119 fixtures in both contexts, 164 tests, the complete ledger and a constructive dual-authority attack. Codex accepted that review with one precision note: the former lifecycle sequence remains visible only as the name of an explicitly excluded surface in §13; it is absent from the positive kernel and has no transition/history/provenance semantics.
+
+This proves that the reviewed remediation contract was implemented. It does not prove production fitness, a complete Resource model, Organization mapping, lifecycle semantics, availability, Readiness or domain taxonomy authority.
+
+## 115. Fresh K/B/S/C classification
+
+AD-016K classifies the post-remediation surface rather than copying AD-016I.
+
+| Surface | Fresh classification | Evidence and result |
+|---|---|---|
+| Resource identity and management granularity | K | one managed subject, discrete/group and managed-stock identities are explicit in §§1–3/5/12 |
+| opaque classification binding | K for non-empty binding; S for specialized meaning | §4 and two bounded fixtures enforce opacity; OCP-016/named owner gates domain meaning |
+| managed-site and managed-stock identity | K | stable wording lives in normative §5, not only in catalog |
+| Assignment participation and role | K | exact OCP-005 ownership preserved; no membership/composition inheritance |
+| Capability claim boundary | K | Resource-only holder, exact OCP-009 version and `Capability ≠ Readiness` preserved |
+| directional interchangeability | K | OCP-013 remains consumer-specific without equality/symmetry/transitivity |
+| Organization/`Unit` mapping | S, external | explicitly excluded under AB-006/AB-052; no current consumer requires it |
+| structural relation records | S, external | identity/non-inheritance stable; record shape/effectivity/authority excluded |
+| general Resource lifecycle | S, external | no stages or projection in kernel; requires a separately owned future contract |
+| location, availability, health, Readiness and current use | S, external | explicitly excluded; AD-011 boundary preserved |
+| quantity/reservation/consumption/capacity | S, external | managed-stock identity stable; operational quantity model excluded |
+| Resource Group and bulk Assignment | S, external | no identity or mechanism selected |
+| OCP-004/005/006 current Resource status rows | C | three tables still truthfully say `Accepted`; a future Resource transition would require atomic `Canonical` PATCH updates |
+| OCP-000/OCP-002/map/accounting projections | C on transition only | currently correct; future transition footprint is finite and mechanical |
+
+No current semantic B-item is demonstrated inside the proposed Resource `1.x` promise. This is a negative audit result, not proof that no future blocker exists. Excluded surfaces remain real work; they do not block the bounded kernel unless a current consumer, identity invariant or migration requires them.
+
+## 116. Direct-consumer compatibility audit
+
+| Consumer | Stable Resource dependency | Post-remediation result | Lifecycle-footprint note |
+|---|---|---|---|
+| OCP-004 Operation | exact Resource participation only through Assignment; managed-site identity separate from spatial payload | semantic replay succeeds; no taxonomy/mapping/lifecycle dependency | §4 has one current `Resource / Accepted` C-row; future PATCH also needs bounded version/accounting prose |
+| OCP-005 Assignment | one exact Resource identity and contextual role | semantic replay succeeds; no type-derived role or inherited participation | §4 has one current `Resource / Accepted` C-row; future PATCH also needs bounded version/accounting prose |
+| OCP-006 Constraint | Resource may be an exact subject | semantic replay succeeds; no subtype hierarchy is consumed | §5 has one current `Resource / Accepted` C-row; future PATCH also needs bounded version/accounting prose |
+| OCP-012 CapabilityClaimRecord | Resource-only exact holder and exact OCP-009 binding | semantic replay succeeds; no Organization holder or identity coupling | no current Resource status row needs repair |
+| OCP-013 interchangeability | distinct Resource identities under one directional requirement | semantic replay succeeds; equal labels/claims do not create equality | no current Resource status row needs repair |
+| OCP-014 Coordination profile | exact Resource requirement owner/context | semantic replay succeeds; no ranking/selection authority appears | no current Resource status row needs repair |
+
+A full `Depends-On` and prose sweep finds no seventh direct normative consumer. OCP-007 is a neighboring identity owner and reopening boundary, not a current Resource consumer requiring mapping. The three status rows are volatile views, not semantic dependencies; changing them in a later atomic lifecycle act would require PATCH bumps but no consumer rebinding.
+
+## 117. Executable evidence audit
+
+The current evidence closes only mechanically expressible claims:
+
+1. 119 fixtures pass in both PR and main audit contexts; 164 unit tests pass.
+2. The original Resource fixture retains `Technical Resource`/`Platform` as opaque values.
+3. The new namespaced-value fixture proves a non-catalog value is structurally valid.
+4. The new empty-value fixture proves at least one non-empty classification remains required.
+5. The validator still enforces exactly non-empty identity, non-empty classification and direct self-containment rejection.
+6. Rules manifest IDs still cite OCP-003 §12 accurately.
+7. Current Assignment, Capability claim, interchangeability and integrated scenarios preserve exact Resource identities without taxonomy inference.
+8. Concept graph remains edge-free for Resource and `Concept-Depends-On: []` remains exact.
+
+The evidence cannot prove human readability, legitimate Organization mapping, domain label meaning, lifecycle completeness, operational availability or production schema fitness. Those claims remain human-reviewed or excluded. Fixture count, pass rate and checker acceptance never become authority rules.
+
+## 118. L2, Pattern and Core Boundary floors
+
+### 118.1 L2
+
+OCP-003 directly depends on OCP-000, OCP-001 and OCP-002; all three are Canonical. AD-014 is an Accepted decision carrying the managed-site boundary already incorporated into §5. It is not a pre-Canonical OCP dependency and creates no Concept edge.
+
+OCP-001 reaches the Canonical OCP-016 routing contract. OCP-003's rule that specialized classification meaning requires a legitimate owner and OCP-016 route therefore uses the accepted governance path without inventing a registry or admission shortcut.
+
+The six consumers depend directionally on Resource; their Draft/Accepted states do not become upstream lifecycle floors. Same-act consumer promotion is neither required nor permitted.
+
+### 118.2 Pattern floor
+
+OCP-003 declares no `Uses-Patterns`, invokes no Pattern and does not inherit P-001 from OCP-007, OCP-012 or any record consumer. P-001 lifecycle therefore neither blocks nor authorizes Resource. Adding an invocation would be scope widening and a stop condition.
+
+### 118.3 Concept and Core Boundary floor
+
+Resource remains one already Accepted fundamental Concept under Route F. The audit creates no new Concept, `Concept-Depends-On` edge, mapping record, taxonomy registry or Organization projection. Domain classification remains Route D by default and Route E only after a concrete shared-envelope decision. No-projection remains the baseline.
+
+No L2, Pattern or Core Boundary floor currently blocks a bounded lifecycle proposal.
+
+## 119. Candidate lifecycle footprint and migration audit
+
+AD-016K does not edit these files. It records the smallest currently complete candidate footprint that AD-016L must accept, revise or reject before authoring:
+
+| Future file | Candidate change | Why it is in the atomic unit |
+|---|---|---|
+| `docs/003-resource-concept/README.md` | `0.7.0 / Draft → 1.0.0 / Canonical`; Resource `Accepted → Canonical` | defining compatibility contract and Concept lifecycle source |
+| `docs/000-operational-ontology/README.md` | `1.2.0 → 1.3.0`; Resource row to `Canonical` | authoritative registry projection |
+| `docs/002-concept-taxonomy/README.md` | `1.2.0 → 1.3.0`; frontmatter/table Resource status to `Canonical` | exact status projection contract |
+| `docs/004-operation-concept/README.md` | `0.8.2 → 0.8.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Operation semantic change |
+| `docs/005-assignment-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Assignment semantic change |
+| `docs/006-constraint-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Constraint semantic change |
+| `architecture/baselines/foundation-map.md` | generated Resource row to `Canonical` | derived current Concept map |
+| `README.md` | current-state and count/readiness accounting only | human current projection |
+| `backlog/architecture-backlog.md` | AB-062 accounting only; no AB-006/AB-052 resolution | governance accounting |
+| `backlog/roadmap.md` | lifecycle-act and next-gate accounting only | roadmap projection |
+
+The candidate footprint is ten files. OCP-004/005/006 changes are three bounded current-status PATCHes discovered by a repository-wide sweep; omitting any would leave false human-readable prose. OCP-007, OCP-012/013/014, AD records, fixtures, checker, rules manifests and Concept edges remain byte-unchanged in the candidate lifecycle act.
+
+No Resource data, classification value, Assignment, CapabilityClaimRecord, Constraint, Operation binding or interchangeability evidence requires migration or rebinding. Rollback would revert the ten-file lifecycle commit as one unit; it would not revert the already accepted `0.7.0` kernel, delete data or reinterpret labels.
+
+If a required eleventh file, semantic consumer edit, new graph edge, checker/schema change or data migration appears, the candidate footprint is incomplete and authoring must stop.
+
+## 120. Outcome space
+
+AD-016K keeps five outcomes admissible for the later Board act.
+
+### N0 — retain hold
+
+Keep OCP-003 `0.7.0 / Draft` and Resource `Accepted`. Reopen only when a named evidence gap is closed. This is the fail-safe default.
+
+### N3 — prepare one bounded Resource lifecycle proposal
+
+Authorize preparation of the exact §119 ten-file proposal. This would be preparation only: the lifecycle PR would still require its own exact-head review, adjudication, CI and owner authorization.
+
+### NR — repair the remediation first
+
+Prepare a separately reviewed OCP-003 Draft repair if the stable kernel, exclusions, catalog separation, anchors or evidence prove defective. Repair has no automatic lifecycle effect.
+
+### N37 — reopen joint Resource/Organization work
+
+Return to AB-006/AB-052 only if concrete current evidence proves that Resource stability requires `Unit`, Organizational Resource or an exact mapping. Shared labels, fixture occurrence or conceptual neatness are insufficient.
+
+### NX — reopen the authority arrangement
+
+Reconsider extraction or another OCP-016 route only if one-file authority/readability fails or a second legitimate owner is demonstrated. A preference for smaller sections is insufficient.
+
+## 121. Outcome-fair comparison
+
+| Criterion | N0 | N3 | NR | N37 | NX |
+|---|---|---|---|---|---|
+| preserves current semantics | strongest by no change | strong if exact §119 footprint holds | strong after proven repair | uncertain until mapping identity is solved | uncertain until owner split is proved |
+| responds to fresh evidence | defers despite closed current attacks | directly uses bounded kernel/consumer evidence | appropriate only if a defect exists | appropriate only if mapping is required | appropriate only if one-file authority fails |
+| migration exposure | none | ten-file status/accounting unit; no data migration | bounded Draft repair | potentially broad identity/reference migration | reference-home and owner migration risk |
+| rollback | no-op | one lifecycle commit; `0.7.0` remains valid on rollback | revert repair unit | likely multi-artifact | likely multi-artifact |
+| authority risk | indefinite hold | premature lifecycle decision if audit is wrong | repair-by-anxiety without defect | mapping scope expansion | duplicate-owner scope expansion |
+| current evidence | always admissible fail-safe | strongest positive fit | no defect demonstrated | no current consumer need | dual-authority attack failed |
+
+Every outcome receives mechanism-fair evidence:
+
+- N0 requires a named unresolved blocker or evidence insufficiency;
+- N3 requires full semantic, consumer, floor and migration closure;
+- NR requires a reproducible remediation defect;
+- N37 requires a concrete current mapping consumer or identity contradiction; and
+- NX requires a reproducible one-file authority/readability failure.
+
+No outcome may be rejected because another outcome has more fixtures, newer commits or more completed work.
+
+## 122. Commissioned falsification targets
+
+AD-016K commissions these attacks for external review and AD-016L:
+
+| Attack | Evidence attempted | Current result |
+|---|---|---|
+| §14 catalog can still act as a second Resource authority | actual OCP-003 layout, catalog rules, §5 placement and §19 stop rule | not demonstrated |
+| one of the twelve stable guarantees was lost or weakened | §27.1-to-OCP-003 mapping and §12 invariants | not demonstrated |
+| an exclusion hides a current consumer requirement | six-consumer sweep plus OCP-007 boundary | not demonstrated |
+| a seventh direct normative consumer exists | repository `Depends-On` and prose sweep | not demonstrated |
+| current fixtures require closed taxonomy or `Unit` mapping | full 119-fixture tree and validator behavior | not demonstrated |
+| rules manifest/checker sources became stale after relocation | OCP-003 §12 and exact rule IDs | not demonstrated |
+| OCP-003 has an unmet pre-Canonical direct OCP dependency | exact frontmatter and L2 audit | not demonstrated |
+| P-001 is required or inherited | metadata, record-family boundaries and Pattern ledger | not demonstrated |
+| OCP-007 must change in the same lifecycle act | mapping exclusions and consumer evidence | not demonstrated |
+| three consumer status views require semantic edits | line-level OCP-004/005/006 audit | not demonstrated; PATCH-only C rows identified |
+| another current Resource status projection exists | repository-wide current-view sweep | not demonstrated |
+| data/reference migration or consumer rebinding is required | identities, labels and exact bindings across current fixtures | not demonstrated |
+| ten-file candidate footprint is incomplete | status/projection/accounting sweep | not demonstrated; remains a stop condition |
+| AB-006/AB-052 must resolve before bounded Resource lifecycle | kernel/exclusion and mapping-consumer audit | not demonstrated |
+| one-file Resource contract is not readable by a human | kernel/exclusion/catalog layout review | not demonstrated |
+| evidence obligations assume N3-specific storage or lifecycle | outcome-by-outcome evidence mapping §121 | not demonstrated |
+| newest/order/count/majority chooses authority | explicit authority rules and replay checks | rejected |
+| remediation approval or sunk cost authorizes lifecycle | non-transfer gates and separate AD-016L contract | rejected |
+
+“Not demonstrated” is narrower than “impossible.” Any successful attack changes the classification before selection; N3 receives no presumption from being the leading result.
+
+## 123. Audit recommendation
+
+Current evidence most strongly supports **N3 — prepare one bounded Resource lifecycle proposal**, with N0 as fail-safe.
+
+The recommendation rests on five independent results:
+
+1. the positive Resource kernel is finite and human-readable;
+2. mapping, lifecycle, relation, availability, quantity and group work is visibly excluded rather than silently resolved;
+3. all six consumers replay without semantic edits, while three current-status rows form a finite PATCH-only footprint;
+4. L2, Pattern and Core Boundary floors are satisfied; and
+5. the ten-file candidate act requires no data or reference migration.
+
+The principal risk is a false-negative scope audit: a hidden current Resource status view, semantic consumer dependence or ambiguous catalog statement could make §119 incomplete. That risk is why AD-016L must re-attempt §122 and why any extra file or semantic edit stops the future lifecycle authoring.
+
+AD-016K does not select N3, authorize a branch, approve the ten-file footprint or change any lifecycle state.
+
+## 124. Mandatory AD-016L decision contract
+
+Before any OCP-003 lifecycle proposal, a separate AD-016L Board act must:
+
+1. exact-anchor AD-016K, OCP-003, OCP-007, all six consumers, executable evidence and current projections;
+2. re-attempt every §122 falsification target on the then-current `main`;
+3. accept, revise or reject the K/B/S/C classifications in §115;
+4. select N0, N3, NR, N37, NX or a separately justified alternative;
+5. if selecting N3, confirm every one of the ten §119 files and the exact version/status effects;
+6. preserve Resource-only CapabilityClaimRecord holders, exact OCP-009 binding, `Capability ≠ Readiness`, exact Assignment and directional interchangeability;
+7. keep AB-006/AB-052 Open unless a separately reviewed mapping act resolves them;
+8. state migration, rollback and stop conditions without newest/order/count authority; and
+9. state explicitly that selection authorizes preparation only, not merge or lifecycle effect.
+
+The later lifecycle proposal, if selected, requires a new exact-head Fable review, Codex adjudication, green CI and separate explicit Pavlo/Architecture Board authorization. AD-016K or AD-016L authorization cannot transfer to that merge.
+
+## 125. AD-016K accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016K will:
+
+- set AD-016 to `0.12.0 / Accepted`;
+- record the fresh post-remediation Resource blocker/stability audit;
+- classify no current semantic B-item inside the bounded kernel while preserving every excluded surface;
+- record the exact ten-file candidate lifecycle footprint and three consumer C-only status views;
+- recommend N3 with N0 as fail-safe;
+- require a separate AD-016L Board decision before authoring; and
+- keep foundation readiness at approximately 69% because no OCP or Concept lifecycle changes.
+
+This audit changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, AB-006/AB-052 status or production authority. Approval and authorization apply only to AD-016K evidence. They cannot select N3, merge AD-016L, author or merge OCP-003 `1.0.0`, patch OCP-004/005/006, resolve AB-062 or authorize another remaining-T4 scope.
