@@ -207,12 +207,14 @@ The field ledger shows why an editorial cleanup is insufficient: required inputs
 
 ### 8.1 Exact consumer sweep
 
-The repository contains:
+On the exact §2 baseline, the repository contains:
 
 - zero OCP documents with direct `Depends-On: OCP-007`;
 - zero current `Concept-Depends-On: [Organization]` edges;
 - four discovery/provenance records with OCP-007 in `Depends-On`: AD-005, AD-011, AD-014 and AD-018; and
 - registry/taxonomy/foundation-map projections of current Organization status, none of which consume Organization semantics.
+
+This proposed AD-019 record becomes the fifth such discovery/provenance dependency in the PR tree because its own frontmatter exact-binds OCP-007. It is not a normative OCP consumer. A post-merge AD-019A sweep must therefore expect five AD records while preserving the zero-OCP-consumer result.
 
 Current OCP prose establishes only negative or local boundaries:
 
