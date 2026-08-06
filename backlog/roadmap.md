@@ -75,6 +75,7 @@
 - [x] AD-016K post-Resource-remediation audit — no current semantic B-item is demonstrated inside the bounded kernel; N3 ten-file lifecycle preparation leads only as a recommendation before separate AD-016L selection
 - [x] AD-016L Resource lifecycle scope selection — N3 authorizes preparation of one exact ten-file proposal with OCP-002 prose sync and three PATCH-only consumer views; selection itself changes no lifecycle state
 - [x] Third T4 micro-wave — OCP-003/Resource `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.3.0` projections and PATCH-only OCP-004/005/006 Resource status views, with no semantic consumer change, migration or excluded-surface authority
+- [x] AD-016M post-Resource reassessment — OCP-007 is the sole remaining-T4 candidate; continuity, classification, class/type and scheme/exception authority remain blocked, O7D leads only as a discovery hypothesis before separate AD-016N selection
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -149,8 +150,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Require a new evidence-based Board scope act before preparing any next remaining-T4 lifecycle proposal; AD-016K/AD-016L and the Resource lifecycle authorization do not transfer.
-2. Keep OCP-007/Organization at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
-3. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
-4. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
-5. Continue later T4–T10 work only through OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. Review and decide AD-016N on the exact AD-016M baseline: select O0/O7D/O7R/O7E/O37/O5/O7P without editing OCP-007, changing lifecycle or reopening T5 by implication.
+2. If O7D is selected, prepare a separate outcome-fair AD-019 discovery across Organization identity, classification, relationship-kind, scheme/exception, composition and mapping axes; no semantic outcome or lifecycle authority transfers.
+3. Keep OCP-007/Organization at current status and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve exact questions.
+4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
+5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
