@@ -102,6 +102,7 @@ backlog/                 відкриті питання та дорожня к�
 - другий T4 act встановлює OCP-008/Objective `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.2.0`, OCP-004 до `0.8.2` та current map/accounting без record migration, consumer rebinding, нового graph edge або achievement authority;
 - AD-016I `0.10.0` заново оцінює remaining T4 scope: OCP-003/OCP-007 лишаються blocked, M0 — fail-safe, а M3 Resource stable-surface discovery є лише провідною гіпотезою до окремого AD-016J Board selection;
 - AD-016J `0.11.0` обирає M3 лише як підготовку окремого AD-018 Resource stable-surface discovery з outcome-fair R0/RI/RE/RS/RX comparison; OCP-003/OCP-007, AB-006/AB-052 та lifecycle state не змінюються;
+- AD-018 `0.1.0 / Discovery` порівнює R0/RI/RE/RS/RX на exact Resource consumer і fixture evidence; RS in-place stable kernel є лише провідною гіпотезою до окремого AD-018A Board selection, без OCP-правок або taxonomy authority;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 117 non-sensitive fixtures і 164 unit tests;
