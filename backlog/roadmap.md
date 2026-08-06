@@ -73,6 +73,7 @@
 - [x] AD-018A Resource stable-surface selection — RS authorizes preparation of one OCP-003 `0.7.0 / Draft` remediation; no OCP edit, Concept status change, mapping decision or lifecycle authority occurs in the selection act
 - [x] OCP-003 `0.7.0 / Draft` Resource stable-kernel remediation — one normative kernel, explicit deferred boundary, non-governed opaque classification catalog and two bounded fixtures; Resource remains Accepted and consumers/checker stay unchanged
 - [x] AD-016K post-Resource-remediation audit — no current semantic B-item is demonstrated inside the bounded kernel; N3 ten-file lifecycle preparation leads only as a recommendation before separate AD-016L selection
+- [x] AD-016L Resource lifecycle scope selection — N3 authorizes preparation of one exact ten-file proposal with OCP-002 prose sync and three PATCH-only consumer views; selection itself changes no lifecycle state
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -147,8 +148,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review and decide AD-016L on the exact AD-016K baseline: re-attempt all attacks and select N0/N3/NR/N37/NX without lifecycle effect.
-2. If AD-016L selects N3, prepare the exact ten-file OCP-003/Resource lifecycle proposal with three PATCH-only consumer status views; stop on any eleventh file or semantic consumer change.
+1. Prepare the exact AD-016L-selected ten-file OCP-003/Resource lifecycle proposal with OCP-002 frontmatter/prose sync and three PATCH-only consumer status views.
+2. Stop and return to N0/Board on any eleventh file, OCP semantic drift, consumer semantic change, migration, new edge or hidden excluded-surface dependency.
 3. Require a fresh exact-head review and separate Board authorization for the lifecycle PR; AD-016K/AD-016L authority does not transfer.
 4. Keep OCP-007 at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
 5. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
