@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.12.0
+Version: 0.13.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-016L Board decision on the post-remediation Resource audit before any OCP-003 lifecycle proposal or another remaining-T4 scope
+Review-After: Completion or stop of the separately selected OCP-003/Resource lifecycle proposal before another remaining-T4 scope
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -2114,3 +2114,203 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016K will:
 - keep foundation readiness at approximately 69% because no OCP or Concept lifecycle changes.
 
 This audit changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, AB-006/AB-052 status or production authority. Approval and authorization apply only to AD-016K evidence. They cannot select N3, merge AD-016L, author or merge OCP-003 `1.0.0`, patch OCP-004/005/006, resolve AB-062 or authorize another remaining-T4 scope.
+
+## 126. AD-016L Board question and exact baseline
+
+AD-016K recommends N3 after a fresh post-remediation audit, but recommendation is not selection. AD-016L asks:
+
+> Should the Board authorize preparation of one bounded ten-file OCP-003/Resource governance-lifecycle proposal, or retain hold, require repair, reopen joint Organization work or change the authority arrangement?
+
+Here “lifecycle proposal” means the OCP document/Concept status transition governed by OCP-001. It does not mean a Resource operational lifecycle, availability, health, Readiness or current-state model.
+
+The decision baseline is `main@7ed2cc4564178cf18dd57567fca1180d5f0039c4`, tree `89930324ca2846b916b3a044e8e07159854a5ff1`, after the separately authorized AD-016K merge.
+
+### 126.1 Decision and semantic anchors
+
+| Input | Exact state | Git blob | SHA-256 |
+|---|---|---|---|
+| AD-016K | `0.12.0 / Accepted` | `055e78af3dbaa58b99638ed165d44f20216c28cf` | `dcfe1b83025f47c0828e42c5138f05fd8bd28645a2dda0e27fbacaf59981e95e` |
+| OCP-003 Resource | `0.7.0 / Draft`; Resource `Accepted` | `1f0fb356f5393add8fc3dfbdf6fe62bfb8251ac8` | `ffbe08088f86d716182017f19951d89546106bda08633819bbaac9c293d48d73` |
+| OCP-007 Organization | `0.3.2 / Draft`; Organization `Accepted` | `543d579f9ce1033ff38d478d1663c71a10b5f118` | `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b` |
+| AD-014 managed-site boundary | `0.3.0 / Accepted` | `4e9aad5631d6990c4eb77d9b9060c5a107ba0e1a` | `dedc3c9e7e3e63a4f969faa55e63206f725aac0830301959ab84bc953ec14544` |
+| OCP-004 Operation | `0.8.2 / Draft` | `f95acdec469baa8c44885853c055ad2fa326ac57` | `de9e786759af436c71a7cd56ed834f27e3b52cb1f479dd56d9164a8babfd5b2e` |
+| OCP-005 Assignment | `0.2.2 / Draft` | `f50daff2f69898264f5a166c919f1299050ff456` | `aa39c06ed076cfd8e6efd4f7f5a4547f3f579fb3d608667ebc05c0d7dabbcf74` |
+| OCP-006 Constraint | `0.2.2 / Draft` | `5ae9245740b82e981880563287b3986574df4bfb` | `dc8b3249c9c4d1b003b9cd8132430c2145be3cf5d566ba9e0d154a23056d68cc` |
+| OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted` | `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-013 interchangeability | `0.2.0 / Accepted` | `658a291b4c3b9a0229aba09d485c1137723fe70b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` |
+| OCP-014 Coordination profile | `0.2.0 / Accepted` | `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+
+### 126.2 Governance, projection and executable anchors
+
+| Input | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| OCP-000 | `1.2.0 / Canonical`; Resource `Accepted` | blob `05f697ea3aa7adaebfb23c0a6be1312a100a2dba` | `5912df3f5d291d9f2dd14201bbbe009a9c4321f2690bad9a6dc73dd564edb225` |
+| OCP-001 | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 | `1.2.0 / Canonical`; Resource `Accepted` in frontmatter and §108 prose | blob `ce00db657e65ac31f88dbea1a2bc88aec6cbf2f4` | `90ebfa9c43e77f673daa41eed45bc40acd0dc1a5ccfeb9f7e0f24a7b27a40911` |
+| OCP-016 | `1.0.0 / Canonical` | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| P-001 | `0.1.0 / Accepted`; not invoked by OCP-003 | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| foundation map | Resource `Accepted` | blob `60d5ceae8ed5a2a81b240268b27fcce4ee53fed0` | `5674a0832fd4919d12435307979a4a1ac1fc22fa60d5d9cfd939dd18735326b6` |
+| Resource validator | three structural rules | blob `03586af0f94187b4e620076b3a29348025f26e40` | `45f68314e2b66b54facc786f0fb976d3ec98871400fbbb7a210808d86082db96` |
+| rules manifest | Resource sources point to OCP-003 §12 | blob `063e2f94f8548fc349aa4918aa5583e6977decf2` | `a99d23637abb49149eb7d6a6ab9891d45f2317ff006b52251aee81519695ad0b` |
+| fixture set | 119 non-sensitive fixtures | tree `fe02d8a9f5d302ff35ddceda0477f7722e861629` | recursive manifest `737d961afffd0e64981021b186861d690b49218dd8a155a5acdef0389e7efd67` |
+
+All anchors other than AD-016 are byte-identical to AD-016K. Hash equality proves continuity of the reviewed input, not the Board choice.
+
+## 127. Board treatment of the AD-016K audit
+
+AD-016L accepts the audit as bounded decision input with these limits:
+
+1. **No current semantic B-item was demonstrated inside the bounded kernel.** This is a negative result on the exact baseline, not proof of permanent completeness.
+2. **Excluded work remains real.** Organization mapping, Resource operational lifecycle, relations, availability, Readiness, quantity and Resource Group remain outside the compatibility promise.
+3. **Consumer compatibility is bounded.** Six consumers replay semantically, while OCP-004/005/006 each carry one volatile current Resource-status view requiring PATCH accounting in a transition act.
+4. **The ten-file footprint is provisional until re-attacked below.** A required eleventh file or semantic edit defeats N3 authoring.
+5. **Machine evidence has a finite role.** Passing fixtures/checker prove structural claims only; they do not choose lifecycle or taxonomy authority.
+6. **The recommendation is not self-executing.** AD-016K approval and merge authorization cannot select N3.
+
+## 128. Commissioned attack closure
+
+AD-016L re-attempts all eighteen AD-016K §122 attacks on the unchanged semantic baseline:
+
+| Attack | Decision evidence | Board result |
+|---|---|---|
+| §14 catalog can act as a second Resource authority | actual three-surface layout, §5 site/stock placement, §14 rules and §19 stop | not demonstrated |
+| one of twelve stable guarantees was lost | AD-018A §27.1 mapping to OCP-003 §§1–12 | not demonstrated |
+| an exclusion hides a current consumer requirement | exact six-consumer replay | not demonstrated |
+| a seventh direct normative consumer exists | repository `Depends-On` and prose sweep | not demonstrated |
+| fixtures require closed taxonomy or `Unit` mapping | 119-fixture tree, opaque-value cases and validator | not demonstrated |
+| rule/checker sources are stale | exact rules manifest against OCP-003 §12 | not demonstrated |
+| a pre-Canonical direct OCP dependency violates L2 | OCP-000/OCP-001/OCP-002 are Canonical; AD-014 is Accepted | not demonstrated |
+| P-001 is required or inherited | metadata and record-family boundaries | not demonstrated |
+| OCP-007 must change in the lifecycle act | explicit mapping exclusion and no current mapping consumer | not demonstrated |
+| OCP-004/005/006 status rows require semantic edits | line-level tables and PATCH precedent | not demonstrated; C-only updates |
+| a current status-bearing statement is omitted | full current-view sweep | not demonstrated; OCP-002 frontmatter and §108 prose both included |
+| data migration or consumer rebinding is required | exact identities/references in fixtures and consumers | not demonstrated |
+| ten-file footprint is incomplete | registry, projection, prose and accounting sweep | not demonstrated; remains a stop condition |
+| AB-006/AB-052 must resolve first | Resource kernel/exclusion and mapping-consumer evidence | not demonstrated |
+| one-file contract is not human-readable | kernel/exclusion/catalog layout | not demonstrated |
+| evidence obligations assume N3 | outcome-fair N0/N3/NR/N37/NX mapping | not demonstrated |
+| newest/order/count/majority selects authority | explicit governance and replay rules | rejected |
+| remediation approval or sunk cost authorizes lifecycle | separate AD-016L and lifecycle gates | rejected |
+
+“Not demonstrated” remains narrower than “impossible.” Any successful attack during the later lifecycle draft invokes the stop rule; this selection cannot override new evidence.
+
+## 129. Architecture Board selection — N3
+
+AD-016L selects **N3 — prepare one bounded Resource lifecycle proposal**.
+
+N3 is selected because:
+
+- the positive Resource compatibility kernel is finite, readable and already reviewed as one authority;
+- unresolved Organization, lifecycle, relation, availability, quantity and grouping work is explicitly excluded with reopening gates;
+- all six direct consumers replay without semantic change;
+- all direct OCP dependencies satisfy L2, and OCP-003 invokes no Pattern;
+- the complete current-status footprint is finite, including OCP-002 §108 and three consumer PATCH views; and
+- no Resource data, reference or classification migration is required.
+
+N3 is not selected because Resource is next, because two Concepts are already Canonical, because CI is green, because the remediation is recent or costly, or because readiness would increase. N0 remains the immediate fail-safe if authoring falsifies any premise.
+
+This selection authorizes preparation of one exact proposal only. It changes no lifecycle state and does not authorize merge of that proposal.
+
+## 130. Selected ten-file preparation scope
+
+The later proposal may change exactly these files and effects:
+
+| File | Authorized proposed effect |
+|---|---|
+| `docs/003-resource-concept/README.md` | `0.7.0 / Draft → 1.0.0 / Canonical`; Resource `Accepted → Canonical`; add lifecycle accounting without semantic drift in the three-surface contract |
+| `docs/000-operational-ontology/README.md` | `1.2.0 → 1.3.0`; Resource registry row to `Canonical`; bounded MINOR accounting |
+| `docs/002-concept-taxonomy/README.md` | `1.2.0 → 1.3.0`; `Concept-Statuses` frontmatter and §108 prose to `Canonical`; bounded MINOR accounting; qualified subtype tree unchanged |
+| `docs/004-operation-concept/README.md` | `0.8.2 → 0.8.3 / Draft`; only Resource current-status row, review date and PATCH accounting |
+| `docs/005-assignment-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; only Resource current-status row, review date and PATCH accounting |
+| `docs/006-constraint-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; only Resource current-status row, review date and PATCH accounting |
+| `architecture/baselines/foundation-map.md` | regenerate only the Resource current-status row to `Canonical` |
+| `README.md` | current-state, Concept-count and readiness accounting only |
+| `backlog/architecture-backlog.md` | AB-062 accounting only; no AB-006/AB-052 resolution |
+| `backlog/roadmap.md` | lifecycle-act and next-gate accounting only |
+
+OCP-007, OCP-012/013/014, AD records, fixtures, checker, rule manifests, artifact taxonomy and Concept graph remain byte-unchanged. The proposal may not add an eleventh file because the edit appears mechanical; it stops and returns to the Board.
+
+## 131. Mandatory lifecycle-proposal contract
+
+The separately reviewed proposal must:
+
+1. exact-anchor AD-016L and all §126 semantic, governance, projection and executable inputs;
+2. preserve the normative meaning of OCP-003 §§1–19 exactly; textual changes are limited to frontmatter, lifecycle/accounting wrapper and mechanically stale self-references required by `1.0.0`, and every semantic change is a stop;
+3. publish a human-readable `1.x` compatibility statement that stabilizes the positive kernel and explicit exclusions, not the §14 catalog as taxonomy;
+4. retain current OCP-003 `Depends-On`, `Concept-Depends-On: []`, Resource-only CapabilityClaimRecord holders and exact OCP-009 Capability version binding;
+5. preserve `Capability ≠ Readiness`, exact Assignment ownership and OCP-013 directional non-equality;
+6. make no Organization claim, mapping, projection, identity collapse, inheritance, aggregation or transitive-possession rule;
+7. update all ten §130 files atomically with the exact versions/effects stated there;
+8. prove OCP-004/005/006 diffs are status-view PATCHes only and OCP-002's qualified subtype tree is unchanged;
+9. regenerate the foundation map from defining metadata and pass repository-wide status synchronization;
+10. keep all 119 fixtures, 164 tests, checker rules and current Resource data unchanged and green;
+11. state no-migration and atomic rollback to OCP-003 `0.7.0 / Draft` plus prior status projections without rewriting data;
+12. include the twelve AD-018A scenarios and eighteen counterexamples by exact reference, showing that lifecycle status changes none of their results;
+13. preserve all §128 stop conditions and fail safe on unknown/conflicting evidence; and
+14. state that merge requires its own exact-head Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization.
+
+Canonicalizing OCP-003/Resource would stabilize the bounded generic identity contract. It would not Canonicalize catalog labels, Organization mapping, an operational Resource lifecycle, availability, Readiness, quantity, composition records, Capability claims, consumers or checker behavior.
+
+## 132. Alternatives not selected and reopening gates
+
+### 132.1 N0 — retain hold
+
+N0 is not selected because current evidence closes the finite preparation questions without semantic or data migration. It becomes immediate fallback if §130 or §131 cannot be satisfied exactly.
+
+### 132.2 NR — repair first
+
+NR is not selected because no reproducible remediation defect remains after two exact-head review iterations. It reopens only on a concrete kernel, exclusion, catalog, anchor or evidence defect; uncertainty alone does not authorize a repair.
+
+### 132.3 N37 — joint Resource/Organization work
+
+N37 is not selected because no current consumer, invariant or migration requires mapping. It reopens only through concrete evidence that `Unit`, Organizational Resource or an exact mapping is necessary for the bounded Resource identity promise. AB-006 and AB-052 remain Open.
+
+### 132.4 NX — authority-arrangement reopening
+
+NX is not selected because the real one-file dual-authority attack failed. It reopens only if the lifecycle proposal reveals two plausible defining surfaces or a legitimate second owner that cannot be expressed through current exclusions.
+
+No failed option transfers authority to another. The Board must decide any reopened direction separately.
+
+## 133. Migration, rollback and stop rules
+
+AD-016L changes no data or reference. The selected proposal is expected to require no data migration:
+
+- Resource identifiers and classifications remain unchanged;
+- Assignment, CapabilityClaimRecord, Constraint, Operation and interchangeability bindings remain exact;
+- no Organization projection or Resource operational lifecycle history is synthesized; and
+- no consumer version binding changes.
+
+Rollback of the later lifecycle act reverts the exact ten-file unit to the post-remediation baseline. It does not remove the `0.7.0` semantic kernel, delete data, merge identity, reinterpret classifications or reopen excluded surfaces automatically.
+
+Authoring stops if it discovers:
+
+- an eleventh required file or unlisted current status view;
+- semantic content change in OCP-003 or any consumer;
+- a need to edit OCP-007, OCP-012/013/014, AD records, fixtures, checker or rule manifests;
+- a new Concept dependency, Pattern invocation, graph edge, schema change or data migration;
+- incomplete status synchronization or an OCP-002 curated-tree rewrite;
+- a current mapping/lifecycle/taxonomy dependency hidden by an exclusion;
+- failure of any AD-016K/AD-016L commissioned attack; or
+- an authority decision based on timestamp, order, count, majority, CI or completed effort.
+
+## 134. Authorization boundary
+
+AD-016L selection requires exact-head Fable review, Codex adjudication, green CI and explicit owner/Board authorization. Those gates authorize only this selection record.
+
+The selected ten-file lifecycle proposal is a separate PR and repeats all four gates. Marking it Ready, passing CI, citing N3 or preparing the exact authorized files does not authorize merge. Any new head invalidates its review and authorization.
+
+Authorization does not transfer to Organization, AB-006/AB-052, another remaining-T4 candidate or downstream T5–T10 work.
+
+## 135. AD-016L accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016L will:
+
+- set AD-016 to `0.13.0 / Accepted`;
+- accept AD-016K as bounded decision input;
+- select N3 solely as preparation of one exact ten-file OCP-003/Resource lifecycle proposal;
+- keep N0 as immediate fail-safe and preserve NR/N37/NX reopening gates;
+- retain OCP-003 at `0.7.0 / Draft`, Resource at `Accepted`, OCP-007 at `0.3.2 / Draft` and Organization at `Accepted`;
+- keep AB-006/AB-052 Open and AB-062 Planned; and
+- retain foundation readiness at approximately 69% because selection changes no OCP or Concept lifecycle.
+
+This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Approval and authorization apply only to AD-016L. They cannot merge the ten-file proposal, change OCP-003/Resource status, patch consumers, resolve AB-062 or authorize another scope.
