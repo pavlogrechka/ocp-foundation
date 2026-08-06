@@ -10,7 +10,7 @@
 | Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; OCP-007 Q2 remediation змерджено як `0.4.0 / Draft`, а AD-016O лише рекомендує O7C до окремого AD-016P Board selection |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; OCP-007 Q2 remediation змерджено як `0.4.0 / Draft`, а AD-016P обирає O7C лише для підготовки exact seven-file lifecycle proposal з окремими exact-head gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -81,6 +81,7 @@
 - [x] AD-019A Organization stable-surface selection — Q2 authorizes preparation of one bounded OCP-007 `0.4.0 / Draft` remediation with one owner, two readable surfaces and exact C2/K3/T2/S1/E1/Y1/R1/U0/M0 boundaries; no OCP/checker/fixture or lifecycle change occurs in the selection act
 - [x] OCP-007 Q2 remediation — `0.4.0 / Draft` separates readable identity/lifecycle and local relationship-record surfaces, adds exact external kind-profile/dataset resolution and finite seventeen-group evidence; lifecycle remains separately gated
 - [x] AD-016O post-Organization-remediation audit — no current semantic B-item is demonstrated inside the bounded Q2 promise; O7C seven-file lifecycle preparation leads only as a recommendation before mandatory AD-016P selection
+- [x] AD-016P Organization lifecycle scope selection — all sixteen commissioned targets close negatively and O7C authorizes preparation only of the exact seven-file lifecycle proposal; O0 remains fail-safe and no lifecycle, backlog status or topology changes in the selection act
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -155,8 +156,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Review and decide AD-016O's post-Q2 evidence through a separate AD-016P Board act; O7C seven-file lifecycle preparation is a recommendation only and O0 remains fail-safe.
-2. If AD-016P selects O7C, prepare a fresh exact-head lifecycle proposal limited to OCP-007, OCP-000, OCP-002, the generated foundation map and README/backlog/roadmap accounting; semantic drift or an eighth current projection stops the proposal.
+1. Prepare the fresh exact-head O7C lifecycle proposal selected by AD-016P, limited to OCP-007, OCP-000, OCP-002, the generated foundation map and README/backlog/roadmap accounting; semantic drift, migration or an eighth current projection stops the proposal and returns to O0.
+2. Require Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization on one unchanged proposal head; no AD-016P approval or preparation authority transfers to proposal merge.
 3. Keep OCP-007/Organization at `0.4.0 / Draft` and `Accepted`, and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve their exact external/excluded questions.
 4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
 5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
