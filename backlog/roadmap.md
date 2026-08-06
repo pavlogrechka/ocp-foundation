@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 84% | Capability та Objective є Canonical; шість інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
+| Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈69%** | Другий T4 micro-wave встановлює OCP-008/Objective `1.0.0 / Canonical`; новий Board scope act обов'язковий перед будь-яким третім T4 proposal |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; новий Board scope act обов'язковий перед наступним remaining-T4 proposal |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -31,7 +31,7 @@
 
 ## Milestone 1 — Core Domain Foundation
 
-- [x] Resource Accepted working description
+- [x] Resource `1.0.0 / Canonical` bounded identity contract with explicit exclusions and non-governed classification catalog
 - [x] Operation Accepted working description
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
@@ -74,6 +74,7 @@
 - [x] OCP-003 `0.7.0 / Draft` Resource stable-kernel remediation — one normative kernel, explicit deferred boundary, non-governed opaque classification catalog and two bounded fixtures; Resource remains Accepted and consumers/checker stay unchanged
 - [x] AD-016K post-Resource-remediation audit — no current semantic B-item is demonstrated inside the bounded kernel; N3 ten-file lifecycle preparation leads only as a recommendation before separate AD-016L selection
 - [x] AD-016L Resource lifecycle scope selection — N3 authorizes preparation of one exact ten-file proposal with OCP-002 prose sync and three PATCH-only consumer views; selection itself changes no lifecycle state
+- [x] Third T4 micro-wave — OCP-003/Resource `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.3.0` projections and PATCH-only OCP-004/005/006 Resource status views, with no semantic consumer change, migration or excluded-surface authority
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -148,8 +149,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the exact AD-016L-selected ten-file OCP-003/Resource lifecycle proposal with OCP-002 frontmatter/prose sync and three PATCH-only consumer status views.
-2. Stop and return to N0/Board on any eleventh file, OCP semantic drift, consumer semantic change, migration, new edge or hidden excluded-surface dependency.
-3. Require a fresh exact-head review and separate Board authorization for the lifecycle PR; AD-016K/AD-016L authority does not transfer.
-4. Keep OCP-007 at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
-5. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
+1. Require a new evidence-based Board scope act before preparing any next remaining-T4 lifecycle proposal; AD-016K/AD-016L and the Resource lifecycle authorization do not transfer.
+2. Keep OCP-007/Organization at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
+3. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
+4. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
+5. Continue later T4–T10 work only through OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

@@ -1,14 +1,14 @@
 ---
 Document-ID: OCP-003
 Title: Resource Concept
-Version: 0.7.0
-Status: Draft
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-014
 Used-By: Operation Concept, Assignment Concept, Organization Model, Capability Model, Domain Model
 Defines-Concepts: Resource
 Concept-Depends-On: []
-Concept-Status: Accepted
+Concept-Status: Canonical
 Last-Review: 2026-08-06
 ---
 
@@ -363,6 +363,10 @@ The remediation stops and returns to R0/Architecture Board rather than widening 
 
 ## 20. Version history
 
+### `1.0.0` — canonical compatibility and lifecycle act
+
+Stabilizes the bounded Resource contract in §§1–13 as a human-readable `1.x` compatibility promise while keeping the §14 catalog non-governed. The act adds only lifecycle, evidence and accounting wrapper §§21–27; it does not add Resource semantics, data migration, a Concept dependency, graph edge, Pattern invocation, checker rule or fixture.
+
 ### `0.7.0` — stable-kernel remediation proposal
 
 Implements the exact AD-018A RS contract inside one defining OCP: normative stable kernel, explicit exclusions and non-governed working catalog. It adds exactly two bounded Resource fixtures and changes no Concept status, dependency, graph edge, Pattern invocation, consumer contract or checker code.
@@ -370,3 +374,205 @@ Implements the exact AD-018A RS contract inside one defining OCP: normative stab
 ### `0.6.1` — volatile status PATCH
 
 Corrected only the then-current Capability status rendering in former §7. It did not change definition, identity, working taxonomy, dependencies, Concept status, graph edges or P-001 invocation. The exact baseline bytes remain anchored in §16; superseded wording is historical evidence, not a second current authority.
+
+## 21. Current lifecycle bridge
+
+Sections 1–19 preserve the normative meaning and bytes reviewed at OCP-003 `0.7.0`; only frontmatter and the lifecycle/accounting wrapper beginning with the new `1.0.0` history entry change in this act. The statements in §18 that `0.7.0` was a Draft remediation, that Resource then remained `Accepted` and that a later Board act was still required describe the state in which that remediation was reviewed. They do not override the current frontmatter or §§21–27.
+
+Here “lifecycle” means the OCP document/Concept governance transition defined by OCP-001. It does not introduce the excluded general Resource operational lifecycle, state history, availability, health, current use or Readiness model named in §§10/13.
+
+The current semantic contract remains exactly three-surfaced:
+
+1. §§1–12 — normative positive kernel and non-implication rules;
+2. §13 — normative exclusions and reopening gates; and
+3. §14 — a non-governed, non-exhaustive working catalog outside the compatibility promise.
+
+Evidence and lifecycle appendices cannot promote a §14 label, create taxonomy authority or weaken an exclusion.
+
+## 22. Canonical compatibility surface `1.x`
+
+OCP-003 `1.x` stabilizes these guarantees:
+
+1. Resource is one identified managed subject at an explicitly chosen operational-management granularity; classification, role, claim, state and external record order do not define that identity.
+2. Every Resource has at least one non-empty opaque classification value, but OCP-003 defines no closed taxonomy, hierarchy, equivalence, precedence or Capability correspondence.
+3. Managed-site Resource identity remains separate from geometry, footprint, route, coverage, environment payload and condition snapshots under the AD-014 boundary.
+4. Managed-stock Resource identity names a managed stock, batch, container, kit or other accounting unit, not a material kind or quantity value.
+5. Exact Assignment under OCP-005 remains the sole current Core owner of Resource participation and operational role; identity, membership, composition, claims or availability do not create Assignment.
+6. Composite and component Resource identities remain distinct when modeled separately, and Assignment, participation or Capability claims do not inherit, aggregate or transitively propagate through composition.
+7. OCP-012 CapabilityClaimRecord remains Resource-holder-only, exact-bind-ить one OCP-009 Capability version and never becomes Resource identity, Readiness, availability, authorization, admissibility, selection or Assignment; `Capability ≠ Readiness`.
+8. Constraint does not change Resource identity, while OCP-013 interchangeability remains directional and consumer-specific; equal classifications or claims create neither equality nor automatic replacement.
+9. `Organization ≠ Resource`; Organization membership, `Unit`, a shared referent or a catalog label creates no mapping, identity collapse, Assignment, participation or Capability claim.
+10. Resource operational lifecycle, location, availability, health, Readiness, current use, quantity and relation authority remain outside this contract unless reopened by their exact owners under §13.
+11. Unknown, conflicting or ownerless semantic evidence fails safe; timestamp, record order, source/issuer/reviewer count, label frequency, majority and implementation popularity choose no authority.
+12. OCP-003 retains `Concept-Depends-On: []`, invokes no Pattern and creates no relationship or graph edge; consumers exact-bind Resource identity without importing their semantics into Resource.
+
+The scoped exclusions and reopening gates in §13 are part of the `1.x` promise. The illustrative §14 tree is not: it remains a human-readable view of opaque values and may not be used as a Core subtype, inheritance, mapping or admission source.
+
+`Canonical` means a stable versioned compatibility promise over this bounded generic identity contract. It does not mean production readiness, complete taxonomy, current truth, Organization mapping, operational Readiness, universal interchangeability, completion of every Resource extension or immutability forever.
+
+## 23. Versioning and excluded-surface discipline after `1.0.0`
+
+SemVer applies to the guarantees in §22 and the exclusions in §13:
+
+- **PATCH** may correct prose, links, examples or accounting without changing a guarantee, exclusion, owner, invariant, exact binding or interpretation of an existing Resource/classification value;
+- **MINOR** may add a backward-compatible optional guarantee or clarification only when every existing Resource identity, opaque classification, consumer binding and §22 guarantee keeps the same meaning and no excluded authority is imported; and
+- **MAJOR** is required to remove or weaken a guarantee/exclusion, reinterpret identity or existing classifications, change management granularity incompatibly, permit implicit mapping/inheritance, change exact consumer binding or admit a previously excluded authority in a breaking way.
+
+An operational lifecycle, relation record, Organization mapping, closed taxonomy, quantity model or holder expansion is not automatically MINOR because it adds fields. It first requires the exact reopening owner and OCP-001/OCP-016 route named in §13, and it uses MAJOR whenever it weakens or reinterprets `1.x`.
+
+Adding or changing a domain classification under its own exact external owner does not automatically version OCP-003. Such a contract cannot silently rewrite Resource identity, Core opacity or historical consumer interpretation.
+
+OCP document version `1.0.0` is not a Resource instance version, lifecycle stage, classification version or proof that the represented subject is available, healthy, ready or current.
+
+## 24. Dependencies, consumers and evidence boundary
+
+The atomic post-act dependency floor satisfies L2:
+
+- OCP-000 `1.3.0 / Canonical` owns registry membership and the synchronized Resource row;
+- OCP-001 `1.0.0 / Canonical` owns lifecycle, atomicity, L2 and authorization choreography;
+- OCP-002 `1.3.0 / Canonical` owns the exact Concept-status projection and keeps its Resource subtype tree non-normative; and
+- AD-014 `0.3.0 / Accepted` owns the managed-site/Operation-local spatial boundary.
+
+OCP-003 retains no `Uses-Patterns` metadata and no Concept dependency. Accepted AD-018A and AD-016L remain decision provenance; their status does not transfer to this document or authorize merge.
+
+Current consumers require no semantic or data migration:
+
+| Consumer | Result of this act |
+|---|---|
+| OCP-004 Operation `0.8.2 → 0.8.3 / Draft` | only its current Resource status row and PATCH accounting change; the review date is already the lifecycle date, while Resource references and Operation semantics remain exact |
+| OCP-005 Assignment `0.2.2 → 0.2.3 / Draft` | only its current Resource status row, review date and accounting note change; `resource_ref`, Assignment ownership and participation remain exact |
+| OCP-006 Constraint `0.2.2 → 0.2.3 / Draft` | only its current Resource status row, review date and accounting note change; targets and evaluation semantics remain exact |
+| OCP-012 CapabilityClaimRecord `0.3.0 / Accepted` | byte-unchanged; holder remains Resource-only with exact OCP-009 binding and no Readiness implication |
+| OCP-013 Resource interchangeability `0.2.0 / Accepted` | byte-unchanged; directional exact-consumer semantics and all non-equivalence rules remain exact |
+| OCP-014 Coordination profile `0.2.0 / Accepted` | byte-unchanged; contextual requirement ownership creates no selection or Resource mutation |
+
+The unchanged checker, all 119 fixtures and all 164 unit tests witness only the mechanically expressible subset: unique/non-empty Resource identifiers, required non-empty classification, self-containment, exact references, status synchronization, dependency floors and graph acyclicity. They remain unchanged and green in both PR and main audit contexts. They do not prove classification meaning, legitimate external ownership, Organization mapping, operational lifecycle, Readiness, semantic completeness or Board authority. Green CI is evidence, never an authority rule.
+
+## 25. Exact baseline, atomic transition and rollback
+
+The lifecycle baseline is `main@24e3555da48d8372670a70b38d8e3cc1ae87b3ad`, tree `410e2719b9ff2d6c51356066071d288b1a5e9c6e`, after the separately authorized AD-016L merge.
+
+### 25.1 Decision and semantic anchors
+
+| Input | Exact state | Git blob | SHA-256 |
+|---|---|---|---|
+| AD-016L | `0.13.0 / Accepted`; N3 preparation selected only | `646edef1209c900968b57d9c328dd3c79d74a5da` | `50a1be3d7a3c7051efa64dcc9312bb25f5fe1c262c432056ff7a508a66365a3b` |
+| OCP-003 Resource | `0.7.0 / Draft`; Resource `Accepted` | `1f0fb356f5393add8fc3dfbdf6fe62bfb8251ac8` | `ffbe08088f86d716182017f19951d89546106bda08633819bbaac9c293d48d73` |
+| OCP-007 Organization | `0.3.2 / Draft`; Organization `Accepted` | `543d579f9ce1033ff38d478d1663c71a10b5f118` | `93fdf3e2e71e844888306b22da4f46468418ed30f3a2a62b8a39a98e7c6b387b` |
+| AD-014 managed-site boundary | `0.3.0 / Accepted` | `4e9aad5631d6990c4eb77d9b9060c5a107ba0e1a` | `dedc3c9e7e3e63a4f969faa55e63206f725aac0830301959ab84bc953ec14544` |
+| OCP-004 Operation | `0.8.2 / Draft` | `f95acdec469baa8c44885853c055ad2fa326ac57` | `de9e786759af436c71a7cd56ed834f27e3b52cb1f479dd56d9164a8babfd5b2e` |
+| OCP-005 Assignment | `0.2.2 / Draft` | `f50daff2f69898264f5a166c919f1299050ff456` | `aa39c06ed076cfd8e6efd4f7f5a4547f3f579fb3d608667ebc05c0d7dabbcf74` |
+| OCP-006 Constraint | `0.2.2 / Draft` | `5ae9245740b82e981880563287b3986574df4bfb` | `dc8b3249c9c4d1b003b9cd8132430c2145be3cf5d566ba9e0d154a23056d68cc` |
+| OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted` | `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-013 interchangeability | `0.2.0 / Accepted` | `658a291b4c3b9a0229aba09d485c1137723fe70b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` |
+| OCP-014 Coordination profile | `0.2.0 / Accepted` | `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+
+### 25.2 Governance, projection and executable anchors
+
+| Input | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| OCP-000 | `1.2.0 / Canonical`; Resource `Accepted` | blob `05f697ea3aa7adaebfb23c0a6be1312a100a2dba` | `5912df3f5d291d9f2dd14201bbbe009a9c4321f2690bad9a6dc73dd564edb225` |
+| OCP-001 | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 | `1.2.0 / Canonical`; Resource `Accepted` in frontmatter and §108 prose | blob `ce00db657e65ac31f88dbea1a2bc88aec6cbf2f4` | `90ebfa9c43e77f673daa41eed45bc40acd0dc1a5ccfeb9f7e0f24a7b27a40911` |
+| OCP-016 | `1.0.0 / Canonical` | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| P-001 | `0.1.0 / Accepted`; not invoked by OCP-003 | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| foundation map | Resource `Accepted` | blob `60d5ceae8ed5a2a81b240268b27fcce4ee53fed0` | `5674a0832fd4919d12435307979a4a1ac1fc22fa60d5d9cfd939dd18735326b6` |
+| Resource validator | three structural rules | blob `03586af0f94187b4e620076b3a29348025f26e40` | `45f68314e2b66b54facc786f0fb976d3ec98871400fbbb7a210808d86082db96` |
+| rules manifest | Resource sources point to OCP-003 §12 | blob `063e2f94f8548fc349aa4918aa5583e6977decf2` | `a99d23637abb49149eb7d6a6ab9891d45f2317ff006b52251aee81519695ad0b` |
+| fixture set | 119 non-sensitive fixtures | tree `fe02d8a9f5d302ff35ddceda0477f7722e861629` | recursive manifest `737d961afffd0e64981021b186861d690b49218dd8a155a5acdef0389e7efd67` |
+
+Hash continuity proves exact inputs, not lifecycle authority. The atomic transition changes exactly ten files:
+
+1. OCP-003 `0.7.0 / Draft → 1.0.0 / Canonical` and Resource `Accepted → Canonical`;
+2. OCP-000 `1.2.0 → 1.3.0`, changing only the Resource registry row plus bounded revision accounting;
+3. OCP-002 `1.2.0 → 1.3.0`, changing the exact Resource projection and its current status sentence while leaving the curated subtype tree byte-identical;
+4. OCP-004 `0.8.2 → 0.8.3 / Draft`, changing only one Resource status row plus review/PATCH accounting;
+5. OCP-005 `0.2.2 → 0.2.3 / Draft`, changing only one Resource status row plus review/PATCH accounting;
+6. OCP-006 `0.2.2 → 0.2.3 / Draft`, changing only one Resource status row plus review/PATCH accounting;
+7. the generated Foundation map Resource row;
+8. README current-state, Concept-count and readiness accounting;
+9. AB-062 backlog accounting without resolving AB-006/AB-052; and
+10. roadmap lifecycle and next-gate accounting.
+
+OCP-007, OCP-012/013/014, AD records, fixtures, checker, rules manifests, artifact taxonomy and Concept graph remain byte-unchanged. No Resource record, identifier, classification, Assignment, claim, Constraint, exact reference or consumer binding requires migration.
+
+Corrective rollback requires a new reviewed act that returns the complete ten-file unit to OCP-003 `0.7.0 / Draft`, Resource `Accepted`, prior registry/taxonomy/consumer/map values and prior repository accounting. It cannot delete or merge Resource identities, reinterpret classifications, rewrite consumer history, synthesize Organization mapping or change excluded authority. Partial projection rollback is invalid.
+
+### 25.3 AD-016L attack replay and stop rule
+
+The implementation re-attempts every AD-016L §128 attack against its actual diff:
+
+| AD-016L §128 attack | Result on this proposal |
+|---|---|
+| §14 catalog acts as second Resource authority | not demonstrated; §§21–23 explicitly exclude it from `1.x` |
+| one of twelve stable guarantees is lost | not demonstrated; §22 states twelve preserved guarantees and §§1–19 are byte-identical |
+| an exclusion hides a current consumer requirement | not demonstrated by the six-consumer replay in §24 |
+| a seventh direct normative consumer exists | not demonstrated by the complete repository sweep |
+| fixtures require closed taxonomy or `Unit` mapping | not demonstrated; all 119 fixtures replay unchanged |
+| rule/checker sources are stale | not demonstrated; exact §25.2 anchors still point to §12 and stay byte-unchanged |
+| a pre-Canonical direct OCP dependency violates L2 | not demonstrated; OCP-000/OCP-001/OCP-002 are Canonical in the atomic post-act state |
+| P-001 is required or inherited | not demonstrated; metadata remains invocation-free |
+| OCP-007 must change | not demonstrated; Organization/mapping stay excluded and OCP-007 remains byte-unchanged |
+| OCP-004/005/006 require semantic changes | not demonstrated; each diff is one status view plus bounded PATCH accounting |
+| a current status-bearing statement is omitted | not demonstrated; registry, both OCP-002 renderings, three consumers, map and accounting are synchronized |
+| data migration or consumer rebinding is required | not demonstrated; exact identifiers/references replay unchanged |
+| the ten-file footprint is incomplete | not demonstrated; actual diff contains exactly the ten §25 files |
+| AB-006/AB-052 must resolve first | not demonstrated for the bounded generic identity promise; both remain Open |
+| the one-file contract is not human-readable | not demonstrated; kernel, exclusions, catalog and `1.x` promise remain separately labeled |
+| evidence obligations assume N3 | rejected; any failed row here stops the proposal and returns to N0/Board |
+| newest/order/count/majority selects authority | rejected by §§4/11/22 and the lifecycle gate |
+| remediation approval, sunk cost or prior authorization selects lifecycle | rejected; this exact head repeats all four gates |
+
+“Not demonstrated” remains narrower than “impossible.” Authoring or review stops and returns to the Architecture Board if any attack succeeds, an eleventh file becomes necessary, §§1–19 differ, a consumer needs semantic change, a migration/new edge/Pattern is required, OCP-007/checker/rules/fixtures must change, status synchronization fails or excluded authority is needed. Neither this table nor green evidence may waive that stop.
+
+## 26. Scenario and counterexample replay
+
+Lifecycle status changes none of the twelve §15.1 scenario results:
+
+| Exact prior reference | Lifecycle replay result |
+|---|---|
+| §15.1 row 1 — two equally classified assets | unchanged: two distinct Resource identities; label equality does not merge them |
+| §15.1 row 2 — one crew in two Operations | unchanged: two exact Assignment are required; classification does not define role |
+| §15.1 row 3 — composite and component | unchanged: identities stay distinct; relation representation remains deferred |
+| §15.1 row 4 — composite assigned, component not | unchanged: Assignment and participation do not inherit |
+| §15.1 row 5 — managed site and equal geometry | unchanged: site identity stays separate from payload |
+| §15.1 row 6 — fuel stock quantity changes | unchanged: managed-stock identity remains separate from quantity |
+| §15.1 row 7 — battalion without mapping | unchanged: Organization remains exact; no Organizational Resource appears |
+| §15.1 row 8 — unknown domain classification | unchanged: the non-empty value is opaque and Core derives no hierarchy/equivalence |
+| §15.1 row 9 — equal positive claims | unchanged: identities remain distinct and eligibility remains directional/exact |
+| §15.1 row 10 — future retired Resource | unchanged: historical references remain exact; operational lifecycle authority remains absent |
+| §15.1 row 11 — current `Technical Resource` fixture | unchanged: valid opaque value, not a Canonical subtype |
+| §15.1 row 12 — Organization `unit@1` fixture | unchanged: Organization classification evidence, not Resource mapping |
+
+Lifecycle status also leaves all eighteen §15.2 rejections intact:
+
+| Exact prior reference | Still rejected after `1.0.0` |
+|---|---|
+| §15.2 item 1 | fixture frequency не канонізує жоден subtype |
+| §15.2 item 2 | checker acceptance defines no label meaning |
+| §15.2 item 3 | equal classifications create no equality/interchangeability |
+| §15.2 item 4 | equal claims create no replacement authority |
+| §15.2 item 5 | Organization membership creates no participation |
+| §15.2 item 6 | composition inherits no Assignment |
+| §15.2 item 7 | Organization `Unit` creates no Resource identity |
+| §15.2 item 8 | informal `belongs_to` creates no graph edge or mapping |
+| §15.2 item 9 | label `Active` creates no availability, Readiness or authorization |
+| §15.2 item 10 | geometry is not managed-site identity |
+| §15.2 item 11 | quantity is not Resource and does not itself change identity |
+| §15.2 item 12 | catalog placement cannot discard stable §5 site/stock rules |
+| §15.2 item 13 | one file does not make every section equally normative |
+| §15.2 item 14 | extraction creates no legitimate owner by itself |
+| §15.2 item 15 | timestamp, order, count and majority choose no meaning |
+| §15.2 item 16 | OCP-003 inherits no P-001 invocation |
+| §15.2 item 17 | Resource lifecycle status promotes no consumer |
+| §15.2 item 18 | prior AD acceptance or selection does not authorize this `1.0.0` merge |
+
+## 27. Third T4 Resource canonicalization act
+
+This act preserves the normative Resource meaning in §§1–19 exactly. The `1.0.0` history entry and §§21–26 add only the current compatibility, exclusion, dependency, evidence, atomic-transition, rollback and replay wrapper required by OCP-001 and AD-016L.
+
+When exact-head reviewed, separately owner-authorized and squash-merged, the act makes OCP-003 `1.0.0 / Canonical` and Resource the third `Canonical` fundamental Concept. Capability and Objective remain Canonical; Operation, Assignment, Constraint, Organization and Event remain Accepted; Proposed registry candidates remain unchanged.
+
+The act adds no Resource field, operational lifecycle, taxonomy owner, Organization mapping, relation record, quantity model, Concept, graph edge, schema, checker rule, fixture, Pattern invocation, P-001 inheritance, Capability/Readiness collapse, interchangeability rule or production authority. AB-006 and AB-052 remain Open; AB-062 remains Planned for later separately selected lifecycle scopes.
+
+AD-016K and AD-016L authorized evidence and preparation only. This exact head requires fresh Fable approval, Codex adjudication, green CI and a new explicit Pavlo/Architecture Board authorization specifically for this lifecycle act before squash merge. Its authorization and merge do not transfer to OCP-007, another T4 candidate, any excluded Resource extension or T5–T10 work.
