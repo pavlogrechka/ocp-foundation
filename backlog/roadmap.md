@@ -71,6 +71,7 @@
 - [x] AD-016J remaining-T4 scope selection — M3 authorizes preparation of one separate AD-018 Resource stable-surface discovery; it selects no semantic outcome and changes no OCP, Concept status or backlog resolution
 - [x] AD-018 Resource stable-surface discovery — exact consumer/fixture audit and outcome-fair R0/RI/RE/RS/RX comparison; RS is a leading hypothesis only and R0 remains fail-safe
 - [x] AD-018A Resource stable-surface selection — RS authorizes preparation of one OCP-003 `0.7.0 / Draft` remediation; no OCP edit, Concept status change, mapping decision or lifecycle authority occurs in the selection act
+- [x] OCP-003 `0.7.0 / Draft` Resource stable-kernel remediation — one normative kernel, explicit deferred boundary, non-governed opaque classification catalog and two bounded fixtures; Resource remains Accepted and consumers/checker stay unchanged
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -145,8 +146,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare one separately reviewed OCP-003 `0.7.0 / Draft` RS remediation: explicit normative stable kernel, exclusions/deferred surface, non-governed working catalog, complete relocation ledger and two bounded classification fixtures; keep all direct consumers and checker code byte-unchanged.
-2. If remediation scope widens or one-file authority/readability fails, stop at R0 and return to a separate Board act; do not improvise RI/RE/RX.
-3. After remediation completes or fails, perform a fresh blocker/stability audit and require another Board act before any OCP-003 `1.0.0` proposal.
+1. Perform a fresh post-remediation OCP-003 blocker/stability audit on the exact merged baseline: recompute one-file authority, consumer compatibility, executable evidence, L2/Pattern floors and migration.
+2. If the audit finds scope widening or failed one-file authority/readability, return to R0 and a separate Board act; do not improvise RI/RE/RX.
+3. Require another Board act after the audit before any OCP-003 `1.0.0` proposal; remediation merge alone has no lifecycle authority.
 4. Keep OCP-007 at current status and preserve AB-006/AB-052 until a separately authorized mapping decision resolves them.
 5. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.

@@ -1,0 +1,11 @@
+case_id: resource-invalid-missing-classification-001
+concept: Resource
+expected:
+  valid: false
+  error_codes:
+    - RESOURCE_CLASSIFICATION_REQUIRED
+entity:
+  resource_id: R-SYNTHETIC-NO-CLASS-001
+  classifications:
+    - ""
+  contains_refs: []

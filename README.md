@@ -104,9 +104,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016J `0.11.0` обирає M3 лише як підготовку окремого AD-018 Resource stable-surface discovery з outcome-fair R0/RI/RE/RS/RX comparison; OCP-003/OCP-007, AB-006/AB-052 та lifecycle state не змінюються;
 - AD-018 `0.1.0 / Discovery` порівнює R0/RI/RE/RS/RX на exact Resource consumer і fixture evidence; RS in-place stable kernel є лише провідною гіпотезою до окремого AD-018A Board selection, без OCP-правок або taxonomy authority;
 - AD-018A `0.2.0 / Accepted` обирає RS лише як підготовку окремої OCP-003 `0.7.0 / Draft` remediation: один normative stable kernel, explicit exclusions і non-governed working catalog; OCP/Concept lifecycle та AB-006/AB-052 не змінюються;
+- OCP-003 `0.7.0 / Draft` реалізує RS в одному defining document: normative Resource kernel, explicit deferred boundary і non-governed classification catalog; Resource лишається `Accepted`, direct consumers/checker незмінні, а дві synthetic fixtures перевіряють лише opaque-classification envelope;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 117 non-sensitive fixtures і 164 unit tests;
+- reference suite містить 119 non-sensitive fixtures і 164 unit tests;
 - не-нормативна оцінка загальної foundation-готовності після другого T4 micro-wave — **≈69%**; два Concepts Canonical, шість лишаються Accepted, а наступний T4 scope потребує нового Board act.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

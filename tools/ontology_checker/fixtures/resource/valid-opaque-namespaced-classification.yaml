@@ -1,0 +1,9 @@
+case_id: resource-valid-opaque-classification-001
+concept: Resource
+expected:
+  valid: true
+entity:
+  resource_id: R-SYNTHETIC-OPAQUE-001
+  classifications:
+    - example.resource-class://specialized-asset@1
+  contains_refs: []
