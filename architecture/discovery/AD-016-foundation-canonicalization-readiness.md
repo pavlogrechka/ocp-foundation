@@ -2759,7 +2759,7 @@ This audit does not answer that Board question. It recomputes the evidence on `m
 | OCP-014 Coordination profile | `0.2.0 / Accepted`; no Organization-name authority | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
 | OCP-015 Coordination workflow | `0.2.0 / Accepted`; no Organization-name authority | blob `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
 | foundation map | Organization `Accepted`; no Organization Concept edge | blob `38011129ab9bf2e0362df2255a57fa15d3c90e54` | `f8af51e97e193820d24323cd0db5262d4fe0d353cb93c9bec910834e3e7b70e8` |
-| architecture backlog | AB-006/044–047/051/052 Open; AB-062 Planned | blob `86716ac7fac50cf211aced438b6cb03f37480a6` | `a190c04a4f024afc5992561aa5cac8d230ef96f974a94228f4eedbd595dc0ccb` |
+| architecture backlog | AB-006/044–047/051/052 Open; AB-062 Planned | blob `86716ac7fac50cf211aced4383b6cb03f37480a6` | `a190c04a4f024afc5992561aa5cac8d230ef96f974a94228f4eedbd595dc0ccb` |
 
 ### 157.2 Executable anchors
 
