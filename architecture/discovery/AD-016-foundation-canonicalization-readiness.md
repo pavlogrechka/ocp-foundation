@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.15.0
+Version: 0.16.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-019 Organization stable-surface discovery and later Board selection before any OCP-007 edit, lifecycle proposal or T5 topology reopening
+Review-After: Separate AD-016P Board selection before any OCP-007 lifecycle proposal or T5 topology reopening
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -2729,3 +2729,267 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016N will:
 - retain foundation readiness at approximately 70% because this selection changes no OCP or Concept lifecycle.
 
 This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Approval and authorization apply only to AD-016N. They cannot create or merge AD-019, select an Organization outcome, edit or promote OCP-007, resolve an Organization backlog item, reopen T5 or authorize downstream work.
+
+## 157. AD-016O mandate and exact post-remediation baseline
+
+AD-019A required a fresh blocker/stability/consumer/Pattern/route/migration audit after the separately authorized Q2 remediation. PR #113 has now merged OCP-007 `0.4.0 / Draft` with two human-readable surfaces under one owner, exact C2/K3/T2/S1/E1/Y1/R1 boundaries, explicit U0/M0 exclusions and bounded executable evidence. Completion of that remediation is a trigger for reassessment, not momentum toward `1.0.0`.
+
+AD-016O asks one narrow question:
+
+> Does the exact post-remediation evidence justify placing one bounded OCP-007/Organization lifecycle proposal before the Board, or must the repository hold, repair Q2, reopen semantic discovery, include mapping or change the accepted topology first?
+
+This audit does not answer that Board question. It recomputes the evidence on `main@b1e554d199cd343a522988e6469c9e0c9de28672`, tree `d3982a5a01017919d6a2baee5f0e8e3a8fdb0955`.
+
+### 157.1 Governing and candidate anchors
+
+| Input | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016N | `0.15.0 / Accepted` | blob `1fb8d963f7becd2b88971196ee9fe46b34ddc99f` | `87a9079cab57e00b1e84c8014253ddf238d44ad48bbbbc8b3b8ba43563979e39` |
+| AD-019 | `0.2.0 / Accepted`; Q2 selected and bounded | blob `928c63fd2665e36311b771550b8c60396e9e8486` | `51319816b9613b2ac2ced22559c739b96ad2b5e685d45ecba904b067cea0ad3c` |
+| OCP-007 Organization | `0.4.0 / Draft`; Organization `Accepted` | blob `dceb5d57c66d180cd5298f4e3ad48d02831a4f23` | `55834d6da1b1b984140020e0e4613ea578b6c83e721d1b81688c12ffa8375a3f` |
+| OCP-003 Resource | `1.0.0 / Canonical`; Resource `Canonical` | blob `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` |
+| OCP-000 registry | `1.3.0 / Canonical`; Organization `Accepted` | blob `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
+| OCP-001 governance | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 projection | `1.3.0 / Canonical`; Organization `Accepted` | blob `3b676afcff63ac4b600fb382a67283d67f766c7f` | `e0112f751b7922904d7217c76102cc8d5e3382ce49f13d94e99c31af1275669e` |
+| OCP-016 Core Boundary | `1.0.0 / Canonical` | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| P-001 | `0.1.0 / Accepted`; exact OCP-007 Module B and A/B/C invocations | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| OCP-009 Capability | `1.0.0 / Canonical` | blob `31163eacb0ca2a78b17b9d2466d99ef0c8b2d272` | `29362c815cb14f07bfd06775d1398498a27ace5ee5a4acaafde0eb39e902152a` |
+| OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted`; Resource-only holders | blob `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-013 interchangeability | `0.2.0 / Accepted`; Resource-specific and directional | blob `658a291b4c3b9a0229aba09d485c1137723fe70b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` |
+| OCP-014 Coordination profile | `0.2.0 / Accepted`; no Organization-name authority | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+| OCP-015 Coordination workflow | `0.2.0 / Accepted`; no Organization-name authority | blob `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
+| foundation map | Organization `Accepted`; no Organization Concept edge | blob `38011129ab9bf2e0362df2255a57fa15d3c90e54` | `f8af51e97e193820d24323cd0db5262d4fe0d353cb93c9bec910834e3e7b70e8` |
+| architecture backlog | AB-006/044–047/051/052 Open; AB-062 Planned | blob `86716ac7fac50cf211aced4383b6cb03f37480a6` | `a190c04a4f024afc5992561aa5cac8d230ef96f974a94228f4eedbd595dc0ccb` |
+
+### 157.2 Executable anchors
+
+| Input | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| Organization checker | bounded Q2 dataset validator | blob `ec3795b2d5ac9bbb4831ff3a1169caf4a66dd56f` | `5598e6852fb155b771ef6d513f303ed26cc1e80b43054c4b75e40169194e622f` |
+| Organization rules manifest | exact Q2 validation/derivation identifiers | blob `634105c41a0fe3f8dbb1ce641dca4607260da97a` | `8748c7c11cf9cf316206790f5d2b8f2942c83c76c3174363276430dd1ce25ba1` |
+| Organization tests | 166-test repository context | blob `d772b471d6e3a3b46356e15364399ad446a3fecd` | `1fc3bc0018b1c8856f33888b0caae6899fa00e75cb1cd18ce80b962566c5ac13` |
+| Organization primary fixtures | Q2 cases plus three retained files | tree `654d4f3c25a508ace3c532d65ec96ca813643748` | recursive `git ls-tree` manifest `b3a55a10222104ea8feda9356b458404b57ba375a3c6c63fbe44517672dc6625` |
+| Organization graph regressions | cycle, transient-cycle and multiple-superior cases | tree `7936aa998c610429e1aa7c15cb92e45558200d0a` | recursive `git ls-tree` manifest `861ac4bb3e115bd85e1130692ca98d60d071ce46cc7272acbf4857f920e7fd9d` |
+| complete fixture set | 120 non-sensitive fixtures | tree `8c2599c28c82112e91b55eb4ee5cf5855a4203dc` | recursive `git ls-tree` manifest `b0fbcdb1a85680cd16e061e24fe791117d960212dc747044f899ff791ca1a0cd` |
+
+Hashes identify reviewed bytes. Recency, file order, completed work, fixture count, green CI and reviewer agreement do not select lifecycle.
+
+## 158. Audit discipline and non-selection boundary
+
+AD-016O treats the merged remediation as evidence to attack, not a decision to continue. None of the following is lifecycle evidence by itself:
+
+- PR #113 was approved without findings;
+- 120 fixtures and 166 tests pass;
+- Q2 was expensive, recent or selected by two prior acts;
+- Organization is the sole remaining T4 candidate;
+- Resource, Objective and Capability are Canonical;
+- readiness is approximately 70%; or
+- reviewers, issuers or files agree by count.
+
+The audit keeps five questions separate:
+
+1. **semantic stability** — is the positive Organization promise finite and honest about real-world continuity?
+2. **authority separation** — does Core own only identity, local records, coarse classes and the exact shared envelope while external owners retain specialized meaning?
+3. **consumer compatibility** — can current consumers and exact references replay without semantic rebinding?
+4. **governance floors** — do L2, P-001 and OCP-016 routing hold independently?
+5. **migration and atomicity** — is every current status projection known and one lifecycle unit finite and reversible?
+
+A positive result on all five supports only a recommendation. AD-016P remains the Board gate.
+
+## 159. Remediation completion evidence and its limits
+
+The merged Q2 proposal satisfies all twenty-two AD-019 §36 obligations on exact head `92a698cd6434a5adc3ab337fcac60617f84e00f9`, tree `d3982a5a01017919d6a2baee5f0e8e3a8fdb0955`:
+
+- §§1–13 define exact Organization identity, C2's explicit material-event limit, optional opaque K3 annotations and complete Y1 record lifecycle;
+- §§14–20 define one local OrganizationRelationshipRecord, an exact three-field T2 kind-profile envelope, S1 dataset-local partitions, unconditional E1 rejection and R1 history-only branching supersession;
+- §§21–23 state shared non-implications, excluded U0/M0 surfaces and the finite resolver context in human-readable prose;
+- §§24–30 cover replay, scenarios, executable evidence, twenty-eight counterexamples, complete relocation, rollback and fail-safe stops; and
+- §§31–32 preserve current lifecycle and require this fresh audit.
+
+The checker now enforces the mechanically expressible subset, including exact set equality for 44 validation identifiers and three derivations. It does not decide whether an external kind owner is legitimate, whether a real-world institution continued through a material event, whether an annotation is meaningful in a domain or whether an excluded future mapping should exist.
+
+The exact three-field profile shape prevents hidden payload inside the shared resolver envelope. That shape alone does **not** prove the absence of a registry. The no-registry result depends on the whole contract: a closed envelope, no normative Core catalog, external ownership of specialized meaning, synthetic-only fixtures, provenance/attribution without authority and the stop rule if a legitimate owner boundary cannot be maintained.
+
+## 160. Fresh K/B/S/C classification
+
+| Surface | Classification | Evidence and compatibility boundary |
+|---|---|---|
+| exact Organization ID, declared resolution scope, duplicate rejection and no redirect | K | one readable defining owner; stable historical exact references; no order-based winner |
+| material-event continuity | S/external to bounded `1.x` promise | C2 states positively that exact record continuity does not decide merger, split, reorganization or constitutive redesignation; AB-044 may reopen a legitimate decision owner |
+| optional `classification_refs` serialization | K | K3 retains compatible opaque values and forbids semantic inference |
+| classification meaning or taxonomy | S/external | no required Core resolution, owner, identity, lifecycle or mapping effect; a domain may govern meaning separately |
+| Organization record-recognition lifecycle and projections | K | finite Y1 paths, exact P-001 Module B invocation, terminal behavior and projection checks |
+| broader institutional or operational lifecycle | S/external | Established is not activity, Readiness, availability, admissibility, Assignment or authorization; AB-046 remains a reopening owner |
+| local OrganizationRelationshipRecord identity, endpoints, effectivity and history | K | one owner, exact P-001 Modules A/B/C and fail-safe dataset resolution |
+| five coarse relationship behavior classes | K | non-equivalent shared behavior families only, not a complete taxonomy |
+| exact T2 kind-profile envelope and class agreement | K | exactly one three-field profile is required; missing, duplicate, unknown or mismatched resolution rejects |
+| specialized relationship-kind meaning and legitimacy | S/external | named external/domain owner; Core fixtures are synthetic evidence and not a normative catalog |
+| S1 structural partition equality | K | exact decoded equality only inside one declared dataset/scope |
+| scheme identity and cross-scope interpretation | S/external | no cross-dataset, cross-scope or cross-key inference; AB-051 may reopen |
+| multiple direct structural superiors | K | E1 rejects unconditionally in one exact partition; no label, waiver or producer bypass |
+| future multiple-superior exception | S/external | requires a separate legitimate owner, version, effectivity and conflict act |
+| R1 branching supersession | K | predecessor resolution, acyclicity, independent branches and successor attribution are complete; no redirect, current head or winner |
+| Organization composition/unit identity | S/external | U0 explicitly excludes it under AB-047 |
+| Organization/Resource mapping and Organization Capability holders | S/external | M0 and Canonical Resource keep identities separate; OCP-012 remains Resource-only; AB-006/AB-052 remain Open |
+| completed wording, checker/rules/test and count synchronization | C | repository projections agree with Q2 and do not carry semantic authority |
+
+No current semantic B item is demonstrated **inside the bounded Q2 compatibility promise**. That negative result is narrower than resolving AB-006, AB-044–AB-047, AB-051 or AB-052. Each remains visible and may reopen its separately owned question without making the current exclusions dishonest.
+
+## 161. Consumer and topology audit
+
+The fresh frontmatter and graph sweep finds:
+
+- zero normative OCP consumer declaring `Depends-On: OCP-007`;
+- zero current `Concept-Depends-On: [Organization]` edge; and
+- exactly five AD provenance dependencies: AD-005, AD-011, AD-014, AD-018 and AD-019.
+
+Current nearby contracts preserve negative boundaries rather than consume new Organization semantics:
+
+- Canonical OCP-003 keeps `Organization ≠ Resource` and excludes mapping;
+- OCP-004/OCP-005/OCP-006 do not infer participation, Assignment or Constraint results from Organization references;
+- OCP-012 accepts only exact Resource holders and preserves exact OCP-009 Capability binding;
+- OCP-013 remains Resource-specific and directional; and
+- OCP-014/OCP-015 infer no authority from Organization name, caller identity or labels.
+
+No consumer needs rebinding, data migration or a semantic edit for Q2 replay. Historical status statements in OCP-003/OCP-008 and prior accepted acts remain historical evidence, not current status projections to rewrite.
+
+The accepted topology still places OCP-007 at the remaining T4 boundary. OCP-004 and OCP-012 may be locally ready, but local readiness does not silently authorize a T5 bypass. A lifecycle recommendation and a topology-reopening option remain separate Board choices.
+
+## 162. L2, Pattern, route and Core Boundary floors
+
+OCP-007 directly depends on OCP-000 `1.3.0`, OCP-001 `1.0.0` and OCP-002 `1.3.0`; all are Canonical. AD-001 is Accepted. Exact `P-001@0.1.0` is Accepted and records both OCP-007 invocations. OCP-007 is one of six current primary P-001 invokers; historical snapshots do not create extra invocations. L2 and Pattern floors pass without an exception.
+
+OCP-016 Route F remains correct for fundamental Organization identity. Route C remains correct for the two local identified-record invocations. The exact T2 envelope shares interoperability behavior without admitting a Core kind registry; specialized meaning stays Route D by default and may use Route E only where a separately governed shared boundary is actually justified.
+
+No second defining owner, new artifact class, Pattern, Concept, graph edge, mapping authority, Organization Capability holder or production validator is required by the bounded surface. If a lifecycle proposal discovers one, it stops rather than treating the new layer as already authorized.
+
+## 163. Candidate lifecycle footprint and migration audit
+
+The complete current Organization-status sweep yields one candidate seven-file lifecycle unit:
+
+1. `docs/007-organization-concept/README.md`: `0.4.0 / Draft` and Organization `Accepted` to `1.0.0 / Canonical`, preserving §§1–32 semantics byte-for-byte except lifecycle metadata and a local act wrapper;
+2. `docs/000-operational-ontology/README.md`: `1.3.0 → 1.4.0`, Organization registry row only plus lifecycle accounting;
+3. `docs/002-concept-taxonomy/README.md`: `1.3.0 → 1.4.0`, frontmatter and current §102 Organization prose only plus lifecycle accounting;
+4. `architecture/baselines/foundation-map.md`: generated Organization status projection only;
+5. `README.md`: current status, lifecycle act and accounting projections;
+6. `backlog/architecture-backlog.md`: AB-062 accounting only; and
+7. `backlog/roadmap.md`: current status, completed gate and next-step accounting.
+
+OCP-003's earlier audit anchors and lifecycle-effect prose, OCP-008's earlier lifecycle-effect prose, accepted AD records and reviewed snapshots describe their own recorded baselines. They are history, not current projections, and must remain unchanged.
+
+Existing Organization/relationship IDs, transition histories, classifications, kind profiles, partition keys, exact references and fixtures require no migration or rebinding. The lifecycle unit changes governance status only. Rollback is a new reviewed act that restores all seven projections atomically; it never deletes records, redirects references, rewrites history, chooses a head or resolves an excluded semantic question.
+
+Any required eighth current projection, domain-record migration, semantic OCP-007 edit, consumer edit, checker/rule/fixture change or backlog-status change stops this candidate and returns it to the Board.
+
+## 164. Outcome space and outcome-conditional evidence
+
+AD-016O compares these next scopes without selecting one:
+
+| Option | Next preparation scope | Required evidence | Principal risk |
+|---|---|---|---|
+| O0 — hold | authorize no lifecycle or topology proposal | identify an unresolved fact that prevents an honest bounded promise, or retain uncertainty without fabricating migration | indefinite hold despite a finite reviewed contract |
+| O7C — bounded lifecycle proposal | prepare exactly the seven-file unit in §163 | no current B inside Q2; exact semantic preservation, status completeness, replay, rollback and all four independent gates | a missed current projection or hidden dependency makes the unit non-atomic |
+| O7R — repair Q2 | prepare another bounded OCP-007 remediation | demonstrate a concrete contradiction, missing §36 obligation or mechanically false claim | using preference to reopen an already bounded semantic choice |
+| O7D2 — reopen semantic discovery | compare a newly evidenced continuity, classification, kind, scheme, exception or lifecycle axis | demonstrate that the new evidence lies inside the `1.x` promise and cannot remain a truthful exclusion | replacing a finite contract with unbounded domain completeness |
+| O37 — joint mapping work | reopen AB-006/AB-052 before lifecycle | demonstrate that Organization identity itself cannot remain honest without Organization/Resource mapping and legitimate owners of both sides | identity collapse or accidental Organization Capability inheritance |
+| O5 — topology reopening | compare T5 before Organization lifecycle | demonstrate concrete compatibility harm caused by the no-bypass strategy | schedule pressure masquerading as architectural evidence |
+
+Evidence is outcome-fair. O0 need not fabricate a lifecycle migration. O7C must prove the full lifecycle unit but need not implement excluded domain semantics. O7R must identify an exact defect. O7D2 must show why an exclusion became part of the compatibility promise. O37 must prove inseparability rather than desirability. O5 must show strategy harm rather than local readiness.
+
+## 165. Outcome-fair comparison
+
+| Criterion | O0 | O7C | O7R | O7D2 | O37 | O5 |
+|---|---|---|---|---|---|---|
+| preserves Q2's bounded promise | yes | strongest if byte-stable | only if defect proved | only if new in-scope evidence | risks expansion | unchanged locally |
+| current semantic B inside promise | none asserted | none demonstrated | must demonstrate one | must demonstrate one | must prove mapping is in-scope | irrelevant to Organization |
+| current consumer migration | none | none found | unknown until defect | unknown | likely cross-owner | candidate-local only |
+| one defining owner | unchanged | preserved | must preserve | must prove | highest dual-owner risk | unchanged |
+| finite reversible next act | strongest | seven files | defect-dependent | discovery only | unclear | strategy act only |
+| compatibility with accepted topology | yes | yes | yes | yes | only after selection | requires explicit reopening |
+| fail-safe | hold | stop to O0 | stop to O0 | stop to O0 | stop to O0 | stop to O0 |
+
+Current evidence most strongly supports O7C as a **recommendation only**, with O0 as immediate fail-safe. O7C leads because Q2 makes each prior blocker either a finite Core guarantee or an explicit external/excluded boundary, current consumers require no semantic change, shared floors pass and the lifecycle projection unit is finite. The conclusion fails if review demonstrates any hidden semantic B, current projection, consumer or migration.
+
+## 166. Commissioned falsification targets
+
+Before any selection, AD-016P and external review must try to demonstrate:
+
+1. a current normative OCP-007 consumer or Organization Concept edge was missed;
+2. C2's distinction between exact-record continuity and material-event continuity is misleading or not human-readable as a stable `1.x` promise;
+3. K3's optional opaque annotations still carry a hidden required classification meaning;
+4. T2 duplicates specialized kind authority or cannot name a legitimate external/domain owner without a Core registry;
+5. the exact three-field T2 profile shape is being used as sufficient no-registry proof despite the additional ownership/catalog/fixture/attribution/stop conditions in §159;
+6. S1 permits a cross-dataset, cross-scope or cross-key semantic inference;
+7. E1's unconditional multiple-superior rejection conflicts with any current governed consumer or accepted record;
+8. Y1 omits an allowed terminal path, historical-reference rule or projection consistency case;
+9. R1 branches, overlap or gaps create an implicit redirect, head, winner or authority-by-time/order/count;
+10. an Open AB-006/044–047/051/052 question is actually inside the bounded Q2 compatibility promise rather than a truthful named reopening boundary;
+11. L2, exact P-001 invocation or OCP-016 routing has an exception or duplicate owner;
+12. a current Organization status projection beyond the seven files in §163 was misclassified as history;
+13. an existing record, resolver context, consumer or exact reference needs semantic migration or rebinding;
+14. lifecycle text cannot remain understandable without checker code, PR history or an unstated product model;
+15. a new Concept, graph edge, Pattern, registry, mapping, Organization Capability holder or production authority is required merely to state the current promise; or
+16. the evidence obligations assume a semantic layer rejected by O0, O7R, O7D2, O37 or O5.
+
+Every target must close negatively before O7C can be selected. “No current evidence” remains narrower than “impossible.” Unknown, conflicting or non-replayable evidence returns to O0; it never defaults to O7C or another option.
+
+## 167. Recommendation and mandatory AD-016P contract
+
+AD-016O recommends **O7C — one bounded seven-file OCP-007/Organization lifecycle proposal**. It does not select or authorize that proposal.
+
+The separate AD-016P Board act must:
+
+1. exact-anchor this AD-016O baseline and every changed current projection;
+2. independently close all sixteen §166 targets rather than cite PR #113 approval;
+3. accept, revise or reject the §160 K/B/S/C classification row by row;
+4. compare O0/O7C/O7R/O7D2/O37/O5 under the outcome-conditional obligations in §§164–165;
+5. if selecting O7C, enumerate the exact seven-file scope, version transitions, semantic byte-stability requirement, rollback unit and stop conditions;
+6. preserve `Organization ≠ Resource`, Resource-only CapabilityClaimRecord holders, exact OCP-009 binding, `Capability ≠ Readiness`, directional OCP-013 semantics and every Assignment/authority/interchangeability non-implication;
+7. keep AB-006, AB-044–AB-047, AB-051 and AB-052 Open and AB-062 Planned unless a separately authorized act changes them;
+8. retain O0 as fail-safe and prohibit transfer of authority between options;
+9. state that review, CI, readiness, newest timestamp, document/record order, issuer/reviewer count, majority and prior effort supply no selection authority; and
+10. require a later exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization for the lifecycle proposal itself.
+
+AD-016P may change only AD-016 and current accounting. It may not edit OCP-007, any Concept status, registry/taxonomy/map projection, checker, rule, fixture, schema, consumer, graph or backlog status.
+
+## 168. Stop, reopening and topology rules
+
+O7C preparation must stop before publication or merge if it discovers:
+
+- any positive §166 result;
+- an OCP-007 semantic edit beyond lifecycle metadata and a local act wrapper;
+- a required current status projection outside §163;
+- a consumer, record or reference migration;
+- a need to resolve material-event continuity, classification meaning, specialized kind meaning, cross-scope scheme identity, a multiple-superior exception, composition or mapping inside the lifecycle act;
+- a duplicate semantic owner or a Core/domain authority collapse;
+- a need for a new Concept, Pattern, graph edge, registry, Organization Capability claim, Assignment implication or interchangeability inference; or
+- authority based on timestamp, order, count, majority, CI, readiness or completed effort.
+
+Concrete Q2 defects reopen O7R. New in-scope semantic evidence reopens O7D2. Inseparable mapping evidence reopens O37. Concrete no-bypass harm reopens O5. No stop selects its reopening route automatically; each requires a new exact Board act.
+
+T5 remains closed by the accepted topology until Organization completes, fails under an explicitly selected stop, or a separate O5 decision changes the strategy. Local OCP-004/OCP-012 readiness cannot bypass this rule by implication.
+
+## 169. Migration, rollback and authorization boundary
+
+AD-016O changes only the AD-016 audit record and current accounting. It creates no data, reference, record, Pattern, semantic or lifecycle migration.
+
+If AD-016P later selects O7C, that selection authorizes preparation only. The lifecycle proposal must repeat all evidence against its then-current `main`, keep the seven-file unit atomic and receive four fresh gates. A changed head invalidates review and owner authorization for that head.
+
+Rollback of this audit is a new reviewed AD/accounting act. Rollback of a future lifecycle proposal is a new reviewed seven-file status act. Neither can delete Organization records, redirect exact references, rewrite transitions, elect a relationship head, infer mapping or decide an excluded continuity question.
+
+Fable approval, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization for AD-016O accept only this audit. They cannot select O7C, create AD-016P, mark OCP-007 Ready, merge a lifecycle proposal, resolve Organization backlog, reopen T5 or authorize downstream work.
+
+## 170. AD-016O accounting and accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016O will:
+
+- set AD-016 to `0.16.0 / Accepted`;
+- record the fresh post-Q2 blocker/stability/consumer/Pattern/route/migration audit;
+- classify no current semantic B item inside the bounded Q2 compatibility promise while retaining all named external/excluded reopening owners;
+- recommend O7C only as preparation of one seven-file lifecycle proposal, with O0 as fail-safe;
+- require a separate AD-016P Board selection before any proposal is authored;
+- retain OCP-007 at `0.4.0 / Draft` and Organization at `Accepted`;
+- keep AB-006, AB-044–AB-047, AB-051 and AB-052 `Open`, and AB-062 `Planned`; and
+- retain foundation readiness at approximately 70% because this audit changes no OCP or Concept lifecycle.
+
+This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Approval and authorization apply only to AD-016O. They cannot select O7C, create or merge AD-016P, edit or promote OCP-007, resolve an Organization backlog item, reopen T5 or authorize downstream work.
