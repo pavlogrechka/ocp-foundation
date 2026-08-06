@@ -21,15 +21,9 @@ from ocp_checker import (  # noqa: E402
     validate_reference_fixture,
     validate_repository,
 )
-from ocp_checker.organization import validate_organization, validate_organization_relationship  # noqa: E402
 
 
 def validate_any_fixture(fixture: dict):
-    concept = fixture.get("concept")
-    if concept == "Organization":
-        return validate_organization(fixture.get("entity") or {})
-    if concept == "OrganizationRelationshipRecord":
-        return validate_organization_relationship(fixture.get("entity") or {})
     return validate_reference_fixture(fixture)
 
 

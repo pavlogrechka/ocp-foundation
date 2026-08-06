@@ -10,7 +10,7 @@
 | Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; AD-019A обирає Q2 лише як напрям окремого Organization remediation без implementation або lifecycle authority |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; окремий OCP-007 Q2 remediation лишається `0.4.0 / Draft` proposal без lifecycle authority до review та Board gate |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -79,6 +79,7 @@
 - [x] AD-016N Organization discovery scope selection — O7D authorizes preparation of one outcome-fair AD-019 discovery across independent identity, classification, relationship-kind, scheme/exception, composition and mapping axes; no semantic outcome, OCP edit or topology change is selected
 - [x] AD-019 Organization stable-surface discovery — H0–H4 authority layouts and independent C/K/T/S/E/Y/R/U/M treatments are compared; Q2 is a leading hypothesis only and H0 remains fail-safe before separate AD-019A selection
 - [x] AD-019A Organization stable-surface selection — Q2 authorizes preparation of one bounded OCP-007 `0.4.0 / Draft` remediation with one owner, two readable surfaces and exact C2/K3/T2/S1/E1/Y1/R1/U0/M0 boundaries; no OCP/checker/fixture or lifecycle change occurs in the selection act
+- [ ] OCP-007 Q2 remediation — `0.4.0 / Draft` proposal now separates readable identity/lifecycle and local relationship-record surfaces, adds exact external kind-profile/dataset resolution and finite seventeen-group evidence; merge, fresh audit and every lifecycle act retain separate gates
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -153,7 +154,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare one separately bounded Q2 OCP-007 `0.4.0 / Draft` remediation under AD-019A §36: one owner, two human-readable surfaces, exact C2/K3/T2/S1/E1/Y1/R1/U0/M0 contracts and bounded Organization-only checker/rules/fixtures evidence.
+1. Review and decide the separately bounded Q2 OCP-007 `0.4.0 / Draft` remediation under AD-019A §36: one owner, two human-readable surfaces, exact C2/K3/T2/S1/E1/Y1/R1/U0/M0 contracts and bounded Organization-only checker/rules/fixtures evidence.
 2. Stop and return to H0/Board if T2 lacks a legitimate external kind-owner boundary, Module C cannot remain local, another OCP/Concept/graph/schema edit is required or prose depends on checker implementation.
 3. After remediation completes or fails, run a fresh exact blocker/stability/consumer/Pattern/route/migration audit and require another Board act before any OCP-007/Organization lifecycle proposal.
 4. Keep OCP-007/Organization at current status and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve exact questions.

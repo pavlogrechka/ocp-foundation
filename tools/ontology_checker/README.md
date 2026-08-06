@@ -12,7 +12,7 @@ Implemented validators:
 - Operation identity, Objective resolution, explicit-intent evidence and local spatial-binding exact profile/snapshot envelope;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
-- Organization and OrganizationRelationshipRecord module validation;
+- Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
 - Capability definition identity, namespace, supersession and exact resolution;
 - Event occurrence identity and exact resolution;
 - ObservationRecord attribution, optional Event linkage and Module C supersession;
@@ -48,6 +48,9 @@ Implemented reference derivations include:
 - `resolve_interchangeability_requirement`;
 - `derive_resource_interchangeability`.
 - `derive_coordination_evidence`.
+- `organization_established_at`;
+- `organization_relationship_effective_at`;
+- `organization_relationship_successor_ids` (all exact successors, never a head).
 
 ## Manifest discipline
 
@@ -99,6 +102,24 @@ Resolvers use exact normalized identities. They do not select by:
 - fuzzy similarity.
 
 Zero or multiple exact candidates fail closed.
+
+## Organization Q2 envelope
+
+OCP-007 `0.4.0 / Draft` keeps one semantic owner and exposes two bounded validation surfaces. Organization records have dataset-scoped exact IDs, authoritative finite history and optional opaque `classification_refs`. Equal or missing annotations do not change identity; merger/split continuity remains a human governance question rather than a checker projection.
+
+Established relationship records resolve both Organization endpoints exactly once and bind `relationship_type_ref` to exactly one synthetic `OrganizationRelationshipKindProfile`:
+
+```yaml
+validation_scope_ref: SCOPE-A
+relationship_kind_profiles:
+  - kind_ref: domain-kind://structural@1
+    profile_owner_ref: domain-owner://organization-relations@1
+    relationship_class: structural
+```
+
+The checker validates only the shared exact-resolution/class-agreement envelope. A fixture owner reference is attribution, not proof of legitimate authority, and the profiles do not form a Core registry. Structural `scheme_ref` values are opaque exact partition keys inside one declared dataset/scope. The full breakpoint sweep rejects cycles and multiple direct superiors unconditionally.
+
+Supersession targets resolve exactly and remain acyclic. Branching, overlap and gaps are allowed. `organization_relationship_successor_ids` exposes every branch in stable order but neither redirects an old reference nor elects a current head. The mandatory Q2 fixture covers all seventeen AD-019A mechanical evidence groups with exact expected error sets.
 
 ## Operation-local spatial-binding envelope
 

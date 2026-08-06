@@ -3,6 +3,10 @@ concept: OrganizationRelationshipRecord
 expected:
   valid: false
   error_codes: [ORGANIZATION_RELATIONSHIP_CLASS_INVALID]
+references:
+  organizations:
+    - {organization_id: ORG-A}
+    - {organization_id: ORG-B}
 entity:
   relationship_id: ORR-BAD-CLASS
   relationship_class: strutural

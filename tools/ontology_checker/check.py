@@ -12,16 +12,9 @@ import yaml
 from ocp_checker import load_fixture, validate_reference_fixture, validate_repository
 from ocp_checker.artifact_governance import validate_artifact_governance, validate_process_audit
 from ocp_checker.concept_graph import validate_and_render_concept_graph
-from ocp_checker.organization import validate_organization, validate_organization_relationship
 
 
 def validate_any_fixture(fixture: dict):
-    concept = fixture.get("concept")
-    entity = fixture.get("entity") or {}
-    if concept == "Organization":
-        return validate_organization(entity)
-    if concept == "OrganizationRelationshipRecord":
-        return validate_organization_relationship(entity)
     return validate_reference_fixture(fixture)
 
 

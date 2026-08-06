@@ -1,0 +1,327 @@
+case_id: organization-mandatory-q2-cases
+concept: OrganizationQ2ContractDataset
+expected: {valid: true, error_codes: []}
+
+cases:
+  optional_classification_and_equal_opaque_annotations:
+    expected_error_codes: []
+    validation_scope_ref: SCOPE-A
+    organizations:
+      - &org_a {organization_id: ORG-A, created_at: 2026-01-01T00:00:00Z, transition_history: []}
+      - &org_b {organization_id: ORG-B, classification_refs: [organization-type://unit@1], created_at: 2026-01-01T00:00:00Z, transition_history: []}
+      - &org_c {organization_id: ORG-C, classification_refs: [organization-type://unit@1], created_at: 2026-01-01T00:00:00Z, transition_history: []}
+    relationships: []
+    relationship_kind_profiles: []
+
+  malformed_optional_classification_rejects:
+    expected_error_codes: [ORGANIZATION_CLASSIFICATION_ANNOTATIONS_INVALID]
+    organizations:
+      - {organization_id: ORG-A, classification_refs: [""], created_at: 2026-01-01T00:00:00Z, transition_history: []}
+    relationships: []
+    relationship_kind_profiles: []
+
+  duplicate_organization_ids_reject:
+    expected_error_codes: [ORGANIZATION_ID_DUPLICATE]
+    organizations:
+      - *org_a
+      - <<: *org_a
+    relationships: []
+    relationship_kind_profiles: []
+
+  duplicate_organization_transition_ids_reject:
+    expected_error_codes: [ORGANIZATION_TRANSITION_ID_DUPLICATE]
+    organizations:
+      - &established_a
+        organization_id: ORG-A
+        created_at: 2026-01-01T00:00:00Z
+        transition_history:
+          - {transition_id: OT-SHARED, organization_ref: ORG-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-A}
+      - organization_id: ORG-B
+        created_at: 2026-01-01T00:00:00Z
+        transition_history:
+          - {transition_id: OT-SHARED, organization_ref: ORG-B, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-B}
+    relationships: []
+    relationship_kind_profiles: []
+
+  terminal_paths_and_projections_replay:
+    expected_error_codes: []
+    validation_scope_ref: SCOPE-A
+    organizations:
+      - organization_id: ORG-A
+        created_at: 2026-01-01T00:00:00Z
+        lifecycle_stage: Retired
+        established_at: 2026-01-02T00:00:00Z
+        retired_at: 2026-03-01T00:00:00Z
+        establishment_provenance_ref: TEST-A
+        transition_history:
+          - {transition_id: OT-A-1, organization_ref: ORG-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-A}
+          - {transition_id: OT-A-2, organization_ref: ORG-A, from_stage: Established, to_stage: Retired, occurred_at: 2026-03-01T00:00:00Z, provenance_ref: TEST-A-RETIRE}
+      - organization_id: ORG-B
+        created_at: 2026-01-01T00:00:00Z
+        lifecycle_stage: Cancelled
+        transition_history:
+          - {transition_id: OT-B-1, organization_ref: ORG-B, from_stage: Draft, to_stage: Cancelled, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-B}
+    relationships:
+      - &closed_structural
+        relationship_id: REL-CLOSED
+        relationship_class: structural
+        relationship_type_ref: domain-kind://structural@1
+        source_organization_ref: ORG-A
+        target_organization_ref: ORG-B
+        scheme_ref: STRUCTURE-A
+        validity_start: 2026-01-02T00:00:00Z
+        validity_end: 2026-02-01T00:00:00Z
+        created_at: 2026-01-01T00:00:00Z
+        lifecycle_stage: Closed
+        established_at: 2026-01-02T00:00:00Z
+        terminal_at: 2026-02-01T00:00:00Z
+        establishment_provenance_ref: TEST-REL
+        transition_history:
+          - {transition_id: RT-C-1, relationship_ref: REL-CLOSED, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-REL}
+          - {transition_id: RT-C-2, relationship_ref: REL-CLOSED, from_stage: Established, to_stage: Closed, occurred_at: 2026-02-01T00:00:00Z, provenance_ref: TEST-CLOSE}
+      - <<: *closed_structural
+        relationship_id: REL-REVOKED
+        lifecycle_stage: Revoked
+        terminal_at: 2026-02-15T00:00:00Z
+        establishment_provenance_ref: TEST-REL-REVOKE
+        validity_end: null
+        transition_history:
+          - {transition_id: RT-R-1, relationship_ref: REL-REVOKED, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST-REL-REVOKE}
+          - {transition_id: RT-R-2, relationship_ref: REL-REVOKED, from_stage: Established, to_stage: Revoked, occurred_at: 2026-02-15T00:00:00Z, provenance_ref: TEST-REVOKE}
+      - relationship_id: REL-CANCELLED
+        created_at: 2026-01-01T00:00:00Z
+        lifecycle_stage: Cancelled
+        transition_history:
+          - {transition_id: RT-X-1, relationship_ref: REL-CANCELLED, from_stage: Draft, to_stage: Cancelled, occurred_at: 2026-01-03T00:00:00Z, provenance_ref: TEST-CANCEL}
+    relationship_kind_profiles:
+      - &structural_profile {kind_ref: domain-kind://structural@1, profile_owner_ref: domain-owner://organization-relations@1, relationship_class: structural}
+
+  projection_mismatch_rejects:
+    expected_error_codes: [ORGANIZATION_LIFECYCLE_STAGE_MISMATCH]
+    organizations:
+      - <<: *established_a
+        lifecycle_stage: Draft
+    relationships: []
+    relationship_kind_profiles: []
+
+  missing_kind_profile_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_TYPE_UNRESOLVED]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships:
+      - &structural_rel
+        relationship_id: REL-A-B
+        relationship_class: structural
+        relationship_type_ref: domain-kind://structural@1
+        source_organization_ref: ORG-A
+        target_organization_ref: ORG-B
+        scheme_ref: STRUCTURE-A
+        validity_start: 2026-01-02T00:00:00Z
+        created_at: 2026-01-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-A-B, relationship_ref: REL-A-B, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: []
+
+  duplicate_kind_profiles_reject:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_TYPE_UNRESOLVED]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships: [*structural_rel]
+    relationship_kind_profiles: [*structural_profile, *structural_profile]
+
+  malformed_kind_profile_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_KIND_PROFILE_INVALID]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships: [*structural_rel]
+    relationship_kind_profiles:
+      - <<: *structural_profile
+        hidden_authority_rule: newest
+
+  kind_class_mismatch_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_TYPE_CLASS_MISMATCH]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships: [*structural_rel]
+    relationship_kind_profiles:
+      - <<: *structural_profile
+        relationship_class: operational
+
+  missing_endpoint_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_ENDPOINTS_REQUIRED]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships:
+      - <<: *structural_rel
+        target_organization_ref: ""
+    relationship_kind_profiles: [*structural_profile]
+
+  ambiguous_endpoint_rejects:
+    expected_error_codes: [ORGANIZATION_ID_DUPLICATE, ORGANIZATION_RELATIONSHIP_ENDPOINT_UNRESOLVED]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b, *org_b]
+    relationships: [*structural_rel]
+    relationship_kind_profiles: [*structural_profile]
+
+  duplicate_relationship_and_transition_ids_reject:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_ID_DUPLICATE, ORGANIZATION_RELATIONSHIP_TRANSITION_ID_DUPLICATE]
+    organizations: [*org_a, *org_b]
+    relationships:
+      - &draft_rel {relationship_id: REL-DUP, created_at: 2026-01-01T00:00:00Z, transition_history: []}
+      - relationship_id: REL-DUP
+        created_at: 2026-01-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-DUP, relationship_ref: REL-DUP, from_stage: Draft, to_stage: Cancelled, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+      - relationship_id: REL-OTHER
+        created_at: 2026-01-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-DUP, relationship_ref: REL-OTHER, from_stage: Draft, to_stage: Cancelled, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: []
+
+  structural_validation_scope_is_exact_and_required:
+    expected_error_codes: [ORGANIZATION_STRUCTURAL_VALIDATION_SCOPE_REQUIRED]
+    organizations: [*org_a, *org_b]
+    relationships: [*structural_rel]
+    relationship_kind_profiles: [*structural_profile]
+
+  different_partitions_do_not_form_a_cycle:
+    expected_error_codes: []
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships:
+      - *structural_rel
+      - <<: *structural_rel
+        relationship_id: REL-B-A
+        source_organization_ref: ORG-B
+        target_organization_ref: ORG-A
+        scheme_ref: STRUCTURE-B
+        transition_history:
+          - {transition_id: RT-B-A, relationship_ref: REL-B-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: [*structural_profile]
+
+  all_time_structural_cycle_rejects:
+    expected_error_codes: [ORGANIZATION_STRUCTURAL_CYCLE]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships:
+      - *structural_rel
+      - <<: *structural_rel
+        relationship_id: REL-B-A
+        source_organization_ref: ORG-B
+        target_organization_ref: ORG-A
+        transition_history:
+          - {transition_id: RT-B-A-CYCLE, relationship_ref: REL-B-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: [*structural_profile]
+
+  transient_structural_cycle_rejects:
+    expected_error_codes: [ORGANIZATION_STRUCTURAL_CYCLE]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b]
+    relationships:
+      - <<: *structural_rel
+        validity_end: 2026-03-01T00:00:00Z
+      - <<: *structural_rel
+        relationship_id: REL-B-A
+        source_organization_ref: ORG-B
+        target_organization_ref: ORG-A
+        validity_start: 2026-02-01T00:00:00Z
+        validity_end: 2026-04-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-B-A-TRANSIENT, relationship_ref: REL-B-A, from_stage: Draft, to_stage: Established, occurred_at: 2026-02-01T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: [*structural_profile]
+
+  multiple_superiors_reject_unconditionally:
+    expected_error_codes: [ORGANIZATION_MULTIPLE_STRUCTURAL_SUPERIORS]
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b, *org_c]
+    relationships:
+      - *structural_rel
+      - <<: *structural_rel
+        relationship_id: REL-A-C
+        target_organization_ref: ORG-C
+        transition_history:
+          - {transition_id: RT-A-C, relationship_ref: REL-A-C, from_stage: Draft, to_stage: Established, occurred_at: 2026-01-02T00:00:00Z, provenance_ref: TEST}
+    relationship_kind_profiles: [*structural_profile]
+
+  unresolved_supersession_target_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_SUPERSESSION_TARGET_UNRESOLVED]
+    organizations: []
+    relationships:
+      - <<: *draft_rel
+        relationship_id: REL-SUCCESSOR
+        supersedes_relationship_ref: REL-MISSING
+    relationship_kind_profiles: []
+
+  ambiguous_supersession_target_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_ID_DUPLICATE, ORGANIZATION_RELATIONSHIP_SUPERSESSION_TARGET_UNRESOLVED]
+    organizations: []
+    relationships:
+      - *draft_rel
+      - *draft_rel
+      - <<: *draft_rel
+        relationship_id: REL-SUCCESSOR
+        supersedes_relationship_ref: REL-DUP
+    relationship_kind_profiles: []
+
+  supersession_cycle_rejects:
+    expected_error_codes: [ORGANIZATION_RELATIONSHIP_SUPERSESSION_CYCLE]
+    organizations: []
+    relationships:
+      - <<: *draft_rel
+        relationship_id: REL-A
+        supersedes_relationship_ref: REL-B
+      - <<: *draft_rel
+        relationship_id: REL-B
+        supersedes_relationship_ref: REL-A
+    relationship_kind_profiles: []
+
+  branching_overlap_is_valid:
+    expected_error_codes: []
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b, *org_c]
+    relationships:
+      - <<: *structural_rel
+        relationship_class: operational
+        relationship_type_ref: domain-kind://operational@1
+        validity_end: 2026-02-01T00:00:00Z
+      - &successor_b
+        <<: *structural_rel
+        relationship_id: REL-SUCCESSOR-B
+        relationship_class: operational
+        relationship_type_ref: domain-kind://operational@1
+        target_organization_ref: ORG-B
+        validity_start: 2026-02-01T00:00:00Z
+        supersedes_relationship_ref: REL-A-B
+        transition_history:
+          - {transition_id: RT-SUCCESSOR-B, relationship_ref: REL-SUCCESSOR-B, from_stage: Draft, to_stage: Established, occurred_at: 2026-02-01T00:00:00Z, provenance_ref: TEST-B}
+      - &successor_c
+        <<: *structural_rel
+        relationship_id: REL-SUCCESSOR-C
+        relationship_class: operational
+        relationship_type_ref: domain-kind://operational@1
+        target_organization_ref: ORG-C
+        validity_start: 2026-02-01T00:00:00Z
+        supersedes_relationship_ref: REL-A-B
+        transition_history:
+          - {transition_id: RT-SUCCESSOR-C, relationship_ref: REL-SUCCESSOR-C, from_stage: Draft, to_stage: Established, occurred_at: 2026-02-01T00:00:00Z, provenance_ref: TEST-C}
+    relationship_kind_profiles:
+      - &operational_profile {kind_ref: domain-kind://operational@1, profile_owner_ref: domain-owner://organization-relations@1, relationship_class: operational}
+
+  branching_gap_and_independent_effectivity_are_valid:
+    expected_error_codes: []
+    validation_scope_ref: SCOPE-A
+    organizations: [*org_a, *org_b, *org_c]
+    relationships:
+      - <<: *structural_rel
+        relationship_class: operational
+        relationship_type_ref: domain-kind://operational@1
+        validity_end: 2026-02-01T00:00:00Z
+      - <<: *successor_b
+        validity_start: 2026-03-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-SUCCESSOR-B-GAP, relationship_ref: REL-SUCCESSOR-B, from_stage: Draft, to_stage: Established, occurred_at: 2026-03-01T00:00:00Z, provenance_ref: TEST-B}
+      - <<: *successor_c
+        validity_start: 2026-04-01T00:00:00Z
+        transition_history:
+          - {transition_id: RT-SUCCESSOR-C-GAP, relationship_ref: REL-SUCCESSOR-C, from_stage: Draft, to_stage: Established, occurred_at: 2026-04-01T00:00:00Z, provenance_ref: TEST-C}
+    relationship_kind_profiles: [*operational_profile]
