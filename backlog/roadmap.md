@@ -68,6 +68,7 @@
 - [x] AD-016H Q1 preflight correction — OCP-003 `0.6.1` and OCP-004 `0.8.1` correct only the two stale Capability status views; Resource/Operation semantics, dependencies and Concept statuses remain unchanged
 - [x] Second T4 micro-wave — OCP-008/Objective `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.2.0` projections and bounded OCP-004 `0.8.2` status rendering, with exact historical consumer replay and no achievement authority
 - [x] AD-016I post-Objective reassessment — OCP-003/OCP-007 remain blocked; M0 stays fail-safe and M3 Resource stable-surface discovery is only a leading hypothesis before mandatory AD-016J selection
+- [x] AD-016J remaining-T4 scope selection — M3 authorizes preparation of one separate AD-018 Resource stable-surface discovery; it selects no semantic outcome and changes no OCP, Concept status or backlog resolution
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -142,7 +143,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare a separately reviewed AD-016J Board act that chooses M0, M3, M37, M7, ME7 or another explicitly compared remaining-T4 scope; AD-016I itself authorizes no discovery or lifecycle draft.
-2. If M3 is selected, open only a Resource stable-surface discovery comparing inclusion/mapping, explicit exclusion, in-place stabilization and safe extraction; do not edit or promote OCP-003 in the selection act.
-3. Keep OCP-003 and OCP-007 at current status until their candidate-local blockers are resolved and a later Board act separately authorizes lifecycle preparation.
+1. Prepare one separately reviewed AD-018 Resource stable-surface discovery comparing R0 hold, RI mapping inclusion, RE explicit exclusion, RS in-place stable kernel and RX extraction; do not edit OCP-003/OCP-007 or resolve AB-006/AB-052 in that proposal.
+2. After AD-018 completes or fails, require a separate Board act to choose a semantic outcome or return to M0/M37/M7/ME7; discovery merge does not authorize an OCP edit.
+3. Keep OCP-003 and OCP-007 at current status until their candidate-local blockers are resolved and another Board act separately authorizes lifecycle preparation.
 4. Preserve OCP-008 scoped exclusions under their named owners; Canonical Objective does not itself schedule lifecycle, hierarchy, taxonomy, amendment, display or advanced assessment work.
