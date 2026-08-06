@@ -1863,7 +1863,7 @@ Hashes identify reviewed bytes. File recency, commit order, completed-act count 
 | core rules manifest | Resource sources remain OCP-003 §12 | `063e2f94f8548fc349aa4918aa5583e6977decf2` | `a99d23637abb49149eb7d6a6ab9891d45f2317ff006b52251aee81519695ad0b` |
 | complete fixture set | 119 non-sensitive files | tree `fe02d8a9f5d302ff35ddceda0477f7722e861629` | recursive `git ls-tree` manifest `737d961afffd0e64981021b186861d690b49218dd8a155a5acdef0389e7efd67` |
 
-The exact current projection anchors are OCP-000 blob `05f697ea…`, OCP-002 blob `ce00db65…` and generated foundation-map blob `60d5ceae8ed5a2a81b240268b27fcce4ee53fed0`, SHA-256 `5674a0832fd4919d12435307979a4a1ac1fc22fa60d5d9cfd939dd18735326b6`. All render Resource as `Accepted`.
+The exact current projection anchors are OCP-000 blob `05f697ea…`, OCP-002 blob `ce00db65…` and generated foundation-map blob `60d5ceae8ed5a2a81b240268b27fcce4ee53fed0`, SHA-256 `5674a0832fd4919d12435307979a4a1ac1fc22fa60d5d9cfd939dd18735326b6`. OCP-002 carries both the exact `Concept-Statuses` frontmatter value and the §108 prose rendering “Прийнята чернетка Concept Resource”; all current status-bearing renderings say `Accepted`.
 
 ## 113. Audit discipline and non-selection boundary
 
@@ -1982,7 +1982,7 @@ AD-016K does not edit these files. It records the smallest currently complete ca
 |---|---|---|
 | `docs/003-resource-concept/README.md` | `0.7.0 / Draft → 1.0.0 / Canonical`; Resource `Accepted → Canonical` | defining compatibility contract and Concept lifecycle source |
 | `docs/000-operational-ontology/README.md` | `1.2.0 → 1.3.0`; Resource row to `Canonical` | authoritative registry projection |
-| `docs/002-concept-taxonomy/README.md` | `1.2.0 → 1.3.0`; frontmatter/table Resource status to `Canonical` | exact status projection contract |
+| `docs/002-concept-taxonomy/README.md` | `1.2.0 → 1.3.0`; `Concept-Statuses` frontmatter and §108 Resource status prose to `Canonical`, plus MINOR accounting | exact status projection and human-readable current view; the qualified subtype tree stays unchanged |
 | `docs/004-operation-concept/README.md` | `0.8.2 → 0.8.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Operation semantic change |
 | `docs/005-assignment-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Assignment semantic change |
 | `docs/006-constraint-concept/README.md` | `0.2.2 → 0.2.3 / Draft`; Resource current-status row plus PATCH accounting only | volatile consumer view; no Constraint semantic change |
@@ -1991,7 +1991,7 @@ AD-016K does not edit these files. It records the smallest currently complete ca
 | `backlog/architecture-backlog.md` | AB-062 accounting only; no AB-006/AB-052 resolution | governance accounting |
 | `backlog/roadmap.md` | lifecycle-act and next-gate accounting only | roadmap projection |
 
-The candidate footprint is ten files. OCP-004/005/006 changes are three bounded current-status PATCHes discovered by a repository-wide sweep; omitting any would leave false human-readable prose. OCP-007, OCP-012/013/014, AD records, fixtures, checker, rules manifests and Concept edges remain byte-unchanged in the candidate lifecycle act.
+The candidate footprint is ten files. OCP-002's two in-file status renderings must change together; its qualified Resource subtype tree is a non-status curated view and must not be rewritten by lifecycle implication. OCP-004/005/006 changes are three bounded current-status PATCHes discovered by a repository-wide sweep; omitting any would leave false human-readable prose. OCP-007, OCP-012/013/014, AD records, fixtures, checker, rules manifests and Concept edges remain byte-unchanged in the candidate lifecycle act.
 
 No Resource data, classification value, Assignment, CapabilityClaimRecord, Constraint, Operation binding or interchangeability evidence requires migration or rebinding. Rollback would revert the ten-file lifecycle commit as one unit; it would not revert the already accepted `0.7.0` kernel, delete data or reinterpret labels.
 
@@ -2058,7 +2058,7 @@ AD-016K commissions these attacks for external review and AD-016L:
 | P-001 is required or inherited | metadata, record-family boundaries and Pattern ledger | not demonstrated |
 | OCP-007 must change in the same lifecycle act | mapping exclusions and consumer evidence | not demonstrated |
 | three consumer status views require semantic edits | line-level OCP-004/005/006 audit | not demonstrated; PATCH-only C rows identified |
-| another current Resource status projection exists | repository-wide current-view sweep | not demonstrated |
+| a current Resource status-bearing statement exists outside the ten-file footprint or is omitted inside a listed file | repository-wide current-view sweep | no outside file demonstrated; OCP-002 §108 prose is explicitly included with its frontmatter projection |
 | data/reference migration or consumer rebinding is required | identities, labels and exact bindings across current fixtures | not demonstrated |
 | ten-file candidate footprint is incomplete | status/projection/accounting sweep | not demonstrated; remains a stop condition |
 | AB-006/AB-052 must resolve before bounded Resource lifecycle | kernel/exclusion and mapping-consumer audit | not demonstrated |
