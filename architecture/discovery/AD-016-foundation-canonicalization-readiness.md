@@ -3219,9 +3219,9 @@ The stale non-Organization label is outside AD-016Q's edit authority, but it def
 
 The inventory is derived from rules rather than a closed list of familiar paths. On the exact §180 tree the sweep enumerates every tracked Markdown line where `Organization` and a lifecycle token (`Proposed`, `Accepted`, `Canonical` or `Draft`) occur together; every tracked Markdown table whose header contains `Status` and whose body contains an Organization row; every four-line window coupling `Organization` or `OCP-007` to that vocabulary; defining-document frontmatter; structured registry/taxonomy/map projections; and current repository/accounting surfaces. Each hit is then classified statement-locally under §181. This rule catches OCP-005 §4 even though its path was absent from the former hand-enumerated classes, and it also surfaces multi-line baseline lists such as `architecture/baselines/M1-foundation-baseline.md` for explicit historical classification.
 
-The remaining apparent Organization/OCP-007 status statements fall into these exhaustively reviewed classes:
+The following classes are illustrative groupings of the reviewed hits; §181 remains the operational classifier, and no path name or grouping below limits the rule-based coverage:
 
-1. AD-016 and AD-019 exact-baseline tables, comparisons, selected effects and authorization boundaries are historical decision evidence.
+1. Any discovery record's exact-baseline anchor tables, comparisons, selected effects and authorization boundaries—including AD-016, AD-018 and AD-019—are historical decision evidence.
 2. OCP-003 exact input tables and its Resource lifecycle-act effect, OCP-008's Objective lifecycle-act effect, OCP-007 §2 and M1's explicitly named baseline list record completed acts or exact baselines; they are not current projections to rewrite. OCP-007 §31 is the live post-Q2 gate on this baseline, but a future additive local act wrapper would supersede rather than rewrite it.
 3. README entries for AD-019A, Q2 remediation, AD-016O and AD-016P, plus roadmap completed checkboxes, record completed milestones. The separate README current-status line and roadmap current snapshot/sequence remain current under §182.
 4. reviewed-contract files, exact archived snapshots and Git history are historical by construction.
