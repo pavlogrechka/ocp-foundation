@@ -601,7 +601,7 @@ The atomic correction changes exactly five files: OCP-007, the checker guide, re
 
 ### 34.2 Revision class and versioning after `1.0.0`
 
-This is a **MINOR** revision, `1.0.0 → 1.1.0`. It adds a backward-compatible normative rule for future OCP-007 revisions. Calling it PATCH would understate a new obligation; calling it MAJOR would falsely imply a break in the §33.2 promise, stored records or consumer interpretation. The classification follows OCP-001's rule that compatible additions of rules are MINOR and is consistent with the local treatment used by Canonical OCP-003, OCP-008 and OCP-016.
+This is a **MINOR** revision, `1.0.0 → 1.1.0`. It adds a backward-compatible normative rule for future OCP-007 revisions. Calling it PATCH would understate a new obligation; calling it MAJOR would falsely imply a break in the §33.2 promise, stored records or consumer interpretation. OCP-001 §257 is the determining authority because it classifies compatible additions of rules as MINOR. OCP-003 `0.6.1 → 0.7.0` is the only version-class precedent; OCP-008 and OCP-016 instead added their local ladders inside their canonicalization acts, so this is the first separate post-canonical correction of this class.
 
 SemVer applies to every guarantee, exclusion and non-implication in §33.2:
 
