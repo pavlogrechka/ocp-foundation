@@ -3773,7 +3773,7 @@ If this act is not accepted, O0 remains unchanged. If it is accepted, O9C become
 
 The separately authored lifecycle proposal must re-anchor then-current `main` and contain exactly the freshly confirmed unit unless it stops and returns to the Board:
 
-1. **OCP-007:** `0.4.0 / Draft → 1.0.0 / Canonical`, Organization `Accepted → Canonical`; change lifecycle metadata and add one local §33 lifecycle wrapper, while §§1–32 remain byte-identical;
+1. **OCP-007:** `0.4.0 / Draft → 1.0.0 / Canonical`, Organization `Accepted → Canonical`; change lifecycle metadata and add one local §33 lifecycle wrapper that explicitly classifies §31's existing `0.4.0 / Draft` and Organization `Accepted` statement as a preserved historical act record which does not override the current frontmatter or §33, while §§1–32 remain byte-identical;
 2. **OCP-000:** `1.3.0 → 1.4.0 / Canonical`; synchronize only the Organization registry value, review metadata and lifecycle accounting;
 3. **OCP-002:** `1.3.0 → 1.4.0 / Canonical`; synchronize only Organization `Concept-Statuses`, current prose, review metadata and lifecycle accounting;
 4. **OCP-005:** `0.2.4 → 0.2.5 / Draft`; synchronize only the guarded Organization peer row, review metadata and PATCH accounting;
