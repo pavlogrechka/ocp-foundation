@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.3
+Version: 0.2.4
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # Assignment Concept
@@ -62,10 +62,10 @@ Assignment може бути підставою для перевірки цих
 |---|---|---|
 | Resource | Canonical | елемент, що залучається |
 | Operation | Accepted | контекст залучення |
-| Organization | Proposed | не створює Assignment автоматично |
-| Capability | Proposed | може перевіряти відповідність ролі |
-| Constraint | Proposed | може обмежувати одночасні чи часові Assignment |
-| Event | Proposed | можливе джерело історії Assignment |
+| Organization | Accepted | не створює Assignment автоматично |
+| Capability | Canonical | може перевіряти відповідність ролі |
+| Constraint | Accepted | може обмежувати одночасні чи часові Assignment |
+| Event | Accepted | можливе джерело історії Assignment |
 | Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Assignment |
 | State | не зареєстрований окремо | AD-011 S0; lifecycle Assignment не є shared State |
 
@@ -487,3 +487,14 @@ Revision `0.2.3` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Assignment — `Accepted`. `resource_ref`, exact Resource binding, Assignment identity/lifecycle, participation derivation, role semantics, dependencies, Concept status, graph edges, P-001 invocation і всі інваріанти лишаються незмінними; existing Assignment records не потребують rebinding.
 
 Corrective rollback повертає цей status rendering разом з OCP-003, OCP-000, OCP-002, двома іншими consumer views, generated map і repository accounting через новий reviewed act. Ізольована зміна row або переписування Assignment/Resource history заборонені.
+
+
+## 22. PATCH accounting — v0.2.4
+
+Revision `0.2.4` синхронізує лише volatile current-status renderings у §4 з чинним OCP-000: Organization, Constraint і Event тепер показані як `Accepted`, а Capability — як `Canonical`. Review date і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Assignment — `Accepted`. Жоден оновлений status cell не створює Assignment, участь, authority, availability, Readiness, Organization/Resource mapping, Capability holder або interchangeability inference. Assignment identity/lifecycle, exact Resource/Operation binding, role/applicability semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
+
+Mechanical peer-view validation звіряє тільки registered-Concept rows у current `Concept Status and Dependencies` tables з OCP-000. Воно не визначає статус, не охоплює історичні tables або ASCII `[Status]` tree labels і не замінює Board lifecycle act.
+
+Corrective rollback є новим reviewed synchronization act, виведеним із тодішнього authoritative registry. Він не може відновити stale value, переписати lifecycle history або надати checker незалежний authority.
