@@ -3953,7 +3953,7 @@ Each option is admissible for comparison. U4D and U10D are implementation-neutra
 | reversible before semantic write-back | maximal | high | high | lower | low | medium because six invokers may move atomically |
 | avoids authority by order/count/readiness | yes | yes if separately selected | yes if separately selected | no supporting selection evidence | no supporting inseparability evidence | no supporting defect evidence |
 
-U4D is the leading hypothesis because Operation is the strict T5 root, its direct OCP floor now passes, and its current blockers are finite enough for a separate discovery while too consequential for direct remediation. U10D remains a credible alternative because Event identity is expressly independent of Operation and the current dependency may be narrower than its metadata suggests. U0 remains safe. U4R, UJ and UP do not meet their burdens on this baseline.
+U4D is the leading hypothesis because Operation is the strict T5 root; its direct OCP floor has passed since PR #108 canonicalized OCP-003/Resource, before the Organization wave; and its current blockers are finite enough for a separate discovery while too consequential for direct remediation. U10D remains a credible alternative because Event identity is expressly independent of Operation and the current dependency may be narrower than its metadata suggests. U0 remains safe. U4R, UJ and UP do not meet their burdens on this baseline.
 
 This is a recommendation, not a selection. A separate AD-016V Board act must independently compare, revise, reject or select an option. AD-016U does not authorize creation of an Operation/Event discovery, any OCP edit, P-001 change, lifecycle proposal or T5/T6/T7 work.
 
