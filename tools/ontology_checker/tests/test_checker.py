@@ -369,6 +369,38 @@ class FixtureContractTests(unittest.TestCase):
                 {"STATUS_PEER_VIEW_MISMATCH"},
             )
 
+    def test_repository_status_sync_accepts_matching_rows_in_separate_sections(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/005-assignment-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/005-assignment-concept/README.md").write_text(
+                "## 4. Concept Status and Dependencies\n\n"
+                "| Concept | Status | Use |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | subject |\n\n"
+                "## 5. Concept Status and Dependencies\n\n"
+                "| Concept | Status | Use |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | synchronized second view |\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(validate_repository(root).valid)
+
     def test_repository_status_sync_ignores_peer_shaped_historical_table(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

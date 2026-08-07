@@ -585,10 +585,10 @@ def _ontology_registry(path: Path) -> dict[str, str]:
 
 
 
-def _peer_concept_status_rows(path: Path) -> list[tuple[str, str]]:
+def _peer_concept_status_rows(path: Path) -> list[tuple[int, str, str]]:
     """Read current peer Concept status rows from the governed section/table shape."""
     lines = path.read_text(encoding="utf-8").splitlines()
-    rows: list[tuple[str, str]] = []
+    rows: list[tuple[int, str, str]] = []
 
     for section_start, line in enumerate(lines):
         if not line.startswith("## "):
@@ -623,7 +623,7 @@ def _peer_concept_status_rows(path: Path) -> list[tuple[str, str]]:
                 index += 1
                 if len(cells) < 2 or not cells[0] or set(cells[0]) == {"-"}:
                     continue
-                rows.append((cells[0], cells[1]))
+                rows.append((section_start, cells[0], cells[1]))
             continue
 
     return rows
@@ -675,12 +675,12 @@ def validate_repository(repo_root: Path) -> ValidationResult:
         if concept not in defining:
             errors.append("STATUS_TAXONOMY_EXTRA")
 
-    peer_status_rows: set[tuple[Path, str]] = set()
+    peer_status_rows: set[tuple[Path, int, str]] = set()
     for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        for concept, status in _peer_concept_status_rows(path):
+        for section_start, concept, status in _peer_concept_status_rows(path):
             if concept not in registry:
                 continue
-            key = (path, concept)
+            key = (path, section_start, concept)
             if key in peer_status_rows or status != registry[concept]:
                 errors.append("STATUS_PEER_VIEW_MISMATCH")
             peer_status_rows.add(key)
