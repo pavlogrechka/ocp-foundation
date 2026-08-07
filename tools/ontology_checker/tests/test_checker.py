@@ -176,6 +176,7 @@ class FixtureContractTests(unittest.TestCase):
             (root / "docs/000-operational-ontology").mkdir(parents=True)
             (root / "docs/002-concept-taxonomy").mkdir(parents=True)
             (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/005-assignment-concept").mkdir(parents=True)
             (root / "docs/000-operational-ontology/README.md").write_text(
                 "| Concept | Status | Specification / Decision |\n|---|---|---|\n| Resource | Accepted | OCP-003 |\n",
                 encoding="utf-8",
@@ -185,6 +186,13 @@ class FixtureContractTests(unittest.TestCase):
             )
             (root / "docs/003-resource-concept/README.md").write_text(
                 "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/005-assignment-concept/README.md").write_text(
+                "## 4. Concept Status and Dependencies\n\n"
+                "| Concept | Status | Use |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | subject |\n",
+                encoding="utf-8",
             )
             self.assertTrue(validate_repository(root).valid)
 
@@ -261,6 +269,70 @@ class FixtureContractTests(unittest.TestCase):
                 "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
             )
             self.assertEqual(set(validate_repository(root).errors), {"STATUS_TAXONOMY_DUPLICATE"})
+
+
+    def test_repository_status_sync_rejects_mismatched_peer_view(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/005-assignment-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/005-assignment-concept/README.md").write_text(
+                "## 4. Concept Status and Dependencies\n\n"
+                "| Concept | Status | Use |\n"
+                "|---|---|---|\n"
+                "| Resource | Proposed | subject |\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                set(validate_repository(root).errors),
+                {"STATUS_PEER_VIEW_MISMATCH"},
+            )
+
+    def test_repository_status_sync_rejects_duplicate_peer_view(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            (root / "docs/000-operational-ontology").mkdir(parents=True)
+            (root / "docs/002-concept-taxonomy").mkdir(parents=True)
+            (root / "docs/003-resource-concept").mkdir(parents=True)
+            (root / "docs/005-assignment-concept").mkdir(parents=True)
+            (root / "docs/000-operational-ontology/README.md").write_text(
+                "| Concept | Status | Specification / Decision |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | OCP-003 |\n",
+                encoding="utf-8",
+            )
+            (root / "docs/002-concept-taxonomy/README.md").write_text(
+                "---\nConcept-Statuses:\n  Resource: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/003-resource-concept/README.md").write_text(
+                "---\nDefines-Concepts: Resource\nConcept-Status: Accepted\n---\n", encoding="utf-8"
+            )
+            (root / "docs/005-assignment-concept/README.md").write_text(
+                "## 4. Concept Status and Dependencies\n\n"
+                "| Concept | Status | Use |\n"
+                "|---|---|---|\n"
+                "| Resource | Accepted | subject |\n"
+                "| Resource | Accepted | duplicate |\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                set(validate_repository(root).errors),
+                {"STATUS_PEER_VIEW_MISMATCH"},
+            )
 
 
 if __name__ == "__main__":
