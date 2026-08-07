@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 1.3.0
+Version: 1.4.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # Operational Ontology
@@ -83,7 +83,7 @@ Version OCP-000 не є версією жодного Concept або defining OC
 | Operation | Accepted | OCP-004; Architecture Board approval of PR-0003 |
 | Assignment | Accepted | OCP-005; Architecture Board approval of PR-0004 |
 | Operational Space | Proposed | — |
-| Organization | Accepted | OCP-007; Architecture Board approval of PR-0007 |
+| Organization | Canonical | OCP-007; Architecture Board approval of PR-0007 |
 | Objective | Canonical | OCP-008; AD-003; AD-017; AD-016G; separately authorized T4 act |
 | Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
 | Spectrum | Proposed | — |
@@ -193,3 +193,9 @@ Registry membership, row identity, status vocabulary, Board authority, Proposed 
 Окремий третій T4 lifecycle act змінює рівно один active registry value: `Resource: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.2.0 → 1.3.0`.
 
 Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Resource taxonomy, Organization mapping, relation, operational lifecycle, availability, Readiness, quantity або Capability semantics: defining contract залишається в OCP-003, а OCP-000 лише відображає окремо авторизований status.
+
+## Revision `1.4.0` — Organization status transition
+
+Окремий четвертий T4 lifecycle act змінює рівно один active registry value: `Organization: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.3.0 → 1.4.0`.
+
+Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає institutional-continuity, relationship-kind taxonomy, structural-scheme, composition, Organization/Resource mapping, Organization Capability holder або production semantics: defining authority залишається в OCP-007, а OCP-000 лише відображає окремо авторизований status.

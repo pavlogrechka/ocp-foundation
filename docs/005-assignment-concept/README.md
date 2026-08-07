@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.4
+Version: 0.2.5
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -62,7 +62,7 @@ Assignment може бути підставою для перевірки цих
 |---|---|---|
 | Resource | Canonical | елемент, що залучається |
 | Operation | Accepted | контекст залучення |
-| Organization | Accepted | не створює Assignment автоматично |
+| Organization | Canonical | не створює Assignment автоматично |
 | Capability | Canonical | може перевіряти відповідність ролі |
 | Constraint | Accepted | може обмежувати одночасні чи часові Assignment |
 | Event | Accepted | можливе джерело історії Assignment |
@@ -498,3 +498,12 @@ Revision `0.2.4` синхронізує лише volatile current-status renderi
 Mechanical peer-view validation звіряє тільки registered-Concept rows у current `Concept Status and Dependencies` tables з OCP-000. Воно не визначає статус, не охоплює історичні tables або ASCII `[Status]` tree labels і не замінює Board lifecycle act.
 
 Corrective rollback є новим reviewed synchronization act, виведеним із тодішнього authoritative registry. Він не може відновити stale value, переписати lifecycle history або надати checker незалежний authority.
+
+
+## 23. PATCH accounting — v0.2.5
+
+Revision `0.2.5` синхронізує лише volatile current-status rendering Organization у §4 з окремим Organization lifecycle act: row тепер показує Organization як `Canonical`. Review metadata і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Assignment — `Accepted`. Organization status не створює Assignment, participation, authority, Resource identity, Organization/Resource mapping, Capability holder, Readiness або interchangeability inference. Assignment semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
+
+Corrective rollback повертає цей status rendering разом з OCP-007, OCP-000, OCP-002, generated map, checker-guide label і repository accounting через новий reviewed act. Ізольована зміна row або переписування Assignment/Organization history заборонені.

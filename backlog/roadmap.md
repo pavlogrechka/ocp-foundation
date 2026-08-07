@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
+| Core domain ontology | 86% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; AD-016T обирає O9C лише як preparation scope exact nine-file lifecycle proposal, який ще потребує власних review/Board gates |
+| **Загальна foundation-готовність** | **≈71%** | Четвертий T4 micro-wave встановлює OCP-007/Organization `1.0.0 / Canonical` і завершує T4; жодна авторизація не переноситься на topology decision або T5 |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -35,7 +35,7 @@
 - [x] Operation Accepted working description
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
-- [x] Organization Accepted working description
+- [x] Organization `1.0.0 / Canonical` bounded identity, record-lifecycle and relationship-record contract with explicit continuity, taxonomy, scheme, composition and Resource-mapping exclusions
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
 - [x] Capability boundary and registry direction accepted in `AD-005C`
@@ -87,6 +87,7 @@
 - [x] O7V peer status synchronization implementation — OCP-005/OCP-006 `0.2.4 / Draft` synchronize all six demonstrated rows; bounded repository validation rejects mismatched or duplicate registered-Concept rows without becoming lifecycle authority; O0 remains binding
 - [x] AD-016S post-O7V Organization audit — 172 tests and 120 fixtures replay green, all governed peer rows are synchronized, a fresh rule-based sweep derives exact nine-file O9C without a demonstrated tenth projection, and O9C remains recommendation-only before AD-016T
 - [x] AD-016T Organization lifecycle scope selection — independent projection/consumer/non-Markdown sweep and all sixteen targets support O9C only as preparation of one exact nine-file proposal with explicit SemVer/status atomicity; no lifecycle state changes in the selection act
+- [x] Fourth T4 micro-wave — OCP-007/Organization `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.4.0`, OCP-005 `0.2.5` and current map/checker-guide/accounting synchronization; §§1–32 and all executable semantics remain unchanged
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -161,8 +162,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare the separately gated exact nine-file O9C lifecycle proposal selected by AD-016T; re-anchor then-current `main`, preserve OCP-007 §§1–32 byte-exactly, and stop to O0 on any changed footprint, version transition, semantic edit or migration.
-2. Treat green CI as necessary but insufficient: exact OCP-007/OCP-000/OCP-002/OCP-005 SemVer and status transitions require explicit external-review verification because the current checker does not enforce those increments.
-3. Keep OCP-007/Organization at `0.4.0 / Draft` and `Accepted`, and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve their exact external/excluded questions.
+1. Treat the fourth T4 lifecycle act as completion evidence only: its review and merge authorization do not open T5 or select a downstream candidate.
+2. Recompute the post-T4 T5–T10 inventory and topology against then-current `main`, then require a separate outcome-fair Board scope act before any T5 proposal.
+3. Keep AB-006/AB-044–AB-047/AB-051/AB-052 Open and AB-062 Planned until separately reviewed acts resolve their exact external/excluded or program-level questions.
 4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
 5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

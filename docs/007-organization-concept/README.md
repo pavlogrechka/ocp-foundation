@@ -1,16 +1,16 @@
 ---
 Document-ID: OCP-007
 Title: Organization Concept
-Version: 0.4.0
-Status: Draft
-Concept-Status: Accepted
+Version: 1.0.0
+Status: Canonical
+Concept-Status: Canonical
 Defines-Concepts: Organization
 Concept-Depends-On: []
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-001, P-001
 Uses-Patterns: P-001@0.1.0
 Used-By: Organization Model, Coordination Model, Operational Ontology
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # OCP-007 — Organization Concept
@@ -521,3 +521,119 @@ Completion or failure of this remediation triggers a fresh exact blocker/stabili
 ## 32. Review target
 
 External review should try to falsify the two-surface readability, exact C2 identity limit, K3 opacity, T2 one-owner envelope, S1 scope locality, unconditional E1 rejection, Y1 record-only lifecycle, R1 branching history, P-001 completeness, U0/M0 exclusions, finite evidence matrix, data replay and absence of any registry, graph edge, mapping, Organization Capability holder, head election or authority-by-time/order/count.
+
+## 33. Canonical lifecycle act
+
+### 33.1 Historical bridge and current effect
+
+Sections 1–32 are preserved byte-for-byte from the reviewed `0.4.0 / Draft` Q2 contract. In particular, §31 is a historical act record: its statements that this document remained `0.4.0 / Draft`, Organization remained `Accepted` and another lifecycle act was required describe the state in which that remediation was reviewed. They do not override the current frontmatter or this §33.
+
+After this exact proposal receives Fable exact-head review, Codex adjudication, green required CI, separate explicit Pavlo/Architecture Board authorization for that unchanged head and squash merge, OCP-007 and Organization become `1.0.0 / Canonical`. Before merge, the changed frontmatter and this wrapper remain a proposed lifecycle act and convey no authority.
+
+The semantic contract remains the two human-readable surfaces in §§1–32: exact Organization identity and finite record lifecycle, plus the local `OrganizationRelationshipRecord` contract. This lifecycle act adds no field, stage, relationship class, kind authority, continuity rule, structural exception, current/head selector, registry, mapping, Concept, graph edge, Pattern or production behavior.
+
+### 33.2 Canonical compatibility surface `1.x`
+
+OCP-007 `1.x` preserves these guarantees:
+
+1. Organization is an identified organizational entity distinct from Operation, Assignment, temporary relation, Resource identity and current label.
+2. Exact `organization_id` resolution is dataset- and scope-bounded; duplicate or ambiguous identity fails closed, and exact historical references never redirect.
+3. Merger, split, reorganization and constitutive redesignation continuity remain unresolved without a separate legitimate owner; name, personnel, time, order or count cannot select a survivor.
+4. `classification_refs` remains optional opaque annotation and implies no identity, lifecycle, hierarchy, role, composition, mapping, Capability, Readiness, authority or interchangeability result.
+5. Organization record lifecycle remains the finite Y1 paths of §9 with authoritative P-001 Module B transition history and exact optional projections.
+6. `OrganizationRelationshipRecord` remains a distinct P-001 identified record with exact endpoints, one coarse Core class, one exact external kind-profile reference, half-open effectivity and finite record lifecycle.
+7. The T2 envelope validates exact profile resolution and class agreement but creates no Core kind registry, specialized meaning or legitimacy authority.
+8. S1 structural comparison remains local to one declared dataset, resolution scope and exact opaque `scheme_ref`; no cross-scope or cross-scheme inference arises.
+9. Multiple simultaneously effective direct structural superiors remain invalid without an owner-specific exception; no inferred hierarchy repairs ambiguity.
+10. R1 supersession remains visible, acyclic, branching history. It never elects a head, winner, redirect or current record.
+11. OCP-007 continues to invoke exact `P-001@0.1.0` separately for `OrganizationTransitionRecord` and `OrganizationRelationshipRecord`; Pattern form imports no domain semantics or Canonical status.
+12. Relationship meaning remains local: structural, operational, administrative, support and coordination relations do not imply one another, Assignment, participation, ownership, Capability or command.
+13. `Organization ≠ Resource`; no Organization/Organizational-Resource mapping, composition identity or Organization Capability holder arises by implication.
+14. `Capability ≠ Readiness`; exact OCP-009 version binding, Resource-only OCP-012 holders and all availability/authorization/admissibility boundaries remain unchanged.
+15. Timestamp, record/file order, source/issuer/reviewer count, majority, CI result and document age never choose semantic or lifecycle authority.
+
+`Canonical` is a versioned human-readable compatibility promise over these guarantees. It is not production readiness, current operational activity, institutional continuity, authorization, complete domain coverage or a claim that every consumer is Canonical.
+
+### 33.3 Scoped exclusions and reopening owners
+
+The open surfaces in §22 remain excluded rather than silently solved:
+
+| Surface | Current boundary | Reopening owner |
+|---|---|---|
+| institutional continuity through merger, split, redesignation or reorganization | exact stored identity remains stable; material-event continuity is unresolved | AB-044 plus a separate OCP-001/OCP-016 cycle |
+| specialized relationship-kind taxonomy and legitimacy | Core owns only five coarse classes and exact profile/class agreement | AB-045 and a legitimate external/domain owner |
+| broader Organization lifecycle semantics | Y1 covers record recognition only, not operational activity or institutional state | AB-046 with concrete consumers and evidence |
+| composition, units, crews and temporary grouping | no universal parent/child or composition identity | AB-047 |
+| cross-scope schemes or multiple-vertical exceptions | S1 stays scope-local and E1 stays unconditional | AB-051 |
+| Organization/Organizational-Resource mapping | both identities remain separate and no mapping is inferred | AB-006 and AB-052 |
+| Organization Capability holders | OCP-012 remains Resource-only | separate accepted claim-holder mandate after the named mapping/authority gates |
+
+Canonical status neither resolves these questions nor forbids a future governed extension. Each proposal must name a legitimate owner, concrete consumer, compatibility and migration consequences, evidence and its own Board act. No excluded question may be imported by label similarity or by treating completed T4 work as momentum.
+
+### 33.4 Versioning after `1.0.0`
+
+SemVer applies to the §33.2 compatibility surface:
+
+- **PATCH** may correct prose, links, examples, review evidence or current accounting without changing any identity, field, invariant, authority, exact resolution, lifecycle path, profile envelope, structural rule, supersession behavior or non-implication.
+- **MINOR** may add a backward-compatible optional clarification or extension only when every existing Organization, relationship record and exact reference keeps the same interpretation and all fifteen guarantees remain true.
+- **MAJOR** is required when a proposal changes an identity key or required structure, permits redirect or automatic continuity, reinterprets annotations, weakens exact resolution or history, changes kind/scheme authority, permits an E1 exception, elects a relationship head, introduces mapping by implication or removes a §33.2 non-implication.
+
+A continuity, taxonomy, lifecycle, composition, scheme, mapping or Organization-holder proposal is not automatically MINOR because it appears additive. It first passes the relevant reopening owner and OCP-001/OCP-016 route; compatibility impact determines the version.
+
+OCP document version is not an Organization or relationship-record revision, does not rewrite an identifier and creates no common version clock for stored records.
+
+### 33.5 Exact baseline and atomic nine-file transition
+
+The recomputed lifecycle baseline is `main@66a81b26115e404ad5bb6443ae6df60033cb28a5`, tree `495d12661eb10b3518bde482ee3b1fd185d81128`, after the separately authorized AD-016T merge.
+
+| Input | Exact pre-act state | Git blob | SHA-256 |
+|---|---|---|---|
+| AD-016T | `0.21.0 / Accepted`; exact O9C preparation selected only | `124e1535db06dcfa60b579dd49ecea5292d0c687` | `32b91265723ec2a8a2408a9078537e5f3bf33fc0c81bd7ad06eaffcbb4c6f3e7` |
+| OCP-007 | `0.4.0 / Draft`; Organization `Accepted` | `dceb5d57c66d180cd5298f4e3ad48d02831a4f23` | `55834d6da1b1b984140020e0e4613ea578b6c83e721d1b81688c12ffa8375a3f` |
+| OCP-000 | `1.3.0 / Canonical`; Organization `Accepted` | `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
+| OCP-002 | `1.3.0 / Canonical`; Organization `Accepted` | `3b676afcff63ac4b600fb382a67283d67f766c7f` | `e0112f751b7922904d7217c76102cc8d5e3382ce49f13d94e99c31af1275669e` |
+| OCP-005 peer view | `0.2.4 / Draft`; Organization `Accepted` | `3223ba69e289c38530d93965c2faa8cf280c1239` | `da599b71ea8fb26cde3f57921a6bee07a8ddf75aaad0f6e9e2387ee499bda11b` |
+| generated foundation map | Organization `Accepted`; no Organization Concept edge | `38011129ab9bf2e0362df2255a57fa15d3c90e54` | `f8af51e97e193820d24323cd0db5262d4fe0d353cb93c9bec910834e3e7b70e8` |
+| checker guide | live `OCP-007 0.4.0 / Draft` label | `74c4195c182d076e62a3ef1d8b8897db83cc177d` | `5ff2c58dcb3a9b0daee7458329e0b9eaef6ff4fa2864c5045c82c133827140b5` |
+| repository README | three Canonical / five Accepted Concepts; 172 tests and 120 fixtures | `a3e005f0cacce5b742c18842d9220a8d23f144b9` | `499d13693bfa3b7f0ee7406432df621d3b88fc1f6c9a7049613a6a6e232be33f` |
+| roadmap | O9C proposal pending; readiness approximately 70% | `ca0be71419dd0d50b4e4d18415be3531d7cfeb25` | `8d124d8410c28ec693246f9ba0f47a9b706cdc226f12a7240d8b2542f8f550fa` |
+| architecture backlog | AB-062 `Planned`; O9C proposal pending | `6d73ff60344cdc19fc28ddbf45f8fa4b64d6e99d` | `60cba188912e6ea2c465423340c0c926ea014ec7f39bbbfa53a542eccd240bd2` |
+
+The complete transition changes exactly nine files and must merge or roll back as one unit:
+
+1. OCP-007 `0.4.0 / Draft → 1.0.0 / Canonical`, Organization `Accepted → Canonical`, lifecycle metadata and this additive §33 wrapper; §§1–32 remain byte-identical.
+2. OCP-000 `1.3.0 → 1.4.0 / Canonical`, changing only the Organization registry value, review metadata and bounded lifecycle accounting.
+3. OCP-002 `1.3.0 → 1.4.0 / Canonical`, changing only the Organization projection, current Organization sentence, review metadata and bounded lifecycle accounting.
+4. OCP-005 `0.2.4 → 0.2.5 / Draft`, changing only the guarded Organization peer row and PATCH accounting.
+5. The generated foundation map changes only the Organization status projection.
+6. The checker guide changes only the live Q2 document lifecycle label; checker semantics remain byte-unchanged.
+7. The repository README changes only current status, lifecycle-act, Concept-count and readiness accounting.
+8. The foundation roadmap changes only current lifecycle and next-gate accounting.
+9. The architecture backlog changes only AB-062 accounting; AB-062 remains `Planned` and every named Organization question remains Open.
+
+No Organization record, relationship record, transition, exact reference, consumer binding, fixture or stored payload requires migration or rebinding. `Concept-Depends-On: []`, both exact P-001 invocations and the empty Organization Concept-edge set remain unchanged.
+
+### 33.6 Evidence replay and stop rule
+
+The proposal must pass the complete 172-test and 120-fixture suites, or their complete then-current successors, in both repository contexts together with status synchronization, peer-view guardrail, L2 dependency floors, artifact governance, process audit, Concept graph and generated-map drift checks.
+
+Mechanical success is necessary but insufficient. External review must independently verify:
+
+- byte identity of OCP-007 §§1–32 against baseline blob `dceb5d57c66d180cd5298f4e3ad48d02831a4f23`;
+- exact equality of all current Organization projections at `Canonical`;
+- all four required version transitions and the exact nine-file footprint;
+- zero semantic checker/rule/test/fixture change;
+- zero record, resolver, consumer or reference migration; and
+- continued human readability without checker code or PR history.
+
+Preparation, review or merge stops and returns to O0 if a tenth current projection or non-Markdown lifecycle authority appears; a classification is unknown or conflicting; the nine-file unit or a required version differs; §§1–32 need any semantic edit; checker behavior must change; a consumer or record needs migration/rebinding; an excluded continuity, kind, scheme, exception, composition, mapping or holder question must be decided; a new Concept, edge, Pattern or registry is required; or authority would depend on timestamp, order, count, majority, CI, readiness or completed effort.
+
+No apparently small diff, passing test or reviewer agreement waives a stop.
+
+### 33.7 Rollback and non-transfer
+
+Corrective rollback is a new reviewed act that restores the complete nine-file lifecycle unit together: OCP-007/document and Organization statuses, OCP-000/OCP-002 values and versions, OCP-005 peer view/version, foundation map, checker-guide live label and repository accounting. Partial projection rollback is invalid.
+
+Rollback cannot delete or merge Organization identities, rewrite transitions or relationship history, redirect exact references, elect a supersession head, infer composition/mapping, introduce Organization Capability claims or choose authority by time, order or count.
+
+AD-016T authorization permits preparation only and cannot merge this proposal. Merge authorization for this proposal does not resolve AB-006, AB-044–AB-047, AB-051, AB-052 or AB-062; authorize T5; reopen topology; or transfer to a later act. Completion of T4 is evidence for a fresh topology/scope decision, never automatic downstream authority.
