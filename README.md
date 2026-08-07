@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Capability, Objective та Resource мають статус `Canonical`; Operation, Assignment, Constraint, Organization та Event лишаються `Accepted`;
+- Capability, Objective, Resource та Organization мають статус `Canonical`; Operation, Assignment, Constraint та Event лишаються `Accepted`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -119,9 +119,10 @@ backlog/                 відкриті питання та дорожня к�
 - O7V peer-status synchronization PATCH встановлює OCP-005/OCP-006 `0.2.4 / Draft`, синхронізує шість registered-Concept rows з OCP-000 і додає bounded `STATUS_PEER_VIEW_MISMATCH` guardrail без lifecycle або semantic authority; O0 лишається чинним до fresh post-repair Board comparison;
 - AD-016S `0.20.0 / Accepted` заново перевіряє post-O7V evidence: усі governed peer rows синхронізовані, rule-based sweep незалежно виводить exact nine-file O9C candidate і не демонструє tenth current Organization projection; O9C є лише рекомендацією до окремого AD-016T Board selection, O0 лишається чинним;
 - AD-016T `0.21.0 / Accepted` незалежно повторює projection/consumer/non-Markdown sweep і всі sixteen targets та обирає O9C лише як підготовку exact nine-file OCP-007/Organization lifecycle proposal; selection не змінює status і не переносить merge authority на proposal;
+- четвертий T4 act встановлює OCP-007/Organization `1.0.0 / Canonical`, атомарно оновлює OCP-000/OCP-002 до `1.4.0`, OCP-005 до `0.2.5`, current map, checker-guide label і accounting; Q2 §§1–32, record/history identities, Open Organization questions, mapping exclusion та closed T5 збережено без migration або production authority;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 120 non-sensitive fixtures і 172 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після третього T4 micro-wave — **≈70%**; три Concepts Canonical, п’ять лишаються Accepted, а OCP-007 remediation та кожен наступний audit/lifecycle act потребують власних Board gates.
+- не-нормативна оцінка загальної foundation-готовності після четвертого T4 micro-wave — **≈71%**; чотири Concepts Canonical, чотири лишаються Accepted, а кожен наступний reassessment/lifecycle act потребує власних Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
