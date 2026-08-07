@@ -914,7 +914,7 @@ AD-020A re-attempts all thirty §25 targets against the exact baseline and compl
 | 19 | §14.1 versus P-001 §§4–8 | F1 maps all seven Required Elements and selects no unsupported module |
 | 20 | §14.2 versus P-001 §§4–8 | V1 maps all elements; evaluator/time/order/count never elect authority |
 | 21 | §14.3 versus P-001 Module B | LT2 includes transition identity, operation reference, paths, ordered history, projections and branch rejection |
-| 22 | current free enum, owner sweep and provisional Q3 | **demonstrated against Q3/IO3**: no legitimate exact relationship-kind owner is named; Q3 is rejected and Q3I selects IO2 |
+| 22 | current free enum, owner sweep and provisional Q3 | **demonstrated against Q3/IO3**: no legitimate exact relationship-kind owner is named; **not demonstrated against IO1** because OCP-004 can own one closed kind set, but any IO1 reopening must keep that one-owner proof explicit; Q3 is rejected and Q3I selects IO2 |
 | 23 | Q3I IO2 envelope | no relationship ID, independent reference, effectivity, history or supersession remains; appearance of one reopens IO3 |
 | 24 | P-001 `0.1.0` §§4–8 and §12 | selected families require no new Pattern obligation or module; exact `0.1.0` use is sufficient, subject to the §42 ledger stop |
 | 25 | six current invokers and three immutable snapshots | selection changes none; future remediation must preserve their exact bindings and cannot rewrite snapshots |
@@ -1097,7 +1097,7 @@ These are normative rejection classes, not a substitute for the positive contrac
 - **Q3** cannot reopen unchanged; any identified external relationship family must name its owner and is H4/IO3 evidence.
 - **Q4** may reopen only when a concrete consumer needs independent relationship identity/effectivity/history or an exact relationship-kind owner exists.
 - **F2** remains gated by AD-004's Objective-only sunset decision and a lossless explicit-intent migration.
-- **V2/V3, LT1/LT3 and IO1/IO3** require concrete identity, consumer or migration evidence; architectural symmetry is insufficient.
+- **V2/V3 and LT1/LT3** require concrete identity, consumer or migration evidence; **IO1** additionally requires one explicit OCP-004-owned closed kind set, while **IO3** requires one exact downstream kind owner; architectural symmetry is insufficient.
 - **E2/E3 or D3** require their own topology evidence and Board act. Prose in the remediation cannot add an edge or reverse a dependency.
 
 No sunk authoring cost, accepted status of this act, readiness percentage or implementation convenience raises the reopening threshold.
