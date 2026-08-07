@@ -3442,7 +3442,7 @@ Even a successful O7V repair does not make Organization Canonical-ready. After t
 5. compares it fairly with O0/O7R/O7D2/O37/O5; and
 6. receives its own Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization.
 
-The peer-table guardrail reduces one recurrence mode; it does not prove semantic completeness or projection completeness outside its declared shape. O0 remains the Organization lifecycle disposition until a later Board act explicitly selects otherwise.
+The peer-table guardrail reduces one recurrence mode; it does not prove semantic completeness or projection completeness outside its declared shape. ASCII `[Status]` tree labels in OCP-002 and OCP-004 are a separate current status-view shape: they are synchronized on the §189 baseline, remain outside O7V's guardrail, and any future mechanical treatment requires its own evidence and Board authority. O0 remains the Organization lifecycle disposition until a later Board act explicitly selects otherwise.
 
 ## 195. Exact-head gates, non-transfer and accepted effect
 
