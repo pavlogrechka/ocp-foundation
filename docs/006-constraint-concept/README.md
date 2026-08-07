@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.2.3
+Version: 0.2.4
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -9,7 +9,7 @@ Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Read
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # Constraint Concept
@@ -78,8 +78,8 @@ Constraint може бути джерелом derivation для цих моде�
 | Resource | Canonical | можливий subject або учасник оцінювання |
 | Operation | Accepted | можливий context або subject |
 | Assignment | Accepted | основний subject для перевірки сумісності та залучення |
-| Capability | Proposed | можливий вхід перевірки відповідності; не визначається тут |
-| Event | Proposed | можливе evidence або trigger повторного оцінювання |
+| Capability | Canonical | можливий вхід перевірки відповідності; не визначається тут |
+| Event | Accepted | можливе evidence або trigger повторного оцінювання |
 | Risk | Proposed | не виводиться автоматично з порушення |
 | Conflict | не зареєстрований окремо | порушення Constraint не канонізує Conflict |
 | Readiness | не зареєстрований окремо | AD-011 R0; Constraint decision не є Readiness |
@@ -633,3 +633,14 @@ Revision `0.2.3` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Constraint — `Accepted`. Resource target binding, Constraint identity/evaluation, applicability/admissibility semantics, dependencies, Concept status, graph edges, P-001 invocation і всі інваріанти лишаються незмінними; existing Constraint records та evaluations не потребують rebinding.
 
 Corrective rollback повертає цей status rendering разом з OCP-003, OCP-000, OCP-002, двома іншими consumer views, generated map і repository accounting через новий reviewed act. Ізольована зміна row або переписування Constraint/Resource history заборонені.
+
+
+## 25. PATCH accounting — v0.2.4
+
+Revision `0.2.4` синхронізує лише volatile current-status renderings у §4 з чинним OCP-000: Event тепер показаний як `Accepted`, а Capability — як `Canonical`. Review date і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Constraint — `Accepted`. Оновлені status cells не додають Capability requirements, Event-trigger semantics, authority, availability, Readiness, Organization mapping або будь-яку нову нормативну відповідальність. Constraint identity/lifecycle/evaluation, applicability/admissibility semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
+
+Mechanical peer-view validation звіряє тільки registered-Concept rows у current `Concept Status and Dependencies` tables з OCP-000. Воно не визначає статус, не охоплює історичні tables або ASCII `[Status]` tree labels і не замінює Board lifecycle act.
+
+Corrective rollback є новим reviewed synchronization act, виведеним із тодішнього authoritative registry. Він не може відновити stale value, переписати lifecycle history або надати checker незалежний authority.

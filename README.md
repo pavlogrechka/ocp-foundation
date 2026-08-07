@@ -116,9 +116,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016P `0.17.0 / Accepted` незалежно закриває п'ятнадцять commissioned targets негативно, але target 12 позитивно виявляє live eighth lifecycle projection у checker guide; O0 обрано як hold, exact seven-file O7C відхилено без implied expansion, і жоден lifecycle/topology proposal не авторизовано;
 - AD-016Q `0.18.0 / Accepted` виконує повний read-only exact-head audit усіх current Organization lifecycle projections: вісім projection-bearing/current-roadmap файлів плюс AB-062 accounting утворюють evidence-only candidate U9; OCP-005 §4 містить stale `Organization: Proposed` проти registry `Accepted` і потребує окремого repair act, outcome не обрано, O0 лишається чинним, а lifecycle/topology proposal не авторизовано;
 - AD-016R `0.19.0 / Accepted` rule-based audit виявляє шість stale registered-Concept views у current peer tables OCP-005/OCP-006 і обирає O7V лише як підготовку окремого synchronization-and-guardrail PATCH; O0 лишається Organization lifecycle-рішенням, а implementation і post-repair comparison мають власні exact-head gates;
+- O7V peer-status synchronization PATCH встановлює OCP-005/OCP-006 `0.2.4 / Draft`, синхронізує шість registered-Concept rows з OCP-000 і додає bounded `STATUS_PEER_VIEW_MISMATCH` guardrail без lifecycle або semantic authority; O0 лишається чинним до fresh post-repair Board comparison;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 120 non-sensitive fixtures і 166 unit tests;
+- reference suite містить 120 non-sensitive fixtures і 168 unit tests;
 - не-нормативна оцінка загальної foundation-готовності після третього T4 micro-wave — **≈70%**; три Concepts Canonical, п’ять лишаються Accepted, а OCP-007 remediation та кожен наступний audit/lifecycle act потребують власних Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
