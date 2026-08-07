@@ -123,9 +123,10 @@ backlog/                 відкриті питання та дорожня к�
 - окремий OCP-007 `1.1.0 / Canonical` correction act додає документо-локальні post-`1.0.0` SemVer-правила над exact §33.2 compatibility promise; він не змінює Organization semantics, Concept status, record, checker rule, mapping, readiness estimate або remaining-T4 authority;
 - AD-016U `0.22.0 / Accepted` заново виводить чотири remaining candidates з post-correction `main`, зберігає strict L2 slots T5 Operation, T6 Assignment/Event і T7 Constraint, перевіряє exact P-001 floor та OCP-007 bridge guard і рекомендує U4D Operation stable-surface discovery лише до окремого AD-016V Board comparison;
 - AD-016V `0.23.0 / Accepted` незалежно повторює all-OCP inventory, floors, consumer sweep і всі twenty targets та обирає U4D лише як підготовку окремого outcome-fair AD-020 Operation stable-surface discovery; selection не редагує OCP-004 і не переносить merge authority;
+- AD-020 `0.1.0 / Discovery` порівнює H0–H4 authority layouts, lifecycle/completeness/authorization/terminal/composition/Event/dependency осі та окремі P-001 verdicts для чотирьох record-like форм; Q3 є лише провідною гіпотезою до окремого AD-020A Board selection;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 120 non-sensitive fixtures і 172 unit tests;
-- не-нормативна оцінка загальної foundation-готовності після четвертого T4 micro-wave — **≈71%**; чотири Concepts Canonical, чотири лишаються Accepted, а кожен наступний reassessment/lifecycle act потребує власних Board gates.
+- не-нормативна оцінка загальної foundation-готовності після четвертого T4 micro-wave — **≈71%**; чотири Concepts Canonical, чотири лишаються Accepted, а AD-020A і кожен наступний remediation/lifecycle act потребують власних Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
