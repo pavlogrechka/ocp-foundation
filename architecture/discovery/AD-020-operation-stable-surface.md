@@ -5,7 +5,7 @@ Version: 0.1.0
 Status: Discovery
 Owner: Architecture Board
 Depends-On: AD-004, AD-006, AD-011, AD-014, AD-016, OCP-001, OCP-004, OCP-005, OCP-006, OCP-008, OCP-010, OCP-011, OCP-014, OCP-016, P-001
-Applies-To: AB-015, AB-016, AB-017, AB-019, AB-020, AB-023, AB-028, AB-062, Operation stable-surface remediation
+Applies-To: AB-062, Operation stable-surface remediation
 Review-After: External adversarial review; then a separate Architecture Board outcome-selection act
 ---
 
