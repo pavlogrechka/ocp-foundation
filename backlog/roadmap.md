@@ -91,6 +91,7 @@
 - [x] OCP-007 post-canonical versioning correction — `1.1.0 / Canonical` adds local PATCH/MINOR/MAJOR boundaries for the unchanged §33.2 promise; Organization status, data, checker semantics, readiness and remaining-T4 authority do not change
 - [x] AD-016U post-Organization remaining-frontier reassessment — a fresh rule-based sweep derives exactly Operation, Assignment, Constraint and Event, preserves strict T5/T6/T7 L2 order, audits exact P-001 and OCP-007 bridge obligations, and records U4D only as a recommendation before separate AD-016V selection
 - [x] AD-016V remaining-frontier Board comparison — a fresh all-seventeen-OCP replay and independent adjudication of all twenty targets select U4D only for preparation of one separate outcome-fair AD-020 Operation stable-surface discovery; no OCP edit, semantic outcome or downstream merge is authorized
+- [x] AD-020 Operation stable-surface discovery — H0–H4 layouts, ten semantic/authority axes and separate form verdicts for ExplicitIntentRecord, validation evidence, lifecycle transitions and inter-operation assertions are compared; Q3 is recommendation-only and H0 remains fail-safe before AD-020A
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -165,7 +166,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare one separate outcome-fair AD-020 Operation stable-surface discovery under AD-016V §233; U4D selection authorizes preparation and review only, not AD-020 merge, an OCP-004 edit, semantic outcome or lifecycle act.
-2. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 as Open external/excluded Organization questions; Canonical status does not resolve continuity, taxonomy, mapping, composition, exception or Organization Capability-holder policy.
-3. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
-4. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. Prepare a separately reviewed AD-020A Board act that re-anchors then-current `main`, adjudicates all thirty falsification targets and selects one complete H0–H4/semantic/form combination or explicit hold; do not edit OCP-004 or invoke P-001 in the selection act.
+2. If a positive outcome is selected, require a separate bounded remediation or non-Concept contract proposal with its own exact-head review and authorization; selection is not implementation or lifecycle promotion.
+3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until their exact owners and treatments are implemented and separately accepted; discovery comparison resolves none of them.
+4. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
+5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
