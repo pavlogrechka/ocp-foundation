@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-007
 Title: Organization Concept
-Version: 1.0.0
+Version: 1.1.0
 Status: Canonical
 Concept-Status: Canonical
 Defines-Concepts: Organization
@@ -572,3 +572,55 @@ No Organization, relationship, transition or profile record changes shape or ide
 Corrective rollback is a new reviewed nine-file lifecycle act derived from its then-current baseline. It cannot delete records, redirect exact references, rewrite history, elect a relationship head, infer mapping or restore stale peer values.
 
 This lifecycle becomes authoritative only after Fable exact-head review, Codex adjudication, green required CI, fresh explicit Pavlo/Architecture Board authorization for the same unchanged head and squash merge. AD-016T authorization is consumed and does not transfer. This act does not resolve AB-006, AB-044–AB-047, AB-051 or AB-052, authorize T5, select the next T4 candidate or create production authority.
+
+## 34. Post-canonical versioning correction act
+
+OCP-007 `1.1.0 / Canonical` closes one governance gap left by the `1.0.0` lifecycle act: the stable Organization surface had no document-local rules for classifying later `1.x` changes as PATCH, MINOR or MAJOR. The generic OCP-001 ladder remains binding, but it cannot by itself name which OCP-007 guarantees a proposal preserves, extends or breaks.
+
+Section 33 remains the preserved O9C lifecycle-act record. Its statement that OCP-007 and Organization were then `1.0.0 / Canonical` records the first Canonical transition; it does not override the current frontmatter or this §34.
+
+This correction adds that local rule without changing Organization semantics. Section 33.2 remains the exact compatibility promise; §§1–33 retain their existing meaning; Organization remains `Canonical`; and every identity, record, field, invariant, exclusion, dependency, Pattern invocation and non-implication remains unchanged.
+
+### 34.1 Exact baseline and bounded unit
+
+The exact proposal baseline is `main@6c33b7c111296966616184368e81c0a67f5e9278`, tree `822aac10b3d8440bfb290547402edb4faffc841c`.
+
+| Input / atomic member | Baseline object | SHA-256 | Treatment |
+|---|---|---|---|
+| OCP-007 / Organization | blob `d3258a4d7b4776bfdf25c5b62b0fcfca34e4bb78` | `6706f94a497502651ac9204e6c0510af5bc550781857efecb050e4de0f882bce` | version and this additive §34 |
+| OCP-001 governance | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` | read-only generic SemVer authority |
+| OCP-003 Resource precedent | blob `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` | read-only Concept-local precedent |
+| OCP-008 Objective precedent | blob `24ed01e0f5d6bc8f349a7aedae4c5f100eb449ee` | `46f1ecb7b956b106f9c66da0626ec4266961e07492059e594110f63736be6f0d` | read-only Concept-local precedent |
+| OCP-016 Core Boundary precedent | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` | read-only Canonical contract precedent |
+| checker guide | blob `a3a4ec3bc6d1e052138d4b10e1a6e7f997b3bc18` | `90665b646844a18fc3c4007519c9bb7cad7e6fdd38de6e0d2d896c2048fc2469` | current OCP-007 version label only |
+| repository README | blob `78219ff6d921f6edfd93553c7be0d4833d509336` | `f8aea9918b598c9a763e98200d922c4c6fa600b655aed481f47abf71e33ff2fd` | current act accounting only |
+| foundation roadmap | blob `562c98924879c4c0c0ae4078a6868884088a47ca` | `a0877f21ac6f04bf266338cce4f113f9878ea575dbdd4a54acc71d069388478e` | current version and sequencing accounting |
+| architecture backlog | blob `b24c168070b4ab8466ff344ca82602bb41d1efff` | `eb6016d819c936a6f731d75b940803acbd1ef0463c8c736ddf3109874f704920` | AB-062 accounting only; status unchanged |
+
+The atomic correction changes exactly five files: OCP-007, the checker guide, repository README, roadmap and architecture backlog. OCP-001, OCP-003, OCP-008 and OCP-016 are exact read-only classification evidence, not hidden members of the changed unit. Closed PR #122 is non-authoritative comparison material and supplies neither text nor approval to this act.
+
+### 34.2 Revision class and versioning after `1.0.0`
+
+This is a **MINOR** revision, `1.0.0 → 1.1.0`. It adds a backward-compatible normative rule for future OCP-007 revisions. Calling it PATCH would understate a new obligation; calling it MAJOR would falsely imply a break in the §33.2 promise, stored records or consumer interpretation. OCP-001 §257 is the determining authority because it classifies compatible additions of rules as MINOR. OCP-003 `0.6.1 → 0.7.0` is the only version-class precedent; OCP-008 and OCP-016 instead added their local ladders inside their canonicalization acts, so this is the first separate post-canonical correction of this class.
+
+SemVer applies to every guarantee, exclusion and non-implication in §33.2:
+
+- **PATCH** may correct prose, links, examples, review evidence or current accounting without changing an identity, required or optional field, invariant, owner, authority boundary, exact resolution rule, lifecycle path, Pattern binding, kind-profile envelope, structural-partition rule, supersession behavior, exclusion or non-implication.
+- **MINOR** may add a backward-compatible optional clarification or extension only when every existing valid Organization, transition record, relationship record, exact profile/reference and consumer binding keeps the same interpretation; all §33.2 guarantees remain true; and no excluded authority is imported.
+- **MAJOR** is required to change an identity key or required structure; permit redirect or automatic material-event continuity; reinterpret `classification_refs`; weaken exact resolution, authoritative history or fail-safe ambiguity handling; move specialized kind or scheme authority into Core; allow a previously rejected multiple-superior result; elect a relationship head; weaken an exact P-001 or OCP-009 binding; introduce Organization/Resource mapping or Organization Capability holders by implication; or remove a §33.2 exclusion or non-implication.
+
+A continuity, taxonomy, lifecycle, composition, scheme, exception, mapping or holder proposal is not automatically MINOR merely because it is additive in storage. It first requires its exact reopening owner and OCP-001/OCP-016 route; the effect on the existing `1.x` promise then determines the version.
+
+Adding or changing a specialized relationship-kind profile under its exact external owner does not automatically version OCP-007. It does require an OCP-007 revision if the shared Core envelope, class agreement, exact resolution, graph behavior or an existing consumer interpretation changes.
+
+OCP-007 document version is not an Organization, transition-record, relationship-record, profile or stored-payload version. It does not rewrite an identifier, select a current record or create a common version clock for domain data.
+
+### 34.3 Evidence, migration, rollback and authorization
+
+The proposed tree must pass the complete repository tests, fixtures, status synchronization, artifact governance, process audit, Concept graph and generated-map drift checks in both repository contexts. External review must additionally verify the five-file footprint, all §34.1 anchors, the `1.1.0` MINOR rationale, byte stability of the existing OCP-007 contract apart from frontmatter and additive §34, and absence of any stale current OCP-007 version label. Green CI cannot classify SemVer or grant authority.
+
+No Organization, transition, relationship, profile, resolver, fixture, schema, checker rule, dependency, Concept projection or graph edge changes. No stored record, exact reference or consumer binding requires migration or rebinding. Organization remains Canonical, readiness accounting does not increase, all named Organization backlog questions retain their status and T5 stays closed.
+
+Corrective rollback or replacement is a new reviewed act derived from its then-current baseline. It cannot silently downgrade the document, delete §34 as history cleanup, rewrite records, redirect exact references, infer continuity or mapping, elect a relationship head, expand CapabilityClaimRecord holders or select authority by timestamp, order, count, majority, reviewer, CI or completed effort.
+
+This correction becomes authoritative only after exact-head Fable review, Codex adjudication, green required CI, fresh explicit Pavlo/Architecture Board authorization for the unchanged head and squash merge. Pavlo's instruction to prepare this separate item authorizes authoring and review only. It does not authorize merge, remaining-T4 reassessment, another lifecycle act, T5, backlog resolution or any semantic extension.
