@@ -10,7 +10,7 @@
 | Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; OCP-007 лишається `0.4.0 / Draft`, O7V PATCH синхронізує шість peer status views і додає bounded CI guardrail, а O0 lifecycle hold лишається чинним до fresh comparison |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; AD-016S після O7V заново виводить exact O9C candidate лише як рекомендацію, а O0 lifecycle hold лишається чинним до окремого AD-016T selection |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -85,6 +85,7 @@
 - [x] AD-016Q complete Organization lifecycle-projection audit — a rule-based exact-baseline sweep classifies eight projection-bearing/current-roadmap files plus AB-062 accounting as evidence-only candidate U9, records stale OCP-005 §4 `Organization: Proposed` for a separate repair act, and leaves O0 binding with no outcome or proposal authorized
 - [x] AD-016R peer status synchronization selection — rule-based audit finds six stale registered-Concept views across OCP-005/OCP-006; O7V authorizes preparation only of one separate synchronization-and-guardrail PATCH, O0 remains binding for Organization lifecycle, and implementation plus post-repair comparison require fresh exact-head gates
 - [x] O7V peer status synchronization implementation — OCP-005/OCP-006 `0.2.4 / Draft` synchronize all six demonstrated rows; bounded repository validation rejects mismatched or duplicate registered-Concept rows without becoming lifecycle authority; O0 remains binding
+- [x] AD-016S post-O7V Organization audit — 172 tests and 120 fixtures replay green, all governed peer rows are synchronized, a fresh rule-based sweep derives exact nine-file O9C without a demonstrated tenth projection, and O9C remains recommendation-only before AD-016T
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -159,8 +160,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Keep O0 Organization lifecycle hold after the O7V synchronization PATCH; the repaired peer tables and green guardrail are evidence for reassessment, not lifecycle authority.
-2. Re-anchor fresh `main`, repeat the rule-based Organization projection sweep and all sixteen targets, derive any lifecycle unit anew rather than inherit U9, and compare it fairly with O0/O7R/O7D2/O37/O5 in a separate Board act.
+1. Keep O0 Organization lifecycle hold after AD-016S; repaired peer tables, a green bounded guardrail and the freshly derived O9C candidate are evidence for selection review, not lifecycle authority.
+2. Prepare AD-016T as a separate exact-head Board selection: re-anchor then-current `main`, rerun the projection sweep and all sixteen targets, and compare O9C fairly with O0/O7R/O7D2/O37/O5 without inheriting this recommendation.
 3. Keep OCP-007/Organization at `0.4.0 / Draft` and `Accepted`, and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve their exact external/excluded questions.
 4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
 5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
