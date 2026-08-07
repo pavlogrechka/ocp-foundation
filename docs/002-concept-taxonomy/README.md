@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.3.0
+Version: 1.4.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -11,11 +11,11 @@ Concept-Statuses:
   Operation: Accepted
   Assignment: Accepted
   Constraint: Accepted
-  Organization: Accepted
+  Organization: Canonical
   Objective: Canonical
   Capability: Canonical
   Event: Accepted
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # Concept Taxonomy
@@ -99,7 +99,7 @@ Concept Categories
 
 ## Organization
 
-Concept `Organization` має статус `Accepted` і визначений у [OCP-007 — Organization Concept](../007-organization-concept/README.md).
+Concept `Organization` має статус `Canonical` і визначений у [OCP-007 — Organization Concept](../007-organization-concept/README.md).
 
 Organization представляє сталу організаційну ідентичність. Структурні, оперативні, адміністративні, support і coordination relations моделюються окремими локальними `OrganizationRelationshipRecord` відповідно до AD-001 та P-001; вони не є універсальним фундаментальним Relationship Concept.
 
@@ -306,3 +306,9 @@ Projection owner, exact set/value rules, category exclusions і fail-safe mismat
 Окремий третій T4 lifecycle act exact-sync-ить одну projection value: `Resource: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.2.0 → 1.3.0`.
 
 Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Resource. Ненормативне curated subtype tree лишається байт-ідентичним і не отримує Core taxonomy, inheritance, mapping або authority. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior і status кожного іншого Concept лишаються незмінними.
+
+## Revision `1.4.0` — Organization status projection
+
+Окремий четвертий T4 lifecycle act exact-sync-ить одну projection value: `Organization: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.3.0 → 1.4.0`.
+
+Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Organization. Ненормативні category/subtype/decomposition trees лишаються байт-ідентичними; вони не містять Organization lifecycle label і не отримують taxonomy, inheritance, mapping або authority. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior і status кожного іншого Concept лишаються незмінними.

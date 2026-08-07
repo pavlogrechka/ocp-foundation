@@ -16,7 +16,7 @@
 | Operation | Accepted |
 | Operational Space | Proposed |
 | Order | Proposed |
-| Organization | Accepted |
+| Organization | Canonical |
 | Resource | Canonical |
 | Risk | Proposed |
 | Spectrum | Proposed |

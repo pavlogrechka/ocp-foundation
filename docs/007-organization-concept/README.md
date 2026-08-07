@@ -1,16 +1,16 @@
 ---
 Document-ID: OCP-007
 Title: Organization Concept
-Version: 0.4.0
-Status: Draft
-Concept-Status: Accepted
+Version: 1.0.0
+Status: Canonical
+Concept-Status: Canonical
 Defines-Concepts: Organization
 Concept-Depends-On: []
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-001, P-001
 Uses-Patterns: P-001@0.1.0
 Used-By: Organization Model, Coordination Model, Operational Ontology
-Last-Review: 2026-08-06
+Last-Review: 2026-08-07
 ---
 
 # OCP-007 — Organization Concept
@@ -521,3 +521,54 @@ Completion or failure of this remediation triggers a fresh exact blocker/stabili
 ## 32. Review target
 
 External review should try to falsify the two-surface readability, exact C2 identity limit, K3 opacity, T2 one-owner envelope, S1 scope locality, unconditional E1 rejection, Y1 record-only lifecycle, R1 branching history, P-001 completeness, U0/M0 exclusions, finite evidence matrix, data replay and absence of any registry, graph edge, mapping, Organization Capability holder, head election or authority-by-time/order/count.
+
+## 33. O9C lifecycle bridge and canonicalization act
+
+OCP-007 and Organization are now `1.0.0 / Canonical` under the separately reviewed O9C lifecycle act selected by AD-016T. Sections 1–32 remain byte-identical to the bounded Q2 contract reviewed at `0.4.0 / Draft`.
+
+Section 31 is a preserved historical act record. Its statement that this document remained `0.4.0 / Draft` and Organization remained `Accepted` describes the pre-O9C state in which Q2 remediation was reviewed; it does not override the current frontmatter or this §33. Its second paragraph's fresh-audit and separate-Board gates were satisfied by AD-016S, AD-016T and this separately gated lifecycle act.
+
+### 33.1 Exact baseline and atomic unit
+
+The exact proposal baseline is `main@66a81b26115e404ad5bb6443ae6df60033cb28a5`, tree `495d12661eb10b3518bde482ee3b1fd185d81128`.
+
+| Input / atomic member | Baseline object | SHA-256 |
+|---|---|---|
+| AD-016T selection | blob `124e1535db06dcfa60b579dd49ecea5292d0c687` | `32b91265723ec2a8a2408a9078537e5f3bf33fc0c81bd7ad06eaffcbb4c6f3e7` |
+| OCP-007 / Organization | blob `dceb5d57c66d180cd5298f4e3ad48d02831a4f23` | `55834d6da1b1b984140020e0e4613ea578b6c83e721d1b81688c12ffa8375a3f` |
+| OCP-000 registry | blob `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
+| OCP-002 projection | blob `3b676afcff63ac4b600fb382a67283d67f766c7f` | `e0112f751b7922904d7217c76102cc8d5e3382ce49f13d94e99c31af1275669e` |
+| OCP-005 guarded peer view | blob `3223ba69e289c38530d93965c2faa8cf280c1239` | `da599b71ea8fb26cde3f57921a6bee07a8ddf75aaad0f6e9e2387ee499bda11b` |
+| generated foundation map | blob `38011129ab9bf2e0362df2255a57fa15d3c90e54` | `f8af51e97e193820d24323cd0db5262d4fe0d353cb93c9bec910834e3e7b70e8` |
+| checker guide | blob `74c4195c182d076e62a3ef1d8b8897db83cc177d` | `5ff2c58dcb3a9b0daee7458329e0b9eaef6ff4fa2864c5045c82c133827140b5` |
+| repository README | blob `a3e005f0cacce5b742c18842d9220a8d23f144b9` | `499d13693bfa3b7f0ee7406432df621d3b88fc1f6c9a7049613a6a6e232be33f` |
+| foundation roadmap | blob `ca0be71419dd0d50b4e4d18415be3531d7cfeb25` | `8d124d8410c28ec693246f9ba0f47a9b706cdc226f12a7240d8b2542f8f550fa` |
+| architecture backlog | blob `6d73ff60344cdc19fc28ddbf45f8fa4b64d6e99d` | `60cba188912e6ea2c465423340c0c926ea014ec7f39bbbfa53a542eccd240bd2` |
+
+The atomic lifecycle unit changes exactly nine files: OCP-007, OCP-000, OCP-002, OCP-005, the generated foundation map, checker guide, repository README, roadmap and architecture backlog. AD-016T is read-only selection evidence, not a tenth changed file.
+
+### 33.2 Preserved compatibility promise
+
+Canonical status stabilizes the Q2 surface; it does not expand it. In particular:
+
+- Organization identity remains exact and distinct from Resource identity;
+- merger, split, reorganization and constitutive redesignation continuity remain external decisions;
+- `classification_refs` remain optional opaque annotations without taxonomy authority;
+- OrganizationRelationshipRecord remains a local identified record under exact P-001 invocation, not a new fundamental Concept;
+- Core owns only the exact external kind-profile envelope and shared behavior-class agreement, not specialized kind meaning;
+- structural partition equality remains dataset-, scope- and `scheme_ref`-local;
+- multiple direct structural superiors remain unconditionally rejected inside one exact partition;
+- branching supersession preserves history without redirect, current-head election or authority by time/order/count; and
+- composition, Organization/Resource mapping and Organization Capability holders remain excluded and separately governed.
+
+Organization Canonical status does not imply activity, readiness, availability, authorization, admissibility, Assignment, participation, suitability, interchangeability or operational command. CapabilityClaimRecord holders remain Resource-only and exact-bind one explicit OCP-009 Capability version under OCP-012.
+
+### 33.3 Evidence, migration, rollback and authority
+
+The proposed tree passes the complete unit-test and fixture suite, peer-view synchronization, registry/taxonomy/defining-document equality, L2 dependency floors, artifact governance, process audit, Concept graph and generated-map drift. Those checks witness finite consistency only; they do not grant lifecycle status or real-world authority.
+
+No Organization, relationship, transition or profile record changes shape or identity. No exact reference, history, resolver context or consumer requires migration or rebinding. Record-stage fixture values such as `Draft`, `Established`, `Cancelled`, `Closed` and `Revoked` remain Q2 record-lifecycle evidence and are not Concept-status projections.
+
+Corrective rollback is a new reviewed nine-file lifecycle act derived from its then-current baseline. It cannot delete records, redirect exact references, rewrite history, elect a relationship head, infer mapping or restore stale peer values.
+
+This lifecycle becomes authoritative only after Fable exact-head review, Codex adjudication, green required CI, fresh explicit Pavlo/Architecture Board authorization for the same unchanged head and squash merge. AD-016T authorization is consumed and does not transfer. This act does not resolve AB-006, AB-044–AB-047, AB-051 or AB-052, authorize T5, select the next T4 candidate or create production authority.

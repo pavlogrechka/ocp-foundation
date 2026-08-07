@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.4
+Version: 0.2.5
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -62,7 +62,7 @@ Assignment може бути підставою для перевірки цих
 |---|---|---|
 | Resource | Canonical | елемент, що залучається |
 | Operation | Accepted | контекст залучення |
-| Organization | Accepted | не створює Assignment автоматично |
+| Organization | Canonical | не створює Assignment автоматично |
 | Capability | Canonical | може перевіряти відповідність ролі |
 | Constraint | Accepted | може обмежувати одночасні чи часові Assignment |
 | Event | Accepted | можливе джерело історії Assignment |
@@ -498,3 +498,12 @@ Revision `0.2.4` синхронізує лише volatile current-status renderi
 Mechanical peer-view validation звіряє тільки registered-Concept rows у current `Concept Status and Dependencies` tables з OCP-000. Воно не визначає статус, не охоплює історичні tables або ASCII `[Status]` tree labels і не замінює Board lifecycle act.
 
 Corrective rollback є новим reviewed synchronization act, виведеним із тодішнього authoritative registry. Він не може відновити stale value, переписати lifecycle history або надати checker незалежний authority.
+
+
+## 23. PATCH accounting — v0.2.5
+
+Revision `0.2.5` синхронізує лише volatile current-status rendering Organization у §4 з окремим O9C lifecycle act: row тепер показує Organization як `Canonical`. Дата review вже збігається з датою акта; ця accounting note входить до того самого PATCH.
+
+Документ лишається `Draft`, Assignment — `Accepted`. Organization Canonical status не створює Assignment, участь, authority, availability, Readiness, Organization/Resource mapping, Capability holder або interchangeability inference. Assignment identity/lifecycle, exact Resource/Operation binding, role/applicability semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
+
+Mechanical peer-view validation exact-sync-ить цей registered-Concept row з OCP-000, але не визначає статус і не замінює окремий Board lifecycle act. Corrective rollback є новим reviewed atomic synchronization act; він не може ізольовано відновити stale value або переписати Assignment/Organization history.
