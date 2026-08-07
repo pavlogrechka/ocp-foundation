@@ -10,7 +10,7 @@
 | Core domain ontology | 87% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈71%** | Четвертий T4 micro-wave встановлює OCP-007/Organization `1.0.0 / Canonical` exact nine-file O9C unit; наступний remaining-T4 reassessment і будь-який downstream act мають окремі gates |
+| **Загальна foundation-готовність** | **≈71%** | Четвертий T4 micro-wave встановлює OCP-007/Organization `1.0.0 / Canonical`, а окремий `1.1.0` correction додає лише локальні SemVer-правила; наступний remaining-T4 reassessment і будь-який downstream act мають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -35,7 +35,7 @@
 - [x] Operation Accepted working description
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
-- [x] Organization `1.0.0 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions
+- [x] Organization `1.1.0 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions and document-local post-`1.0.0` SemVer rules
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
 - [x] Capability boundary and registry direction accepted in `AD-005C`
@@ -88,6 +88,7 @@
 - [x] AD-016S post-O7V Organization audit — 172 tests and 120 fixtures replay green, all governed peer rows are synchronized, a fresh rule-based sweep derives exact nine-file O9C without a demonstrated tenth projection, and O9C remains recommendation-only before AD-016T
 - [x] AD-016T Organization lifecycle scope selection — independent projection/consumer/non-Markdown sweep and all sixteen targets support O9C only as preparation of one exact nine-file proposal with explicit SemVer/status atomicity; no lifecycle state changes in the selection act
 - [x] Fourth T4 micro-wave — OCP-007/Organization `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.4.0`, OCP-005 `0.2.5`, current map/checker-guide/accounting synchronization and no semantic, migration, mapping or T5 authority
+- [x] OCP-007 post-canonical versioning correction — `1.1.0 / Canonical` adds local PATCH/MINOR/MAJOR boundaries for the unchanged §33.2 promise; Organization status, data, checker semantics, readiness and remaining-T4 authority do not change
 
 ## Milestone 1A — Governed Executable Validation Loop
 
