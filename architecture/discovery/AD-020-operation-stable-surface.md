@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-020
 Title: Operation Stable-Surface Discovery
-Version: 0.1.0
-Status: Discovery
+Version: 0.2.0
+Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-004, AD-006, AD-011, AD-014, AD-016, OCP-001, OCP-004, OCP-005, OCP-006, OCP-008, OCP-010, OCP-011, OCP-014, OCP-016, P-001
 Applies-To: AB-062, Operation stable-surface remediation
-Review-After: External adversarial review; then a separate Architecture Board outcome-selection act
+Review-After: Completion or failure of the selected OCP-004/OCP-017 remediation; then a fresh blocker/stability audit before any lifecycle proposal
 ---
 
 # AD-020 — Operation Stable-Surface Discovery
@@ -790,3 +790,366 @@ While this document is `0.1.0 / Discovery`:
 - no data, reference, record, projection, checker rule, schema or production authority changes.
 
 Merge of this discovery, if separately reviewed and authorized, records only the comparison space and evidence obligations. It cannot select Q3, create AD-020A, edit OCP-004, invoke P-001, add/remove an edge, resolve a backlog item or authorize any downstream merge.
+
+## 29. AD-020A Board question and exact baseline
+
+AD-020A decides whether the reviewed discovery supports one complete Operation stable-surface remediation direction. It does not perform that remediation, edit OCP-004, create a lifecycle document, invoke P-001, change the Concept graph or resolve an Operation backlog item.
+
+The exact decision baseline is `main@cb9cf0bdcf4db812e917df2f7769127be8e5cc12`, tree `b3dda9d8dc7ee5fd38c88ffd3b168f9799c6c443`. On that baseline:
+
+- AD-020 is `0.1.0 / Discovery`, blob `3266f047dadb7bc1febd4c814f948ed73bac5295`, SHA-256 `fc76ba840860261f5f7aa27470870edd38d6cf78ac4dd5090893e68cb863d5b2`;
+- the current README projection is blob `96089f6fdcf4e60a0a44aba7974415059e71f0e8`, SHA-256 `aa0081d29d53284fb9c23a891f28ca3c1391987ba4f873b1a16667c1fde6514d`;
+- the architecture backlog is blob `859c98c1599e913ebedcf4d48574637887b64e1e`, SHA-256 `88a592330a7accf7e2d51dc49c7fd31e7174deb6c4118b3eda82dea297943ab5`;
+- the roadmap is blob `567a5b01afdbd7424ceaacefef7de4ab89cf4a4a`, SHA-256 `a0c1e6fed773ec640b68ff4bf342e717011ed92fd6ca862ea70b8f082b71ae00`;
+- every semantic and executable anchor in §2 remains byte-identical to the discovery baseline;
+- OCP-004 remains blob `6f6990ed2cef7887af663e7dc806b34bddca6e30`, SHA-256 `aa81d60ef8c9802f40f488390d151b5f6c50d116ece6576c1783da0e48087033`;
+- P-001 remains blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f`, SHA-256 `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82`;
+- a fresh frontmatter scan of all seventeen primary OCP documents again yields exactly five direct OCP-004 consumers: OCP-005, OCP-006, OCP-010, OCP-011 and OCP-014; and
+- OCP-004 remains `0.8.3 / Draft`, Operation remains `Accepted`, the graph remains unchanged, P-001 has six current primary invoking contracts on this baseline, and no OCP-017 artifact exists.
+
+Fable externally reviewed discovery head `33aebc9b5dfc0c9778e22dcd9e37d14177bd70cf` and approved iteration 2/5 with no open findings after the `Applies-To` acceptance path was made executable. The authorized discovery squash-merged as `cb9cf0bdcf4db812e917df2f7769127be8e5cc12`; its tree is byte-identical to the reviewed head, CI succeeded, and the post-merge runs returned 172/172 unit tests plus 120/120 fixtures in both contexts.
+
+The Board question is narrow: **does one complete H0–H4/semantic/form combination survive all thirty attacks strongly enough to authorize preparation of a bounded remediation, or must the result remain H0?** The preliminary Q3 label, authoring effort, review approval, option order, readiness estimate, hashes and green CI are evidence inputs or controls; none is selection authority.
+
+## 30. Board treatment of the discovery
+
+AD-020A accepts the discovery with the following adjudications.
+
+1. **The fifteen-guarantee kernel is retained.** No evidence contradicts §18, and no selected rule may weaken it by relocation or omission.
+2. **The five-consumer baseline is complete for the current tree.** A later OCP-017 would become a new sixth consumer by explicit creation; it is not evidence that the baseline scan missed one.
+3. **H0, H1, H2, H3 and H4 are materially distinct.** Their differences are authority placement, dependency direction, migration burden and record form—not merely file count.
+4. **The provisional Q3 is not internally complete.** H3 promises one separate lifecycle authority while independent coordination stays separately bounded, but Q3 also selects IO3 and therefore requires a second separate relationship authority. As written, Q3 crosses into H4 without naming that owner.
+5. **Falsification target 22 succeeds against provisional Q3.** The current free relation enum points only to a future Coordination Model; no exact accepted relationship-kind owner or contract exists. That result defeats Q3 as written rather than defeating all split-lifecycle outcomes.
+6. **A revised H3 combination remains viable.** Keeping inter-operation relations as bounded IO2 values under OCP-004 removes the unowned IO3 extraction while preserving the lifecycle split. The revised combination is named Q3I so that the change cannot be mistaken for discovery momentum.
+7. **P-001 is applicable per family, not per file or suffix.** F1, V1 and LT2 retain independent identity/evidence/history and therefore require three separate conformance statements. IO2 rejects independent identity, effectivity, lifecycle and supersession and therefore supplies the non-invoking equivalent instead.
+8. **P-001's evidence ledger is a named implementation risk.** Its §13 says “six current primary invokers,” while §16 frames that ledger as evidence for the T3 acceptance act and §13 denies registry status. AD-020A does not amend or reinterpret P-001 silently; §42 makes truthful treatment of that prose a non-waivable stop.
+9. **The Event seam is resolved only to E1.** OCP-010 §10 already supplies independent identity, zero/one/many relevance and no current edge. The stable Operation surface can retire `generates` without denying relevance.
+10. **Selection remains preparation-only.** None of these adjudications changes a current document, runtime object, Pattern invocation, dependency or status outside AD-020 itself.
+
+## 31. Complete-combination comparison
+
+Each row below supplies every §11 axis. A layout name without the rest of the row is not an outcome.
+
+| Candidate | Complete combination | Human-readable ownership | Board disposition |
+|---|---|---|---|
+| Q0 | `H0 + L0 + G0 + A0 + T0 + C0 + E0 + D1 + F0 + V0 + LT0 + IO0` | current OCP-004 remains the bounded working owner; every B item stays explicitly unresolved | admissible fail-safe; not selected because exact owners can be bounded without inventing semantic facts |
+| Q1 | `H1 + L1 + G1 + A1 + T1 + C1 + E1 + D1 + F1 + V1 + LT1 + IO1` | OCP-004 owns identity, lifecycle, composition and identified local relationships; downstream contracts retain participation, applicability, occurrence and assessment | coherent but rejected: one document would accumulate four P-001 families plus lifecycle, authorization-evidence and terminal-alignment obligations |
+| Q2 | `H2 + L1 + G1 + A1 + T1 + C1 + E1 + D1 + F1 + V1 + LT1 + IO2` | one OCP-004 owner with separate identity/context and lifecycle/support surfaces | strongest in-place alternative; rejected because the promised separate lifecycle contract and transition-history burden have concrete evidence, not merely editorial separation needs |
+| Q3 | `H3 + L2 + G2 + A1 + T1 + C1 + E1 + D1 + F1 + V1 + LT2 + IO3` | lifecycle would move, and an unnamed future owner would also receive identified inter-operation relations | rejected as written: IO3 turns H3 into an unnamed H4-like split and target 22 succeeds |
+| Q3I | `H3 + L2 + G2 + A1 + T1 + C1 + E1 + D2 + F1 + V1 + LT2 + IO2` | OCP-004 owns the stable Operation kernel, composition and bounded inline relation values; one Route C lifecycle contract owns lifecycle and transition history | **selected for remediation preparation**; it repairs Q3's owner gap while keeping one readable Operation document and one separately readable lifecycle owner |
+| Q4 | `H4 + L2 + G2 + A1 + T1 + C1 + E2 + D2 + F1 + V1 + LT2 + IO3` | OCP-004 plus separate Board-owned Route C lifecycle and Operation-relationship/relevance contracts, each depending on its exact endpoints | coherent if the second contract defines the legitimate relationship-kind owner; rejected now because no consumer or record-history requirement justifies that extraction and migration cost |
+
+Q0 remains the immediate fallback. Q1 remains the concentration alternative, Q2 the in-place alternative and Q4 the extraction alternative. Q3 is retained as a falsified historical hypothesis; Q3I is not a silent relabeling of it.
+
+## 32. Board disposition of the discovery ledgers
+
+### 32.1 OCP-004 section disposition
+
+| Current section | AD-020A disposition |
+|---|---|
+| §§1–3 | retain the exact identified purposeful activity, scope and specialization exclusions in OCP-004 |
+| §4 | retain current Concept status/dependency reporting; replace any relationship prose that overstates a Concept edge |
+| §5 | retain exact Operation identity independence in OCP-004 |
+| §6 | retain the readable context decomposition only after lifecycle and relationship ownership match §§35–37 |
+| §7 | retain the exclusive active-intent invariant; complete F1 and V1 as separate OCP-004 P-001 families without changing AD-004's sunset gate |
+| §8 | retain planned/actual temporal separation as Operation-owned context |
+| §9 | retain AD-014 local spatial bindings byte-semantically; they remain inline, non-reusable and outside P-001 |
+| §10 | retain only the OCP-005 participation boundary and no-inheritance rules; no Assignment formula is copied |
+| §11.1 | retain pursuit/Assignment/Constraint boundary vocabulary; remove `Operation generates Event` from the stable relation list under E1 |
+| §11.2 | replace the future-owner placeholder with the exact IO2 local-value envelope in §37; OCP-004 owns only that bounded assertion vocabulary |
+| §11.3 | move authorization-evidence acceptance to OCP-017 under A1; OCP-004 keeps the statement that authorization source/mechanism is external |
+| §12 | complete parent/child composition in OCP-004 under C1; independent coordination, shared time/space and participation inheritance remain excluded |
+| §13 | move stage vocabulary, paths, completeness, transition history, authorization-evidence acceptance and terminal alignment to OCP-017; OCP-004 keeps one readable cross-reference and non-implications |
+| §14 | retain Event/assessment identity and completion non-implications; state E1 downstream relevance and no new edge positively |
+| §§15–17 | retain Operation identity/context rules; relocate lifecycle rules to OCP-017 and remove any duplicate current owner |
+| §§18–19 | retain human examples/non-examples as evidence after updating them to the selected owners |
+| §§20–21 | keep every named Operation question and exclusion visible; selection resolves none of their backlog statuses |
+| §§22–24 | retain as historical PATCH accounting; they do not become current semantic owners |
+
+Every current B item is assigned to OCP-004, OCP-017, an exact downstream owner or an explicit exclusion. The remediation may not hide one in an example, checker rule or “future work” paragraph.
+
+### 32.2 Structure and field disposition
+
+| Structure / field group | Selected treatment |
+|---|---|
+| `operation_id` | OCP-004 stable Concept identity; never changed or redirected by lifecycle extraction |
+| `objective_refs` | exact OCP-008 references and affirmative pursuit semantics remain OCP-004-owned |
+| `ExplicitIntentRecord` | F1 endpoint-free identified family under OCP-004 and exact P-001; AD-004 sunset remains separate |
+| validation evidence | V1 endpoint-free identified evidence family under OCP-004 and a separate exact P-001 mapping; evaluator identity is not authority |
+| planned/actual temporal context | OCP-004 inline context, with no shared Time Concept |
+| local spatial binding | unchanged AD-014 inline value; never reused as a relationship or P-001 identity |
+| Assignment participation | OCP-005 remains the only authoritative owner |
+| Constraint applicability | OCP-006 remains the only authoritative owner |
+| parent/child | OCP-004 C1 composition with exact acyclicity and no inherited Assignment, Constraint, context, outcome or authorization |
+| inter-operation assertion | IO2 nested value in the exact owning Operation snapshot under §37; no independent record identity/history |
+| `lifecycle_stage` | optional checked projection from OCP-017 history, not an OCP-004 authority |
+| lifecycle transition | LT2 identified record under OCP-017 and P-001 Module B |
+| Event relevance | E1 explicit downstream reference/relation, no `Operation → Event` Concept edge and no automatic Event generation |
+| outcome assessment | unchanged external OCP-011 record; never an Operation lifecycle projection |
+
+## 33. Commissioned falsification closure
+
+AD-020A re-attempts all thirty §25 targets against the exact baseline and complete combinations:
+
+| # | Exact evidence rechecked | Board result |
+|---:|---|---|
+| 1 | commit/tree, §2 objects and frontmatter scan | baseline and five-consumer set reproduce; error not demonstrated |
+| 2 | all seventeen primary OCP `Depends-On` fields | no sixth current consumer exists; future OCP-017 would be an explicit new consumer |
+| 3 | §18 against Q3I §§35–37 | all fifteen guarantees remain explicit; loss not demonstrated |
+| 4 | §32 owner ledger | every B statement has one proposed owner or exclusion; any unassigned statement is a remediation stop |
+| 5 | Q1 dependency sketch | in-place completion need not create a cycle; attack fails, though concentration cost remains |
+| 6 | Q2 two-surface ledger | identity/context and lifecycle/support can be stated distinctly; attack fails |
+| 7 | Q3I OCP-004/OCP-017 split | lifecycle rules refer to exact Operation identity without redefining it; attack fails |
+| 8 | Q4 relocation rule | two extracted contracts need not duplicate one relation statement; attack fails conditionally, but owner/migration burden remains |
+| 9 | current fixtures and exact historical references | H0 replays current snapshots byte-exactly; attack fails |
+| 10 | OCP-004 §§13, 15 and 20 | no complete authoritative `Draft → Planned` rule exists |
+| 11 | OCP-004 §11.3 and repository owner sweep | no accepted mandatory Operation authorization source exists |
+| 12 | OCP-004/OCP-005 terminal rules and AB-028 | terminal alignment remains incomplete and not uniquely owned |
+| 13 | OCP-004 §§11.2 and 12 | composition and independent coordination are distinguishable; attack fails |
+| 14 | OCP-004 §11.1 versus §14 and OCP-010 §10 | `generates` has no exact non-cyclic current owner or edge |
+| 15 | all five consumers plus OCP-010 §10 | no consumer-required generation guarantee is lost by E1 |
+| 16 | OCP-010 → OCP-004 dependency and current graph | a direct reverse Concept dependency would introduce topology/semantic work; easy E3 addition is not demonstrated |
+| 17 | Q1/Q2 D1 ledgers | OCP-004 can state boundaries without copying downstream formulas; duplication is not necessary |
+| 18 | all four field ledgers and P-001 applicability | classification follows identity/effectivity/history properties, not names or storage |
+| 19 | §14.1 versus P-001 §§4–8 | F1 maps all seven Required Elements and selects no unsupported module |
+| 20 | §14.2 versus P-001 §§4–8 | V1 maps all elements; evaluator/time/order/count never elect authority |
+| 21 | §14.3 versus P-001 Module B | LT2 includes transition identity, operation reference, paths, ordered history, projections and branch rejection |
+| 22 | current free enum, owner sweep and provisional Q3 | **demonstrated against Q3/IO3**: no legitimate exact relationship-kind owner is named; Q3 is rejected and Q3I selects IO2 |
+| 23 | Q3I IO2 envelope | no relationship ID, independent reference, effectivity, history or supersession remains; appearance of one reopens IO3 |
+| 24 | P-001 `0.1.0` §§4–8 and §12 | selected families require no new Pattern obligation or module; exact `0.1.0` use is sufficient, subject to the §42 ledger stop |
+| 25 | six current invokers and three immutable snapshots | selection changes none; future remediation must preserve their exact bindings and cannot rewrite snapshots |
+| 26 | OCP-005/006/010/011/014 contracts | no Operation identity rebinding is required; lifecycle evidence dependencies and historical wrappers still require explicit accounting |
+| 27 | checker implementation versus §§8.2–8.3 | checker proves only the finite structural subset; no semantic overclaim is accepted |
+| 28 | §§21–23 obligations by Q0/Q1/Q2/Q3I/Q4 | each rejected layer has an explicit replay or owner equivalent; outcome-fairness failure not demonstrated |
+| 29 | Q3I route, graph and exclusions | it adds no Concept, Concept edge, authorization source, Organization holder or production schema in this act |
+| 30 | counterfactual comparison Q0/Q1/Q2/Q4 | original Q3 fails despite being recommended; Q3I wins on named owner and bounded migration evidence, not momentum or aesthetics |
+
+“Not demonstrated” remains narrower than “impossible.” Target 22 is a positive result and permanently distinguishes Q3I from Q3. Targets 4, 21, 23, 24, 25, 26, 28 and 29 become non-waivable remediation stops; success of any one returns immediately to Q0 and Board review.
+
+## 34. Architecture Board selection — Q3I
+
+AD-020A selects this complete remediation direction:
+
+```text
+Q3I := H3 + L2 + G2 + A1 + T1 + C1 + E1 + D2
+       + F1 + V1 + LT2 + IO2
+```
+
+In human terms:
+
+- OCP-004 remains the single readable owner of Operation identity, intent, temporal/spatial context, parent/child composition and bounded inter-operation assertion values;
+- one new Route C, non-Concept `OCP-017 — Operation Lifecycle Contract` is the sole owner of stages, paths, structural completeness, authorization-evidence acceptance, authoritative transition history and terminal-alignment evidence;
+- Assignment, Constraint, Event occurrence, Objective and assessment retain their current defining owners;
+- `Operation generates Event` leaves the stable surface; explicit downstream Event relevance remains possible without a new Concept edge;
+- ExplicitIntentRecord and validation evidence become two separately mapped families under one exact OCP-004 P-001 metadata invocation;
+- lifecycle transitions become one OCP-017 P-001 Module B invocation;
+- inter-operation assertions become exact nested IO2 values rather than independently identified records; and
+- Q0 remains the fail-safe if any selected owner, form, dependency, replay or Pattern obligation cannot be stated exactly.
+
+Q3I is selected because it gives every current statement one bounded owner while creating only the lifecycle authority already required by OCP-004. It is not selected because Q3 led discovery, because split files appear tidy, because CI is green or because Operation is next in T4 order.
+
+## 35. Selected OCP-004 stable surface
+
+The future remediation must make these guarantees readable in OCP-004 itself:
+
+1. One exact `operation_id` identifies one purposeful, context-bounded activity independently of name, template, classification, participants, local spatial payload, lifecycle stage, Event and outcome.
+2. Outside `Draft`, exactly one active intent branch exists: non-empty exact `objective_refs` or one valid ExplicitIntentRecord, never both.
+3. Every Objective reference exact-resolves under OCP-008; membership means affirmative pursuit only and implies no priority, sequence, hierarchy, aggregation or achievement.
+4. Explicit intent and validation keep immutable exact bindings, conflict-safe evidence-set semantics and no timestamp/order/count winner.
+5. Planned and actual temporal statements remain distinct.
+6. AD-014 local spatial context remains zero/one/many, snapshot-local, fail-safe and non-reusable.
+7. Assignment alone owns authoritative Resource participation; parent/child or inter-operation relations create no Assignment.
+8. Constraint alone owns applicability and blocking/advisory semantics.
+9. OCP-004 owns exact parent/child composition, including dataset acyclicity and no inheritance of participation, applicability, spatial context, outcome or authorization.
+10. OCP-004 owns only the bounded IO2 assertion semantics in §37; workflow agreement, permission and caller authorization remain outside it.
+11. Event identity and occurrence remain independent; an Operation transition is not an Event automatically.
+12. `Completed Operation != achieved Objective`; OCP-011 remains the assessment owner.
+13. Authorization evidence, provenance, profile success or a stage label never creates authorization by itself.
+14. No Readiness, State, availability, admissibility, interchangeability, Organization holder or production authority is inferred.
+15. Every exact current/historical reference replays under its original reviewed contract or has an explicit lossless migration; no newest-version redirect exists.
+
+OCP-004 must expose one concise cross-reference to OCP-017 and one ownership table. A person must be able to learn what an Operation is and what it does not own without reconstructing PR history or checker code.
+
+## 36. Selected OCP-017 lifecycle authority
+
+The future remediation may propose one `OCP-017 — Operation Lifecycle Contract` only as a Route C non-Concept artifact under OCP-016. Its proposed direct dependency set is exactly `AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010, OCP-011, OCP-016, P-001`; removing an unused dependency is allowed only with line-level evidence that the corresponding semantic boundary is not consumed. It must:
+
+1. depend on exact OCP-004 identity and import OCP-005/OCP-006/OCP-010/OCP-011 only for the evidence or boundary semantics named below;
+2. define one finite stage vocabulary and every allowed transition path;
+3. own G2's universal structural minimum for each non-Draft stage and one exact fail-safe domain-profile hook;
+4. own A1's evidence-acceptance envelope while leaving the authorization source/mechanism to a separately governed owner;
+5. reject missing, duplicate, ambiguous, stale, conflicting or incomparable profile/authorization evidence;
+6. own T1 terminal-alignment evidence and require a named non-permissive disposition for each still-effective Assignment without mutating OCP-005 records;
+7. define LT2 OperationLifecycleTransitionRecord under exact `P-001@0.1.0` and Module B;
+8. make transition history authoritative and any materialized stage/time/provenance field a checked projection;
+9. keep Constraint evaluation in OCP-006, Event occurrence in OCP-010 and outcome assessment in OCP-011;
+10. preserve `Completed != achieved`, lifecycle/Assignment independence and all Readiness/State exclusions; and
+11. supply a readable dependency and authority table with no reverse OCP-004 dependency.
+
+The selected D2 topology is downstream and acyclic: OCP-017 depends on OCP-004 and any exact evidence owners it consumes; OCP-004 does not gain dependencies on OCP-005, OCP-006, OCP-010, OCP-011 or OCP-017. OCP-017 is not a Concept, State abstraction, authorization mechanism or production workflow schema.
+
+## 37. Selected record-form and relation contract
+
+### 37.1 F1 and V1
+
+OCP-004 must publish separate conformance statements for OperationExplicitIntentRecord and OperationIntentValidationEvidenceRecord using the complete mappings in §§14.1–14.2. One `Uses-Patterns: P-001@0.1.0` metadata binding may import the shared form, but it cannot merge the two semantic families.
+
+F1 adds exact immutable authoring provenance and keeps `intent_id` independent of `intent_version_ref`. V1 keeps `validation_id`, exact intent/rule/input bindings and conflict-safe set evaluation. Neither family selects a newest record, and validation never becomes authorization.
+
+### 37.2 LT2
+
+OCP-017 must publish the complete §14.3 mapping, including non-empty `transition_id`, exact `operation_ref`, allowed path, ordered occurrence rule, provenance, authoritative history, deterministic projections and invalid-branch rejection. Module B is mandatory; Modules A and C remain absent unless separately justified by actual effectivity or supersession semantics.
+
+### 37.3 IO2
+
+OCP-004 must replace the record-like placeholder with a snapshot-local value having this bounded meaning:
+
+- `source_operation_ref` equals the owning Operation identity;
+- `target_operation_ref` exact-resolves once to another Operation under a declared resolution scope;
+- `relation_type` is one closed OCP-004-owned value among `coordinates_with`, `depends_on`, `supports` and `conflicts_with`;
+- `provenance_ref` attributes why the exact owning snapshot contains the assertion but grants no permission or precedence;
+- duplicate normalized `(source, relation_type, target)` values reject without list-order selection; and
+- the value has no independent ID, external reference target, effectivity, transition history, supersession or current-head projection.
+
+The four values are deliberately modest: they state coordination relevance, operational dependency, claimed support direction or claimed incompatibility in the owning snapshot. They do not create workflow agreement, Constraint applicability, Assignment, Event, outcome, authority or a Concept edge.
+
+Because the owning Operation snapshot is the only identity and history boundary, IO2 does not invoke P-001. If any consumer needs to address the assertion independently, preserve it across Operation snapshots as the same subject, add effectivity/history/supersession or delegate kind meaning, the remediation must stop and reopen IO1/IO3 rather than add a hidden record.
+
+### 37.4 P-001 ledger boundary
+
+AD-020A changes neither P-001 nor any current invoker. The future remediation must quote P-001 §§13 and 16 and state whether “six current primary invokers” is an acceptance-time evidence statement or requires a Pattern-owned current-prose correction before two new invoking artifacts can merge.
+
+It may not silently leave a false live count, edit P-001 under an unchanged semantic claim, bump P-001 and mass-update invokers, or rewrite immutable snapshots without a separately reviewed justification. If exact-head review cannot establish a truthful no-Pattern-change treatment, the Operation remediation stops; a separate Pattern accounting/version act with its own gates must precede it.
+
+## 38. Consumer, migration and rollback result
+
+Q3I changes no Operation identity or current reference by design.
+
+| Consumer / data surface | Selected treatment |
+|---|---|
+| OCP-005 Assignment | keeps exact Operation endpoint and participation authority; OCP-017 may read exact Assignment evidence but never mutates it |
+| OCP-006 Constraint | keeps applicability/evaluation authority; OCP-017 may require exact evaluation evidence without copying its formula |
+| OCP-010 Event | keeps independent occurrence and zero/one/many relevance; no dependency reversal or new edge |
+| OCP-011 assessment | keeps exact Objective assessment; no lifecycle projection or rebinding |
+| OCP-014 coordination profile | keeps context validation without operational permission; IO2 does not make profile ownership relation authority |
+| future OCP-017 | becomes an explicit new downstream OCP-004 consumer and owns only the lifecycle surface |
+
+Historical OCP-004 `0.8.3` snapshots remain replayable under that exact reviewed contract. Migration cannot invent `transition_id`, `operation_ref`, provenance, authorization evidence, relationship meaning or a passing validation result. A current value that cannot satisfy the new contract remains historical or causes migration to stop; it is never repaired by timestamp, list order, nearest label or source count.
+
+The later remediation must provide an exact field relocation ledger, before/after reference examples, unchanged-consumer evidence and an atomic rollback that restores both document ownership and executable interpretation. Partial rollback of OCP-004 without OCP-017, or vice versa, is invalid.
+
+## 39. Selected scenario results
+
+The thirty §19 scenarios have deterministic Q3I treatment:
+
+| # | Q3I result |
+|---:|---|
+| 1 | both Operation retain distinct `operation_id`; shared context never merges identity |
+| 2 | Draft may have neither active intent branch |
+| 3 | both exact Objective references are affirmative and must resolve separately |
+| 4 | both branches outside Draft reject |
+| 5 | stale exact-binding evidence rejects the non-Draft explicit-intent branch |
+| 6 | conflicting exact-binding validation results reject; time cannot elect a winner |
+| 7 | changed content under the old version token rejects |
+| 8 | domain-profile failure blocks the transition despite Core structural completeness |
+| 9 | zero, multiple or incomparable profile owners reject |
+| 10 | ownerless authorization provenance cannot satisfy A1 |
+| 11 | exact evidence binding is traceability only; OCP-017 grants no external permission |
+| 12 | Assignment effectivity remains OCP-005-owned and is not implied by Active |
+| 13 | Completed with an effective unfinished Assignment requires the exact T1 disposition/evidence; no automatic mutation occurs |
+| 14 | missing/conflicting terminal alignment evidence rejects the terminal transition |
+| 15 | parent/child creates no inherited Assignment |
+| 16 | self-parent and any dataset cycle reject |
+| 17 | independent coordination uses IO2 and creates no composition |
+| 18 | time/space overlap alone creates no IO2 assertion |
+| 19 | Event remains valid with zero Operation relevance |
+| 20 | one Event may be relevant downstream to several Operation without identity change |
+| 21 | a transition may exist without an Event |
+| 22 | Completed and `indeterminate` assessment remain compatible distinct facts |
+| 23 | Constraint evidence may block a transition while remaining external to lifecycle stage identity |
+| 24 | an ownerless or multiply owned relationship kind cannot become IO3; IO2 uses only the closed OCP-004 values |
+| 25 | unresolved or ambiguous target Operation rejects the IO2 value |
+| 26 | duplicate transition IDs or invalid branching reject under LT2 Module B |
+| 27 | historical exact references replay under their original contract before and after remediation |
+| 28 | lifecycle extraction preserves the exact Operation endpoint consumed downstream |
+| 29 | local spatial binding cannot be promoted into IO2 or a reusable relation identity |
+| 30 | Operation context yields no Capability/Readiness or Resource-interchangeability conclusion |
+
+## 40. Counterexample disposition
+
+All thirty-two §20 counterexamples remain rejected:
+
+- **1–4:** lifecycle order, discovery approval, section length and file count create no semantic owner or selection authority;
+- **5–8:** prose cannot create an Event edge, deleting `generates` does not erase relevance, reverse dependency is not free, and a transition is not an Event;
+- **9–16:** completion, Assignment, composition, overlap, provenance labels, Order status, domain validation and checker success cannot supply achievement, authorization or completeness authority;
+- **17–22:** names, storage, record count, P-001, occurrence time and version references cannot decide applicability or optional modules;
+- **23–26:** timestamp, order, count, list position and local spatial identity cannot elect a record or supply another family's identity;
+- **27–30:** Coordination profile, Capability equality, Organization data and discovery approval create no operational permission, interchangeability, participation, authority or backlog resolution; and
+- **31–32:** green CI does not select Q3I, and no prior authorization transfers to AD-020A or remediation.
+
+These are normative rejection classes, not a substitute for the positive contracts in §§35–37.
+
+## 41. Alternatives not selected and reopening gates
+
+- **Q0** becomes immediate outcome if any selected owner, migration, P-001 mapping or evidence envelope cannot be proved exactly.
+- **Q1** may reopen only if a concrete human or consumer need requires one complete in-place lifecycle and the four-family P-001 concentration remains readable.
+- **Q2** may reopen if extraction duplicates identity, makes historical replay non-atomic or leaves OCP-004/OCP-017 unreadable together.
+- **Q3** cannot reopen unchanged; any identified external relationship family must name its owner and is H4/IO3 evidence.
+- **Q4** may reopen only when a concrete consumer needs independent relationship identity/effectivity/history or an exact relationship-kind owner exists.
+- **F2** remains gated by AD-004's Objective-only sunset decision and a lossless explicit-intent migration.
+- **V2/V3, LT1/LT3 and IO1/IO3** require concrete identity, consumer or migration evidence; architectural symmetry is insufficient.
+- **E2/E3 or D3** require their own topology evidence and Board act. Prose in the remediation cannot add an edge or reverse a dependency.
+
+No sunk authoring cost, accepted status of this act, readiness percentage or implementation convenience raises the reopening threshold.
+
+## 42. Mandatory remediation proposal
+
+AD-020A authorizes preparation—not merge—of one atomic proposal with this bounded semantic target:
+
+1. revise OCP-004 to `0.9.0 / Draft` with the §§35 and 37 stable surface, add only P-001 to its current direct dependency set for the selected form invocation, and add no OCP-017/downstream dependency;
+2. add one `OCP-017 — Operation Lifecycle Contract` at `0.1.0 / Draft` with the §36 Route C contract;
+3. add exact `Uses-Patterns: P-001@0.1.0` metadata and separate F1/V1/LT2 conformance prose only after the §37.4 ledger question is resolved;
+4. change only checker code, rule manifest, tests and synthetic non-sensitive fixtures necessary to witness the selected finite rules;
+5. update README, backlog and roadmap accounting without changing a Concept registry/taxonomy/map projection;
+6. keep all five current consumer identities/references stable and account for OCP-017 as the explicit new consumer;
+7. include exact old/new section and field relocation ledgers, historical replay, migration and atomic rollback evidence;
+8. cover every §39 scenario, every §40 rejection class and material positive/negative P-001 case;
+9. distinguish machine checks from human-only ownership, authority, readability and topology review; and
+10. retain every inherited exclusion and backlog status.
+
+The proposal stops and returns to Q0/Board if it discovers:
+
+- a second lifecycle or relationship owner;
+- an OCP-004 identity/reference change;
+- no exact legitimate owner for the domain-profile or authorization-evidence envelope;
+- a need for OCP-004 to depend on OCP-005/006/010/011/017;
+- a new Concept, Concept edge, State abstraction, authorization mechanism, registry, Organization holder or production schema;
+- an IO2 consumer requiring independent identity, effectivity, lifecycle, supersession or external reference;
+- an F1/V1/LT2 mapping missing a P-001 element or using an undeclared module;
+- a P-001 current-ledger statement that cannot remain truthful without a separate Pattern act;
+- non-replayable historical data or invented migration facts; or
+- an edit to any Operation backlog status.
+
+The remediation must receive its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization. If the bounded implementation cannot fit one reviewable atomic tree, it must stop rather than split semantic ownership across partially effective merges.
+
+## 43. Authorization boundary
+
+AD-020A selects Q3I only as the preparation direction and authorizes authoring the exact §42 remediation proposal.
+
+It does not edit or approve OCP-004, create or approve OCP-017, invoke P-001, amend P-001, change a dependency or graph edge, create a fixture/schema authority, resolve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028, promote Operation or authorize T5/T6/T7 work. It does not decide Assignment/Event ordering or any later lifecycle act.
+
+Authorization for AD-020A cannot merge the remediation. A content change after exact-head review invalidates that review and any head-bound authorization. No authorization transfers across these gates.
+
+## 44. Accepted effect and next gate
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-020A will:
+
+- set AD-020 to `0.2.0 / Accepted`;
+- record the positive target-22 result against provisional Q3;
+- select Q3I (`H3 + L2 + G2 + A1 + T1 + C1 + E1 + D2 + F1 + V1 + LT2 + IO2`) only as the Operation stable-surface remediation direction;
+- retain Q0 as immediate fail-safe and every reopening gate in §41;
+- authorize preparation of one bounded OCP-004 `0.9.0 / Draft` plus OCP-017 `0.1.0 / Draft` proposal under §42;
+- keep OCP-004 at `0.8.3 / Draft`, Operation at `Accepted`, P-001 at `0.1.0 / Accepted`, AB-062 `Planned`, all seven Operation AB statuses unchanged and readiness at approximately 71%; and
+- change no OCP, Concept, Concept status, Pattern, dependency, registry row, taxonomy projection, foundation-map edge, checker rule, fixture, schema, data, reference or production authority.
+
+The selected remediation remains only a proposal until its own four gates close on one exact head. Completion or failure of that proposal must be followed by a fresh blocker/stability audit before any Operation lifecycle or T5 decision.

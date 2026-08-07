@@ -92,6 +92,7 @@
 - [x] AD-016U post-Organization remaining-frontier reassessment — a fresh rule-based sweep derives exactly Operation, Assignment, Constraint and Event, preserves strict T5/T6/T7 L2 order, audits exact P-001 and OCP-007 bridge obligations, and records U4D only as a recommendation before separate AD-016V selection
 - [x] AD-016V remaining-frontier Board comparison — a fresh all-seventeen-OCP replay and independent adjudication of all twenty targets select U4D only for preparation of one separate outcome-fair AD-020 Operation stable-surface discovery; no OCP edit, semantic outcome or downstream merge is authorized
 - [x] AD-020 Operation stable-surface discovery — H0–H4 layouts, ten semantic/authority axes and separate form verdicts for ExplicitIntentRecord, validation evidence, lifecycle transitions and inter-operation assertions are compared; Q3 is recommendation-only and H0 remains fail-safe before AD-020A
+- [x] AD-020A Operation stable-surface Board selection — all thirty targets are re-attempted; target 22 defeats provisional Q3's unowned IO3/H3–H4 blend, and revised Q3I selects one OCP-004 kernel plus one downstream Route C lifecycle owner and inline IO2 only as remediation preparation
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -166,8 +167,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Prepare a separately reviewed AD-020A Board act that re-anchors then-current `main`, adjudicates all thirty falsification targets and selects one complete H0–H4/semantic/form combination or explicit hold; do not edit OCP-004 or invoke P-001 in the selection act.
-2. If a positive outcome is selected, require a separate bounded remediation or non-Concept contract proposal with its own exact-head review and authorization; selection is not implementation or lifecycle promotion.
-3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until their exact owners and treatments are implemented and separately accepted; discovery comparison resolves none of them.
-4. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
-5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. Prepare one separately reviewed atomic Q3I remediation proposal: OCP-004 `0.9.0 / Draft` retains the Operation kernel, composition and IO2 values; new Route C OCP-017 `0.1.0 / Draft` owns lifecycle and LT2, with exact F1/V1/LT2 P-001 mappings and no new Concept or edge.
+2. Stop before remediation merge if P-001's human-readable invoker ledger cannot remain truthful without a separately gated Pattern act, or if any selected owner, history migration, exact dependency or IO2 non-record boundary fails.
+3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until their exact owners and treatments are implemented and separately accepted; AD-020A resolves none of their statuses.
+4. After remediation completes or fails, perform a fresh blocker/stability audit before any Operation lifecycle or T5 act; selection is not implementation or lifecycle promotion.
+5. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
+6. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
