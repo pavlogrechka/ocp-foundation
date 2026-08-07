@@ -626,8 +626,6 @@ def _peer_concept_status_rows(path: Path) -> list[tuple[str, str]]:
                 rows.append((cells[0], cells[1]))
             continue
 
-        break
-
     return rows
 
 
