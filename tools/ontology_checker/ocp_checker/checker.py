@@ -61,6 +61,7 @@ ERROR_CODES = frozenset(
         "STATUS_TAXONOMY_EXTRA",
         "STATUS_DEFINING_DOCUMENT_MISSING",
         "STATUS_MISMATCH",
+        "STATUS_PEER_VIEW_MISMATCH",
     }
 )
 
@@ -583,6 +584,53 @@ def _ontology_registry(path: Path) -> dict[str, str]:
     return rows
 
 
+
+def _peer_concept_status_rows(path: Path) -> list[tuple[str, str]]:
+    """Read current peer Concept status rows from the governed section/table shape."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    rows: list[tuple[str, str]] = []
+
+    for section_start, line in enumerate(lines):
+        if not line.startswith("## "):
+            continue
+        heading = line[3:].strip()
+        number, separator, title = heading.partition(". ")
+        if separator and number.isdigit():
+            heading = title
+        if heading != "Concept Status and Dependencies":
+            continue
+
+        section_end = len(lines)
+        for index in range(section_start + 1, len(lines)):
+            if lines[index].startswith("## "):
+                section_end = index
+                break
+
+        index = section_start + 1
+        while index < section_end:
+            line = lines[index]
+            if not line.startswith("|"):
+                index += 1
+                continue
+            cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+            if len(cells) < 2 or cells[:2] != ["Concept", "Status"]:
+                index += 1
+                continue
+
+            index += 1
+            while index < section_end and lines[index].startswith("|"):
+                cells = [cell.strip() for cell in lines[index].strip().strip("|").split("|")]
+                index += 1
+                if len(cells) < 2 or not cells[0] or set(cells[0]) == {"-"}:
+                    continue
+                rows.append((cells[0], cells[1]))
+            continue
+
+        break
+
+    return rows
+
+
 def validate_repository(repo_root: Path) -> ValidationResult:
     errors: list[str] = []
     registry_path = repo_root / "docs/000-operational-ontology/README.md"
@@ -628,5 +676,15 @@ def validate_repository(repo_root: Path) -> ValidationResult:
     for concept in taxonomy:
         if concept not in defining:
             errors.append("STATUS_TAXONOMY_EXTRA")
+
+    peer_status_rows: set[tuple[Path, str]] = set()
+    for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
+        for concept, status in _peer_concept_status_rows(path):
+            if concept not in registry:
+                continue
+            key = (path, concept)
+            if key in peer_status_rows or status != registry[concept]:
+                errors.append("STATUS_PEER_VIEW_MISMATCH")
+            peer_status_rows.add(key)
 
     return _result(errors)
