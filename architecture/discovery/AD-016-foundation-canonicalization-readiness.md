@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.21.0
+Version: 0.22.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate exact nine-file O9C lifecycle proposal; selection does not authorize its merge or reopen T5
+Review-After: Separate AD-016V exact-head Board selection over the post-T4 frontier; no T5 lifecycle or remediation proposal is yet authorized
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -3821,3 +3821,167 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016T will:
 - retain foundation readiness at approximately 70% because this selection changes no OCP or Concept lifecycle.
 
 This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry/taxonomy/map row, checker guide, rule, fixture, schema, consumer, graph edge, backlog status or production authority.
+
+
+## 214. AD-016U trigger and exact post-O9C baseline
+
+The separately governed fourth T4 lifecycle act completed on `main@6c33b7c111296966616184368e81c0a67f5e9278`, tree `822aac10b3d8440bfb290547402edb4faffc841c`. OCP-007 and Organization are now `1.0.0 / Canonical`; OCP-000 and OCP-002 are `1.4.0 / Canonical`; OCP-005 is `0.2.5 / Draft`; the reviewed head and merged tree were byte-identical; post-merge CI, 172 unit tests and 120 fixtures passed.
+
+That completion consumes every AD-016T and O9C lifecycle authorization. It completes T4 but does not choose a T5 candidate, make every Accepted contract Canonical, resolve AB-062 or transfer authority to Operation, CapabilityClaimRecord or any downstream slot. AD-016U therefore recomputes the frontier rather than continuing by momentum.
+
+| Input / evidence surface | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016T | `0.21.0 / Accepted`; O9C preparation selection consumed | blob `124e1535db06dcfa60b579dd49ecea5292d0c687` | `32b91265723ec2a8a2408a9078537e5f3bf33fc0c81bd7ad06eaffcbb4c6f3e7` |
+| OCP-007 / Organization | `1.0.0 / Canonical`; Q2 §§1–32 preserved | blob `d3258a4d7b4776bfdf25c5b62b0fcfca34e4bb78` | `6706f94a497502651ac9204e6c0510af5bc550781857efecb050e4de0f882bce` |
+| OCP-004 / Operation | `0.8.3 / Draft`; Operation `Accepted` | blob `6f6990ed2cef7887af663e7dc806b34bddca6e30` | `aa81d60ef8c9802f40f488390d151b5f6c50d116ece6576c1783da0e48087033` |
+| OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted`; non-Concept | blob `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-012 immutable reviewed annex | incorporated `holder-capability@1` baseline | blob `6fbc670bf643c839d4f127d6a87deeece2cad223` | `a397323ee69863790e55f1b548bce3946100797abe03b464d642e0261c76db55` |
+| OCP-000 / OCP-001 / OCP-002 | `1.4.0 / 1.0.0 / 1.4.0`, all Canonical | blobs `54d4f9a908c0ef572a4300be1f31e938db5557ef` / `33524fa3d18f3253faa9a854500be7ddfb20815f` / `470c7b035be3039065fc76f03bf76ad5fc8d3064` | `f88a494aafff88bead233a43156435f460df2db0a31f8900465ac7fd7e1f335b` / `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` / `0366d50ec5ac21f5cd1e37af0cf7b46035dde38d0859b4fed9785793c5aa802c` |
+| OCP-003 / OCP-008 / OCP-009 | `1.0.0 / Canonical` | blobs `71485bb337cfd59def2e0f1b18b474a7959bd30c` / `24ed01e0f5d6bc8f349a7aedae4c5f100eb449ee` / `31163eacb0ca2a78b17b9d2466d99ef0c8b2d272` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` / `46f1ecb7b956b106f9c66da0626ec4266961e07492059e594110f63736be6f0d` / `29362c815cb14f07bfd06775d1398498a27ace5ee5a4acaafde0eb39e902152a` |
+| P-001 | `0.1.0 / Accepted`; exact Pattern floor | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| OCP-013 / OCP-014 / OCP-015 direct consumers | `0.2.0 / Accepted` | blobs `658a291b4c3b9a0229aba09d485c1137723fe70b` / `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` / `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` / `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` / `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
+| OCP-012 checker / rules / tests | bounded reference implementation | blobs `ca1ce042b17a8897c012bef56d5ea77965747a82` / `398a4fdd587909b43279536360adf3a6e048088f` / `f149160d108438b01fe90a7097489fbce9c47188` | `b2b483e5058826a38fdbec24243a46ccfb586ee8ad97bda92653468d9abb15ba` / `ba1c1a5c941d29f029cb165729c464af1e3350747dae3a9c295b86f7f26ab302` / `c25c85affe09daaf1cec9c12527270a7606c7b57073f84fa69de74fdfebb4e30` |
+| OCP-012 fixture set | 24 non-sensitive fixtures | tree `6946c88f6f8460e6027aee991fc81dcaf9ff45c7` | recursive manifest `be514c1673f1b98923e663518f30ae5a11bb0d1dde3b9a37b6516c734b60c7ff` |
+
+This reassessment may edit only AD-016 and current accounting in README, architecture backlog and roadmap. Every OCP, Pattern, annex, checker, rule, test, fixture, schema, projection and graph surface is read-only evidence.
+
+## 215. Post-T4 lifecycle inventory and L2 frontier
+
+| Slot | Artifact | Current state | Recomputed position |
+|---:|---|---|---|
+| T5 | OCP-004 Operation | `0.8.3 / Draft`; Operation `Accepted` | direct OCP dependencies are Canonical; semantic B items remain |
+| T5 | OCP-012 CapabilityClaimRecord | `0.3.0 / Accepted`; non-Concept | all direct OCP dependencies are Canonical; exact P-001 is Accepted; no current B item demonstrated |
+| T6 | OCP-005 Assignment | `0.2.5 / Draft`; Assignment `Accepted` | waits for Canonical Operation |
+| T6 | OCP-010 Event | `0.2.0 / Draft`; Event `Accepted` | waits for Canonical Operation; Objective and exact P-001 are ready |
+| T7 | OCP-006 Constraint | `0.2.4 / Draft`; Constraint `Accepted` | waits for Canonical Operation and Assignment |
+| T8 | OCP-011 OutcomeAssessmentRecord | `0.3.0 / Accepted`; non-Concept | waits for Operation, Constraint and Event; Objective and exact P-001 are ready |
+| T8 | OCP-013 Resource Interchangeability | `0.2.0 / Accepted`; non-Concept | waits for Assignment and Constraint; Resource and OCP-012 are at the frontier |
+| T9 | OCP-014 Coordination Profile | `0.2.0 / Accepted`; non-Concept | waits for Operation, Constraint and OCP-013 |
+| T10 | OCP-015 Coordination Workflow | `0.2.0 / Accepted`; non-Concept | waits for Assignment, Constraint and OCP-012–OCP-014; exact P-001 is ready |
+
+The graph remains cycle-free and no accepted dependency correction is demonstrated. T4 completion removes the former no-bypass stop, but **eligibility is not selection**: OCP-004 and OCP-012 must still satisfy their own semantic, compatibility, migration and rollback burdens. P-001 remains an Accepted exact-version-bound Pattern under the artifact-class floor in §21; inventing a Canonical Pattern status is neither required nor allowed.
+
+## 216. Fresh OCP-004 Operation audit
+
+The Operation contract has stable implemented regions: exact identity; plural Objective binding or fail-safe explicit-intent evidence; zero/one/many local spatial bindings; Assignment-owned participation; separation of Event and OutcomeAssessmentRecord; and the non-implications for Resource, Organization, Capability, Readiness, authorization and outcome achievement.
+
+Those regions do not make the entire document `1.x`-ready. Current prose still puts wire-significant behavior behind unresolved questions:
+
+| Surface | Classification | Reason |
+|---|---|---|
+| exact Operation identity, Objective/intent binding and local spatial envelope | K | implemented, human-readable and replayable without a new owner |
+| `Authorized` source and multiple authorization sources | B | changes the meaning and admissibility of a current lifecycle stage |
+| exact `Draft → Planned` completeness and transition model | B | §§13/15 state that criteria and transition validity remain open before canonicalization |
+| parent/child composition | B | current stored relations and acyclicity exist while §12 says final composition rules remain open |
+| terminal Operation versus unfinished Assignment | B | changes lifecycle/participation behavior across OCP-004/OCP-005 |
+| `Suspended`, templates, reusable spatial identity, domain geometry, Conflict and Readiness | S | explicitly deferred and not required by the current stable regions |
+| current status views and prior PATCH notes | C | synchronized historical/current accounting; no semantic defect demonstrated |
+
+A direct OCP-004 lifecycle proposal would either freeze acknowledged placeholders or silently exclude fields and stages that the same document currently presents as normative. Neither is admissible. A separate Operation stable-surface discovery remains possible, but it must compare in-place completion, explicit exclusion, extraction and hold without treating OCP-012 readiness as pressure.
+
+## 217. Fresh OCP-012 CapabilityClaimRecord audit
+
+OCP-012 has one bounded authority: an attributable holder claim. The incorporated annex owns the exact `holder-capability@1` baseline; README §§7–14 add the exact `holder-capability@2` activation. The precedence statement in §1 makes the publication split readable: the annex remains immutable historical input, while the README governs later lifecycle, mode, evidence expectation and F1/A1 rules.
+
+The stable candidate surface is:
+
+1. one P-001 identified record with exact Resource holder, exact OCP-009 Capability definition version, claimant, condition set, claim kind, authority, provenance and effectivity bindings;
+2. Resource-only holders and explicit rejection of Organization holders;
+3. attributable authority only—never Capability truth, independent assessment, Readiness, availability, authorization, admissibility, Assignment eligibility, selection or interchangeability;
+4. `holder-capability@1` F0/A0 historical compatibility;
+5. mutually exclusive `holder-capability@2` declaration-only and evidence-backed modes;
+6. only the explicit same-assertion `declaration-only → evidence-backed` transition, with reverse and polarity-changing transitions rejected;
+7. exact evidence expectation, snapshot, input snapshot, rule version and evaluation-time binding;
+8. historical replay separated from an explicit-time derived current view;
+9. missing, stale, ambiguous, conflicting, unresolved and unknown inputs remaining fail-safe;
+10. visible branching and withdrawal without redirect, newest-head election or authority by timestamp/order/count; and
+11. consumer-local authority separation: OCP-012 source usability is not portable as OCP-013 or another consumer's own conclusion.
+
+The fresh K/B/S/C result is:
+
+| Surface | Classification | Reason |
+|---|---|---|
+| exact record, `@1/@2`, mode, evidence, history and replay contracts | K | executable and readable under one owner with exact old-record preservation |
+| direct OCP and Pattern floors | K | OCP-000/001/002/003/009 are Canonical; AD-007/AD-013 are Accepted; exact `P-001@0.1.0` is Accepted |
+| independent Capability assessment | S | remains OCP-011-compatible future work and cannot be inferred from attribution |
+| Organization holders or holder mapping | S | Organization and Resource remain distinct; OCP-012 remains Resource-only; AB-006/AB-052 stay Open |
+| new claim kinds, evidence kinds, condition semantics and consumer-specific freshness | S | each requires its own owner, exact version, evidence and OCP-001/OCP-016 route |
+| production schema, persistence, trust/authentication and semantic equivalence | S | not promised by the reference contract |
+| `Used-By: AB-011` and current §4 wording | C | AB-011 is resolved by OCP-013; cleanup must name the accepted consumer without rewriting §6 history |
+| §13's `100 fixtures / 129 tests` and §14's eight-Accepted statement | C/historical | exact revision-`0.3.0` evidence/effect, not current repository accounting; a lifecycle wrapper must classify it explicitly and state the current totals |
+
+No B item is demonstrated inside this bounded surface. “No B found” is narrower than lifecycle selection. A later proposal must still define the exact `1.x` promise, SemVer, current-status footprint, annex byte-stability, historical/current classification, consumer replay and rollback. Green fixtures cannot supply that Board authority.
+
+The frontmatter `Review-After` trigger is not treated as selection evidence. Three primary OCPs depend on OCP-012, but no repository statement explicitly names an implementation-facing `holder-capability@2` consumer that owns OCP-012's support-usability result. AD-016U is an independent lifecycle-frontier audit, not a claim that this trigger fired. The absent trigger leaves future consumer-specific review in S; it neither retracts the Accepted `@2` contract nor authorizes Canonical status.
+
+## 218. Consumer, migration and executable replay
+
+Exactly three primary documents declare direct `Depends-On: OCP-012`: OCP-013, OCP-014 and OCP-015. Their accepted reviewed contracts separate claimant attribution from interchangeability, coordination requirement and workflow evidence authority. None binds a mutable latest claim, equates Resources, imports OCP-012 support usability as its own freshness result or permits Organization holders.
+
+OCP-013 reads fail-safe attributable claim-head inputs. OCP-014 preserves separate claimant and consumer authority. OCP-015 depends on the same claim contract without turning proposal/response evidence into Capability truth or authorization. No consumer requires an OCP-012 field change, claim-kind rewrite, exact-reference rebinding or data migration for a status-only lifecycle act.
+
+The complete repository suite passes with 172 unit tests and 120 fixtures in both contexts. The OCP-012 slice contains 24 dedicated fixtures and 27 dedicated unit tests covering exact resolution, disjoint modes, forward-only transition, time comparison, snapshots/rules, missing/stale/ambiguous/conflicting support, withdrawal, branching, order independence and Organization-holder rejection. This is finite conformance evidence, not proof of semantic completeness or production behavior.
+
+The following falsification targets remain mandatory before selection:
+
+1. the annex/README precedence is ambiguous to a human reader;
+2. an existing valid `@1` or `@2` record changes meaning under the proposed compatibility surface;
+3. exact historical replay needs current wall clock, newest rule, record order or source/issuer count;
+4. an OCP-013/014/015 consumer needs semantic change, migration or rebinding;
+5. a current Organization-holder requirement defeats the Resource-only boundary;
+6. an assessment or consumer-local conclusion must be imported to make the claim usable;
+7. a direct OCP dependency fails L2 or P-001 fails its exact Pattern floor;
+8. a current status-bearing projection is omitted or historical evidence is rewritten as current truth;
+9. the candidate needs checker/rule/fixture change merely to pass lifecycle review; or
+10. authority depends on CI, readiness, completed effort, recency, order, majority or reviewer count.
+
+Any successful target returns to hold and selects no substitute route.
+
+## 219. Outcome-fair post-T4 comparison
+
+| Option | Evidence obligation | Result and principal risk | AD-016U disposition |
+|---|---|---|---|
+| P0 — hold | retain the frontier if no bounded next preparation is safe | maximally reversible; cost is delaying a candidate whose B set is currently empty | retained as fail-safe |
+| P12 — OCP-012-first T5 micro-wave | prove bounded `1.x`, exact status footprint, consumer replay, historical classification and no migration | strongest current evidence; principal risk is over-canonicalizing the publication split or exact reference-rule values | **leading recommendation only** |
+| P4D — Operation stable-surface discovery | compare completion, explicit exclusion, extraction and hold for every §216 B item | directly attacks genuine blockers; risk is a large cross-contract lifecycle/composition scope | admissible separate lane, not selected by this audit |
+| P4 — direct Operation lifecycle | show every current lifecycle/composition placeholder is resolved or safely excluded | burden fails on the current text | not recommended |
+| P45 — combined T5 wave | show one rollback unit and no weakest-member pressure | OCP-004 B items would govern an otherwise bounded OCP-012 candidate | not recommended |
+| PR — reopen topology or weaken L2 | demonstrate cycle, incompatibility or concrete harm from the accepted sequence/floor | no such evidence is demonstrated | not recommended |
+
+P12 leads on its own contract evidence, not because T4 finished, OCP-012 is older, CI is green, a dependency slot is next, or reviewers previously accepted revisions `0.2.0/0.3.0`. Rejection of P4/P45 cannot select P12. P0 remains mandatory if any §218 target succeeds.
+
+## 220. Recommendation and mandatory AD-016V contract
+
+AD-016U recommends **P12 only for a separate exact-head Architecture Board selection**. It does not select a T5 outcome, authorize an OCP-012 edit, define an exact lifecycle footprint, make OCP-012 Canonical, open Operation remediation or transfer authority downstream.
+
+AD-016V must:
+
+1. re-anchor then-current `main`, rerun the T5–T10 inventory, direct-dependency and three-consumer sweeps;
+2. replay every §218 falsification target and record positive results honestly;
+3. compare P0/P12/P4D/P4/P45/PR under their own evidence burdens without momentum weighting;
+4. if selecting P12, enumerate every current status-bearing projection from a fresh rule-based sweep rather than inheriting a familiar file list;
+5. specify the exact OCP-012 SemVer/status transition, human-readable `1.x` surface, annex byte-stability, `@1/@2` preservation, C cleanup, consumer replay, stop and rollback contract;
+6. preserve Resource-only holders, exact OCP-009 Capability version binding, `Capability ≠ Readiness`, claim/assessment separation, directional OCP-013 authority and every fail-safe ambiguity/freshness boundary;
+7. leave OCP-004, every Concept status, graph edge, Organization mapping/holder question and T6–T10 scope unchanged; and
+8. require four new exact-head gates for any later lifecycle proposal; selection authorization cannot merge it.
+
+AD-016V may change only AD-016 and current accounting. If its evidence needs an OCP, annex, checker, rule, fixture, schema, consumer, graph or backlog-status edit, it stops and returns to the Board.
+
+## 221. AD-016U gates, non-transfer and accepted effect
+
+AD-016U requires on one unchanged head: Fable exact-head review, Codex adjudication of every finding, green required CI and fresh explicit Pavlo/Architecture Board authorization naming that head. A changed head invalidates review and authorization.
+
+Authorization for AD-016T or the O9C lifecycle act does not transfer to AD-016U. Authorization for AD-016U cannot create or merge AD-016V, an OCP-012 lifecycle proposal, an Operation discovery/remediation or any T5–T10 act.
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016U will:
+
+- set AD-016 to `0.22.0 / Accepted`;
+- record T4 completion and the exact post-O9C T5–T10 inventory;
+- retain L2 and the distinct Accepted exact-Pattern floor;
+- record current OCP-004 B items and no demonstrated B item inside the bounded OCP-012 surface;
+- recommend P12 only to a separate AD-016V Board selection, with P0 as fail-safe and P4D as an independent admissible lane;
+- keep every OCP, Concept, Pattern, dependency, record, projection, rule, fixture, graph edge and backlog status unchanged;
+- keep AB-062 `Planned`, every named Organization question Open and T6–T10 unauthorized; and
+- retain foundation readiness at approximately 71% because this audit changes no lifecycle state.
+
+This act changes only AD-016 and current accounting. It creates no production authority and no permission by implication.

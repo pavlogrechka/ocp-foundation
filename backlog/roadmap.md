@@ -88,6 +88,7 @@
 - [x] AD-016S post-O7V Organization audit — 172 tests and 120 fixtures replay green, all governed peer rows are synchronized, a fresh rule-based sweep derives exact nine-file O9C without a demonstrated tenth projection, and O9C remains recommendation-only before AD-016T
 - [x] AD-016T Organization lifecycle scope selection — independent projection/consumer/non-Markdown sweep and all sixteen targets support O9C only as preparation of one exact nine-file proposal with explicit SemVer/status atomicity; no lifecycle state changes in the selection act
 - [x] Fourth T4 micro-wave — OCP-007/Organization `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.4.0`, OCP-005 `0.2.5`, current map/checker-guide/accounting synchronization and no semantic, migration, mapping or T5 authority
+- [x] AD-016U post-O9C frontier reassessment — T4 is complete; OCP-004 retains lifecycle/composition blockers, bounded OCP-012 has no demonstrated B item, and P12 is recommendation-only before a separate AD-016V Board selection
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -162,7 +163,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Recompute the remaining T4 inventory from the post-O9C `main` in a fresh AD-016 reassessment; Organization completion does not select Operation, Assignment, Constraint or Event by implication.
-2. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 as Open external/excluded Organization questions; Canonical status does not resolve continuity, taxonomy, mapping, composition, exception or Organization Capability-holder policy.
-3. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
-4. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. Prepare a separate AD-016V exact-head Board selection over P0/P12/P4D/P4/P45/PR; AD-016U recommends P12 but authorizes no OCP-012 or OCP-004 edit.
+2. Keep OCP-004 lifecycle/composition questions explicit B items and do not couple them to an otherwise bounded OCP-012 candidate through a combined T5 wave.
+3. Preserve Resource-only CapabilityClaimRecord holders, exact OCP-009 Capability version binding, claim/assessment separation, `Capability ≠ Readiness` and fail-safe consumer-local evidence semantics.
+4. Continue T5–T10 only through OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates; no authorization transfers from T4.
