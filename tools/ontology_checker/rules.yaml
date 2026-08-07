@@ -1,4 +1,4 @@
-manifest_version: 0.8.0
+manifest_version: 0.8.1
 authority: reference-only
 normative_source: OCP documents and governed artifact taxonomy
 rules:
@@ -290,6 +290,9 @@ rules:
 - id: STATUS_MISMATCH
   kind: validation
   source: OCP-001 Concept status synchronization
+- id: STATUS_PEER_VIEW_MISMATCH
+  kind: validation
+  source: OCP-001 Concept status synchronization; OCP-005 §4; OCP-006 §4
 - id: STATUS_REGISTRY_MISSING
   kind: validation
   source: OCP-001 Concept status synchronization
