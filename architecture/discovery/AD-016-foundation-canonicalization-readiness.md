@@ -6,7 +6,7 @@ Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate exact-head OCP-005 preflight repair implementation after AD-016R; no Organization lifecycle proposal or T5 topology reopening
+Review-After: Separate exact-head peer status synchronization and guardrail implementation after AD-016R; no Organization lifecycle proposal or T5 topology reopening
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -3322,119 +3322,142 @@ This act changes only AD-016 and current accounting. It changes no OCP, Concept,
 
 ## 189. AD-016R Board question and exact baseline
 
-AD-016Q established two facts that must not be collapsed into one decision: a rule-based sweep found an evidence-only nine-file candidate lifecycle unit, and the current OCP-005 peer status table already misstates Organization as `Proposed` while the authoritative registry states `Accepted`. AD-016R asks which next step is justified before any Organization lifecycle proposal is prepared.
+AD-016Q established two facts that must not be collapsed into one decision: a rule-based Organization projection sweep found an evidence-only nine-file candidate lifecycle unit, and OCP-005 contains at least one stale peer Concept-status rendering. Before selecting a repair scope, AD-016R broadens the question from the known Organization row to the complete class of current peer status tables.
 
-> Should the repository hold, repair the demonstrated stale peer view first, prepare a newly derived lifecycle option, repair Q2 semantics, reopen semantic discovery, join Organization to Resource mapping work or reopen topology?
+> Should the repository hold, repair every demonstrated stale peer status view and add a mechanical guardrail first, prepare a newly derived Organization lifecycle option, repair Q2 semantics, reopen semantic discovery, join Organization to Resource mapping work or reopen topology?
 
-This is a selection act only. It does not edit OCP-005, OCP-007, a registry, taxonomy, map, checker guide, rule, fixture, schema, consumer, graph edge, Concept status or backlog status. The exact baseline is `main@5bd1012fdbec89b04ea437a7f10e017dee8f09ec`, tree `51c46eec1003a3bd48330dcb770024ec16715763`.
+This is a selection act only. It edits no peer table, checker, rule, test, fixture or OCP contract. The exact baseline is `main@5bd1012fdbec89b04ea437a7f10e017dee8f09ec`, tree `51c46eec1003a3bd48330dcb770024ec16715763`.
 
-| Input / current surface | Exact state | Git object | SHA-256 |
+| Input / audited surface | Exact state | Git object | SHA-256 |
 |---|---|---|---|
 | AD-016Q | `0.18.0 / Accepted`; O0 hold; evidence-only U9 | blob `3f24b4d70feab4bae1483def333250898ca820dd` | `193a72357cea352c56659502e47b09d2ee8ed8c7a1e5436b3d49ed53837198be` |
-| OCP-005 Assignment | `0.2.3 / Draft`; §4 projects Organization `Proposed` | blob `2b51ae76aab760efcd3ef1cf2f11114329185b70` | `ca7261cf429bf26db999cd3ecdbcce488a07e2fd10d76ede643278446d7feeb0` |
-| OCP-000 registry | `1.3.0 / Canonical`; Organization `Accepted` | blob `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
+| OCP-005 Assignment | `0.2.3 / Draft`; four stale registered-Concept rows in §4 | blob `2b51ae76aab760efcd3ef1cf2f11114329185b70` | `ca7261cf429bf26db999cd3ecdbcce488a07e2fd10d76ede643278446d7feeb0` |
+| OCP-006 Constraint | `0.2.3 / Draft`; two stale registered-Concept rows in §4 | blob `d5101ace4e63e4f5e9556915e2db8792aab2a093` | `07d59a4d1acc032e856d19064f13dc82d2024de33ea535358be0ac28c03267d3` |
+| OCP-000 registry | `1.3.0 / Canonical`; authoritative current Concept values | blob `547ccae7f417cf3d0bff92db20e0ccb9933cc8c5` | `a088d0b9c73035270480ddc266abbd3b5f847625053fef7744468eb667753332` |
 | OCP-007 Organization | `0.4.0 / Draft`; Organization `Accepted` | blob `dceb5d57c66d180cd5298f4e3ad48d02831a4f23` | `55834d6da1b1b984140020e0e4613ea578b6c83e721d1b81688c12ffa8375a3f` |
-| OCP-001 governance | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
-| OCP-016 Core Boundary | `1.0.0 / Canonical` | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
-| checker guide | line 108 remains the live `OCP-007 0.4.0 / Draft` projection | blob `0d49a0e6d8b95859df1c4efc2ef5de0404bed5ec` | `24943ba839671155883a15101e36f441dc7d02e49c81b3a4ee8003300f6b4dc1` |
+| repository status validator | checks registry, taxonomy and defining frontmatter, but not peer prose tables | blob `03586af0f94187b4e620076b3a29348025f26e40` | `45f68314e2b66b54facc786f0fb976d3ec98871400fbbb7a210808d86082db96` |
+| repository-status unit tests | current positive and registry/taxonomy/defining-document cases | blob `e260def8135d0766eb9a890af9c72db5b5c3c1e4` | `d2ff525b84ccab9af65988597cf561b3ba640071d3c9a415007f477fc3ac7f8c` |
+| validation rule manifest | `0.8.0`; no peer-view drift identifier | blob `063e2f94f8548fc349aa4918aa5583e6977decf2` | `a99d23637abb49149eb7d6a6ab9891d45f2317ff006b52251aee81519695ad0b` |
+| checker guide | live Q2 lifecycle projection and current checker boundary | blob `0d49a0e6d8b95859df1c4efc2ef5de0404bed5ec` | `24943ba839671155883a15101e36f441dc7d02e49c81b3a4ee8003300f6b4dc1` |
+| OCP-001 governance | `1.0.0 / Canonical`; Concept synchronization and machine-evidence boundary | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-016 Core Boundary | `1.0.0 / Canonical`; no new semantic authority from validation | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
 | repository README | AD-016Q and O0 current accounting | blob `93f8cc4c669126c0634177ead9f05ff045a12921` | `ab278917ca9508f3067a19cb2fe09845dc28180ec88f8133383e43601cf96e82` |
-| architecture backlog | AB-062 `Planned`; stale-view repair pending | blob `2f6fcbb11f5696714e087f6d1631b2930cec2e18` | `7775ff2c94e01711308fb04c84196c0bde2355f252141f63d4fc772fa33f0d0d` |
+| architecture backlog | AB-062 `Planned`; repair pending | blob `2f6fcbb11f5696714e087f6d1631b2930cec2e18` | `7775ff2c94e01711308fb04c84196c0bde2355f252141f63d4fc772fa33f0d0d` |
 | foundation roadmap | O0 and the fresh-comparison gate | blob `dda88816cf524f1ffbf4497975f4eaf8137cf6b5` | `bba7d752c00ccb35ddd057bfb0f46a626da1d2b8adc9027e9ecc38f715c0bf3d` |
 
-The allowed edit surface for AD-016R is AD-016 plus the three current-accounting files. Recency, file order, work already completed, review agreement, CI, readiness and the fact that Organization is the last T4 candidate supply no selection authority.
+The allowed edit surface for AD-016R remains AD-016 plus the three current-accounting files. Recency, completed effort, review agreement, CI, readiness and the fact that Organization is the last T4 candidate supply no selection authority.
 
-## 190. Demonstrated preflight defect and its boundary
+## 190. Rule-based peer status-view audit
 
-OCP-005 §4 is a live human-readable Concept-status table. Its Organization row states `Proposed`, while OCP-000, OCP-002, OCP-007 frontmatter and the generated map all state `Accepted`. The sentence immediately below the table assigns operational scoping consequences to `Proposed` rows, so the mismatch can mislead a human reader even though current mechanical synchronization checks do not inspect peer-document prose tables.
+AD-016Q §181 remains the classifier: a statement is current when it presents an unqualified lifecycle value as maintained operational guidance and would mislead after a lifecycle change. AD-016R applies that rule to every tracked defining-document section titled `Concept Status and Dependencies` whose table begins with `Concept | Status`, then compares every row naming a registered Concept with the authoritative OCP-000 value. The rule is syntactic enough to replay and semantic enough to exclude exact-baseline tables, completed-act effects and reviewed snapshots outside that current section.
 
-The defect is narrow:
+The baseline contains three current peer tables of this class:
 
-- it is a stale status rendering, not an Assignment semantic rule;
-- it changes neither Organization identity nor OCP-007 semantics;
-- it does not make Assignment depend on Organization;
-- it creates no Organization Concept edge, Organization Capability holder, mapping or interchangeability inference; and
-- it can be corrected without deciding whether Organization should become Canonical.
+| Document | Registered Concept | Current peer value | OCP-000 value | Result |
+|---|---|---:|---:|---|
+| OCP-004 §4 | every registered row | matches | matches | synchronized |
+| OCP-005 §4 | Resource | Canonical | Canonical | synchronized |
+| OCP-005 §4 | Operation | Accepted | Accepted | synchronized |
+| OCP-005 §4 | Organization | Proposed | Accepted | stale |
+| OCP-005 §4 | Capability | Proposed | Canonical | stale |
+| OCP-005 §4 | Constraint | Proposed | Accepted | stale |
+| OCP-005 §4 | Event | Proposed | Accepted | stale |
+| OCP-006 §4 | Resource / Operation / Assignment | matches | matches | synchronized |
+| OCP-006 §4 | Capability | Proposed | Canonical | stale |
+| OCP-006 §4 | Event | Proposed | Accepted | stale |
+| OCP-006 §4 | Risk / Order | Proposed | Proposed | synchronized |
 
-The existing OCP-005 §21 PATCH precedent updated the Resource row when Resource changed lifecycle. That precedent establishes the peer table as maintained current rendering; it does not authorize this repair by itself. AD-016Q recorded the mismatch but expressly withheld repair authority.
+Rows whose named term is not a registered Concept are outside exact registry equality and retain their explicit “not separately registered” rendering. No current peer table outside OCP-004/OCP-005/OCP-006 is demonstrated by the rule on this baseline.
 
-A repair must therefore be independently reviewable before a lifecycle comparison relies on the table. Folding `Proposed → Accepted` into a later `Accepted → Canonical` lifecycle act would erase the distinction between correcting an already false current view and selecting a new lifecycle value.
+All six stale rows are current, not historical:
+
+- both tables are unqualified present-tense §4 status views in live Draft documents;
+- both following sentences assign operational consequences to `Proposed`;
+- the Resource lifecycle act already updated the Resource row in each table; and
+- OCP-004 demonstrates the same table class fully synchronized.
+
+The defect is therefore six stale current views across two files, not one Organization row. It remains a rendering/synchronization defect rather than a change to Assignment, Constraint, Organization, Capability or Event semantics.
 
 ## 191. Outcome-fair Board comparison
 
 | Option | Evidence obligation on the §189 baseline | Result and principal risk | Disposition |
 |---|---|---|---|
-| O0 — hold | retain uncertainty or identify a fact that makes every narrower next act unsafe | safe but leaves a demonstrated misleading current view in human-readable governance prose | not selected while a bounded reversible repair is available |
-| O7V — preflight status-view repair | demonstrate an exact stale current view, one authoritative current value, a finite PATCH scope and no semantic or lifecycle coupling | demonstrated by OCP-005 §4 against OCP-000; risk is accidental semantic expansion during the repair | **selected for preparation only** |
-| O9C — newly derived lifecycle proposal | freshly derive a complete atomic unit, repeat all sixteen targets and show every current input is truthful before promotion | U9 is audit evidence only, and one of its inputs is already false; direct preparation would mix defect correction with lifecycle selection | not selected; reopens only after the repair and a fresh comparison |
-| O7R — repair Q2 semantics | demonstrate a concrete contradiction, missing obligation or mechanically false Q2 claim | no Q2 semantic defect is demonstrated; the stale peer row is outside Q2 semantics | not selected |
-| O7D2 — reopen semantic discovery | demonstrate new continuity, classification, kind, scheme, exception or lifecycle evidence inside the bounded `1.x` promise | no such in-scope evidence is demonstrated | not selected |
-| O37 — joint Organization/Resource mapping work | demonstrate that truthful Organization identity is inseparable from Resource mapping under legitimate owners of both sides | not demonstrated; identity collapse and dual-owner risks remain | not selected |
-| O5 — topology reopening | demonstrate concrete compatibility harm from the accepted no-T5-bypass strategy | not demonstrated; a stale view is not topology evidence | not selected |
+| O0 — hold | retain uncertainty or identify a fact that makes every narrower next act unsafe | safe but leaves six demonstrated misleading current views and no guardrail against recurrence | not selected while a bounded reversible repair is available |
+| O7V — peer-view synchronization and guardrail | demonstrate a complete rule-derived stale set, exact authoritative values, finite document/checker scope and no semantic or lifecycle coupling | demonstrated by §190; risk is turning the checker into status authority or overmatching historical tables | **selected for preparation only**, with bounded parser and authority limits |
+| O9C — newly derived Organization lifecycle proposal | freshly derive a complete atomic unit, repeat all sixteen targets and show every current input is truthful before promotion | the Organization unit is audit evidence only, while peer status inputs are already false and the class can drift undetected | not selected; reopens after repair and a fresh comparison |
+| O7R — repair Q2 semantics | demonstrate a concrete contradiction, missing obligation or mechanically false Q2 claim | no Q2 semantic defect is demonstrated; peer status drift is outside Q2 semantics | not selected |
+| O7D2 — reopen semantic discovery | demonstrate new in-scope continuity, classification, kind, scheme, exception or lifecycle evidence | not demonstrated | not selected |
+| O37 — joint Organization/Resource mapping work | demonstrate inseparability under legitimate owners of both identities | not demonstrated; identity-collapse and dual-owner risks remain | not selected |
+| O5 — topology reopening | demonstrate concrete compatibility harm from the accepted no-T5-bypass strategy | not demonstrated; peer rendering drift is not topology evidence | not selected |
 
-Outcome fairness is preserved: O7V succeeds on its own exact defect-and-scope obligation and does not require any other option to accept a lifecycle, semantic, mapping or topology layer. No rejected option transfers authority to O7V, and O7V transfers no authority to a later lifecycle option.
+O7V succeeds on its own complete-class evidence burden. It requires no other option to accept a lifecycle, semantic, mapping or topology layer. No rejected option transfers authority to O7V, and O7V transfers no authority to a later lifecycle option.
 
 ## 192. Architecture Board selection — O7V
 
-AD-016R selects **O7V — prepare one separate preflight PATCH that repairs the stale Organization status view in OCP-005**.
+AD-016R selects **O7V — prepare one separate peer-status synchronization and mechanical-guardrail PATCH**.
 
-Selection authorizes preparation and review of that repair only. It does not authorize merge of the repair, select O9C, inherit U9 as complete, change OCP-007 or Organization lifecycle, resolve AB-062, reopen T5 or move any Open Organization question.
+Selection authorizes preparation and exact-head review only. It does not repair any row, merge the later PATCH, select O9C, inherit U9, change OCP-007 or any Concept lifecycle, resolve AB-062, reopen T5 or move an Open Organization question.
 
-The later PATCH proposal must be derived from its then-current exact `main`. Its normative edit is bounded to:
+The later proposal must derive its exact surface from then-current `main`, but the §189 baseline demonstrates this finite nine-file candidate unit:
 
-1. bump OCP-005 from `0.2.3` to `0.2.4`;
-2. update `Last-Review` for the repair act;
-3. change only the §4 Organization status cell from `Proposed` to `Accepted`; and
-4. append one human-readable PATCH-accounting section stating the exact correction, preserved semantics and rollback boundary.
+1. OCP-005: `0.2.3 → 0.2.4`, current review date, six registered rows synchronized as shown in §190, and one §22 PATCH-accounting section modeled on §21;
+2. OCP-006: `0.2.3 → 0.2.4`, current review date, its registered rows synchronized as shown in §190, and one §25 PATCH-accounting section modeled on §24;
+3. `tools/ontology_checker/ocp_checker/checker.py`: a repository rule that scans all defining documents for the exact current-section/table shape, compares registered rows with OCP-000, rejects mismatch or duplicate registered rows and does not infer a status for unregistered terms;
+4. `tools/ontology_checker/tests/test_checker.py`: positive synchronized and negative mismatched/duplicate peer-table cases;
+5. `tools/ontology_checker/rules.yaml`: PATCH manifest bump and exact validation identifier/source entry;
+6. `tools/ontology_checker/README.md`: human-readable statement of the bounded check and its non-authority;
+7. `README.md`: current repair/test-count accounting only;
+8. `backlog/architecture-backlog.md`: AB-062 current accounting only; and
+9. `backlog/roadmap.md`: completed repair and next-gate accounting only.
 
-The proposal may also update README, architecture backlog and roadmap current accounting to record the repair. It may not change any other OCP-005 §1–21 semantic byte, dependency, Concept status, graph edge, P-001 invocation, Assignment record contract, Organization contract, checker/rule/fixture/schema/consumer surface or backlog status.
+The mechanical rule is a consistency guard, not an independent lifecycle source. OCP-000 remains authoritative; OCP-005/OCP-006 tables remain human-readable projections. The parser must be bounded by the `Concept Status and Dependencies` section and exact `Concept | Status` table shape so that historical anchor tables and completed-act evidence are not reclassified by code.
 
-## 193. Repair evidence, rollback and stop conditions
+The proposal may not edit OCP-004 because its peer table is already synchronized. It may not change any Assignment/Constraint semantic rule, dependency, Concept status, graph edge, P-001 invocation, record contract, OCP-007 text, Organization Q2 behavior, fixture/schema/consumer surface or backlog status.
 
-The repair proposal must prove:
+## 193. Evidence, rollback and stop conditions
 
-- the OCP-000 Organization row is still exactly `Accepted` on its baseline;
-- OCP-002, OCP-007 and the generated map agree with that value;
-- OCP-005 §4 is still current rather than historical under AD-016Q §181;
-- only the Organization status cell is semantically corrected;
-- Assignment remains `Accepted`, OCP-005 remains `Draft`, and `Organization ≠ Resource`;
-- Organization status creates no Assignment, participation, authority, availability, Readiness, mapping or interchangeability implication; and
-- existing Assignment and Organization records, references and histories require no migration or rebinding.
+The later PATCH must prove:
 
-Rollback is a new reviewed PATCH/accounting act. It cannot restore `Proposed` while the authoritative registry remains `Accepted`, rewrite historical lifecycle evidence, or derive a different Organization status from timestamps, file order, issuer count or reviewer agreement.
+- the rule-based sweep on its own baseline yields the same complete peer-table class or explicitly stops on a changed class;
+- each registered row exactly equals the then-current OCP-000 value after the repair;
+- OCP-002, defining frontmatter and generated map remain synchronized independently;
+- only status-rendering cells, PATCH metadata/accounting and the bounded guardrail change;
+- Assignment, Constraint, Organization and every other Concept keep their current lifecycle values;
+- Organization status creates no Assignment, participation, authority, availability, Readiness, mapping or interchangeability implication;
+- the new error identifier is exactly represented in the rule manifest and tests fail before the row repair but pass after it; and
+- existing records, references and histories require no migration or rebinding.
 
-The proposal stops without merge if the registry value changes, another current peer status view is discovered stale, OCP-005 semantic prose must change, the repair requires a dependency/edge/checker/fixture/schema/consumer edit, or the four-file maximum no longer contains the correction honestly. A stop returns to O0 and requires a fresh Board act; it selects no alternate route automatically.
+Rollback is a new reviewed nine-file-or-freshly-derived PATCH/accounting act. It cannot restore a stale peer value while OCP-000 retains a different value, make the checker authoritative, rewrite historical lifecycle evidence or derive status from timestamps, file order, issuer count or reviewer agreement.
 
-## 194. Post-repair lifecycle gate
+The proposal stops without merge if, **after the §190 known set is accounted for**, another current peer table or stale registered row is discovered; the current-section/table classifier is ambiguous; OCP-000 changes; a semantic OCP edit is required; a historical table would be captured; or the freshly derived atomic unit differs from the reviewed proposal. A stop returns to O0 and requires a fresh Board act; it selects no alternate route automatically.
 
-Even a successful O7V repair does not make Organization Canonical-ready. After the separately reviewed PATCH merges, the only permitted lifecycle step is another fresh AD-016 exact-head audit/comparison that:
+## 194. Post-repair Organization lifecycle gate
+
+Even a successful O7V repair does not make Organization Canonical-ready. After the separately reviewed PATCH merges, the only permitted Organization lifecycle step is another fresh AD-016 exact-head audit/comparison that:
 
 1. re-anchors the new `main`;
-2. reruns the rule-based current/historical projection sweep rather than inheriting U9;
+2. reruns the rule-based current/historical Organization projection sweep rather than inheriting U9;
 3. repeats all sixteen commissioned targets;
 4. derives and names any candidate lifecycle unit from the new evidence;
 5. compares it fairly with O0/O7R/O7D2/O37/O5; and
 6. receives its own Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization.
 
-The repair does not predetermine the result of that comparison. O0 remains the lifecycle disposition until a later Board act explicitly selects otherwise.
+The peer-table guardrail reduces one recurrence mode; it does not prove semantic completeness or projection completeness outside its declared shape. O0 remains the Organization lifecycle disposition until a later Board act explicitly selects otherwise.
 
 ## 195. Exact-head gates, non-transfer and accepted effect
 
-AD-016R requires on one unchanged head:
+AD-016R requires on one unchanged head: Fable exact-head review, Codex adjudication of every finding, green required CI and fresh explicit Pavlo/Architecture Board authorization naming that head. A changed head invalidates prior review and authorization.
 
-1. Fable exact-head review;
-2. Codex adjudication of every finding;
-3. green required CI; and
-4. fresh explicit Pavlo/Architecture Board authorization naming that head.
-
-A changed head invalidates the prior review and authorization. Merge authorization for AD-016Q does not transfer to AD-016R, and authorization for AD-016R cannot merge the later repair.
+Merge authorization for AD-016Q does not transfer to AD-016R. Authorization for AD-016R cannot merge the later PATCH; the implementation receives the same four gates on its own unchanged head.
 
 When exact-head reviewed, explicitly authorized and squash-merged, AD-016R will:
 
 - set AD-016 to `0.19.0 / Accepted`;
-- select O7V only as preparation of one bounded OCP-005 `0.2.4` preflight repair proposal;
+- record a rule-based audit of current `Concept Status and Dependencies` peer tables, with six stale registered-Concept views across OCP-005/OCP-006;
+- select O7V only as preparation of one bounded synchronization-and-guardrail PATCH;
 - keep O0 binding for Organization lifecycle and require a fresh post-repair comparison;
-- retain OCP-007 at `0.4.0 / Draft`, Organization at `Accepted`, OCP-005 at `0.2.3 / Draft` and Assignment at `Accepted` until the separate repair act;
+- retain OCP-007 at `0.4.0 / Draft`, Organization at `Accepted`, OCP-005/OCP-006 at `0.2.3 / Draft`, Assignment/Constraint at `Accepted` and the checker/rules unchanged until the separate PATCH;
 - keep AB-006, AB-044–AB-047, AB-051 and AB-052 `Open`, AB-062 `Planned`, and T5 closed; and
 - retain foundation readiness at approximately 70% because selection changes no OCP, Concept lifecycle or production authority.
 
-This act changes only AD-016 and current accounting. It creates no Concept, Pattern, graph edge, registry, mapping, Organization Capability holder, Assignment inference, migration or production authority.
+This act changes only AD-016 and current accounting. It creates no Concept, Pattern, graph edge, registry, mapping, Organization Capability holder, Assignment/Constraint inference, migration or production authority.
