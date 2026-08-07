@@ -89,6 +89,7 @@
 - [x] AD-016T Organization lifecycle scope selection — independent projection/consumer/non-Markdown sweep and all sixteen targets support O9C only as preparation of one exact nine-file proposal with explicit SemVer/status atomicity; no lifecycle state changes in the selection act
 - [x] Fourth T4 micro-wave — OCP-007/Organization `1.0.0 / Canonical`, atomic OCP-000/OCP-002 `1.4.0`, OCP-005 `0.2.5`, current map/checker-guide/accounting synchronization and no semantic, migration, mapping or T5 authority
 - [x] OCP-007 post-canonical versioning correction — `1.1.0 / Canonical` adds local PATCH/MINOR/MAJOR boundaries for the unchanged §33.2 promise; Organization status, data, checker semantics, readiness and remaining-T4 authority do not change
+- [x] AD-016U post-Organization remaining-frontier reassessment — a fresh rule-based sweep derives exactly Operation, Assignment, Constraint and Event, preserves strict T5/T6/T7 L2 order, audits exact P-001 and OCP-007 bridge obligations, and records U4D only as a recommendation before separate AD-016V selection
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -163,7 +164,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Recompute the remaining T4 inventory from the post-O9C `main` in a fresh AD-016 reassessment; Organization completion does not select Operation, Assignment, Constraint or Event by implication.
+1. Compare U0/U4D/U10D/U4R/UJ/UP in a separate AD-016V Board act on a fresh baseline; AD-016U recommends U4D but does not select or authorize Operation/Event discovery, OCP changes, Pattern work or lifecycle work.
 2. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 as Open external/excluded Organization questions; Canonical status does not resolve continuity, taxonomy, mapping, composition, exception or Organization Capability-holder policy.
 3. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
 4. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

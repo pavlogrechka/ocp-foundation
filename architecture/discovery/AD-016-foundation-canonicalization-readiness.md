@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.21.0
+Version: 0.22.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate exact nine-file O9C lifecycle proposal; selection does not authorize its merge or reopen T5
+Review-After: Separate AD-016V Board comparison; AD-016U recommends U4D only and authorizes no discovery, remediation, lifecycle act or T5 work
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -3819,5 +3819,212 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-016T will:
 - retain O0 as the immediate fail-safe for every stop and prohibit authority transfer;
 - retain OCP-007 `0.4.0 / Draft`, Organization `Accepted`, AB-062 `Planned`, all named Organization questions Open and T5 closed until separately reviewed acts change them; and
 - retain foundation readiness at approximately 70% because this selection changes no OCP or Concept lifecycle.
+
+This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry/taxonomy/map row, checker guide, rule, fixture, schema, consumer, graph edge, backlog status or production authority.
+
+
+## 214. AD-016U mandate and exact post-correction baseline
+
+The fourth T4 micro-wave completed Organization, and the separate post-canonical correction added OCP-007-local versioning rules. Neither act chose the next candidate. AD-016U therefore recomputes the remaining frontier from repository evidence instead of inheriting a candidate from document order, prior effort or the old pre-Organization snapshot.
+
+The exact baseline is `main@2793d930159769fa7b51caa1271bc6ad6f7f4e97`, tree `2a8444eac2eb2e78bd5bae45e63fcf3b196cc012`.
+
+| Input / current surface | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016T and completed-act history | `0.21.0 / Accepted` | blob `124e1535db06dcfa60b579dd49ecea5292d0c687` | `32b91265723ec2a8a2408a9078537e5f3bf33fc0c81bd7ad06eaffcbb4c6f3e7` |
+| OCP-000 registry | `1.4.0 / Canonical`; four Canonical and four Accepted Concepts | blob `54d4f9a908c0ef572a4300be1f31e938db5557ef` | `f88a494aafff88bead233a43156435f460df2db0a31f8900465ac7fd7e1f335b` |
+| OCP-001 governance / L2 | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 status projection | `1.4.0 / Canonical`; four remaining Accepted values | blob `470c7b035be3039065fc76f03bf76ad5fc8d3064` | `0366d50ec5ac21f5cd1e37af0cf7b46035dde38d0859b4fed9785793c5aa802c` |
+| OCP-003 Resource | `1.0.0 / Canonical` | blob `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` |
+| OCP-004 Operation | `0.8.3 / Draft`; Operation `Accepted` | blob `6f6990ed2cef7887af663e7dc806b34bddca6e30` | `aa81d60ef8c9802f40f488390d151b5f6c50d116ece6576c1783da0e48087033` |
+| OCP-005 Assignment | `0.2.5 / Draft`; Assignment `Accepted` | blob `e5e0a62eda4ac84be081186c005e0167a3ebe288` | `8172173addc797416a151db198dcbea360711b82fb0a93b3732723f7f71154c6` |
+| OCP-006 Constraint | `0.2.4 / Draft`; Constraint `Accepted` | blob `020c76f2518491beb2b7696e707224809ff26770` | `a604f6b07373741c9bfb25ad2e064b9b77b4c8fd52c9c3075b4865f9f65dfb27` |
+| OCP-007 Organization | `1.1.0 / Canonical`; current §34 over preserved §§31/33 | blob `1dd7d00c8094464e1b8c18dcb77689e10208e7e8` | `f3f736e60b771d5125ff0a5c06dc2b752f573cc013f674b98498b95e5953ae31` |
+| OCP-008 Objective | `1.0.0 / Canonical`; invokes exact P-001 | blob `24ed01e0f5d6bc8f349a7aedae4c5f100eb449ee` | `46f1ecb7b956b106f9c66da0626ec4266961e07492059e594110f63736be6f0d` |
+| OCP-010 Event | `0.2.0 / Draft`; Event `Accepted`; invokes exact P-001 | blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
+| primary OCP-011/OCP-013/OCP-014/OCP-015 consumers | current direct-dependency evidence | blobs `ff2608a372c6305db4c290f05c15e961ca96e6f6` / `658a291b4c3b9a0229aba09d485c1137723fe70b` / `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` / `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` / `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` / `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` / `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
+| P-001 | `0.1.0 / Accepted`; `binding-when-invoked` | blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f` | `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82` |
+| checker implementation tree | read-only finite evidence | tree `d93073d35ad7393dad1f4c2bc70af9f6b64cdc20` | content verified by the complete repository suite |
+| README / roadmap / architecture backlog | current accounting | blobs `99ea06cac523e77aed1ab9cc65747d799acb92b4` / `ad7a96ae0c931de87d5dbb553f82c9e0e37b1b54` / `7171a79f2fa330e51f5f53ac87ec57547390f909` | `b703210505fcea8412a36f2328ad0bbba18179a8a375b9578f7f4871e574ee2f` / `4815954addf86459c127449945431631377e6553e262f2be066fc6e9dfbb6f24` / `fd62c86c0222cdbadc5947b9bc14ed32918b72046dd7df8ed6d05903440faad3` |
+
+The complete edit surface for AD-016U is AD-016 plus README, roadmap and AB-062 accounting. All OCP, Pattern, checker, rule, fixture, schema, map and consumer files are read-only evidence.
+
+
+## 215. Fresh rule-based inventory method
+
+The candidate rule is intentionally mechanical: select every registered Concept whose current registry and OCP-002 values are `Accepted` while its defining OCP remains `Draft`. Then inspect the defining metadata, all primary `Depends-On` consumers, invoked Pattern bindings, current open questions and current normative prose. Historical snapshots and completed-act statements remain evidence, not current status projections.
+
+This yields exactly four candidates: Operation, Assignment, Constraint and Event. Capability, Objective, Resource and Organization are Canonical and therefore excluded. Non-Concept contracts, Proposed registry candidates and absent concepts are not silently added. No candidate is preferred because it occurs earlier in a file, has more consumers, has more tests, has existed longer or would raise the readiness percentage.
+
+The roadmap phrase “remaining T4” names the remaining Concept-canonicalization programme. It does not flatten the accepted strict L2 topology: Operation remains T5; Assignment and Event remain T6; Constraint remains T7. AD-016U may compare possible next work without pretending that all four can be promoted as one T4 unit.
+
+
+## 216. Dependency-floor and consumer replay
+
+| Candidate | Current direct-OCP floor | Strict slot | Current result |
+|---|---|---|---|
+| Operation / OCP-004 | OCP-000, OCP-001, OCP-002, OCP-003 and OCP-008 are Canonical | T5 | structural L2 floor passes; semantic readiness is not implied |
+| Assignment / OCP-005 | OCP-004 remains Draft | T6 | L2 blocks Canonical review |
+| Event / OCP-010 | OCP-004 remains Draft; OCP-008 is Canonical | T6 | L2 blocks Canonical review; exact P-001 binding is valid |
+| Constraint / OCP-006 | OCP-004 and OCP-005 remain Draft | T7 | L2 blocks Canonical review |
+
+The current primary-consumer sweep is also exact:
+
+- OCP-004 is directly consumed by OCP-005, OCP-006, OCP-010, OCP-011 and OCP-014;
+- OCP-005 is directly consumed by OCP-006, OCP-013 and OCP-015;
+- OCP-006 is directly consumed by OCP-011, OCP-013, OCP-014 and OCP-015; and
+- OCP-010 is directly consumed by OCP-011.
+
+Those links show blast radius and dependency order. They do not make a popular document authoritative, do not select a candidate and do not prove that a joint edit is necessary. Reviewed snapshots and historical AD references are not counted as primary consumers.
+
+
+## 217. Candidate-local K/B/S/C audit
+
+### 217.1 Operation
+
+The current stable material includes Operation identity, exact Objective or explicit-intent branching, fail-safe exact-binding evidence, Operation-local spatial binding, and explicit separation from Assignment, Event, outcome assessment, authorization and Readiness.
+
+The current document nevertheless carries semantic blockers that a lifecycle-only proposal cannot decide:
+
+- the complete `Draft → Planned` threshold, authorization source and terminal interaction with unfinished Assignment remain open;
+- parent/child composition and inter-operation relation ownership are not complete;
+- §11's working statement that an Operation generates Event conflicts with §14's explicit statement that Operation-to-Event relevance remains a downstream question and creates no edge;
+- normative participation is delegated to OCP-005 while Assignment, Constraint, Event and assessment boundaries are described in prose but absent from OCP-004 `Depends-On`; adding them mechanically could invert the accepted order or create cycles, so owner and dependency direction must be reviewed first; and
+- `ExplicitIntentRecord`, `LifecycleTransitionRecord`, `InterOperationRelationshipAssertion` and validation evidence use identity, history, endpoints or provenance, but OCP-004 does not invoke P-001. Pattern applicability and each record's authority must be classified rather than inferred from its name.
+
+Templates, reusable spatial identity, domain geometry, Readiness/State, Conflict and product authorization mechanisms remain scoped or external. The evidence supports a bounded stable-surface discovery, not direct remediation or Canonical review.
+
+### 217.2 Assignment
+
+Assignment already has independent identity, exact Resource/Operation references, explicit transition history, temporal applicability and derived participation. Its direct OCP-004 dependency still fails L2.
+
+Amendment, retroactivity, multiple applicability intervals, replacement overlap/gap and terminal alignment with Operation can change lifecycle and effectivity semantics. The document also defines `AssignmentTransitionRecord` and supersession-shaped history without an explicit P-001 invocation decision. Those are current B questions, not harmless future extensions. Reservation, capacity, role taxonomy, availability and Readiness remain separate S surfaces.
+
+### 217.3 Constraint
+
+Constraint already separates rule identity from evaluation results and has exact target, predicate, input and evaluator evidence. Its direct OCP-004/OCP-005 dependencies still fail L2.
+
+Predicate-expression compatibility, precedence, override, waiver, evaluation freshness and result authority remain current B questions. `ConstraintTransitionRecord` and `ConstraintEvaluationRecord` are independently identified, provenance-bearing records, yet P-001 applicability is not explicitly classified. Conflict aggregation, quantity/capacity, Readiness and domain predicate libraries remain scoped or external.
+
+### 217.4 Event
+
+Event has a stable occurrence identity independent of Operation and an exact P-001 ObservationRecord contract. That independence makes an Event-first dependency audit a real alternative: it may be possible to remove or narrow OCP-010's direct OCP-004 dependency. The current evidence does not yet demonstrate that the dependency is non-normative, so L2 still blocks Canonical review.
+
+Two current prose seams also need explicit classification. §11 still says that the general OutcomeAssessmentRecord belongs to unresolved AB-056 even though AB-056 is Resolved and OCP-011 is Accepted. §14 retains a checker-local `ScenarioAssessmentEnvelope` that predates the normative OCP-011 contract. A later act must decide whether those statements are historical, replaced or still bounded evidence without allowing duplicate assessment authority. This supports discovery, not silent cleanup or direct promotion.
+
+
+## 218. P-001 Pattern-floor reassessment
+
+P-001 remains `0.1.0 / Accepted`. Exactly six primary OCP artifacts invoke `P-001@0.1.0`: OCP-007, OCP-008, OCP-010, OCP-011, OCP-012 and OCP-015. OCP-007 and OCP-008 are Canonical, so Canonical consumption of an Accepted Pattern is established rather than newly introduced by this frontier.
+
+This is not an L2 defect. OCP-001 applies L2 to direct OCP dependencies and separately requires an invoked Pattern to be Accepted and exact-version-bound. Pattern lifecycle currently has no Canonical status. Count, centrality and Canonical invokers cannot manufacture a Pattern promotion rule.
+
+The audit still matters. A future P-001 version change would require atomic `track-current` treatment of all six invokers and reviewed snapshots. Separately, OCP-004/OCP-005/OCP-006 must classify whether their record-like structures should invoke P-001. Candidate-local applicability gaps do not prove that P-001 itself is inadequate, and AD-016U authorizes neither a Pattern revision nor new invocations.
+
+
+## 219. Current-statement bridge guard
+
+OCP-007 now has a three-layer act history: §31 records Q2 remediation, §33 records the first Canonical lifecycle act, and current §34 records the post-canonical versioning correction. §33 explicitly declassifies §31's old lifecycle statement, and §34 explicitly declassifies §33's former current version statement.
+
+Any later act that changes OCP-007's current version, lifecycle or compatibility wrapper must name the prior current bridge and classify it as historical in the same proposal. Appending a new current statement without that declassification is a stop, even if frontmatter and CI agree. This guard records a reusable review obligation; it does not edit OCP-007 or retrospectively rewrite §§31/33/34.
+
+
+## 220. Outcome space
+
+| Option | Proposed next preparation scope | Evidence burden | Main risk |
+|---|---|---|---|
+| U0 — hold | prepare no downstream act | show that no bounded discovery is currently justified | preserves blockers but may defer a tractable root audit |
+| U4D — Operation stable-surface discovery | one separate outcome-fair discovery of OCP-004's kernel, lifecycle/composition/dependency seams and P-001 applicability | prove a finite readable outcome space without editing OCP-004 | discovery could smuggle a preferred lifecycle or dependency direction |
+| U10D — Event dependency/stable-surface discovery | one separate discovery of Event's Operation dependency, assessment seams and exact retained kernel | prove that Event-first work is independently reviewable despite the current L2 block | independence language could be mistaken for permission to delete OCP-004 dependency |
+| U4R — direct Operation remediation | prepare an OCP-004 semantic edit immediately | demonstrate that owners and exact treatments of all current B items are already selected | premature write-back could harden unresolved authorization, lifecycle or composition choices |
+| UJ — joint four-candidate work | one combined Operation/Assignment/Constraint/Event discovery or remediation | demonstrate semantic inseparability and reviewable atomicity | weakest-member coupling, cycle pressure and unreadable authority boundaries |
+| UP — Pattern-first change | revise or promote P-001 before candidate work | demonstrate a concrete defect in exact P-001 `0.1.0` obligations or current Pattern lifecycle | status by popularity and broad invoker churn without a Pattern defect |
+
+Each option is admissible for comparison. U4D and U10D are implementation-neutral discovery routes; U4R is intentionally included so direct write-back must meet its higher burden rather than disappear from the matrix. U0 remains the fail-safe for unknown, conflicting or non-replayable evidence.
+
+
+## 221. Outcome-fair comparison and recommendation
+
+| Criterion | U0 | U4D | U10D | U4R | UJ | UP |
+|---|---|---|---|---|---|---|
+| respects current L2 topology | yes | yes; studies the T5 root | yes; studies a blocked T6 node without promoting it | structurally yes, semantically premature | weak; crosses T5–T7 | yes, but does not solve candidate blockers |
+| closes a demonstrated evidence gap | no | yes; Operation has multiple finite B seams | yes; Event has a real dependency/assessment seam | attempts closure before an outcome decision | mixes distinct gaps | no P-001 defect demonstrated |
+| preserves human-readable ownership | yes | plausible under one bounded OCP-004 discovery | plausible under one bounded OCP-010 discovery | not yet demonstrated | poor | Pattern form remains readable but scope is unmotivated |
+| reversible before semantic write-back | maximal | high | high | lower | low | medium because six invokers may move atomically |
+| avoids authority by order/count/readiness | yes | yes if separately selected | yes if separately selected | no supporting selection evidence | no supporting inseparability evidence | no supporting defect evidence |
+
+U4D is the leading hypothesis because Operation is the strict T5 root; its direct OCP floor has passed since PR #108 canonicalized OCP-003/Resource, before the Organization wave; and its current blockers are finite enough for a separate discovery while too consequential for direct remediation. U10D remains a credible alternative because Event identity is expressly independent of Operation and the current dependency may be narrower than its metadata suggests. U0 remains safe. U4R, UJ and UP do not meet their burdens on this baseline.
+
+This is a recommendation, not a selection. A separate AD-016V Board act must independently compare, revise, reject or select an option. AD-016U does not authorize creation of an Operation/Event discovery, any OCP edit, P-001 change, lifecycle proposal or T5/T6/T7 work.
+
+
+## 222. Commissioned falsification targets
+
+Before AD-016U is accepted, review must try to demonstrate that:
+
+1. the rule-based inventory omits or adds a current Accepted-Concept/Draft-OCP candidate;
+2. any declared direct OCP dependency or current lifecycle value in §216 is wrong;
+3. the primary-consumer sweep omits a current `Depends-On` consumer;
+4. Operation's lifecycle, authorization, composition and terminal behavior are already complete enough for direct remediation or Canonical review;
+5. OCP-004's `Operation generates Event` and no-edge/downstream-relation statements are already unambiguous together;
+6. OCP-004's prose consumers and metadata dependencies already have one non-cyclic authority direction;
+7. P-001 applicability and authority are already explicit for every OCP-004 record-like structure;
+8. Assignment's amendment, interval, replacement and terminal-alignment questions cannot alter current semantics;
+9. P-001 applicability is already explicit for Assignment transition/supersession records;
+10. Constraint predicate compatibility, precedence, override, waiver, freshness and result authority are merely external S items;
+11. P-001 applicability is already explicit for Constraint transition/evaluation records;
+12. OCP-010's direct OCP-004 dependency is demonstrated removable without semantic loss or consumer rebinding;
+13. Event's stale AB-056 statement and `ScenarioAssessmentEnvelope` cannot create duplicate or obsolete current assessment authority;
+14. the four candidates are semantically inseparable and require one joint act;
+15. P-001 `0.1.0` fails a current exact invoker or needs a nonexistent Canonical status;
+16. Canonical OCP-007/OCP-008 invocation of Accepted exact P-001 violates current governance;
+17. a future OCP-007 current-version wrapper may omit explicit declassification of §34 without creating competing current statements;
+18. any record, fixture, consumer, projection, exact reference or stored data must migrate merely to accept this reassessment;
+19. document order, timestamp, consumer/test count, prior effort, review agreement or readiness percentage is a legitimate selection rule; or
+20. any option's evidence obligations assume a semantic, Pattern, dependency or lifecycle layer rejected by that option.
+
+A positive result is recorded, not explained away. Unknown, conflicting, incomplete or non-replayable evidence retains U0 and prevents a downstream selection. Review must be possible from this human-readable act and exact repository evidence without treating checker code as the semantic source.
+
+
+## 223. Mandatory AD-016V contract
+
+If AD-016U is accepted, the next Board act must:
+
+1. re-anchor then-current `main` and replay the rule-based four-candidate inventory;
+2. compare at least U0, U4D, U10D, U4R, UJ and UP without assuming this recommendation is authority;
+3. adjudicate every §222 target and any external-review finding on exact evidence;
+4. state one selected preparation scope or retain U0;
+5. if U4D is selected, authorize at most one separate outcome-fair Operation stable-surface discovery, not an OCP-004 edit or lifecycle act;
+6. if U10D is selected, authorize at most one separate Event dependency/stable-surface discovery, not dependency removal or lifecycle act;
+7. preserve the exact Accepted P-001 floor unless a concrete Pattern defect receives its own route and scope;
+8. require the §219 bridge guard in any future act touching OCP-007's current wrapper;
+9. preserve AB-062 as `Planned` and readiness at approximately 71% until a separately authorized lifecycle act changes them; and
+10. repeat Fable exact-head review, Codex adjudication, green CI and fresh Pavlo/Architecture Board authorization on one unchanged head.
+
+AD-016V preparation itself is not authorized by an earlier AD-016 act. Acceptance of AD-016U authorizes only preparation and review of AD-016V under this contract; it cannot authorize AD-016V merge or any downstream artifact.
+
+
+## 224. Stop, rollback and non-transfer
+
+Stop before review or merge if the inventory is not exact, a candidate's direct floor is misclassified, a primary consumer is omitted, a supposed current statement is historical, an option is denied evidence available to another option, or any conclusion requires a new Concept, edge, Pattern status, registry, authority source, Organization Capability holder, Resource interchangeability inference, data migration or production contract.
+
+No authority may come from newest timestamp, record/file order, consumer, issuer or reviewer count, majority, CI, readiness percentage, elapsed effort or the success of the Organization wave. `Capability ≠ Readiness`; equal Capability claims do not make Resources interchangeable; exact OCP-009 Capability version binding remains unchanged.
+
+Rollback of this reassessment is a new reviewed AD/accounting act. It cannot rewrite completed AD-016 history or OCP-007's §31/§33/§34 history. Every downstream selection, discovery, remediation and lifecycle proposal requires its own exact-head four-gate cycle; authorization does not transfer.
+
+
+## 225. AD-016U accepted effect
+
+When exact-head reviewed, explicitly authorized and squash-merged, AD-016U will:
+
+- set AD-016 to `0.22.0 / Accepted`;
+- record exactly four remaining Accepted-Concept/Draft-OCP candidates from the post-correction baseline;
+- preserve strict L2 slots T5 Operation, T6 Assignment/Event and T7 Constraint;
+- record U4D only as the leading hypothesis before mandatory AD-016V comparison;
+- retain U0 as the fail-safe and U10D as a live alternative;
+- retain P-001 `0.1.0 / Accepted` as a valid exact Pattern floor while exposing candidate-local applicability questions;
+- establish the explicit OCP-007 current-bridge review guard without editing OCP-007;
+- retain AB-062 `Planned`, all candidate-local Open questions, four Canonical/four Accepted Concepts and readiness at approximately 71%; and
+- authorize no OCP, Concept, Pattern, dependency, status, graph, fixture, checker, migration, discovery, remediation, lifecycle or production change.
 
 This act changes only AD-016 and current accounting. It changes no OCP, Concept, Pattern, dependency, projection, registry/taxonomy/map row, checker guide, rule, fixture, schema, consumer, graph edge, backlog status or production authority.
