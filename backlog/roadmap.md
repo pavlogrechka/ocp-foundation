@@ -10,7 +10,7 @@
 | Core domain ontology | 85% | Capability, Objective та Resource є Canonical; п’ять інших Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; OCP-007 Q2 remediation лишається `0.4.0 / Draft`, а AD-016Q rule-based audit фіксує evidence-only candidate U9 і stale OCP-005 peer view без outcome selection та залишає O0 hold чинним |
+| **Загальна foundation-готовність** | **≈70%** | Третій T4 micro-wave встановлює OCP-003/Resource `1.0.0 / Canonical`; OCP-007 лишається `0.4.0 / Draft`, а AD-016R обирає лише O7V preflight repair preparation для stale OCP-005 peer view та зберігає O0 lifecycle hold |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -83,6 +83,7 @@
 - [x] AD-016O post-Organization-remediation audit — no current semantic B-item is demonstrated inside the bounded Q2 promise; O7C seven-file lifecycle preparation leads only as a recommendation before mandatory AD-016P selection
 - [x] AD-016P Organization lifecycle scope selection — fifteen commissioned targets close negatively but target 12 finds a live eighth checker-guide projection; O0 hold is selected, exact seven-file O7C is not expanded by implication, and no lifecycle, backlog-status or topology proposal is authorized
 - [x] AD-016Q complete Organization lifecycle-projection audit — a rule-based exact-baseline sweep classifies eight projection-bearing/current-roadmap files plus AB-062 accounting as evidence-only candidate U9, records stale OCP-005 §4 `Organization: Proposed` for a separate repair act, and leaves O0 binding with no outcome or proposal authorized
+- [x] AD-016R Organization preflight-repair selection — O7V authorizes preparation only of one separate OCP-005 `0.2.4` PATCH for the stale Organization status view; O0 remains binding for lifecycle, and repair merge plus post-repair comparison require fresh exact-head gates
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -157,8 +158,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. Keep O0 hold: AD-016Q identifies candidate U9 only as audit evidence and records a stale OCP-005 peer view for separate repair; do not prepare an OCP-007 lifecycle or topology proposal without a separate exact-head Board selection.
-2. A future Board act must derive any newly named lifecycle option from a fresh rule-based sweep rather than inherit U9, then compare O0/O7R/O7D2/O37/O5 fairly and repeat all sixteen targets after re-anchoring current `main`; it requires Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization on one unchanged head.
-3. Keep OCP-007/Organization at `0.4.0 / Draft` and `Accepted`, and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve their exact external/excluded questions.
-4. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
-5. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. Keep O0 lifecycle hold: AD-016R selects O7V only to prepare one separate OCP-005 `0.2.4` preflight PATCH correcting the stale Organization `Proposed` view to the authoritative current `Accepted` value.
+2. Review and merge that repair only through its own exact-head Fable review, Codex adjudication, green CI and explicit Pavlo/Architecture Board authorization; AD-016R authorization does not transfer.
+3. After repair, re-anchor fresh `main`, repeat the rule-based projection sweep and all sixteen targets, derive any lifecycle unit anew rather than inherit U9, and compare it fairly with O0/O7R/O7D2/O37/O5 in a separate Board act.
+4. Keep OCP-007/Organization at `0.4.0 / Draft` and `Accepted`, and preserve AB-006/AB-044–AB-047/AB-051/AB-052 until separately reviewed acts resolve their exact external/excluded questions.
+5. Preserve OCP-003 exclusions: Canonical Resource does not schedule operational lifecycle, taxonomy, relations, quantity, availability, Readiness or Organization mapping work.
+6. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
