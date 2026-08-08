@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-002
 Title: State and Readiness Review
-Version: 0.2.0
+Version: 0.2.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: ADR-DRAFT-007, OCP-004, OCP-005, OCP-006
 Applies-To: State, Readiness and subsequent Foundation Concepts
-Review-After: Accepted Operation and Assignment; Constraint and executable fixtures available
+Review-After: A separately accepted AD-011 reopening mandate supplies new State identity evidence or a concrete Readiness consumer with legitimate criterion, target and freshness owners
 ---
 
 # AD-002 — State and Readiness Review
@@ -71,3 +71,9 @@ Attempt to falsify each candidate by constructing cases where it collapses ident
 ## 8. Architecture Board decision
 
 The Architecture Board accepts this review mandate after external adversarial review. State and Readiness remain `Deferred` until a subsequent decision evaluates the required evidence and selects or rejects a candidate outcome.
+
+## 9. Post-AD-011 Review-After correction — v0.2.1
+
+The prior `Review-After` named Accepted Operation and Assignment plus available Constraint and executable fixtures. Those conditions triggered AD-002 and were later fully adjudicated by AD-011; retaining them as a future trigger would present completed evidence as an open review gate.
+
+Version `0.2.1` therefore aligns `Review-After` with the accepted independent reopening rule in AD-011 §25.3. It creates no State or Readiness Concept, record, conclusion, authority or positive-capable result; does not change AD-011 S0/R0, the negative identity verdicts, deregistration, AB-007 or any OCP; and keeps `Capability ≠ Readiness`. Either axis may reopen only through a separately accepted mandate carrying the exact new evidence and legitimate owners already required by AD-011.
