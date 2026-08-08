@@ -10,7 +10,7 @@
 | Core domain ontology | 87% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Q3I Operation lifecycle Draft, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈71%** | Q3I remediation й AD-016W audit завершені без Concept promotion; AD-016X Board comparison та кожен lifecycle act мають окремі gates |
+| **Загальна foundation-готовність** | **≈71%** | Q3I remediation, AD-016W audit і AD-016X WJ scope selection завершені без Concept promotion; joint lifecycle proposal та merge мають власні свіжі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -96,6 +96,7 @@
 - [x] P-001 evidence-accounting correction — §§11/13 are time-anchored to the exact T3 acceptance baseline, the recurring live invoker count is removed without a Pattern version/form change, §16 stays historical, and structured `Uses-Patterns` remains the sole current invoker-set source
 - [x] Bounded Q3I remediation — OCP-004 `0.9.0 / Draft` retains the stable Operation kernel, F1/V1 and inline IO2; new Route C OCP-017 `0.1.0 / Draft` owns G2/A1/T1 lifecycle and LT2 Module B in one atomic tree, with unchanged P-001 and no Concept/edge/backlog-status change
 - [x] AD-016W post-Operation-remediation blocker/stability audit — OCP-004 and OCP-017 are classified independently; six-consumer D2/E1 topology, L2/Accepted-Pattern/Route C floors, eight metadata-derived P-001 invokers, all reopening gates, 30 scenarios, 32 rejection classes and 191/125 executable evidence replay without a current semantic B; WJ is recommendation-only before AD-016X
+- [x] AD-016X Operation lifecycle-scope Board comparison — all twenty targets are independently re-adjudicated and W0/W4C/W17A/WJ/WR receive outcome-fair treatment; WJ is selected only as preparation of one exact joint proposal whose two artifacts retain separate readiness proof and fresh merge gates
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -170,9 +171,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. AD-016W completes the fresh exact-baseline blocker/stability audit after bounded Q3I remediation; Draft implementation is not lifecycle promotion. Next require a separate AD-016X Board comparison of W0/W4C/W17A/WJ/WR before any Operation lifecycle proposal or T5 act.
+1. AD-016X selects WJ only as preparation/review scope after an independent comparison of W0/W4C/W17A/WJ/WR; Draft implementation and scope selection are not lifecycle promotion. Next require a separate owner mandate and exact joint OCP-004/Operation + OCP-017 lifecycle proposal whose two artifacts each prove compatibility, readiness, migration and rollback, followed by four fresh exact-head merge gates.
 2. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
-3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; this remediation resolves none of them.
+3. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
 4. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
 5. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
 6. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

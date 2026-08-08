@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.24.0
+Version: 0.25.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separate AD-016X Operation lifecycle-scope Board comparison; AD-016W recommendation authorizes no lifecycle proposal, T5 act or OCP change
+Review-After: Separately authorized WJ joint OCP-004/Operation and OCP-017 lifecycle proposal; AD-016X selection authorizes preparation and review only, never merge, OCP change or T5 completion
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -4466,3 +4466,202 @@ AD-016W creates no record, data, reference, semantic, Pattern, dependency or lif
 AD-016W requires on one unchanged head: Fable exact-head review, Codex adjudication, green required CI and fresh explicit Pavlo/Architecture Board authorization. Authorization for PR #129 does not transfer here. Authorization for AD-016W cannot create or merge AD-016X or a lifecycle proposal.
 
 When those gates close and this act is squash-merged, it will set AD-016 to `0.24.0 / Accepted`, replace the stale `Review-After`, record the post-remediation blocker/stability audit, recommend WJ only as a hypothesis before AD-016X, preserve Operation `Accepted`, OCP-004/OCP-017 `Draft`, P-001 `0.1.0 / Accepted`, all eight Operation backlog statuses, the current graph and readiness at approximately 71%, and change only AD-016 plus README/backlog/roadmap accounting.
+
+## 250. AD-016X mandate, exact baseline and authority boundary
+
+Pavlo / Architecture Board separately mandated preparation of AD-016X after AD-016W was accepted. The subject is one Board comparison of the Operation lifecycle scope: W0, W4C, W17A, WJ and WR. The mandate authorizes preparation and external review of this comparison. It does not authorize its merge, either lifecycle transition, an OCP edit or T5 completion.
+
+The exact baseline is post-audit `main@acf5d56b2df88d6b58126dff8d08febd64f487d1`, tree `fd2dab37c100cd88bf5e764c4516fc4c48f3a6df`. Every blob below was resolved first and then reverse-matched to its path through `git ls-tree -r`; no written path was trusted as the lookup key.
+
+| Input / current surface | Exact state | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016W and comparison contract | `0.24.0 / Accepted`; WJ recommendation only | blob `1ef004b18c5ca4bdee2eaac0fb9d3c22cc439fce` | `80fd77b38e7190cbec80787cf168f9f64c61cb56b32e6c33fff73ae5c36393d8` |
+| OCP-000 registry | `1.4.0 / Canonical`; Operation `Accepted`; no OCP-017 row | blob `54d4f9a908c0ef572a4300be1f31e938db5557ef` | `f88a494aafff88bead233a43156435f460df2db0a31f8900465ac7fd7e1f335b` |
+| OCP-001 governance / L2 / atomicity | `1.0.0 / Canonical` | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 status projection | `1.4.0 / Canonical`; Operation `Accepted` | blob `470c7b035be3039065fc76f03bf76ad5fc8d3064` | `0366d50ec5ac21f5cd1e37af0cf7b46035dde38d0859b4fed9785793c5aa802c` |
+| OCP-004 Operation | `0.9.0 / Draft`; Operation `Accepted`; F1/V1 and inline IO2 | blob `591f1006e1a2faff135ecdbdadad4c63a666860b` | `ca5ce624ab180e4d97e86c534f03b3e9a1975244a7dd73edabc6e0c095e008a3` |
+| OCP-017 Operation Lifecycle | `0.1.0 / Draft`; Route C non-Concept; LT2 | blob `4c5fe6361a8f67fa0c7b1746e372d6404b9876a1` | `e3fc44295a8182eb97c3e39cd407daadc3434b49000b74fd4926cfa4e420cb28` |
+| P-001 identified-record Pattern | `0.1.0 / Accepted`; eight metadata-derived primary invokers | blob `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+| OCP-005 Assignment consumer | `0.2.5 / Draft`; Operation peer view `Accepted` | blob `e5e0a62eda4ac84be081186c005e0167a3ebe288` | `8172173addc797416a151db198dcbea360711b82fb0a93b3732723f7f71154c6` |
+| OCP-006 Constraint consumer | `0.2.4 / Draft`; Operation peer view `Accepted` | blob `020c76f2518491beb2b7696e707224809ff26770` | `a604f6b07373741c9bfb25ad2e064b9b77b4c8fd52c9c3075b4865f9f65dfb27` |
+| OCP-010 Event consumer | `0.2.0 / Draft`; independent Event identity and relevance boundary | blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
+| OCP-011 assessment consumer | `0.2.0 / Accepted`; exact Operation target reference | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-014 coordination-profile consumer | `0.2.0 / Accepted`; exact Operation context reference | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+| OCP-016 Core Boundary | `1.0.0 / Canonical`; Route C authority | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| Operation lifecycle rule manifest | exact Q3I validation-source map | blob `942e227820fb33130b0bcfd00cf118376d9f23a1` | `0e0cd72c4f7eacc49a4b2b4276257c6a52c5346483568b67106643f6b58e3685` |
+| generated foundation map | Operation `Accepted`; only current outgoing edge is `Operation → Objective` | blob `0b7406d0934f8b2ef1e9698608ac9841aaec1b54` | `6c18c44fbb685a350bc86fbcb3d1a6a391ef63c2700aebb435569ae539daac48` |
+| checker guide | current Q3I kernel and Draft OCP-017 description | blob `4f7f60dc915682d6ce7aab6304a03f868c188fd2` | `c3b8c1b13c366ea5e7ef15d2be842f7b73f3763779a54cd0eef0f40d725d202f` |
+| complete fixture set | 125 non-sensitive fixtures | tree `e5a2eed1ab0d752d3e0e4b1a31bc4c1fdcf6b108` | recursive `git ls-tree` manifest `a856ddb65b8ed071b27dda91f9e49cd0a3971003d223f9c658cc4df10ebd24ad` |
+| complete unit-test set | 191 tests | tree `21016e8af459eb34ce8f356a6ab53da786d83c56` | recursive `git ls-tree` manifest `571d1e8256bce8732367dc95f469a65a3cd38f7bb6ca7749691f117b6ed6f754` |
+| README / architecture backlog / roadmap | current post-audit accounting | blobs `dc449ebeaec6339cab08e3e1b390c716dfca72a2` / `c5281dac0b43b92db63ca98d1292bfcc3b5ec467` / `9cf114806f655b8154eea38d26b447d3e5b86b49` | `eefcc4aad4aad0999615c1211c6cd2c71c858c506262115081f172368de3e9a9` / `d9d00642b53227879cbed87e21f297bcd5400abff6908ff44516f85a45c960b1` / `f67ea84f7ca954f7292aa28dff23aadad44855f234105557e69e9cb05aaebb39` |
+
+Hashes identify the reviewed bytes. A recent file, a passed test, a prior recommendation, a large remediation or an earlier authorization has no lifecycle authority.
+
+
+## 251. Fresh evidence and separate readiness treatment
+
+AD-016X does not inherit WJ from AD-016W. It first removes that recommendation and asks what the current contracts support.
+
+The fresh result remains two independently readable artifacts:
+
+- OCP-004 owns Operation identity and the bounded stable kernel, including Objective references, active intent, temporal/spatial context, participation, acyclic parent/child composition, downstream Event relevance and inline IO2. Its fifteen pre-selection guarantees remain present. Its five direct OCP dependencies are Canonical, so the OCP-001 L2 floor passes. Its exact P-001 dependency is `Accepted`, which is the required Pattern floor; Patterns do not acquire a `Canonical` status.
+- OCP-017 owns only the extracted lifecycle contract: stages and paths, completeness/profile gates, evidence acceptance for `Authorized`, LT2 transition history and terminal Assignment-alignment evidence. It remains a Route C non-Concept with no OCP-000 row, no Concept graph edge and no authority over Operation identity. Its nine declared dependencies are all used by named semantic boundaries.
+
+A fresh metadata scan still yields exactly six direct OCP-004 consumers: OCP-005, OCP-006, OCP-010, OCP-011, OCP-014 and OCP-017. OCP-017 is downstream of OCP-004; no reverse dependency exists and the full graph is acyclic. The actual Concept graph still has `Operation → Objective` as the only outgoing Operation edge. `Operation ⇢ Event` remains a non-edge.
+
+The executable tree still passes 191 tests and 125 fixtures in both PR and `main` contexts. That demonstrates consistency of the reviewed Draft contracts. It does not itself promote either artifact or decide whether their lifecycle transitions must be grouped.
+
+
+## 252. Current lifecycle projections and the candidate change unit
+
+The current status is rendered in more places than the two defining documents. A lifecycle comparison must therefore start from the full current projection set, not from a two-file diff.
+
+| Current projection | Current statement | Treatment only if a later WJ proposal is separately authorized |
+|---|---|---|
+| OCP-004 frontmatter and current lifecycle prose | `0.9.0 / Draft`; Operation `Accepted` | `1.0.0 / Canonical`; Operation `Canonical`; add the lifecycle wrapper without weakening the `0.9.0` body |
+| OCP-017 frontmatter and current lifecycle prose | `0.1.0 / Draft`; Route C non-Concept | `0.2.0 / Accepted`; retain non-Concept route and incorporate the reviewed Draft body |
+| OCP-000 Concept registry | Operation `Accepted` with its older acceptance provenance | `1.4.0 → 1.5.0`; Operation `Canonical`; exact AD-020A/AD-016X/separately-authorized-act provenance |
+| OCP-002 taxonomy | Operation `Accepted` in frontmatter/current prose | `1.4.0 → 1.5.0`; only current Operation status views change |
+| OCP-005 peer view | Operation `Accepted` | `0.2.5 → 0.2.6`; PATCH-only peer-status synchronization |
+| OCP-006 peer view | Operation `Accepted` | `0.2.4 → 0.2.5`; PATCH-only peer-status synchronization |
+| generated foundation map | Operation `Accepted` | Operation `Canonical`; no edge change |
+| checker guide | Q3I kernel plus `draft OCP-017` | current lifecycle label only; checker semantics stay unchanged |
+| repository README / backlog / roadmap | four Canonical Concepts; lifecycle decision pending | current lifecycle/accounting text only; no semantic authority |
+
+The exact future WJ candidate is therefore a **twelve-file proposal**, not a change made by AD-016X:
+
+1. `docs/004-operation-concept/README.md`;
+2. `docs/017-operation-lifecycle/README.md`;
+3. new immutable `docs/017-operation-lifecycle/reviewed-contract-v0.1.0.md` containing the complete reviewed Draft body;
+4. `docs/000-operational-ontology/README.md`;
+5. `docs/002-concept-taxonomy/README.md`;
+6. `docs/005-assignment-concept/README.md`;
+7. `docs/006-constraint-concept/README.md`;
+8. `architecture/generated/foundation-map.md`;
+9. `tools/ontology_checker/README.md`;
+10. repository `README.md`;
+11. `backlog/architecture-backlog.md`; and
+12. `backlog/roadmap.md`.
+
+The OCP-017 snapshot is review evidence, not a second current artifact or ninth primary P-001 invoker. The Accepted wrapper must link to it in plain language and incorporate its complete normative body, preserving every current `OCP-017 §N` source resolution. OCP-004 remains the human-readable full stable contract; it does not gain a snapshot merely to make the package look symmetric.
+
+No rule, checker implementation, test, fixture, P-001 file, existing reviewed snapshot or consumer reference belongs in that candidate. The exact `OCP-004@0.9.0` executable harness remains immutable evidence for the body incorporated into `1.0.0`; it is not silently relabelled as evidence generated against a different contract version.
+
+
+## 253. Independent adjudication of the atomicity premise
+
+OCP-004 §25.7 and OCP-017 §15 stipulate one atomic ownership tree and reject partial merge or rollback. AD-016X does **not** treat that wording or PR #129 approval as proof. There is still no fixture that simulates a partial repository rollback.
+
+The independent lifecycle evidence is narrower and sufficient for comparison:
+
+1. OCP-004's proposed Canonical promise includes the fact that lifecycle authority is externalized to one exact Route C owner. Leaving that sole owner Draft would create a stable defining contract whose lifecycle surface is explicitly unstable.
+2. OCP-017's proposed Accepted promise exact-depends on OCP-004 and interprets transitions for its Operation endpoint. Accepting it first would create an admitted downstream contract whose defining endpoint contract remains Draft.
+3. The operation-lifecycle manifest deliberately binds rules to normative sections in **both** documents, and one exact evidence dataset exercises F1/V1/IO2 together with LT2. This is a cross-document source chain, not proof that the two artifacts have the same identity.
+4. OCP-001 permits a grouped lifecycle unit only when grouping reduces rather than hides review and rollback risk. The group therefore remains admissible only if OCP-004 and OCP-017 each provide their own compatibility statement, readiness evidence, migration analysis and rollback boundary.
+5. Repository rollback of the proposed twelve-file tree can be exact and atomic. Partial rollback is not accepted as a recovery strategy because either direction recreates one of the two mixed-lifecycle states above. This is a governance conclusion over exact projections, not a claim that partial rollback was fixture-tested.
+
+The principal WJ risk remains real: grouping can hide an immature OCP-017 behind a mature Concept contract or turn a one-time ownership split into a general same-release rule. The later proposal must expose both artifacts as separate review units inside one merge unit. Failure of either unit returns the whole proposal to W0; it never permits promotion of the stronger side by default.
+
+
+## 254. Independent adjudication of all twenty AD-016W targets
+
+| # | Exact attack and AD-016X result |
+|---:|---|
+| 1 | **No omitted trigger demonstrated.** AD-016W's `Review-After` is satisfied by this separately mandated comparison; this act replaces it without treating expiry as authority. |
+| 2 | **No weakening demonstrated.** The fifteen OCP-004 guarantees remain in the exact `0.9.0` body; a later proposal must incorporate them without semantic reduction. |
+| 3 | **Independent classification holds.** OCP-017 remains separately readable and Route C; none of its readiness is inherited from OCP-004. |
+| 4 | **Exactly six consumers.** A fresh all-primary-OCP metadata scan yields OCP-005/006/010/011/014/017 and no seventh. |
+| 5 | **No reverse dependency, cycle or prose-only edge.** OCP-017 depends on OCP-004, not conversely; the full metadata graph is acyclic. |
+| 6 | **E1 holds.** The generated map and current consumers retain the Event non-edge and independent Event identity. |
+| 7 | **L2 passes without category substitution.** All five direct OCP dependencies of OCP-004 are Canonical; AD-014 and P-001 are not miscounted as Canonical OCPs. |
+| 8 | **The Pattern floor is legitimate.** OCP-001 explicitly permits an exact-version-bound Accepted Pattern; `P-001@0.1.0` is Accepted and has no Canonical state. |
+| 9 | **Route C holds.** OCP-017 defines no Concept, registry row or hidden admission route; adding a row would be a defect. |
+| 10 | **Exactly eight primary invokers.** The set is derived from `Uses-Patterns`; reviewed snapshots are evidence, not current invokers. |
+| 11 | **P-001 is unchanged.** Its exact blob is anchored in §250; §§11/13 remain time-anchored and contain no live invoker count. |
+| 12 | **No reopening gate has new concrete evidence.** Q0/Q1/Q2/Q3/Q4/F2/V2/V3/LT1/LT3/IO1/IO3/E2/E3/D3 retain the individual §244 results. |
+| 13 | **All thirty scenarios retain their result.** The exact rules and 125-fixture tree replay without a semantic difference. |
+| 14 | **All thirty-two rejection classes remain fail-safe.** No permissive path or new authority rule is present. |
+| 15 | **The rule/source chain is complete in both directions for this scope.** F1/V1/LT2 normative sections, rule IDs and material positive/negative evidence remain connected. |
+| 16 | **No new section-reference debt is introduced.** The baseline remains 393 heading resolutions + 43 numbered-list resolutions + the same 2 inherited OCP-015 dangling references. Their repair is outside AD-016X. |
+| 17 | **No semantic migration or rebinding is required.** Exact identities, stored records, historical references and six consumers keep their meaning. Lifecycle projections change only in a later act. |
+| 18 | **Joint treatment is supported but not inherited.** The independent §253 analysis shows that either one-sided transition creates a mixed-lifecycle source chain; each artifact must still pass separate readiness and rollback review. No executable partial-rollback claim is made. |
+| 19 | **No forbidden expansion is required.** Every option can be compared without a new Concept, Pattern version, edge, registry, schema or backlog resolution. |
+| 20 | **Evidence remains outcome-fair.** W0 requires no fabricated migration; W4C/W17A are judged on their own mixed-state burden; WJ bears the strongest separate-readiness and anti-coupling proof; WR requires a positive reopening result. |
+
+All twenty attacks close negatively on the exact §250 baseline. “Negative” means that this comparison did not demonstrate the falsifier. It does not make the result permanent or authorize the next merge.
+
+
+## 255. Outcome-fair comparison of W0, W4C, W17A, WJ and WR
+
+| Option | Evidence in its favour | Evidence against / unresolved cost | Verdict for preparation |
+|---|---|---|---|
+| **W0 — hold** | safest result if a blocker, floor failure or ambiguous package remains | no §254 target closes positively; holding would preserve two Draft contracts despite completed bounded evidence and no named missing owner | admissible fail-safe, but not selected |
+| **W4C — Operation-only Canonical proposal** | OCP-004 independently has a bounded stable kernel, passes L2 and has complete current Concept projections | its stable promise delegates the only lifecycle surface to Draft OCP-017; the downstream owner and cross-document rule sources would need full review again before acceptance | rejected as a mixed-lifecycle intermediate state |
+| **W17A — OCP-017 acceptance first** | OCP-017 is independently readable, Route C, executable and bounded | it would be Accepted while exact-depending on Draft OCP-004; it makes no Concept progress and would need re-review when the endpoint contract becomes Canonical | rejected as the opposite mixed-lifecycle intermediate state |
+| **WJ — one joint proposal** | avoids both mixed states; preserves one-way D2 topology; lets one exact tree update every current projection while each artifact supplies separate compatibility/readiness/migration/rollback evidence | can over-couple two identities or conceal weak OCP-017 evidence; no fixture proves partial rollback semantics | **selected only as the next preparation and review scope**, under §§253 and 257 |
+| **WR — repair or reopen first** | required immediately if a §244 gate opens or a positive §254 target appears | no concrete repair owner, migration, topology defect or semantic reopening evidence exists; repair-by-preference would reopen bounded work | not selected; remains mandatory on future positive evidence |
+
+WJ wins after, not before, the comparison. Removing the AD-016W recommendation leaves the same current facts: each one-sided option creates a different unstable dependency/source boundary, while the joint option can avoid both only by retaining separate proof for both artifacts. Green CI, the number of files, remediation effort and the prior WJ recommendation contribute no authority.
+
+
+## 256. Board selection — WJ as preparation scope only
+
+AD-016X selects **WJ** as the scope for preparing and externally reviewing one later joint lifecycle proposal:
+
+- OCP-004 / Operation: `0.9.0 / Draft` and `Accepted` → proposed `1.0.0 / Canonical` and `Canonical`;
+- OCP-017: `0.1.0 / Draft` → proposed `0.2.0 / Accepted`, remaining a Route C non-Concept; and
+- the exact status/accounting projections listed in §252, with no semantic or data migration.
+
+This selection is not a lifecycle proposal, not T5 completion and not permission to edit any of those files. It authorizes only preparation and review after a separate owner mandate. The later proposal receives a new exact baseline, a new external verdict, Codex adjudication, green CI on the same head and a separate explicit Pavlo/Architecture Board merge authorization.
+
+W0 remains the immediate fail-safe. WR becomes mandatory if new evidence opens a named route. W4C and W17A remain valid comparison controls but gain no automatic priority if WJ stops.
+
+
+## 257. Mandatory contract for a later WJ proposal
+
+A separately mandated WJ proposal must satisfy all of the following on its then-current exact baseline:
+
+1. use exactly the twelve-file semantic/projection/accounting footprint in §252, unless a fresh rule-based sweep demonstrates an additional current projection or proves one listed file has no current statement;
+2. preserve the complete OCP-004 `0.9.0` body and all fifteen guarantees in a human-readable `1.0.0` contract; define exact MAJOR/MINOR/PATCH treatment for the resulting 1.x compatibility surface;
+3. preserve the complete reviewed OCP-017 `0.1.0` body byte-for-byte in `reviewed-contract-v0.1.0.md`, publish a readable `0.2.0 / Accepted` wrapper that incorporates all seventeen sections and defines its own future-version rules;
+4. prove OCP-004 and OCP-017 readiness independently: separate compatibility claims, evidence ledgers, migration analyses, rollback boundaries and stop conditions; one passing side cannot waive a failing side;
+5. update Operation status atomically across OCP-004, OCP-000, OCP-002, OCP-005, OCP-006 and the generated map; update OCP-000/OCP-002 by MINOR and peer views by PATCH for status projection only;
+6. use exact provenance naming OCP-004, AD-020A, AD-016X and the separately authorized WJ lifecycle act; the original Operation acceptance PR is not Canonical provenance;
+7. keep OCP-017 absent from OCP-000, OCP-002 and the Concept map because Route C acceptance does not create a Concept;
+8. preserve the exact D2 dependency direction, the six-consumer set, the acyclic graph, `Operation → Objective` and the Event non-edge; no dependency or Concept-edge edit is admitted by lifecycle language;
+9. keep P-001 `0.1.0 / Accepted` byte-identical, keep all eight primary invokers exact-bound, apply §17.3 without editing the T3 ledger, and treat the new OCP-017 snapshot as historical evidence rather than a current invoker;
+10. keep rules, checker implementation, tests and fixtures byte-identical; update only the checker guide's current lifecycle description, and state that the exact `OCP-004@0.9.0` harness is reviewed evidence for the unchanged body incorporated into `1.0.0`;
+11. demonstrate no stored record, reference, consumer, fixture or production-data migration and no re-evaluation of historical evidence; the only migration is governed document/status projection;
+12. preserve all Q3I exclusions, every §244 reopening gate and AB-015/016/017/018/019/020/023/028 without status change or implied resolution;
+13. replay the full test/fixture suite in both contexts and verify bidirectional normative-source and section-reference resolution without importing the known unrelated debt into the proposal; and
+14. define one atomic merge and one exact full-tree rollback. Partial promotion is invalid, but no claim may be made that partial rollback was fixture-tested.
+
+Any footprint drift, content change outside those bounded lifecycle wrappers/projections, Pattern edit, consumer rebinding, new edge, newly unresolved source or inability to review either artifact independently stops the proposal before merge.
+
+
+## 258. Stops, migration, rollback and non-transfer
+
+Preparation returns to W0 if the then-current baseline differs materially, a seventh consumer or reverse dependency appears, either artifact loses its bounded compatibility surface, L2/Pattern/Route C fails, the OCP-017 snapshot cannot preserve the reviewed body, a primary invoker drifts from exact `P-001@0.1.0`, a current projection is omitted, or any §244 route gains concrete evidence.
+
+No authority may come from newest timestamp, document/record order, issuer/reviewer/consumer count, majority, green CI, readiness percentage, file count, elapsed effort, prior authorization or the fact that WJ was recommended twice. `Capability ≠ Readiness`; equal Capability claims do not make Resources interchangeable; exact OCP-009 version binding and fail-safe evidence semantics remain unchanged.
+
+AD-016X changes no record, stored reference, OCP, Pattern, dependency, graph, registry/taxonomy/map row, fixture, rule, checker, schema or backlog status. Its rollback is one reviewed AD/accounting act that restores the prior comparison record; it never rewrites AD-016W or rolls back PR #129.
+
+Authorization for AD-016W does not transfer here. Authorization for AD-016X cannot create a branch, edit an OCP, open or merge the WJ proposal, or complete T5. Every new head invalidates prior review and authorization for that head.
+
+
+## 259. AD-016X gates and accepted effect
+
+AD-016X requires on one unchanged head: Fable exact-head external review of both the comparison contract and its execution, Codex adjudication of every finding, green required CI and fresh explicit Pavlo/Architecture Board authorization naming that head. Any changed head resets those gates.
+
+When those gates close and this act is squash-merged, AD-016X will:
+
+- set AD-016 to `0.25.0 / Accepted`;
+- independently adjudicate all twenty AD-016W targets on post-audit main;
+- compare W0, W4C, W17A, WJ and WR without inheriting the prior recommendation;
+- select WJ only as the preparation/review scope for one exact later proposal under §257;
+- retain W0 as fail-safe and WR as the mandatory route on new concrete evidence;
+- preserve Operation `Accepted`, OCP-004 `0.9.0 / Draft`, OCP-017 `0.1.0 / Draft`, P-001 `0.1.0 / Accepted`, the current graph, all eight Operation backlog statuses and readiness at approximately 71%; and
+- change only AD-016 plus README/backlog/roadmap accounting.
+
+The accepted effect is a governed next question, not the answer to that next question. A future WJ lifecycle act remains separately mandated, reviewed, adjudicated, tested and authorized.
