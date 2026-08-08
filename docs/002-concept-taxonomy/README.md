@@ -1,21 +1,21 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.4.0
+Version: 1.5.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
 Used-By: Domain Model, Knowledge Graph, Architecture
 Concept-Statuses:
   Resource: Canonical
-  Operation: Accepted
+  Operation: Canonical
   Assignment: Accepted
   Constraint: Accepted
   Organization: Canonical
   Objective: Canonical
   Capability: Canonical
   Event: Accepted
-Last-Review: 2026-08-07
+Last-Review: 2026-08-08
 ---
 
 # Concept Taxonomy
@@ -146,7 +146,7 @@ Capability не має поточної фундаментальної Concept d
 
 ## Operation
 
-Concept `Operation` має статус `Accepted` і визначений у [OCP-004](../004-operation-concept/README.md).
+Concept `Operation` має статус `Canonical` і визначений у [OCP-004](../004-operation-concept/README.md).
 
 Operation є універсальним контекстом координованої діяльності. Предметні типи визначаються domain або capability modules.
 
@@ -312,3 +312,9 @@ Projection owner, exact set/value rules, category exclusions і fail-safe mismat
 Окремий четвертий T4 lifecycle act exact-sync-ить одну projection value: `Organization: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.3.0 → 1.4.0`.
 
 Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Organization. Ненормативні category/subtype/decomposition trees лишаються байт-ідентичними; вони не містять Organization lifecycle label і не отримують taxonomy, inheritance, mapping або authority. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior і status кожного іншого Concept лишаються незмінними.
+
+## Revision `1.5.0` — Operation status projection
+
+Окремий T5 WJ lifecycle act exact-sync-ить одну projection value: `Operation: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.4.0 → 1.5.0`.
+
+Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Operation. Taxonomy authority, category/decomposition trees, registry membership, dependencies, Operation identity, `Operation → Objective`, Event non-edge та всі інші projected values лишаються незмінними. Жоден non-Concept lifecycle contract не додається до taxonomy.

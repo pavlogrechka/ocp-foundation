@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-017
 Title: Operation Lifecycle Contract
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010, OCP-011, OCP-016, P-001
 Uses-Patterns: P-001@0.1.0
@@ -336,94 +336,3 @@ This Draft is created only in the atomic Q3I remediation tree with OCP-004 `0.9.
 - leaves foundation readiness at approximately 71% pending fresh post-remediation audit.
 
 Merge requires exact-head Fable review, Codex adjudication, green CI and a fresh explicit Pavlo/Architecture Board authorization for this unchanged atomic tree. The preparation mandate does not satisfy that gate.
-
-## 18. Accepted lifecycle bridge and incorporated reviewed body
-
-Architecture Board accepts OCP-017 `0.2.0` as the Route C Operation lifecycle contract selected through AD-020A and the WJ comparison in AD-016X.
-
-The complete externally reviewed `0.1.0 / Draft` artifact is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md). Its Git content is identical to baseline blob `4c5fe6361a8f67fa0c7b1746e372d6404b9876a1` and SHA-256 `e3fc44295a8182eb97c3e39cd407daadc3434b49000b74fd4926cfa4e420cb28`.
-
-All seventeen reviewed sections are incorporated into this Accepted specification:
-
-| Incorporated section | Accepted authority retained |
-|---|---|
-| §1 | Route C non-Concept ownership and one-way OCP-017 → OCP-004 dependency |
-| §2 | plain-language distinction between Operation identity and transition-history evidence |
-| §3 | complete non-implication and excluded-authority boundary |
-| §4 | exact Operation endpoint and lifecycle-envelope contract |
-| §5 | closed stage vocabulary and allowed paths |
-| §6 | `OperationLifecycleTransitionRecord` LT2 identity and fields |
-| §7 | predecessor-chain authority, unique-leaf projection and fail-safe history |
-| §8 | G2 structural completeness plus exact domain-profile hook |
-| §9 | A1 authorization-evidence acceptance without permission or authority grant |
-| §10 | T1 terminal Assignment-alignment evidence without Assignment mutation |
-| §11 | validation rules and rejection behavior |
-| §12 | boundaries with Event, assessment, Constraint, Assignment and other consumers |
-| §13 | independent P-001 Module B conformance statement for LT2 |
-| §14 | executable positive/negative evidence and its explicit limits |
-| §15 | historical replay, non-fabrication, migration and rollback boundary |
-| §16 | Route C/non-Concept and future-change boundary |
-| §17 | exact Q3I remediation history and its no-authority accounting |
-
-The original frontmatter and the Draft/future-gate statements in §§1, 15–17 remain historical evidence of the remediation state. They do not override the current `0.2.0 / Accepted` frontmatter or §§18–22. Every current structured source such as `OCP-017 §4`, `§7`, `§8`, `§9`, `§10`, `§11`, `§12` and `§14` continues to resolve to the same numbered semantic owner in this README; the snapshot is evidence, not a second current authority.
-
-This publication form changes no lifecycle stage, path, record field, rule, derivation, fixture or authority. It makes the exact reviewed contract readable as one current Accepted artifact while preserving the immutable review input.
-
-## 19. Accepted compatibility surface
-
-OCP-017 `0.2.x` guarantees:
-
-1. OCP-017 remains a Route C non-Concept and never gains an OCP-000 row, OCP-002 projection or Concept graph node;
-2. OCP-004 alone owns Operation identity and the stable non-lifecycle kernel; OCP-017 depends on OCP-004 and no reverse dependency is introduced;
-3. lifecycle stages and paths remain the closed vocabulary in §5 until separately versioned;
-4. authoritative history is an exact, acyclic, unbranched predecessor chain of independently identified LT2 records, never newest timestamp, list order, record count or issuer count;
-5. a materialized current stage is only a checked projection from the unique exact chain leaf;
-6. G2 completeness remains exact-owner/profile evidence and cannot be inferred from field count, label or implementation success;
-7. A1 accepts evidence for a transition but never grants permission, authenticates an actor or defines an authorization source;
-8. T1 records exact terminal Assignment dispositions without completing, revoking or mutating Assignment;
-9. Event occurrence, Objective assessment, Constraint truth, Readiness, State, availability and production authority remain external and non-implied;
-10. LT2 remains a distinct invocation of `P-001@0.1.0` with Module B only; Modules A/C are absent unless new effectivity or supersession semantics are separately justified; and
-11. historical inputs replay under their exact contract or stop without fabricated identities, predecessor links, provenance, profile success, authorization evidence or Assignment alignment.
-
-Acceptance makes these guarantees a governed working foundation for dependent specifications. It does not make OCP-017 a Concept, production schema, workflow engine, permission service, authenticator, universal lifecycle Pattern or proof that a particular Operation is authorized or current.
-
-## 20. Future version rules
-
-SemVer for OCP-017 is local to the compatibility surface in §19:
-
-- **PATCH** may correct prose, links, examples or accounting while preserving every stage/path, record field, owner, exact binding, P-001 conformance statement, validation result and non-implication;
-- **MINOR** may add a backward-compatible optional stage-path, evidence/profile feature or consumer clarification only through its exact reopening owner and only when all existing records, histories, projections and eleven guarantees retain their meaning; and
-- **MAJOR** is required to remove or reinterpret a stage/path, change LT2 identity or predecessor authority, alter the OCP-004/OCP-017 direction, change required evidence incompatibly, select another P-001 module, grant authorization/Assignment mutation authority, create a Concept/edge or break historical replay.
-
-Changing a production representation, adding a domain-local profile or introducing an authorization mechanism is not automatically an OCP-017 MINOR. It first needs its own legitimate owner and route; OCP-017 versions only when this contract's governed surface changes.
-
-OCP-017 version `0.2.0` is not an Operation lifecycle stage, transition version, current-head selector or authority result.
-
-## 21. Independent OCP-017 readiness evidence
-
-OCP-017 passes its side of the joint lifecycle review independently of OCP-004:
-
-| Review dimension | OCP-017 evidence and bounded conclusion |
-|---|---|
-| compatibility | the complete `0.1.0` bytes are immutable in the reviewed snapshot; all seventeen numbered semantic owners remain present and §19 states the Accepted promise explicitly |
-| route and identity | OCP-016 Route C permits a non-Concept contract; OCP-017 has no `Defines-Concepts`, registry/taxonomy row or graph node and does not inherit Operation identity |
-| dependency and topology | all nine declared dependencies support named boundaries; OCP-017 depends on OCP-004, no reverse dependency or cycle exists and the Concept edge set is unchanged |
-| Pattern | one exact `Uses-Patterns: P-001@0.1.0` binding remains; §13 gives the LT2-specific Module B conformance statement and does not inherit F1/V1 modules |
-| executable evidence | the unchanged rules, checker implementation, 191 tests and 125 fixtures replay exact paths, chain projection, profiles, A1 evidence, terminal alignment and material negative cases in both contexts |
-| source integrity | every existing `OCP-017 §N` rule source continues to name the same numbered owner; wrapper/snapshot publication adds no competing source and no unresolved reference |
-| migration | no LT2 or Operation record is rewritten, invented or rebound; the accepted wrapper governs future use while historical `0.1.0` evidence remains exact |
-| rollback | OCP-017 may return to `0.1.0 / Draft` only through the complete reviewed twelve-file rollback; one passing side cannot retain promotion when the other side fails |
-
-The newly created snapshot is the fourth immutable reviewed-contract carrier of exact `P-001@0.1.0` inside `track-current`. It is historical evidence, not a ninth primary invoker, current contract, duplicate lifecycle owner or license to bypass a future Pattern-version act. P-001, its time-anchored T3 ledger, all eight primary invokers and the three earlier snapshots remain byte-identical.
-
-OCP-017 readiness fails independently if the snapshot differs by one byte, any numbered source loses its owner, Route C/non-Concept classification fails, a dependency is unused or reversed, a stage/path/record meaning drifts, P-001 exact binding changes, migration fabricates facts, a new edge appears or any Q3I reopening gate obtains concrete evidence. OCP-004 readiness cannot waive such a failure.
-
-## 22. Accepted WJ act, rollback and non-transfer
-
-This revision participates in one atomic WJ lifecycle unit with OCP-004 `1.0.0 / Canonical`, Operation `Canonical` and the exact projections/accounting enumerated in OCP-004 §31. The grouping does not merge document identities or evidence burdens. OCP-004 and OCP-017 retain separate compatibility claims, evidence ledgers, migration analyses, rollback boundaries and stop conditions.
-
-The act requires no stored-record, endpoint, history, consumer, fixture or production-data migration. Existing exact references retain their target. The rules and executable evidence continue to describe the unchanged contract body; green replay is evidence only and does not select lifecycle status.
-
-Corrective rollback is a future reviewed act over all twelve files. It restores this document to `0.1.0 / Draft` and the full Operation projection set together without rewriting historical LT2 records, P-001 or the immutable snapshot history. Partial promotion or rollback is invalid, but the repository does not claim a fixture simulates partial rollback.
-
-Acceptance does not resolve AB-015/016/017/018/019/020/023/028, define the missing authorization source, open IO1/IO3, add Event relevance authority, start T6–T10 or grant production use. It becomes effective only after exact-head Fable approval, Codex adjudication, green CI, fresh explicit Pavlo/Architecture Board authorization for that unchanged head and squash merge.

@@ -10,7 +10,7 @@ Implemented validators:
 
 - Resource identity and classification;
 - Operation identity, Objective resolution, F1/V1 explicit-intent evidence, local spatial-binding exact profile/snapshot envelope, bounded IO2 values and Q3I composition checks;
-- draft OCP-017 Operation lifecycle predecessor-chain history, exact completeness/authorization evidence bindings, stage projection and terminal Assignment alignment;
+- Accepted OCP-017 Operation lifecycle predecessor-chain history, exact completeness/authorization evidence bindings, stage projection and terminal Assignment alignment;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
@@ -63,7 +63,7 @@ The checker uses exact module manifests:
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
 - `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
 - `coordination-workflow-rules.yaml` — draft OCP-015 proposal/response record and evidence-projection module.
-- `operation-lifecycle-rules.yaml` — OCP-004 `0.9.0` Q3I kernel and draft OCP-017 LT2 lifecycle module.
+- `operation-lifecycle-rules.yaml` — OCP-004 `0.9.0` Q3I evidence kernel and Accepted OCP-017 LT2 lifecycle module; the harness remains exact-bound to the reviewed `0.9.0` body incorporated into OCP-004 `1.0.0`.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 

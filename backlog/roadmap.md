@@ -7,10 +7,10 @@
 | Напрям | Орієнтовна готовність | Коментар |
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
-| Core domain ontology | 87% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Q3I Operation lifecycle Draft, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
+| Core domain ontology | 91% | Capability, Objective, Resource, Organization та Operation є Canonical; Assignment, Constraint і Event лишаються Accepted, OCP-017 є Route C Accepted non-Concept, а candidate-local blockers/gates не змінюються за implication |
+| Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈71%** | Q3I remediation, AD-016W audit, AD-016X WJ scope selection і bounded governance hygiene завершені без Concept promotion; joint lifecycle proposal та merge мають власні свіжі gates |
+| **Загальна foundation-готовність** | **≈72%** | T5 WJ joint lifecycle unit стабілізує Operation і приймає окремий Route C lifecycle contract без semantic migration; T6–T10, known reference debt і кожен відкритий Operation backlog item зберігають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -32,7 +32,7 @@
 ## Milestone 1 — Core Domain Foundation
 
 - [x] Resource `1.0.0 / Canonical` bounded identity contract with explicit exclusions and non-governed classification catalog
-- [x] Operation Accepted working description
+- [x] Operation `1.0.0 / Canonical` bounded identity/Q3I contract with Accepted Route C OCP-017 lifecycle owner
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
 - [x] Organization `1.1.0 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions and document-local post-`1.0.0` SemVer rules
@@ -98,6 +98,7 @@
 - [x] AD-016W post-Operation-remediation blocker/stability audit — OCP-004 and OCP-017 are classified independently; six-consumer D2/E1 topology, L2/Accepted-Pattern/Route C floors, eight metadata-derived P-001 invokers, all reopening gates, 30 scenarios, 32 rejection classes and 191/125 executable evidence replay without a current semantic B; WJ is recommendation-only before AD-016X
 - [x] AD-016X Operation lifecycle-scope Board comparison — all twenty targets are independently re-adjudicated and W0/W4C/W17A/WJ/WR receive outcome-fair treatment; WJ is selected only as preparation of one exact joint proposal whose two artifacts retain separate readiness proof and fresh merge gates
 - [x] Post-AD-016X governance hygiene PATCH — correct the two OCP-011 `0.3.0` anchor cells, the real foundation-map path and completed AD-002/018/019/020 review triggers; preserve AD-011 S0/R0 and change no semantic contract, lifecycle status, backlog status or readiness authority
+- [x] T5 WJ joint lifecycle act — OCP-004/Operation `1.0.0 / Canonical` and Route C OCP-017 `0.2.0 / Accepted` in one exact twelve-file unit with separate compatibility/readiness/migration/rollback evidence, immutable OCP-017 Draft snapshot and unchanged P-001/rules/checker/tests/fixtures
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -149,7 +150,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Constraint pattern library
 - [ ] Assignment conflict, exclusivity and capacity rules
 - [ ] Business Rules specification
-- [ ] Operation Lifecycle completion
+- [x] Operation Lifecycle foundation contract — OCP-017 `0.2.0 / Accepted`, with authorization source, broader stage/profile expansion and production implementation separately gated
 - [ ] Assignment / Operation lifecycle coordination
 - [x] Coordination proposal-response evidence workflow — `OCP-015`
 - [x] Cross-vertical visibility/agreement boundary — `AD-010` selects independent V0/A0 no-new-authority controls
@@ -172,7 +173,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. The post-AD-016X hygiene PATCH makes the accepted twelve-file path/evidence ledger executable and replaces four completed review triggers without State/Readiness or lifecycle authority. AD-016X still selects WJ only as preparation/review scope; next require a separate owner mandate and exact joint OCP-004/Operation + OCP-017 lifecycle proposal whose two artifacts each prove compatibility, readiness, migration and rollback, followed by four fresh exact-head merge gates.
+1. The separately mandated T5 WJ act applies the corrected twelve-file ledger: OCP-004/Operation moves to `1.0.0 / Canonical` and OCP-017 to `0.2.0 / Accepted` only after each side independently proves compatibility, readiness, migration, rollback and stop conditions. This act grants no T6–T10 authority; any next frontier needs its own fresh inventory, Board selection and exact-head gates.
 2. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
 3. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
 4. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.

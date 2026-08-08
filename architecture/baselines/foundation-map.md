@@ -13,7 +13,7 @@
 | Coordination | Proposed |
 | Event | Accepted |
 | Objective | Canonical |
-| Operation | Accepted |
+| Operation | Canonical |
 | Operational Space | Proposed |
 | Order | Proposed |
 | Organization | Canonical |

@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Capability, Objective, Resource та Organization мають статус `Canonical`; Operation, Assignment, Constraint та Event лишаються `Accepted`;
+- Capability, Objective, Resource, Organization та Operation мають статус `Canonical`; Assignment, Constraint та Event лишаються `Accepted`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -74,7 +74,7 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-013 `0.2.0 / Accepted` визначає exact consumer requirement, directional eligibility, fail-safe claim/Constraint bindings, rule-version replay та executable evidence для всіх AD-008 §12 counterexamples;
 - OCP-014 `0.2.0 / Accepted` активує exact governed owner `ocp-coordination-consumer@0.1.0` для одного contextual requirement, fail-safe wrong-owner binding і окрему actor-authorization boundary без workflow authority;
 - AD-009 і OCP-015 `0.2.0 / Accepted` визначають окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
-- OCP-004 `0.9.0 / Draft` визначає stable Operation kernel, plural Objective references, окремі F1/V1 exact-binding intent families, zero/one/many Operation-local spatial bindings, acyclic composition та bounded inline IO2; lifecycle authority винесено до OCP-017 `0.1.0 / Draft`;
+- OCP-004 `1.0.0 / Canonical` стабілізує Operation identity і Q3I kernel, plural Objective references, окремі F1/V1 exact-binding intent families, zero/one/many Operation-local spatial bindings, acyclic composition та bounded inline IO2; lifecycle authority винесено до Route C OCP-017 `0.2.0 / Accepted`;
 - spatial binding має identity лише в межах owning Operation, не є Operational Area Concept або P-001 record і не створює Resource equality, Assignment, overlap consequence, coordination, suitability, authorization чи Readiness;
 - reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation F1/V1/IO2/spatial evidence, OCP-017 LT2 history/completeness/authorization/alignment envelope, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
 - assessment module має власний exact `assessment-rules.yaml` manifest за чинним module-manifest precedent;
@@ -130,9 +130,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016W `0.24.0 / Accepted` виконує fresh post-remediation blocker/stability audit окремо для OCP-004 і OCP-017: шість consumers, acyclic D2/E1 topology, L2/Accepted-Pattern/Route C floors, вісім metadata-derived P-001 invokers, усі reopening gates, 30 scenarios, 32 rejection classes, `191/191` tests і `125/125` fixtures зійшлися; WJ лишається recommendation-only до AD-016X;
 - AD-016X `0.25.0 / Accepted` незалежно повторює всі twenty targets і outcome-fair порівнює W0/W4C/W17A/WJ/WR; WJ обрано лише як scope підготовки exact joint OCP-004/Operation + OCP-017 lifecycle proposal з окремою готовністю кожного артефакта, без status/OCP/Pattern/graph/backlog змін або переносу merge authority;
 - post-AD-016X governance hygiene act встановлює AD-016 `0.25.1` та AD-002/018/019/020 `0.2.1` як PATCH-only corrections: виправляє exact OCP-011 `0.3.0` evidence cells, реальний `architecture/baselines/foundation-map.md` WJ path і чотири вичерпані `Review-After` triggers без нового State/Readiness або semantic/lifecycle authority;
+- T5 WJ joint lifecycle act встановлює OCP-004/Operation `1.0.0 / Canonical` та Route C non-Concept OCP-017 `0.2.0 / Accepted` одним atomic twelve-file unit; OCP-017 Draft bytes збережені в immutable snapshot, обидві сторони мають окремі readiness/rollback stops, P-001/rules/checker/tests/fixtures і D2/E1 graph лишаються незмінними;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 125 non-sensitive fixtures і 191 unit test;
-- не-нормативна оцінка загальної foundation-готовності після четвертого T4 micro-wave — **≈71%**; чотири Concepts Canonical, чотири лишаються Accepted, bounded Operation remediation, audit і WJ scope selection завершені, а joint lifecycle proposal та його merge потребують власних свіжих Board gates.
+- не-нормативна оцінка загальної foundation-готовності після T5 — **≈72%**; п'ять Concepts Canonical, три лишаються Accepted, OCP-017 є Accepted non-Concept lifecycle contract, а T6–T10 потребують власних discovery/lifecycle рішень і свіжих Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
