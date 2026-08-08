@@ -4582,7 +4582,7 @@ The principal WJ risk remains real: grouping can hide an immature OCP-017 behind
 | 13 | **All thirty scenarios retain their result.** The exact rules and 125-fixture tree replay without a semantic difference. |
 | 14 | **All thirty-two rejection classes remain fail-safe.** No permissive path or new authority rule is present. |
 | 15 | **The rule/source chain is complete in both directions for this scope.** F1/V1/LT2 normative sections, rule IDs and material positive/negative evidence remain connected. |
-| 16 | **No new section-reference debt is introduced.** A fresh bidirectional baseline/head sweep leaves exactly the same 2 inherited dangling references, OCP-015 §7.1 and §7.2; every reference introduced by AD-016X resolves. Their repair is outside this act. |
+| 16 | **No new section-reference debt is introduced.** A fresh bidirectional baseline/head sweep leaves exactly the same two inherited coordination-workflow rule-source defects recorded in §247; every reference introduced by AD-016X resolves. Their repair is outside this act. |
 | 17 | **No semantic migration or rebinding is required.** Exact identities, stored records, historical references and six consumers keep their meaning. Lifecycle projections change only in a later act. |
 | 18 | **Joint treatment is supported but not inherited.** The independent §253 analysis distinguishes the unstable W4C sole-owner state from admissible W17A sequencing, then supports one source-chain change unit only while each artifact passes separate readiness and rollback review. No executable partial-rollback claim is made. |
 | 19 | **No forbidden expansion is required.** Every option can be compared without a new Concept, Pattern version, edge, registry, schema or backlog resolution. |
