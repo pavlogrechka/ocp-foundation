@@ -220,6 +220,14 @@ Architecture Board authorization for this act is separate from the T3 OCP-002 ac
 
 This correction starts from `main@34c4b5db52ce3627e727d8f69051352d14bd2c8d`, tree `33405dcfead41ba4a1ee1ce2aa11c3c5c55e1142`. P-001 is blob `f1e95efa055022a9342b16133bf7b3c3db90fa4f`, SHA-256 `cf6fb3501a1a5504aa873c372e97436813725c6e44a7fc682a2db404a7d97b82`, at `0.1.0 / Accepted`.
 
+The three accounting projections on that baseline are:
+
+| Projection | Git blob | SHA-256 |
+|---|---|---|
+| repository README | `45c68d61518c95e0ecf79b1b06ca2d539327b02b` | `f04590a23b4cc1a3e0d25a6c4dc61f992a5ee2c1c771e0d6840ddec7eb431493` |
+| architecture backlog | `6dbea4a1e54191226681e7edbdce746f47fa0e48` | `b3d39a10be1098e1e1a03978d35beeaad6b39847b1cce08d4317265a2a20ffbd` |
+| foundation roadmap | `02b98d1323ffe04fbdb303bac768916845bc53c0` | `c7fe580fd781c60aa06cc5224b7612521f85e82f409175301692b5a230479358` |
+
 On that exact tree, structured metadata yields six primary invokers:
 
 - OCP-007;
@@ -248,6 +256,8 @@ The Board chooses the binding-form reading for this correction. The reason is se
 - merge `645b22b27be8ff004bd98e4b918403335f300278` already established the reviewed precedent by adding §§11–16 and accepting the Pattern while retaining version `0.1.0`; and
 - changing only the Pattern version would trigger `PATTERN_VERSION_MISMATCH` across six primary invokers and three immutable snapshots, falsely representing an unchanged form as a new contract and forcing unrelated historical treatment.
 
+The nearest contrary precedent is OCP-007 §34.2, accepted in PR #123. It classified a backward-compatible rule for all future OCP-007 revisions as MINOR and warned that calling the new obligation PATCH would understate it. That precedent does not classify this act: OCP-007 is a post-Canonical `1.x` OCP whose document-local ladder itself became a new normative rule, whereas P-001 is a pre-`1.0` Pattern whose exact `0.1.0` binding surface was already limited by §12 to §§1–10. Section 17.3 adds no new invocation or future-revision obligation: item 1 restates OCP-001's existing `Uses-Patterns` authority, item 2 restates OCP-001's existing snapshot/primary-artifact distinction, item 3 reports existing checker behavior, item 4 restates §14 external-review responsibility, and item 5 restates §13's existing non-registry boundary. It consolidates the rules needed to avoid another stale evidence count; it does not expand the Pattern contract.
+
 Version `0.1.0` therefore remains exact. Git history, exact-head external review and Board authorization version this evidence-accounting act as repository history; they do not manufacture a new Pattern-form version.
 
 This is not permission for unreviewed same-version edits. Any future change to Pattern form, Required Elements, Optional Modules, invocation obligations, applicability or binding behavior requires a Pattern version change and the complete `track-current` atomic treatment. Any future evidence-only correction still requires exact-head external review, Codex adjudication, green CI and explicit Board authorization.
@@ -268,7 +278,7 @@ This rule prevents the same stale-counter defect when the seventh, eighth or lat
 
 ### 17.4 Executable and rollback boundary
 
-The admissible footprint for this act is exactly this P-001 file. It must preserve:
+The admissible footprint for this act is exactly four files: this P-001 file plus `README.md`, `backlog/architecture-backlog.md` and `backlog/roadmap.md`. The three additional files record current act/sequencing status only and cannot carry Pattern semantics. The act must preserve:
 
 - `Version: 0.1.0`, `Status: Accepted` and `Normative-Level: binding-when-invoked`;
 - §§1–10 and §12 obligations byte-identically;
@@ -295,6 +305,7 @@ When exact-head reviewed, explicitly authorized and squash-merged, this act:
 - keeps P-001 at `0.1.0 / Accepted` with its complete binding form unchanged;
 - leaves §16 as the unmodified historical T3 acceptance record;
 - makes structured `Uses-Patterns` metadata the sole current invoker-set source, consistently with §13's existing non-registry boundary; and
+- synchronizes repository accounting so the roadmap no longer presents this completed prerequisite as a future unresolved Pattern stop; and
 - removes the evidence-accounting blocker identified by AD-020A §37.4 without authorizing any new invocation.
 
 It does not edit or authorize OCP-004, create or authorize OCP-017, change P-001 form or version, update an invoker or snapshot, alter checker policy, add a Concept/edge, resolve backlog or authorize the bounded Operation remediation. That remediation remains a separate future act with four fresh exact-head gates.
