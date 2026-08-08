@@ -4438,7 +4438,7 @@ All three debt classes are the same governance failure: a human-readable `§` ci
 
 ## 248. Recommendation and mandatory AD-016X contract
 
-Current evidence supports **WJ — one joint lifecycle proposal for OCP-004/Operation and OCP-017 — as the leading hypothesis only**. The reason is semantic rollback, not schedule: OCP-004 now names OCP-017 as the sole lifecycle owner, OCP-017 depends downstream on OCP-004, and PR #129 proved that partial rollback of either side would restore conflicting ownership or executable interpretation. The principal risk is over-coupling two independently classified artifacts merely because they were remediated together.
+Current evidence supports **WJ — one joint lifecycle proposal for OCP-004/Operation and OCP-017 — as the leading hypothesis only**. The reason is a normative rollback stipulation, not schedule: OCP-004 §25.7 and OCP-017 §15 state that the two artifacts form one atomic ownership tree and that partial merge or rollback is invalid. No executable evidence models a partial rollback, so §246 target 18 must adjudicate that atomicity premise independently rather than inherit it from PR #129. The principal risk is over-coupling two independently classified artifacts merely because they were remediated together.
 
 The separate AD-016X Board act must therefore compare at least:
 
