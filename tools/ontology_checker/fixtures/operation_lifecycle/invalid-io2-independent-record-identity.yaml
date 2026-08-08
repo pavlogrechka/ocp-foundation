@@ -1,0 +1,30 @@
+case_id: operation-lifecycle-invalid-io2-independent-record-identity-001
+concept: OperationQ3IContractDataset
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_Q3I_RELATION_FORBIDDEN_INDEPENDENT_RECORD
+objectives: []
+completeness_profiles: []
+authorization_evidence_sources: []
+operations:
+  - operation_id: OP-Q3I-IO2-SOURCE
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Draft
+    inter_operation_relationships:
+      - relationship_id: REL-Q3I-IO2-HIDDEN-RECORD
+        source_operation_ref: OP-Q3I-IO2-SOURCE
+        relation_type: coordinates_with
+        target_operation_ref: OP-Q3I-IO2-TARGET
+        provenance_ref: ACT-Q3I-IO2-HIDDEN-RECORD
+  - operation_id: OP-Q3I-IO2-TARGET
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Draft
+operation_lifecycles:
+  - operation_ref: OP-Q3I-IO2-SOURCE
+    lifecycle_stage: Draft
+    transition_history: []
+  - operation_ref: OP-Q3I-IO2-TARGET
+    lifecycle_stage: Draft
+    transition_history: []
+assignments: []

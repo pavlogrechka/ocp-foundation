@@ -9,7 +9,8 @@ The checker is **not** a production validator, persistence schema, policy engine
 Implemented validators:
 
 - Resource identity and classification;
-- Operation identity, Objective resolution, explicit-intent evidence and local spatial-binding exact profile/snapshot envelope;
+- Operation identity, Objective resolution, F1/V1 explicit-intent evidence, local spatial-binding exact profile/snapshot envelope, bounded IO2 values and Q3I composition checks;
+- draft OCP-017 Operation lifecycle predecessor-chain history, exact completeness/authorization evidence bindings, stage projection and terminal Assignment alignment;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
@@ -62,6 +63,7 @@ The checker uses exact module manifests:
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
 - `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
 - `coordination-workflow-rules.yaml` — draft OCP-015 proposal/response record and evidence-projection module.
+- `operation-lifecycle-rules.yaml` — OCP-004 `0.9.0` Q3I kernel and draft OCP-017 LT2 lifecycle module.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
@@ -74,6 +76,8 @@ A `Uses-Patterns` invocation uses `P-NNN@x.y.z` checker syntax and must resolve 
 The repository policy is **track-current**, not historical pinning. A Pattern version change must update all invokers atomically and pass the applicable review lane.
 
 ObservationRecord and OutcomeAssessmentRecord invoke `P-001@0.1.0` with selected Module C supersession. CapabilityClaimRecord selects Modules A and C for time-bounded applicability plus history-preserving correction/withdrawal. Their domain semantics remain in OCP-010, OCP-011 and OCP-012 respectively.
+
+OCP-004 separately maps endpoint-free ExplicitIntentRecord (F1) and validation-evidence (V1) families without an Optional Module. OCP-017 maps lifecycle transitions (LT2) with Module B. P-001 remains unchanged: its time-anchored T3 ledger is not edited when these two primary invokers are added, and structured `Uses-Patterns` metadata remains the current invoker-set authority.
 
 ## Structured governance references
 
@@ -157,6 +161,26 @@ The checker validates local identity, exact version syntax, unique binding IDs/v
 `OperationSpatialTransitionEvidence` compares preserved previous/current snapshots. A substantive spatial change must mint a new context version, and changed content for the same local binding must mint a new binding version. The evidence does not introduce P-001 supersession lineage or select a current record by timestamp/order.
 
 Equal payload references in two bindings or Operations remain distinct local subjects. Unknown, absent, duplicate, ambiguous or mismatched profile/snapshot input fails closed. Binding fields for Resource, Assignment, Organization, coordination, conflict, visibility, overlap, suitability, admissibility, availability, authorization, selection and Readiness are rejected; the checker derives none of those conclusions.
+
+## Operation Q3I and lifecycle evidence
+
+The bounded `OperationQ3IContractDataset` harness exact-binds current synthetic Operation examples to `OCP-004@0.9.0`. Existing OCP-004 `0.8.3` fixtures continue to replay without that marker; the marker distinguishes executable contract context and is not a production wire-schema field.
+
+For OCP-004 the harness checks:
+
+- fixed, separate F1/V1 kinds and provenance while preserving the existing exact intent/rule/input evidence-set semantics;
+- unique Operation and record identities;
+- exact parent resolution and acyclicity;
+- IO2 source ownership, exact target resolution, the closed four-value kind set and duplicate-tuple rejection; and
+- absence of independent IO2 record ID, effectivity, history, supersession or current-head fields.
+
+For OCP-017, a lifecycle envelope names one exact Operation and carries an authoritative set of `operation-lifecycle-transition@1` records. `predecessor_transition_ref` creates the single chain. The current stage is the target of its unique leaf, not the last YAML item or greatest timestamp. Timestamp order is checked only along the already exact chain. Branches, cycles, disconnected records, competing roots/leaves and materialized-stage mismatch fail closed.
+
+Every transition exact-binds one domain completeness profile and passed input snapshot. Only the transition to `Authorized` carries an exact external authorization-evidence binding; the checker validates its structural agreement but neither authenticates the source owner nor grants permission. Terminal transitions exact-enumerate Assignment dispositions at the transition time using OCP-005 `assignment_effective_at`; the evidence cannot mutate Assignment.
+
+The positive synthetic fixture covers a complete `Draft → Planned → Authorized → Active → Completed` path and a still-effective Assignment that remains independently effective. Four separate invalid fixtures make missing F1 authoring provenance, missing V1 evidence provenance, branched LT2 history and hidden IO2 record identity fail through the same fixture gate in both contexts. Focused unit attacks cover the remaining ambiguous/missing/failing evidence, invalid time/projections, unresolved relations, composition cycles and forbidden authorization/Event/outcome/Readiness coupling.
+
+This module is not a lifecycle engine, authorization mechanism, persistence schema, Constraint evaluator, Event generator or outcome assessor. Legitimate ownership, domain sufficiency, external permission and production behavior remain human-reviewed responsibilities.
 
 ## Event and ObservationRecord envelope
 

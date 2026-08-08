@@ -1,0 +1,66 @@
+case_id: operation-lifecycle-invalid-lt2-branched-history-001
+concept: OperationQ3IContractDataset
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_LIFECYCLE_HISTORY_INVALID
+objectives: []
+completeness_profiles:
+  - profile_ref: synthetic.operation-minimum@1
+    profile_owner_ref: domain://synthetic-operation-profile
+authorization_evidence_sources: []
+operations:
+  - operation_id: OP-Q3I-LT2-BRANCH
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Draft
+operation_lifecycles:
+  - operation_ref: OP-Q3I-LT2-BRANCH
+    lifecycle_stage: Draft
+    transition_history:
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-LT2-BRANCH-T1
+        operation_ref: OP-Q3I-LT2-BRANCH
+        from_stage: Draft
+        to_stage: Planned
+        occurred_at: 2026-08-08T10:00:00Z
+        provenance_ref: ACT-Q3I-LT2-BRANCH-T1
+        completeness_binding: &complete
+          profile_ref: synthetic.operation-minimum@1
+          profile_owner_ref: domain://synthetic-operation-profile
+          input_snapshot_ref: SNAP-Q3I-LT2-BRANCH@1
+          input_state: effective
+          result: passed
+          provenance_ref: ACT-Q3I-LT2-BRANCH-COMPLETENESS
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-LT2-BRANCH-T2-A
+        operation_ref: OP-Q3I-LT2-BRANCH
+        predecessor_transition_ref: OP-Q3I-LT2-BRANCH-T1
+        from_stage: Planned
+        to_stage: Cancelled
+        occurred_at: 2026-08-08T10:15:00Z
+        provenance_ref: ACT-Q3I-LT2-BRANCH-T2-A
+        completeness_binding:
+          <<: *complete
+          input_snapshot_ref: SNAP-Q3I-LT2-BRANCH-A@1
+          provenance_ref: ACT-Q3I-LT2-BRANCH-A-COMPLETENESS
+        assignment_alignment:
+          evaluation_time: 2026-08-08T10:15:00Z
+          input_snapshot_ref: SNAP-Q3I-LT2-BRANCH-A-ASSIGNMENTS@1
+          dispositions: []
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-LT2-BRANCH-T2-B
+        operation_ref: OP-Q3I-LT2-BRANCH
+        predecessor_transition_ref: OP-Q3I-LT2-BRANCH-T1
+        from_stage: Planned
+        to_stage: Cancelled
+        occurred_at: 2026-08-08T10:20:00Z
+        provenance_ref: ACT-Q3I-LT2-BRANCH-T2-B
+        completeness_binding:
+          <<: *complete
+          input_snapshot_ref: SNAP-Q3I-LT2-BRANCH-B@1
+          provenance_ref: ACT-Q3I-LT2-BRANCH-B-COMPLETENESS
+        assignment_alignment:
+          evaluation_time: 2026-08-08T10:20:00Z
+          input_snapshot_ref: SNAP-Q3I-LT2-BRANCH-B-ASSIGNMENTS@1
+          dispositions: []
+assignments: []
