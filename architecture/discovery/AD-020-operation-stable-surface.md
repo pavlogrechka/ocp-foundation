@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-020
 Title: Operation Stable-Surface Discovery
-Version: 0.2.0
+Version: 0.2.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-004, AD-006, AD-011, AD-014, AD-016, OCP-001, OCP-004, OCP-005, OCP-006, OCP-008, OCP-010, OCP-011, OCP-014, OCP-016, P-001
 Applies-To: AB-062, Operation stable-surface remediation
-Review-After: Completion or failure of the selected OCP-004/OCP-017 remediation; then a fresh blocker/stability audit before any lifecycle proposal
+Review-After: Separately mandated WJ joint OCP-004/Operation and OCP-017 lifecycle proposal under AD-016X; preparation and merge require their own fresh gates
 ---
 
 # AD-020 — Operation Stable-Surface Discovery
@@ -1153,3 +1153,9 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-020A will:
 - change no OCP, Concept, Concept status, Pattern, dependency, registry row, taxonomy projection, foundation-map edge, checker rule, fixture, schema, data, reference or production authority.
 
 The selected remediation remains only a proposal until its own four gates close on one exact head. Completion or failure of that proposal must be followed by a fresh blocker/stability audit before any Operation lifecycle or T5 decision.
+
+## 45. Post-audit Review-After correction — v0.2.1
+
+The prior `Review-After` named completion/failure of the selected OCP-004/OCP-017 remediation followed by a blocker/stability audit. PR #129 completed the remediation, and AD-016W completed the separately gated audit. The old field is therefore a satisfied trigger, not a current next step.
+
+Version `0.2.1` points `Review-After` to the existing AD-016X decision: WJ is only the scope of a separately mandated joint lifecycle proposal. This correction does not mandate that proposal, edit OCP-004/OCP-017, invoke or revise P-001, promote Operation, complete T5, resolve any Operation backlog item or transfer merge authority. Preparation, review and merge remain distinct fresh gates.
