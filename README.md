@@ -129,7 +129,7 @@ backlog/                 відкриті питання та дорожня к�
 - bounded Q3I remediation встановлює OCP-004 `0.9.0 / Draft` як стабільний Operation kernel і додає Route C non-Concept OCP-017 `0.1.0 / Draft` як єдиного lifecycle owner; F1/V1/LT2 окремо map-лять незмінний `P-001@0.1.0`, IO2 лишається inline, Concept graph і сім Operation backlog statuses не змінюються;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 121 non-sensitive fixture і 191 unit test;
+- reference suite містить 125 non-sensitive fixtures і 191 unit test;
 - не-нормативна оцінка загальної foundation-готовності після четвертого T4 micro-wave — **≈71%**; чотири Concepts Canonical, чотири лишаються Accepted, а selected Operation remediation і кожен наступний lifecycle act потребують власних Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

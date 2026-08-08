@@ -284,7 +284,7 @@ Modules A and C are not selected. `occurred_at` orders transition history; it do
 
 ## 14. Executable evidence
 
-The reference checker adds a bounded `OperationQ3IContractDataset` harness and an `operation-lifecycle-rules.yaml` manifest. The synthetic fixture demonstrates:
+The reference checker adds a bounded `OperationQ3IContractDataset` harness and an `operation-lifecycle-rules.yaml` manifest. The positive synthetic fixture demonstrates:
 
 - two distinct Operation identities with one IO2 value;
 - F1 and V1 fixed kinds, independent IDs, exact bindings and provenance;
@@ -294,7 +294,9 @@ The reference checker adds a bounded `OperationQ3IContractDataset` harness and a
 - one still-effective Assignment explicitly left independent at terminal transition; and
 - unchanged replay of the prior OCP-004 `0.8.3` explicit-intent fixture.
 
-Unit attacks cover invalid branching, time order, stage override, missing/ambiguous/failing profiles, invalid/ambiguous authorization evidence, wrong Assignment disposition, hidden IO2 record identity, unresolved/duplicate relations, composition cycle, missing F1/V1 provenance, duplicate record IDs and forbidden outcome/Readiness coupling.
+Four material negative fixtures independently reject missing F1 authoring provenance, missing V1 evidence provenance, branched LT2 history and hidden IO2 record identity. They run through `check.py` in both PR and main contexts. The F1, V1 and LT2 cases meet the selected record-family fixture obligation in AD-020 §23; all four negative cases, together with the positive Q3I fixture, meet AD-020A §42 points 4 and 8.
+
+Focused unit attacks additionally cover invalid time order, stage override, missing/ambiguous/failing profiles, invalid/ambiguous authorization evidence, wrong Assignment disposition, unresolved/duplicate relations, composition cycle, duplicate record IDs and forbidden outcome/Readiness coupling.
 
 The manifest is an exact projection of emitted rule and derivation IDs. It cites this document and OCP-004 but creates no authority. Passing evidence is necessary for the executable subset, never proof of legitimate owners, complete domain policy, semantic sufficiency, Draft acceptance or production readiness.
 
@@ -311,7 +313,7 @@ OCP-004 `0.8.3` snapshots remain historical evidence under their exact prior con
 
 If one required fact is absent, the snapshot stays historical or migration stops. No newest version, timestamp, list order, source count, issuer count or label similarity may fill the gap.
 
-OCP-004 `0.9.0` and OCP-017 `0.1.0` are one atomic ownership change. Partial merge or rollback is invalid. Corrective rollback restores the prior OCP-004 document and checker interpretation, removes OCP-017 and its manifest/tests/fixture, and restores repository accounting together. It does not rewrite historical data, P-001, its existing invokers, immutable snapshots, Concept statuses or graph edges.
+OCP-004 `0.9.0` and OCP-017 `0.1.0` are one atomic ownership change. Partial merge or rollback is invalid. Corrective rollback restores the prior OCP-004 document and checker interpretation, removes OCP-017 and its manifest/tests/fixtures, and restores repository accounting together. It does not rewrite historical data, P-001, its existing invokers, immutable snapshots, Concept statuses or graph edges.
 
 ## 16. Version and lifecycle boundary
 

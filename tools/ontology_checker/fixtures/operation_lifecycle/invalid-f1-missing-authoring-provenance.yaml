@@ -1,0 +1,35 @@
+case_id: operation-lifecycle-invalid-f1-missing-authoring-provenance-001
+concept: OperationQ3IContractDataset
+expected:
+  valid: false
+  error_codes:
+    - OPERATION_Q3I_INTENT_CONFORMANCE_INVALID
+objectives: []
+completeness_profiles: []
+authorization_evidence_sources: []
+operations:
+  - operation_id: OP-Q3I-F1-MISSING-PROVENANCE
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Draft
+    explicit_intent_record:
+      record_kind_ref: operation-explicit-intent@1
+      intent_id: INT-Q3I-F1-MISSING-PROVENANCE
+      intent_version_ref: INT-Q3I-F1-MISSING-PROVENANCE@1
+      statement: Preserve the synthetic access route
+      validation_rule_ref: synthetic.intent-rule@1
+      input_snapshot_ref: SNAP-Q3I-F1-MISSING-PROVENANCE@1
+      validation_records:
+        - record_kind_ref: operation-intent-validation@1
+          validation_id: INT-VAL-Q3I-F1-MISSING-PROVENANCE
+          intent_version_ref: INT-Q3I-F1-MISSING-PROVENANCE@1
+          validation_rule_ref: synthetic.intent-rule@1
+          input_snapshot_ref: SNAP-Q3I-F1-MISSING-PROVENANCE@1
+          evaluated_at: 2026-08-08T09:30:00Z
+          evaluator_ref: checker://synthetic-intent
+          provenance_ref: ACT-INTENT-VALIDATION-Q3I-F1-MISSING-PROVENANCE
+          result: passed
+operation_lifecycles:
+  - operation_ref: OP-Q3I-F1-MISSING-PROVENANCE
+    lifecycle_stage: Draft
+    transition_history: []
+assignments: []

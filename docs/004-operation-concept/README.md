@@ -552,10 +552,12 @@ The exact pre-remediation baseline is `main@66d32cb5a996c3796a370e3c54fc56bf7669
 
 ### 25.2 Stable `0.x` Operation kernel
 
-Revision `0.9.0` preserves these fifteen reviewed guarantees:
+Revision `0.9.0` refines, rather than renumbers one-for-one, the fifteen reviewed guarantees in AD-020 §18. The mapping is explicit: §18 points 1–2 are combined in point 1 below, while their `repeated shape` clause remains normative in §5; §18 point 3 maps to point 2 and retains its explicit AD-004 reopening condition; points 4–9 map to points 3–8, with the fail-safe rule that missing, stale or conflicting evidence never becomes `passed` retained in §7.2, §16 point 7 and §17 point 6; point 10 is refined across points 9–10 and §12, which keeps parent/child composition distinct from independent coordination; and points 11–15 map to points 11–15. Point 10 below is an additional Q3I refinement for the newly bounded IO2 value, not a replacement for an inherited guarantee. This mapping uses the refinement permission in AD-020 §18 and weakens none of its terms.
+
+The resulting fifteen guarantees are:
 
 1. one exact `operation_id` identifies one purposeful context-bounded activity independently of name, template, classification, participants, spatial payload, lifecycle, Event and outcome;
-2. outside `Draft`, exactly one active intent branch exists: non-empty exact `objective_refs` or one valid explicit-intent record, never both;
+2. outside `Draft`, exactly one active intent branch exists: non-empty exact `objective_refs` or one valid explicit-intent record, never both; this remains binding until AD-004 is separately changed by a reviewed act;
 3. every Objective reference exact-resolves under OCP-008 and means affirmative pursuit only—never priority, sequence, hierarchy, aggregation or achievement;
 4. explicit intent and validation keep immutable exact bindings, conflict-safe evidence-set semantics and no timestamp/order/count winner;
 5. planned and actual temporal assertions remain distinct;
@@ -647,6 +649,8 @@ OCP-004 `0.9.0` and OCP-017 `0.1.0` form one atomic ownership tree. Partial merg
 - terminal Assignment alignment without Assignment mutation; and
 - explicit non-implications for Event generation, outcome, Readiness, State, availability and interchangeability.
 
+Material negative evidence is carried by separate F1, V1, LT2 and IO2 fixtures as well as focused unit attacks. The fixtures execute through `check.py` in both PR and main contexts. The F1, V1 and LT2 cases satisfy the selected record-family fixture obligation in AD-020 §23; all four negative cases, together with the positive Q3I fixture, satisfy the material positive/negative evidence obligation in AD-020A §42 points 4 and 8.
+
 The checker does not authenticate legitimate owners, decide domain completeness, grant permission, evaluate Constraint truth, infer Event relevance, assess Objective achievement, provide a production schema or approve this Draft. Human review remains authoritative for those questions.
 
 ### 25.9 SemVer and status
@@ -678,7 +682,18 @@ The pre-remediation nine binding-bearing files—six primary contracts and three
 | `LifecycleTransitionRecord` without ID/ref | `OperationLifecycleTransitionRecord` with `transition_id`, exact `operation_ref` and predecessor chain | new LT2 record family; Module B only |
 | materialized `lifecycle_stage` | optional checked projection from OCP-017 unique chain leaf | no label, time or storage-order authority |
 | OCP-004 §§14–17 | current boundaries/rules retained, with lifecycle ownership removed and IO2/F1/V1 made exact | no duplicate lifecycle owner |
-| OCP-004 §§18–21 | examples/questions remain readable under selected owners | all seven backlog statuses unchanged |
+| OCP-004 §§18–19 | examples and non-examples retained verbatim | no example is reclassified and no ownership claim is added |
+| OCP-004 §20 questions 3 and 8 | retained verbatim as current questions 3 and 6 | repeated-instance and separate-template-Concept questions remain open |
+| OCP-004 §20 questions 1, 2 and 5 | reformulated as current questions 1, 2 and 5 | authority moves from an `Order` presumption to a separately governed source/mechanism; `Suspended` becomes the broader evidence-gated stage/path question; multiple sources remain open only inside a separate ambiguity-safe authorization contract |
+| OCP-004 §20 question 4 | closed in place by §12 | exact parent resolution, acyclicity and no-inheritance form the bounded kernel; only extensions beyond that kernel remain deferred |
+| OCP-004 §20 question 6 | closed for the bounded route by OCP-017 §8 | exact structural and owner-bound completeness is required; additional legitimate domain profiles remain current question 7 |
+| OCP-004 §20 question 7 | closed only for the selected IO2 storage boundary by §11.2; current question 4 preserves the IO1/IO3 reopening gate | IO2 is a snapshot-local OCP-004-owned value; independently identified conflict/coordination records remain deferred and AB-018 remains Open |
+| OCP-004 §20 question 9 | closed for the LT2 minimum by OCP-017 §6 | every transition needs non-empty provenance; a canonical provenance taxonomy remains deferred |
+| OCP-004 §20 question 10 | closed for bounded terminal alignment by OCP-017 §10 | exact Assignment dispositions are required without mutation; automatic Assignment completion/revocation remains deferred |
+| OCP-004 §21 composition decision | narrowed from a wholly open canonical model to extensions beyond the §12 acyclicity/no-inheritance kernel | the bounded kernel is current; broader composition is not implied |
+| OCP-004 §21 conflict/coordination decision | narrowed from a wholly open canonical model to independently identified records beyond IO2 | bounded IO2 is current; no record identity, conflict ontology or coordination Concept is implied |
+| OCP-004 §21 Assignment decision | sharpened from rules for automatic completion/revocation to the explicit prohibition of any such automatic action without a later Board act | OCP-017 terminal alignment records evidence and never mutates Assignment |
+| AB-015, AB-016, AB-017, AB-019, AB-020, AB-023 and AB-028 | no status or resolution change | all seven backlog statuses remain unchanged; this document ledger does not substitute for backlog authority |
 | OCP-004 §§22–24 | retained verbatim as historical PATCH accounting | cannot override current `0.9.0` semantics |
 
 Five pre-existing direct consumers remain byte-identical in the proposed tree:
