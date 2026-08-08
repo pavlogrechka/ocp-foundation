@@ -21,7 +21,7 @@ Implemented validators:
 - CapabilityClaimRecord exact Resource/Capability/claimant/condition binding, temporal effectivity, Module C supersession, activated F1/A1 evidence replay and fail-safe attributable projection;
 - ResourceInterchangeabilityRequirement exact owner/context/version binding and deterministic candidate eligibility;
 - OCP-014 CoordinationResourceRequirement exact accepted-owner profile binding;
-- draft OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
+- accepted OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - artifact governance and complete-history process audit.

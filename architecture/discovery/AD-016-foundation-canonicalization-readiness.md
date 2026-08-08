@@ -4750,7 +4750,7 @@ The complete correction ledger is:
 | `COORDINATION_RECORD_DUPLICATE` | `§7` | `§§4.1–4.2` | line 194 rejects duplicate proposal or response record ids | the two P-001 mappings name the stable identity field for each independently identified record family |
 | `COORDINATION_REFERENCE_UNRESOLVED` | `§§6, 8` | `§§8–9` | line 212 rejects a response whose exact `proposal_ref` does not resolve | §8 defines exact proposal-record binding and §9 requires the exact proposal endpoint |
 | `COORDINATION_RESPONDER_OUT_OF_SCOPE` | `§§6, 8` | `§9` | line 214 rejects a responder not invited by the exact proposal | §9 invariant 6 explicitly defines this out-of-scope fail-safe result |
-| `COORDINATION_SUPERSESSION_INVALID` | `§7` | `§§5–9` | lines 156, 160, 167 and 206 reject cross-identity, branching, cyclic or payload-changing supersession | §§5–7 own proposal lineage/head constraints; §§8–9 own response lineage and same-endpoint constraints |
+| `COORDINATION_SUPERSESSION_INVALID` | `§7` | `§§5–6, 8–9` | lines 156, 160, 167 and 206 reject cross-identity, branching, cyclic or payload-changing supersession | §§5–6 own proposal lineage and withdrawal constraints; §§8–9 own response lineage and same-endpoint constraints |
 | `COORDINATION_FORBIDDEN_COUPLING` | `§§4, 10` | `§§3, 5, 9` | lines 110 and 133 reject forbidden authority fields on proposal or response records | §3 owns the record-level authority exclusions, §5 bars proposal/Assignment mutation and §9 bars response directives |
 | `COORDINATION_FIXTURE_INVALID` | `§11` | `§12` | lines 295, 303 and 306 reject malformed cases or derived/expected mismatch | §12, not the replay semantics in §11, owns executable evidence and its required cases |
 | `derive_coordination_evidence` | `§§8–9` | `§10` | lines 242–289 implement the four-outcome snapshot projection | §10 defines the derivation, its outcomes and its non-authorizing meaning |
@@ -4765,7 +4765,7 @@ This act does not claim a semantic audit of those 342 rows and does not convert 
 
 ### 261.4 Checker-guide correction, PATCH classification and exact boundary
 
-The checker guide's manifest entry, coordination-envelope heading and opening sentence are synchronized from Draft to Accepted. This corrects one current lifecycle fact in three reader-facing locations; it does not change OCP-015, its incorporated contract, rule behavior or checker authority.
+The checker guide's capability list, manifest entry, coordination-envelope heading and opening sentence are synchronized from Draft to Accepted. This corrects one current lifecycle fact in four reader-facing locations; it does not change OCP-015, its incorporated contract, rule behavior or checker authority.
 
 AD-016 moves `0.25.1 → 0.25.2` as PATCH. The nearest contrary precedent, OCP-007 §34.2, classified a backward-compatible **new normative rule for future revisions** as MINOR. This act adds no rule or obligation: every new label points to an already-incorporated normative owner, the manifest ids and code are unchanged, and the guide merely reflects OCP-015's existing `0.2.0 / Accepted` state. Calling it MINOR would invent new compatible semantics; leaving AD-016 unversioned would hide a governed correction ledger.
 
