@@ -10,7 +10,7 @@
 | Core domain ontology | 87% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
 | Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Q3I Operation lifecycle Draft, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈71%** | Q3I remediation додає bounded Draft surfaces і executable evidence без Concept promotion; fresh post-remediation blocker/stability audit та кожен lifecycle act мають окремі gates |
+| **Загальна foundation-готовність** | **≈71%** | Q3I remediation й AD-016W audit завершені без Concept promotion; AD-016X Board comparison та кожен lifecycle act мають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -95,6 +95,7 @@
 - [x] AD-020A Operation stable-surface Board selection — all thirty targets are re-attempted; target 22 defeats provisional Q3's unowned IO3/H3–H4 blend, and revised Q3I selects one OCP-004 kernel plus one downstream Route C lifecycle owner and inline IO2 only as remediation preparation
 - [x] P-001 evidence-accounting correction — §§11/13 are time-anchored to the exact T3 acceptance baseline, the recurring live invoker count is removed without a Pattern version/form change, §16 stays historical, and structured `Uses-Patterns` remains the sole current invoker-set source
 - [x] Bounded Q3I remediation — OCP-004 `0.9.0 / Draft` retains the stable Operation kernel, F1/V1 and inline IO2; new Route C OCP-017 `0.1.0 / Draft` owns G2/A1/T1 lifecycle and LT2 Module B in one atomic tree, with unchanged P-001 and no Concept/edge/backlog-status change
+- [x] AD-016W post-Operation-remediation blocker/stability audit — OCP-004 and OCP-017 are classified independently; six-consumer D2/E1 topology, L2/Accepted-Pattern/Route C floors, eight metadata-derived P-001 invokers, all reopening gates, 30 scenarios, 32 rejection classes and 191/125 executable evidence replay without a current semantic B; WJ is recommendation-only before AD-016X
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -169,7 +170,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. After this bounded Q3I remediation merges or fails, perform a fresh exact-baseline blocker/stability audit before any Operation lifecycle or T5 act; Draft implementation is not lifecycle promotion.
+1. AD-016W completes the fresh exact-baseline blocker/stability audit after bounded Q3I remediation; Draft implementation is not lifecycle promotion. Next require a separate AD-016X Board comparison of W0/W4C/W17A/WJ/WR before any Operation lifecycle proposal or T5 act.
 2. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
 3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; this remediation resolves none of them.
 4. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
