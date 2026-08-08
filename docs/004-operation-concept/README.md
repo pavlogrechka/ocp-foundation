@@ -1,15 +1,16 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 0.8.3
+Version: 0.9.0
 Status: Draft
 Owner: Architecture Board
-Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014
+Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014, P-001
+Uses-Patterns: P-001@0.1.0
 Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business Rules, Domain Model
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
 Concept-Status: Accepted
-Last-Review: 2026-08-06
+Last-Review: 2026-08-08
 ---
 
 # Operation Concept
@@ -73,6 +74,8 @@ Operation не визначає сама по собі:
 
 `OutcomeAssessmentRecord` за OCP-011 може оцінювати exact Objective, але не є Concept, дочірнім об’єктом Operation або полем її успіху. Фундаментальний `Result` відхилено AD-006C.
 
+OCP-004 exact-invoke-ить `P-001@0.1.0` окремо для двох endpoint-free record families: `OperationExplicitIntentRecord` і `OperationIntentValidationEvidenceRecord`. Pattern визначає лише форму; OCP-004 лишається єдиним власником їхньої Operation-specific семантики. Lifecycle transitions належать downstream OCP-017 і не є третьою record family цього документа.
+
 Правила, що залежать від Concept у статусі `Proposed`, є робочими й підлягають уточненню у відповідних специфікаціях. Цей документ не передає нормативну відповідальність незареєстрованим поняттям; описові слова `state`, `readiness`, `area` або `environment` не створюють shared authority.
 
 ## 5. Identity
@@ -101,6 +104,8 @@ Operation
 │   └── Assignment [Accepted]
 ├── Constraints
 │   └── Constraint [Accepted]
+├── Lifecycle Reference
+│   └── OCP-017 transition history [Route C non-Concept contract]
 └── Outcome
     ├── Event [Accepted]
     └── OutcomeAssessmentRecord [Accepted record contract; not a Concept]
@@ -108,7 +113,7 @@ Operation
 
 Назви `Intent`, `Temporal Context`, `Spatial Context`, `Participation`, `Constraints` і `Outcome` у цій структурі є секціями моделі Operation, а не автоматично окремими фундаментальними Concept.
 
-Не всі елементи мають бути повністю визначені під час створення Operation. Мінімальна повнота залежить від lifecycle stage і буде формалізована окремими правилами.
+Не всі елементи мають бути повністю визначені під час створення Operation. Мінімальна повнота й допустимість переходів належать OCP-017; OCP-004 визначає стабільний Operation kernel, який ці правила перевіряють.
 
 ## 7. Intent and Objective
 
@@ -146,23 +151,27 @@ Domain або Coordination rules можуть додавати явні стру
 
 ```text
 ExplicitIntentRecord
+- record_kind_ref: operation-explicit-intent@1
 - intent_id
 - intent_version_ref
 - statement
+- authoring_provenance_ref
 - validation_rule_ref
 - input_snapshot_ref
 - validation_status: not_evaluated | passed | failed  # optional derived projection
 - validation_records:
   - validation_id
+  - record_kind_ref: operation-intent-validation@1
   - intent_version_ref
   - validation_rule_ref
   - input_snapshot_ref
   - evaluated_at
   - evaluator_ref
+  - provenance_ref
   - result: not_evaluated | passed | failed
 ```
 
-`intent_version_ref` та `validation_rule_ref` є непрозорими exact-version references. Кожне посилання повинно однозначно розрізняти identity та immutable version; нормативна модель не приписує delimiter або wire encoding. `input_snapshot_ref` непрозоро ідентифікує точний evaluated input snapshot.
+`record_kind_ref` має відповідне фіксоване значення для кожної з двох record families. `intent_version_ref` та `validation_rule_ref` є непрозорими exact-version references. Кожне посилання повинно однозначно розрізняти identity та immutable version; нормативна модель не приписує delimiter або wire encoding. `input_snapshot_ref` непрозоро ідентифікує точний evaluated input snapshot. `authoring_provenance_ref` атрибутує створення exact intent version, а `provenance_ref` — exact validation record; жодне з них саме по собі не є authorization.
 
 Нормалізований `statement` повинен містити щонайменше один символ літери або цифри. Значення, що складаються лише з пробілів, розділових знаків або службових заповнювачів, не є валідним statement.
 
@@ -174,7 +183,7 @@ ExplicitIntentRecord
 
 Усі records із цим exact binding утворюють effective evidence set. Evidence є однозначним, якщо всі exact-binding records мають один і той самий `result`. Повторні immutable records з однаковим result є допустимими; порядок списку та `evaluated_at` не обирають авторитетний record. Якщо exact-binding records містять різні results, evidence є conflicting.
 
-Кожен record повинен містити валідні `validation_id`, `evaluated_at`, `evaluator_ref` і `result`. Non-Draft explicit-intent branch є валідною лише тоді, коли effective evidence set дає один однозначний `result = passed`.
+Кожен record повинен містити фіксований kind, валідні `validation_id`, `evaluated_at`, `evaluator_ref`, `provenance_ref` і `result`. Non-Draft explicit-intent branch є валідною лише тоді, коли effective evidence set дає один однозначний `result = passed`.
 
 `intent_version_ref` позначає immutable version усього binding-relevant змісту explicit intent, включно зі `statement`. Будь-яка substantive зміна statement або іншої binding-властивості, версії validation rule чи evaluated input snapshot повинна створювати нову version/reference value та інвалідовує попередній `passed`. Повторне використання старого version token після зміни змісту порушує цю semantic rule незалежно від того, чи здатний reference checker виявити таке зловживання.
 
@@ -287,7 +296,6 @@ Operation не володіє Resource і не змінює його орган�
 Operation pursues Objective
 Operation has Assignment
 Operation is_subject_to Constraint
-Operation generates Event
 ```
 
 Кожен Concept у цих зв’язках має статус, наведений у розділі 4.
@@ -305,23 +313,25 @@ Operation conflicts_with Operation
 
 Ці зв’язки не виникають автоматично через просторове або часове перекриття.
 
-Кожен збережений inter-operation relationship представляється локальним structured assertion record:
+Кожен inter-operation relationship у current Operation snapshot є локальним structured value, а не незалежно identified record:
 
 ```text
-InterOperationRelationshipAssertion
-- source_operation_id
+InterOperationRelationshipValue
+- source_operation_ref
 - relation_type: coordinates_with | depends_on | supports | conflicts_with
-- target_operation_id
+- target_operation_ref
 - provenance_ref
 ```
 
-`provenance_ref` є непорожнім посиланням на правило, рішення, Event, результат обчислення або інший доказ, що пояснює встановлення зв’язку. Таке посилання не створює нового фундаментального Concept.
+`source_operation_ref` дорівнює identity owning Operation. `target_operation_ref` exact-resolve-иться рівно в одну іншу Operation у declared resolution scope. `relation_type` належить закритому OCP-004-owned набору; довільний kind неприпустимий. `provenance_ref` є непорожнім посиланням на правило, рішення, Event, результат обчислення або інший доказ, що пояснює наявність value у snapshot, але не надає permission або precedence.
 
-Точна семантика цих зв’язків і типів provenance буде визначена Coordination Model.
+Нормалізований tuple `(source_operation_ref, relation_type, target_operation_ref)` у межах snapshot є унікальним. Value не має власного ID, зовнішньої адресації, effectivity, transition history, supersession або current-head projection. Якщо конкретний consumer потребує хоча б однієї з цих властивостей, реалізація зупиняється й reopen-ить IO1/IO3 за AD-020A §41; додавати прихований record заборонено.
+
+Ці чотири values позначають coordination relevance, operational dependency, claimed support direction або claimed incompatibility. Вони не створюють workflow agreement, Constraint applicability, Assignment, Event, outcome, authorization чи Concept graph edge. Саме відсутність independent record semantics пояснює, чому IO2 не invoke-ить P-001.
 
 ### 11.3 Authorization references
 
-Operation може потребувати авторизації перед виконанням. `Order` є зареєстрованим кандидатом на одне з можливих джерел такої авторизації.
+Operation може потребувати авторизації перед виконанням. OCP-017 визначає лише exact evidence-acceptance envelope для переходу до `Authorized`; джерело й механізм авторизації лишаються окремо governed. `Order` є зареєстрованим кандидатом на одне з можливих джерел, але OCP-004 та OCP-017 не обирають його автоматично.
 
 Цей документ не вводить окремі Concept `Authority`, `Approval`, `Policy` або `Governance` і не визначає їхні зв’язки з Operation.
 
@@ -340,65 +350,15 @@ Parent/child використовується лише тоді, коли доч
 
 Assignment не успадковується між parent і child Operation автоматично.
 
-Остаточні правила композиції залишаються відкритим питанням.
+`parent_operation_ref`, якщо наявний, exact-resolve-иться рівно в одну іншу Operation у declared dataset. Self-parent і будь-який цикл parent/child заборонені. Parent/child не успадковує Assignment, Constraint, local spatial context, outcome, authorization або lifecycle transition.
 
-## 13. Working Lifecycle
+## 13. Lifecycle boundary
 
-Робочі lifecycle stages Operation:
+OCP-004 не є власником lifecycle state machine. Єдиний current owner stage vocabulary, allowed paths, structural completeness, transition history, authorization-evidence acceptance, terminal Assignment alignment і lifecycle projections — [OCP-017 — Operation Lifecycle Contract](../017-operation-lifecycle/README.md).
 
-```text
-Draft → Planned → Authorized → Active → Completed
-                         ↘ Cancelled
-                         ↘ Aborted
-```
+Operation зберігає ту саму `operation_id` на всіх lifecycle stages. Матеріалізований `lifecycle_stage`, якщо він присутній у snapshot, є лише checked projection з authoritative OCP-017 transition history. Stage label, provenance, completeness-profile result або authorization evidence не є другим джерелом істини й не може зробити перехід permissive.
 
-Ці значення є lifecycle stages, визначеними локально для Operation. Вони не є значеннями фундаментального Concept `State`; AD-011 прийняв S0 no-shared-State control і superseded історичний ADR-DRAFT-007.
-
-Кожна зафіксована зміна lifecycle представляється локальним structured transition record:
-
-```text
-LifecycleTransitionRecord
-- from_stage
-- to_stage
-- occurred_at
-- provenance_ref
-```
-
-`provenance_ref` є непорожнім непрозорим посиланням на Event, Order, правило, рішення, системну дію або інший доказ переходу. Вимога до `provenance_ref` перевіряє простежуваність запису, але не визначає фундаментальний Concept джерела дозволу чи переходу.
-
-### 13.1 Draft
-
-Operation зареєстрована, але її намір, контекст або склад можуть бути неповними.
-
-### 13.2 Planned
-
-Operation має мінімальний плановий контекст, достатній для перевірки та підготовки. Точні критерії переходу залишаються відкритими.
-
-### 13.3 Authorized
-
-Для Operation зафіксовано необхідне підтвердження дозволу на виконання відповідно до застосовних правил.
-
-Цей stage не визначає, який саме Concept або артефакт є джерелом дозволу. Простежуваність конкретного переходу забезпечується `provenance_ref` у LifecycleTransitionRecord.
-
-### 13.4 Active
-
-Зафіксовано початок фактичного виконання Operation.
-
-`Active` Operation не робить усі пов’язані Assignment ефективними автоматично: для кожного Assignment окремо застосовується temporal effectivity rule OCP-005.
-
-### 13.5 Completed
-
-Зафіксовано завершення фактичного виконання Operation.
-
-### 13.6 Cancelled
-
-Operation завершена без переходу до фактичного виконання.
-
-### 13.7 Aborted
-
-Operation припинена після початку фактичного виконання або через неможливість продовження.
-
-Можливий stage `Suspended` не вводиться цим документом. Остаточна state machine буде винесена до окремого Operation Lifecycle contract; вона не створюватиме shared State abstraction без reopening evidence за AD-011.
+Operation transition не є Event автоматично. Operation lifecycle не є shared State, не визначає Readiness і не змінює Assignment lifecycle. OCP-004 не залежить від OCP-017: downstream lifecycle contract залежить від стабільної Operation identity, а не навпаки.
 
 ## 14. Outcome Evidence, Completion and Events
 
@@ -413,21 +373,22 @@ OutcomeAssessmentRecord assesses exact Objective
 
 Event за OCP-010 має незалежну occurrence identity. Він може бути exact evidence для окремого assessment або lifecycle provenance, але не є lifecycle stage, Operation-owned result, truth чи автоматичним доказом досягнення.
 
-Operation-to-Event relevance лишається explicit downstream reference/relation question. Цей документ не додає `Operation → Event` Concept dependency або graph edge.
+Downstream contract може exact-reference одну Operation як контекст relevance для zero, one або many Event, а один Event може бути relevant до zero, one або many Operation. Така explicit relevance не змінює жодної identity, не означає generation або causation і не додає `Operation → Event` чи `Event → Operation` Concept dependency або graph edge.
 
 ## 15. Business Rules
 
-1. Operation може бути неповною лише на stage `Draft`; критерії повноти для інших stages повинні бути визначені до канонізації lifecycle.
-2. Допустимість переходів lifecycle визначається окремою transition model.
+1. Operation може бути неповною лише на stage `Draft`; універсальний structural minimum і exact domain-profile hook для інших stages визначає OCP-017.
+2. Допустимість lifecycle transition визначається лише authoritative history за OCP-017.
 3. Resource може мати кілька Assignment до різних Operation; допустимість одночасної участі визначається застосовними Constraint.
-4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або окремо оціненого outcome.
+4. Parent/child допускається лише для Operation зі спільним наміром і залежністю виконання або окремо оціненого outcome; exact dataset graph є ациклічним.
 5. Предметні розширення Operation повинні проходити Core Boundary Test.
-6. Перехід до `Authorized` потребує простежуваного підтвердження, але тип підтвердження не визначається цим документом.
+6. Перехід до `Authorized` потребує exact evidence-acceptance envelope OCP-017, але ні OCP-004, ні evidence binding не визначають зовнішнє джерело permission.
 7. Explicit intent може використовуватися поза `Draft` лише коли один або більше authoritative validation records мають exact binding до поточних intent version, validation rule version та input snapshot, усі дають один однозначний result і цей result дорівнює `passed`.
 8. Missing, stale, conflicting або structurally invalid explicit-intent evidence fail-safe не задовольняє intent invariant; за відсутності однозначного effective result нормативна projection дорівнює `not_evaluated`, а mutable `validation_status` не може зробити Operation більш permissive.
 9. Кожен член plural `objective_refs` є активним affirmative-твердженням pursuit і повинен окремо резолвитися; один валідний Objective не компенсує інший невалідний reference.
 10. Поза `Draft` `objective_refs` і `ExplicitIntentRecord` є взаємовиключними активними представленнями; автоматичної precedence або promotion між ними немає.
 11. Operation lifecycle та Assignment lifecycle змінюються незалежно; правила їх узгодження повинні бути явними.
+12. IO2 relation value exact-resolve-ить обидві Operation, належить owning snapshot, використовує один із чотирьох закритих kinds і не має independent record semantics.
 
 ## 16. Semantic Rules
 
@@ -462,16 +423,16 @@ Operation-to-Event relevance лишається explicit downstream reference/re
 1. Кожен Operation instance має рівно одну непорожню стабільну identity.
 2. Кожна Operation, lifecycle stage якої відрізняється від `Draft`, має рівно одну активну intent-гілку: або непорожній список унікальних `objective_refs`, або один `ExplicitIntentRecord`; одночасна наявність обох гілок є невалідною.
 3. Кожен член non-Draft `objective_refs` є активним affirmative-твердженням pursuit і однозначно резолвиться у валідний Objective; список не означає вибір будь-якого одного елемента як достатнього.
-4. Non-Draft `ExplicitIntentRecord` містить непорожні `intent_id`, exact-version `intent_version_ref`, змістовний `statement`, exact-version `validation_rule_ref` і непорожній `input_snapshot_ref`; exact-version references однозначно розрізняють identity та immutable version без нормативно визначеного wire encoding.
-5. Кожен validation record містить непорожній `validation_id`, exact `intent_version_ref`, exact `validation_rule_ref`, exact `input_snapshot_ref`, валідний `evaluated_at`, непорожній `evaluator_ref` і один result із `not_evaluated | passed | failed`.
+4. Non-Draft `OperationExplicitIntentRecord` містить fixed kind `operation-explicit-intent@1`, непорожні `intent_id` та `authoring_provenance_ref`, exact-version `intent_version_ref`, змістовний `statement`, exact-version `validation_rule_ref` і непорожній `input_snapshot_ref`; exact-version references однозначно розрізняють identity та immutable version без нормативно визначеного wire encoding.
+5. Кожен `OperationIntentValidationEvidenceRecord` містить fixed kind `operation-intent-validation@1`, непорожні `validation_id` та `provenance_ref`, exact `intent_version_ref`, exact `validation_rule_ref`, exact `input_snapshot_ref`, валідний `evaluated_at`, непорожній `evaluator_ref` і один result із `not_evaluated | passed | failed`.
 6. Non-Draft explicit-intent branch є валідною лише коли один або більше structurally valid records точно збігаються з поточними intent version, validation rule version та input snapshot, усі exact-binding records мають один однозначний result і цей result дорівнює `passed`.
 7. Missing, stale, conflicting або structurally invalid explicit-intent evidence не задовольняє invariant 6 і fail-safe робить non-Draft Operation невалідною.
 8. Матеріалізований `validation_status` є derived non-authoritative projection: вона дорівнює однозначному effective result, а за його відсутності — `not_evaluated`; будь-яке інше матеріалізоване значення є mismatch.
 9. Кожне часове твердження Operation класифіковане як `planned` або `actual`, але не одночасно як обидва.
 10. Жодна Operation не може бути parent або child самої себе.
 11. Граф parent/child між Operation є ациклічним.
-12. Кожен LifecycleTransitionRecord містить валідні `from_stage`, `to_stage`, `occurred_at` і непорожній `provenance_ref`.
-13. Кожен InterOperationRelationshipAssertion містить валідні `source_operation_id`, `relation_type`, `target_operation_id` і непорожній `provenance_ref`.
+12. Lifecycle authority, transition identity, paths and projection invariants належать лише OCP-017; materialized `lifecycle_stage` Operation не може override-ити його history.
+13. Кожен IO2 value містить owning `source_operation_ref`, exact `target_operation_ref`, один закритий `relation_type` і непорожній `provenance_ref`; normalized tuple є унікальним, а independent ID/effectivity/history/supersession заборонені.
 
 ### 17.2 Local spatial-binding invariants
 
@@ -525,16 +486,13 @@ Operation-to-Event relevance лишається explicit downstream reference/re
 
 AD-014B закрив питання, чи кожна Operation повинна мати окремий `Operational Area`: ні. OCP-004 використовує zero/one/many local bindings за §9; reusable area identity можна reopen лише за gates AD-014 §32.
 
-1. Чи є Order обов’язковим механізмом авторизації Operation або лише одним із можливих джерел?
-2. Чи потрібен `Suspended` у канонічному lifecycle?
+1. Який окремо governed artifact є legitimate authorization source/mechanism для конкретного domain?
+2. Які додаткові lifecycle stages або paths мають достатні reopening evidence поза bounded OCP-017 `0.1.0`?
 3. Як представляти повторювані Operation без змішування шаблону й instance?
-4. Які точні правила визначають parent/child?
-5. Чи може одна Operation мати декілька незалежних джерел авторизації?
-6. Який мінімальний набір даних потрібен для переходу `Draft → Planned`?
-7. Коли conflict між Operation є збереженим фактом, а коли — похідним результатом?
-8. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
-9. Які типи provenance повинні бути канонічними для lifecycle transitions та inter-operation relationships?
-10. Які правила мають узгоджувати terminal stage Operation з незавершеними Assignment?
+4. Коли bounded IO2 value потребує reopen до independently identified IO1/IO3 record?
+5. Чи може окремий authorization contract прийняти декілька незалежних sources без двозначності?
+6. Чи потрібен окремий зареєстрований Concept для шаблону Operation?
+7. Які additional domain completeness profiles є legitimate owners для конкретних consumers?
 
 ## 21. Deferred Decisions
 
@@ -557,10 +515,10 @@ AD-011 прийняв S0 і R0: Operation lifecycle не є shared State, а fou
 До окремих рішень Architecture Board відкладаються:
 
 - моделі авторизації, наказів і погоджень;
-- канонічна модель композиції Operation;
-- канонічна модель conflict і coordination;
+- розширення bounded parent/child composition поза acyclicity/no-inheritance kernel;
+- independently identified conflict або coordination records поза IO2;
 - taxonomy provenance для transition та relationship records;
-- правила автоматичного завершення або відкликання Assignment після завершення Operation.
+- будь-яке автоматичне завершення або відкликання Assignment після завершення Operation.
 
 ## 22. PATCH accounting — v0.8.1
 
@@ -583,3 +541,185 @@ Revision `0.8.3` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Operation — `Accepted`. Resource reference, Assignment ownership, Operation fields/lifecycle, domain semantics, dependencies, Concept status, graph edges, P-001 invocation і всі інваріанти лишаються незмінними; existing Operation data не потребують rebinding.
 
 Corrective rollback повертає цей status rendering разом з OCP-003, OCP-000, OCP-002, двома іншими consumer views, generated map і repository accounting через новий reviewed act. Ізольована зміна row або переписування Operation/Resource history заборонені.
+
+## 25. Q3I stable-surface remediation — v0.9.0
+
+### 25.1 Authority and exact baseline
+
+AD-020A `0.2.0 / Accepted` selected Q3I only as the direction for this bounded remediation. A separate owner mandate authorized preparation of one atomic tree containing OCP-004 `0.9.0 / Draft` and new Route C OCP-017 `0.1.0 / Draft`; neither the selection nor that mandate authorizes merge or Operation lifecycle promotion.
+
+The exact pre-remediation baseline is `main@66d32cb5a996c3796a370e3c54fc56bf7669358c`, tree `86424fec4b81f7b2ebfcc855666222d5f5113491`. On it OCP-004 is `0.8.3 / Draft`, Operation is `Accepted`, OCP-017 does not exist, P-001 is `0.1.0 / Accepted`, all nine structured `Uses-Patterns` bindings exact-resolve, 172 unit tests and 120 fixtures pass, and the Concept graph contains no Operation/Event edge.
+
+### 25.2 Stable `0.x` Operation kernel
+
+Revision `0.9.0` preserves these fifteen reviewed guarantees:
+
+1. one exact `operation_id` identifies one purposeful context-bounded activity independently of name, template, classification, participants, spatial payload, lifecycle, Event and outcome;
+2. outside `Draft`, exactly one active intent branch exists: non-empty exact `objective_refs` or one valid explicit-intent record, never both;
+3. every Objective reference exact-resolves under OCP-008 and means affirmative pursuit only—never priority, sequence, hierarchy, aggregation or achievement;
+4. explicit intent and validation keep immutable exact bindings, conflict-safe evidence-set semantics and no timestamp/order/count winner;
+5. planned and actual temporal assertions remain distinct;
+6. AD-014 local spatial context remains zero/one/many, snapshot-local, fail-safe and non-reusable;
+7. Assignment alone owns authoritative Resource participation; composition and IO2 create none;
+8. Constraint alone owns applicability and blocking/advisory semantics;
+9. OCP-004 owns exact acyclic parent/child composition without inheritance of participation, applicability, spatial context, outcome or authorization;
+10. OCP-004 owns only the bounded IO2 values in §11.2; workflow agreement, permission and caller authorization remain external;
+11. Event occurrence and identity remain independent; an Operation transition is not an Event automatically;
+12. `Completed Operation != achieved Objective`; OCP-011 remains assessment owner;
+13. provenance, profile success, evidence or a stage label never grants authorization by itself;
+14. Operation implies no Readiness, State, availability, admissibility, interchangeability, Organization holder or production authority; and
+15. historical references replay under their original reviewed contract or stop for explicit lossless migration—never newest-version redirect.
+
+### 25.3 Ownership ledger
+
+| Responsibility | Single normative owner |
+|---|---|
+| Operation identity, active intent, planned/actual context, local spatial binding, composition, IO2 | OCP-004 |
+| Objective identity and statement | OCP-008 |
+| Resource participation | OCP-005 Assignment |
+| Constraint applicability/evaluation | OCP-006 |
+| lifecycle stages, paths, completeness, transition history, authorization-evidence acceptance, terminal alignment | OCP-017 |
+| Event occurrence identity | OCP-010 |
+| Objective outcome assessment | OCP-011 |
+| P-001 record form | P-001; domain meaning stays with each invoker |
+
+OCP-004 adds only P-001 to its direct dependency set. It deliberately does not depend on OCP-017 or any downstream evidence owner. OCP-017 consumes stable Operation identity in the acyclic downstream direction.
+
+### 25.4 P-001 conformance — `OperationExplicitIntentRecord` (F1)
+
+OCP-004 separately invokes `P-001@0.1.0` for the endpoint-free `OperationExplicitIntentRecord` family:
+
+| P-001 Required Element | OCP-004 mapping |
+|---|---|
+| stable record identity | `intent_id`, unique across the invoking dataset |
+| owning semantic specification | OCP-004 §7.2 and this section |
+| endpoint contract | endpoint-free assertion owned by exact `operation_id`; no second endpoint |
+| governed kind | fixed `record_kind_ref = operation-explicit-intent@1` |
+| provenance | immutable `authoring_provenance_ref` for the exact intent version |
+| validation | meaningful statement, exact intent/rule/input refs, exclusive active branch and executable negative evidence |
+| authority | exact stored intent record plus its exact-binding validation evidence; `validation_status` is only a projection |
+
+No Optional Module is selected. `intent_version_ref` versions binding-relevant content but is not P-001 Module C supersession; `evaluated_at` belongs only to the separate V1 evidence family and is not temporal effectivity of F1.
+
+### 25.5 P-001 conformance — `OperationIntentValidationEvidenceRecord` (V1)
+
+OCP-004 separately invokes the same exact Pattern for endpoint-free validation evidence:
+
+| P-001 Required Element | OCP-004 mapping |
+|---|---|
+| stable record identity | `validation_id`, unique across the invoking dataset |
+| owning semantic specification | OCP-004 §7.2 and this section |
+| endpoint contract | endpoint-free evidence exact-bound to `intent_version_ref`, `validation_rule_ref` and `input_snapshot_ref` |
+| governed kind | fixed `record_kind_ref = operation-intent-validation@1` |
+| provenance | `evaluator_ref`, `evaluated_at` and immutable `provenance_ref` |
+| validation | all bindings required; all exact-binding records must agree; missing/stale/conflicting/invalid evidence fails closed |
+| authority | the complete exact-binding evidence set; no newest record, list order, evaluator count or issuer count selects a winner |
+
+No Optional Module is selected. `evaluated_at` records when validation occurred; it does not create effectivity and therefore does not select Module A. No supersession field or winner projection selects Module C. Validation establishes conformance to the named rule/input only and never authorization.
+
+One metadata `Uses-Patterns: P-001@0.1.0` imports the common form, but the two tables remain independent conformance statements and do not merge their identities or semantics.
+
+### 25.6 IO2 non-invocation and reopening rule
+
+`InterOperationRelationshipValue` does not invoke P-001 because it has no identity outside the exact owning Operation snapshot, no independently addressable subject, no temporal effectivity, lifecycle, supersession or current-head projection. Its authority is the exact owning Operation snapshot; duplicate tuples reject rather than compete.
+
+Adding `relationship_id`, external reference target, effectivity, independent history, supersession, delegated kind ownership or a current-head selector changes that nature. Such a proposal must stop and reopen IO1/IO3 through a separate Board act instead of evolving IO2 silently.
+
+### 25.7 Migration, replay and rollback
+
+Historical OCP-004 `0.8.3` fixtures and exact references remain valid evidence under that contract. `0.9.0` adds a fixture-only `operation_contract_ref` so executable Q3I datasets can distinguish current conformance from historical replay; it is not a production wire-schema requirement.
+
+Migration may carry forward an existing `operation_id`, exact Objective references and already evidenced intent content. It must not invent missing intent/validation IDs, authoring provenance, validation provenance, lifecycle transition IDs, authorization evidence, relation meaning or passing results. A source snapshot that cannot meet `0.9.0` remains historical or stops migration.
+
+OCP-004 `0.9.0` and OCP-017 `0.1.0` form one atomic ownership tree. Partial merge or rollback of either document alone is invalid. Corrective rollback restores OCP-004 `0.8.3`, removes OCP-017 and its executable module/fixtures together, and restores accounting without rewriting P-001, its invokers, immutable snapshots, historical Operation data or the Concept graph.
+
+### 25.8 Executable evidence boundary
+
+`OperationQ3IContractDataset` is a non-production synthetic harness. It checks the finite structural subset that is mechanically expressible:
+
+- exact current `OCP-004@0.9.0` fixture binding while legacy Operation fixtures still replay;
+- unique Operation/F1/V1/LT2 identities;
+- fixed F1/V1 kinds and provenance;
+- exact parent resolution and acyclicity;
+- the closed IO2 tuple, exact target and absence of independent-record fields;
+- OCP-017 predecessor-chain history, allowed paths and materialized projection equality;
+- exact completeness-profile and authorization-evidence bindings with ambiguity rejection;
+- terminal Assignment alignment without Assignment mutation; and
+- explicit non-implications for Event generation, outcome, Readiness, State, availability and interchangeability.
+
+The checker does not authenticate legitimate owners, decide domain completeness, grant permission, evaluate Constraint truth, infer Event relevance, assess Objective achievement, provide a production schema or approve this Draft. Human review remains authoritative for those questions.
+
+### 25.9 SemVer and status
+
+`0.9.0` is a MINOR Draft revision because it adds two exact P-001 conformance surfaces, completes parent/child and IO2 boundaries, and relocates lifecycle authority to a new explicit downstream contract while preserving `operation_id`, Objective references, spatial semantics, consumers and the Concept edge set. PATCH would understate new compatible obligations; `1.0.0 / Canonical` would overstate readiness before a fresh lifecycle audit and separate Board act.
+
+Operation remains `Accepted`; OCP-004 remains `Draft`. AB-015, AB-016, AB-017, AB-019, AB-020, AB-023 and AB-028 retain their prior statuses. This remediation creates no Concept, graph edge, authorization source, Organization claim/holder, Pattern version, production schema or lifecycle promotion.
+
+### 25.10 P-001 evidence-accounting treatment
+
+P-001 §17.3 is binding on this exact baseline: adding invokers of unchanged `P-001@0.1.0` does not edit the T3 evidence ledger. Therefore this remediation does not modify P-001 §11, §13, §16, `Last-Review` or any other byte. The current invoker set is derived only from structured `Uses-Patterns` metadata and exact checker resolution.
+
+The pre-remediation nine binding-bearing files—six primary contracts and three immutable reviewed snapshots—remain byte-identical. This act adds OCP-004 and OCP-017 as seventh and eighth primary invokers without rewriting historical evidence. If Pattern form/obligations or exact track-current binding cannot remain unchanged, remediation stops for a separately gated Pattern-version act.
+
+### 25.11 Exact relocation and consumer ledger
+
+| `0.8.3` location / field | `0.9.0` / OCP-017 treatment | Identity or authority effect |
+|---|---|---|
+| OCP-004 §§1–5 | retained in OCP-004; §4 adds only Pattern/lifecycle ownership explanation | no `operation_id`, Concept or consumer change |
+| OCP-004 §6 | readable kernel retained; lifecycle branch now points to OCP-017 | no new stored child object or edge |
+| OCP-004 §§7–10 | intent/temporal/spatial/participation semantics retained; F1/V1 gain fixed kinds and provenance | intent/validation IDs remain their own identities; Assignment owner unchanged |
+| `ExplicitIntentRecord.intent_id` | `OperationExplicitIntentRecord.intent_id` plus fixed kind and `authoring_provenance_ref` | same intent identity; no automatic Objective promotion |
+| validation entry `validation_id` | `OperationIntentValidationEvidenceRecord.validation_id` plus fixed kind and `provenance_ref` | same evidence-set authority; no newest winner |
+| OCP-004 §11.1 `Operation generates Event` | removed; positive zero/one/many downstream relevance is in §14 and OCP-017 §12 | no Event identity change and no graph edge |
+| OCP-004 §11.2 record-like placeholder | exact snapshot-local IO2 value in §11.2 | `source_operation_id`/`target_operation_id` become exact `*_ref` fields; no relationship ID is migrated or invented |
+| OCP-004 §11.3 authorization prose | boundary retained; evidence acceptance moves to OCP-017 §9 | no authorization source/mechanism selected |
+| OCP-004 §12 | completed in place with exact parent resolution, acyclicity and no inheritance | parent/child stays OCP-004-owned and distinct from IO2 |
+| OCP-004 §13 stages and incomplete local transition | sole current owner becomes OCP-017 §§4–10 | old stage values remain historical; new LT2 identity/provenance/evidence cannot be invented |
+| `LifecycleTransitionRecord` without ID/ref | `OperationLifecycleTransitionRecord` with `transition_id`, exact `operation_ref` and predecessor chain | new LT2 record family; Module B only |
+| materialized `lifecycle_stage` | optional checked projection from OCP-017 unique chain leaf | no label, time or storage-order authority |
+| OCP-004 §§14–17 | current boundaries/rules retained, with lifecycle ownership removed and IO2/F1/V1 made exact | no duplicate lifecycle owner |
+| OCP-004 §§18–21 | examples/questions remain readable under selected owners | all seven backlog statuses unchanged |
+| OCP-004 §§22–24 | retained verbatim as historical PATCH accounting | cannot override current `0.9.0` semantics |
+
+Five pre-existing direct consumers remain byte-identical in the proposed tree:
+
+| Consumer | Baseline/current Git blob | SHA-256 |
+|---|---|---|
+| OCP-005 Assignment | `e5e0a62eda4ac84be081186c005e0167a3ebe288` | `8172173addc797416a151db198dcbea360711b82fb0a93b3732723f7f71154c6` |
+| OCP-006 Constraint | `020c76f2518491beb2b7696e707224809ff26770` | `a604f6b07373741c9bfb25ad2e064b9b77b4c8fd52c9c3075b4865f9f65dfb27` |
+| OCP-010 Event | `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
+| OCP-011 assessment | `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-014 coordination profile | `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+
+OCP-017 is the one explicit new downstream consumer. Its `operation_ref: OP-Q3I-ALPHA` resolves the same `operation_id` that OCP-004 owns; no rebinding wrapper or successor ID is introduced. By contrast, a legacy stage-only snapshot has no defensible `transition_id` or predecessor chain and therefore remains under `0.8.3` rather than receiving fabricated LT2 history.
+
+### 25.12 Complete scenario and rejection coverage
+
+Every AD-020A §39 scenario has an explicit current address:
+
+| Scenario set | Current contract/evidence | Result retained |
+|---|---|---|
+| 1–4 | OCP-004 §§5, 7 and 17.1 | identities stay distinct; Draft may be incomplete; non-Draft intent is exact and exclusive |
+| 5–7 | OCP-004 §§7.2, 25.4–25.5; legacy and Q3I intent tests | stale/conflicting/reused-version evidence rejects without time/order winner |
+| 8–9 | OCP-017 §§8, 11; profile failure/ambiguity tests | failure, zero/multiple owner or incomparable binding blocks transition |
+| 10–11 | OCP-017 §§3, 9; authorization mismatch/ambiguity tests | ownerless evidence rejects; accepted evidence never grants permission |
+| 12–14 | OCP-017 §10; terminal-alignment tests | Assignment effectivity stays OCP-005-owned; missing/wrong disposition rejects; no mutation |
+| 15–18 | OCP-004 §§11.2, 12; composition/IO2 tests | no inheritance, self/cycle reject, IO2 creates no composition, overlap creates no relation |
+| 19–23 | OCP-004 §14 and OCP-017 §§3, 12 | Event may have zero/many relevance; transition need not be Event; completion/assessment/Constraint remain separate |
+| 24–26 | OCP-004 §11.2 and OCP-017 §§5–7; IO2/LT2 tests | closed kinds, exact target, unique IDs and unbranched history fail closed |
+| 27–28 | §§25.7, 25.11 and unchanged five-consumer hashes | historical replay and exact Operation endpoint are preserved |
+| 29–30 | OCP-004 §§9, 16–17, 25.2 and OCP-017 §3 | spatial value never becomes IO2 identity; no Capability/Readiness/interchangeability inference |
+
+All thirty-two AD-020A §40 rejection classes also remain active:
+
+| Rejection classes | Remediation control |
+|---|---|
+| 1–4 | §25.1 and OCP-017 §17 keep discovery/order/file count/review evidence non-authoritative and preserve four fresh merge gates |
+| 5–8 | OCP-004 §§13–14 and OCP-017 §§3, 12 forbid prose-created edge, relevance erasure, free reverse dependency and transition/Event collapse |
+| 9–16 | OCP-004 §§14–17 and OCP-017 §§8–10 separate completion, Assignment, composition, provenance, Order, domain profile and checker success from achievement/authorization/completeness authority |
+| 17–22 | §§25.4–25.6 and OCP-017 §§7, 13 derive form/module use from identity/history semantics, never names, storage, counts, times or version labels |
+| 23–26 | OCP-004 §§7.2, 9, 11.2 and OCP-017 §7 prohibit timestamp/order/count/list-position and local spatial identity from electing another record or family |
+| 27–30 | OCP-004 §§3–4, 10–11, 16 and OCP-017 §3 preserve no permission/interchangeability/participation/Organization/backlog implication |
+| 31–32 | §§25.1, 25.9 and OCP-017 §17 state that green CI neither selects Q3I nor transfers authorization to merge or later lifecycle work |
+
+Machine evidence covers the finite material subset listed in §25.8; the remaining ownership, legitimate-authority, topology, readability and migration claims stay human-review obligations. Grouped coverage is not evidence that one successful scenario compensates for another failed one.

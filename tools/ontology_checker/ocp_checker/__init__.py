@@ -111,6 +111,13 @@ from .coordination_workflow import (
     validate_coordination_workflow_dataset,
     validate_coordination_workflow_fixture,
 )
+from .operation_lifecycle import (
+    OPERATION_LIFECYCLE_DERIVATION_RULES,
+    OPERATION_LIFECYCLE_ERROR_CODES,
+    derive_operation_lifecycle_stage,
+    validate_operation_q3i_dataset,
+    validate_operation_q3i_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -182,6 +189,8 @@ def validate_reference_fixture(fixture):
         return validate_coordination_requirement(fixture.get("entity") or {})
     if concept == "CoordinationWorkflowDataset":
         return validate_coordination_workflow_fixture(fixture)
+    if concept == "OperationQ3IContractDataset":
+        return validate_operation_q3i_fixture(fixture)
     return validate_fixture(fixture)
 
 

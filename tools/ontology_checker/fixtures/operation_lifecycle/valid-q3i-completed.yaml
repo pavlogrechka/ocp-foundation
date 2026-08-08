@@ -1,0 +1,137 @@
+case_id: operation-lifecycle-valid-q3i-completed-001
+concept: OperationQ3IContractDataset
+expected:
+  valid: true
+  error_codes: []
+objectives: []
+completeness_profiles:
+  - profile_ref: synthetic.operation-minimum@1
+    profile_owner_ref: domain://synthetic-operation-profile
+authorization_evidence_sources:
+  - source_contract_ref: synthetic.authorization-evidence@1
+    source_owner_ref: domain://synthetic-authorization-owner
+operations:
+  - operation_id: OP-Q3I-ALPHA
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Completed
+    explicit_intent_record:
+      record_kind_ref: operation-explicit-intent@1
+      intent_id: INT-Q3I-ALPHA
+      intent_version_ref: INT-Q3I-ALPHA@1
+      statement: Maintain the synthetic transit corridor
+      authoring_provenance_ref: ACT-INTENT-Q3I-ALPHA
+      validation_rule_ref: synthetic.intent-rule@1
+      input_snapshot_ref: SNAP-INTENT-Q3I-ALPHA@1
+      validation_status: passed
+      validation_records:
+        - record_kind_ref: operation-intent-validation@1
+          validation_id: INT-VAL-Q3I-ALPHA
+          intent_version_ref: INT-Q3I-ALPHA@1
+          validation_rule_ref: synthetic.intent-rule@1
+          input_snapshot_ref: SNAP-INTENT-Q3I-ALPHA@1
+          evaluated_at: 2026-08-08T09:30:00Z
+          evaluator_ref: checker://synthetic-intent
+          provenance_ref: ACT-INTENT-VALIDATION-Q3I-ALPHA
+          result: passed
+    planned_start: 2026-08-08T10:00:00Z
+    actual_start: 2026-08-08T10:30:00Z
+    actual_end: 2026-08-08T12:00:00Z
+    inter_operation_relationships:
+      - source_operation_ref: OP-Q3I-ALPHA
+        relation_type: supports
+        target_operation_ref: OP-Q3I-BRAVO
+        provenance_ref: ACT-Q3I-REL-ALPHA-BRAVO
+  - operation_id: OP-Q3I-BRAVO
+    operation_contract_ref: OCP-004@0.9.0
+    lifecycle_stage: Draft
+operation_lifecycles:
+  - operation_ref: OP-Q3I-ALPHA
+    lifecycle_stage: Completed
+    transition_history:
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-ALPHA-T1
+        operation_ref: OP-Q3I-ALPHA
+        from_stage: Draft
+        to_stage: Planned
+        occurred_at: 2026-08-08T09:45:00Z
+        provenance_ref: ACT-Q3I-ALPHA-T1
+        completeness_binding: &completeness_t1
+          profile_ref: synthetic.operation-minimum@1
+          profile_owner_ref: domain://synthetic-operation-profile
+          input_snapshot_ref: SNAP-Q3I-ALPHA-PLANNED@1
+          input_state: effective
+          result: passed
+          provenance_ref: ACT-Q3I-COMPLETENESS-T1
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-ALPHA-T2
+        operation_ref: OP-Q3I-ALPHA
+        predecessor_transition_ref: OP-Q3I-ALPHA-T1
+        from_stage: Planned
+        to_stage: Authorized
+        occurred_at: 2026-08-08T10:15:00Z
+        provenance_ref: ACT-Q3I-ALPHA-T2
+        completeness_binding:
+          <<: *completeness_t1
+          input_snapshot_ref: SNAP-Q3I-ALPHA-AUTHORIZED@1
+          provenance_ref: ACT-Q3I-COMPLETENESS-T2
+        authorization_evidence_binding:
+          source_contract_ref: synthetic.authorization-evidence@1
+          source_owner_ref: domain://synthetic-authorization-owner
+          evidence_ref: AUTH-EVIDENCE-Q3I-ALPHA@1
+          subject_operation_ref: OP-Q3I-ALPHA
+          input_snapshot_ref: SNAP-Q3I-ALPHA-AUTHORIZED@1
+          input_state: effective
+          result: accepted
+          provenance_ref: ACT-Q3I-AUTH-BINDING-T2
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-ALPHA-T3
+        operation_ref: OP-Q3I-ALPHA
+        predecessor_transition_ref: OP-Q3I-ALPHA-T2
+        from_stage: Authorized
+        to_stage: Active
+        occurred_at: 2026-08-08T10:30:00Z
+        provenance_ref: ACT-Q3I-ALPHA-T3
+        completeness_binding:
+          <<: *completeness_t1
+          input_snapshot_ref: SNAP-Q3I-ALPHA-ACTIVE@1
+          provenance_ref: ACT-Q3I-COMPLETENESS-T3
+      - record_kind_ref: operation-lifecycle-transition@1
+        transition_id: OP-Q3I-ALPHA-T4
+        operation_ref: OP-Q3I-ALPHA
+        predecessor_transition_ref: OP-Q3I-ALPHA-T3
+        from_stage: Active
+        to_stage: Completed
+        occurred_at: 2026-08-08T12:00:00Z
+        provenance_ref: ACT-Q3I-ALPHA-T4
+        completeness_binding:
+          <<: *completeness_t1
+          input_snapshot_ref: SNAP-Q3I-ALPHA-COMPLETED@1
+          provenance_ref: ACT-Q3I-COMPLETENESS-T4
+        assignment_alignment:
+          evaluation_time: 2026-08-08T12:00:00Z
+          input_snapshot_ref: SNAP-Q3I-ALPHA-ASSIGNMENTS@1
+          dispositions:
+            - assignment_ref: ASG-Q3I-ALPHA
+              disposition: remains_effective_independently
+              evidence_ref: ASSIGNMENT-EVIDENCE-Q3I-ALPHA@1
+  - operation_ref: OP-Q3I-BRAVO
+    lifecycle_stage: Draft
+    transition_history: []
+assignments:
+  - assignment_id: ASG-Q3I-ALPHA
+    resource_ref: R-Q3I-ALPHA
+    operation_ref: OP-Q3I-ALPHA
+    role_specification:
+      role_code: executor
+    applicability_start: 2026-08-08T10:20:00Z
+    created_at: 2026-08-08T09:00:00Z
+    lifecycle_stage: Established
+    established_at: 2026-08-08T10:20:00Z
+    provenance_ref: ACT-Q3I-ASG-ESTABLISHED
+    transition_history:
+      - transition_id: ASG-Q3I-ALPHA-T1
+        assignment_ref: ASG-Q3I-ALPHA
+        from_stage: Draft
+        to_stage: Established
+        occurred_at: 2026-08-08T10:20:00Z
+        provenance_ref: ACT-Q3I-ASG-ESTABLISHED

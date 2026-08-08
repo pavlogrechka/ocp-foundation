@@ -8,9 +8,9 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 87% | Capability, Objective, Resource та Organization є Canonical; чотири інші Concepts і governed OCP-012–OCP-015 contracts лишаються Accepted, а їхні candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 19% | Є participation, admissibility, lifecycle projection, explicit-intent validation, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; AD-010 зберігає visibility та agreement як no-new-authority controls, а authorization, reservation і conflict models не завершені |
-| Machine-readable schemas and enforcement | 72% | Local spatial profile/snapshot resolution і immutable transition evidence додані до checker; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
-| **Загальна foundation-готовність** | **≈71%** | Четвертий T4 micro-wave встановлює OCP-007/Organization `1.0.0 / Canonical`, а окремий `1.1.0` correction додає лише локальні SemVer-правила; наступний remaining-T4 reassessment і будь-який downstream act мають окремі gates |
+| Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Q3I Operation lifecycle Draft, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
+| Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
+| **Загальна foundation-готовність** | **≈71%** | Q3I remediation додає bounded Draft surfaces і executable evidence без Concept promotion; fresh post-remediation blocker/stability audit та кожен lifecycle act мають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
 
@@ -94,6 +94,7 @@
 - [x] AD-020 Operation stable-surface discovery — H0–H4 layouts, ten semantic/authority axes and separate form verdicts for ExplicitIntentRecord, validation evidence, lifecycle transitions and inter-operation assertions are compared; Q3 is recommendation-only and H0 remains fail-safe before AD-020A
 - [x] AD-020A Operation stable-surface Board selection — all thirty targets are re-attempted; target 22 defeats provisional Q3's unowned IO3/H3–H4 blend, and revised Q3I selects one OCP-004 kernel plus one downstream Route C lifecycle owner and inline IO2 only as remediation preparation
 - [x] P-001 evidence-accounting correction — §§11/13 are time-anchored to the exact T3 acceptance baseline, the recurring live invoker count is removed without a Pattern version/form change, §16 stays historical, and structured `Uses-Patterns` remains the sole current invoker-set source
+- [x] Bounded Q3I remediation — OCP-004 `0.9.0 / Draft` retains the stable Operation kernel, F1/V1 and inline IO2; new Route C OCP-017 `0.1.0 / Draft` owns G2/A1/T1 lifecycle and LT2 Module B in one atomic tree, with unchanged P-001 and no Concept/edge/backlog-status change
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -168,9 +169,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. After a separate owner mandate, prepare one separately reviewed atomic Q3I remediation proposal: OCP-004 `0.9.0 / Draft` retains the Operation kernel, composition and IO2 values; new Route C OCP-017 `0.1.0 / Draft` owns lifecycle and LT2, with exact F1/V1/LT2 P-001 mappings and no new Concept or edge.
-2. Treat the P-001 live-ledger prerequisite as resolved by the time-anchored evidence rule; adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved; any selected-owner, history-migration, dependency or IO2-boundary failure still returns to Q0/Board.
-3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until their exact owners and treatments are implemented and separately accepted; AD-020A resolves none of their statuses.
-4. After remediation completes or fails, perform a fresh blocker/stability audit before any Operation lifecycle or T5 act; selection is not implementation or lifecycle promotion.
+1. After this bounded Q3I remediation merges or fails, perform a fresh exact-baseline blocker/stability audit before any Operation lifecycle or T5 act; Draft implementation is not lifecycle promotion.
+2. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
+3. Preserve AB-015/AB-016/AB-017/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; this remediation resolves none of them.
+4. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
 5. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
 6. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
