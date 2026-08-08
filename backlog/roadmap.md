@@ -99,6 +99,7 @@
 - [x] AD-016X Operation lifecycle-scope Board comparison — all twenty targets are independently re-adjudicated and W0/W4C/W17A/WJ/WR receive outcome-fair treatment; WJ is selected only as preparation of one exact joint proposal whose two artifacts retain separate readiness proof and fresh merge gates
 - [x] Post-AD-016X governance hygiene PATCH — correct the two OCP-011 `0.3.0` anchor cells, the real foundation-map path and completed AD-002/018/019/020 review triggers; preserve AD-011 S0/R0 and change no semantic contract, lifecycle status, backlog status or readiness authority
 - [x] T5 WJ joint lifecycle act — OCP-004/Operation `1.0.0 / Canonical` and Route C OCP-017 `0.2.0 / Accepted` in one exact twelve-file unit with separate compatibility/readiness/migration/rollback evidence, immutable OCP-017 Draft snapshot and unchanged P-001/rules/checker/tests/fixtures
+- [x] Coordination workflow source-metadata PATCH — rederive all nine manifest owners from the incorporated OCP-015 snapshot, remove the two structurally dangling labels, synchronize the Accepted checker-guide view and defer repository-wide semantic-source enforcement without executable or normative change
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -173,9 +174,11 @@ The checker is a reference validation layer, not production implementation. OCP 
 
 ## Planned Sequence
 
-1. The separately mandated T5 WJ act applies the corrected twelve-file ledger: OCP-004/Operation moves to `1.0.0 / Canonical` and OCP-017 to `0.2.0 / Accepted` only after each side independently proves compatibility, readiness, migration, rollback and stop conditions. This act grants no T6–T10 authority; any next frontier needs its own fresh inventory, Board selection and exact-head gates.
-2. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
-3. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
-4. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
-5. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
-6. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+1. The completed T5 WJ act establishes OCP-004/Operation `1.0.0 / Canonical` and OCP-017 `0.2.0 / Accepted` without transferring authority to T6–T10; any next frontier needs its own fresh inventory, Board selection and exact-head gates.
+2. The separately mandated coordination source-metadata PATCH rederives all nine OCP-015 manifest owners and corrects the Accepted checker-guide view without changing executable or normative behavior. Its merge grants no authority to the separate bare-integer citation step.
+3. Bare-integer section-reference hygiene for OCP-001/OCP-002 remains a separately mandated later decision. Do not rewrite historical acts or infer authorization from completion of the coordination metadata repair.
+4. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
+5. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
+6. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
+7. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
+8. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
