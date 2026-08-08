@@ -1,20 +1,20 @@
 rules:
   - id: COORDINATION_PROPOSAL_INVALID
-    source: OCP-015 §§5, 7.1
+    source: OCP-015 §§5–6
   - id: COORDINATION_RESPONSE_INVALID
-    source: OCP-015 §§6, 7.2
+    source: OCP-015 §§8–9
   - id: COORDINATION_RECORD_DUPLICATE
-    source: OCP-015 §7
+    source: OCP-015 §§4.1–4.2
   - id: COORDINATION_REFERENCE_UNRESOLVED
-    source: OCP-015 §§6, 8
+    source: OCP-015 §§8–9
   - id: COORDINATION_RESPONDER_OUT_OF_SCOPE
-    source: OCP-015 §§6, 8
+    source: OCP-015 §9
   - id: COORDINATION_SUPERSESSION_INVALID
-    source: OCP-015 §7
+    source: OCP-015 §§5–9
   - id: COORDINATION_FORBIDDEN_COUPLING
-    source: OCP-015 §§4, 10
+    source: OCP-015 §§3, 5, 9
   - id: COORDINATION_FIXTURE_INVALID
-    source: OCP-015 §11
+    source: OCP-015 §12
   - id: derive_coordination_evidence
     kind: derivation
-    source: OCP-015 §§8–9
+    source: OCP-015 §10

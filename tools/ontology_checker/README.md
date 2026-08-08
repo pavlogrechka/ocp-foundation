@@ -62,7 +62,7 @@ The checker uses exact module manifests:
 - `assessment-rules.yaml` — OCP-011 OutcomeAssessmentRecord module;
 - `capability-claim-rules.yaml` — OCP-012 CapabilityClaimRecord module.
 - `interchangeability-rules.yaml` — accepted OCP-013 Resource interchangeability module plus the OCP-014 exact-owner profile invariant.
-- `coordination-workflow-rules.yaml` — draft OCP-015 proposal/response record and evidence-projection module.
+- `coordination-workflow-rules.yaml` — accepted OCP-015 proposal/response record and evidence-projection module.
 - `operation-lifecycle-rules.yaml` — OCP-004 `0.9.0` Q3I evidence kernel and Accepted OCP-017 LT2 lifecycle module; the harness remains exact-bound to the reviewed `0.9.0` body incorporated into OCP-004 `1.0.0`.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
@@ -274,9 +274,9 @@ The output vocabulary is `positive`, `negative`, `indeterminate` and `review_req
 
 The mandatory-counterexamples fixture covers every AD-008 §12 case and exact rule-version replay. It deliberately preserves Resource and Assignment identities and contains no Resource-to-Resource equality edge.
 
-## Draft Coordination workflow envelope
+## Accepted Coordination workflow envelope
 
-Draft OCP-015 keeps one proposal revision separate from every invited vertical's response. The checker validates immutable record identity, exact proposal binding, responder scope, temporal effectivity and one-to-one acyclic supersession for both record families.
+Accepted OCP-015 keeps one proposal revision separate from every invited vertical's response. The checker validates immutable record identity, exact proposal binding, responder scope, temporal effectivity and one-to-one acyclic supersession for both record families.
 
 `derive_coordination_evidence` returns `positive`, `negative`, `withdrawal` or `indeterminate` for one exact snapshot under `coordination-evidence@1`. Missing responses, conflicting heads, stale proposal revisions, malformed lineage or forbidden authorization/selection/Assignment coupling fail safe. Record order, timestamps and response count do not choose authority.
 

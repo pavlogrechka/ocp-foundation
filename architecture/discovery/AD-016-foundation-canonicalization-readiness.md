@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.25.1
+Version: 0.25.2
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separately authorized WJ joint OCP-004/Operation and OCP-017 lifecycle proposal; AD-016X selection authorizes preparation and review only, never merge, OCP change or T5 completion
+Review-After: Separately authorized bare-integer section-reference hygiene decision; this source-metadata PATCH authorizes no checker change, OCP edit or later act
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -4717,3 +4717,60 @@ Rollback is one reviewed eight-file PATCH restoring the prior five document vers
 Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. The preparation mandate authorizes none of those later gates by implication.
 
 When those gates close and this act is squash-merged, it sets AD-016 to `0.25.1 / Accepted` and AD-002/AD-018/AD-019/AD-020 to `0.2.1 / Accepted`, corrects exactly the seven individual ledger/metadata facts grouped in §260.2, preserves AD-011 S0/R0 and WJ as separately gated boundaries, and leaves foundation readiness at approximately 71%.
+
+## 261. Coordination-workflow normative-source metadata repair — v0.25.2
+
+### 261.1 Mandate, exact baseline and strengthened anchors
+
+Pavlo / Architecture Board separately mandated step 3 of the post-T5 sequence: repair the complete nine-row `source:` class in `coordination-workflow-rules.yaml`, without changing executable behavior. The exact baseline is post-WJ `main@4a3dfedf165f118feef96b514eff5b0f77c8e231`, tree `0d983d5be47dff4df3275a5f6c2ea6f3aa4fc453`. The mandate authorizes preparation and review only, never merge.
+
+Every object below was resolved by blob first, reverse-matched to its sole path through `git ls-tree -r`, checked for the stated fact inside that object and independently SHA-256 hashed:
+
+| Artifact | Git object | SHA-256 | Verified baseline fact |
+|---|---|---|---|
+| AD-016 | blob `3c0f3c5e0532090ede9a3f04fe16bc477f3df9eb` | `afd046ee9ed1a2eb92ddc1e0e7bc73b02b293ec1292ff45fb1b9f3217e19d284` | `0.25.1 / Accepted`; §247 records the visible source-reference debt |
+| OCP-015 Accepted wrapper | blob `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` | `0.2.0 / Accepted`; §1 incorporates snapshot §§1–15 without semantic alteration |
+| OCP-015 reviewed snapshot | blob `4ee782217147c4d64e91c979a95cd9b0a8090a65` | `08f0d972c327a8572551821f66beb7675fad407cccda94f057eeb4780fc3826e` | `0.1.0 / Draft` historical review state; sixteen numbered sections |
+| coordination manifest | blob `d864ddeb31710465abffa94106aa3f2a758a18b2` | `8d2e447cbd589c625d4bef16e7a7786ebaff40cd0bf56775934a660cbd73a613` | exactly eight validation ids and one derivation id, each with one `source:` field |
+| coordination implementation | blob `2137009c8678bac5b34784dc4dc04c2202497e9d` | `14463955ee7e97275b0bd1308e74327a09c81f47bfd799a15912f22ce1bf270d` | emits the same eight ids and implements the one derivation |
+| artifact-governance implementation | blob `021b0c2da482d1d6b09cfd8f76d9da2feeecb031` | `3bd03d57e574bffd28eb0630b45afdd424c0eb06d3a37600aa62acfaac6feb13` | validates only the leading OCP identifier of a rule source, not its `§` owner |
+| coordination manifest test | blob `f7ae5622cc508d0fb65f42789e0aef148d135a67` | `a5ea92089e8a5c857e2456274600d6ef8dd58efafe0af8e4fb3bdff595bf8079` | checks exact id sets, not semantic ownership of `source:` metadata |
+| checker guide | blob `e913760f9173096ce1affd3341c6ec499eb524a2` | `fb910f78c590a44b4ca4c20d5e8ec49294250b1ce9ab57278d1cbe17c53faaf6` | labels the coordination module and envelope as Draft although OCP-015 is Accepted |
+
+### 261.2 Numbering basis and complete nine-row derivation
+
+`OCP-015 §N` in this manifest means section `N` of the incorporated `reviewed-contract-v0.1.0.md`, not section `N` of the seven-section Accepted wrapper. OCP-015 README §1 establishes that §§1–15 of the immutable snapshot are the incorporated contract body. Inside that body, §4.1 and §4.2 themselves identify §§5–7 and §§8–10 as the owning specifications for the proposal and response record families. This is a derivation from the Accepted wrapper and snapshot, not a numbering convention introduced by this repair.
+
+The complete correction ledger is:
+
+| Rule or derivation | Old written label | New written label | Actual implementation emission on the §261.1 blob | Normative ownership reason |
+|---|---:|---:|---|---|
+| `COORDINATION_PROPOSAL_INVALID` | `§§5, 7.1` | `§§5–6` | lines 108 and 182 reject malformed/non-record proposal inputs | §5 defines the proposal shape; §6 owns all proposal invariants checked by the validator |
+| `COORDINATION_RESPONSE_INVALID` | `§§6, 7.2` | `§§8–9` | lines 131 and 187 reject malformed/non-record response inputs | §8 defines the response shape; §9 owns all response invariants checked by the validator |
+| `COORDINATION_RECORD_DUPLICATE` | `§7` | `§§4.1–4.2` | line 194 rejects duplicate proposal or response record ids | the two P-001 mappings name the stable identity field for each independently identified record family |
+| `COORDINATION_REFERENCE_UNRESOLVED` | `§§6, 8` | `§§8–9` | line 212 rejects a response whose exact `proposal_ref` does not resolve | §8 defines exact proposal-record binding and §9 requires the exact proposal endpoint |
+| `COORDINATION_RESPONDER_OUT_OF_SCOPE` | `§§6, 8` | `§9` | line 214 rejects a responder not invited by the exact proposal | §9 invariant 6 explicitly defines this out-of-scope fail-safe result |
+| `COORDINATION_SUPERSESSION_INVALID` | `§7` | `§§5–9` | lines 156, 160, 167 and 206 reject cross-identity, branching, cyclic or payload-changing supersession | §§5–7 own proposal lineage/head constraints; §§8–9 own response lineage and same-endpoint constraints |
+| `COORDINATION_FORBIDDEN_COUPLING` | `§§4, 10` | `§§3, 5, 9` | lines 110 and 133 reject forbidden authority fields on proposal or response records | §3 owns the record-level authority exclusions, §5 bars proposal/Assignment mutation and §9 bars response directives |
+| `COORDINATION_FIXTURE_INVALID` | `§11` | `§12` | lines 295, 303 and 306 reject malformed cases or derived/expected mismatch | §12, not the replay semantics in §11, owns executable evidence and its required cases |
+| `derive_coordination_evidence` | `§§8–9` | `§10` | lines 242–289 implement the four-outcome snapshot projection | §10 defines the derivation, its outcomes and its non-authorizing meaning |
+
+All nine rows are changed because the manifest contains exactly nine `source:` fields. The two visibly dangling labels registered in §247 are therefore evidence of a larger semantic-ownership defect, not the cardinality of that defect. The old labels remain only in the separate `Old written label` column above; this does not recreate a contiguous OCP-addressed dangling reference.
+
+### 261.3 Repository-wide class boundary and consciously deferred enforcement
+
+The unchecked metadata class is repository-wide. The other six manifests contain 342 additional `source:` rows: `rules.yaml` 164, `organization-rules.yaml` 47, `assessment-rules.yaml` 42, `capability-claim-rules.yaml` 50, `interchangeability-rules.yaml` 14 and `operation-lifecycle-rules.yaml` 25. Of these, 217 use explicit section labels and 125 use prose labels. Current artifact governance checks only a syntactically leading, resolvable OCP id for every row; the manifest-completeness tests check exported ids. Neither mechanism proves that a written section semantically owns the emitted rule.
+
+This act does not claim a semantic audit of those 342 rows and does not convert absence of a dangling citation into proof of correct ownership. A repository-wide source-owner audit and any machine validation of `§N` or prose ownership are known, consciously deferred governance debt requiring a separate Board mandate. The rejected option C — editing `artifact_governance.py`, tests or schema policy here — is not smuggled into this metadata-only repair.
+
+### 261.4 Checker-guide correction, PATCH classification and exact boundary
+
+The checker guide's manifest entry, coordination-envelope heading and opening sentence are synchronized from Draft to Accepted. This corrects one current lifecycle fact in three reader-facing locations; it does not change OCP-015, its incorporated contract, rule behavior or checker authority.
+
+AD-016 moves `0.25.1 → 0.25.2` as PATCH. The nearest contrary precedent, OCP-007 §34.2, classified a backward-compatible **new normative rule for future revisions** as MINOR. This act adds no rule or obligation: every new label points to an already-incorporated normative owner, the manifest ids and code are unchanged, and the guide merely reflects OCP-015's existing `0.2.0 / Accepted` state. Calling it MINOR would invent new compatible semantics; leaving AD-016 unversioned would hide a governed correction ledger.
+
+The bounded implementation footprint is this AD-016 record, `coordination-workflow-rules.yaml`, the checker guide and README/backlog/roadmap accounting. No `.py`, test, fixture, OCP, Pattern, Concept status, OCP status/version, dependency, graph edge, registry, taxonomy, foundation map, rule id, derivation, executable behavior, backlog status or readiness estimate changes. OCP-004 remains `1.0.0 / Canonical`, OCP-017 and OCP-015 remain `0.2.0 / Accepted`, P-001 remains byte-identical, the distribution remains five Canonical / three Accepted / five Proposed Concepts and readiness remains approximately 72%.
+
+The OCP/Pattern structural sweep must move from the two inherited §247 dangling labels to zero as a consequence of correct ownership, not as the selection criterion. The twelve AD-addressed references remain a separately checked class. Partial rollback of a label, the numbering-basis statement or the guide correction restores a known false current fact and is invalid; rollback is the complete reviewed unit.
+
+Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. This preparation mandate supplies none of the later gates. It does not authorize the separate bare-integer citation step, any T6–T10 act or machine enforcement of source ownership.
