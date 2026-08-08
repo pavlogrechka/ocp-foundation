@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.25.0
+Version: 0.25.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -4229,7 +4229,7 @@ The exact baseline is post-remediation `main@e9ce8bebbaf4fcfd3742dfaba89fe4d1e87
 | OCP-005 Assignment consumer | `0.2.5 / Draft`; direct OCP-004 dependency | blob `e5e0a62eda4ac84be081186c005e0167a3ebe288` | `8172173addc797416a151db198dcbea360711b82fb0a93b3732723f7f71154c6` |
 | OCP-006 Constraint consumer | `0.2.4 / Draft`; direct OCP-004 dependency | blob `020c76f2518491beb2b7696e707224809ff26770` | `a604f6b07373741c9bfb25ad2e064b9b77b4c8fd52c9c3075b4865f9f65dfb27` |
 | OCP-010 Event consumer | `0.2.0 / Draft`; direct OCP-004 dependency | blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
-| OCP-011 assessment consumer | `0.2.0 / Accepted`; direct OCP-004 dependency | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-011 assessment consumer | `0.3.0 / Accepted`; direct OCP-004 dependency | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
 | OCP-014 coordination-profile consumer | `0.2.0 / Accepted`; direct OCP-004 dependency | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
 | OCP-016 Core Boundary | `1.0.0 / Canonical`; Route C authority | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
 | Operation lifecycle rule manifest | exact Q3I validation-source map | blob `942e227820fb33130b0bcfd00cf118376d9f23a1` | `0e0cd72c4f7eacc49a4b2b4276257c6a52c5346483568b67106643f6b58e3685` |
@@ -4485,7 +4485,7 @@ The exact baseline is post-audit `main@acf5d56b2df88d6b58126dff8d08febd64f487d1`
 | OCP-005 Assignment consumer | `0.2.5 / Draft`; Operation peer view `Accepted` | blob `e5e0a62eda4ac84be081186c005e0167a3ebe288` | `8172173addc797416a151db198dcbea360711b82fb0a93b3732723f7f71154c6` |
 | OCP-006 Constraint consumer | `0.2.4 / Draft`; Operation peer view `Accepted` | blob `020c76f2518491beb2b7696e707224809ff26770` | `a604f6b07373741c9bfb25ad2e064b9b77b4c8fd52c9c3075b4865f9f65dfb27` |
 | OCP-010 Event consumer | `0.2.0 / Draft`; independent Event identity and relevance boundary | blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
-| OCP-011 assessment consumer | `0.2.0 / Accepted`; exact Operation target reference | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-011 assessment consumer | `0.3.0 / Accepted`; exact Operation target reference | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
 | OCP-014 coordination-profile consumer | `0.2.0 / Accepted`; exact Operation context reference | blob `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
 | OCP-016 Core Boundary | `1.0.0 / Canonical`; Route C authority | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
 | Operation lifecycle rule manifest | exact Q3I validation-source map | blob `942e227820fb33130b0bcfd00cf118376d9f23a1` | `0e0cd72c4f7eacc49a4b2b4276257c6a52c5346483568b67106643f6b58e3685` |
@@ -4537,7 +4537,7 @@ The exact future WJ candidate is therefore a **twelve-file proposal**, not a cha
 5. `docs/002-concept-taxonomy/README.md`;
 6. `docs/005-assignment-concept/README.md`;
 7. `docs/006-constraint-concept/README.md`;
-8. `architecture/generated/foundation-map.md`;
+8. `architecture/baselines/foundation-map.md`;
 9. `tools/ontology_checker/README.md`;
 10. repository `README.md`;
 11. `backlog/architecture-backlog.md`; and
@@ -4665,3 +4665,53 @@ When those gates close and this act is squash-merged, AD-016X will:
 - change only AD-016 plus README/backlog/roadmap accounting.
 
 The accepted effect is a governed next question, not the answer to that next question. A future WJ lifecycle act remains separately mandated, reviewed, adjudicated, tested and authorized.
+
+## 260. Post-AD-016X governance hygiene correction — v0.25.1
+
+### 260.1 Mandate and exact baseline
+
+Pavlo / Architecture Board separately mandated a bounded hygiene act before any WJ lifecycle proposal. The exact baseline is post-AD-016X `main@89cc0e4897082a3ca0f46ac229004dc6baa2a9b0`, tree `cd34bd98eb5bed9b63c4380ee1f1c4f52f92cb9a`.
+
+The affected objects were resolved first and reverse-matched to their paths:
+
+| Artifact | Git object | SHA-256 | Verified current fact |
+|---|---|---|---|
+| AD-016 | blob `42ac65a6b77056bfdfc324140d0c98155d9cf760` | `a82451da6289cf96724dc1a5c25d3a89f7393665f4db08e80bc93b4994654fdc` | `0.25.0 / Accepted`; three factual defects below |
+| AD-018 | blob `e4aa8d261587e393e9da87663e3c247a3cb0518c` | `ac39ff8848c78380513ddf1a76412ce58272c41cef4525b7e45d906b86fd95e7` | `0.2.0 / Accepted`; remediation/audit trigger completed |
+| AD-019 | blob `928c63fd2665e36311b771550b8c60396e9e8486` | `51319816b9613b2ac2ced22559c739b96ad2b5e685d45ecba904b067cea0ad3c` | `0.2.0 / Accepted`; remediation/audit/lifecycle trigger completed |
+| AD-020 | blob `4537de79daedcb10e1b089296b5e735aa8f697d3` | `65a6e1cd9e455fb5d395f3ded023ab384207fe20855faf117e1a74bdfe45c2a3` | `0.2.0 / Accepted`; remediation and blocker/stability audit completed |
+| OCP-011 | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` | `0.3.0 / Accepted` |
+| foundation map | blob `0b7406d0934f8b2ef1e9698608ac9841aaec1b54` | `6c18c44fbb685a350bc86fbcb3d1a6a391ef63c2700aebb435569ae539daac48` | sole path `architecture/baselines/foundation-map.md` |
+
+### 260.2 Exact correction ledger
+
+| Defect on the §260.1 baseline | Correction | Why the correction is bounded |
+|---|---|---|
+| §§237 and 250 label the exact OCP-011 blob as `0.2.0 / Accepted` | both cells now say `0.3.0 / Accepted` | the blob and SHA-256 already identify OCP-011 `0.3.0`; no OCP-011 byte changes |
+| §252 item 8 names a nonexistent `generated`-directory map path | use the sole reverse-resolved path `architecture/baselines/foundation-map.md` | the candidate remains twelve files; its map object and required status treatment do not change |
+| AD-018, AD-019 and AD-020 retain `Review-After` conditions already completed on current `main` | replace each stale field with its already-accepted next or reopening gate and add a local correction record | no new semantic question, proposal or authorization is created |
+
+The path repair makes §257 point 1 executable as written. The version repair aligns the human-readable state with the object that the two anchor rows already name. The metadata repairs prevent a completed condition from presenting itself as a future trigger.
+
+### 260.3 PATCH classification
+
+This is a four-document PATCH, not a new discovery outcome:
+
+- AD-016 moves `0.25.0 → 0.25.1` for exact evidence/path corrections;
+- AD-018, AD-019 and AD-020 each move `0.2.0 → 0.2.1` for a completed-trigger correction;
+- every accepted outcome, reopening condition, authorization boundary and status remains unchanged; and
+- the replacement `Review-After` fields point only to gates already present in the accepted bodies or in AD-016X.
+
+Calling the act MINOR would imply a new compatible obligation. None is added. Calling it no-version editorial work would hide that four current governance documents changed. PATCH records the correction without overstating it.
+
+### 260.4 Boundary, rollback and accepted effect
+
+This act changes only AD-016, AD-018, AD-019, AD-020 and README/backlog/roadmap accounting. It changes no OCP, Concept, Concept status, Pattern, dependency, graph edge, registry, taxonomy, generated map, rule, checker, test, fixture, backlog status, readiness estimate, data, reference or production authority.
+
+It does not mandate, author, review or merge WJ; promote Operation; accept OCP-017; complete T5; repair OCP-015 rule sources; or repair bare-integer section citations. Those are separate steps, and only the first remains the next possible lifecycle direction under AD-016X.
+
+Rollback is one reviewed seven-file PATCH restoring the prior four document versions/fields and current accounting. It cannot restore a false path, false OCP-011 version or completed `Review-After` trigger as a claimed current fact without new contradictory evidence.
+
+Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. The preparation mandate authorizes none of those later gates by implication.
+
+When those gates close and this act is squash-merged, it sets AD-016 to `0.25.1 / Accepted` and AD-018/AD-019/AD-020 to `0.2.1 / Accepted`, corrects exactly the six individual ledger/metadata facts grouped in §260.2, preserves WJ as a separately gated preparation scope and leaves foundation readiness at approximately 71%.

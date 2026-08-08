@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-018
 Title: Resource Stable-Surface Discovery
-Version: 0.2.0
+Version: 0.2.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-001, OCP-003, OCP-007, OCP-016, AD-014, AD-016
 Applies-To: AB-062, Resource stable-surface remediation
-Review-After: Completion or failure of the selected OCP-003 stable-kernel remediation; then a fresh blocker/stability audit before any lifecycle proposal
+Review-After: Concrete evidence satisfying an AD-018A reopening or stop condition; no current Resource lifecycle proposal is authorized by this discovery
 ---
 
 # AD-018 — Resource Stable-Surface Discovery
@@ -740,3 +740,9 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-018A will:
 - retain foundation readiness at approximately 69% because this selection changes no OCP or Concept lifecycle.
 
 This act changes no OCP, Concept, Concept status, Pattern, dependency, projection, registry row, graph edge, schema, checker rule, fixture, backlog status or production authority. Authorization applies only to AD-018A. It cannot merge the OCP-003 remediation, add its fixtures, resolve AB-006/AB-052, promote Resource or authorize another T4 lifecycle act.
+
+## 36. Post-lifecycle Review-After correction — v0.2.1
+
+The prior `Review-After` named completion/failure of the selected OCP-003 remediation followed by a fresh audit. Both the remediation and the separately gated Resource lifecycle act have completed. Retaining that text as a future trigger would describe historical work as pending.
+
+Version `0.2.1` therefore points `Review-After` to the existing AD-018A reopening and stop conditions in §§32–34. It creates no new Resource question or lifecycle proposal, changes no RS outcome, OCP-003 byte, Resource status, consumer, mapping boundary, AB-006/AB-052 status or authorization. Any concrete reopening still requires a separate Board mandate and fresh gates.

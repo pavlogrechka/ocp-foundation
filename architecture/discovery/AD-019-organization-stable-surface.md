@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-019
 Title: Organization Stable-Surface Discovery
-Version: 0.2.0
+Version: 0.2.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-016, OCP-000, OCP-001, OCP-002, OCP-003, OCP-007, OCP-016, P-001
 Applies-To: AB-062, Organization stable-surface remediation
-Review-After: Completion or failure of the selected OCP-007 remediation; then a fresh blocker/stability audit before any lifecycle proposal or T5 topology reopening
+Review-After: Concrete evidence satisfying an AD-019A reopening or stop condition; no current Organization lifecycle or T5 topology proposal is authorized by this discovery
 ---
 
 # AD-019 — Organization Stable-Surface Discovery
@@ -1151,3 +1151,9 @@ When exact-head reviewed, explicitly authorized and squash-merged, AD-019A will:
 AB-006, AB-044–AB-047, AB-051 and AB-052 remain the active backlog owners of mapping, continuity, kind, lifecycle, composition and scheme questions. Once AD-019 becomes Accepted, they no longer appear in its `Applies-To` metadata because this selection neither resolves them nor takes over their active ownership. This metadata handoff changes no question, status, scope or future reopening gate.
 
 Authorization applies only to AD-019A. It cannot implement Q2, merge the OCP-007 remediation, admit an external kind owner, create a registry or mapping, introduce Organization Capability holders, promote Organization or authorize any lifecycle/T5 act.
+
+## 43. Post-lifecycle Review-After correction — v0.2.1
+
+The prior `Review-After` named completion/failure of the selected OCP-007 remediation, a fresh audit and a later lifecycle decision. Those gates have all completed: OCP-007 is now `1.1.0 / Canonical`, while no T5 topology reopening was selected. The old field is therefore historical, not a live trigger.
+
+Version `0.2.1` points `Review-After` to the existing AD-019A reopening and stop conditions in §§39–41. It creates no Organization question, lifecycle proposal or T5 authority; changes no Q2 outcome, OCP-007 byte, Organization status, P-001 binding, mapping/composition boundary or backlog status; and grants no authority from the completed Organization wave. Any concrete reopening still requires a separate Board mandate and fresh gates.
