@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.5
+Version: 0.2.6
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-07
+Last-Review: 2026-08-08
 ---
 
 # Assignment Concept
@@ -61,7 +61,7 @@ Assignment може бути підставою для перевірки цих
 | Concept | Status | Використання в OCP-005 |
 |---|---|---|
 | Resource | Canonical | елемент, що залучається |
-| Operation | Accepted | контекст залучення |
+| Operation | Canonical | контекст залучення |
 | Organization | Canonical | не створює Assignment автоматично |
 | Capability | Canonical | може перевіряти відповідність ролі |
 | Constraint | Accepted | може обмежувати одночасні чи часові Assignment |
@@ -507,3 +507,11 @@ Revision `0.2.5` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Assignment — `Accepted`. Organization Canonical status не створює Assignment, участь, authority, availability, Readiness, Organization/Resource mapping, Capability holder або interchangeability inference. Assignment identity/lifecycle, exact Resource/Operation binding, role/applicability semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
 
 Mechanical peer-view validation exact-sync-ить цей registered-Concept row з OCP-000, але не визначає статус і не замінює окремий Board lifecycle act. Corrective rollback є новим reviewed atomic synchronization act; він не може ізольовано відновити stale value або переписати Assignment/Organization history.
+
+## 24. PATCH accounting — v0.2.6
+
+Revision `0.2.6` синхронізує лише volatile current-status rendering Operation у §4 з окремим T5 WJ lifecycle act: row тепер показує Operation як `Canonical`. Review date і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Assignment — `Accepted`. Operation Canonical status та OCP-017 acceptance не створюють Assignment, participation, role, terminal mutation, authorization, availability, Readiness, outcome або Event inference. Assignment identity/lifecycle, exact Resource/Operation binding, role/applicability semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
+
+Mechanical peer-view validation exact-sync-ить тільки current registered-Concept status із OCP-000; воно не визначає status і не замінює Board act. Corrective rollback повертає цей row лише разом з повним twelve-file WJ projection unit через новий reviewed act.

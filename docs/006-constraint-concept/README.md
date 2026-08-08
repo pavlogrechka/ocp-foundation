@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.2.4
+Version: 0.2.5
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -9,7 +9,7 @@ Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Read
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-07
+Last-Review: 2026-08-08
 ---
 
 # Constraint Concept
@@ -76,7 +76,7 @@ Constraint може бути джерелом derivation для цих моде�
 | Concept | Status | Використання в OCP-006 |
 |---|---|---|
 | Resource | Canonical | можливий subject або учасник оцінювання |
-| Operation | Accepted | можливий context або subject |
+| Operation | Canonical | можливий context або subject |
 | Assignment | Accepted | основний subject для перевірки сумісності та залучення |
 | Capability | Canonical | можливий вхід перевірки відповідності; не визначається тут |
 | Event | Accepted | можливе evidence або trigger повторного оцінювання |
@@ -644,3 +644,11 @@ Revision `0.2.4` синхронізує лише volatile current-status renderi
 Mechanical peer-view validation звіряє тільки registered-Concept rows у current `Concept Status and Dependencies` tables з OCP-000. Воно не визначає статус, не охоплює історичні tables або ASCII `[Status]` tree labels і не замінює Board lifecycle act.
 
 Corrective rollback є новим reviewed synchronization act, виведеним із тодішнього authoritative registry. Він не може відновити stale value, переписати lifecycle history або надати checker незалежний authority.
+
+## 26. PATCH accounting — v0.2.5
+
+Revision `0.2.5` синхронізує лише volatile current-status rendering Operation у §4 з окремим T5 WJ lifecycle act: row тепер показує Operation як `Canonical`. Review date і ця accounting note входять до того самого PATCH.
+
+Документ лишається `Draft`, Constraint — `Accepted`. Operation Canonical status та OCP-017 acceptance не змінюють Constraint identity, applicability/evaluation truth, stage preconditions, authorization, Conflict, availability, Readiness, outcome або Event semantics. Dependencies, Concept status, graph edges, P-001 invocation, existing records/references і всі інваріанти лишаються незмінними.
+
+Mechanical peer-view validation exact-sync-ить тільки current registered-Concept status із OCP-000; воно не визначає status і не замінює Board act. Corrective rollback повертає цей row лише разом з повним twelve-file WJ projection unit через новий reviewed act.

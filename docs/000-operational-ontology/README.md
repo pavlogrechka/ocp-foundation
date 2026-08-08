@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 1.4.0
+Version: 1.5.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
-Last-Review: 2026-08-07
+Last-Review: 2026-08-08
 ---
 
 # Operational Ontology
@@ -80,7 +80,7 @@ Version OCP-000 не є версією жодного Concept або defining OC
 | Concept | Status | Specification / Decision |
 |---|---|---|
 | Resource | Canonical | OCP-003; AD-014; AD-018A; AD-016L; separately authorized T4 act |
-| Operation | Accepted | OCP-004; Architecture Board approval of PR-0003 |
+| Operation | Canonical | OCP-004; AD-020A; AD-016X; separately authorized WJ lifecycle act |
 | Assignment | Accepted | OCP-005; Architecture Board approval of PR-0004 |
 | Operational Space | Proposed | — |
 | Organization | Canonical | OCP-007; AD-019A; AD-016T; separately authorized O9C lifecycle act |
@@ -199,3 +199,11 @@ Registry membership, row identity, status vocabulary, Board authority, Proposed 
 Окремий четвертий T4 lifecycle act змінює рівно один active registry value: `Organization: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.3.0 → 1.4.0`.
 
 Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Organization/Resource mapping, taxonomy, continuity, composition, relationship-kind meaning, exception, availability, Readiness, Assignment, authority або Capability-holder semantics: defining contract залишається в OCP-007, а OCP-000 лише відображає окремо авторизований status.
+
+## Revision `1.5.0` — Operation status transition
+
+Окремий T5 WJ lifecycle act змінює рівно один active registry value: `Operation: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.4.0 → 1.5.0`.
+
+Exact Canonical provenance є `OCP-004; AD-020A; AD-016X; separately authorized WJ lifecycle act`. Первинне прийняття Operation у PR-0003 лишається історією acceptance, а не provenance цього Canonical переходу.
+
+Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Operation stage, authorization source, Event relation, outcome, Readiness, Assignment mutation, IO2 record identity або production semantics: defining authority залишається в OCP-004, а OCP-000 лише відображає окремо авторизований status.
