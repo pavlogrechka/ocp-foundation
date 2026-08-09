@@ -1,0 +1,18 @@
+case_id: conflict-boundary-invalid-positive-g4-missing-consumer
+concept: ConflictDerivationBoundaryDataset
+gate_probe: {missing_groups: [accepted_consumer]}
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_REQUEST_INVALID, CONFLICT_DERIVATION_RESULT_MISMATCH, CONFLICT_DERIVATION_POSITIVE_AUTHORITY_FORBIDDEN]}
+snapshot:
+  derivation_request:
+    request_id: REQUEST-SYNTH-20
+    rule_ref: conflict-establishment-boundary@1
+    context_ref: CONTEXT-SYNTH-20
+    input_snapshot_ref: SNAPSHOT-SYNTH-20
+    evaluation_refs: [EVAL-SYNTH-20]
+    derived_at: 2099-12-20T00:00:00Z
+    evidence_state: current
+    stored_result: conflict
+    positive_conflict: true
+    activation_attempt: {baseline_contract_ref: OCP-SYNTH@1, result_need_ref: RESULT-NEED-SYNTH@1, positive_rule_ref: conflict-positive-synth@1, positive_input_snapshot_ref: SNAPSHOT-SYNTH-20, evaluation_context_ref: CONTEXT-SYNTH-20, criterion_owner_ref: OWNER-SYNTH-20, evaluator_ref: EVALUATOR-SYNTH-20, object_class_decision_ref: PROJECTION-SYNTH@1}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-20, constraint_ref: CONSTRAINT-SYNTH-20, constraint_version_ref: constraint-synth-20@1, context_ref: CONTEXT-SYNTH-20, input_snapshot_ref: SNAPSHOT-SYNTH-20, evaluated_at: 2099-12-19T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-20], evaluator_ref: EVALUATOR-SYNTH-20}

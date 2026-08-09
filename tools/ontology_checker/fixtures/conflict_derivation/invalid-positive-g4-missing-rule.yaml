@@ -1,0 +1,18 @@
+case_id: conflict-boundary-invalid-positive-g4-missing-rule
+concept: ConflictDerivationBoundaryDataset
+gate_probe: {missing_groups: [versioned_positive_rule]}
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_REQUEST_INVALID, CONFLICT_DERIVATION_RESULT_MISMATCH, CONFLICT_DERIVATION_POSITIVE_AUTHORITY_FORBIDDEN]}
+snapshot:
+  derivation_request:
+    request_id: REQUEST-SYNTH-22
+    rule_ref: conflict-establishment-boundary@1
+    context_ref: CONTEXT-SYNTH-22
+    input_snapshot_ref: SNAPSHOT-SYNTH-22
+    evaluation_refs: [EVAL-SYNTH-22]
+    derived_at: 2099-12-22T00:00:00Z
+    evidence_state: current
+    stored_result: conflict
+    positive_conflict: true
+    activation_attempt: {consumer_ref: CONSUMER-SYNTH-22, consumer_status: Accepted, baseline_contract_ref: OCP-SYNTH@1, result_need_ref: RESULT-NEED-SYNTH@1, positive_input_snapshot_ref: SNAPSHOT-SYNTH-22, evaluation_context_ref: CONTEXT-SYNTH-22, criterion_owner_ref: OWNER-SYNTH-22, evaluator_ref: EVALUATOR-SYNTH-22, object_class_decision_ref: PROJECTION-SYNTH@1}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-22, constraint_ref: CONSTRAINT-SYNTH-22, constraint_version_ref: constraint-synth-22@1, context_ref: CONTEXT-SYNTH-22, input_snapshot_ref: SNAPSHOT-SYNTH-22, evaluated_at: 2099-12-21T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-22], evaluator_ref: EVALUATOR-SYNTH-22}
