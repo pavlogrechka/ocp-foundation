@@ -160,6 +160,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [x] Cross-vertical visibility/agreement boundary — `AD-010` selects independent V0/A0 no-new-authority controls
 - [x] Operation authorization source model — AD-021 selects AC and OCP-018 `0.2.1 / Accepted` governs the Route C source/Organization/Capability/level/effectivity evidence contract with material negative fixtures, without resolving Order, legitimizing a production source or introducing Authority/Approval/Policy Concepts
 - [x] Conflict derivation boundary — AD-022 selects H0-B and OCP-019 `0.1.0 / Draft` makes the negative Route C establishment boundary executable: exact ConstraintEvaluationRecord references are preserved, while one/many violations and incomplete, conflicting, stale or indeterminate inputs never permissively derive Conflict; positive activation remains separately gated by OCP-016 G4
+- [x] Positive Conflict activation-gate audit — AD-023 inventories every Accepted-or-higher contract and finds no complete OCP-019 §9 / OCP-016 G4 consumer; seven synthetic gate probes make each missing group and a complete self-declared attempt derive only `indeterminate`, while OCP-019 remains byte-identical `0.1.0 / Draft`
 - [ ] Production source profiles and any broader approval semantics
 - [ ] Reservation and Allocation decision
 - [ ] Conflict and remediation model
@@ -186,7 +187,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 5. The selected Y10D Event dependency/stable-surface discovery requires its own owner mandate and four fresh exact-head gates; AD-016Z neither creates nor authorizes it and Y0 remains its fail-safe.
 6. After that bounded frontier discovery, define `Review-After` through a separately mandated normative governance act before any YR repair; AD-016Z registers 30 fields as 17 fulfilled / 13 open but changes none of them.
 7. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
-8. Preserve AB-015/AB-016/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-021 resolves only AB-017, while AD-016X/Y/Z resolved none of them.
+8. Preserve AB-015/AB-016/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-023 closes only the positive activation attempt on `main@f69e4b31`, and AB-018 requires a separately accepted consumer profile before another comparison.
 9. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
 10. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
 11. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

@@ -22,6 +22,18 @@ from ocp_checker.conflict_derivation import (  # noqa: E402
 
 
 class ConflictDerivationBoundaryTests(unittest.TestCase):
+    G4_BINDING_GROUPS = {
+        "accepted_consumer": {"consumer_ref", "consumer_status"},
+        "baseline_and_result_need": {"baseline_contract_ref", "result_need_ref"},
+        "versioned_positive_rule": {"positive_rule_ref"},
+        "input_snapshot_and_context": {
+            "positive_input_snapshot_ref",
+            "evaluation_context_ref",
+        },
+        "criterion_owner_and_evaluator": {"criterion_owner_ref", "evaluator_ref"},
+        "object_class_decision": {"object_class_decision_ref"},
+    }
+
     @classmethod
     def setUpClass(cls) -> None:
         fixture_root = ROOT / "fixtures/conflict_derivation"
@@ -30,12 +42,12 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
         }
 
     def test_evidence_grows_with_positive_and_material_negative_cases(self) -> None:
-        self.assertGreaterEqual(len(self.fixtures), 12)
+        self.assertGreaterEqual(len(self.fixtures), 22)
         self.assertGreaterEqual(
             len([item for item in self.fixtures.values() if item["expected"]["valid"]]), 4
         )
         self.assertGreaterEqual(
-            len([item for item in self.fixtures.values() if not item["expected"]["valid"]]), 8
+            len([item for item in self.fixtures.values() if not item["expected"]["valid"]]), 18
         )
 
     def test_all_fixtures_match_exact_expected_errors(self) -> None:
@@ -80,6 +92,44 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
         conflicting_extra["result"] = "satisfied"
         snapshot["constraint_evaluations"].extend([conflicting_extra, "MALFORMED-UNREFERENCED"])
         self.assertEqual(derive_conflict_establishment_result(snapshot), "conflict_not_established")
+
+    def test_each_incomplete_positive_g4_binding_attempt_fails_safe(self) -> None:
+        fixtures = {
+            name: item
+            for name, item in self.fixtures.items()
+            if name.startswith("invalid-positive-g4-missing-")
+        }
+        self.assertEqual(len(fixtures), len(self.G4_BINDING_GROUPS))
+        for name, fixture in fixtures.items():
+            with self.subTest(fixture=name):
+                attempt = fixture["snapshot"]["derivation_request"]["activation_attempt"]
+                supplied_groups = {
+                    group
+                    for group, fields in self.G4_BINDING_GROUPS.items()
+                    if fields <= set(attempt)
+                }
+                declared_missing = set(fixture["gate_probe"]["missing_groups"])
+                self.assertEqual(
+                    set(self.G4_BINDING_GROUPS) - supplied_groups,
+                    declared_missing,
+                )
+                derived = derive_conflict_establishment_result(fixture["snapshot"])
+                self.assertEqual(derived, "indeterminate")
+                self.assertNotEqual(derived, "conflict")
+
+    def test_complete_self_declared_positive_g4_attempt_has_no_authority(self) -> None:
+        fixture = self.fixtures["invalid-positive-g4-unverified-complete"]
+        attempt = fixture["snapshot"]["derivation_request"]["activation_attempt"]
+        self.assertTrue(
+            all(fields <= set(attempt) for fields in self.G4_BINDING_GROUPS.values())
+        )
+        self.assertEqual(fixture["gate_probe"]["missing_groups"], [])
+        self.assertEqual(attempt["consumer_status"], "Accepted")
+        validation = validate_reference_fixture(fixture)
+        self.assertFalse(validation.valid)
+        derived = derive_conflict_establishment_result(fixture["snapshot"])
+        self.assertEqual(derived, "indeterminate")
+        self.assertNotEqual(derived, "conflict")
 
     def test_manifest_is_complete(self) -> None:
         rules = yaml.safe_load(
