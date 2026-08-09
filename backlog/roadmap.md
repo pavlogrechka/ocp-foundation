@@ -101,6 +101,7 @@
 - [x] T5 WJ joint lifecycle act — OCP-004/Operation `1.0.0 / Canonical` and Route C OCP-017 `0.2.0 / Accepted` in one exact twelve-file unit with separate compatibility/readiness/migration/rollback evidence, immutable OCP-017 Draft snapshot and unchanged P-001/rules/checker/tests/fixtures
 - [x] Coordination workflow source-metadata PATCH — rederive all nine manifest owners from the incorporated OCP-015 snapshot, remove the two structurally dangling labels, synchronize the Accepted checker-guide view and defer repository-wide semantic-source enforcement without executable or normative change
 - [x] Bare-integer section-reference hygiene PATCH — repair the sole current OCP-007 occurrence with a named-heading link, preserve and permanently register eight historical occurrences, record the honest `9 → 8` metric and prohibit new occurrences without machine enforcement or history rewriting
+- [x] AD-016Y post-T5 frontier reassessment — rederive all eighteen current OCPs, replay L2/Pattern/route/consumer floors, register every `Review-After` value as 17 fulfilled / 12 open without repair and retain Y10D Event discovery only as a recommendation before a separately mandated Board comparison
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -178,8 +179,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 1. The completed T5 WJ act establishes OCP-004/Operation `1.0.0 / Canonical` and OCP-017 `0.2.0 / Accepted` without transferring authority to T6–T10; any next frontier needs its own fresh inventory, Board selection and exact-head gates.
 2. The completed coordination source-metadata PATCH rederives all nine OCP-015 manifest owners and corrects the Accepted checker-guide view without changing executable or normative behavior.
 3. The separately gated bare-integer hygiene PATCH repairs only current OCP-007 navigation, permanently registers eight historical occurrences and adds no machine enforcement. Completion of the four-step sequence grants no authority to T6–T10 or another post-T5 frontier.
-4. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
-5. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
-6. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
-7. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
-8. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
+4. AD-016Y independently derives Assignment and Event as the exact post-T5 L2-admissible frontier, keeps Constraint blocked and records Y10D only as a recommendation. Any AD-016Z comparison, downstream preparation or merge needs a separate owner mandate and four fresh exact-head gates.
+5. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
+6. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X and AD-016Y resolve none of them.
+7. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
+8. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
+9. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.

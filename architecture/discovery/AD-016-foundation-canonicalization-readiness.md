@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.25.3
+Version: 0.26.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -4855,3 +4855,230 @@ The OCP/Pattern structural sweep remains at zero dangling references. The indepe
 Rollback is one reviewed six-file PATCH restoring OCP-007 `1.1.0`, AD-016 `0.25.2`, the old unresolved current citation and the prior current accounting. Partial rollback would make the reader-facing OCP-007 version disagree with its projections or leave the permanent register claiming a repair that is absent.
 
 Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. This mandate authorizes preparation and review only. It does not authorize machine enforcement, historical rewriting, any post-T5 frontier, T6–T10 work or backlog resolution.
+
+## 263. AD-016Y mandate, exact post-T5 baseline and MINOR classification
+
+Pavlo / Architecture Board separately mandated a fresh post-T5 frontier reassessment. The mandate requires a rule-derived inventory of all eighteen current OCP documents, replay of the applicable lifecycle floors and a complete `Review-After` sweep. It authorizes preparation and external review of this recommendation-only act. It authorizes no downstream preparation, merge, lifecycle change, repair or backlog transition.
+
+The exact baseline is `main@019ef5b6ebd3b5855c7b8230c9ac6dbcdc1fe437`. The baseline already contains the completed T5 WJ lifecycle act, both separately gated post-T5 hygiene PATCHes and the current `Review-After` values audited below. Registration does not repair an exhausted trigger; every current or historical value remains byte-unchanged in this act, including AD-016's own now-satisfied owner-mandate trigger.
+
+AD-016 moves `0.25.3 → 0.26.0` as MINOR. AD-016X `0.24.0 → 0.25.0` is the nearest same-class precedent: it added a new outcome comparison and governed next-question contract. The intervening `0.25.1`, `0.25.2` and `0.25.3` revisions corrected already-governed paths, state cells, metadata ownership and citation form without opening a new comparison. AD-016Y is closer to AD-016X: it introduces a fresh post-T5 frontier derivation, replays new floor results and records a complete trigger audit plus a recommendation. It changes no domain or lifecycle outcome, but PATCH would understate a new compatible decision surface inside this Accepted discovery record.
+
+## 264. Strengthened exact anchors
+
+Every object below was resolved by blob first, reverse-matched to its path through `git ls-tree -r`, checked for the stated state inside that object and independently SHA-256 hashed. Written paths were never lookup keys.
+
+| Artifact | Exact baseline fact | Git object | SHA-256 |
+|---|---|---|---|
+| AD-016 | `0.25.3 / Accepted`; post-T5 owner-mandate trigger | blob `178bdbd0ee0e86005cb36e7b6cc30d6703b0c7c1` | `28b194105a2259f47a6d0b41bfb0205a2aa6d1ede36b250e3ce00933e7f309bb` |
+| OCP-000 registry | `1.5.0 / Canonical`; five Canonical and three Accepted Concepts | blob `7da7d7aad6ba505603cfbfa98ff1349c84892720` | `3f76ae4b55f01ce388bd865330f386c3ec0a6f6416e1aaed522145df96cfb7d6` |
+| OCP-001 governance | `1.0.0 / Canonical`; L2 and exact Pattern floors | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-004 Operation | `1.0.0 / Canonical`; stable endpoint for both T6 candidates | blob `1ff548a1f213b574472a90a8b3cfe014f6c1ce11` | `9c9173d3a3dec044e2cae2eb8fd5b66d07a106318f497a973409fedf4677155b` |
+| OCP-005 Assignment | `0.2.6 / Draft`; Assignment `Accepted` | blob `6e78d6d54d53260fb42f4ef67776e3cf8b11daa7` | `fd77fbdc47d1d436a95c95c6a211521d65dd5261633ccd2eee17f9a761fef3ba` |
+| OCP-006 Constraint | `0.2.5 / Draft`; Constraint `Accepted` | blob `5d7404717e500c66c0c017263678ae0a1a405c7d` | `e0469604b1d8e6c2156c35e85017129eaca1fb929633a8be0287af4ef67a88aa` |
+| OCP-010 Event | `0.2.0 / Draft`; Event `Accepted`; exact P-001 invocation | blob `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
+| OCP-011 assessment contract | `0.3.0 / Accepted`; first contract-local F1/A1 activation | blob `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-012 claim contract | `0.3.0 / Accepted`; second contract-local F1/A1 activation | blob `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-016 route contract | `1.0.0 / Canonical`; F/C/E/D/I and Pattern boundary | blob `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| OCP-017 lifecycle contract | `0.2.0 / Accepted`; downstream Route C non-Concept | blob `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
+| P-001 | `0.1.0 / Accepted`; T3 ledger remains time-anchored | blob `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+| generated foundation map | Operation/Event is a dashed non-edge with unresolved relation owner | blob `faa71f329a3207bc6d3096b7cc86ecfab6130296` | `ea88b22d6a0543995e2b757daec0a60b62b0028c8c3583e237a6b178951be882` |
+| repository README | current accounting through AD-016 `0.25.3` | blob `319cc438ad038e5d7812a4cce68cd25443e43a38` | `d84e3678095d8256278d48fe35c60e2a39cb7479140415e5a850e7cc7da36653` |
+| architecture backlog | AB-062 `Planned`; T6–T10 unopened | blob `35f9f42892ab7509417a06d7d047dac1a3211fef` | `90cbd54d0db499e8d2d1ca43467122c9a4ed00fc603c59aecb7e93fc44ab52ac` |
+| foundation roadmap | T5 complete; every next frontier separately gated | blob `976ac2dfc965b0a94d94d1e40075904cfaf0f5e9` | `09d1d8cd53b1449f4011269d8ed37b743dda5ddb7affc1d80f3975edb2da530c` |
+
+## 265. Fresh all-eighteen-OCP inventory
+
+The inventory rule reads the current frontmatter of every primary `docs/*/README.md`, before consulting any historical AD-016 table. It selects registered Concepts whose defining OCP is still Draft, then applies current direct-OCP floors. Non-Concept contracts, Proposed registry candidates, immutable snapshots and already Canonical Concepts are not candidates.
+
+| OCP | Document state | Concept state / class | Current direct OCP floor result |
+|---|---|---|---|
+| OCP-000 | `1.5.0 / Canonical` | registry, non-Concept | not a frontier candidate |
+| OCP-001 | `1.0.0 / Canonical` | governance, non-Concept | not a frontier candidate |
+| OCP-002 | `1.5.0 / Canonical` | taxonomy, non-Concept | not a frontier candidate |
+| OCP-003 | `1.0.0 / Canonical` | Resource `Canonical` | excluded |
+| OCP-004 | `1.0.0 / Canonical` | Operation `Canonical` | completed T5 root |
+| OCP-005 | `0.2.6 / Draft` | Assignment `Accepted` | **passes L2** |
+| OCP-006 | `0.2.5 / Draft` | Constraint `Accepted` | **fails L2 on Draft OCP-005** |
+| OCP-007 | `1.1.1 / Canonical` | Organization `Canonical` | excluded |
+| OCP-008 | `1.0.0 / Canonical` | Objective `Canonical` | excluded |
+| OCP-009 | `1.0.0 / Canonical` | Capability `Canonical` | excluded |
+| OCP-010 | `0.2.0 / Draft` | Event `Accepted` | **passes L2** |
+| OCP-011 | `0.3.0 / Accepted` | non-Concept record contract | not a Concept frontier candidate |
+| OCP-012 | `0.3.0 / Accepted` | non-Concept record contract | not a Concept frontier candidate |
+| OCP-013 | `0.2.0 / Accepted` | non-Concept rule contract | not a Concept frontier candidate |
+| OCP-014 | `0.2.0 / Accepted` | non-Concept profile contract | not a Concept frontier candidate |
+| OCP-015 | `0.2.0 / Accepted` | non-Concept workflow contract | not a Concept frontier candidate |
+| OCP-016 | `1.0.0 / Canonical` | Core routing contract | not a Concept frontier candidate |
+| OCP-017 | `0.2.0 / Accepted` | Route C lifecycle contract | not a Concept frontier candidate |
+
+The post-T5 readiness frontier is therefore exactly **Assignment/OCP-005 and Event/OCP-010**. Constraint remains a registered Accepted Concept with a Draft defining OCP, but it is not on the L2-admissible frontier. The historical T6 row naming OCP-005 `0.2.3` is stale by construction: three later peer-view PATCHes produced `0.2.6`. More importantly, both historical T6 blockers named Draft OCP-004; T5 removed that blocker. For Constraint, the old two-node OCP-004/OCP-005 block has narrowed to OCP-005 alone. Historical rows remain records of their baselines, not current inventory authority.
+
+## 266. Floors, Pattern accounting, routes and consumers
+
+### 266.1 L2 and artifact-class floors
+
+OCP-005 directly depends on OCP-000/001/002/003/004, all Canonical. OCP-010 directly depends on OCP-000/001/002/004/008, all Canonical. Both therefore pass L2 for admission to a future readiness comparison; neither is promoted by that fact. OCP-006 additionally depends on Draft OCP-005 and remains blocked.
+
+Accepted AD provenance and P-001 are not miscounted as Canonical OCPs. Event's exact `P-001@0.1.0` invocation satisfies the separate OCP-001 Pattern floor because P-001 is Accepted and current. Assignment invokes no Pattern; absence is not a defect unless a later stable-surface comparison demonstrates an independently identified shared record form that requires P-001.
+
+### 266.2 P-001 ledger and `track-current`
+
+A metadata-only rule derives exactly eight primary invokers of unchanged `P-001@0.1.0`: OCP-004, OCP-007, OCP-008, OCP-010, OCP-011, OCP-012, OCP-015 and OCP-017. Four immutable reviewed snapshots—OCP-011, OCP-012, OCP-015 and OCP-017—also preserve that exact binding. Together with P-001 itself, the mechanical track-current surface is thirteen files; only the eight primary artifacts are current invokers.
+
+P-001's blob remains exact, §§11/13 remain time-anchored to T3 and §17.3 forbids editing that ledger merely because the unchanged form gains an invoker. Neither frontier option changes P-001, its current binding set or checker policy. Any future Pattern-form/version change must stop for a separate atomic track-current act.
+
+### 266.3 OCP-016 routes and consumer blast radius
+
+Assignment and Event retain their already accepted Route F fundamental Concept identities. Reassessment does not reroute them. ObservationRecord remains a P-001-invoking non-Concept record owned by OCP-010. Any future independently identified Operation/Event relationship family would be a new candidate requiring its own F/C/E/D/I ledger; neither a dashed map line nor a familiar record name chooses its route.
+
+Current primary `Depends-On` consumers are derived from all eighteen frontmatters:
+
+- OCP-005 is consumed by OCP-006, OCP-013, OCP-015 and OCP-017;
+- OCP-010 is consumed by OCP-011 and OCP-017; and
+- OCP-006, while blocked, is consumed by OCP-011, OCP-013, OCP-014, OCP-015 and OCP-017.
+
+Consumer count measures review and migration surface only. It cannot select a candidate by popularity, age or file centrality.
+
+## 267. Operation/Event topology and the unresolved relation owner
+
+The actual Concept graph retains `Operation → Objective` as Operation's only outgoing edge. `Operation ⇢ Event` is dashed and explicitly says that the relation owner remains unresolved. OCP-010 §10 independently states zero/one/many relevance and no current edge in either direction. OCP-004 §14 now states the same downstream relevance, denies generation/causation and adds no edge. OCP-017 is downstream of both OCP-004 and OCP-010 and does not reverse that topology.
+
+This unresolved owner **does not block recommendation of an Event stable-surface discovery**: discovery is precisely the bounded place to compare retain-local references, an independently routed relationship family and the current no-new-edge baseline without changing any of them. It **does block a direct Event lifecycle proposal** that would claim the relation surface complete or silently convert the dashed non-edge into authority. A future discovery must preserve E1 unless exact consumer evidence separately justifies a route, owner, dependency direction and migration contract.
+
+Two additional current OCP-010 seams remain evidence for discovery, not silent cleanup: §11 still assigns a general OutcomeAssessmentRecord to already resolved AB-056 despite Accepted OCP-011, and §14 preserves a checker-local `ScenarioAssessmentEnvelope` predating that normative contract. Their historical, replaced or still-bounded roles require explicit classification before Event lifecycle selection.
+
+## 268. Complete `Review-After` derivation method
+
+The sweep recursively inspected every text artifact under `architecture/`, `docs/` and `patterns/`, parsed only exact frontmatter keys named `Review-After`, and then adjudicated every disjunct against accepted repository evidence on the §263 baseline. It did not start from §260.2, §247 or another historical list. Immutable reviewed snapshots remain in the inventory because they physically carry the field, but they are classified separately from current wrappers. Patterns contribute zero fields.
+
+The result is **29 fields: 17 fulfilled and 12 open**. “Fulfilled” means the named review condition or event has occurred; it does not mean that the field may be edited here, that the underlying question is resolved forever or that the artifact is defective. “Open” means no exact evidence demonstrates any disjunct, not that it can never occur.
+
+The exact source manifest for that derivation is:
+
+| Source | State | Git blob | SHA-256 |
+|---|---|---|---|
+| `architecture/discovery/AD-002-state-readiness-review.md` | `0.2.1 / Accepted` | `4595621b52db7f79cbaff434627f978522b27b3b` | `6485a4f7c1fb01fdd3c170e558b730ccf8b84a61121ed4d0221ca7e9c1d03020` |
+| `architecture/discovery/AD-003-objective-boundary.md` | `0.2.1 / Accepted` | `35705ef13f7b9fb3522d94ec15d2a463269a6d7b` | `0d4fdbdb55082e394325c456f17e5a4ffa402428161fdf99218f289909a903da` |
+| `architecture/discovery/AD-004-operational-intent-boundary.md` | `0.3.2 / Accepted` | `64f4f520bf4c9add82b7212fedc293c74cab13fc` | `489466ec73dd61f0af4ca0e98a47b0f5e43f4d5ea9b0c0fc6bf77e41e4cb1a2e` |
+| `architecture/discovery/AD-005-capability-boundary.md` | `0.3.0 / Accepted` | `596f66c15343c3b56ba966b5592a6bf5395b546e` | `bfafc203f0061b716c851fa0cf628db32b3bd62f9523ed04e2b827087f967b4d` |
+| `architecture/discovery/AD-006-event-result-boundary.md` | `0.3.0 / Accepted` | `f5ea5cd9256f90a45071d60d50b23b25f6eb1e6c` | `a97bf053efab6e6f4d4f9d05b07715c73115c037f532ab80c68d68ab67aaeaae` |
+| `architecture/discovery/AD-007-capability-claim-boundary.md` | `0.4.0 / Accepted` | `5160756bba070d07ec943e687db537f009d62626` | `f2bc489dfe81cbe9c6ad3f58d1354eda1792e02e15e73e6c95f47c48ca14a4e9` |
+| `architecture/discovery/AD-008-resource-interchangeability.md` | `0.3.0 / Accepted` | `9246339fa47d13dcae4d6b0cf9094854ea9dcb53` | `d87f7a5969649d4ef9a8ac31d9224726013e86c098d1ffbb48df9e740c08bd83` |
+| `architecture/discovery/AD-009-coordination-workflow-mandate.md` | `0.2.0 / Accepted` | `40f3547600b8eae0756fa59f9de356d1e82bad4a` | `5cb43b2585f319e78b4c4a260dfca443a2a939322e74df455747c4cbfecfadf7` |
+| `architecture/discovery/AD-010-cross-vertical-visibility-agreement.md` | `0.3.0 / Accepted` | `f769d9292d9f5209c8ee35366257836b1222857f` | `8a4778ba679784634d166984dd3489b87f3680f5daa8970921c67f1a8314d488` |
+| `architecture/discovery/AD-011-state-readiness-evidence.md` | `0.3.0 / Accepted` | `cb398157d1941eb39d2585ed02993af924ff8bd7` | `bbf2916294de1c8bdc81b9e5cbdb77856126856b0c33ad11481f9395e0b85cf2` |
+| `architecture/discovery/AD-012-evidence-freshness-replay-boundary.md` | `0.3.0 / Accepted` | `7c0de0dc8dfe8ff333e8e5120ca31f829cbeaaa5` | `65267c41568a8c7d333bc809d9e7096ca8e03fef297700385f78f5923c11dfb5` |
+| `architecture/discovery/AD-013-capability-claim-support-usability.md` | `0.3.0 / Accepted` | `f85bd8a3bec98eb40a3198e9d253fb6e4e8abfa2` | `82dcdb47b710efaad0bce7938d9aa5a8a1ce24e5649b947fa4faf4773af44cac` |
+| `architecture/discovery/AD-014-operational-area-environment-boundary.md` | `0.3.0 / Accepted` | `4e9aad5631d6990c4eb77d9b9060c5a107ba0e1a` | `dedc3c9e7e3e63a4f969faa55e63206f725aac0830301959ab84bc953ec14544` |
+| `architecture/discovery/AD-015-core-boundary-specification.md` | `0.3.0 / Accepted` | `1c8a36c71220061cb111ac1ec4008e3d98922edb` | `8916542822dc9abf046fa3c19e064ff6290e63769ab2c0ab99439393c1119225` |
+| `architecture/discovery/AD-016-foundation-canonicalization-readiness.md` | `0.25.3 / Accepted` | `178bdbd0ee0e86005cb36e7b6cc30d6703b0c7c1` | `28b194105a2259f47a6d0b41bfb0205a2aa6d1ede36b250e3ce00933e7f309bb` |
+| `architecture/discovery/AD-017-objective-editorial-correction-boundary.md` | `0.3.0 / Accepted` | `231f8ace53c8b795b400ec14377d02229452982c` | `50d192db36097bda5a00c1b22bba5596a63ce1126cb44b2a7410d54cbce2717f` |
+| `architecture/discovery/AD-018-resource-stable-surface.md` | `0.2.1 / Accepted` | `f9e88f84c5c901a53df3ff8c1ab3e087660c3e63` | `065b362d0bf7d252bfd984c51170ab990b45cb579d577d3b02dc732482668067` |
+| `architecture/discovery/AD-019-organization-stable-surface.md` | `0.2.1 / Accepted` | `5573045639880958a810f25d851f47e42a646c0e` | `33ee693b4042c1dfdbbf5bf0f237d14f086ab797eda490e760c19fde6f40ac57` |
+| `architecture/discovery/AD-020-operation-stable-surface.md` | `0.2.1 / Accepted` | `d27ba9b8e8ae99a629f2b416cc43bfda4974c035` | `7a1f545d0c12f40b955bd51ecb34401de924beea75204665cd9ce6dd69d1f989` |
+| `docs/012-capability-claim-record/README.md` | `0.3.0 / Accepted` | `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| `docs/013-resource-interchangeability/README.md` | `0.2.0 / Accepted` | `658a291b4c3b9a0229aba09d485c1137723fe70b` | `a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74` |
+| `docs/014-coordination-profile/README.md` | `0.2.0 / Accepted` | `23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99` | `72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c` |
+| `docs/014-coordination-profile/reviewed-contract-v0.1.0.md` | `0.1.0 / Draft` | `a55a36f0b1a2f9c0d8fb4cd56354aad880e9c891` | `022580c6731414a533736171c5cfc111ff311fd75adc0462cb7095697a7fd0ac` |
+| `docs/015-coordination-workflow/README.md` | `0.2.0 / Accepted` | `ea60634e54faedabb8c5e08b036030c2f0e4e20b` | `6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d` |
+| `docs/015-coordination-workflow/reviewed-contract-v0.1.0.md` | `0.1.0 / Draft` | `4ee782217147c4d64e91c979a95cd9b0a8090a65` | `08f0d972c327a8572551821f66beb7675fad407cccda94f057eeb4780fc3826e` |
+| `docs/016-core-boundary/README.md` | `1.0.0 / Canonical` | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| `docs/016-core-boundary/reviewed-contract-v0.1.0.md` | `0.1.0 / Draft` | `3196f09f4a0b99160b42d1d1d27cc5a8387aae27` | `111e676ac750a2bfbe17d34fb1e8d2984af860fd38c856b824b4aff8c261c155` |
+| `docs/017-operation-lifecycle/README.md` | `0.2.0 / Accepted` | `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
+| `docs/017-operation-lifecycle/reviewed-contract-v0.1.0.md` | `0.1.0 / Draft` | `4c5fe6361a8f67fa0c7b1746e372d6404b9876a1` | `e3fc44295a8182eb97c3e39cd407daadc3434b49000b74fd4926cfa4e420cb28` |
+
+## 269. `Review-After` adjudication — all twenty-nine values
+
+| Source | Trigger class | Result on the §263 boundary | Exact evidence or absence |
+|---|---|---|---|
+| AD-002 | accepted reopening mandate or concrete Readiness consumer | **open** | no new State identity evidence and no consumer with criterion/target/freshness owners |
+| AD-003 | external adversarial boundary review | **fulfilled** | the reviewed AD-003 outcome and later OCP-008 history are accepted |
+| AD-004 | external adversarial boundary review | **fulfilled** | AD-004 boundary review and its selected downstream use completed |
+| AD-005 | external adversarial boundary review | **fulfilled** | AD-005 boundary review and Capability implementation completed |
+| AD-006 | OCP-010 and assessment-record external review | **fulfilled** | OCP-010 and OCP-011 are separately reviewed and Accepted |
+| AD-007 | downstream CapabilityClaimRecord review | **fulfilled** | OCP-012 is reviewed and Accepted |
+| AD-008 | review of AD-008C selection | **fulfilled** | AD-008C and OCP-013 cycles completed |
+| AD-009 | AB-059 visibility/agreement review | **fulfilled** | AD-010 completed that separately governed review while leaving residual questions bounded |
+| AD-010 | accepted concrete consumer/owner mandate | **open** | no later accepted visibility/agreement consumer-owner mandate exists |
+| AD-011 | State/Readiness reopening mandate or consumer | **open** | S0/R0 reopening evidence remains absent |
+| AD-012 | repeated Accepted contract-local activations or profile/usability need | **fulfilled** | Accepted OCP-011 and OCP-012 independently activate F1/A1 with exact protected use, versioned rules, immutable snapshots, explicit evaluation time and fail-safe ambiguity; values differ while the obligation form repeats |
+| AD-013 | OCP-012 falsification or consumer insufficiency | **open** | activation exists but no evidence falsifies the unified-mode transition or proves local support unusable |
+| AD-014 | local-binding falsification or reopening gate | **open** | OCP-004 preserves Outcome A boundaries; no B/C/D/E/F gate is demonstrated |
+| AD-015 | OCP-016 falsification | **open** | no routed candidate defeats route completeness/non-overlap, G2/H2 or no-projection |
+| AD-016 | separate post-T5 owner mandate | **fulfilled at this act boundary** | the explicit owner mandate for AD-016Y is the trigger; the field remains unchanged and registered, not repaired |
+| AD-017 | strict-immutability implementation or B/C evidence | **fulfilled** | OCP-008 implemented the selected strict stored-statement A+D boundary; no B/C reopening is implied |
+| AD-018 | AD-018A reopening/stop evidence | **open** | no accepted Resource reopening evidence exists |
+| AD-019 | AD-019A reopening/stop evidence | **open** | no accepted Organization reopening evidence exists |
+| AD-020 | separately mandated WJ joint proposal | **fulfilled** | PR #133 completed the separately gated WJ lifecycle act |
+| OCP-012 current | first implementation-facing `holder-capability@2` consumer or reopening | **open** | repository fixtures are reference evidence, not the named implementation-facing consumer; no AD-013 reopening exists |
+| OCP-013 current | Coordination profile review | **fulfilled** | OCP-014 is reviewed and Accepted |
+| OCP-014 current | AB-058 workflow mandate | **fulfilled** | AD-009/OCP-015 completed the separate workflow cycle |
+| OCP-014 reviewed snapshot | external review and Board decision | **fulfilled / historical** | the immutable Draft snapshot records a completed review; wrapper governs current lifecycle |
+| OCP-015 current | AB-059 visibility/agreement review | **fulfilled** | AD-010 completed the named review without importing its residual questions into OCP-015 |
+| OCP-015 reviewed snapshot | external review and Board decision | **fulfilled / historical** | the immutable Draft snapshot records the completed OCP-015 review |
+| OCP-016 current | concrete routing falsification | **open** | no exact proposal falsifies the accepted routes, split or no-projection baseline |
+| OCP-016 reviewed snapshot | external review and Board acceptance | **fulfilled / historical** | the immutable Draft snapshot records the completed OCP-016 review/acceptance |
+| OCP-017 current | production-facing proposal or incomplete selected boundary | **open** | WJ was a repository lifecycle act, expressly not production authority; no selected boundary failure exists |
+| OCP-017 reviewed snapshot | same production-facing or incompleteness trigger | **open / historical field** | the preserved Draft value has not been satisfied by production-facing evidence |
+
+The seventeen fulfilled rows include three immutable reviewed-snapshot records. Fourteen current AD/wrapper fields therefore name conditions or events already met, but this act does not decide their replacement text or whether some should remain historical. That is the exact registered remediation surface, not a merge authorization.
+
+## 270. Event-versus-condition rule adjudication
+
+The evidence does **not** support the simple rule “`Review-After` names a condition, not an event.” A condition can become true and then be stale just as a named event can occur. AD-020's one-event trigger expired quickly; AD-018/019's corrected reopening conditions remain live; AD-016's owner-mandate condition became true immediately when this act was commissioned. Grammar is not the governing distinction.
+
+The stronger candidate rule is: a `Review-After` value must be falsifiable, and any governed act that satisfies it must explicitly account for replacement, preservation as historical evidence or a separately registered repair. A self-renewing reopening condition may be durable; a one-shot event is honest only when its completion act also handles the exhausted field.
+
+That formulation would add a forward governance obligation and lifecycle-accounting rule. Recommendation-only AD-016Y records it as a candidate for a separate normative governance act; it does not make the rule binding, alter any field or authorize machine enforcement. Until such an act exists, later authors must not cite the 17-row registration as if the fields were already repaired.
+
+## 271. Outcome-fair post-T5 comparison
+
+| Option | Next possible preparation scope | Positive evidence | Burden / stop |
+|---|---|---|---|
+| Y0 — hold | prepare no frontier act | always preserves current authority | required if inventory, floors, relation owner or trigger audit cannot replay |
+| Y5D — Assignment discovery | one stable-surface discovery for OCP-005 | L2 now passes; stable identity, exact Resource/Operation binding and transition history exist | eleven open questions span amendment, intervals, replacement, reservation, quantity, roles and provenance; no outcome may be preselected |
+| Y10D — Event dependency/stable-surface discovery | one outcome-fair discovery for OCP-010 | L2 now passes; Event identity and ObservationRecord/P-001 boundary are Accepted; precise Operation/Event and assessment seams are visible | must not delete OCP-004 dependency, add an edge or silently replace OCP-011/AB-056 authority |
+| YJ — joint Assignment/Event discovery | one combined T6 discovery | both candidates share Canonical Operation as a floor | no semantic inseparability or rollback advantage is demonstrated; joint work risks weakest-member coupling |
+| YR — `Review-After` repair first | separately repair the registered trigger class | 17 fulfilled rows are concrete governance debt | repair scope and normative forward rule are not selected here and do not answer the semantic frontier |
+
+**Y10D is the leading recommendation**, not a selection. It has one exact bounded question that became newly reviewable only after T5: reconcile the actual no-edge topology with an unresolved Operation/Event relation owner while classifying the now-stale assessment seams against Accepted OCP-011. Event's existing identity and exact P-001 contract let a discovery compare complete treatments without changing the artifact. Y5D remains a fully admissible alternative; its broader unresolved amendment/effectivity/replacement surface is not a defect, but it needs a larger independent comparison. Consumer count, document order, age, readiness percentage and the prior U10D option provide no authority.
+
+Y0 remains the fail-safe. YR is separately warranted by the audit but is not a prerequisite for a bounded discovery unless a later act needs one of the exhausted fields as current authority. A separate AD-016Z Board comparison must re-anchor then-current main, replay the two-candidate frontier, compare at least Y0/Y5D/Y10D/YJ/YR and may reject this recommendation.
+
+## 272. Fresh falsification targets
+
+External review and any later AD-016Z comparison must try to demonstrate that:
+
+1. the primary-doc inventory is not exactly eighteen OCPs;
+2. another Accepted-Concept/Draft-OCP pair exists or one of Assignment/Constraint/Event is misclassified;
+3. Assignment or Event still has a pre-Canonical direct OCP dependency;
+4. Constraint no longer depends on Draft OCP-005 or is otherwise L2-admissible;
+5. a current direct consumer is omitted from the 4/2/5 sets;
+6. Event's exact P-001 binding is stale, P-001 is not Accepted or the eight-primary/four-snapshot accounting is wrong;
+7. Assignment requires a Pattern invocation merely from a record-like name rather than independently shared form obligations;
+8. OCP-016 routing makes the unresolved Operation/Event relation automatically Route F/C/E/D/I;
+9. the current Concept graph contains an Operation/Event edge or a hidden reverse dependency;
+10. the dashed relation owner can remain unresolved through a direct Event lifecycle proposal without weakening the compatibility promise;
+11. OCP-010 §11 and §14 are already unambiguously historical or current after OCP-011 acceptance;
+12. Assignment's amendment, interval, replacement, terminal or provenance questions are already outcome-complete;
+13. Assignment and Event are semantically inseparable and require one joint discovery;
+14. the complete `Review-After` class is not 29 fields or a field exists under `patterns/`;
+15. any of the 17 fulfilled classifications lacks an exact completed disjunct;
+16. any of the 12 open classifications has exact evidence that was omitted;
+17. OCP-011 and OCP-012 do not demonstrate repeated stable F1/A1 obligation form despite their separate values and owners;
+18. a production-facing OCP-017 proposal exists or repository reference fixtures count as one;
+19. “condition, not event” alone prevents exhausted metadata; or
+20. this recommendation, prior option naming, green CI, file count, consumer count, elapsed effort or completed T5 authorization can select or merge a downstream act.
+
+A positive result is recorded and returns the next decision to Y0 unless independently resolved. “Not demonstrated” is not “impossible.” Evidence requirements must remain valid under every option, including hold and rejection of the recommended route.
+
+## 273. Recommendation boundary, footprint, rollback and gates
+
+This act recommends only that a later Board comparison examine Y10D first. It does not select Y10D, authorize AD-016Z, authorize an Event or Assignment discovery, change OCP-005/OCP-006/OCP-010, repair a `Review-After`, create a relationship owner, add/remove a dependency or edge, invoke a Pattern, promote a Concept or open T6. Even preparing a downstream act requires a separate owner mandate; its merge requires its own exact-head Fable review, Codex adjudication, green CI and fresh explicit Pavlo/Board authorization. Completion of post-T5 steps 1–4 transfers no authority.
+
+The bounded footprint is AD-016 plus README, roadmap and AB-062 accounting. No `.py`, test, fixture, `*rules.yaml`, OCP version/status, Concept status, dependency, registry, taxonomy, Pattern, foundation map, `Review-After` field, backlog status or readiness estimate changes. AB-062 remains `Planned`; OCP-004 stays `1.0.0 / Canonical`, OCP-007 stays `1.1.1 / Canonical`, OCP-015/OCP-017 stay `0.2.0 / Accepted`, P-001 remains blob `c679f3e35eb015aecf6cb9a839aacd75a432e844`, the Concept distribution remains five Canonical / three Accepted / five Proposed and readiness remains approximately 72%.
+
+The OCP/Pattern structural section sweep remains at zero dangling references. The bare-integer class remains eight registered historical occurrences and is not declared closed. Rollback is one reviewed four-file act that returns AD-016 to `0.25.3` and removes only AD-016Y/current accounting. Partial rollback would leave current accounting claiming a frontier and trigger registry absent from its owning decision record.
+
+AD-016Y becomes Accepted only after exact-head Fable review, explicit Codex adjudication, green CI and a fresh Pavlo/Architecture Board authorization naming the unchanged head, followed by squash merge. The preparation mandate is only the first gate.
