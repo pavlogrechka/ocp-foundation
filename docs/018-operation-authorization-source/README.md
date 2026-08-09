@@ -409,14 +409,44 @@ All candidate-tree bindings remain exact `P-001@0.1.0`. The `track-current` poli
 
 ## 25. Stale lifecycle-carrier counter adjudication
 
-The bounded detector searches tracked Markdown for a standalone English/Ukrainian word-number or digit, followed in prose or across a Markdown table-cell separator by `Accepted` and optional `non-Concept`/`OCP` before `contract(s)`. It therefore sees prose, table cells, word-numbers and digits while excluding version fragments and identifiers.
+Two bounded detectors cover the mandated carrier-count class without treating every number as a repository count. The Accepted-contract detector searches tracked Markdown for a standalone English/Ukrainian word-number or digit, followed in prose or across a Markdown table-cell separator by `Accepted` and optional `non-Concept`/`OCP` before `contract(s)`. The P-001-carrier detector searches for a standalone English/Ukrainian cardinal, ordinal or digit directly governing `primary invoker(s)`, `primary contract(s)`, `reviewed[-contract] snapshot(s)`, `snapshot carrier(s)` or `binding-bearing file(s)`; a second clause admits `N files` only when the same clause names the mechanical P-001 or `track-current` surface/footprint. Negative lookarounds exclude identifier, version and path fragments. These forms cover prose and Markdown table cells, word-numbers, ordinals and digits; they do not claim to parse arbitrary natural-language arithmetic.
 
-Before the repository-wide scan, the detector was required to reproduce the known positive at AD-016 line 16; any non-zero search exit stopped the audit rather than being treated as an empty result. The complete exact-base scan returned two prose/word-number hits and zero prose/digit, table/word-number or table/digit hits.
+Before either repository-wide scan, the relevant detector had to reproduce a known positive on the exact base: AD-016 §1 for the Accepted-contract form and AD-016 §243 for `eight current primary invokers` plus `three reviewed-contract snapshots`. Any failed known-positive match or non-zero search exit stopped the audit rather than being treated as an empty result. The complete exact-base Accepted-contract scan returned two prose/word-number hits and zero prose/digit, table/word-number or table/digit hits.
 
-Each hit is adjudicated separately:
+Each Accepted-contract hit is adjudicated separately:
 
 1. AD-016 §1 says the foundation “now” has six Accepted non-Concept OCP contracts. It is a recurring current-state statement. The same sentence's eight Accepted Concepts and Accepted Core Boundary wording are already false on the base: the current distribution is five Canonical and three Accepted Concepts, and OCP-016 is Canonical. AD-016 `0.27.1` repairs the class by time-anchoring the sentence to the original `0.1.0` trigger instead of replacing one live counter with another.
 2. AD-016 §38 records five Accepted non-Concept contracts on exact `main@645b22b27be8ff004bd98e4b918403335f300278`. It is historical baseline evidence and remains byte-identical. No debt is created.
+
+The exact-base P-001-carrier scan returned **36 direct counter tokens across 23 matching lines**. The mechanical-file clause added no new carrier line beyond the two lines already matched directly. Every matching line is adjudicated here; multiple counters on one line share the stated disposition:
+
+| Location | Detected carrier-count form(s) | Adjudication |
+|---|---|---|
+| root README T3 milestone | six primary contracts | completed T3 act effect; historical and unchanged |
+| AD-016 §38 | six current primary invokers | exact `main@645b22b...` baseline; historical and unchanged |
+| AD-016 §243 | eight current primary invokers; three reviewed-contract snapshots | recurring current-state wording, false on the acceptance base and additionally stale for the new snapshot; repaired in `0.27.1` by binding the complete paragraph to exact AD-016W baseline `main@e9ce8beb...` and using past tense |
+| AD-016 §252 | ninth primary invoker; fourth immutable reviewed-snapshot carrier | exact AD-016X candidate-effect record for OCP-017; historical and unchanged |
+| AD-016 §254 | eight primary invokers | numbered replay of the AD-016W target; historical and unchanged |
+| AD-016 §257 | eight primary invokers; fourth immutable reviewed-snapshot binding | mandatory contract for the later WJ proposal; historical and unchanged |
+| AD-016 §266 | eight primary invokers; four immutable reviewed snapshots; thirteen-file surface | exact §263-baseline audit result; historical and unchanged |
+| AD-016 §276 | eight primary invokers; four immutable reviewed snapshots | exact §273-baseline frontier audit; historical and unchanged |
+| AD-016 §279 | eight primary and four snapshot carriers | replay result for §272 target 6; historical and unchanged |
+| AD-020 §28 | six current primary invokers | discovery accounting on its reviewed baseline; historical and unchanged |
+| AD-020 §30 | quoted six-current-invoker ledger | explicit implementation-risk quotation, not current authority; historical and unchanged |
+| AD-020 §33 target 25 | six current invokers; three immutable snapshots | Board-selection target on the selected baseline; historical and unchanged |
+| AD-020 §37 | quoted six-current-invoker ledger | explicit future-remediation stop; historical and unchanged |
+| OCP-004 §25 | nine binding-bearing files; six primary contracts; three snapshots; seventh/eighth invokers | completed Q3I remediation delta; historical act evidence and unchanged |
+| OCP-004 §30 | eight primary invokers | exact WJ baseline anchor; historical and unchanged |
+| OCP-004 §31 | eight primary invokers; three prior snapshots; fourth carrier; ninth-invoker negation | completed atomic T5 act effect; historical and unchanged |
+| OCP-017 §21 | fourth carrier; ninth-invoker negation; eight invokers; three earlier snapshots | completed OCP-017 acceptance evidence; historical and unchanged |
+| P-001 §16 | six primary invokers; three reviewed snapshots | named T3 acceptance act; historical and unchanged |
+| P-001 §17 exact-tree sentence | six primary invokers | explicitly bound to the correction act's exact tree; historical and unchanged |
+| P-001 §17 footprint sentence | three snapshots; nine files; six primary artifacts | explicitly bound to that exact tree; historical and unchanged |
+| P-001 §17 mismatch counterfactual | six invokers; three snapshots | counterfactual replay of a Pattern-only version change; historical and unchanged |
+| P-001 §17 preservation list | six invoker files; three snapshots | rollback preservation of the correction baseline; historical and unchanged |
+| checker guide Pattern policy | two primary invokers | bounded pair OCP-004/OCP-017 added by the named remediation, not a total repository count; correct and unchanged |
+
+Candidate structured metadata independently derives the current values recorded in §24: nine primary invokers, five immutable snapshot carriers, fourteen binding-bearing files and fifteen files including P-001. No prose counter supplies those values. The repaired AD-016 §243 retains its original eight/three facts as historical evidence rather than replacing them with another live total.
 
 The detector and this adjudication grant no repair authority over `Review-After`, bare-integer section references or `source:` rows. No existing `Review-After` value or trigger is edited. The mandatory byte-identical snapshot does physically repeat the Draft's historical field, so exact-frontmatter carriers change **31 → 32** and repository-wide field-shaped carriers change **32 → 33**; this is registered as immutable historical evidence, not a new trigger or repaired counter. Prior inventories remain historical records. Bare-integer references and `source:` rows remain byte-unchanged.
 
@@ -430,7 +460,7 @@ On 2026-08-09, Architecture Board:
 4. preserves all exclusions of source legitimacy, authentication, permission, Order requirement, lifecycle/Assignment mutation and production adoption;
 5. keeps AB-017 Resolved while leaving AB-002 Open;
 6. changes no Concept or Concept status and introduces no Authority, Approval or Policy Concept;
-7. accepts the AD-016 `0.27.1` current-prose correction and preserves every historical carrier count; and
+7. accepts the AD-016 `0.27.1` time-anchoring repairs for §1 and §243 current-facing prose and preserves every historical carrier count; and
 8. transfers no authority to another act.
 
 This decision becomes effective only after Fable review of the exact unchanged acceptance head, Codex adjudication, green CI on that head, separate explicit Pavlo authorization naming it and squash merge. Until then, this section and the Accepted frontmatter are proposed repository state only.
@@ -439,11 +469,11 @@ This decision becomes effective only after Fable review of the exact unchanged a
 
 OCP-018 moves `0.1.0 / Draft → 0.2.0 / Accepted`. Under OCP-001 pre-canonical versioning, the lifecycle change is substantive because Accepted makes the current semantics a Board-approved basis for dependents, so `Y` increments. PATCH is insufficient because this is not merely editorial; MAJOR/`1.0.0` is false because no contract meaning is broken or removed and the document is not Canonical.
 
-AD-016 moves `0.27.0 → 0.27.1` by PATCH. Its original trigger facts are time-anchored without changing any decision, candidate, selection, reopening rule or future obligation.
+AD-016 moves `0.27.0 → 0.27.1` by PATCH. Its original trigger facts and AD-016W P-001 ledger facts are time-anchored without changing any decision, candidate, selection, reopening rule or future obligation.
 
 No record, source profile, Organization, Capability, decision, evidence binding, Operation, Assignment, consumer or production representation migrates. Existing exact OCP-018 evidence remains bound to the same semantics. Acceptance does not rebind another source or manufacture missing provenance.
 
-Complete rollback requires a separately reviewed act that restores the primary OCP-018 lifecycle to `0.1.0 / Draft`, restores current README/backlog/roadmap/checker-guide projections, restores AD-016 `0.27.0` and its prior intro bytes, and adjudicates retention of the immutable review snapshot without rewriting historical records. A future rollback may retain AD-016 `0.27.1` only by explicitly re-authorizing that correction as an independent hygiene result; silent partial rollback is invalid. Rollback cannot remove or reinterpret AD-021's AC selection, reopen AB-017 by implication, legitimize another source or partially rewrite evidence history.
+Complete rollback requires a separately reviewed act that restores the primary OCP-018 lifecycle to `0.1.0 / Draft`, restores current README/backlog/roadmap/checker-guide projections, restores AD-016 `0.27.0` plus its prior §1 and §243 bytes, and adjudicates retention of the immutable review snapshot without rewriting historical records. A future rollback may retain AD-016 `0.27.1` only by explicitly re-authorizing both time-anchoring corrections as an independent hygiene result; silent partial rollback is invalid. Rollback cannot remove or reinterpret AD-021's AC selection, reopen AB-017 by implication, legitimize another source or partially rewrite evidence history.
 
 ## 28. Non-transfer and next gates
 
