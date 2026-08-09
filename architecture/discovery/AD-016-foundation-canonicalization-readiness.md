@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.27.0
+Version: 0.27.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -13,7 +13,7 @@ Review-After: Separate owner mandate for any post-T5 frontier or machine citatio
 
 ## 1. Trigger and purpose
 
-The foundation now has eight `Accepted` Concepts, six `Accepted` non-Concept OCP contracts, an Accepted Core Boundary contract, executable reference evidence and enforced governance. The roadmap therefore names canonicalization readiness as the next review direction.
+At the original `0.1.0` trigger, the foundation had eight `Accepted` Concepts, six `Accepted` non-Concept OCP contracts, an Accepted Core Boundary contract, executable reference evidence and enforced governance. The roadmap therefore named canonicalization readiness as the next review direction.
 
 That does not mean the repository is ready for a bulk `1.0.0` status change.
 
@@ -4318,11 +4318,11 @@ OCP-017 is independently a Route C non-Concept contract under OCP-016. Its exact
 
 ## 243. P-001 ledger stability under §17.3
 
-The current invoker set is derived from primary frontmatter `Uses-Patterns`, not from prose or snapshots:
+On the exact AD-016W baseline `main@e9ce8bebbaf4fcfd3742dfaba89fe4d1e87b15e2`, the invoker set was derived from primary frontmatter `Uses-Patterns`, not from prose or snapshots:
 
 `{OCP-004, OCP-007, OCP-008, OCP-010, OCP-011, OCP-012, OCP-015, OCP-017}`.
 
-There are exactly eight current primary invokers, all bound to `P-001@0.1.0`. The three reviewed-contract snapshots remain immutable evidence and do not add current invokers. P-001's current blob `c679f3e35eb015aecf6cb9a839aacd75a432e844` is byte-identical to the pre-remediation baseline. Sections 11 and 13 remain explicitly anchored to T3 acceptance evidence; they contain no live repository count. Section 16 remains the historical T3 act record.
+There were exactly eight primary invokers, all bound to `P-001@0.1.0`. The three reviewed-contract snapshots were immutable evidence and did not add current invokers. P-001's blob on that baseline, `c679f3e35eb015aecf6cb9a839aacd75a432e844`, was byte-identical to the pre-remediation baseline. Sections 11 and 13 remained explicitly anchored to T3 acceptance evidence; they contained no live repository count. Section 16 remained the historical T3 act record.
 
 This is the §17.3 treatment in operation: adding OCP-004 and OCP-017 did not edit the T3 ledger. A future invoker is discovered through metadata and exact checker binding, not by turning human review evidence back into a second registry.
 

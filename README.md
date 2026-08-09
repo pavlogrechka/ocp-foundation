@@ -75,7 +75,7 @@ backlog/                 відкриті питання та дорожня к�
 - OCP-014 `0.2.0 / Accepted` активує exact governed owner `ocp-coordination-consumer@0.1.0` для одного contextual requirement, fail-safe wrong-owner binding і окрему actor-authorization boundary без workflow authority;
 - AD-009 і OCP-015 `0.2.0 / Accepted` визначають окремі immutable proposal/response records, exact-revision confirmation та fail-safe evidence projection без authorization, selection або Assignment mutation;
 - OCP-004 `1.0.0 / Canonical` стабілізує Operation identity і Q3I kernel, plural Objective references, окремі F1/V1 exact-binding intent families, zero/one/many Operation-local spatial bindings, acyclic composition та bounded inline IO2; lifecycle authority винесено до Route C OCP-017 `0.2.0 / Accepted`;
-- AD-021 outcome-fair порівнює A0/AO/AE/AD/AC і обирає AC: Route C OCP-018 `0.1.0 / Draft` exact-bind-ить source profile, Organization, Capability, decision level, effectivity/supersession і OCP-017 evidence без нового Concept, Order requirement або production authority;
+- AD-021 outcome-fair порівнює A0/AO/AE/AD/AC і обирає AC; OCP-018 `0.2.0 / Accepted` приймає Route C source-profile/decision contract як основу залежних специфікацій без нового Concept, Order requirement, production profile legitimacy або permission authority;
 - spatial binding має identity лише в межах owning Operation, не є Operational Area Concept або P-001 record і не створює Resource equality, Assignment, overlap consequence, coordination, suitability, authorization чи Readiness;
 - reference checker перевіряє fixtures, lifecycle projections, exact-version evaluation, Operation F1/V1/IO2/spatial evidence, OCP-017 LT2 history/completeness/authorization/alignment envelope, OCP-018 source/authorizer/level/effectivity evidence, Capability registry resolution, Event/Observation references, OutcomeAssessmentRecord, accepted Coordination workflow evidence, integrated scenario, Concept status synchronization і dependency graph;
 - assessment module має власний exact `assessment-rules.yaml` manifest за чинним module-manifest precedent;
@@ -139,6 +139,6 @@ backlog/                 відкриті питання та дорожня к�
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
 - reference suite містить 141 non-sensitive fixtures і 201 unit tests;
-- не-нормативна оцінка загальної foundation-готовності — **≈72%**; п'ять Concepts Canonical, три лишаються Accepted, OCP-017 є Accepted lifecycle contract, OCP-018 — Draft source contract, а T6–T10 потребують власних discovery/lifecycle рішень і свіжих Board gates.
+- не-нормативна оцінка загальної foundation-готовності — **≈72%**; п'ять Concepts Canonical, три лишаються Accepted, OCP-017 і OCP-018 є Accepted Route C contracts, а production source profiles та T6–T10 потребують власних discovery/lifecycle рішень і свіжих Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
