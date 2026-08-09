@@ -8,7 +8,7 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 91% | Capability, Objective, Resource, Organization та Operation є Canonical; Assignment, Constraint і Event лишаються Accepted, OCP-017 є Route C Accepted non-Concept, а candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 25% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow і Draft OCP-018 authorization-source contract з executable fail-safe evidence; production source profiles, reservation і conflict models не завершені |
+| Operational rules and workflows | 25% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow і Accepted OCP-018 authorization-source contract з executable fail-safe evidence; production source profiles, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
 | **Загальна foundation-готовність** | **≈72%** | T5 WJ joint lifecycle unit стабілізує Operation і приймає окремий Route C lifecycle contract без semantic migration; T6–T10, known reference debt і кожен відкритий Operation backlog item зберігають окремі gates |
 
@@ -158,7 +158,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Assignment / Operation lifecycle coordination
 - [x] Coordination proposal-response evidence workflow — `OCP-015`
 - [x] Cross-vertical visibility/agreement boundary — `AD-010` selects independent V0/A0 no-new-authority controls
-- [x] Operation authorization source model — AD-021 selects Route C OCP-018 `0.1.0 / Draft` with exact source/Organization/Capability/level/effectivity evidence and material negative fixtures, without resolving Order or introducing Authority/Approval/Policy Concepts
+- [x] Operation authorization source model — AD-021 selects AC and OCP-018 `0.2.0 / Accepted` governs the Route C source/Organization/Capability/level/effectivity evidence contract with material negative fixtures, without resolving Order, legitimizing a production source or introducing Authority/Approval/Policy Concepts
 - [ ] Production source profiles and any broader approval semantics
 - [ ] Reservation and Allocation decision
 - [ ] Conflict and remediation model

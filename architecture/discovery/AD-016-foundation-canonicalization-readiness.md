@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.27.0
+Version: 0.27.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -13,7 +13,7 @@ Review-After: Separate owner mandate for any post-T5 frontier or machine citatio
 
 ## 1. Trigger and purpose
 
-The foundation now has eight `Accepted` Concepts, six `Accepted` non-Concept OCP contracts, an Accepted Core Boundary contract, executable reference evidence and enforced governance. The roadmap therefore names canonicalization readiness as the next review direction.
+At the original `0.1.0` trigger, the foundation had eight `Accepted` Concepts, six `Accepted` non-Concept OCP contracts, an Accepted Core Boundary contract, executable reference evidence and enforced governance. The roadmap therefore named canonicalization readiness as the next review direction.
 
 That does not mean the repository is ready for a bulk `1.0.0` status change.
 
