@@ -100,6 +100,7 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
             if name.startswith("invalid-positive-g4-missing-")
         }
         self.assertEqual(len(fixtures), len(self.G4_BINDING_GROUPS))
+        covered_groups: set[str] = set()
         for name, fixture in fixtures.items():
             with self.subTest(fixture=name):
                 attempt = fixture["snapshot"]["derivation_request"]["activation_attempt"]
@@ -109,6 +110,9 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
                     if fields <= set(attempt)
                 }
                 declared_missing = set(fixture["gate_probe"]["missing_groups"])
+                self.assertEqual(len(declared_missing), 1)
+                self.assertTrue(covered_groups.isdisjoint(declared_missing))
+                covered_groups.update(declared_missing)
                 self.assertEqual(
                     set(self.G4_BINDING_GROUPS) - supplied_groups,
                     declared_missing,
@@ -116,6 +120,7 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
                 derived = derive_conflict_establishment_result(fixture["snapshot"])
                 self.assertEqual(derived, "indeterminate")
                 self.assertNotEqual(derived, "conflict")
+        self.assertEqual(covered_groups, set(self.G4_BINDING_GROUPS))
 
     def test_complete_self_declared_positive_g4_attempt_has_no_authority(self) -> None:
         fixture = self.fixtures["invalid-positive-g4-unverified-complete"]

@@ -94,20 +94,23 @@ P-001 `0.1.0 / Accepted` supplies record form only and cannot prove a need for r
 
 ## 5. Plausible candidates and exact missing elements
 
-Six repository surfaces are plausible enough to require individual gate adjudication. “Partial” inputs are named to prevent a nearby field from being mistaken for the missing governed binding.
+The individual-adjudication set is reproducible rather than mention-count based. After excluding governance/routing/registry artifacts, the upstream-only OCP-006 evidence provider and OCP-019 self-consumption, a surface enters the set when it meets at least one rule: it owns a structural Conflict field or open relation for its governed subject; it is an Accepted consumer/profile/workflow/lifecycle surface that names conflict handling, a responsibility pointer or conflict-shaped input; or it is the Draft defining contract of an Accepted Concept with its own normative Conflict boundary or open question. Mere local `conflicting` ambiguity in a record/result contract does not qualify.
+
+Seven repository surfaces meet that rule. “Partial” inputs are named to prevent a nearby field from being mistaken for the missing governed binding.
 
 | Candidate | Existing partial evidence | Missing §9/G4 elements | Object-class evidence |
 |---|---|---|---|
 | OCP-004 Operation | Canonical baseline; local `conflicts_with` value with source, target and provenance | no declaration that OCP-004 consumes authoritative Conflict; no positive result need; no positive rule; no exact OCP-006 evaluation set/context activation; no legitimate criterion owner/evaluator | current evidence selects only a snapshot-local value; independent record and fundamental Concept are expressly unproved |
 | OCP-005 Assignment | Assignment identities and intervals; open questions mention simultaneous conflict | defining OCP is Draft, so no Accepted consumer; no exact need, rule, pair/set snapshot, context or owner/evaluator | pair/set projection is only a hypothesis; record/Concept identity absent |
 | OCP-008 Objective | Canonical identity contract | no consumer or need by explicit verdict; no rule, snapshot/context or owner/evaluator | a future relation projection is unadmitted; record/Concept identity absent |
+| OCP-010 Event | Accepted Concept with a Draft defining contract and a normative Constraint/Conflict/Risk boundary | no Accepted consumer contract or positive result need; no rule, Conflict snapshot/context or owner/evaluator | current boundary contains only non-implications; projection/record/Concept identity all remain unselected |
 | OCP-014 Coordination profile | Accepted exact consumer profile for OCP-013 requirements | conflict use explicitly excluded; no Conflict need, rule, Conflict snapshot/context or owner/evaluator | consumer-local projection is only hypothetical |
 | OCP-015 Coordination workflow | Accepted exact proposal/response evidence and heads | does not settle disagreement; no Conflict need, positive rule, OCP-006 snapshot/context or criterion owner/evaluator | workflow projection is plausible but unselected; record/Concept identity absent |
 | OCP-017 Operation lifecycle | Accepted exact transition and profile envelopes | no transition declares a Conflict need; no positive rule, Conflict evaluation set/context or accepted criterion owner/evaluator | a Route D profile result is plausible; no record/Concept identity evidence |
 
 The governed object-class decision is missing for every row. The last column bounds the evidence-supported hypotheses only; it does not select a positive result class.
 
-OCP-011, OCP-012 and OCP-018 use the ordinary word `conflicting` only as local ambiguity/fail-safe classification. OCP-013 already derives a different exact eligibility result. OCP-006 provides the ConstraintEvaluationRecord inputs. None is a hidden seventh positive candidate.
+OCP-011, OCP-012 and OCP-018 use the ordinary word `conflicting` only as local ambiguity/fail-safe classification. OCP-013 already derives a different exact eligibility result without naming Conflict consumption. OCP-006 provides the ConstraintEvaluationRecord inputs. No excluded document satisfies the rule above, so none is a hidden eighth positive candidate.
 
 ## 6. Gate verdict and no-comparison stop
 
@@ -124,6 +127,7 @@ No positive contract, result vocabulary, validation ID, rule manifest entry, che
 | OCP-004 | a separate Accepted Operation conflict-use activation/profile exact-binding OCP-004 `1.0.0`, the protected `conflicts_with` use, source/target Operation and OCP-006 snapshots, versioned criterion and legitimate owner/evaluator |
 | OCP-005 | first accept an Assignment compatibility consumer contract with an exact pair/set result need and owner; Concept status alone is insufficient |
 | OCP-008 | first accept an Objective-relation consumer and semantic owner that declares an exact positive use |
+| OCP-010 | first accept an Event-side conflict-use consumer that declares the exact Event/Observation and evaluation snapshots, positive rule and legitimate criterion owner; Event Concept status alone is insufficient |
 | OCP-014 | first accept a separate Coordination conflict-use profile with protected use, parties/context, evaluation inputs and criterion authority |
 | OCP-015 | first accept a downstream conflict-resolution consumer or compatible activation that declares the protected result use and exact rule bindings |
 | OCP-017 | first accept one concrete domain completeness profile that explicitly needs and owns the Conflict result |
