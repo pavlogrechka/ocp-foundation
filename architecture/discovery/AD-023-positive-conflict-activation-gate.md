@@ -50,12 +50,12 @@ Anchors establish reviewed inputs only. They cannot provide an absent consumer, 
 
 ## 3. Gate applied before model comparison
 
-OCP-016 G4 requires each positive-capable activation to exact-bind one Accepted consumer, baseline, rule version, input snapshot, evaluation context and legitimate owner/evaluator. It forbids inheritance across activations, baseline rewrite and authority transfer by matching labels. OCP-019 §9 adds the consumer's explicit positive result need and requires an object-class decision among a projection, independently identified P-001 record and evidence for a separately admitted fundamental Concept.
+OCP-016 G4 requires each positive-capable activation to exact-bind one Accepted consumer, baseline, rule version, input snapshot, evaluation context and legitimate owner/evaluator. It forbids inheritance across activations, baseline rewrite and authority transfer by matching labels. OCP-019 §9 adds the positive result need declared by that consumer and requires an object-class decision among a projection, independently identified P-001 record and evidence for a separately admitted fundamental Concept.
 
 The resulting precondition has six checked groups:
 
 1. a concrete Accepted consumer of the positive result;
-2. its exact baseline and self-declared positive result need;
+2. its exact baseline and positive result need declared by that consumer;
 3. one versioned positive rule;
 4. one exact input snapshot and evaluation context;
 5. one legitimate criterion owner/evaluator; and
@@ -104,6 +104,8 @@ Six repository surfaces are plausible enough to require individual gate adjudica
 | OCP-014 Coordination profile | Accepted exact consumer profile for OCP-013 requirements | conflict use explicitly excluded; no Conflict need, rule, Conflict snapshot/context or owner/evaluator | consumer-local projection is only hypothetical |
 | OCP-015 Coordination workflow | Accepted exact proposal/response evidence and heads | does not settle disagreement; no Conflict need, positive rule, OCP-006 snapshot/context or criterion owner/evaluator | workflow projection is plausible but unselected; record/Concept identity absent |
 | OCP-017 Operation lifecycle | Accepted exact transition and profile envelopes | no transition declares a Conflict need; no positive rule, Conflict evaluation set/context or accepted criterion owner/evaluator | a Route D profile result is plausible; no record/Concept identity evidence |
+
+The governed object-class decision is missing for every row. The last column bounds the evidence-supported hypotheses only; it does not select a positive result class.
 
 OCP-011, OCP-012 and OCP-018 use the ordinary word `conflicting` only as local ambiguity/fail-safe classification. OCP-013 already derives a different exact eligibility result. OCP-006 provides the ConstraintEvaluationRecord inputs. None is a hidden seventh positive candidate.
 
