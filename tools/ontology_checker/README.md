@@ -12,6 +12,7 @@ Implemented validators:
 - Operation identity, Objective resolution, F1/V1 explicit-intent evidence, local spatial-binding exact profile/snapshot envelope, bounded IO2 values and Q3I composition checks;
 - Accepted OCP-017 Operation lifecycle predecessor-chain history, exact completeness/authorization evidence bindings, stage projection and terminal Assignment alignment;
 - Accepted OCP-018 authorization-source profiles, identified decision records, authorizer Organization/Capability/level bindings, effectivity, supersession and OCP-017 acceptance derivation;
+- Draft OCP-019 negative Conflict-establishment requests with exact ConstraintEvaluationRecord references and fail-safe incomplete/conflicting/stale evidence handling;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
@@ -66,6 +67,7 @@ The checker uses exact module manifests:
 - `coordination-workflow-rules.yaml` — accepted OCP-015 proposal/response record and evidence-projection module.
 - `operation-lifecycle-rules.yaml` — OCP-004 `0.9.0` Q3I evidence kernel and Accepted OCP-017 LT2 lifecycle module; the harness remains exact-bound to the reviewed `0.9.0` body incorporated into OCP-004 `1.0.0`.
 - `operation-authorization-rules.yaml` — Accepted OCP-018 exact source-profile, decision, level, eligibility, effectivity, supersession and OCP-017 acceptance rules.
+- `conflict-derivation-rules.yaml` — Draft OCP-019 negative establishment-boundary and prohibited positive-authority rules.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
@@ -179,6 +181,10 @@ For OCP-004 the harness checks:
 For OCP-017, a lifecycle envelope names one exact Operation and carries an authoritative set of `operation-lifecycle-transition@1` records. `predecessor_transition_ref` creates the single chain. The current stage is the target of its unique leaf, not the last YAML item or greatest timestamp. Timestamp order is checked only along the already exact chain. Branches, cycles, disconnected records, competing roots/leaves and materialized-stage mismatch fail closed.
 
 For Accepted OCP-018, `operation-authorization-decision@1` exact-binds one source profile, source owner, subject Operation, authorizer Organization, Capability version, decision level and input snapshot. A unique effective supersession head derives `accepted` only for an eligible `authorize` decision whose exact OCP-017 binding matches. Denial derives `denied`; stale, ineligible, wrong-level, conflicting, unresolved or forbidden coupling derives `indeterminate`. Stored `accepted`, newest timestamp, list order or source/issuer count cannot override the derivation.
+
+For Draft OCP-019, `conflict-establishment-boundary@1` exact-binds a derivation request to one or more OCP-006 `ConstraintEvaluationRecord` references, one context and one input snapshot. Complete definitive evidence derives only `conflict_not_established`; missing, duplicate, contradictory, cross-bound, stale or indeterminate evidence derives `indeterminate`. Neither one violation nor many violations can derive Conflict. Positive Conflict, Risk, lifecycle, Assignment, remediation, precedence/waiver and quantity/capacity couplings are rejected.
+
+Manifests may opt into direct fixture coverage with `fixture_coverage.status: complete` and one fixture concept. A generic test requires the exact validation-ID set to be named by direct fixture expectations. OCP-018 and OCP-019 opt in; legacy manifests make no untrue completeness claim.
 
 Every transition exact-binds one domain completeness profile and passed input snapshot. Only the transition to `Authorized` carries an exact external authorization-evidence binding; the checker validates its structural agreement but neither authenticates the source owner nor grants permission. Terminal transitions exact-enumerate Assignment dispositions at the transition time using OCP-005 `assignment_effective_at`; the evidence cannot mutate Assignment.
 

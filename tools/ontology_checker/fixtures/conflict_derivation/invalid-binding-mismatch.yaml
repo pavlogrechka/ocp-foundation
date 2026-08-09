@@ -1,0 +1,7 @@
+case_id: conflict-boundary-invalid-binding-mismatch
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_BINDING_MISMATCH]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-10, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-10, input_snapshot_ref: SNAPSHOT-SYNTH-10, evaluation_refs: [EVAL-SYNTH-10], derived_at: 2099-10-02T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-10, constraint_ref: CONSTRAINT-SYNTH-10, constraint_version_ref: constraint-synth-10@1, context_ref: CONTEXT-SYNTH-OTHER, input_snapshot_ref: SNAPSHOT-SYNTH-10, evaluated_at: 2099-10-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-10], evaluator_ref: EVALUATOR-SYNTH-10}

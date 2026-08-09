@@ -1,0 +1,8 @@
+case_id: conflict-boundary-invalid-evaluation-ambiguous
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_EVALUATION_AMBIGUOUS]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-9, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-9, input_snapshot_ref: SNAPSHOT-SYNTH-9, evaluation_refs: [EVAL-SYNTH-9A, EVAL-SYNTH-9B], derived_at: 2099-09-02T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-9A, constraint_ref: CONSTRAINT-SYNTH-9, constraint_version_ref: constraint-synth-9@1, context_ref: CONTEXT-SYNTH-9, input_snapshot_ref: SNAPSHOT-SYNTH-9, evaluated_at: 2099-09-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-9A], evaluator_ref: EVALUATOR-SYNTH-9}
+    - {evaluation_id: EVAL-SYNTH-9B, constraint_ref: CONSTRAINT-SYNTH-9, constraint_version_ref: constraint-synth-9@1, context_ref: CONTEXT-SYNTH-9, input_snapshot_ref: SNAPSHOT-SYNTH-9, evaluated_at: 2099-09-01T00:00:00Z, result: satisfied, evidence_refs: [EVIDENCE-SYNTH-9B], evaluator_ref: EVALUATOR-SYNTH-9}

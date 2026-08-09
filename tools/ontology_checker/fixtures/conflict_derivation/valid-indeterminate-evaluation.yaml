@@ -1,0 +1,7 @@
+case_id: conflict-boundary-valid-indeterminate-evaluation
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: true, error_codes: []}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-4, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-4, input_snapshot_ref: SNAPSHOT-SYNTH-4, evaluation_refs: [EVAL-SYNTH-4], derived_at: 2099-04-02T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-4, constraint_ref: CONSTRAINT-SYNTH-4, constraint_version_ref: constraint-synth-4@1, context_ref: CONTEXT-SYNTH-4, input_snapshot_ref: SNAPSHOT-SYNTH-4, evaluated_at: 2099-04-01T00:00:00Z, result: indeterminate, evidence_refs: [EVIDENCE-SYNTH-4], evaluator_ref: EVALUATOR-SYNTH-4}

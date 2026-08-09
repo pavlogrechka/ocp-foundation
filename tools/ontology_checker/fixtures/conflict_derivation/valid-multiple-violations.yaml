@@ -1,0 +1,8 @@
+case_id: conflict-boundary-valid-multiple-violations
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: true, error_codes: []}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-2, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-2, input_snapshot_ref: SNAPSHOT-SYNTH-2, evaluation_refs: [EVAL-SYNTH-2A, EVAL-SYNTH-2B], derived_at: 2099-02-02T00:00:00Z, evidence_state: current, stored_result: conflict_not_established}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-2A, constraint_ref: CONSTRAINT-SYNTH-2A, constraint_version_ref: constraint-synth-2a@1, context_ref: CONTEXT-SYNTH-2, input_snapshot_ref: SNAPSHOT-SYNTH-2, evaluated_at: 2099-02-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-2A], evaluator_ref: EVALUATOR-SYNTH-2}
+    - {evaluation_id: EVAL-SYNTH-2B, constraint_ref: CONSTRAINT-SYNTH-2B, constraint_version_ref: constraint-synth-2b@1, context_ref: CONTEXT-SYNTH-2, input_snapshot_ref: SNAPSHOT-SYNTH-2, evaluated_at: 2099-02-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-2B], evaluator_ref: EVALUATOR-SYNTH-2}

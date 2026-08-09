@@ -1,0 +1,7 @@
+case_id: conflict-boundary-invalid-stale-input
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_STALE_INPUT]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-11, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-11, input_snapshot_ref: SNAPSHOT-SYNTH-11, evaluation_refs: [EVAL-SYNTH-11], derived_at: 2099-11-02T00:00:00Z, evidence_state: stale, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-11, constraint_ref: CONSTRAINT-SYNTH-11, constraint_version_ref: constraint-synth-11@1, context_ref: CONTEXT-SYNTH-11, input_snapshot_ref: SNAPSHOT-SYNTH-11, evaluated_at: 2099-11-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-11], evaluator_ref: EVALUATOR-SYNTH-11}

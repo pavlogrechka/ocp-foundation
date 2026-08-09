@@ -1,0 +1,8 @@
+case_id: conflict-boundary-valid-mixed-definitive-results
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: true, error_codes: []}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-3, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-3, input_snapshot_ref: SNAPSHOT-SYNTH-3, evaluation_refs: [EVAL-SYNTH-3A, EVAL-SYNTH-3B], derived_at: 2099-03-02T00:00:00Z, evidence_state: current, stored_result: conflict_not_established}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-3A, constraint_ref: CONSTRAINT-SYNTH-3A, constraint_version_ref: constraint-synth-3a@1, context_ref: CONTEXT-SYNTH-3, input_snapshot_ref: SNAPSHOT-SYNTH-3, evaluated_at: 2099-03-01T00:00:00Z, result: satisfied, evidence_refs: [EVIDENCE-SYNTH-3A], evaluator_ref: EVALUATOR-SYNTH-3}
+    - {evaluation_id: EVAL-SYNTH-3B, constraint_ref: CONSTRAINT-SYNTH-3B, constraint_version_ref: constraint-synth-3b@1, context_ref: CONTEXT-SYNTH-3, input_snapshot_ref: SNAPSHOT-SYNTH-3, evaluated_at: 2099-03-01T00:00:00Z, result: not_applicable, evidence_refs: [EVIDENCE-SYNTH-3B], evaluator_ref: EVALUATOR-SYNTH-3}

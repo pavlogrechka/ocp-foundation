@@ -125,6 +125,13 @@ from .operation_authorization import (
     validate_operation_authorization_dataset,
     validate_operation_authorization_fixture,
 )
+from .conflict_derivation import (
+    CONFLICT_DERIVATION_DERIVATION_RULES,
+    CONFLICT_DERIVATION_ERROR_CODES,
+    derive_conflict_establishment_result,
+    validate_conflict_derivation_dataset,
+    validate_conflict_derivation_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -200,6 +207,8 @@ def validate_reference_fixture(fixture):
         return validate_operation_q3i_fixture(fixture)
     if concept == "OperationAuthorizationSourceDataset":
         return validate_operation_authorization_fixture(fixture)
+    if concept == "ConflictDerivationBoundaryDataset":
+        return validate_conflict_derivation_fixture(fixture)
     return validate_fixture(fixture)
 
 

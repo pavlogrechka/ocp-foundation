@@ -1,0 +1,4 @@
+case_id: conflict-boundary-invalid-fixture-shape
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_FIXTURE_INVALID]}
+snapshot: []

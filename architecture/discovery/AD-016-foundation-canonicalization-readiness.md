@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.27.1
+Version: 0.27.2
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -456,7 +456,7 @@ The audit uses:
 | OCP-000 | compatibility meaning of the “Operational Space First” principle while Operational Space remains Proposed | future Proposed candidates and later compatible registry additions | none identified |
 | OCP-001 | selected dependency floors, promotion units and atomicity rules from AD-016 | production deployment policy outside ontology governance | historical roadmap prose that no longer describes the current checker phase |
 | OCP-002 | whether the top-level category tree is normative, stabilized, or explicitly excluded from the Canonical surface | future categories and Concepts admitted through OCP-016 | projections for already resolved Result, State/Readiness and Operational Area decisions are already current |
-| P-001 | Pattern acceptance evidence and exact version treatment for six current invokers | future optional modules and new domain invokers | §11's future-tense extraction/evidence statement |
+| P-001 | Pattern acceptance evidence and exact version treatment for the six invokers that were current on exact AD-016A baseline `main@37d8b672` | future optional modules and new domain invokers | §11's future-tense extraction/evidence statement |
 | OCP-003 Resource | `Unit` / Organization / Organizational Resource identity mapping where it affects the current Resource subtype contract | availability, Readiness, Resource Group, quantity/reservation and implementation mechanisms | none identified |
 | OCP-004 Operation | current lifecycle/authorization/composition questions that can change existing stages, transition validity, parent/child or terminal behavior | templates, reusable spatial identity, domain geometry/environment, future State/Readiness and separate conflict models | resolved Operational Area wording is already current |
 | OCP-005 Assignment | amendment, retroactivity, interval and replacement overlap/gap rules that alter present lifecycle/history guarantees | Reservation, quantity, role taxonomy, coordination roles and future availability/Readiness | obsolete reference to reconsidering superseded ADR-DRAFT-007 |
@@ -3915,11 +3915,11 @@ Two current prose seams also need explicit classification. §11 still says that 
 
 ## 218. P-001 Pattern-floor reassessment
 
-P-001 remains `0.1.0 / Accepted`. Exactly six primary OCP artifacts invoke `P-001@0.1.0`: OCP-007, OCP-008, OCP-010, OCP-011, OCP-012 and OCP-015. OCP-007 and OCP-008 are Canonical, so Canonical consumption of an Accepted Pattern is established rather than newly introduced by this frontier.
+On exact AD-016U baseline `main@2793d930`, P-001 was `0.1.0 / Accepted`. Exactly six primary OCP artifacts invoked `P-001@0.1.0`: OCP-007, OCP-008, OCP-010, OCP-011, OCP-012 and OCP-015. OCP-007 and OCP-008 were Canonical, so Canonical consumption of an Accepted Pattern was established rather than newly introduced by this frontier.
 
 This is not an L2 defect. OCP-001 applies L2 to direct OCP dependencies and separately requires an invoked Pattern to be Accepted and exact-version-bound. Pattern lifecycle currently has no Canonical status. Count, centrality and Canonical invokers cannot manufacture a Pattern promotion rule.
 
-The audit still matters. A future P-001 version change would require atomic `track-current` treatment of all six invokers and reviewed snapshots. Separately, OCP-004/OCP-005/OCP-006 must classify whether their record-like structures should invoke P-001. Candidate-local applicability gaps do not prove that P-001 itself is inadequate, and AD-016U authorizes neither a Pattern revision nor new invocations.
+The audit still matters. Relative to that exact baseline, a future P-001 version change would have required atomic `track-current` treatment of all six then-current invokers and reviewed snapshots. Separately, OCP-004/OCP-005/OCP-006 must classify whether their record-like structures should invoke P-001. Candidate-local applicability gaps do not prove that P-001 itself is inadequate, and AD-016U authorizes neither a Pattern revision nor new invocations.
 
 
 ## 219. Current-statement bridge guard
@@ -4180,7 +4180,7 @@ The discovery must include an explicit hold outcome, in-place and split-authorit
 
 ## 234. Preserved Pattern and OCP-007 bridge obligations
 
-P-001 remains `0.1.0 / Accepted`, and all six current invokers remain exact-bound. AD-020 may compare candidate-local applicability for OCP-004 structures; it may not revise P-001, invent a Canonical Pattern status, change an existing invoker or infer invocation from record count.
+On exact AD-016V baseline `main@844b6fdf`, P-001 was `0.1.0 / Accepted`, and all six then-current invokers were exact-bound. AD-020 may compare candidate-local applicability for OCP-004 structures; it may not revise P-001, invent a Canonical Pattern status, change an existing invoker or infer invocation from record count.
 
 Any future act touching OCP-007's current version, lifecycle or compatibility wrapper must explicitly name current §34 and classify its prior current statement as historical in the same proposal. Neither U4D nor a future Operation discovery has permission to touch OCP-007, but the guard remains part of downstream review discipline.
 
@@ -5253,3 +5253,9 @@ The bounded footprint is exactly AD-016 plus repository README, architecture bac
 There is no data, stored-record, reference, dependency or evidence migration. Rollback is one reviewed four-file act restoring AD-016 `0.26.0` and the prior current accounting; it does not rewrite AD-016Y or alter any field. Partial rollback would leave current accounting claiming a comparison, corrected inventory and selection absent from the owning decision record.
 
 AD-016Z requires on one unchanged head: exact-head Fable external review, explicit Codex adjudication, green required CI and fresh Pavlo/Architecture Board merge authorization naming that head. Any head change resets all gates. Prior authorization, completion of AD-016Y or post-T5 steps 1–4, and acceptance of this comparison cannot authorize the selected discovery, the normative rule act, YR or T6.
+
+## 284. AB-038 carrier-counter debt closure
+
+AD-022 closes the four current-facing carrier-counter statements registered by OCP-018 §25. Section 23 is bound to exact AD-016A baseline `main@37d8b672`; both §218 statements are bound to exact AD-016U baseline `main@2793d930`; §234 is bound to exact AD-016V baseline `main@844b6fdf`. Independent structured metadata confirms that each named baseline had exactly six primary P-001 invokers.
+
+No six-count is replaced by a later live total. The edits change only tense and temporal scope, preserve the original historical evidence and change no selection, obligation, authority, dependency, Pattern binding or `Review-After`. AD-016 therefore moves `0.27.1 → 0.27.2 / Accepted` by PATCH. This closure does not claim a complete natural-language counter detector or authorize another carrier repair.

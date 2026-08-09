@@ -1,0 +1,8 @@
+case_id: conflict-boundary-invalid-forbidden-coupling
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_FORBIDDEN_COUPLING]}
+snapshot:
+  assignment_mutation: cancel
+  derivation_request: {request_id: REQUEST-SYNTH-14, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-14, input_snapshot_ref: SNAPSHOT-SYNTH-14, evaluation_refs: [EVAL-SYNTH-14], derived_at: 2099-12-22T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-14, constraint_ref: CONSTRAINT-SYNTH-14, constraint_version_ref: constraint-synth-14@1, context_ref: CONTEXT-SYNTH-14, input_snapshot_ref: SNAPSHOT-SYNTH-14, evaluated_at: 2099-12-21T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-14], evaluator_ref: EVALUATOR-SYNTH-14}
