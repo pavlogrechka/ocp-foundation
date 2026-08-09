@@ -1,0 +1,6 @@
+case_id: operation-authorization-invalid-fixture-shape
+concept: OperationAuthorizationSourceDataset
+expected:
+  valid: false
+  error_codes: [OPERATION_AUTHORIZATION_FIXTURE_INVALID]
+snapshot: []

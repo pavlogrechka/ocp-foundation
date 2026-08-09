@@ -282,6 +282,8 @@ Adding this exact invoker does not edit P-001's time-anchored T3 ledger. Current
 `tools/ontology_checker/operation-authorization-rules.yaml` is the complete source-bound rule manifest. `operation_authorization.py` implements the finite reference derivation. Fixtures include:
 
 - one accepted exact authorize decision with a prior superseded denial;
+- malformed fixture shape, invalid source-profile shape and an unresolved profile reference;
+- duplicate decision IDs and an invalid eligibility-binding result;
 - expired decision evidence that cannot remain accepted;
 - an ineligible authorizer result that fails safe;
 - an unresolved Capability version that cannot satisfy a profile level;
@@ -291,7 +293,7 @@ Adding this exact invoker does not edit P-001's time-anchored T3 ledger. Current
 - branching conflicting successor heads; and
 - forbidden mandatory-Order/concept coupling.
 
-Focused unit tests replay every fixture, require exact error sets, check decision-order independence and assert manifest completeness. The general fixture harness executes every file in both PR and main contexts.
+Every declared validation rule ID has direct fixture evidence. Focused unit tests replay every fixture, require exact error sets, check decision-order independence and assert manifest completeness. The general fixture harness executes every file in both PR and main contexts.
 
 All examples and fixtures are invented for this repository. They contain only synthetic identifiers, synthetic future timestamps and abstract capability/profile values. They contain no real operations, coordinates, frequencies, unit designators, personnel, credentials, operational windows or material copied from another project.
 

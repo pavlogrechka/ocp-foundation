@@ -212,7 +212,7 @@ The atomic Draft includes:
 2. a dedicated checker module and central fixture dispatch;
 3. focused unit tests for exact fixture results, manifest equality and order independence;
 4. a positive authorize fixture with a superseded historical denial; and
-5. separate material negatives for stale evidence, ineligible authorizer, unresolved or malformed Organization/Capability evidence, malformed history, denial, wrong level, conflicting heads and prohibited mandatory-Order/concept coupling.
+5. separate material negatives for fixture shape, invalid or unresolved source profiles, duplicate decisions, invalid eligibility bindings, stale evidence, ineligible authorizers, unresolved or malformed Organization/Capability evidence, malformed history, denial, wrong level, conflicting heads and prohibited mandatory-Order/concept coupling.
 
 The fixtures mechanically prove only finite structural and derivation obligations. They do not authenticate a real owner or prove real operational permission. Those responsibilities stay outside this repository slice.
 
@@ -233,7 +233,7 @@ On merge only:
 - AB-017 becomes `Resolved` by AD-021 + OCP-018 Draft;
 - `Operational rules and workflows` moves from 23% to 25% because a governed executable source contract now exists, while overall readiness remains `≈72%` and no T6 scope opens;
 - P-001 gains one current structured invoker without editing its time-anchored T3 ledger; and
-- the executable suite grows from 125 to 136 fixtures and from 191 to 201 unit tests as required.
+- the executable suite grows from 125 to 141 fixtures and from 191 to 201 unit tests as required.
 
 AB-002 remains `Open`. AB-015, AB-016, AB-018, AB-020, AB-023 and AB-028 retain their statuses. No status changes by implication.
 
