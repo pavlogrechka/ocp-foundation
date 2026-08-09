@@ -1,0 +1,33 @@
+case_id: operation-authorization-invalid-wrong-decision-level
+concept: OperationAuthorizationSourceDataset
+expected:
+  valid: false
+  error_codes: [OPERATION_AUTHORIZATION_LEVEL_INVALID, OPERATION_AUTHORIZATION_EVIDENCE_BINDING_INVALID]
+snapshot:
+  evaluation_time: 2099-04-01T00:00:00Z
+  operations: [{operation_id: OP-SYNTH-ALPHA}]
+  organizations:
+    - {organization_id: ORG-SYNTH-SOURCE, classification_refs: [organization-type://synthetic-source@1], created_at: 2098-01-01T00:00:00Z, transition_history: [{transition_id: ORG-TRANS-SOURCE, organization_ref: ORG-SYNTH-SOURCE, from_stage: Draft, to_stage: Established, occurred_at: 2098-01-02T00:00:00Z, provenance_ref: PROV-ORG-SOURCE}], lifecycle_stage: Established, established_at: 2098-01-02T00:00:00Z, retired_at: null, establishment_provenance_ref: PROV-ORG-SOURCE}
+    - {organization_id: ORG-SYNTH-AUTHORIZER, classification_refs: [organization-type://synthetic-authorizer@1], created_at: 2098-01-01T00:00:00Z, transition_history: [{transition_id: ORG-TRANS-AUTHORIZER, organization_ref: ORG-SYNTH-AUTHORIZER, from_stage: Draft, to_stage: Established, occurred_at: 2098-01-02T00:00:00Z, provenance_ref: PROV-ORG-AUTHORIZER}], lifecycle_stage: Established, established_at: 2098-01-02T00:00:00Z, retired_at: null, establishment_provenance_ref: PROV-ORG-AUTHORIZER}
+  capabilities:
+    - &cap {namespace: synthetic.authorization, capability_id: decide-operation, version: v1, label: Synthetic operation decision, definition: Synthetic capability definition used only by contract fixtures., namespace_owner_ref: ORG-SYNTH-SOURCE, published_at: 2098-01-03T00:00:00Z, provenance_ref: PROV-CAP}
+  source_profiles:
+    - {profile_kind_ref: operation-authorization-source-profile@1, source_contract_ref: synthetic-operation-source@1, source_owner_ref: ORG-SYNTH-SOURCE, level_rule_ref: synthetic-level-resolution@1, freshness_rule_ref: operation-authorization-effective@1, decision_levels: [{decision_level_ref: synthetic-level-alpha@1, required_capability_ref: *cap}]}
+  decisions:
+    - record_kind: operation-authorization-decision@1
+      decision_id: AUTH-DECISION-SYNTH-1
+      source_contract_ref: synthetic-operation-source@1
+      source_owner_ref: ORG-SYNTH-SOURCE
+      subject_operation_ref: OP-SYNTH-ALPHA
+      authorizer_organization_ref: ORG-SYNTH-AUTHORIZER
+      authorizer_capability_ref: *cap
+      decision_level_ref: synthetic-level-beta@1
+      input_snapshot_ref: INPUT-SYNTH-1
+      level_binding: {rule_ref: synthetic-level-resolution@1, input_snapshot_ref: INPUT-SYNTH-1, result_level_ref: synthetic-level-beta@1, result: resolved, evidence_ref: LEVEL-EVIDENCE-SYNTH-1, provenance_ref: PROV-LEVEL-1}
+      eligibility_binding: {authorizer_organization_ref: ORG-SYNTH-AUTHORIZER, capability_ref: *cap, input_snapshot_ref: INPUT-SYNTH-1, result: eligible, evidence_ref: ELIGIBILITY-EVIDENCE-SYNTH-1, provenance_ref: PROV-ELIGIBILITY-1}
+      decision: authorize
+      effective_from: 2099-01-01T00:00:00Z
+      effective_until: 2099-12-31T00:00:00Z
+      recorded_at: 2098-12-31T00:00:00Z
+      provenance_ref: PROV-DECISION-1
+  authorization_evidence_binding: {source_contract_ref: synthetic-operation-source@1, source_owner_ref: ORG-SYNTH-SOURCE, evidence_ref: AUTH-DECISION-SYNTH-1, subject_operation_ref: OP-SYNTH-ALPHA, input_snapshot_ref: INPUT-SYNTH-1, input_state: effective, result: accepted, provenance_ref: PROV-BINDING-1}

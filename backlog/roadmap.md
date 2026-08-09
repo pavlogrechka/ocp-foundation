@@ -8,7 +8,7 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 91% | Capability, Objective, Resource, Organization та Operation є Canonical; Assignment, Constraint і Event лишаються Accepted, OCP-017 є Route C Accepted non-Concept, а candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 23% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination consumer profile та proposal-response evidence workflow; authorization source, reservation і conflict models не завершені |
+| Operational rules and workflows | 25% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow і Draft OCP-018 authorization-source contract з executable fail-safe evidence; production source profiles, reservation і conflict models не завершені |
 | Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
 | **Загальна foundation-готовність** | **≈72%** | T5 WJ joint lifecycle unit стабілізує Operation і приймає окремий Route C lifecycle contract без semantic migration; T6–T10, known reference debt і кожен відкритий Operation backlog item зберігають окремі gates |
 
@@ -154,11 +154,12 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [ ] Constraint pattern library
 - [ ] Assignment conflict, exclusivity and capacity rules
 - [ ] Business Rules specification
-- [x] Operation Lifecycle foundation contract — OCP-017 `0.2.0 / Accepted`, with authorization source, broader stage/profile expansion and production implementation separately gated
+- [x] Operation Lifecycle foundation contract — OCP-017 `0.2.0 / Accepted`, with source-side evidence delegated to OCP-018 and broader stage/profile expansion and production implementation separately gated
 - [ ] Assignment / Operation lifecycle coordination
 - [x] Coordination proposal-response evidence workflow — `OCP-015`
 - [x] Cross-vertical visibility/agreement boundary — `AD-010` selects independent V0/A0 no-new-authority controls
-- [ ] Visibility, authorization and approval model
+- [x] Operation authorization source model — AD-021 selects Route C OCP-018 `0.1.0 / Draft` with exact source/Organization/Capability/level/effectivity evidence and material negative fixtures, without resolving Order or introducing Authority/Approval/Policy Concepts
+- [ ] Production source profiles and any broader approval semantics
 - [ ] Reservation and Allocation decision
 - [ ] Conflict and remediation model
 
@@ -184,7 +185,7 @@ The checker is a reference validation layer, not production implementation. OCP 
 5. The selected Y10D Event dependency/stable-surface discovery requires its own owner mandate and four fresh exact-head gates; AD-016Z neither creates nor authorizes it and Y0 remains its fail-safe.
 6. After that bounded frontier discovery, define `Review-After` through a separately mandated normative governance act before any YR repair; AD-016Z registers 30 fields as 17 fulfilled / 13 open but changes none of them.
 7. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
-8. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X/Y/Z resolve none of them.
+8. Preserve AB-015/AB-016/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-021 resolves only AB-017, while AD-016X/Y/Z resolved none of them.
 9. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
 10. Preserve AB-006/AB-044–AB-047/AB-051/AB-052 and OCP-003 exclusions; Operation work creates no Organization mapping, Resource lifecycle, availability, Readiness or interchangeability authority.
 11. Continue T5–T10 only through an explicit topology decision, OCP-016 routing, OCP-001 L2/atomicity and separate exact-head review/Board gates.
