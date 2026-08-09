@@ -111,7 +111,7 @@ Zero or multiple exact candidates fail closed.
 
 ## Organization Q2 envelope
 
-OCP-007 `1.1.0 / Canonical` keeps one semantic owner and exposes two bounded validation surfaces. Organization records have dataset-scoped exact IDs, authoritative finite history and optional opaque `classification_refs`. Equal or missing annotations do not change identity; merger/split continuity remains a human governance question rather than a checker projection.
+OCP-007 `1.1.1 / Canonical` keeps one semantic owner and exposes two bounded validation surfaces. Organization records have dataset-scoped exact IDs, authoritative finite history and optional opaque `classification_refs`. Equal or missing annotations do not change identity; merger/split continuity remains a human governance question rather than a checker projection.
 
 Established relationship records resolve both Organization endpoints exactly once and bind `relationship_type_ref` to exactly one synthetic `OrganizationRelationshipKindProfile`:
 

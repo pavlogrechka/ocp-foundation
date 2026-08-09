@@ -35,7 +35,7 @@
 - [x] Operation `1.0.0 / Canonical` bounded identity/Q3I contract with Accepted Route C OCP-017 lifecycle owner
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
-- [x] Organization `1.1.0 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions and document-local post-`1.0.0` SemVer rules
+- [x] Organization `1.1.1 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions, document-local post-`1.0.0` SemVer rules and resolvable current governance navigation
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
 - [x] Capability boundary and registry direction accepted in `AD-005C`
@@ -100,6 +100,7 @@
 - [x] Post-AD-016X governance hygiene PATCH — correct the two OCP-011 `0.3.0` anchor cells, the real foundation-map path and completed AD-002/018/019/020 review triggers; preserve AD-011 S0/R0 and change no semantic contract, lifecycle status, backlog status or readiness authority
 - [x] T5 WJ joint lifecycle act — OCP-004/Operation `1.0.0 / Canonical` and Route C OCP-017 `0.2.0 / Accepted` in one exact twelve-file unit with separate compatibility/readiness/migration/rollback evidence, immutable OCP-017 Draft snapshot and unchanged P-001/rules/checker/tests/fixtures
 - [x] Coordination workflow source-metadata PATCH — rederive all nine manifest owners from the incorporated OCP-015 snapshot, remove the two structurally dangling labels, synchronize the Accepted checker-guide view and defer repository-wide semantic-source enforcement without executable or normative change
+- [x] Bare-integer section-reference hygiene PATCH — repair the sole current OCP-007 occurrence with a named-heading link, preserve and permanently register eight historical occurrences, record the honest `9 → 8` metric and prohibit new occurrences without machine enforcement or history rewriting
 
 ## Milestone 1A — Governed Executable Validation Loop
 
@@ -175,8 +176,8 @@ The checker is a reference validation layer, not production implementation. OCP 
 ## Planned Sequence
 
 1. The completed T5 WJ act establishes OCP-004/Operation `1.0.0 / Canonical` and OCP-017 `0.2.0 / Accepted` without transferring authority to T6–T10; any next frontier needs its own fresh inventory, Board selection and exact-head gates.
-2. The separately mandated coordination source-metadata PATCH rederives all nine OCP-015 manifest owners and corrects the Accepted checker-guide view without changing executable or normative behavior. Its merge grants no authority to the separate bare-integer citation step.
-3. Bare-integer section-reference hygiene for OCP-001/OCP-002 remains a separately mandated later decision. Do not rewrite historical acts or infer authorization from completion of the coordination metadata repair.
+2. The completed coordination source-metadata PATCH rederives all nine OCP-015 manifest owners and corrects the Accepted checker-guide view without changing executable or normative behavior.
+3. The separately gated bare-integer hygiene PATCH repairs only current OCP-007 navigation, permanently registers eight historical occurrences and adds no machine enforcement. Completion of the four-step sequence grants no authority to T6–T10 or another post-T5 frontier.
 4. Preserve the time-anchored P-001 evidence rule: adding an invoker of unchanged `P-001@0.1.0` does not edit the T3 ledger. Stop for a separate Pattern-version act only if Pattern form/obligations change or exact `track-current` binding cannot be preserved.
 5. Preserve AB-015/AB-016/AB-017/AB-018/AB-019/AB-020/AB-023/AB-028 until a later exact owner/treatment and separate Board act resolve each status; AD-016X resolves none of them.
 6. Any selected-owner, history-migration, dependency, authorization-source, Assignment-alignment or IO2-boundary failure returns to Q0/Board rather than being repaired inside lifecycle promotion.
