@@ -407,9 +407,9 @@ Acceptance changes the same primary README's status/version but not its exact Pa
 
 All candidate-tree bindings remain exact `P-001@0.1.0`. The `track-current` policy continues to resolve the current Pattern version and distinguish primary artifacts from immutable reviewed snapshots. P-001's blob, version, Required Elements, modules, T3 ledger and §17.3 accounting rule remain byte-identical.
 
-## 25. Stale lifecycle-carrier counter adjudication
+## 25. Bounded lifecycle-carrier counter subsets and debt registration
 
-Two bounded detectors cover the mandated carrier-count class without treating every number as a repository count. The Accepted-contract detector searches tracked Markdown for a standalone English/Ukrainian word-number or digit, followed in prose or across a Markdown table-cell separator by `Accepted` and optional `non-Concept`/`OCP` before `contract(s)`. The P-001-carrier detector searches for a standalone English/Ukrainian cardinal, ordinal or digit directly governing `primary invoker(s)`, `primary contract(s)`, `reviewed[-contract] snapshot(s)`, `snapshot carrier(s)` or `binding-bearing file(s)`; a second clause admits `N files` only when the same clause names the mechanical P-001 or `track-current` surface/footprint. Negative lookarounds exclude identifier, version and path fragments. These forms cover prose and Markdown table cells, word-numbers, ordinals and digits; they do not claim to parse arbitrary natural-language arithmetic.
+Two bounded detectors inspect two named syntactic subsets of the mandated carrier-count class without treating every number as a repository count. The Accepted-contract detector searches tracked Markdown for a standalone English/Ukrainian word-number or digit, followed in prose or across a Markdown table-cell separator by `Accepted` and optional `non-Concept`/`OCP` before `contract(s)`. The P-001-carrier detector searches for a standalone English/Ukrainian cardinal, ordinal or digit directly governing `primary invoker(s)`, `primary contract(s)`, `reviewed[-contract] snapshot(s)`, `snapshot carrier(s)` or `binding-bearing file(s)`; a second clause admits `N files` only when the same clause names the mechanical P-001 or `track-current` surface/footprint. Negative lookarounds exclude identifier, version and path fragments. These forms cover prose and Markdown table cells, word-numbers, ordinals and digits inside those two subsets; they make no completeness claim over arbitrary natural-language carrier counts.
 
 Before either repository-wide scan, the relevant detector had to reproduce a known positive on the exact base: AD-016 §1 for the Accepted-contract form and AD-016 §243 for `eight current primary invokers` plus `three reviewed-contract snapshots`. Any failed known-positive match or non-zero search exit stopped the audit rather than being treated as an empty result. The complete exact-base Accepted-contract scan returned two prose/word-number hits and zero prose/digit, table/word-number or table/digit hits.
 
@@ -448,6 +448,8 @@ The exact-base P-001-carrier scan returned **36 direct counter tokens across 23 
 
 Candidate structured metadata independently derives the current values recorded in §24: nine primary invokers, five immutable snapshot carriers, fourteen binding-bearing files and fifteen files including P-001. No prose counter supplies those values. The repaired AD-016 §243 retains its original eight/three facts as historical evidence rather than replacing them with another live total.
 
+Known prose outside both syntactic subsets is registered, not silently treated as a negative scan: AD-016 §23 says `six current invokers`; §218 says both `Exactly six primary OCP artifacts invoke` and `all six invokers`; §234 says `all six current invokers remain`. The latter two are unanchored current-facing statements and are false against the nine-invoker base; this act records them as unresolved carrier-counter debt. Their bytes remain unchanged because repeated detector expansion has not demonstrated a mechanically complete natural-language inventory, so repair beyond the two validated subsets requires a separately scoped hygiene act rather than another completeness claim here.
+
 The detector and this adjudication grant no repair authority over `Review-After`, bare-integer section references or `source:` rows. No existing `Review-After` value or trigger is edited. The mandatory byte-identical snapshot does physically repeat the Draft's historical field, so exact-frontmatter carriers change **31 → 32** and repository-wide field-shaped carriers change **32 → 33**; this is registered as immutable historical evidence, not a new trigger or repaired counter. Prior inventories remain historical records. Bare-integer references and `source:` rows remain byte-unchanged.
 
 ## 26. Architecture Board decision
@@ -460,7 +462,7 @@ On 2026-08-09, Architecture Board:
 4. preserves all exclusions of source legitimacy, authentication, permission, Order requirement, lifecycle/Assignment mutation and production adoption;
 5. keeps AB-017 Resolved while leaving AB-002 Open;
 6. changes no Concept or Concept status and introduces no Authority, Approval or Policy Concept;
-7. accepts the AD-016 `0.27.1` time-anchoring repairs for §1 and §243 current-facing prose and preserves every historical carrier count; and
+7. accepts the AD-016 `0.27.1` time-anchoring repairs for §1 and §243 current-facing prose, preserves every historical count adjudicated inside the two named syntactic subsets and registers the out-of-form carrier-counter debt without repairing it; and
 8. transfers no authority to another act.
 
 This decision becomes effective only after Fable review of the exact unchanged acceptance head, Codex adjudication, green CI on that head, separate explicit Pavlo authorization naming it and squash merge. Until then, this section and the Accepted frontmatter are proposed repository state only.
