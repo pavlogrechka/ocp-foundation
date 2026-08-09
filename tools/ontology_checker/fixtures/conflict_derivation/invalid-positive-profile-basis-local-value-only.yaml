@@ -1,0 +1,20 @@
+case_id: conflict-boundary-invalid-positive-profile-basis-local-value-only
+concept: ConflictDerivationBoundaryDataset
+independence_probe:
+  basis_kind: local_value_only
+  missing_evidence: [current_operational_responsibility, protected_handling_decision, legitimate_owner_evaluator]
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_REQUEST_INVALID, CONFLICT_DERIVATION_RESULT_MISMATCH, CONFLICT_DERIVATION_POSITIVE_AUTHORITY_FORBIDDEN]}
+snapshot:
+  derivation_request:
+    request_id: REQUEST-SYNTH-29
+    rule_ref: conflict-establishment-boundary@1
+    context_ref: CONTEXT-SYNTH-29
+    input_snapshot_ref: SNAPSHOT-SYNTH-29
+    evaluation_refs: [EVAL-SYNTH-29]
+    derived_at: 2099-12-30T00:00:00Z
+    evidence_state: current
+    stored_result: conflict
+    positive_conflict: true
+    activation_attempt: {consumer_ref: OCP-004@1.0.0, consumer_status: Canonical, baseline_contract_ref: OCP-004@1.0.0, result_need_ref: RESULT-NEED-SYNTH-29@1, positive_rule_ref: RULE-SYNTH-29@1, positive_input_snapshot_ref: SNAPSHOT-SYNTH-29, evaluation_context_ref: CONTEXT-SYNTH-29, criterion_owner_ref: OCP-004@1.0.0, evaluator_ref: EVALUATOR-SYNTH-29@1, object_class_decision_ref: PROJECTION-SYNTH-29@1}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-29, constraint_ref: CONSTRAINT-SYNTH-29, constraint_version_ref: CONSTRAINT-SYNTH-29@1, context_ref: CONTEXT-SYNTH-29, input_snapshot_ref: SNAPSHOT-SYNTH-29, evaluated_at: 2099-12-29T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-29], evaluator_ref: EVALUATOR-SYNTH-29@1}
