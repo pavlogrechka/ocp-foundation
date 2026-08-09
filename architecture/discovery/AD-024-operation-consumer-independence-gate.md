@@ -56,16 +56,23 @@ The same section says the value denotes a **claimed** incompatibility and grants
 
 A separate profile would therefore need evidence of a distinct handling responsibility beyond OCP-004's existing structural validation. No such obligation appears in the current Operation, lifecycle, Coordination profile or Coordination workflow contracts.
 
-## 4. Concrete consumer inventory
+## 4. Reproducible consumer-candidate inventory
+
+The inventory uses the same rule as AD-023 §5. After excluding governance/routing/registry artifacts, OCP-006 as an upstream-only evidence provider and OCP-019 self-consumption, a surface enters when it meets at least one condition: it owns a structural Conflict field or open relation for its governed subject; it is an Accepted consumer/profile/workflow/lifecycle surface that names conflict handling, a responsibility pointer or conflict-shaped input; or it is the Draft defining contract of an Accepted Concept with its own normative Conflict boundary or open question. Mere generic `Used-By` metadata does not qualify.
+
+Exactly seven surfaces meet that rule:
 
 | Candidate | Existing authority | Independence disposition |
 |---|---|---|
 | OCP-004 | Canonical owner of Operation and the snapshot-local relationship value | defines the value and its structural checks; does not consume a separately governed result |
-| OCP-006 | Constraint applicability and evaluation records | supplies upstream evidence only; `evaluator_ref` identifies an implementation or service and does not own an aggregation criterion |
+| OCP-005 | Draft defining contract for Accepted Assignment; §§13–14 and §19.8 describe simultaneous incompatibility through applicable Constraint and keep its representation open | records an open boundary only; declares no exact handling decision, accepted consumer or owner/evaluator |
+| OCP-008 | Canonical Objective identity contract with an undefined relation surface | declares no consumer, protected use, rule or criterion authority |
+| OCP-010 | Draft defining contract for Accepted Event with an explicit Constraint/Conflict/Risk boundary | preserves non-implications and declares no exact downstream handling decision or owner/evaluator |
 | OCP-014 | Accepted Resource-requirement consumer profile | explicitly excludes disagreement handling and cannot transfer its owner reference |
 | OCP-015 | Accepted proposal/response workflow evidence | explicitly does not settle disagreement and declares no Operation relationship-use decision |
 | OCP-017 | Accepted Operation lifecycle contract | consumes completeness, authorization-source and terminal-alignment evidence; no transition consumes this claimed relationship |
-| generic `Operation Planning`, `Coordination Model`, `Business Rules` or `Domain Model` labels | descriptive `Used-By` metadata | not exact governed consumers, protected uses, semantic owners or evaluators |
+
+OCP-006 is adjudicated separately as upstream evidence: it owns Constraint applicability and evaluation records, while `evaluator_ref` identifies an implementation or service and does not own a new aggregation criterion. Generic `Operation Planning`, `Coordination Model`, `Business Rules` and `Domain Model` labels are descriptive metadata, not exact governed consumers, protected uses, semantic owners or evaluators.
 
 AD-023 §7 called an OCP-004 profile the shortest *direction* and expressly denied authority to create it in that act. A recommendation is not the independent responsibility missing here.
 
