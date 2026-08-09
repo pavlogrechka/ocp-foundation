@@ -18,7 +18,7 @@
 | AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
 | AB-016 | Композиція Operation | Open | Визначити правила parent/child, ациклічність і межу з незалежною координацією |
-| AB-017 | Авторизація Operation | Open | Визначити джерела авторизації без передчасного введення Authority, Approval або Policy |
+| AB-017 | Авторизація Operation | Resolved | AD-021 обирає Route C OCP-018 `0.1.0 / Draft`: exact source profile + P-001 decision record, Organization/Capability/level/effectivity/supersession bindings і fail-safe OCP-017 acceptance з executable fixtures; AB-002, source legitimacy, production profiles і Authority/Approval/Policy Concepts лишаються окремо gated |
 | AB-018 | Conflict між Operation як факт або похідний результат | Open | Визначити межу між Constraint violation, агрегованим finding і Conflict Concept |
 | AB-019 | Suspended у lifecycle Operation | Deferred | Переглянути після Constraint, Assignment і State |
 | AB-020 | Operation Template як окремий Concept | Open | Перевірити після стабілізації Operation lifecycle і повторюваних Operation |

@@ -118,6 +118,13 @@ from .operation_lifecycle import (
     validate_operation_q3i_dataset,
     validate_operation_q3i_fixture,
 )
+from .operation_authorization import (
+    OPERATION_AUTHORIZATION_DERIVATION_RULES,
+    OPERATION_AUTHORIZATION_ERROR_CODES,
+    derive_operation_authorization_result,
+    validate_operation_authorization_dataset,
+    validate_operation_authorization_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -191,6 +198,8 @@ def validate_reference_fixture(fixture):
         return validate_coordination_workflow_fixture(fixture)
     if concept == "OperationQ3IContractDataset":
         return validate_operation_q3i_fixture(fixture)
+    if concept == "OperationAuthorizationSourceDataset":
+        return validate_operation_authorization_fixture(fixture)
     return validate_fixture(fixture)
 
 
