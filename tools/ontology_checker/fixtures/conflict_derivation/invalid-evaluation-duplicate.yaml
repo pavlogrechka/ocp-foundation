@@ -1,0 +1,7 @@
+case_id: conflict-boundary-invalid-evaluation-duplicate
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_EVALUATION_DUPLICATE]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-7, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-7, input_snapshot_ref: SNAPSHOT-SYNTH-7, evaluation_refs: [EVAL-SYNTH-7, EVAL-SYNTH-7], derived_at: 2099-07-02T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-7, constraint_ref: CONSTRAINT-SYNTH-7, constraint_version_ref: constraint-synth-7@1, context_ref: CONTEXT-SYNTH-7, input_snapshot_ref: SNAPSHOT-SYNTH-7, evaluated_at: 2099-07-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-7], evaluator_ref: EVALUATOR-SYNTH-7}

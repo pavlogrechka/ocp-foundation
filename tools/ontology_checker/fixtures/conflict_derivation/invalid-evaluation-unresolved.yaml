@@ -1,0 +1,7 @@
+case_id: conflict-boundary-invalid-evaluation-unresolved
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_EVALUATION_UNRESOLVED]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-8, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-8, input_snapshot_ref: SNAPSHOT-SYNTH-8, evaluation_refs: [EVAL-SYNTH-MISSING], derived_at: 2099-08-02T00:00:00Z, evidence_state: current, stored_result: indeterminate}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-8, constraint_ref: CONSTRAINT-SYNTH-8, constraint_version_ref: constraint-synth-8@1, context_ref: CONTEXT-SYNTH-8, input_snapshot_ref: SNAPSHOT-SYNTH-8, evaluated_at: 2099-08-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-8], evaluator_ref: EVALUATOR-SYNTH-8}

@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-018
 Title: Operation Authorization Source Contract
-Version: 0.2.0
+Version: 0.2.1
 Status: Accepted
 Owner: Architecture Board
 Depends-On: AD-012, AD-021, OCP-001, OCP-004, OCP-006, OCP-007, OCP-009, OCP-016, OCP-017, P-001
@@ -448,7 +448,7 @@ The exact-base P-001-carrier scan returned **36 direct counter tokens across 23 
 
 Candidate structured metadata independently derives the current values recorded in §24: nine primary invokers, five immutable snapshot carriers, fourteen binding-bearing files and fifteen files including P-001. No prose counter supplies those values. The repaired AD-016 §243 retains its original eight/three facts as historical evidence rather than replacing them with another live total.
 
-Known prose outside both syntactic subsets is registered, not silently treated as a negative scan: AD-016 §23 says `six current invokers`; §218 says both `Exactly six primary OCP artifacts invoke` and `all six invokers`; §234 says `all six current invokers remain`. The latter two are unanchored current-facing statements and are false against the nine-invoker base; this act records them as unresolved carrier-counter debt. Their bytes remain unchanged because repeated detector expansion has not demonstrated a mechanically complete natural-language inventory, so repair beyond the two validated subsets requires a separately scoped hygiene act rather than another completeness claim here.
+Known prose outside both syntactic subsets was registered, not silently treated as a negative scan: AD-016 §23 said `six current invokers`; §218 said both `Exactly six primary OCP artifacts invoke` and `all six invokers`; §234 said `all six current invokers remain`. All four statements—§23, both statements in §218 and §234—were unanchored current-facing statements and false against the nine-invoker acceptance base. AD-022 time-anchors each statement to its own historical baseline without replacing six by nine. The registered carrier-counter debt is closed; no broader natural-language completeness claim is made.
 
 The detector and this adjudication grant no repair authority over `Review-After`, bare-integer section references or `source:` rows. No existing `Review-After` value or trigger is edited. The mandatory byte-identical snapshot does physically repeat the Draft's historical field, so exact-frontmatter carriers change **31 → 32** and repository-wide field-shaped carriers change **32 → 33**; this is registered as immutable historical evidence, not a new trigger or repaired counter. Prior inventories remain historical records. Bare-integer references and `source:` rows remain byte-unchanged.
 
@@ -482,3 +482,9 @@ Complete rollback requires a separately reviewed act that restores the primary O
 This acceptance stops before Canonicalization, any production-facing source profile, AB-002, Y10D Event discovery, a normative `Review-After` definition act, YR and T6. It does not authorize a schema, implementation, deployment, policy, approval model or next PR.
 
 Any future production profile must name its own legitimate owner, exact contract, evidence, migration and rollback and pass a separate OCP-001/OCP-016 cycle with four fresh exact-head gates. Any future change to P-001 form/version must atomically treat all then-current primary invokers and immutable snapshot carriers under `track-current`.
+
+## 29. Carrier-counter registry clarification
+
+Revision `0.2.1 / Accepted` incorporates only the §25 debt-registry clarification required by AD-022. It replaces the ambiguous phrase “the latter two” with an explicit enumeration of all four AD-016 statements and records their time-anchored closure. The authorization-source contract, lifecycle, dependencies, P-001 binding, executable rules and production boundaries remain unchanged.
+
+Under OCP-001 pre-canonical versioning this is a PATCH: current semantics and obligations are compatible, while retaining `0.2.0` over changed authoritative bytes would conceal the mandated editorial correction. No source profile, decision, evidence binding or consumer migrates. Rollback of this clarification must restore §25 and `0.2.0` together; it cannot alter the historical OCP-018 acceptance act.

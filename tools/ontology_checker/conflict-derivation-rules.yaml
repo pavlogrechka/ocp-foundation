@@ -1,0 +1,29 @@
+fixture_coverage:
+  status: complete
+  concept: ConflictDerivationBoundaryDataset
+rules:
+  - id: CONFLICT_DERIVATION_FIXTURE_INVALID
+    source: OCP-019 §12
+  - id: CONFLICT_DERIVATION_REQUEST_INVALID
+    source: OCP-019 §§6–8
+  - id: CONFLICT_DERIVATION_EVALUATION_INVALID
+    source: OCP-019 §§5–7
+  - id: CONFLICT_DERIVATION_EVALUATION_DUPLICATE
+    source: OCP-019 §§6–8
+  - id: CONFLICT_DERIVATION_EVALUATION_UNRESOLVED
+    source: OCP-019 §§6–8
+  - id: CONFLICT_DERIVATION_EVALUATION_AMBIGUOUS
+    source: OCP-019 §§7–8
+  - id: CONFLICT_DERIVATION_BINDING_MISMATCH
+    source: OCP-019 §§6–8
+  - id: CONFLICT_DERIVATION_STALE_INPUT
+    source: OCP-019 §§7–8
+  - id: CONFLICT_DERIVATION_RESULT_MISMATCH
+    source: OCP-019 §§8, 12
+  - id: CONFLICT_DERIVATION_POSITIVE_AUTHORITY_FORBIDDEN
+    source: OCP-019 §§3, 8–9
+  - id: CONFLICT_DERIVATION_FORBIDDEN_COUPLING
+    source: OCP-019 §§3, 10
+  - id: derive_conflict_establishment_result
+    kind: derivation
+    source: OCP-019 §8

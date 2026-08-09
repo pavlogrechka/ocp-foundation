@@ -1,0 +1,7 @@
+case_id: conflict-boundary-invalid-positive-authority
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: false, error_codes: [CONFLICT_DERIVATION_REQUEST_INVALID, CONFLICT_DERIVATION_RESULT_MISMATCH, CONFLICT_DERIVATION_POSITIVE_AUTHORITY_FORBIDDEN]}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-13, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-13, input_snapshot_ref: SNAPSHOT-SYNTH-13, evaluation_refs: [EVAL-SYNTH-13], derived_at: 2099-12-12T00:00:00Z, evidence_state: current, stored_result: conflict, positive_conflict: true}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-13, constraint_ref: CONSTRAINT-SYNTH-13, constraint_version_ref: constraint-synth-13@1, context_ref: CONTEXT-SYNTH-13, input_snapshot_ref: SNAPSHOT-SYNTH-13, evaluated_at: 2099-12-11T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-13], evaluator_ref: EVALUATOR-SYNTH-13}

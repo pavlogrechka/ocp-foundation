@@ -1,0 +1,7 @@
+case_id: conflict-boundary-valid-single-violation
+concept: ConflictDerivationBoundaryDataset
+expected: {valid: true, error_codes: []}
+snapshot:
+  derivation_request: {request_id: REQUEST-SYNTH-1, rule_ref: conflict-establishment-boundary@1, context_ref: CONTEXT-SYNTH-1, input_snapshot_ref: SNAPSHOT-SYNTH-1, evaluation_refs: [EVAL-SYNTH-1], derived_at: 2099-01-02T00:00:00Z, evidence_state: current, stored_result: conflict_not_established}
+  constraint_evaluations:
+    - {evaluation_id: EVAL-SYNTH-1, constraint_ref: CONSTRAINT-SYNTH-1, constraint_version_ref: constraint-synth-1@1, context_ref: CONTEXT-SYNTH-1, input_snapshot_ref: SNAPSHOT-SYNTH-1, evaluated_at: 2099-01-01T00:00:00Z, result: violated, evidence_refs: [EVIDENCE-SYNTH-1], evaluator_ref: EVALUATOR-SYNTH-1}

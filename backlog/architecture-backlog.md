@@ -18,7 +18,7 @@
 | AB-014 | Operational Intent як окремий Concept | Resolved | AD-004C: окремий фундаментальний Concept не вводиться; reopening потребує нових доказів independent identity за AD-004 §3 |
 | AB-015 | Мінімальна повнота Operation | Open | Формалізувати domain validation rules для переходу Draft → Planned |
 | AB-016 | Композиція Operation | Open | Визначити правила parent/child, ациклічність і межу з незалежною координацією |
-| AB-017 | Авторизація Operation | Resolved | AD-021 обирає AC, а OCP-018 `0.2.0 / Accepted` приймає Route C source profile + P-001 decision record, Organization/Capability/level/effectivity/supersession bindings і fail-safe OCP-017 acceptance як основу залежних specifications; AB-002, source legitimacy, production profiles і Authority/Approval/Policy Concepts лишаються окремо gated |
+| AB-017 | Авторизація Operation | Resolved | AD-021 обирає AC, а OCP-018 `0.2.1 / Accepted` приймає Route C source profile + P-001 decision record, Organization/Capability/level/effectivity/supersession bindings і fail-safe OCP-017 acceptance як основу залежних specifications; AB-002, source legitimacy, production profiles і Authority/Approval/Policy Concepts лишаються окремо gated |
 | AB-018 | Conflict між Operation як факт або похідний результат | Open | Визначити межу між Constraint violation, агрегованим finding і Conflict Concept |
 | AB-019 | Suspended у lifecycle Operation | Deferred | Переглянути після Constraint, Assignment і State |
 | AB-020 | Operation Template як окремий Concept | Open | Перевірити після стабілізації Operation lifecycle і повторюваних Operation |
@@ -39,7 +39,7 @@
 | AB-035 | Constraint expression language | Deferred | Після review OCP-006 вибрати machine-readable predicate та selector representation |
 | AB-036 | Constraint precedence, override and waiver | Open | Визначити порядок застосування, exception semantics і provenance без передчасного Policy Concept |
 | AB-037 | Quantity, demand and capacity model | Open | Визначити units, aggregation та capacity consumption для quantitative Constraint |
-| AB-038 | Conflict derivation model | Open | Визначити, коли одне чи більше Constraint violation створюють збережений або похідний Conflict |
+| AB-038 | Conflict derivation model | Resolved | AD-022 обирає H0-B, а OCP-019 `0.1.0 / Draft` виконує Route C negative establishment boundary: одна чи кілька violations без exact Accepted consumer і legitimate criterion owner не створюють authoritative Conflict; positive model потребує окремого reopening за OCP-016 G4, а AB-005/AB-018/AB-036/AB-037 лишаються Open |
 | AB-039 | Evidence freshness, ambiguity and deterministic replay | Resolved | OCP-011 `0.3.0` активує F1+A1 для exact `objective-achievement@2`: criterion-local temporal rules, named reference/temporal ambiguity, inline historical state, explicit-time query replay і fail-safe fixtures; `@1` та інші consumers лишаються під F0/A0 до власних reviewed activations |
 | AB-040 | Executable ontology checker | Resolved | PR-0006 merged; reference checker, exact-version evaluation, manifests, fixtures, status sync and CI accepted |
 | AB-041 | Relationship as foundation | Resolved | AD-001 Accepted: Option C — Relationship as a governed modeling pattern; P-001 defines reusable identified-record form |

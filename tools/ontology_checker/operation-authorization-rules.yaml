@@ -1,3 +1,6 @@
+fixture_coverage:
+  status: complete
+  concept: OperationAuthorizationSourceDataset
 rules:
   - id: OPERATION_AUTHORIZATION_FIXTURE_INVALID
     source: OCP-018 §14
