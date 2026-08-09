@@ -4838,6 +4838,8 @@ The §247 convention is retained when this debt is discussed: target document an
 
 OCP-001 already requires normative references to identify one defining document and section and guarantees an exact-resolvable defining location. This act records the concrete citation form required by that existing obligation: **new current normative or governance prose MUST link to an exact named heading when the target document has no numbered sections, and MUST NOT present a source-line integer as a `§` authority**. A registered historical occurrence is not precedent for adding another one.
 
+The linked OCP-001 heading text is therefore load-bearing navigation: renaming it would break the current OCP-007 citation and requires the same downstream reference audit and reviewed update as renumbering a cited section, even if the heading edit is otherwise editorial.
+
 No checker currently validates this semantic ownership. Machine detection of bare-integer citations, cross-column targets or named-heading ownership is consciously deferred governance debt requiring a separate Board mandate. This act adds no `.py`, test, fixture or enforcement policy.
 
 ### 262.6 PATCH classification, footprint, rollback and gates
