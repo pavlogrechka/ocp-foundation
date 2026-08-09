@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.26.0
+Version: 0.27.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -5082,3 +5082,174 @@ The bounded footprint is AD-016 plus README, roadmap and AB-062 accounting. No `
 The OCP/Pattern structural section sweep remains at zero dangling references. The bare-integer class remains eight registered historical occurrences and is not declared closed. Rollback is one reviewed four-file act that returns AD-016 to `0.25.3` and removes only AD-016Y/current accounting. Partial rollback would leave current accounting claiming a frontier and trigger registry absent from its owning decision record.
 
 AD-016Y becomes Accepted only after exact-head Fable review, explicit Codex adjudication, green CI and a fresh Pavlo/Architecture Board authorization naming the unchanged head, followed by squash merge. The preparation mandate is only the first gate.
+
+## 274. AD-016Z mandate, exact baseline and revision class
+
+Pavlo / Architecture Board separately mandated one AD-016Z Board comparison over Y0, Y5D, Y10D, YJ and YR. Scope B also requires correction of the area claim in §268 and falsification target 14 along both the repository-catalog and field-recording-form axes. The mandate authorizes preparation and external review of this comparison. It does not authorize merge, preparation of the selected frontier act, a `Review-After` repair or any T6 lifecycle change.
+
+The exact baseline is `main@313a53ab538c9658be360d1eaef1c90be41a2780`, tree `bda4832a2d7dae8a2ed4264fc9fec53455581a02`. It contains accepted AD-016Y but none of the downstream acts that Y named. The frontmatter `Review-After` value of this file is already fulfilled again by the owner mandate for AD-016Z; scope B deliberately leaves that field byte-identical and records its disposition in §§281–282 rather than repairing it in-act.
+
+AD-016 moves `0.26.0 → 0.27.0` as MINOR. Like AD-016X `0.24.0 → 0.25.0` and AD-016Y `0.25.3 → 0.26.0`, this revision adds a new governed comparison, independently replays its evidence and selects one next-question scope. The correction to §268 is PATCH-like in isolation, as were `0.25.1/0.25.2/0.25.3`, but it is subordinate to the new Board decision surface. Calling the combined act PATCH would understate the compatible new selection and sequencing obligations; no domain compatibility promise changes, so MAJOR is not warranted.
+
+## 275. Re-anchored exact evidence
+
+Every anchor was regenerated on the §274 baseline. Each object was identified from current repository content, resolved to its blob, reverse-matched to its path through `git ls-tree -r`, checked for the stated state inside the object and independently SHA-256 hashed. No AD-016Y cell was copied as authority.
+
+| Artifact | Exact baseline fact | Git blob | SHA-256 |
+|---|---|---|---|
+| AD-016Y | `0.26.0 / Accepted`; Y10D recommendation only | `f8ce182a7b5a5f3b0541a004061d13154ca06f26` | `515251f6c22f826b48a98553adae7c6e8e69696aa509279e8b983151067e932c` |
+| OCP-000 registry | `1.5.0 / Canonical`; five Canonical and three Accepted Concepts | `7da7d7aad6ba505603cfbfa98ff1349c84892720` | `3f76ae4b55f01ce388bd865330f386c3ec0a6f6416e1aaed522145df96cfb7d6` |
+| OCP-001 governance | `1.0.0 / Canonical`; L2 and exact Pattern floors | `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-004 Operation | `1.0.0 / Canonical`; completed T5 root | `1ff548a1f213b574472a90a8b3cfe014f6c1ce11` | `9c9173d3a3dec044e2cae2eb8fd5b66d07a106318f497a973409fedf4677155b` |
+| OCP-005 Assignment | `0.2.6 / Draft`; Assignment `Accepted` | `6e78d6d54d53260fb42f4ef67776e3cf8b11daa7` | `fd77fbdc47d1d436a95c95c6a211521d65dd5261633ccd2eee17f9a761fef3ba` |
+| OCP-006 Constraint | `0.2.5 / Draft`; Constraint `Accepted` | `5d7404717e500c66c0c017263678ae0a1a405c7d` | `e0469604b1d8e6c2156c35e85017129eaca1fb929633a8be0287af4ef67a88aa` |
+| OCP-010 Event | `0.2.0 / Draft`; Event `Accepted`; exact P-001 invocation | `d73bab07acac3c316a9a2a4f4d25cb1f9b1bdc06` | `f66a2deb2bd8748aa464adefe3f4ff5ac35baf6af017fb9c782f9a427d7ac95f` |
+| OCP-011 assessment contract | `0.3.0 / Accepted`; normative OutcomeAssessmentRecord | `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| OCP-012 claim contract | `0.3.0 / Accepted`; second stable F1/A1 activation | `cd2df0f1961b6d03eea0db66c8fdfce1f97cb235` | `d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122` |
+| OCP-016 routing contract | `1.0.0 / Canonical`; F/C/E/D/I and Pattern boundary | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| OCP-017 lifecycle contract | `0.2.0 / Accepted`; downstream Route C non-Concept | `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
+| P-001 | `0.1.0 / Accepted`; T3 ledger remains time-anchored | `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+| foundation map | Operation/Event is a dashed non-edge with unresolved relation owner | `faa71f329a3207bc6d3096b7cc86ecfab6130296` | `ea88b22d6a0543995e2b757daec0a60b62b0028c8c3583e237a6b178951be882` |
+| ADR-DRAFT-007 | `Superseded`; Markdown-labelled `Review-After` field | `8510a166abc17e19ffaa241de45ac2c711f3d99d` | `3d72b1e5e4615b0f7ceef634c14521c397e92cf139c6c3c0ecb85cb24f87c4b4` |
+| repository README | current accounting through AD-016Y | `757280d400cbdb7dc4987d99505b76f976c952ef` | `a538badcb18a39c842c8dd194872555db40f653f3049e3e70345cc056f08bce4` |
+| architecture backlog | AB-062 `Planned`; T6 unopened | `20bb187ca1dc56707de0a1775cc594665e9138a6` | `6364ea444641605148d4ac0bd803905b22dc73f4c7695175e97bbe582ce2b88e` |
+| foundation roadmap | AD-016Z and downstream work separately gated | `49baf7315b62e7ec2fbd6fe592472618fe509b2c` | `21e60510e6b6374a7ccccd8f86e4581d4d1c45390d188aba31557b09cfbc82e9` |
+
+These hashes identify evidence, not authority. A passed test, prior recommendation, consumer count, recent timestamp or completed earlier authorization cannot select an option.
+
+## 276. Fresh frontier, floors, Pattern accounting and topology
+
+The inventory was regenerated from the current frontmatter of every primary `docs/*/README.md` before reading the candidate table in §271. The rule selects registered Concepts whose defining OCP remains Draft, then applies current direct-OCP floors. Non-Concept contracts, Proposed registry candidates, immutable snapshots and already Canonical Concepts are excluded.
+
+| OCP | Current document state | Concept state / class | Frontier result |
+|---|---|---|---|
+| OCP-000 | `1.5.0 / Canonical` | registry, non-Concept | excluded |
+| OCP-001 | `1.0.0 / Canonical` | governance, non-Concept | excluded |
+| OCP-002 | `1.5.0 / Canonical` | taxonomy, non-Concept | excluded |
+| OCP-003 | `1.0.0 / Canonical` | Resource `Canonical` | completed |
+| OCP-004 | `1.0.0 / Canonical` | Operation `Canonical` | completed T5 root |
+| OCP-005 | `0.2.6 / Draft` | Assignment `Accepted` | **passes L2** |
+| OCP-006 | `0.2.5 / Draft` | Constraint `Accepted` | **fails L2 on Draft OCP-005** |
+| OCP-007 | `1.1.1 / Canonical` | Organization `Canonical` | completed |
+| OCP-008 | `1.0.0 / Canonical` | Objective `Canonical` | completed |
+| OCP-009 | `1.0.0 / Canonical` | Capability `Canonical` | completed |
+| OCP-010 | `0.2.0 / Draft` | Event `Accepted` | **passes L2** |
+| OCP-011 | `0.3.0 / Accepted` | non-Concept record contract | excluded |
+| OCP-012 | `0.3.0 / Accepted` | non-Concept record contract | excluded |
+| OCP-013 | `0.2.0 / Accepted` | non-Concept rule contract | excluded |
+| OCP-014 | `0.2.0 / Accepted` | non-Concept profile contract | excluded |
+| OCP-015 | `0.2.0 / Accepted` | non-Concept workflow contract | excluded |
+| OCP-016 | `1.0.0 / Canonical` | Core routing contract | excluded |
+| OCP-017 | `0.2.0 / Accepted` | Route C lifecycle contract | excluded |
+
+The current L2-admissible frontier is therefore exactly Assignment/OCP-005 and Event/OCP-010. OCP-005 directly depends on OCP-000/001/002/003/004, all Canonical. OCP-010 directly depends on OCP-000/001/002/004/008, all Canonical. OCP-006 additionally depends on Draft OCP-005 and remains blocked. This is a fresh derivation, not inheritance of AD-016Y's two candidates.
+
+The metadata-derived consumer sets remain exact: OCP-005 has OCP-006/013/015/017 (four), OCP-010 has OCP-011/017 (two), and blocked OCP-006 has OCP-011/013/014/015/017 (five). Consumer count measures blast radius only and supplies no preference.
+
+P-001 remains `0.1.0 / Accepted`. Structured metadata yields eight primary invokers—OCP-004/007/008/010/011/012/015/017—and four immutable reviewed snapshots—OCP-011/012/015/017—inside `track-current`. The T3 ledger and P-001 bytes remain unchanged. Event's exact invocation passes the separate Pattern floor; Assignment has no invocation, and no independently shared governed record form has been demonstrated that would require one.
+
+Both candidates retain Route F identities under OCP-016. The unresolved Operation/Event relation does not acquire a route merely from a dashed map line. The actual graph still has `Operation → Objective` as Operation's only outgoing edge; `Operation ⇢ Event` is a non-edge with unresolved owner, OCP-017 remains downstream of both, and no reverse dependency or cycle appears. That unresolved owner blocks a direct Event lifecycle claim but is admissible evidence for a bounded discovery that preserves the no-new-edge baseline.
+
+## 277. Area-claim correction — catalog and recording form
+
+Falsification target 14 is **demonstrated** on the §274 baseline. Section 268 accurately counted one narrow syntax-and-area slice, but called it the complete class: exact `Review-After:` frontmatter under `architecture/`, `docs/` and `patterns/`. A repository-wide derivation must vary both axes together.
+
+The corrected method starts from all tracked repository files (`git ls-files`), then searches field-shaped labels at line start using a form that admits either plain frontmatter or a Markdown list label: optional indentation, optional list marker, optional bold delimiters, the exact `Review-After` name and a colon. Exact-frontmatter hits are counted separately. The detector was validated before trusting negatives against two known positives: AD-016's plain key and ADR-DRAFT-007's `- **Review-After:**` label. A non-zero search exit is treated as “no match” only after command execution and stderr are distinguished from data.
+
+| Catalog | Recording form | Count | Adjudication effect |
+|---|---|---:|---|
+| `architecture/` | exact frontmatter key | 19 | the same nineteen §269 AD rows |
+| `docs/` | exact frontmatter key | 10 | the same ten §269 wrapper/snapshot rows |
+| `patterns/` | exact frontmatter key | 0 | no Pattern field |
+| `adr/` | Markdown list with bold key | 1 | ADR-DRAFT-007, omitted by §268 |
+| **repository-wide field-shaped class** | both observed forms | **30** | **17 fulfilled / 13 open** |
+
+ADR-DRAFT-007's value requires Canonical descriptions of both Operation and Assignment. Operation is Canonical; Assignment remains `0.2.6 / Draft` with an Accepted Concept. The conjunction is therefore **open**. The file is Superseded, but supersession does not erase a physically present review field.
+
+This correction has three bounded effects. First, the twenty-nine §269 adjudications remain individually correct for their original exact-frontmatter slice; no completed disjunct or open result changes. Second, the L2 frontier is unchanged because the additional object is a Superseded ADR, not a primary OCP, dependency or Concept projection. Third, `17 fulfilled / 12 open` remains the accurate distribution for those twenty-nine rows, while the honest repository-wide distribution is now `17 fulfilled / 13 open` over thirty fields.
+
+The method does not infer paraphrases that omit the field name, quoted or split keys not matching either observed form, untracked/generated state or binary content. Those are explicit limits, not negative findings. Section 268 and target 14 remain historical text; this section supersedes only their area/form completeness claim. No `Review-After` field is repaired.
+
+## 278. Outcome criteria fixed before comparison
+
+The five options are evaluated under the same criteria, fixed before applying them:
+
+1. current L2, Pattern and OCP-016 route admissibility;
+2. semantic independence and whether a joint unit is required by exact evidence;
+3. boundedness and falsifiability of the question without an OCP, dependency or edge edit;
+4. unresolved owner, compatibility and migration risk exposed rather than hidden;
+5. current consumer/replay burden, used only as review scope and never as authority;
+6. prerequisite governance that must exist before the option can be executed honestly;
+7. an exact stop/rollback path to Y0; and
+8. absence of authority from prior recommendation, order, effort, CI, file count or elapsed time.
+
+Y0 is tested as a substantive result: it wins whenever any positive §279 target remains unresolved, a floor fails, the evidence cannot distinguish options or a prerequisite is missing. YR is likewise substantive: it wins first only if current field repair is required to make the semantic frontier governable, not merely because governance debt exists.
+
+## 279. Independent replay of all twenty §272 targets
+
+| # | Result on `main@313a53ab` |
+|---:|---|
+| 1 | **Not demonstrated.** A fresh `docs/*/README.md` inventory contains exactly eighteen primary OCPs. |
+| 2 | **Not demonstrated.** Assignment, Constraint and Event are the only Accepted-Concept/Draft-OCP pairs; exactly Assignment and Event pass current L2. |
+| 3 | **Not demonstrated.** Every direct OCP dependency of OCP-005 and OCP-010 is Canonical. |
+| 4 | **Not demonstrated.** Constraint still directly depends on Draft OCP-005 and is not L2-admissible. |
+| 5 | **Not demonstrated.** Fresh metadata scans reproduce the complete 4/2/5 consumer sets in §276. |
+| 6 | **Not demonstrated.** Event remains exact-bound to Accepted `P-001@0.1.0`; eight primary and four snapshot carriers reproduce. |
+| 7 | **Not demonstrated.** Assignment has record-like local structures but no exact evidence of independently shared P-001 form obligations. |
+| 8 | **Not demonstrated.** OCP-016 does not route a relationship from a name or dashed line; an independent F/C/E/D/I ledger would be required. |
+| 9 | **Not demonstrated.** The metadata graph has no Operation/Event edge, reverse dependency or cycle. |
+| 10 | **Not demonstrated.** An unresolved relation owner would weaken a direct Event lifecycle completeness claim; discovery must keep E1 unless exact evidence selects an owner and route. |
+| 11 | **Not demonstrated.** OCP-010 §11 still points general assessment ownership at resolved AB-056, while §14 retains a checker-local envelope predating Accepted OCP-011; classification remains ambiguous. |
+| 12 | **Not demonstrated.** OCP-005 still has eleven open questions covering amendment, intervals, replacement, terminal interaction, quantity, roles and provenance. |
+| 13 | **Not demonstrated.** The candidates share Canonical Operation as a floor but no evidence makes their stable surfaces semantically inseparable. |
+| 14 | **Demonstrated and independently resolved here.** The old 29-field area omitted one `adr/` Markdown-labelled field. Section 277 corrects both catalog and form, registers thirty fields and preserves the additional open result; no field repair is implied. |
+| 15 | **Not demonstrated.** Each of the seventeen fulfilled §269 rows still has its named completed disjunct; the added ADR row is not classified fulfilled. |
+| 16 | **Not demonstrated.** None of the twelve open §269 rows has omitted completion evidence. The thirteenth repository-wide open row is an area omission corrected in §277, not contrary evidence for one of those twelve. |
+| 17 | **Not demonstrated.** OCP-011 and OCP-012 still activate the same protected F1/A1 obligation form with separate values and owners. |
+| 18 | **Not demonstrated.** No production-facing OCP-017 proposal exists; repository fixtures and the immutable reviewed snapshot are evidence, not production use. |
+| 19 | **Not demonstrated.** Current evidence still refutes “condition, not event” as a sufficient anti-exhaustion rule. |
+| 20 | **Not demonstrated.** Y's recommendation, this mandate, green CI, counts, order and completed T5 convey no downstream preparation or merge authority. |
+
+Target 14 is the sole positive result. Section 272 requires Y0 unless a positive is independently resolved. Section 277 resolves the positive's actual claim—inventory completeness—without pretending to repair the additional field or to change semantic evidence. The decision may therefore proceed beyond Y0, while any failure of the corrected method or a new unresolved positive returns it to Y0. “Not demonstrated” remains bounded to this baseline and method; it never means impossible.
+
+## 280. Outcome-fair comparison
+
+| Option | Evidence in its favour under §278 | Burden / stop under the same criteria | Result |
+|---|---|---|---|
+| **Y0 — hold** | preserves every current authority and is mandatory on unresolved positive evidence | target 14 is now resolved as an inventory correction; both frontier candidates pass floors and the remaining evidence distinguishes bounded next questions | admissible fail-safe, not selected |
+| **Y5D — Assignment discovery** | L2 passes; Assignment has stable identity, exact Resource/Operation binding, lifecycle history and four known consumers | eleven open questions span amendment, multi-interval effectivity, replacement, reservation, quantity, roles, terminal interaction and provenance; one discovery is possible but necessarily broader | admissible, not selected first |
+| **Y10D — Event dependency/stable-surface discovery** | L2 and exact P-001 floor pass; Event/ObservationRecord identity is Accepted; the unresolved Operation/Event owner and two assessment seams form one precise falsifiable surface with two consumers | must preserve E1, cannot delete OCP-004 dependency, add an edge, preselect a route or silently transfer OCP-011/AB-056 authority | **selected only as the next separately mandated frontier scope** |
+| **YJ — joint Assignment/Event discovery** | both candidates share Canonical Operation and could be reviewed together | no semantic inseparability, shared migration or rollback advantage is demonstrated; the wider Assignment surface could hide or delay the narrower Event question | not selected |
+| **YR — `Review-After` repair first** | thirty fields, including seventeen fulfilled, establish a real governance surface; AD-016's field has now been fulfilled twice | no normative definition currently governs the field, so repair-first would choose semantics while applying them; the Event discovery does not need an exhausted field as authority | required later, after a separate normative definition act; not selected first |
+
+Y10D wins only after the prior recommendation is removed from the criteria. Its advantage is not age, ordering or consumer count: it is the narrowest current question with accepted identities on both sides, an exact no-edge baseline and observable conflicting/stale ownership seams that can be compared without changing them. Y5D remains a legitimate later alternative with a broader independent stable-surface problem. YJ has no exact coupling evidence. YR is real but lacks the normative prerequisite needed for a consistent repair.
+
+## 281. Board selection and ordered next questions
+
+AD-016Z selects **Y10D only as the scope of one future Event dependency/stable-surface discovery**. Selection does not create that act, assign its identifier, authorize its preparation or merge, change Event/OCP-010, remove OCP-004 from `Depends-On`, choose an Operation/Event owner, add an edge, reroute an artifact, rewrite the assessment seams or open T6. The discovery needs a separate Pavlo owner mandate and its own unchanged-head Fable review, Codex adjudication, green CI and fresh explicit merge authorization.
+
+The ordered sequence after this comparison is:
+
+1. the separately mandated, outcome-fair Y10D frontier discovery, preserving Y0 as its fail-safe;
+2. a separately mandated normative governance act defining `Review-After`; and
+3. only then, a separately selected YR repair over a freshly rederived field inventory.
+
+None of steps 1–3 is authorized by AD-016Z's preparation mandate or merge. Assignment discovery, joint discovery and T6 lifecycle work remain unselected.
+
+## 282. `Review-After` disposition without in-act repair
+
+A repository search confirms that `Review-After` is not normatively defined by OCP-001 governance, OCP-002 taxonomy, OCP-016 routing, P-001 or any checker rule. Existing fields and §270 provide evidence and a candidate rule, not binding field semantics. YR therefore cannot honestly apply one repair policy repository-wide before a separate normative act defines at least ownership, falsifiability, satisfaction, replacement/preservation and audit obligations.
+
+That normative act belongs after the selected bounded Event discovery and before YR. The discovery may proceed first because it derives authority from current OCP/Pattern/route evidence and does not cite an exhausted `Review-After` as current authority. Conversely, YR necessarily depends on the missing rule because it would edit fields across heterogeneous current and historical records.
+
+Every field remains byte-identical here, including AD-016's own value. The owner mandate for AD-016Z fulfills that field for the second consecutive comparison; this prose disposes of the event only by registering it for the later YR surface. It does not make §270 binding, repair the field, waive future re-derivation or claim that registration cures exhaustion.
+
+## 283. Stops, footprint, rollback and gates
+
+The decision returns to Y0 if the then-current baseline changes materially, the eighteen-OCP/frontier derivation fails, either candidate loses L2, P-001 or route admissibility, the corrected thirty-field inventory cannot replay, another §279 target becomes positive without independent resolution, an Operation/Event edge or reverse dependency appears, or a future act relies on AD-016Z selection as implementation authority.
+
+The bounded footprint is exactly AD-016 plus repository README, architecture backlog and roadmap accounting. No `.py`, test, fixture, `*rules.yaml`, OCP version/status, Concept status, dependency, edge, registry, taxonomy, Pattern, foundation map, `Review-After` field, backlog status or readiness estimate changes. AB-062 remains `Planned`; OCP-004 remains `1.0.0 / Canonical`, OCP-005 `0.2.6 / Draft`, OCP-010 `0.2.0 / Draft`, OCP-015/OCP-017 `0.2.0 / Accepted`, P-001 remains exact, the Concept distribution remains five Canonical / three Accepted / five Proposed and readiness remains approximately 72%. Structural section references remain at zero dangling entries, and the bare-integer class remains eight registered historical occurrences without a closure claim.
+
+There is no data, stored-record, reference, dependency or evidence migration. Rollback is one reviewed four-file act restoring AD-016 `0.26.0` and the prior current accounting; it does not rewrite AD-016Y or alter any field. Partial rollback would leave current accounting claiming a comparison, corrected inventory and selection absent from the owning decision record.
+
+AD-016Z requires on one unchanged head: exact-head Fable external review, explicit Codex adjudication, green required CI and fresh Pavlo/Architecture Board merge authorization naming that head. Any head change resets all gates. Prior authorization, completion of AD-016Y or post-T5 steps 1–4, and acceptance of this comparison cannot authorize the selected discovery, the normative rule act, YR or T6.
