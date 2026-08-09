@@ -1,12 +1,12 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.25.2
+Version: 0.25.3
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
 Applies-To: AB-062, OCP document lifecycle, Concept lifecycle, Pattern dependencies, canonicalization waves
-Review-After: Separately authorized bare-integer section-reference hygiene decision; this source-metadata PATCH authorizes no checker change, OCP edit or later act
+Review-After: Separate owner mandate for any post-T5 frontier or machine citation enforcement; this hygiene PATCH authorizes neither
 ---
 
 # AD-016 — Foundation Canonicalization Readiness Discovery
@@ -4774,3 +4774,84 @@ The bounded implementation footprint is this AD-016 record, `coordination-workfl
 The OCP/Pattern structural sweep must move from the two inherited §247 dangling labels to zero as a consequence of correct ownership, not as the selection criterion. The twelve AD-addressed references remain a separately checked class. Partial rollback of a label, the numbering-basis statement or the guide correction restores a known false current fact and is invalid; rollback is the complete reviewed unit.
 
 Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. This preparation mandate supplies none of the later gates. It does not authorize the separate bare-integer citation step, any T6–T10 act or machine enforcement of source ownership.
+
+## 262. Bare-integer section-reference hygiene — v0.25.3
+
+### 262.1 Mandate, exact baseline and strengthened anchors
+
+Pavlo / Architecture Board separately mandated option A for the fourth post-T5 step: repair the one current bare-integer citation in OCP-007, preserve and register every historical occurrence, and prohibit new occurrences without introducing section numbering or machine enforcement. The exact baseline is `main@96e9fd7bd167ec12238f427b8ed0aa88558aa6e5`, tree `6e341b2c40af684621b59a3eeff31ea76fef177b`.
+
+Every object below was resolved by blob first, reverse-matched to its sole path through `git ls-tree -r`, checked for the stated fact inside that object and independently SHA-256 hashed:
+
+| Artifact | Git object | SHA-256 | Verified baseline fact |
+|---|---|---|---|
+| AD-016 | blob `af4f843f429f2b3819c6624ec241b6e68fb21d19` | `091ce91e45c58a76e420cfb5da9ea28d6489d316a2b32603dad93d6c228b2a90` | `0.25.2 / Accepted`; §247 records an incomplete historical inventory |
+| OCP-007 Organization | blob `1dd7d00c8094464e1b8c18dcb77689e10208e7e8` | `f3f736e60b771d5125ff0a5c06dc2b752f573cc013f674b98498b95e5953ae31` | `1.1.0 / Canonical`; §34.2 is live guidance for future revisions and carries the one repairable citation |
+| OCP-001 governance | blob `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` | `1.0.0 / Canonical`; named **Версіонування** / **Canonical документи** headings, no numbered sections |
+| OCP-002 taxonomy | blob `aaa4ac27a7d77c52b74833a1c088c037538f1f06` | `335f3e8c2f51110f192ceb608188437b6d2fe5b908bbf12894c31e45a651e7c6` | `1.5.0 / Canonical`; named headings, no numbered sections |
+| OCP-003 Resource | blob `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` | `1.0.0 / Canonical`; §25.2 preserves one historical lifecycle-evidence occurrence |
+| checker guide | blob `be3a655122837bbb913cda6fcdd1cce2b8adf9fa` | `7cf495cbb2a2a5c883b11ab1f538dfe2a3b3b6bc0e25c60e4f977e6a67955ada` | current Organization view says `OCP-007 1.1.0 / Canonical` |
+| repository README | blob `2bf3f31e8a3a703d5a57bac979fc3c6693444990` | `f569f9a8209f9929d8638d0d43cf629d698b1644053b2292f1563698111744d9` | current act accounting through AD-016 `0.25.2` |
+| architecture backlog | blob `cbdd4d39735a9bd5f83dafae3746317b43f50e8d` | `e2da481de4946f37f860ce1292e26b9d671704c065a47837cd43c2c3c4d559a8` | AB-062 remains `Planned`; no lifecycle authority transfers |
+| foundation roadmap | blob `8f09e999e382be35ced5574298b9f1b7b5b272cd` | `f5087276e9284183b4fab221d741b80efa887331f9058f318ff7d3cbb899f4a8` | step 4 remains separately gated; readiness is approximately 72% |
+
+### 262.2 Rule-derived inventory and structural cause
+
+The inventory was not copied from §247. The audit collected every Markdown/YAML `§` token followed by a bare integer, established its target from the same phrase, table row, file path or surrounding exact anchor, and inspected the target document version named by that record. A second pass searched explicit `line`, `row`, `рядок`, `L<number>`, `<path>:<number>` and unprefixed bare-integer forms. File-and-line coordinates used as implementation or evidence locations remain honest coordinates; they do not present themselves as section authority. No additional citation to an unnumbered OCP-001 or OCP-002 heading was demonstrated outside the nine rows below.
+
+The class is structural, not an off-by-one error. OCP-001 and OCP-002 use named headings and have no numbered section surface. A bare integer preceded by `§` therefore cannot resolve in either document, even when it points to the correct source line and quotes the correct content. Replacing one citation does not remove that structural fact and does not introduce numbering into either target.
+
+The exact inventory is:
+
+| Source artifact | Source section | Target document | Written label | Function on the §262.1 baseline |
+|---|---:|---|---:|---|
+| OCP-007 | §34.2 | OCP-001 | `§257` | current SemVer navigation; repairable here |
+| AD-016 | §112 | OCP-002 | `§108` | historical post-remediation projection evidence |
+| AD-016 | §119 | OCP-002 | `§108` | historical candidate-footprint evidence |
+| AD-016 | §122 | OCP-002 | `§108` | historical falsification closure |
+| AD-016 | §126.2 | OCP-002 | `§108` | historical exact-anchor state |
+| AD-016 | §128 | OCP-002 | `§108` | historical attack replay |
+| AD-016 | §129 | OCP-002 | `§108` | historical Board-selection rationale |
+| AD-016 | §130 | OCP-002 | `§108` | historical selected-scope ledger |
+| OCP-003 | §25.2 | OCP-002 | `§108` | historical T4 lifecycle anchor state |
+
+Section 247 therefore undercounted the occurrence inventory: it named two AD-016 locations, while the accepted record contains seven, and it omitted the OCP-003 lifecycle row. Section 247 remains byte-unchanged as its own historical audit record; this section supersedes only its count, not its evidence or conclusion that the citations are structurally unchecked.
+
+### 262.3 Current-view repair and evidence-based asymmetry
+
+The one current OCP-007 citation is replaced with a Markdown link to OCP-001's named **Canonical документи** heading. That target contains the cited PATCH/MINOR/MAJOR ladder and remains resolvable without inventing a section number.
+
+The distinction from the eight preserved rows is functional, not directory-based:
+
+- OCP-007 §34.2 says that its SemVer rule governs **future OCP-007 revisions**, applies SemVer to every §33.2 guarantee and directs current readers to the determining governance authority. Its own PATCH rule explicitly permits correction of links, review evidence and current accounting without changing the contract. The frontmatter and checker guide also expose OCP-007 as a current `1.x` contract.
+- AD-016 §§112/119/122/126.2/128/129/130 and OCP-003 §25.2 bind exact past baselines, attacks, candidate scopes or lifecycle evidence. Their claims remain substantively correct because the historical OCP-002 blob places the quoted Resource rendering at that line, but the written label never denoted a real section. Rewriting those bytes would alter completed evidence records rather than repair a current navigation instruction.
+
+Both categories are retrospective in origin. Only the first also performs a live forwarding function for future revisions. If that current function or historical-only classification could not be established from the documents themselves, option A would stop and return to the Board. The exact text above establishes the distinction without using file location, recency, approval count or completed effort as authority.
+
+### 262.4 Permanent historical register — closed, not deferred
+
+The eight historical rows in §262.2 are consciously preserved. Each has correct quoted content and an invalid section-form address; each is now permanently classified as a closed historical record, not temporary repair debt. A future sweep must report all eight and point here rather than silently suppress them or claim that the bare-integer class is closed. Changing one would require a separate, explicitly authorized historical-record correction; this act supplies no such authority.
+
+The §247 convention is retained when this debt is discussed: target document and written label stay in separate table columns. That separation prevents the register itself from creating a new contiguous citation of the class it records.
+
+### 262.5 Forward rule and consciously deferred enforcement
+
+OCP-001 already requires normative references to identify one defining document and section and guarantees an exact-resolvable defining location. This act records the concrete citation form required by that existing obligation: **new current normative or governance prose MUST link to an exact named heading when the target document has no numbered sections, and MUST NOT present a source-line integer as a `§` authority**. A registered historical occurrence is not precedent for adding another one.
+
+The linked OCP-001 heading text is therefore load-bearing navigation: renaming it would break the current OCP-007 citation and requires the same downstream reference audit and reviewed update as renumbering a cited section, even if the heading edit is otherwise editorial.
+
+No checker currently validates this semantic ownership. Machine detection of bare-integer citations, cross-column targets or named-heading ownership is consciously deferred governance debt requiring a separate Board mandate. This act adds no `.py`, test, fixture or enforcement policy.
+
+### 262.6 PATCH classification, footprint, rollback and gates
+
+OCP-007 moves `1.1.0 → 1.1.1` as PATCH. The nearest contrary precedent is the same §34.2: its `1.1.0` act was MINOR because it added a backward-compatible normative rule for future revisions. This edit adds no OCP-007 rule; it changes only the form of one link to the same exact OCP-001 rule and preserves every Organization guarantee and interpretation. Calling it MINOR would falsely imply a new compatible Organization obligation; leaving it unversioned would violate the document's own post-Canonical ladder.
+
+AD-016 moves `0.25.2 → 0.25.3` as PATCH. The inventory, asymmetry adjudication, permanent register and forward formulation make an existing OCP-001 exact-resolvability obligation usable; they do not create a new semantic route, artifact class or governance authority. MINOR would overstate the repair as a new compatible rule, while no-version editing would hide a governed correction record.
+
+The bounded footprint is exactly six files: OCP-007, this AD-016 record, the checker guide and README/backlog/roadmap accounting. OCP-001, OCP-002, OCP-003 and every historical occurrence are read-only evidence. No section numbering, `.py`, test, fixture, Concept/OCP status, dependency, graph edge, registry, taxonomy, Pattern, foundation map, normative domain rule, backlog status or readiness estimate changes. AD-016 §§122 and 129 remain byte-identical, as do all other historical rows.
+
+The OCP/Pattern structural sweep remains at zero dangling references. The independently derived bare-integer occurrence count moves honestly from nine to eight; all eight survivors are the closed historical rows registered above, so the class is not declared closed. OCP-004 remains `1.0.0 / Canonical`, OCP-015 and OCP-017 remain `0.2.0 / Accepted`, P-001 remains byte-identical, the Concept distribution remains five Canonical / three Accepted / five Proposed and readiness remains approximately 72%.
+
+Rollback is one reviewed six-file PATCH restoring OCP-007 `1.1.0`, AD-016 `0.25.2`, the old unresolved current citation and the prior current accounting. Partial rollback would make the reader-facing OCP-007 version disagree with its projections or leave the permanent register claiming a repair that is absent.
+
+Merge requires Fable exact-head review, Codex adjudication, green CI and fresh explicit Pavlo/Architecture Board authorization on one unchanged head. This mandate authorizes preparation and review only. It does not authorize machine enforcement, historical rewriting, any post-T5 frontier, T6–T10 work or backlog resolution.

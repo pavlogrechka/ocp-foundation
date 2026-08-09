@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-007
 Title: Organization Concept
-Version: 1.1.0
+Version: 1.1.1
 Status: Canonical
 Concept-Status: Canonical
 Defines-Concepts: Organization
@@ -10,7 +10,7 @@ Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, AD-001, P-001
 Uses-Patterns: P-001@0.1.0
 Used-By: Organization Model, Coordination Model, Operational Ontology
-Last-Review: 2026-08-07
+Last-Review: 2026-08-09
 ---
 
 # OCP-007 — Organization Concept
@@ -601,7 +601,7 @@ The atomic correction changes exactly five files: OCP-007, the checker guide, re
 
 ### 34.2 Revision class and versioning after `1.0.0`
 
-This is a **MINOR** revision, `1.0.0 → 1.1.0`. It adds a backward-compatible normative rule for future OCP-007 revisions. Calling it PATCH would understate a new obligation; calling it MAJOR would falsely imply a break in the §33.2 promise, stored records or consumer interpretation. OCP-001 §257 is the determining authority because it classifies compatible additions of rules as MINOR. OCP-003 `0.6.1 → 0.7.0` is the only version-class precedent; OCP-008 and OCP-016 instead added their local ladders inside their canonicalization acts, so this is the first separate post-canonical correction of this class.
+This is a **MINOR** revision, `1.0.0 → 1.1.0`. It adds a backward-compatible normative rule for future OCP-007 revisions. Calling it PATCH would understate a new obligation; calling it MAJOR would falsely imply a break in the §33.2 promise, stored records or consumer interpretation. The [OCP-001 **Canonical документи** SemVer ladder](../001-ontology-governance/README.md#canonical-документи) is the determining authority because it classifies compatible additions of rules as MINOR. OCP-003 `0.6.1 → 0.7.0` is the only version-class precedent; OCP-008 and OCP-016 instead added their local ladders inside their canonicalization acts, so this is the first separate post-canonical correction of this class.
 
 SemVer applies to every guarantee, exclusion and non-implication in §33.2:
 
@@ -624,3 +624,5 @@ No Organization, transition, relationship, profile, resolver, fixture, schema, c
 Corrective rollback or replacement is a new reviewed act derived from its then-current baseline. It cannot silently downgrade the document, delete §34 as history cleanup, rewrite records, redirect exact references, infer continuity or mapping, elect a relationship head, expand CapabilityClaimRecord holders or select authority by timestamp, order, count, majority, reviewer, CI or completed effort.
 
 This correction becomes authoritative only after exact-head Fable review, Codex adjudication, green required CI, fresh explicit Pavlo/Architecture Board authorization for the unchanged head and squash merge. Pavlo's instruction to prepare this separate item authorizes authoring and review only. It does not authorize merge, remaining-T4 reassessment, another lifecycle act, T5, backlog resolution or any semantic extension.
+
+OCP-007 `1.1.1 / Canonical` later applies the PATCH allowance above only to replace the unresolved governance address in this §34.2 with an exact named-heading link. It changes no §33.2 guarantee or other rule; AD-016 §262 records the citation audit and permanent historical register.
