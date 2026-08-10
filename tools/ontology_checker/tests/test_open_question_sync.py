@@ -14,9 +14,26 @@ sys.path.insert(0, str(ROOT / "tools/ontology_checker"))
 
 from ocp_checker.open_question_sync import (  # noqa: E402
     OPEN_QUESTION_RESOLUTION_MISSING,
+    OPEN_QUESTION_RESOLUTION_REFERENCE_MISSING,
     OPEN_QUESTION_SYNC_BACKLOG_INVALID,
     validate_open_question_sync,
 )
+
+
+EXPECTED_AB_BINDINGS = {
+    "QSYNC-001": ("AB-059",),
+    "QSYNC-002": ("AB-059",),
+    "QSYNC-003": ("AB-036",),
+    "QSYNC-004": ("AB-037",),
+    "QSYNC-005": ("AB-025",),
+    "QSYNC-006": ("AB-025",),
+    "QSYNC-007": ("AB-025", "AB-037"),
+    "QSYNC-008": ("AB-036",),
+    "QSYNC-009": ("AB-036",),
+    "QSYNC-010": ("AB-037",),
+    "QSYNC-011": ("AB-025",),
+    "QSYNC-012": ("AB-056",),
+}
 
 
 class OpenQuestionSyncTests(unittest.TestCase):
@@ -37,6 +54,10 @@ class OpenQuestionSyncTests(unittest.TestCase):
 
     def test_repository_resolution_map_is_valid(self) -> None:
         self.assertTrue(validate_open_question_sync(ROOT).valid)
+        self.assertEqual(
+            {entry["id"]: tuple(entry["ab_ids"]) for entry in self.entries()},
+            EXPECTED_AB_BINDINGS,
+        )
 
     def test_every_declared_question_is_individually_enforced(self) -> None:
         for entry in self.entries():
@@ -51,20 +72,39 @@ class OpenQuestionSyncTests(unittest.TestCase):
                 result = validate_open_question_sync(root)
                 self.assertIn(OPEN_QUESTION_RESOLUTION_MISSING, result.errors)
 
+            with self.subTest(entry=entry["id"], field="resolution_ref"), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                target = root / entry["document"]
+                text = target.read_text(encoding="utf-8")
+                marker = f"~~{entry['question']}~~"
+                lines = text.splitlines(keepends=True)
+                matching_indexes = [index for index, line in enumerate(lines) if marker in line]
+                self.assertEqual(len(matching_indexes), 1)
+                index = matching_indexes[0]
+                self.assertIn(entry["resolution_ref"], lines[index])
+                lines[index] = lines[index].replace(
+                    entry["resolution_ref"], "REMOVED-RESOLUTION-REF", 1
+                )
+                target.write_text("".join(lines), encoding="utf-8")
+                result = validate_open_question_sync(root)
+                self.assertIn(OPEN_QUESTION_RESOLUTION_REFERENCE_MISSING, result.errors)
+
     def test_resolved_backlog_status_is_required(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            self.copy_inputs(root)
-            target = root / self.backlog_path
-            text = target.read_text(encoding="utf-8")
-            text = text.replace(
-                "| AB-025 | Reservation / Allocation як окремий Concept | Resolved |",
-                "| AB-025 | Reservation / Allocation як окремий Concept | Open |",
-                1,
-            )
-            target.write_text(text, encoding="utf-8")
-            result = validate_open_question_sync(root)
-            self.assertIn(OPEN_QUESTION_SYNC_BACKLOG_INVALID, result.errors)
+        for ab_id in sorted({ab_id for values in EXPECTED_AB_BINDINGS.values() for ab_id in values}):
+            with self.subTest(ab_id=ab_id), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                target = root / self.backlog_path
+                text = target.read_text(encoding="utf-8")
+                old = next(line for line in text.splitlines() if line.startswith(f"| {ab_id} "))
+                self.assertIn("| Resolved |", old)
+                target.write_text(
+                    text.replace(old, old.replace("| Resolved |", "| Open |"), 1),
+                    encoding="utf-8",
+                )
+                result = validate_open_question_sync(root)
+                self.assertIn(OPEN_QUESTION_SYNC_BACKLOG_INVALID, result.errors)
 
 
 if __name__ == "__main__":
