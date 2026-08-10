@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-positive-authority
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_POSITIVE_AUTHORITY_FORBIDDEN, RESERVATION_BOUNDARY_RESULT_MISMATCH]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-POSITIVE
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-POSITIVE
+    context_ref: CONTEXT-SYNTH-POSITIVE
+    resource_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE
+    quantitative_contract_ref: null
+    stored_result: reserved
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-POSITIVE
+      resource_ref: RESOURCE-SYNTH-POSITIVE
+      context_ref: CONTEXT-SYNTH-POSITIVE
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-POSITIVE]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

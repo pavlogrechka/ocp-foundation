@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-snapshot-shape
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_SNAPSHOT_INVALID]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-SNAPSHOT-SHAPE
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-SNAPSHOT-SHAPE
+    context_ref: CONTEXT-SYNTH-SNAPSHOT-SHAPE
+    resource_snapshot_ref: SNAPSHOT-SYNTH-SNAPSHOT-SHAPE
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-SNAPSHOT-SHAPE
+      resource_ref: RESOURCE-SYNTH-SNAPSHOT-SHAPE
+      context_ref: CONTEXT-SYNTH-SNAPSHOT-SHAPE
+      evidence_state: current
+      assignment_refs: []
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

@@ -1,0 +1,23 @@
+case_id: reservation-boundary-invalid-self-supply-e
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_REQUEST_INVALID, RESERVATION_BOUNDARY_SELF_SUPPLY_FORBIDDEN]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-SELF-E
+    branch: whole_resource_exclusivity
+    action: allocation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-SELF-E
+    context_ref: CONTEXT-SYNTH-SELF-E
+    resource_snapshot_ref: SNAPSHOT-SYNTH-SELF-E
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+    activation_attempt: {consumer_ref: CONSUMER-SYNTH-E, consumer_status: Accepted, baseline_contract_ref: BASELINE-SYNTH-E@1, result_need_ref: NEED-SYNTH-E@1, positive_rule_ref: RULE-SYNTH-E@1, input_snapshot_ref: SNAPSHOT-SYNTH-SELF-E, evaluation_context_ref: CONTEXT-SYNTH-SELF-E, criterion_owner_ref: OWNER-SYNTH-E, evaluator_ref: EVALUATOR-SYNTH-E, object_class_decision_ref: FORM-SYNTH-E@1}
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-SELF-E
+      resource_ref: RESOURCE-SYNTH-SELF-E
+      context_ref: CONTEXT-SYNTH-SELF-E
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-SELF-E]
+      constraint_evaluation_refs: [EVALUATION-SYNTH-SELF-E]
+      quantitative_input_snapshot_ref: null

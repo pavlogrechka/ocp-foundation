@@ -1,0 +1,21 @@
+case_id: reservation-boundary-invalid-request-missing
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_REQUEST_INVALID]}
+dataset:
+  establishment_request:
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-REQUEST
+    context_ref: CONTEXT-SYNTH-REQUEST
+    resource_snapshot_ref: SNAPSHOT-SYNTH-REQUEST
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-REQUEST
+      resource_ref: RESOURCE-SYNTH-REQUEST
+      context_ref: CONTEXT-SYNTH-REQUEST
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-REQUEST]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

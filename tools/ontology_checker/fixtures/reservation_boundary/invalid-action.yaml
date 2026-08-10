@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-action
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_ACTION_INVALID]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-ACTION
+    branch: whole_resource_exclusivity
+    action: unknown_action
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-ACTION
+    context_ref: CONTEXT-SYNTH-ACTION
+    resource_snapshot_ref: SNAPSHOT-SYNTH-ACTION
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-ACTION
+      resource_ref: RESOURCE-SYNTH-ACTION
+      context_ref: CONTEXT-SYNTH-ACTION
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-ACTION]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

@@ -1,0 +1,22 @@
+case_id: reservation-boundary-valid-q-allocation-not-established
+concept: ReservationBoundaryDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-Q-ALLOCATION
+    branch: partial_quantitative
+    action: allocation
+    rule_ref: quantitative-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-Q-ALLOCATION
+    context_ref: CONTEXT-SYNTH-Q-ALLOCATION
+    resource_snapshot_ref: SNAPSHOT-SYNTH-Q-ALLOCATION
+    quantitative_contract_ref: OCP-020@0.2.0
+    stored_result: quantitative_allocation_not_established
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-Q-ALLOCATION
+      resource_ref: RESOURCE-SYNTH-Q-ALLOCATION
+      context_ref: CONTEXT-SYNTH-Q-ALLOCATION
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-Q-ALLOCATION-A, ASSIGNMENT-SYNTH-Q-ALLOCATION-B]
+      constraint_evaluation_refs: [EVALUATION-SYNTH-Q-ALLOCATION]
+      quantitative_input_snapshot_ref: QUANTITATIVE-SNAPSHOT-SYNTH-Q-ALLOCATION

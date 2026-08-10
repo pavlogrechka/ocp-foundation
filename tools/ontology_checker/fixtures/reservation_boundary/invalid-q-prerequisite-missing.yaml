@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-q-prerequisite-missing
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_QUANTITATIVE_PREREQUISITE_INVALID]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-Q-MISSING
+    branch: partial_quantitative
+    action: reservation
+    rule_ref: quantitative-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-Q-MISSING
+    context_ref: CONTEXT-SYNTH-Q-MISSING
+    resource_snapshot_ref: SNAPSHOT-SYNTH-Q-MISSING
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-Q-MISSING
+      resource_ref: RESOURCE-SYNTH-Q-MISSING
+      context_ref: CONTEXT-SYNTH-Q-MISSING
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-Q-MISSING]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: QUANTITATIVE-SNAPSHOT-SYNTH-Q-MISSING

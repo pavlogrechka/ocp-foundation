@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-e-quantitative-coupling
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_BRANCH_COUPLING_FORBIDDEN]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-E-COUPLING
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-E-COUPLING
+    context_ref: CONTEXT-SYNTH-E-COUPLING
+    resource_snapshot_ref: SNAPSHOT-SYNTH-E-COUPLING
+    quantitative_contract_ref: OCP-020@0.2.0
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-E-COUPLING
+      resource_ref: RESOURCE-SYNTH-E-COUPLING
+      context_ref: CONTEXT-SYNTH-E-COUPLING
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-E-COUPLING]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: QUANTITATIVE-SNAPSHOT-SYNTH-E-COUPLING

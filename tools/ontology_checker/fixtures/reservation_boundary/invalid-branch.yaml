@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-branch
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_BRANCH_INVALID]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-BRANCH
+    branch: unknown_branch
+    action: reservation
+    rule_ref: unknown-boundary@1
+    resource_ref: RESOURCE-SYNTH-BRANCH
+    context_ref: CONTEXT-SYNTH-BRANCH
+    resource_snapshot_ref: SNAPSHOT-SYNTH-BRANCH
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-BRANCH
+      resource_ref: RESOURCE-SYNTH-BRANCH
+      context_ref: CONTEXT-SYNTH-BRANCH
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-BRANCH]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

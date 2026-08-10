@@ -1,0 +1,22 @@
+case_id: reservation-boundary-valid-e-allocation-not-established
+concept: ReservationBoundaryDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-E-ALLOCATION
+    branch: whole_resource_exclusivity
+    action: allocation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-E-ALLOCATION
+    context_ref: CONTEXT-SYNTH-E-ALLOCATION
+    resource_snapshot_ref: SNAPSHOT-SYNTH-E-ALLOCATION
+    quantitative_contract_ref: null
+    stored_result: whole_resource_allocation_not_established
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-E-ALLOCATION
+      resource_ref: RESOURCE-SYNTH-E-ALLOCATION
+      context_ref: CONTEXT-SYNTH-E-ALLOCATION
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-E-ALLOCATION-A, ASSIGNMENT-SYNTH-E-ALLOCATION-B]
+      constraint_evaluation_refs: [EVALUATION-SYNTH-E-ALLOCATION]
+      quantitative_input_snapshot_ref: null
