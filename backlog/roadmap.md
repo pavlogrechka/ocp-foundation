@@ -37,6 +37,7 @@
 - [x] Constraint Accepted working description
 - [x] Constraint interaction boundaries — AD-027 separately selects AN, ON and WN; OCP-006 `0.3.1 / Draft` preserves complete-set permutation invariance and denies implicit override/contextual waiver without introducing a Concept or positive authority
 - [x] Resolved-AB/open-question hygiene — AD-028 synchronizes twelve exact current mirrors for AB-025/036/037/056/059, preserves forty-six lawfully open prompts and mechanically rejects loss of any declared strikeout, Resolved status or exact disposition reference
+- [x] Accepted-document evidence hygiene — AD-029 enforces one exact named and hashed reviewed-contract snapshot for every current Accepted OCP, retains OCP-016 acceptance evidence explicitly after Canonical promotion and inventories the wider eight-primary presentation debt without rewriting Canonical or incorporated bodies
 - [x] Organization `1.1.1 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions, document-local post-`1.0.0` SemVer rules and resolvable current governance navigation
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
