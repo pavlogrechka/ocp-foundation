@@ -130,7 +130,7 @@ Whole-Resource exclusivity may be assessed separately because it need not depend
 
 `quantitative-input-rules.yaml` binds every validation and derivation identifier to this document and declares complete direct fixture coverage. The checker implements §§5–8 without comparing demand to capacity.
 
-Sixteen synthetic fixtures include exact demand and consumed totals plus separate malformed-shape, malformed-profile, unresolved-profile, ambiguous-profile, wrong-owner, missing-unit, non-canonical-value, cross-bound, stale, duplicate-operand, mixed-unit, mixed-dimension, mismatched-result and forbidden-coupling cases. Tests require exact expected error sets, fail-closed derivation for every negative, order invariance, isolation from unreferenced bindings and exact equality between the manifest and exported rule sets.
+Eighteen synthetic fixtures include exact demand and consumed totals, a valid non-aggregated `capacity_limit`, and separate malformed-shape, malformed-profile, unresolved-profile, ambiguous-profile, wrong-owner, missing-unit, non-canonical-value, cross-bound, stale, duplicate-operand, selected-capacity-limit, mixed-unit, mixed-dimension, mismatched-result and forbidden-coupling cases. Tests require exact expected error sets, fail-closed derivation for every semantic negative, rejection when the declared `capacity_limit` role is removed, order invariance, isolation from valid unreferenced bindings and exact equality between the manifest and exported rule sets.
 
 All fixtures use only `SYNTH` references and abstract decimal lexemes. They contain no real quantities, unit names, capacities, coordinates, geometry, sectors, windows, callsigns, organization identifiers, personal data or material from another project.
 

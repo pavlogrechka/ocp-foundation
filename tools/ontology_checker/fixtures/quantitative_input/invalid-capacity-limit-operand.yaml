@@ -1,0 +1,14 @@
+case_id: quantitative-input-invalid-capacity-limit-operand
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_AGGREGATION_INVALID]}
+dataset:
+  measurement_profiles:
+    - {profile_ref: PROFILE-SYNTH-Q@1, profile_owner_ref: OWNER-SYNTH-Q@1, units: [{unit_ref: UNIT-SYNTH-Q@1, dimension_ref: DIMENSION-SYNTH-Q@1}]}
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-Q
+      context_ref: CONTEXT-SYNTH-Q
+      evidence_state: current
+      bindings:
+        - {binding_key: DEMAND-SYNTH-Q, subject_ref: SUBJECT-SYNTH-Q1, role: demand, magnitude_lexeme: "2", unit_ref: UNIT-SYNTH-Q@1, dimension_ref: DIMENSION-SYNTH-Q@1, measurement_profile_ref: PROFILE-SYNTH-Q@1, profile_owner_ref: OWNER-SYNTH-Q@1, context_ref: CONTEXT-SYNTH-Q, input_snapshot_ref: SNAPSHOT-SYNTH-Q, provenance_ref: EVIDENCE-SYNTH-Q1, evaluator_ref: EVALUATOR-SYNTH-Q@1}
+        - {binding_key: LIMIT-SYNTH-Q, subject_ref: SUBJECT-SYNTH-Q2, role: capacity_limit, magnitude_lexeme: "7", unit_ref: UNIT-SYNTH-Q@1, dimension_ref: DIMENSION-SYNTH-Q@1, measurement_profile_ref: PROFILE-SYNTH-Q@1, profile_owner_ref: OWNER-SYNTH-Q@1, context_ref: CONTEXT-SYNTH-Q, input_snapshot_ref: SNAPSHOT-SYNTH-Q, provenance_ref: EVIDENCE-SYNTH-Q2, evaluator_ref: EVALUATOR-SYNTH-Q@1}
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-Q, context_ref: CONTEXT-SYNTH-Q, measurement_profile_ref: PROFILE-SYNTH-Q@1, profile_owner_ref: OWNER-SYNTH-Q@1, role: demand, operand_keys: [DEMAND-SYNTH-Q, LIMIT-SYNTH-Q], stored_total: null}

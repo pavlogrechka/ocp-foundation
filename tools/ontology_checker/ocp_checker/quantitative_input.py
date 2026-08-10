@@ -175,11 +175,14 @@ def _evaluate(dataset: object) -> tuple[dict[str, str] | None, set[str]]:
     if snapshot is not None and not isinstance(bindings, list):
         errors.add("QUANTITATIVE_INPUT_FIXTURE_INVALID")
         bindings = []
+    if isinstance(bindings, list) and any(not isinstance(item, dict) for item in bindings):
+        errors.add("QUANTITATIVE_INPUT_FIXTURE_INVALID")
+    all_bindings = [item for item in bindings or [] if isinstance(item, dict)]
 
     selected: list[dict] = []
     if isinstance(bindings, list) and isinstance(operand_keys, list):
         for operand_key in operand_keys:
-            matches = [item for item in bindings if isinstance(item, dict) and item.get("binding_key") == operand_key]
+            matches = [item for item in all_bindings if item.get("binding_key") == operand_key]
             if not matches:
                 errors.add("QUANTITATIVE_INPUT_REFERENCE_UNRESOLVED")
                 continue
@@ -191,7 +194,9 @@ def _evaluate(dataset: object) -> tuple[dict[str, str] | None, set[str]]:
     units: set[str] = set()
     dimensions: set[str] = set()
     values: list[Decimal] = []
-    for binding in selected:
+    selected_objects = {id(item) for item in selected}
+    for binding in all_bindings:
+        is_selected = id(binding) in selected_objects
         required = (
             "binding_key",
             "subject_ref",
@@ -212,9 +217,11 @@ def _evaluate(dataset: object) -> tuple[dict[str, str] | None, set[str]]:
         value = _decimal(binding.get("magnitude_lexeme"))
         if value is None:
             errors.add("QUANTITATIVE_INPUT_VALUE_INVALID")
-        else:
+        elif is_selected:
             values.append(value)
-        if binding.get("role") not in ROLES or binding.get("role") != role:
+        if binding.get("role") not in ROLES:
+            errors.add("QUANTITATIVE_INPUT_AGGREGATION_INVALID")
+        if is_selected and binding.get("role") != role:
             errors.add("QUANTITATIVE_INPUT_AGGREGATION_INVALID")
         if (
             binding.get("measurement_profile_ref") != profile_ref
@@ -223,8 +230,9 @@ def _evaluate(dataset: object) -> tuple[dict[str, str] | None, set[str]]:
             or binding.get("input_snapshot_ref") != snapshot_ref
         ):
             errors.add("QUANTITATIVE_INPUT_BINDING_MISMATCH")
-        units.add(binding.get("unit_ref"))
-        dimensions.add(binding.get("dimension_ref"))
+        if is_selected:
+            units.add(binding.get("unit_ref"))
+            dimensions.add(binding.get("dimension_ref"))
 
         if profile is not None:
             unit_matches = [unit for unit in profile.get("units", []) if unit.get("unit_ref") == binding.get("unit_ref")]

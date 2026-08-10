@@ -140,11 +140,11 @@ The profile owner is attribution, not authenticated legitimacy. OCP-020 admits n
 
 ## 10. Executable evidence and completeness
 
-The act adds `quantitative-input-rules.yaml`, a dedicated validator/derivation module, sixteen synthetic fixtures and six focused tests. The manifest declares complete direct fixture coverage, and the existing generic guard requires every validation ID to occur in fixture expectations.
+The act adds `quantitative-input-rules.yaml`, a dedicated validator/derivation module, eighteen synthetic fixtures and six focused tests. The manifest declares complete direct fixture coverage, and the existing generic guard requires every validation ID to occur in fixture expectations.
 
-Positive fixtures prove exact demand and consumed totals. Material negatives separately cover malformed fixture/profile, unresolved and ambiguous profile, wrong owner, missing unit, non-canonical magnitude, cross-bound data, stale snapshot, duplicate operands, mixed units, heterogeneous dimensions, mismatched stored result and forbidden semantic coupling. Tests also prove order invariance, immunity to unreferenced bindings, fail-closed negative derivation and manifest/code equality.
+Positive fixtures prove exact demand and consumed totals and validate a non-aggregated `capacity_limit` beside exact demand operands. Material negatives separately cover malformed fixture/profile, unresolved and ambiguous profile, wrong owner, missing unit, non-canonical magnitude, cross-bound data, stale snapshot, duplicate operands, a selected `capacity_limit`, mixed units, heterogeneous dimensions, mismatched stored result and forbidden semantic coupling. Tests also prove that deleting the declared `capacity_limit` role fails, plus order invariance, immunity to valid unreferenced bindings, fail-closed negative derivation and manifest/code equality.
 
-The repository floor grows from `212` to `218` tests and from `166` to `182` fixtures. Exact counts are verified in both PR and `main` checker contexts; a green count alone cannot grant production or positive-model authority.
+The repository floor grows from `212` to `218` tests and from `166` to `184` fixtures. Exact counts are verified in both PR and `main` checker contexts; a green count alone cannot grant production or positive-model authority.
 
 ## 11. Backlog disposition
 
@@ -161,7 +161,7 @@ The registry, taxonomy, Concept graph and generated foundation map remain byte-i
 
 AD-025 is `0.1.0` because it is the first version of this decision identity, and `Accepted` because it makes the Board's bounded outcome selection and resolves AB-037 rather than merely recording discovery. OCP-020 is `0.1.0` because it is a new contract identity, and remains `Draft` because this act prepares but does not perform the separately required acceptance act. The additive checker evidence does not change the version of any existing normative artifact.
 
-There is no migration because OCP-020 is optional Draft evidence and no existing artifact gains required fields. Rollback removes AD-025, OCP-020, the manifest/module, sixteen fixtures, six tests and synchronized accounting, restoring the exact base semantics.
+There is no migration because OCP-020 is optional Draft evidence and no existing artifact gains required fields. Rollback removes AD-025, OCP-020, the manifest/module, eighteen fixtures, six tests and synchronized accounting, restoring the exact base semantics.
 
 All fixtures are synthetic. They use abstract `SYNTH` references and decimal lexemes only, with no real quantities, unit names, capacities, coordinates, geometry, sectors, windows, callsigns, organization designators, personal data, credentials or material from any other project on this machine.
 

@@ -1,0 +1,15 @@
+case_id: quantitative-input-valid-demand-with-capacity-input
+concept: QuantitativeInputDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  measurement_profiles:
+    - {profile_ref: PROFILE-SYNTH-P@1, profile_owner_ref: OWNER-SYNTH-P@1, units: [{unit_ref: UNIT-SYNTH-P@1, dimension_ref: DIMENSION-SYNTH-P@1}]}
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-P
+      context_ref: CONTEXT-SYNTH-P
+      evidence_state: current
+      bindings:
+        - {binding_key: DEMAND-SYNTH-P1, subject_ref: SUBJECT-SYNTH-P1, role: demand, magnitude_lexeme: "2", unit_ref: UNIT-SYNTH-P@1, dimension_ref: DIMENSION-SYNTH-P@1, measurement_profile_ref: PROFILE-SYNTH-P@1, profile_owner_ref: OWNER-SYNTH-P@1, context_ref: CONTEXT-SYNTH-P, input_snapshot_ref: SNAPSHOT-SYNTH-P, provenance_ref: EVIDENCE-SYNTH-P1, evaluator_ref: EVALUATOR-SYNTH-P@1}
+        - {binding_key: DEMAND-SYNTH-P2, subject_ref: SUBJECT-SYNTH-P2, role: demand, magnitude_lexeme: "3", unit_ref: UNIT-SYNTH-P@1, dimension_ref: DIMENSION-SYNTH-P@1, measurement_profile_ref: PROFILE-SYNTH-P@1, profile_owner_ref: OWNER-SYNTH-P@1, context_ref: CONTEXT-SYNTH-P, input_snapshot_ref: SNAPSHOT-SYNTH-P, provenance_ref: EVIDENCE-SYNTH-P2, evaluator_ref: EVALUATOR-SYNTH-P@1}
+        - {binding_key: LIMIT-SYNTH-P, subject_ref: SUBJECT-SYNTH-P, role: capacity_limit, magnitude_lexeme: "7", unit_ref: UNIT-SYNTH-P@1, dimension_ref: DIMENSION-SYNTH-P@1, measurement_profile_ref: PROFILE-SYNTH-P@1, profile_owner_ref: OWNER-SYNTH-P@1, context_ref: CONTEXT-SYNTH-P, input_snapshot_ref: SNAPSHOT-SYNTH-P, provenance_ref: EVIDENCE-SYNTH-P3, evaluator_ref: EVALUATOR-SYNTH-P@1}
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-P, context_ref: CONTEXT-SYNTH-P, measurement_profile_ref: PROFILE-SYNTH-P@1, profile_owner_ref: OWNER-SYNTH-P@1, role: demand, operand_keys: [DEMAND-SYNTH-P1, DEMAND-SYNTH-P2], stored_total: {magnitude_lexeme: "5", unit_ref: UNIT-SYNTH-P@1, dimension_ref: DIMENSION-SYNTH-P@1}}

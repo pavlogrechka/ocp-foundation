@@ -15,6 +15,7 @@ from ocp_checker import (  # noqa: E402
     load_fixture,
     validate_reference_fixture,
 )
+from ocp_checker import quantitative_input  # noqa: E402
 from ocp_checker.quantitative_input import (  # noqa: E402
     QUANTITATIVE_INPUT_DERIVATION_RULES,
     QUANTITATIVE_INPUT_ERROR_CODES,
@@ -30,12 +31,12 @@ class QuantitativeInputBoundaryTests(unittest.TestCase):
         }
 
     def test_evidence_grows_with_positive_and_material_negative_cases(self) -> None:
-        self.assertGreaterEqual(len(self.fixtures), 16)
+        self.assertGreaterEqual(len(self.fixtures), 18)
         self.assertGreaterEqual(
-            len([item for item in self.fixtures.values() if item["expected"]["valid"]]), 2
+            len([item for item in self.fixtures.values() if item["expected"]["valid"]]), 3
         )
         self.assertGreaterEqual(
-            len([item for item in self.fixtures.values() if not item["expected"]["valid"]]), 14
+            len([item for item in self.fixtures.values() if not item["expected"]["valid"]]), 15
         )
 
     def test_all_fixtures_match_exact_expected_errors(self) -> None:
@@ -57,10 +58,26 @@ class QuantitativeInputBoundaryTests(unittest.TestCase):
                 "unit_ref": "UNIT-SYNTH-B@1",
                 "dimension_ref": "DIMENSION-SYNTH-B@1",
             },
+            "valid-demand-with-capacity-input": {
+                "magnitude_lexeme": "5",
+                "unit_ref": "UNIT-SYNTH-P@1",
+                "dimension_ref": "DIMENSION-SYNTH-P@1",
+            },
         }
         for name, total in expected.items():
             with self.subTest(fixture=name):
                 self.assertEqual(derive_quantitative_total(self.fixtures[name]["dataset"]), total)
+
+        original_roles = quantitative_input.ROLES
+        try:
+            quantitative_input.ROLES = original_roles - {"capacity_limit"}
+            validation = validate_reference_fixture(
+                self.fixtures["valid-demand-with-capacity-input"]
+            )
+            self.assertFalse(validation.valid)
+            self.assertIn("QUANTITATIVE_INPUT_AGGREGATION_INVALID", validation.errors)
+        finally:
+            quantitative_input.ROLES = original_roles
 
     def test_every_material_negative_fails_closed(self) -> None:
         for name, fixture in self.fixtures.items():
