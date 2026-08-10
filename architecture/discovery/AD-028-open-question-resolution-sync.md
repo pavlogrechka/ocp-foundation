@@ -48,7 +48,7 @@ The criterion was fixed before scanning.
 
 1. A current question is a mirror only when its subject and full requested scope match a `Resolved` AB disposition.
 2. The backlog-to-AD/OCP chain must directly show that the act gave the current final answer to that prompt. Topic overlap, a shared noun or `Resolved` alone is insufficient.
-3. Strikeout is permitted only for a fully dispositive current answer. A partial result, consumer-local activation, negative lower boundary that leaves the requested positive model open, transferred ownership or explicit future-reopening question remains open.
+3. Strikeout is permitted only for a fully dispositive current answer. A bounded negative answer is dispositive when the same AB is explicitly `Resolved` by a selected no-establishment/no-new-authority outcome over every alternative named by the question and records a future reopening gate; it is not dispositive when the act is partial, consumer-local, transfers the requested positive subject to a separate Open owner or the question explicitly asks for future reopening evidence.
 4. Historical reviewed-contract snapshots are evidence and remain byte-unchanged. The scan covers only current question carriers: `backlog/open-questions.md` and current primary OCP README sections explicitly named as questions/future-review prompts.
 5. A mixed prompt is struck only if every clause has a current disposition. Otherwise it stays open and the partial resolution is registered here.
 
