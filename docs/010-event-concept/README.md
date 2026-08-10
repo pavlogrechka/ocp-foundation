@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-010
 Title: Event Concept
-Version: 0.2.0
+Version: 0.2.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-008, AD-006, P-001
@@ -10,7 +10,7 @@ Used-By: Operation Evidence, Objective Achievement Assessment, Coordination Mode
 Defines-Concepts: Event
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-04
+Last-Review: 2026-08-10
 ---
 
 # OCP-010 — Event Concept
@@ -480,13 +480,13 @@ OCP-010 свідомо не визначає:
 - authorization, approval або admissibility;
 - database, API, UI, transport або message schema.
 
-## 22. Open questions
+## 22. Open questions and resolved boundaries
 
 - Чи потребує Event окремого temporal interval module після появи canonical time model?
 - Який normative owner визначить Operation-to-Event relationship record, якщо direct references стануть недостатніми?
 - Які domain correlation rules можуть пропонувати candidate Event linkage без зміни Core identity?
 - Чи потрібна governed Event-kind registry або достатньо exact domain references?
-- Як AB-056 визначить allowed assessment targets, conclusions, supersession та authority?
+- ~~Як AB-056 визначить allowed assessment targets, conclusions, supersession та authority?~~ OCP-011 §§2–8 приймає exact target/criterion/evidence/input/evaluator/time/provenance bindings, bounded conclusions і history-preserving supersession without generic assessment authority.
 
 ## 23. External review target
 
@@ -521,3 +521,11 @@ Architecture Board прийняла OCP-010 і Concept `Event` **4 серпня 
 - залишити AB-056 окремим наступним normative cycle для OutcomeAssessmentRecord та атомарної резолюції registry entry `Result`.
 
 `Accepted` не означає `Canonical`. Подальші зміни Event identity, ObservationRecord authority, supersession contract або occurrence/observation boundary потребують нового явного normative cycle.
+
+## 25. PATCH accounting — v0.2.1
+
+Revision `0.2.1` synchronizes the fifth §22 prompt with Resolved AB-056 and the Accepted OCP-011 contract. It keeps the original question visible as a struck historical prompt and adds the exact current owner rather than deleting evidence of the earlier boundary.
+
+The first four questions remain open because AB-055 accepted Event/ObservationRecord identity and evidence only; it did not select a canonical time model, Operation-to-Event relation owner, domain correlation rule or Event-kind registry.
+
+This PATCH changes no Event or ObservationRecord identity, structure, lifecycle, derivation, Concept status, dependency, graph edge, P-001 invocation, checker behavior, rule manifest or fixture.

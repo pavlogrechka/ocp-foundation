@@ -1,0 +1,63 @@
+schema_version: 1
+scope: exact-current-question-mirrors-adjudicated-by-AD-028
+entries:
+  - id: QSYNC-001
+    ab_ids: [AB-059]
+    document: backlog/open-questions.md
+    question: Які дані можуть бути видимими між незалежними вертикалями у спільній операційній зоні?
+    resolution_ref: AD-010 §§25–26
+  - id: QSYNC-002
+    ab_ids: [AB-059]
+    document: backlog/open-questions.md
+    question: Яка канонічна модель погодження, підтвердження та відкликання погодження?
+    resolution_ref: AD-010 §§25–26
+  - id: QSYNC-003
+    ab_ids: [AB-036]
+    document: backlog/open-questions.md
+    question: Як визначаються precedence, override, exception і waiver між Constraint?
+    resolution_ref: AD-027/OCP-006 §27
+  - id: QSYNC-004
+    ab_ids: [AB-037]
+    document: backlog/open-questions.md
+    question: Яка модель quantity, demand, capacity та units потрібна для кількісних Constraint?
+    resolution_ref: AD-025/OCP-020 §§5–8, 11
+  - id: QSYNC-005
+    ab_ids: [AB-025]
+    document: backlog/open-questions.md
+    question: Чи є Reservation окремим Concept або результатом Assignment, Constraint та decision workflow?
+    resolution_ref: AD-026/OCP-021 §§8–12
+  - id: QSYNC-006
+    ab_ids: [AB-025]
+    document: docs/005-assignment-concept/README.md
+    question: Чи потрібен окремий фундаментальний Concept `Reservation`, чи це спеціалізація Assignment або Constraint?
+    resolution_ref: AD-026/OCP-021 §§8–12
+  - id: QSYNC-007
+    ab_ids: [AB-025, AB-037]
+    document: docs/005-assignment-concept/README.md
+    question: Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?
+    resolution_ref: AD-025/OCP-020 §§5–8, 11 and AD-026/OCP-021 §§8–12
+  - id: QSYNC-008
+    ab_ids: [AB-036]
+    document: docs/006-constraint-concept/README.md
+    question: Як визначаються precedence, override та exception між Constraint?
+    resolution_ref: AD-027/OCP-006 §27
+  - id: QSYNC-009
+    ab_ids: [AB-036]
+    document: docs/006-constraint-concept/README.md
+    question: Чи допускаються contextual waivers, і яким Concept вони представлені?
+    resolution_ref: AD-027/OCP-006 §27
+  - id: QSYNC-010
+    ab_ids: [AB-037]
+    document: docs/006-constraint-concept/README.md
+    question: Яка модель quantity, unit, demand і capacity потрібна для кількісних Constraint?
+    resolution_ref: AD-025/OCP-020 §§5–8, 11
+  - id: QSYNC-011
+    ab_ids: [AB-025]
+    document: docs/006-constraint-concept/README.md
+    question: Чи є Reservation окремим Concept або результатом Assignment та blocking Constraint?
+    resolution_ref: AD-026/OCP-021 §§8–12
+  - id: QSYNC-012
+    ab_ids: [AB-056]
+    document: docs/010-event-concept/README.md
+    question: Як AB-056 визначить allowed assessment targets, conclusions, supersession та authority?
+    resolution_ref: OCP-011 §§2–8

@@ -29,6 +29,7 @@ Implemented validators:
 - accepted OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
+- declared Resolved-AB/open-question synchronization with exact current-document strikeout and disposition-reference checks;
 - artifact governance and complete-history process audit.
 
 Implemented reference derivations include:

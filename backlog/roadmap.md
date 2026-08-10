@@ -35,7 +35,8 @@
 - [x] Operation `1.0.0 / Canonical` bounded identity/Q3I contract with Accepted Route C OCP-017 lifecycle owner
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
-- [x] Constraint interaction boundaries — AD-027 separately selects AN, ON and WN; OCP-006 `0.3.0 / Draft` preserves complete-set permutation invariance and denies implicit override/contextual waiver without introducing a Concept or positive authority
+- [x] Constraint interaction boundaries — AD-027 separately selects AN, ON and WN; OCP-006 `0.3.1 / Draft` preserves complete-set permutation invariance and denies implicit override/contextual waiver without introducing a Concept or positive authority
+- [x] Resolved-AB/open-question hygiene — AD-028 synchronizes twelve exact current mirrors for AB-025/036/037/056/059, preserves forty-six lawfully open prompts and mechanically rejects loss of any declared strikeout, Resolved status or exact disposition reference
 - [x] Organization `1.1.1 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions, document-local post-`1.0.0` SemVer rules and resolvable current governance navigation
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path
