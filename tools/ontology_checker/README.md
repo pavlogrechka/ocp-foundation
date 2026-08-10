@@ -30,6 +30,7 @@ Implemented validators:
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
 - declared Resolved-AB/open-question synchronization with exact current-document strikeout and disposition-reference checks;
+- declared Accepted-OCP reviewed-snapshot coverage with exact primary/status, reviewed-version filename, content digest, primary link and retained OCP-016 evidence checks;
 - artifact governance and complete-history process audit.
 
 Implemented reference derivations include:
