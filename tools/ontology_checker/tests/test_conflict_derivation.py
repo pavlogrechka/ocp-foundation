@@ -136,6 +136,64 @@ class ConflictDerivationBoundaryTests(unittest.TestCase):
         self.assertEqual(derived, "indeterminate")
         self.assertNotEqual(derived, "conflict")
 
+    def test_consumer_independence_probe_inventory_is_complete(self) -> None:
+        fixtures = {
+            name: item
+            for name, item in self.fixtures.items()
+            if name.startswith("invalid-positive-profile-basis-")
+        }
+        expected_gaps = {
+            "future_gate_only": {
+                "independent_operational_responsibility",
+                "concrete_consumer",
+                "legitimate_owner_evaluator",
+            },
+            "generic_used_by_label": {
+                "current_operational_responsibility",
+                "concrete_consumer",
+                "legitimate_owner_evaluator",
+            },
+            "local_value_only": {
+                "current_operational_responsibility",
+                "protected_handling_decision",
+                "legitimate_owner_evaluator",
+            },
+        }
+        self.assertEqual(
+            {item["independence_probe"]["basis_kind"] for item in fixtures.values()},
+            set(expected_gaps),
+        )
+        for name, fixture in fixtures.items():
+            with self.subTest(fixture=name):
+                probe = fixture["independence_probe"]
+                self.assertEqual(
+                    set(probe["missing_evidence"]),
+                    expected_gaps[probe["basis_kind"]],
+                )
+                validation = validate_reference_fixture(fixture)
+                self.assertFalse(validation.valid)
+                self.assertEqual(
+                    derive_conflict_establishment_result(fixture["snapshot"]),
+                    "indeterminate",
+                )
+
+    def test_complete_profile_claims_cannot_self_supply_consumer_or_owner(self) -> None:
+        fixtures = {
+            name: item
+            for name, item in self.fixtures.items()
+            if name.startswith("invalid-positive-profile-basis-")
+        }
+        self.assertEqual(len(fixtures), 3)
+        for name, fixture in fixtures.items():
+            with self.subTest(fixture=name):
+                attempt = fixture["snapshot"]["derivation_request"]["activation_attempt"]
+                self.assertTrue(
+                    all(fields <= set(attempt) for fields in self.G4_BINDING_GROUPS.values())
+                )
+                derived = derive_conflict_establishment_result(fixture["snapshot"])
+                self.assertEqual(derived, "indeterminate")
+                self.assertNotEqual(derived, "conflict")
+
     def test_manifest_is_complete(self) -> None:
         rules = yaml.safe_load(
             (ROOT / "conflict-derivation-rules.yaml").read_text(encoding="utf-8")
