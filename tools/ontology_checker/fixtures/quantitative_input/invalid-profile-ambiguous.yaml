@@ -1,0 +1,13 @@
+case_id: quantitative-input-invalid-profile-ambiguous
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_REFERENCE_AMBIGUOUS]}
+dataset:
+  measurement_profiles:
+    - {profile_ref: PROFILE-SYNTH-E@1, profile_owner_ref: OWNER-SYNTH-E@1, units: [{unit_ref: UNIT-SYNTH-E@1, dimension_ref: DIMENSION-SYNTH-E@1}]}
+    - {profile_ref: PROFILE-SYNTH-E@1, profile_owner_ref: OWNER-SYNTH-E@1, units: [{unit_ref: UNIT-SYNTH-E@1, dimension_ref: DIMENSION-SYNTH-E@1}]}
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-E
+      context_ref: CONTEXT-SYNTH-E
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-E, subject_ref: SUBJECT-SYNTH-E, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-E@1, dimension_ref: DIMENSION-SYNTH-E@1, measurement_profile_ref: PROFILE-SYNTH-E@1, profile_owner_ref: OWNER-SYNTH-E@1, context_ref: CONTEXT-SYNTH-E, input_snapshot_ref: SNAPSHOT-SYNTH-E, provenance_ref: EVIDENCE-SYNTH-E, evaluator_ref: EVALUATOR-SYNTH-E@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-E, context_ref: CONTEXT-SYNTH-E, measurement_profile_ref: PROFILE-SYNTH-E@1, profile_owner_ref: OWNER-SYNTH-E@1, role: demand, operand_keys: [DEMAND-SYNTH-E], stored_total: null}

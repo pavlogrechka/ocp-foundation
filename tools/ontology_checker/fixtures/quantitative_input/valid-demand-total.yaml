@@ -1,0 +1,16 @@
+case_id: quantitative-input-valid-demand-total
+concept: QuantitativeInputDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  measurement_profiles:
+    - profile_ref: PROFILE-SYNTH-A@1
+      profile_owner_ref: OWNER-SYNTH-A@1
+      units: [{unit_ref: UNIT-SYNTH-A@1, dimension_ref: DIMENSION-SYNTH-A@1}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-A
+      context_ref: CONTEXT-SYNTH-A
+      evidence_state: current
+      bindings:
+        - {binding_key: DEMAND-SYNTH-A1, subject_ref: SUBJECT-SYNTH-A1, role: demand, magnitude_lexeme: "2", unit_ref: UNIT-SYNTH-A@1, dimension_ref: DIMENSION-SYNTH-A@1, measurement_profile_ref: PROFILE-SYNTH-A@1, profile_owner_ref: OWNER-SYNTH-A@1, context_ref: CONTEXT-SYNTH-A, input_snapshot_ref: SNAPSHOT-SYNTH-A, provenance_ref: EVIDENCE-SYNTH-A1, evaluator_ref: EVALUATOR-SYNTH-A@1}
+        - {binding_key: DEMAND-SYNTH-A2, subject_ref: SUBJECT-SYNTH-A2, role: demand, magnitude_lexeme: "3.5", unit_ref: UNIT-SYNTH-A@1, dimension_ref: DIMENSION-SYNTH-A@1, measurement_profile_ref: PROFILE-SYNTH-A@1, profile_owner_ref: OWNER-SYNTH-A@1, context_ref: CONTEXT-SYNTH-A, input_snapshot_ref: SNAPSHOT-SYNTH-A, provenance_ref: EVIDENCE-SYNTH-A2, evaluator_ref: EVALUATOR-SYNTH-A@1}
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-A, context_ref: CONTEXT-SYNTH-A, measurement_profile_ref: PROFILE-SYNTH-A@1, profile_owner_ref: OWNER-SYNTH-A@1, role: demand, operand_keys: [DEMAND-SYNTH-A1, DEMAND-SYNTH-A2], stored_total: {magnitude_lexeme: "5.5", unit_ref: UNIT-SYNTH-A@1, dimension_ref: DIMENSION-SYNTH-A@1}}

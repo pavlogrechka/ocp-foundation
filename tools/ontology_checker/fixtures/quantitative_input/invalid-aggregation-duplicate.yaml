@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-aggregation-duplicate
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_AGGREGATION_INVALID]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-K@1, profile_owner_ref: OWNER-SYNTH-K@1, units: [{unit_ref: UNIT-SYNTH-K@1, dimension_ref: DIMENSION-SYNTH-K@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-K
+      context_ref: CONTEXT-SYNTH-K
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-K, subject_ref: SUBJECT-SYNTH-K, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-K@1, dimension_ref: DIMENSION-SYNTH-K@1, measurement_profile_ref: PROFILE-SYNTH-K@1, profile_owner_ref: OWNER-SYNTH-K@1, context_ref: CONTEXT-SYNTH-K, input_snapshot_ref: SNAPSHOT-SYNTH-K, provenance_ref: EVIDENCE-SYNTH-K, evaluator_ref: EVALUATOR-SYNTH-K@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-K, context_ref: CONTEXT-SYNTH-K, measurement_profile_ref: PROFILE-SYNTH-K@1, profile_owner_ref: OWNER-SYNTH-K@1, role: demand, operand_keys: [DEMAND-SYNTH-K, DEMAND-SYNTH-K], stored_total: null}
