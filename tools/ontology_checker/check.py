@@ -12,6 +12,7 @@ import yaml
 from ocp_checker import load_fixture, validate_reference_fixture, validate_repository
 from ocp_checker.artifact_governance import validate_artifact_governance, validate_process_audit
 from ocp_checker.concept_graph import validate_and_render_concept_graph
+from ocp_checker.open_question_sync import validate_open_question_sync
 
 
 def validate_any_fixture(fixture: dict):
@@ -73,6 +74,13 @@ def main() -> int:
     print(f"{'PASS' if artifact_result.valid else 'FAIL'} artifact-governance errors={list(artifact_result.errors)}")
     failures += 0 if artifact_result.valid else 1
 
+    question_sync_result = validate_open_question_sync(repo_root)
+    print(
+        f"{'PASS' if question_sync_result.valid else 'FAIL'} "
+        f"open-question-resolution-sync errors={list(question_sync_result.errors)}"
+    )
+    failures += 0 if question_sync_result.valid else 1
+
     process_result = validate_process_audit(repo_root, context=context)
     print(f"{'PASS' if process_result.valid else 'FAIL'} process-audit context={context} errors={list(process_result.errors)}")
     failures += 0 if process_result.valid else 1
@@ -97,7 +105,8 @@ def main() -> int:
 
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
-        f"process audit, Concept graph and generated map; failures={failures}"
+        f"open-question resolution sync, process audit, Concept graph and generated map; "
+        f"failures={failures}"
     )
     return 1 if failures else 0
 

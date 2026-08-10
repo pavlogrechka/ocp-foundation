@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.6
+Version: 0.2.7
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-08
+Last-Review: 2026-08-10
 ---
 
 # Assignment Concept
@@ -436,14 +436,14 @@ Assignment у stage `Established` із довільно заповненим `te
 - резервування кількості без визначеного Resource та Operation;
 - Operation Template.
 
-## 19. Open Questions
+## 19. Open Questions and Resolved Boundaries
 
-1. Чи потрібен окремий фундаментальний Concept `Reservation`, чи це спеціалізація Assignment або Constraint?
+1. ~~Чи потрібен окремий фундаментальний Concept `Reservation`, чи це спеціалізація Assignment або Constraint?~~ AD-026/OCP-021 §§8–12 приймають EN/QN negative establishment boundaries: жоден із цих object/Concept outcomes не встановлений; позитивна модель потребує окремого reopening.
 2. Яка amendment model потрібна для зміни role або applicability після Establishment?
 3. Чи допускається ретроактивне Establishment Assignment?
 4. Чи потрібна окрема Role Taxonomy у Core?
 5. Чи повинен Assignment мати окремий scope для частини складеного Resource без створення нового Resource?
-6. Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?
+6. ~~Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?~~ AD-025/OCP-020 §§5–8, 11 and AD-026/OCP-021 §§8–12 розділяють відповідь: exact-unit `demand`/`consumed` inputs і neutral aggregation прийняті, тоді як reservation/allocation з цієї композиції не встановлюються.
 7. Чи потрібен окремий тип Assignment для coordination, approval або observation roles?
 8. Як Constraint визначає конфлікт одночасних Assignment?
 9. Чи може один Assignment мати кілька неперервних applicability intervals, чи кожен інтервал потребує окремого Assignment?
@@ -515,3 +515,11 @@ Revision `0.2.6` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Assignment — `Accepted`. Operation Canonical status та OCP-017 acceptance не створюють Assignment, participation, role, terminal mutation, authorization, availability, Readiness, outcome або Event inference. Assignment identity/lifecycle, exact Resource/Operation binding, role/applicability semantics, dependencies, Concept status, graph edges, P-001 invocation та existing records/references лишаються незмінними.
 
 Mechanical peer-view validation exact-sync-ить тільки current registered-Concept status із OCP-000; воно не визначає status і не замінює Board act. Corrective rollback повертає цей row лише разом з повним twelve-file WJ projection unit через новий reviewed act.
+
+## 25. PATCH accounting — v0.2.7
+
+Revision `0.2.7` synchronizes two §19 questions with the already Resolved AB-025/AB-037 dispositions. It preserves the questions as struck historical prompts and appends exact current-boundary references instead of deleting or semantically rewriting them.
+
+The remaining nine questions stay open. In particular, simultaneous-Assignment Conflict remains open because AD-022/OCP-019 establishes only a negative lower boundary and AB-018 still owns any positive model; replacement remains open because OCP-013 expressly owns eligibility rather than replacement authority.
+
+This PATCH changes no Assignment identity, structure, lifecycle, derivation, Concept status, dependency, graph edge, P-001 invocation, rule manifest, checker behavior or fixture.

@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.3.0
+Version: 0.3.1
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -578,11 +578,11 @@ Advisory Constraint із відомим `violated` створює finding без
 2. Яка канонічна expression або rule language потрібна для PredicateSpecification?
 3. ~~Як визначаються precedence, override та exception між Constraint?~~ AD-027/OCP-006 §27 окремо встановлюють поточні заперечні межі: нормативний порядок застосування не встановлений, один Constraint не override-ить інший, а exception не є обхідним полем.
 4. ~~Чи допускаються contextual waivers, і яким Concept вони представлені?~~ AD-027/OCP-006 §27 встановлюють, що contextual waiver не встановлений і не представлений новим Concept; позитивне відкриття потребує окремого акта.
-5. Яка модель quantity, unit, demand і capacity потрібна для кількісних Constraint?
+5. ~~Яка модель quantity, unit, demand і capacity потрібна для кількісних Constraint?~~ AD-025/OCP-020 §§5–8, 11 приймають exact profile/unit/snapshot inputs та exact-unit demand/consumed aggregation; `capacity_limit` не агрегується, а позитивний capacity result лишається окремо gated.
 6. Який строк актуальності має ConstraintEvaluationRecord для dynamic inputs?
 7. Чи повинні всі blocking evaluations зберігатися, чи частина може бути відтворюваною derivation?
 8. Як Constraint взаємодіє з authorization Operation?
-9. Чи є Reservation окремим Concept або результатом Assignment та blocking Constraint?
+9. ~~Чи є Reservation окремим Concept або результатом Assignment та blocking Constraint?~~ AD-026/OCP-021 §§8–12 приймають EN/QN: сама композиція Assignment, Constraint evidence й accepted quantitative input не встановлює Reservation/Allocation та не вводить відповідний Concept або object form.
 10. Які Constraint повинні впливати на майбутню Readiness або availability model?
 11. Чи потрібна окрема taxonomy constraint kinds у Core?
 12. Як виражати Constraint над геометричними, часовими та спектральними relations без включення domain semantics до Core?
@@ -760,3 +760,11 @@ Manifest `constraint-interaction-rules.yaml` оголошує complete direct fi
 `0.2.5 → 0.3.0` є MINOR: додаються три backwards-compatible owner-local derivation boundaries, але не змінюються Constraint identity, lifecycle, applicability, evaluation, enforcement, admissibility, Concept status або existing records. Міграції немає; новий dataset є optional reference-evidence envelope.
 
 Rollback видаляє §27 і executable evidence, повертає §22 items 3–4 до Open та відновлює `0.2.5`; він не може вводити позитивну precedence/override/waiver модель. Позитивне reopening потребує окремого outcome comparison, exact G4 elements для відповідного subject і свіжих Board gates.
+
+## 28. PATCH accounting — v0.3.1
+
+Revision `0.3.1` synchronizes §22 questions 5 and 9 with the already Resolved AB-037 and AB-025 dispositions. The prompts remain visible as struck historical questions with exact decision/contract references; no quantity, capacity, reservation or allocation semantics are added here.
+
+Questions 1, 2 and 6–8, 10–12 remain open. The Conflict question remains open because AD-022/OCP-019 selected only the negative establishment boundary and explicitly left AB-018's positive model unresolved; the general freshness question remains open because AD-012/OCP-011 activates one exact assessment kind rather than every dynamic Constraint input.
+
+This PATCH changes no Constraint identity, field, lifecycle, applicability, evaluation, interaction rule, Concept status, dependency, graph edge, P-001 invocation, rule manifest, checker behavior or fixture.
