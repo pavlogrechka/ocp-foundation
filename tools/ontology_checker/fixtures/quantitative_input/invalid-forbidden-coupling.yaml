@@ -1,0 +1,12 @@
+case_id: quantitative-input-invalid-forbidden-coupling
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_FORBIDDEN_COUPLING]}
+dataset:
+  reservation: true
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-O@1, profile_owner_ref: OWNER-SYNTH-O@1, units: [{unit_ref: UNIT-SYNTH-O@1, dimension_ref: DIMENSION-SYNTH-O@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-O
+      context_ref: CONTEXT-SYNTH-O
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-O, subject_ref: SUBJECT-SYNTH-O, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-O@1, dimension_ref: DIMENSION-SYNTH-O@1, measurement_profile_ref: PROFILE-SYNTH-O@1, profile_owner_ref: OWNER-SYNTH-O@1, context_ref: CONTEXT-SYNTH-O, input_snapshot_ref: SNAPSHOT-SYNTH-O, provenance_ref: EVIDENCE-SYNTH-O, evaluator_ref: EVALUATOR-SYNTH-O@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-O, context_ref: CONTEXT-SYNTH-O, measurement_profile_ref: PROFILE-SYNTH-O@1, profile_owner_ref: OWNER-SYNTH-O@1, role: demand, operand_keys: [DEMAND-SYNTH-O], stored_total: null}

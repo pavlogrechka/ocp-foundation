@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-owner-mismatch
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_OWNER_MISMATCH]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-F@1, profile_owner_ref: OWNER-SYNTH-F@1, units: [{unit_ref: UNIT-SYNTH-F@1, dimension_ref: DIMENSION-SYNTH-F@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-F
+      context_ref: CONTEXT-SYNTH-F
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-F, subject_ref: SUBJECT-SYNTH-F, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-F@1, dimension_ref: DIMENSION-SYNTH-F@1, measurement_profile_ref: PROFILE-SYNTH-F@1, profile_owner_ref: OWNER-SYNTH-WRONG@1, context_ref: CONTEXT-SYNTH-F, input_snapshot_ref: SNAPSHOT-SYNTH-F, provenance_ref: EVIDENCE-SYNTH-F, evaluator_ref: EVALUATOR-SYNTH-F@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-F, context_ref: CONTEXT-SYNTH-F, measurement_profile_ref: PROFILE-SYNTH-F@1, profile_owner_ref: OWNER-SYNTH-WRONG@1, role: demand, operand_keys: [DEMAND-SYNTH-F], stored_total: null}

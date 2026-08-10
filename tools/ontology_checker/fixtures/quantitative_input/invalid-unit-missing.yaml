@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-unit-missing
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_VALUE_INVALID]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-G@1, profile_owner_ref: OWNER-SYNTH-G@1, units: [{unit_ref: UNIT-SYNTH-G@1, dimension_ref: DIMENSION-SYNTH-G@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-G
+      context_ref: CONTEXT-SYNTH-G
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-G, subject_ref: SUBJECT-SYNTH-G, role: demand, magnitude_lexeme: "1", unit_ref: "", dimension_ref: DIMENSION-SYNTH-G@1, measurement_profile_ref: PROFILE-SYNTH-G@1, profile_owner_ref: OWNER-SYNTH-G@1, context_ref: CONTEXT-SYNTH-G, input_snapshot_ref: SNAPSHOT-SYNTH-G, provenance_ref: EVIDENCE-SYNTH-G, evaluator_ref: EVALUATOR-SYNTH-G@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-G, context_ref: CONTEXT-SYNTH-G, measurement_profile_ref: PROFILE-SYNTH-G@1, profile_owner_ref: OWNER-SYNTH-G@1, role: demand, operand_keys: [DEMAND-SYNTH-G], stored_total: null}

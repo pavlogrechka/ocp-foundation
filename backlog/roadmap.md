@@ -8,8 +8,8 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 91% | Capability, Objective, Resource, Organization та Operation є Canonical; Assignment, Constraint і Event лишаються Accepted, OCP-017 є Route C Accepted non-Concept, а candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 27% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow, Accepted OCP-018 authorization-source contract і Draft OCP-019 negative Conflict-establishment boundary з executable fail-safe evidence; positive Conflict model, production source profiles і reservation не завершені |
-| Machine-readable schemas and enforcement | 75% | Checker перевіряє local spatial envelopes, F1/V1/IO2, LT2 predecessor-chain history і exact lifecycle evidence; production contracts, geometry evaluator і semantic duplicate analysis відсутні |
+| Operational rules and workflows | 29% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow, Accepted OCP-018, Draft OCP-019 negative Conflict boundary і Draft OCP-020 quantitative input; positive Conflict/capacity models, production profiles і reservation не завершені |
+| Machine-readable schemas and enforcement | 77% | Checker додатково перевіряє exact profile/unit/snapshot quantitative inputs та exact-unit aggregation; production contracts, capacity evaluator, geometry evaluator і semantic duplicate analysis відсутні |
 | **Загальна foundation-готовність** | **≈72%** | T5 WJ joint lifecycle unit стабілізує Operation і приймає окремий Route C lifecycle contract без semantic migration; T6–T10, known reference debt і кожен відкритий Operation backlog item зберігають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
@@ -162,8 +162,9 @@ The checker is a reference validation layer, not production implementation. OCP 
 - [x] Conflict derivation boundary — AD-022 selects H0-B and OCP-019 `0.1.0 / Draft` makes the negative Route C establishment boundary executable: exact ConstraintEvaluationRecord references are preserved, while one/many violations and incomplete, conflicting, stale or indeterminate inputs never permissively derive Conflict; positive activation remains separately gated by OCP-016 G4
 - [x] Positive Conflict activation-gate audit — AD-023 inventories every Accepted-or-higher contract and finds no complete OCP-019 §9 / OCP-016 G4 consumer; seven synthetic gate probes make each missing group and a complete self-declared attempt derive only `indeterminate`, while OCP-019 remains byte-identical `0.1.0 / Draft`
 - [x] Operation consumer-independence audit — AD-024 applies a reproducible seven-surface inventory before route selection and finds no concrete current consumer, protected handling decision or legitimate non-Board owner/evaluator; three synthetic self-supply probes preserve `indeterminate`, so no OCP-004 profile is prepared and the three-act minimum remains future work
+- [x] Quantitative Constraint input direction — AD-025 selects QC and OCP-020 `0.1.0 / Draft` makes exact profile/unit/snapshot bindings and exact-unit demand/consumed aggregation executable without capacity-sufficiency, availability, reservation or allocation authority; AB-037 is Resolved while acceptance and positive activation retain separate gates
 - [ ] Production source profiles and any broader approval semantics
-- [ ] Reservation and Allocation decision
+- [ ] Reservation and Allocation decision — whole-Resource exclusivity and partial/quantitative reservation remain separately gated under AB-025
 - [ ] Conflict and remediation model
 
 ## Milestone 3 — Machine-Readable Foundation Expansion

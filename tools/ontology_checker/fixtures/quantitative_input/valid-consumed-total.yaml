@@ -1,0 +1,14 @@
+case_id: quantitative-input-valid-consumed-total
+concept: QuantitativeInputDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  measurement_profiles:
+    - {profile_ref: PROFILE-SYNTH-B@1, profile_owner_ref: OWNER-SYNTH-B@1, units: [{unit_ref: UNIT-SYNTH-B@1, dimension_ref: DIMENSION-SYNTH-B@1}]}
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-B
+      context_ref: CONTEXT-SYNTH-B
+      evidence_state: current
+      bindings:
+        - {binding_key: CONSUMED-SYNTH-B1, subject_ref: SUBJECT-SYNTH-B1, role: consumed, magnitude_lexeme: "1.25", unit_ref: UNIT-SYNTH-B@1, dimension_ref: DIMENSION-SYNTH-B@1, measurement_profile_ref: PROFILE-SYNTH-B@1, profile_owner_ref: OWNER-SYNTH-B@1, context_ref: CONTEXT-SYNTH-B, input_snapshot_ref: SNAPSHOT-SYNTH-B, provenance_ref: EVIDENCE-SYNTH-B1, evaluator_ref: EVALUATOR-SYNTH-B@1}
+        - {binding_key: CONSUMED-SYNTH-B2, subject_ref: SUBJECT-SYNTH-B2, role: consumed, magnitude_lexeme: "0.75", unit_ref: UNIT-SYNTH-B@1, dimension_ref: DIMENSION-SYNTH-B@1, measurement_profile_ref: PROFILE-SYNTH-B@1, profile_owner_ref: OWNER-SYNTH-B@1, context_ref: CONTEXT-SYNTH-B, input_snapshot_ref: SNAPSHOT-SYNTH-B, provenance_ref: EVIDENCE-SYNTH-B2, evaluator_ref: EVALUATOR-SYNTH-B@1}
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-B, context_ref: CONTEXT-SYNTH-B, measurement_profile_ref: PROFILE-SYNTH-B@1, profile_owner_ref: OWNER-SYNTH-B@1, role: consumed, operand_keys: [CONSUMED-SYNTH-B1, CONSUMED-SYNTH-B2], stored_total: {magnitude_lexeme: "2", unit_ref: UNIT-SYNTH-B@1, dimension_ref: DIMENSION-SYNTH-B@1}}

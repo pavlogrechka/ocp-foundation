@@ -1,0 +1,13 @@
+case_id: quantitative-input-invalid-mixed-units
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_UNIT_MISMATCH]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-L@1, profile_owner_ref: OWNER-SYNTH-L@1, units: [{unit_ref: UNIT-SYNTH-L1@1, dimension_ref: DIMENSION-SYNTH-L@1}, {unit_ref: UNIT-SYNTH-L2@1, dimension_ref: DIMENSION-SYNTH-L@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-L
+      context_ref: CONTEXT-SYNTH-L
+      evidence_state: current
+      bindings:
+        - {binding_key: DEMAND-SYNTH-L1, subject_ref: SUBJECT-SYNTH-L1, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-L1@1, dimension_ref: DIMENSION-SYNTH-L@1, measurement_profile_ref: PROFILE-SYNTH-L@1, profile_owner_ref: OWNER-SYNTH-L@1, context_ref: CONTEXT-SYNTH-L, input_snapshot_ref: SNAPSHOT-SYNTH-L, provenance_ref: EVIDENCE-SYNTH-L1, evaluator_ref: EVALUATOR-SYNTH-L@1}
+        - {binding_key: DEMAND-SYNTH-L2, subject_ref: SUBJECT-SYNTH-L2, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-L2@1, dimension_ref: DIMENSION-SYNTH-L@1, measurement_profile_ref: PROFILE-SYNTH-L@1, profile_owner_ref: OWNER-SYNTH-L@1, context_ref: CONTEXT-SYNTH-L, input_snapshot_ref: SNAPSHOT-SYNTH-L, provenance_ref: EVIDENCE-SYNTH-L2, evaluator_ref: EVALUATOR-SYNTH-L@1}
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-L, context_ref: CONTEXT-SYNTH-L, measurement_profile_ref: PROFILE-SYNTH-L@1, profile_owner_ref: OWNER-SYNTH-L@1, role: demand, operand_keys: [DEMAND-SYNTH-L1, DEMAND-SYNTH-L2], stored_total: null}

@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-cross-bound
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_BINDING_MISMATCH]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-I@1, profile_owner_ref: OWNER-SYNTH-I@1, units: [{unit_ref: UNIT-SYNTH-I@1, dimension_ref: DIMENSION-SYNTH-I@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-I
+      context_ref: CONTEXT-SYNTH-I
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-I, subject_ref: SUBJECT-SYNTH-I, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-I@1, dimension_ref: DIMENSION-SYNTH-I@1, measurement_profile_ref: PROFILE-SYNTH-I@1, profile_owner_ref: OWNER-SYNTH-I@1, context_ref: CONTEXT-SYNTH-CROSS, input_snapshot_ref: SNAPSHOT-SYNTH-CROSS, provenance_ref: EVIDENCE-SYNTH-I, evaluator_ref: EVALUATOR-SYNTH-I@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-I, context_ref: CONTEXT-SYNTH-I, measurement_profile_ref: PROFILE-SYNTH-I@1, profile_owner_ref: OWNER-SYNTH-I@1, role: demand, operand_keys: [DEMAND-SYNTH-I], stored_total: null}

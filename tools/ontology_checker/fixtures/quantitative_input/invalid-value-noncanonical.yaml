@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-value-noncanonical
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_VALUE_INVALID]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-H@1, profile_owner_ref: OWNER-SYNTH-H@1, units: [{unit_ref: UNIT-SYNTH-H@1, dimension_ref: DIMENSION-SYNTH-H@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-H
+      context_ref: CONTEXT-SYNTH-H
+      evidence_state: current
+      bindings: [{binding_key: DEMAND-SYNTH-H, subject_ref: SUBJECT-SYNTH-H, role: demand, magnitude_lexeme: "1.0", unit_ref: UNIT-SYNTH-H@1, dimension_ref: DIMENSION-SYNTH-H@1, measurement_profile_ref: PROFILE-SYNTH-H@1, profile_owner_ref: OWNER-SYNTH-H@1, context_ref: CONTEXT-SYNTH-H, input_snapshot_ref: SNAPSHOT-SYNTH-H, provenance_ref: EVIDENCE-SYNTH-H, evaluator_ref: EVALUATOR-SYNTH-H@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-H, context_ref: CONTEXT-SYNTH-H, measurement_profile_ref: PROFILE-SYNTH-H@1, profile_owner_ref: OWNER-SYNTH-H@1, role: demand, operand_keys: [DEMAND-SYNTH-H], stored_total: null}

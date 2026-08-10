@@ -1,0 +1,33 @@
+fixture_coverage:
+  status: complete
+  concept: QuantitativeInputDataset
+rules:
+  - id: QUANTITATIVE_INPUT_FIXTURE_INVALID
+    source: OCP-020 §§5–8, 11
+  - id: QUANTITATIVE_INPUT_PROFILE_INVALID
+    source: OCP-020 §§5–6
+  - id: QUANTITATIVE_INPUT_REFERENCE_UNRESOLVED
+    source: OCP-020 §§5–8
+  - id: QUANTITATIVE_INPUT_REFERENCE_AMBIGUOUS
+    source: OCP-020 §§5–8
+  - id: QUANTITATIVE_INPUT_OWNER_MISMATCH
+    source: OCP-020 §§5–6
+  - id: QUANTITATIVE_INPUT_VALUE_INVALID
+    source: OCP-020 §§5–6
+  - id: QUANTITATIVE_INPUT_BINDING_MISMATCH
+    source: OCP-020 §§6–8
+  - id: QUANTITATIVE_INPUT_STALE
+    source: OCP-020 §§6–8
+  - id: QUANTITATIVE_INPUT_AGGREGATION_INVALID
+    source: OCP-020 §§7–8
+  - id: QUANTITATIVE_INPUT_UNIT_MISMATCH
+    source: OCP-020 §§5, 7–8
+  - id: QUANTITATIVE_INPUT_DIMENSION_MISMATCH
+    source: OCP-020 §§5, 7–8
+  - id: QUANTITATIVE_INPUT_RESULT_MISMATCH
+    source: OCP-020 §§7–8, 11
+  - id: QUANTITATIVE_INPUT_FORBIDDEN_COUPLING
+    source: OCP-020 §§3–4, 9–10
+  - id: derive_quantitative_total
+    kind: derivation
+    source: OCP-020 §7

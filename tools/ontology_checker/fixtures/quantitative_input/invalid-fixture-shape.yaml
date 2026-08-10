@@ -1,0 +1,4 @@
+case_id: quantitative-input-invalid-fixture-shape
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_FIXTURE_INVALID]}
+dataset: {measurement_profiles: []}

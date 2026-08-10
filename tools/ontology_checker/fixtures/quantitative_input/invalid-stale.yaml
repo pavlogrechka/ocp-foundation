@@ -1,0 +1,11 @@
+case_id: quantitative-input-invalid-stale
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_STALE]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-J@1, profile_owner_ref: OWNER-SYNTH-J@1, units: [{unit_ref: UNIT-SYNTH-J@1, dimension_ref: DIMENSION-SYNTH-J@1}]}]
+  input_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-J
+      context_ref: CONTEXT-SYNTH-J
+      evidence_state: stale
+      bindings: [{binding_key: DEMAND-SYNTH-J, subject_ref: SUBJECT-SYNTH-J, role: demand, magnitude_lexeme: "1", unit_ref: UNIT-SYNTH-J@1, dimension_ref: DIMENSION-SYNTH-J@1, measurement_profile_ref: PROFILE-SYNTH-J@1, profile_owner_ref: OWNER-SYNTH-J@1, context_ref: CONTEXT-SYNTH-J, input_snapshot_ref: SNAPSHOT-SYNTH-J, provenance_ref: EVIDENCE-SYNTH-J, evaluator_ref: EVALUATOR-SYNTH-J@1}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-J, context_ref: CONTEXT-SYNTH-J, measurement_profile_ref: PROFILE-SYNTH-J@1, profile_owner_ref: OWNER-SYNTH-J@1, role: demand, operand_keys: [DEMAND-SYNTH-J], stored_total: null}

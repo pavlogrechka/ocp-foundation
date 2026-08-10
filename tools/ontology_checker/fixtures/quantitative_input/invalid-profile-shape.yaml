@@ -1,0 +1,7 @@
+case_id: quantitative-input-invalid-profile-shape
+concept: QuantitativeInputDataset
+expected: {valid: false, error_codes: [QUANTITATIVE_INPUT_PROFILE_INVALID, QUANTITATIVE_INPUT_REFERENCE_UNRESOLVED]}
+dataset:
+  measurement_profiles: [{profile_ref: PROFILE-SYNTH-C@1, profile_owner_ref: OWNER-SYNTH-C@1, units: []}]
+  input_snapshots: [{snapshot_ref: SNAPSHOT-SYNTH-C, context_ref: CONTEXT-SYNTH-C, evidence_state: current, bindings: []}]
+  aggregation_request: {contract_ref: OCP-020@0.1.0, rule_ref: exact-unit-quantity-sum@1, input_snapshot_ref: SNAPSHOT-SYNTH-C, context_ref: CONTEXT-SYNTH-C, measurement_profile_ref: PROFILE-SYNTH-C@1, profile_owner_ref: OWNER-SYNTH-C@1, role: demand, operand_keys: [MISSING-SYNTH-C], stored_total: null}

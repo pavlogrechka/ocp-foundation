@@ -132,6 +132,13 @@ from .conflict_derivation import (
     validate_conflict_derivation_dataset,
     validate_conflict_derivation_fixture,
 )
+from .quantitative_input import (
+    QUANTITATIVE_INPUT_DERIVATION_RULES,
+    QUANTITATIVE_INPUT_ERROR_CODES,
+    derive_quantitative_total,
+    validate_quantitative_input_dataset,
+    validate_quantitative_input_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -209,6 +216,8 @@ def validate_reference_fixture(fixture):
         return validate_operation_authorization_fixture(fixture)
     if concept == "ConflictDerivationBoundaryDataset":
         return validate_conflict_derivation_fixture(fixture)
+    if concept == "QuantitativeInputDataset":
+        return validate_quantitative_input_fixture(fixture)
     return validate_fixture(fixture)
 
 
