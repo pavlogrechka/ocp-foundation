@@ -1,0 +1,15 @@
+case_id: constraint-interaction-valid-application-order-not-established
+concept: ConstraintInteractionDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  interaction_request:
+    request_id: REQUEST-SYNTH-ORDER
+    interaction_kind: application_order
+    rule_ref: constraint-application-order-boundary@1
+    context_ref: CONTEXT-SYNTH-ORDER
+    input_snapshot_ref: SNAPSHOT-SYNTH-ORDER
+    constraint_version_refs: [CONSTRAINT-SYNTH-B@1, CONSTRAINT-SYNTH-A@1]
+    stored_result: constraint_application_order_not_established
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-A@1, context_ref: CONTEXT-SYNTH-ORDER, input_snapshot_ref: SNAPSHOT-SYNTH-ORDER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-B@1, context_ref: CONTEXT-SYNTH-ORDER, input_snapshot_ref: SNAPSHOT-SYNTH-ORDER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-B}

@@ -8,8 +8,8 @@
 |---|---:|---|
 | Engineering and governance foundation | 100% | Репозиторій, taxonomy, decision/review process, versioning, Ruleset, required checker і post-factum history audit діють |
 | Core domain ontology | 91% | Capability, Objective, Resource, Organization та Operation є Canonical; Assignment, Constraint і Event лишаються Accepted, OCP-017 є Route C Accepted non-Concept, а candidate-local blockers/gates не змінюються за implication |
-| Operational rules and workflows | 31% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow, Accepted OCP-018, Draft OCP-019 negative Conflict boundary, Accepted OCP-020 quantitative input і Draft OCP-021 negative Reservation/Allocation boundary; positive Conflict/capacity/reservation models і production profiles не завершені |
-| Machine-readable schemas and enforcement | 77% | Checker додатково перевіряє exact quantitative inputs, exact-unit aggregation і separate E/Q Reservation/Allocation negative boundaries; production contracts, positive capacity/reservation evaluators, geometry evaluator і semantic duplicate analysis відсутні |
+| Operational rules and workflows | 33% | Є participation, admissibility, explicit-intent validation, Accepted Q3I Operation lifecycle contract, assessment, interchangeability, Coordination workflow, Accepted OCP-018, Draft OCP-019 negative Conflict boundary, Accepted OCP-020 quantitative input, Draft OCP-021 negative Reservation/Allocation boundary і три owner-local OCP-006 A/O/W negative boundaries; positive Conflict/capacity/reservation/precedence/override/waiver models і production profiles не завершені |
+| Machine-readable schemas and enforcement | 77% | Checker додатково перевіряє exact quantitative inputs, exact-unit aggregation, separate E/Q Reservation/Allocation negative boundaries і separate Constraint application-order/override/contextual-waiver negative boundaries; production contracts, positive evaluators, geometry evaluator і semantic duplicate analysis відсутні |
 | **Загальна foundation-готовність** | **≈72%** | T5 WJ joint lifecycle unit стабілізує Operation і приймає окремий Route C lifecycle contract без semantic migration; T6–T10, known reference debt і кожен відкритий Operation backlog item зберігають окремі gates |
 
 Відсоток не означає готовність production-системи. Репозиторій формує специфікаційний фундамент і reference validation layer, а не програмну реалізацію платформи.
@@ -35,6 +35,7 @@
 - [x] Operation `1.0.0 / Canonical` bounded identity/Q3I contract with Accepted Route C OCP-017 lifecycle owner
 - [x] Assignment Accepted working description
 - [x] Constraint Accepted working description
+- [x] Constraint interaction boundaries — AD-027 separately selects AN, ON and WN; OCP-006 `0.3.0 / Draft` preserves complete-set permutation invariance and denies implicit override/contextual waiver without introducing a Concept or positive authority
 - [x] Organization `1.1.1 / Canonical` bounded Q2 identity and local relationship-record contract with explicit continuity/classification/mapping exclusions, document-local post-`1.0.0` SemVer rules and resolvable current governance navigation
 - [x] Objective Accepted working description
 - [x] State/Readiness mandate and final axis decision — `AD-002 / AD-011`; S0/R0 accepted, candidates deregistered, R1 remains a separately gated reopening path

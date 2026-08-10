@@ -15,6 +15,7 @@ Implemented validators:
 - Draft OCP-019 negative Conflict-establishment requests with exact ConstraintEvaluationRecord references and fail-safe incomplete/conflicting/stale evidence handling;
 - Accepted OCP-020 quantitative profile/unit/snapshot bindings and exact-unit `demand | consumed` aggregation without capacity or reservation authority;
 - Draft OCP-021 separate whole-Resource and partial/quantitative Reservation/Allocation negative composition boundaries;
+- Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
@@ -39,6 +40,9 @@ Implemented reference derivations include:
 - `effective_constraint_result`;
 - `constraint_blocks`;
 - `constraint_set_decision`;
+- `derive_constraint_application_order_boundary`;
+- `derive_constraint_override_boundary`;
+- `derive_contextual_waiver_boundary`;
 - `resolve_capability_definition`;
 - `resolve_event`;
 - `observations_for_event`;
@@ -72,6 +76,7 @@ The checker uses exact module manifests:
 - `conflict-derivation-rules.yaml` — Draft OCP-019 negative establishment-boundary and prohibited positive-authority rules.
 - `quantitative-input-rules.yaml` — Accepted OCP-020 exact quantitative-input envelope, fail-safe validation and neutral exact-unit sum.
 - `reservation-boundary-rules.yaml` — Draft OCP-021 separate E/Q evidence envelopes, negative establishment results and prohibited positive authority.
+- `constraint-interaction-rules.yaml` — Draft OCP-006 separate application-order, override and contextual-waiver evidence envelopes, negative results and prohibited positive authority.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
@@ -192,7 +197,9 @@ For Accepted OCP-020, `exact-unit-quantity-sum@1` exact-binds one profile owner,
 
 For Draft OCP-021, `whole-resource-reservation-allocation-boundary@1` and `quantitative-reservation-allocation-boundary@1` remain mechanically separate. Exact current Resource/Assignment/Constraint evidence derives only the E-specific negative result; Q additionally requires exact `OCP-020@0.2.0` and one quantitative snapshot reference, but still derives only the Q-specific negative result. Branch crossover, stale/ambiguous/cross-bound evidence, caller self-supply and every positive Reservation/Allocation/availability/capacity coupling fail closed as `indeterminate`.
 
-Manifests may opt into direct fixture coverage with `fixture_coverage.status: complete` and one fixture concept. A generic test requires the exact validation-ID set to be named by direct fixture expectations. OCP-018, OCP-019, OCP-020 and OCP-021 opt in; legacy manifests make no untrue completeness claim.
+For Draft OCP-006 `0.3.0`, `constraint-application-order-boundary@1`, `constraint-override-boundary@1` and `constraint-waiver-boundary@1` remain mechanically separate. Exact current Constraint-version inputs bound to one context/snapshot derive only `constraint_application_order_not_established`, `constraint_override_not_established` or `contextual_waiver_not_established`. Application-order replay is permutation and provenance invariant. Missing, ambiguous, stale, cross-bound, cross-branch, self-targeting or positive-coupled evidence fails closed as `indeterminate`; the checker creates no precedence, suppression or exemption authority.
+
+Manifests may opt into direct fixture coverage with `fixture_coverage.status: complete` and one fixture concept. A generic test requires the exact validation-ID set to be named by direct fixture expectations. OCP-006 interaction boundaries, OCP-018, OCP-019, OCP-020 and OCP-021 opt in; legacy manifests make no untrue completeness claim.
 
 Every transition exact-binds one domain completeness profile and passed input snapshot. Only the transition to `Authorized` carries an exact external authorization-evidence binding; the checker validates its structural agreement but neither authenticates the source owner nor grants permission. Terminal transitions exact-enumerate Assignment dispositions at the transition time using OCP-005 `assignment_effective_at`; the evidence cannot mutate Assignment.
 

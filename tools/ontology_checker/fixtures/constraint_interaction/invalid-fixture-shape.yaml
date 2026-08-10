@@ -1,0 +1,4 @@
+case_id: constraint-interaction-invalid-fixture-shape
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_FIXTURE_INVALID]}
+dataset: {unexpected: SYNTH}

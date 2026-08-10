@@ -1,0 +1,9 @@
+case_id: constraint-interaction-invalid-precedence-timestamp
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_PRECEDENCE_SELECTOR_FORBIDDEN, CONSTRAINT_INTERACTION_REQUEST_INVALID]}
+dataset: &dataset
+  interaction_request: &request
+    {request_id: REQUEST-SYNTH-PRECEDENCE-TIMESTAMP, interaction_kind: application_order, rule_ref: constraint-application-order-boundary@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, constraint_version_refs: [CONSTRAINT-SYNTH-DEFENSIVE-A@1, CONSTRAINT-SYNTH-DEFENSIVE-B@1], stored_result: indeterminate, precedence_timestamp: SYNTH-PRECEDENCE}
+  constraint_application_inputs: &inputs
+    - {constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-A@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-DEFENSIVE-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-B@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-DEFENSIVE-B}

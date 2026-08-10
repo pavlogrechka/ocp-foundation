@@ -1,0 +1,25 @@
+manifest_version: 0.1.0
+module: constraint-interaction
+fixture_coverage:
+  status: complete
+  concept: ConstraintInteractionDataset
+rules:
+  - {id: CONSTRAINT_INTERACTION_FIXTURE_INVALID, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_REQUEST_INVALID, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_KIND_INVALID, source: OCP-006 §§27.2–27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_INPUT_INVALID, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_INPUT_UNRESOLVED, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_INPUT_AMBIGUOUS, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_CONTEXT_MISMATCH, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_SNAPSHOT_MISMATCH, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_INPUT_STALE, source: OCP-006 §27.5, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_OVERRIDE_TARGET_INVALID, source: OCP-006 §27.3, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_PRECEDENCE_SELECTOR_FORBIDDEN, source: OCP-006 §§27.2 and 27.6, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_CONVENIENCE_OVERRIDE_FORBIDDEN, source: OCP-006 §§27.3 and 27.6, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_OCP018_TAKEOVER_FORBIDDEN, source: OCP-006 §27.6, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_WAIVER_BYPASS_FORBIDDEN, source: OCP-006 §§27.4 and 27.6, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_POSITIVE_RESULT_FORBIDDEN, source: OCP-006 §§27.2–27.4 and 27.6, kind: validation}
+  - {id: CONSTRAINT_INTERACTION_RESULT_MISMATCH, source: OCP-006 §27.5, kind: validation}
+  - {id: derive_constraint_application_order_boundary, source: OCP-006 §27.2, kind: derivation}
+  - {id: derive_constraint_override_boundary, source: OCP-006 §27.3, kind: derivation}
+  - {id: derive_contextual_waiver_boundary, source: OCP-006 §27.4, kind: derivation}

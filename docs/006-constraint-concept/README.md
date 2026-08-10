@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.2.5
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -9,7 +9,7 @@ Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Read
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-08
+Last-Review: 2026-08-10
 ---
 
 # Constraint Concept
@@ -572,12 +572,12 @@ Advisory Constraint із відомим `violated` створює finding без
 - UI validation без онтологічного правила;
 - числове значення без predicate та target scope.
 
-## 22. Open Questions
+## 22. Open Questions and Resolved Boundaries
 
 1. Чи потрібен окремий фундаментальний Concept `Conflict`, чи достатньо агрегованого evaluation model?
 2. Яка канонічна expression або rule language потрібна для PredicateSpecification?
-3. Як визначаються precedence, override та exception між Constraint?
-4. Чи допускаються contextual waivers, і яким Concept вони представлені?
+3. ~~Як визначаються precedence, override та exception між Constraint?~~ AD-027/OCP-006 §27 окремо встановлюють поточні заперечні межі: нормативний порядок застосування не встановлений, один Constraint не override-ить інший, а exception не є обхідним полем.
+4. ~~Чи допускаються contextual waivers, і яким Concept вони представлені?~~ AD-027/OCP-006 §27 встановлюють, що contextual waiver не встановлений і не представлений новим Concept; позитивне відкриття потребує окремого акта.
 5. Яка модель quantity, unit, demand і capacity потрібна для кількісних Constraint?
 6. Який строк актуальності має ConstraintEvaluationRecord для dynamic inputs?
 7. Чи повинні всі blocking evaluations зберігатися, чи частина може бути відтворюваною derivation?
@@ -652,3 +652,111 @@ Revision `0.2.5` синхронізує лише volatile current-status renderi
 Документ лишається `Draft`, Constraint — `Accepted`. Operation Canonical status та OCP-017 acceptance не змінюють Constraint identity, applicability/evaluation truth, stage preconditions, authorization, Conflict, availability, Readiness, outcome або Event semantics. Dependencies, Concept status, graph edges, P-001 invocation, existing records/references і всі інваріанти лишаються незмінними.
 
 Mechanical peer-view validation exact-sync-ить тільки current registered-Concept status із OCP-000; воно не визначає status і не замінює Board act. Corrective rollback повертає цей row лише разом з повним twelve-file WJ projection unit через новий reviewed act.
+
+## 27. Constraint interaction boundaries — v0.3.0
+
+Revision `0.3.0` вирішує два owner-local питання OCP-006 §22, не змінюючи `Constraint` Concept status `Accepted`. Три предмети не взаємозамінні й мають окремі rule references, request shapes та результати.
+
+### 27.1 Gate-first result
+
+OCP-016 G4 перевіряється окремо до вибору форми:
+
+| Subject | Чи здатна позитивна форма створити operational result? | Результат на цій базі |
+|---|---|---|
+| порядок застосування | так, якщо порядок обирає семантичного переможця або змінює `constraint_set_decision` | positive form закрита: немає Accepted consumer, exact positive rule, snapshot/context need та legitimate owner/evaluator |
+| override | так, бо пригнічує чинний Constraint або його evaluation effect | positive form закрита за відсутності тих самих п'яти G4 елементів |
+| contextual waiver | так, бо звільняє context від застосовного Constraint | positive form закрита за відсутності тих самих п'яти G4 елементів |
+
+Заперечна boundary-форма не встановлює позитивного operational result, тому сама не потребує G4 activation. Вона не може self-supply відсутні елементи й не переносить status або semantics будь-якого Accepted артефакту.
+
+### 27.2 Application-order boundary
+
+```text
+derive_constraint_application_order_boundary(Dataset) :=
+    constraint_application_order_not_established
+        if request exact-binds at least two distinct current
+        Constraint version inputs to one context and input snapshot
+        under constraint-application-order-boundary@1
+    indeterminate
+        otherwise
+```
+
+Результат означає лише, що OCP-006 не встановлює нормативного traversal або precedence між застосовними Constraint. Перестановка `constraint_version_refs`, вхідних records або provenance labels не змінює результат. `constraint_set_decision` §12 і далі оцінює повну множину застосовних Constraint через `any`/`none`; порядок обходу не є семантичним input.
+
+Результат не означає, що всі Constraint еквівалентні, що реалізація не може мати детермінований технічний порядок, або що майбутній окремо активований contract не може визначити precedence.
+
+### 27.3 Override boundary
+
+```text
+derive_constraint_override_boundary(Dataset) :=
+    constraint_override_not_established
+        if request exact-binds two distinct current Constraint versions
+        as proposed overriding and affected inputs to one context and snapshot
+        under constraint-override-boundary@1
+    indeterminate
+        otherwise
+```
+
+Поля `overriding_constraint_version_ref` та `affected_constraint_version_ref` є лише адресованими входами заперечної перевірки. Їхні назви не встановлюють напрямок влади, не пригнічують applicability, evaluation result, enforcement або `constraint_set_decision` і не створюють supersession. Self-targeting заборонено.
+
+### 27.4 Contextual-waiver boundary
+
+```text
+derive_contextual_waiver_boundary(Dataset) :=
+    contextual_waiver_not_established
+        if request exact-binds one affected current Constraint version
+        to one context and snapshot
+        under constraint-waiver-boundary@1
+    indeterminate
+        otherwise
+```
+
+Результат не створює Waiver, Exception, Approval, Authority або Policy як Concept чи record type. Він не звільняє context від applicability, evaluation або blocking effect і не перетворює `violated` чи `indeterminate` на permissive outcome.
+
+### 27.5 Exact bounded evidence envelope
+
+Reference harness використовує закриту форму:
+
+```text
+ConstraintInteractionDataset
+- interaction_request
+- constraint_application_inputs [one or more]
+
+ConstraintApplicationInput
+- constraint_version_ref
+- context_ref
+- input_snapshot_ref
+- evidence_state: current | stale
+- provenance_ref
+```
+
+Кожен request містить `request_id`, один із трьох `interaction_kind`, exact `rule_ref`, `context_ref`, `input_snapshot_ref`, branch-local Constraint references та `stored_result`. Кожне вибране посилання повинно resolve-итися рівно один раз; усі вибрані inputs мають бути current і exact-bound до request context/snapshot. Harness трактує version references як opaque exact pointers і не перевизначає структуру або істинність upstream Constraint records.
+
+`evidence_state: current` є структурною заявою синтетичного harness, а не автентифікованою production freshness authority. Envelope не доводить, що request перелічує всі applicable Constraint; повнота множини лишається передумовою чинного `constraint_set_decision` §12. Цей contract доводить лише, що порядок exact-bound inputs не додає семантичного winner.
+
+Malformed, unresolved, ambiguous, stale, cross-context, cross-snapshot, cross-branch, self-targeting override, wrong-rule або stored-result crossover input повертає лише `indeterminate`.
+
+### 27.6 Named non-disturbance boundaries
+
+Цей contract навмисно зберігає кожну чинну заперечну межу:
+
+1. OCP-018 §8: кілька source profiles не створюють equivalence або precedence між профілями.
+2. OCP-018 §11 item 11: timestamp, record order, source/issuer count і caller identity не надають precedence.
+3. OCP-018 §13 authority row: convenience-поле не override-ить operation-authorization derivation.
+4. OCP-007 §9: provenance label не надає authority, continuity або precedence.
+5. OCP-004 §11.2: Operation relation provenance/value не надає permission або precedence й не створює Constraint applicability.
+6. OCP-018 §16 questions 3 and 6 лишаються питаннями власника OCP-018 про decision levels та override його derivation; цей owner-local Constraint contract їх не відповідає, не переносить і не закриває.
+
+Заборонені selector fields `precedence_timestamp`, `precedence_record_order`, `precedence_source_count`, `precedence_issuer_count`, `precedence_caller_identity`, `precedence_provenance_label`, `precedence_operation_relation_value`; `convenience_override`; takeover fields `operation_authorization_level_order`, `operation_authorization_derivation_override`; waiver/bypass fields `waiver_ref`, `exception_ref`, `exception_label`, `producer_bypass`, `policy_ref`, `authority_ref`, `approval_ref`; і positive results `precedence_established`, `override_effective`, `waiver_granted`.
+
+### 27.7 Executable completeness claim
+
+Manifest `constraint-interaction-rules.yaml` оголошує complete direct fixture coverage. Три valid fixtures окремо доводять усі три заперечні результати. Material negatives покривають envelope/request/input failures, resolution, exact binding, staleness, self-targeting, branch crossover і кожну заборонену positive coupling.
+
+Усі `20/20` значень чотирьох захисних переліків плюс positive-result set мають індивідуальну fixture і індивідуальну mutation assertion: сім precedence selectors, один convenience override, два OCP-018 takeover fields, сім waiver/bypass fields і три positive results. Значень, покритих лише категорійно, немає. Окремі mutation checks доводять кожен interaction kind, rule mapping, negative result, request field, input field, dataset field і обидва evidence states. Заявка про покриття не поширюється на невичерпний словник можливих синонімів або production payloads.
+
+### 27.8 Version, migration and reopening
+
+`0.2.5 → 0.3.0` є MINOR: додаються три backwards-compatible owner-local derivation boundaries, але не змінюються Constraint identity, lifecycle, applicability, evaluation, enforcement, admissibility, Concept status або existing records. Міграції немає; новий dataset є optional reference-evidence envelope.
+
+Rollback видаляє §27 і executable evidence, повертає §22 items 3–4 до Open та відновлює `0.2.5`; він не може вводити позитивну precedence/override/waiver модель. Позитивне reopening потребує окремого outcome comparison, exact G4 elements для відповідного subject і свіжих Board gates.

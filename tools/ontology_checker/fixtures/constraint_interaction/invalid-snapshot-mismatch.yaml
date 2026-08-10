@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-snapshot-mismatch
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_SNAPSHOT_MISMATCH]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-SNAPSHOT, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-SNAPSHOT, input_snapshot_ref: SNAPSHOT-SYNTH-EXPECTED, affected_constraint_version_ref: CONSTRAINT-SYNTH-SNAPSHOT@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-SNAPSHOT@1, context_ref: CONTEXT-SYNTH-SNAPSHOT, input_snapshot_ref: SNAPSHOT-SYNTH-OTHER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-SNAPSHOT}

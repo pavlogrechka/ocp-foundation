@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-interaction-rule
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_KIND_INVALID]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-RULE, interaction_kind: contextual_waiver, rule_ref: rule-synth-unknown@1, context_ref: CONTEXT-SYNTH-RULE, input_snapshot_ref: SNAPSHOT-SYNTH-RULE, affected_constraint_version_ref: CONSTRAINT-SYNTH-RULE@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-RULE@1, context_ref: CONTEXT-SYNTH-RULE, input_snapshot_ref: SNAPSHOT-SYNTH-RULE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-RULE}

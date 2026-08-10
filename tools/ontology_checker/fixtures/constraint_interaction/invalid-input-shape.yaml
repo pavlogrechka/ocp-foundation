@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-input-shape
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_INPUT_INVALID]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-INPUT, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-INPUT, input_snapshot_ref: SNAPSHOT-SYNTH-INPUT, affected_constraint_version_ref: CONSTRAINT-SYNTH-INPUT@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-INPUT@1, context_ref: CONTEXT-SYNTH-INPUT, input_snapshot_ref: SNAPSHOT-SYNTH-INPUT, evidence_state: current}

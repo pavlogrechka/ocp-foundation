@@ -1,0 +1,16 @@
+case_id: constraint-interaction-valid-override-not-established
+concept: ConstraintInteractionDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  interaction_request:
+    request_id: REQUEST-SYNTH-OVERRIDE
+    interaction_kind: override
+    rule_ref: constraint-override-boundary@1
+    context_ref: CONTEXT-SYNTH-OVERRIDE
+    input_snapshot_ref: SNAPSHOT-SYNTH-OVERRIDE
+    overriding_constraint_version_ref: CONSTRAINT-SYNTH-OVERRIDING@1
+    affected_constraint_version_ref: CONSTRAINT-SYNTH-AFFECTED@1
+    stored_result: constraint_override_not_established
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-OVERRIDING@1, context_ref: CONTEXT-SYNTH-OVERRIDE, input_snapshot_ref: SNAPSHOT-SYNTH-OVERRIDE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-OVERRIDING}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-AFFECTED@1, context_ref: CONTEXT-SYNTH-OVERRIDE, input_snapshot_ref: SNAPSHOT-SYNTH-OVERRIDE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-AFFECTED}

@@ -1,0 +1,6 @@
+case_id: constraint-interaction-invalid-request-shape
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_REQUEST_INVALID]}
+dataset:
+  interaction_request: {interaction_kind: contextual_waiver}
+  constraint_application_inputs: []
