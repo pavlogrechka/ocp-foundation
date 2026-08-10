@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-override-self-target
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_OVERRIDE_TARGET_INVALID]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-SELF, interaction_kind: override, rule_ref: constraint-override-boundary@1, context_ref: CONTEXT-SYNTH-SELF, input_snapshot_ref: SNAPSHOT-SYNTH-SELF, overriding_constraint_version_ref: CONSTRAINT-SYNTH-SELF@1, affected_constraint_version_ref: CONSTRAINT-SYNTH-SELF@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-SELF@1, context_ref: CONTEXT-SYNTH-SELF, input_snapshot_ref: SNAPSHOT-SYNTH-SELF, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-SELF}

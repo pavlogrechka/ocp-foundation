@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-authority-ref
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_REQUEST_INVALID, CONSTRAINT_INTERACTION_WAIVER_BYPASS_FORBIDDEN]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-AUTHORITY, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, affected_constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-A@1, stored_result: indeterminate, authority_ref: AUTHORITY-SYNTH-REF}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-A@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-DEFENSIVE-A}

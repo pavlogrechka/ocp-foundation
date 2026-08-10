@@ -1,0 +1,9 @@
+case_id: constraint-interaction-invalid-input-ambiguous
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_INPUT_AMBIGUOUS]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-AMBIGUOUS, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-AMBIGUOUS, input_snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, affected_constraint_version_ref: CONSTRAINT-SYNTH-AMBIGUOUS@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-AMBIGUOUS@1, context_ref: CONTEXT-SYNTH-AMBIGUOUS, input_snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-AMBIGUOUS-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-AMBIGUOUS@1, context_ref: CONTEXT-SYNTH-AMBIGUOUS, input_snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-AMBIGUOUS-B}

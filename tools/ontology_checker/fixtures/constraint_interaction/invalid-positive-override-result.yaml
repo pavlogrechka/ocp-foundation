@@ -1,0 +1,9 @@
+case_id: constraint-interaction-invalid-positive-override-result
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_POSITIVE_RESULT_FORBIDDEN, CONSTRAINT_INTERACTION_RESULT_MISMATCH]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-POSITIVE-OVERRIDE, interaction_kind: override, rule_ref: constraint-override-boundary@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, overriding_constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-A@1, affected_constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-B@1, stored_result: override_effective}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-A@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-POSITIVE-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-B@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-POSITIVE-B}

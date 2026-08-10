@@ -1,0 +1,15 @@
+case_id: constraint-interaction-invalid-result-crossover
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_RESULT_MISMATCH]}
+dataset:
+  interaction_request:
+    request_id: REQUEST-SYNTH-CROSSOVER
+    interaction_kind: application_order
+    rule_ref: constraint-application-order-boundary@1
+    context_ref: CONTEXT-SYNTH-CROSSOVER
+    input_snapshot_ref: SNAPSHOT-SYNTH-CROSSOVER
+    constraint_version_refs: [CONSTRAINT-SYNTH-CROSSOVER-A@1, CONSTRAINT-SYNTH-CROSSOVER-B@1]
+    stored_result: constraint_override_not_established
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-CROSSOVER-A@1, context_ref: CONTEXT-SYNTH-CROSSOVER, input_snapshot_ref: SNAPSHOT-SYNTH-CROSSOVER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-CROSSOVER-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-CROSSOVER-B@1, context_ref: CONTEXT-SYNTH-CROSSOVER, input_snapshot_ref: SNAPSHOT-SYNTH-CROSSOVER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-CROSSOVER-B}

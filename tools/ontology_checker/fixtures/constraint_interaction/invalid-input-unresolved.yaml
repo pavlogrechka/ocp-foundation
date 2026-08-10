@@ -1,0 +1,7 @@
+case_id: constraint-interaction-invalid-input-unresolved
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_INPUT_UNRESOLVED]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-UNRESOLVED, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-UNRESOLVED, input_snapshot_ref: SNAPSHOT-SYNTH-UNRESOLVED, affected_constraint_version_ref: CONSTRAINT-SYNTH-UNRESOLVED@1, stored_result: indeterminate}
+  constraint_application_inputs: []

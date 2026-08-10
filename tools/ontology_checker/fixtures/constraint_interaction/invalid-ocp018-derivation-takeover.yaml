@@ -1,0 +1,9 @@
+case_id: constraint-interaction-invalid-ocp018-derivation-takeover
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_OCP018_TAKEOVER_FORBIDDEN, CONSTRAINT_INTERACTION_REQUEST_INVALID]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-OCP018-DERIVATION, interaction_kind: override, rule_ref: constraint-override-boundary@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, overriding_constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-A@1, affected_constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-B@1, stored_result: indeterminate, operation_authorization_derivation_override: SYNTH-TAKEOVER}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-A@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-DEFENSIVE-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-DEFENSIVE-B@1, context_ref: CONTEXT-SYNTH-DEFENSIVE, input_snapshot_ref: SNAPSHOT-SYNTH-DEFENSIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-DEFENSIVE-B}

@@ -147,6 +147,15 @@ from .reservation_boundary import (
     validate_reservation_boundary_dataset,
     validate_reservation_boundary_fixture,
 )
+from .constraint_interaction import (
+    CONSTRAINT_INTERACTION_DERIVATION_RULES,
+    CONSTRAINT_INTERACTION_ERROR_CODES,
+    derive_constraint_application_order_boundary,
+    derive_constraint_override_boundary,
+    derive_contextual_waiver_boundary,
+    validate_constraint_interaction_dataset,
+    validate_constraint_interaction_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -228,6 +237,8 @@ def validate_reference_fixture(fixture):
         return validate_quantitative_input_fixture(fixture)
     if concept == "ReservationBoundaryDataset":
         return validate_reservation_boundary_fixture(fixture)
+    if concept == "ConstraintInteractionDataset":
+        return validate_constraint_interaction_fixture(fixture)
     return validate_fixture(fixture)
 
 

@@ -1,0 +1,14 @@
+case_id: constraint-interaction-valid-waiver-not-established
+concept: ConstraintInteractionDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  interaction_request:
+    request_id: REQUEST-SYNTH-WAIVER
+    interaction_kind: contextual_waiver
+    rule_ref: constraint-waiver-boundary@1
+    context_ref: CONTEXT-SYNTH-WAIVER
+    input_snapshot_ref: SNAPSHOT-SYNTH-WAIVER
+    affected_constraint_version_ref: CONSTRAINT-SYNTH-WAIVER@1
+    stored_result: contextual_waiver_not_established
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-WAIVER@1, context_ref: CONTEXT-SYNTH-WAIVER, input_snapshot_ref: SNAPSHOT-SYNTH-WAIVER, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-WAIVER}

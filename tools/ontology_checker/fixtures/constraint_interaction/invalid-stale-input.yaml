@@ -1,0 +1,8 @@
+case_id: constraint-interaction-invalid-stale-input
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_INPUT_STALE]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-STALE, interaction_kind: contextual_waiver, rule_ref: constraint-waiver-boundary@1, context_ref: CONTEXT-SYNTH-STALE, input_snapshot_ref: SNAPSHOT-SYNTH-STALE, affected_constraint_version_ref: CONSTRAINT-SYNTH-STALE@1, stored_result: indeterminate}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-STALE@1, context_ref: CONTEXT-SYNTH-STALE, input_snapshot_ref: SNAPSHOT-SYNTH-STALE, evidence_state: stale, provenance_ref: PROVENANCE-SYNTH-STALE}

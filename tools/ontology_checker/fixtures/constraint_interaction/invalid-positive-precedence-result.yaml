@@ -1,0 +1,9 @@
+case_id: constraint-interaction-invalid-positive-precedence-result
+concept: ConstraintInteractionDataset
+expected: {valid: false, error_codes: [CONSTRAINT_INTERACTION_POSITIVE_RESULT_FORBIDDEN, CONSTRAINT_INTERACTION_RESULT_MISMATCH]}
+dataset:
+  interaction_request:
+    {request_id: REQUEST-SYNTH-POSITIVE-PRECEDENCE, interaction_kind: application_order, rule_ref: constraint-application-order-boundary@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, constraint_version_refs: [CONSTRAINT-SYNTH-POSITIVE-A@1, CONSTRAINT-SYNTH-POSITIVE-B@1], stored_result: precedence_established}
+  constraint_application_inputs:
+    - {constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-A@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-POSITIVE-A}
+    - {constraint_version_ref: CONSTRAINT-SYNTH-POSITIVE-B@1, context_ref: CONTEXT-SYNTH-POSITIVE, input_snapshot_ref: SNAPSHOT-SYNTH-POSITIVE, evidence_state: current, provenance_ref: PROVENANCE-SYNTH-POSITIVE-B}
