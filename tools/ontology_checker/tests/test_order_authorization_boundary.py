@@ -25,6 +25,57 @@ from ocp_checker.order_authorization_boundary import (  # noqa: E402
 )
 
 
+EXPECTED_POSITIVE_AUTHORITY_FIELDS = frozenset(
+    {
+        "order_required",
+        "order_sufficient",
+        "order_admissible",
+        "authorization_established",
+        "permission_granted",
+    }
+)
+EXPECTED_CONCEPT_COUPLING_FIELDS = frozenset(
+    {"order_concept_ref", "concept_status", "registry_entry", "graph_edge"}
+)
+EXPECTED_CONVENIENCE_SELECTOR_FIELDS = frozenset(
+    {"newest_timestamp", "record_order", "source_count", "issuer_count", "caller_identity"}
+)
+EXPECTED_SELF_SUPPLY_FIELDS = frozenset({"activation_attempt"})
+EXPECTED_FORBIDDEN_FIELDS = frozenset(
+    {
+        "authority_concept_ref",
+        "approval_concept_ref",
+        "policy_concept_ref",
+        "lifecycle_stage",
+        "assignment_mutation",
+        "production_profile",
+    }
+)
+DEFENSIVE_FIXTURE_NAMES = {
+    "order_required": "invalid-positive-authority",
+    "order_sufficient": "invalid-positive-order-sufficient",
+    "order_admissible": "invalid-positive-order-admissible",
+    "authorization_established": "invalid-positive-authorization-established",
+    "permission_granted": "invalid-positive-permission-granted",
+    "order_concept_ref": "invalid-concept-coupling",
+    "concept_status": "invalid-concept-status",
+    "registry_entry": "invalid-registry-entry",
+    "graph_edge": "invalid-graph-edge",
+    "newest_timestamp": "invalid-newest-timestamp",
+    "record_order": "invalid-record-order",
+    "source_count": "invalid-convenience-selector",
+    "issuer_count": "invalid-issuer-count",
+    "caller_identity": "invalid-caller-identity",
+    "activation_attempt": "invalid-self-supply",
+    "authority_concept_ref": "invalid-authority-concept-ref",
+    "approval_concept_ref": "invalid-approval-concept-ref",
+    "policy_concept_ref": "invalid-policy-concept-ref",
+    "lifecycle_stage": "invalid-lifecycle-stage",
+    "assignment_mutation": "invalid-forbidden-coupling",
+    "production_profile": "invalid-production-profile",
+}
+
+
 class OrderAuthorizationBoundaryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
@@ -56,7 +107,7 @@ class OrderAuthorizationBoundaryTests(unittest.TestCase):
                 )
 
     def test_all_fixtures_match_exact_expected_errors(self) -> None:
-        self.assertEqual(len(self.fixtures), 19)
+        self.assertEqual(len(self.fixtures), 35)
         for name, fixture in self.fixtures.items():
             with self.subTest(fixture=name):
                 validation = validate_reference_fixture(fixture)
@@ -123,15 +174,36 @@ class OrderAuthorizationBoundaryTests(unittest.TestCase):
         original_results = dict(order_authorization_boundary.NEGATIVE_RESULTS)
         original_contract = order_authorization_boundary.SOURCE_CONTRACT_REF
         original_source_results = order_authorization_boundary.SOURCE_RESULTS
-        defensive_names = (
-            "POSITIVE_AUTHORITY_FIELDS",
-            "CONCEPT_COUPLING_FIELDS",
-            "CONVENIENCE_SELECTOR_FIELDS",
-            "SELF_SUPPLY_FIELDS",
-            "FORBIDDEN_FIELDS",
+        defensive_categories = (
+            (
+                "POSITIVE_AUTHORITY_FIELDS",
+                EXPECTED_POSITIVE_AUTHORITY_FIELDS,
+                "ORDER_AUTHORIZATION_BOUNDARY_POSITIVE_AUTHORITY_FORBIDDEN",
+            ),
+            (
+                "CONCEPT_COUPLING_FIELDS",
+                EXPECTED_CONCEPT_COUPLING_FIELDS,
+                "ORDER_AUTHORIZATION_BOUNDARY_CONCEPT_COUPLING_FORBIDDEN",
+            ),
+            (
+                "CONVENIENCE_SELECTOR_FIELDS",
+                EXPECTED_CONVENIENCE_SELECTOR_FIELDS,
+                "ORDER_AUTHORIZATION_BOUNDARY_CONVENIENCE_SELECTOR_FORBIDDEN",
+            ),
+            (
+                "SELF_SUPPLY_FIELDS",
+                EXPECTED_SELF_SUPPLY_FIELDS,
+                "ORDER_AUTHORIZATION_BOUNDARY_SELF_SUPPLY_FORBIDDEN",
+            ),
+            (
+                "FORBIDDEN_FIELDS",
+                EXPECTED_FORBIDDEN_FIELDS,
+                "ORDER_AUTHORIZATION_BOUNDARY_FORBIDDEN_COUPLING",
+            ),
         )
         original_defensive = {
-            name: getattr(order_authorization_boundary, name) for name in defensive_names
+            name: getattr(order_authorization_boundary, name)
+            for name, _, _ in defensive_categories
         }
         try:
             for question, fixture in valid_by_question.items():
@@ -173,14 +245,30 @@ class OrderAuthorizationBoundaryTests(unittest.TestCase):
                 del candidate["dataset"]["authorization_snapshots"][0][field]
                 self.assertFalse(validate_reference_fixture(candidate).valid, field)
 
-            for set_name, values in original_defensive.items():
-                for field in values:
+            for set_name, expected_values, error_code in defensive_categories:
+                original_values = original_defensive[set_name]
+                self.assertEqual(original_values, expected_values)
+                for field in expected_values:
                     candidate = copy.deepcopy(mandatory)
                     candidate["dataset"]["claims"] = {field: "VALUE-SYNTH-LIVE"}
-                    self.assertFalse(validate_reference_fixture(candidate).valid, field)
-                    setattr(order_authorization_boundary, set_name, values - {field})
-                    self.assertTrue(validate_reference_fixture(candidate).valid, field)
-                    setattr(order_authorization_boundary, set_name, values)
+                    direct_fixture = self.fixtures[DEFENSIVE_FIXTURE_NAMES[field]]
+                    self.assertIn(field, direct_fixture["dataset"]["claims"])
+                    self.assertNotIn(
+                        direct_fixture["dataset"]["claims"][field],
+                        (None, False, "", [], {}),
+                    )
+                    self.assertIn(error_code, validate_reference_fixture(direct_fixture).errors)
+                    self.assertIn(error_code, validate_reference_fixture(candidate).errors)
+                    setattr(
+                        order_authorization_boundary,
+                        set_name,
+                        original_values - {field},
+                    )
+                    self.assertNotIn(
+                        error_code,
+                        validate_reference_fixture(candidate).errors,
+                    )
+                    setattr(order_authorization_boundary, set_name, original_values)
         finally:
             order_authorization_boundary.QUESTIONS = original_questions
             order_authorization_boundary.RULE_REFS = original_rules

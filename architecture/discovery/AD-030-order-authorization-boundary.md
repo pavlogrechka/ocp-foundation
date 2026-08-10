@@ -139,7 +139,7 @@ No result transfers to another question. All invalid evidence derives `indetermi
 | Consumers | Operation authorization review and audit; neither is a positive G4 activation consumer |
 | Defining sources | OCP-004 §4, OCP-005 §6.4, OCP-006 §4, OCP-017 §9, OCP-018 §§3 and 12 |
 | Exact dependencies | OCP-004, OCP-016, OCP-017 and OCP-018 |
-| Evidence | one derivation, exact manifest, six focused tests and nineteen synthetic fixtures |
+| Evidence | one derivation, exact manifest, six focused tests and thirty-five synthetic fixtures |
 | Non-implications | no Concept, P-001 record, source profile, permission, lifecycle effect, registry/taxonomy/graph change |
 | Lifecycle/migration | new `0.1.0 / Draft`; zero migration |
 
@@ -153,11 +153,11 @@ The checker recognizes only `accepted | denied` generic source results as defini
 
 ## 11. Executable evidence and individual coverage
 
-The tree adds one checker module, one complete-coverage manifest, dispatcher export, six focused unit tests and nineteen fully synthetic fixtures. Three valid fixtures cover every question/result pair, both definitive source-result values, unreferenced-snapshot isolation and order independence. Sixteen material negatives cover every validation class.
+The tree adds one checker module, one complete-coverage manifest, dispatcher export, six focused unit tests and thirty-five fully synthetic fixtures. Three valid fixtures cover every question/result pair, both definitive source-result values, unreferenced-snapshot isolation and order independence. Thirty-two material negatives cover every validation class and provide one direct fixture for every defensive-list member.
 
 Mutation tests remove in turn all three question values, all three rule mappings, all three result mappings, both source-result values, the exact OCP-018 reference, every required dataset field, every required request field, every required snapshot field and each of twenty-one members across five defensive sets. Each mutation makes a previously valid or previously rejected probe expose the removed obligation. The coverage claim is therefore individual, not categorical.
 
-The suite grows from `240` to `246` tests and from `239` to `258` fixtures.
+The suite grows from `240` to `246` tests and from `239` to `274` fixtures.
 
 ## 12. Backlog and neighbouring authority disposition
 

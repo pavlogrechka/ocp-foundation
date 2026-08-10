@@ -133,7 +133,7 @@ If the proposed form is a fundamental Concept, the act must separately change OC
 
 ## 12. Executable evidence and safety
 
-`order-authorization-boundary-rules.yaml` binds every validation and derivation identifier to this document and declares complete direct fixture coverage. Three valid fixtures cover mandatory, sufficient and admissible-source questions, both definitive OCP-018 results, unreferenced-snapshot isolation and distinct negative results. Sixteen material negatives cover malformed dataset/request/snapshot, unknown question, unresolved/ambiguous resolution, subject mismatch, wrong source contract, stale/non-definitive evidence, positive authority, Concept coupling, convenience selection, complete self-supply, adjacent side effect and stored-result mismatch.
+`order-authorization-boundary-rules.yaml` binds every validation and derivation identifier to this document and declares complete direct fixture coverage. Three valid fixtures cover mandatory, sufficient and admissible-source questions, both definitive OCP-018 results, unreferenced-snapshot isolation and distinct negative results. Thirty-two material negatives cover malformed dataset/request/snapshot, unknown question, unresolved/ambiguous resolution, subject mismatch, wrong source contract, stale/non-definitive evidence, every individual positive-authority, Concept-coupling, convenience-selector and side-effect field, complete self-supply and stored-result mismatch.
 
 Focused tests require exact expected errors, fail-safe derivation, order independence, exact manifest equality and individual mutation evidence for every question, rule, result, source-result value, exact contract reference, required dataset/request/snapshot field and every member of all five defensive sets.
 
