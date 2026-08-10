@@ -156,6 +156,13 @@ from .constraint_interaction import (
     validate_constraint_interaction_dataset,
     validate_constraint_interaction_fixture,
 )
+from .order_authorization_boundary import (
+    ORDER_AUTHORIZATION_BOUNDARY_DERIVATION_RULES,
+    ORDER_AUTHORIZATION_BOUNDARY_ERROR_CODES,
+    derive_order_authorization_boundary,
+    validate_order_authorization_boundary_dataset,
+    validate_order_authorization_boundary_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -239,6 +246,8 @@ def validate_reference_fixture(fixture):
         return validate_reservation_boundary_fixture(fixture)
     if concept == "ConstraintInteractionDataset":
         return validate_constraint_interaction_fixture(fixture)
+    if concept == "OrderAuthorizationBoundaryDataset":
+        return validate_order_authorization_boundary_fixture(fixture)
     return validate_fixture(fixture)
 
 

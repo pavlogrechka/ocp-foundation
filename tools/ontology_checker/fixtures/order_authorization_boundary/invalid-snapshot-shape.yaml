@@ -1,0 +1,8 @@
+case_id: order-authorization-boundary-invalid-snapshot-shape
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_SNAPSHOT_INVALID]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-SNAPSHOT, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-SNAPSHOT, authorization_snapshot_ref: SNAPSHOT-SYNTH-SNAPSHOT, stored_result: indeterminate}
+  authorization_snapshots:
+    - {snapshot_ref: SNAPSHOT-SYNTH-SNAPSHOT, subject_operation_ref: OPERATION-SYNTH-SNAPSHOT, source_contract_ref: OCP-018@0.2.1, input_snapshot_ref: INPUT-SYNTH-SNAPSHOT, evaluation_context_ref: CONTEXT-SYNTH-SNAPSHOT, evidence_state: current, source_result: accepted, order_candidate_ref: ORDER-CANDIDATE-SYNTH-SNAPSHOT}
+  claims: {}

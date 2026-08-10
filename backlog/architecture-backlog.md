@@ -3,7 +3,7 @@
 | ID | Тема | Статус | Наступна дія |
 |---|---|---|---|
 | AB-001 | Operational Situation як окремий Concept | Open | Перевірити після базових Concept |
-| AB-002 | Order як фундаментальний Concept | Open | Визначити, чи є Order обов’язковим або одним із можливих джерел авторизації Operation |
+| AB-002 | Order як фундаментальний Concept | Resolved | AD-030 обирає ON, а OCP-022 `0.1.0 / Draft` окремо виконує negative establishment для mandatory, sufficient та admissible-source Order propositions. Order лишається `Proposed`; positive profile або Concept/deregistration proposal потребує reopening, повного OCP-016 G4 і окремого registry/taxonomy/graph акта за застосовністю |
 | AB-003 | Погодження між незалежними вертикалями | Resolved | OCP-014 `0.2.0`: прийнято governed consumer identity, exact contextual requirement та explicit non-authority boundary; будь-який Coordination workflow потребує окремого accepted mandate |
 | AB-004 | Capability Registry | Resolved | PR-0010 / OCP-009: прийнято reusable Capability definition, governed namespace, exact-version resolution і supersession contract; holder claims залишаються окремим downstream-рішенням |
 | AB-005 | Risk Taxonomy | Open | Переглянути після OCP-006 і майбутнього Conflict model |
