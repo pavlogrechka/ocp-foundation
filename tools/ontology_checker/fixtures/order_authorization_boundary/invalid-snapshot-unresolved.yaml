@@ -1,0 +1,7 @@
+case_id: order-authorization-boundary-invalid-snapshot-unresolved
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_SNAPSHOT_UNRESOLVED]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-UNRESOLVED, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-UNRESOLVED, authorization_snapshot_ref: SNAPSHOT-SYNTH-MISSING, stored_result: indeterminate}
+  authorization_snapshots: []
+  claims: {}

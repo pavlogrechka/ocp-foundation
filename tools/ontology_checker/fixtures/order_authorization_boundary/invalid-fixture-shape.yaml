@@ -1,0 +1,4 @@
+case_id: order-authorization-boundary-invalid-fixture-shape
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_FIXTURE_INVALID]}
+dataset: {boundary_request: {}, authorization_snapshots: []}

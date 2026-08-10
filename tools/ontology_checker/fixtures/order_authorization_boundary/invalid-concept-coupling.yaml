@@ -1,0 +1,8 @@
+case_id: order-authorization-boundary-invalid-concept-coupling
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_CONCEPT_COUPLING_FORBIDDEN]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-CONCEPT, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-CONCEPT, authorization_snapshot_ref: SNAPSHOT-SYNTH-CONCEPT, stored_result: indeterminate}
+  authorization_snapshots:
+    - {snapshot_ref: SNAPSHOT-SYNTH-CONCEPT, subject_operation_ref: OPERATION-SYNTH-CONCEPT, source_contract_ref: OCP-018@0.2.1, source_owner_ref: OWNER-SYNTH-CONCEPT, input_snapshot_ref: INPUT-SYNTH-CONCEPT, evaluation_context_ref: CONTEXT-SYNTH-CONCEPT, evidence_state: current, source_result: accepted, order_candidate_ref: ORDER-CANDIDATE-SYNTH-CONCEPT}
+  claims: {order_concept_ref: ORDER-CONCEPT-SYNTH}

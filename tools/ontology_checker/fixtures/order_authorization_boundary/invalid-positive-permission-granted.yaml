@@ -1,0 +1,7 @@
+case_id: order-authorization-boundary-invalid-positive-permission-granted
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_POSITIVE_AUTHORITY_FORBIDDEN]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-POS-PERMISSION, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-POS-PERMISSION, authorization_snapshot_ref: SNAPSHOT-SYNTH-POS-PERMISSION, stored_result: indeterminate}
+  authorization_snapshots: [{snapshot_ref: SNAPSHOT-SYNTH-POS-PERMISSION, subject_operation_ref: OPERATION-SYNTH-POS-PERMISSION, source_contract_ref: OCP-018@0.2.1, source_owner_ref: OWNER-SYNTH-POS-PERMISSION, input_snapshot_ref: INPUT-SYNTH-POS-PERMISSION, evaluation_context_ref: CONTEXT-SYNTH-POS-PERMISSION, evidence_state: current, source_result: accepted, order_candidate_ref: ORDER-CANDIDATE-SYNTH-POS-PERMISSION}]
+  claims: {permission_granted: true}

@@ -1,0 +1,9 @@
+case_id: order-authorization-boundary-invalid-snapshot-ambiguous
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_SNAPSHOT_AMBIGUOUS]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-AMBIGUOUS, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-AMBIGUOUS, authorization_snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, stored_result: indeterminate}
+  authorization_snapshots:
+    - {snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, subject_operation_ref: OPERATION-SYNTH-AMBIGUOUS, source_contract_ref: OCP-018@0.2.1, source_owner_ref: OWNER-SYNTH-A, input_snapshot_ref: INPUT-SYNTH-A, evaluation_context_ref: CONTEXT-SYNTH-A, evidence_state: current, source_result: accepted, order_candidate_ref: ORDER-CANDIDATE-SYNTH-A}
+    - {snapshot_ref: SNAPSHOT-SYNTH-AMBIGUOUS, subject_operation_ref: OPERATION-SYNTH-AMBIGUOUS, source_contract_ref: OCP-018@0.2.1, source_owner_ref: OWNER-SYNTH-B, input_snapshot_ref: INPUT-SYNTH-B, evaluation_context_ref: CONTEXT-SYNTH-B, evidence_state: current, source_result: denied, order_candidate_ref: ORDER-CANDIDATE-SYNTH-B}
+  claims: {}

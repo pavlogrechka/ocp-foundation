@@ -1,0 +1,8 @@
+case_id: order-authorization-boundary-invalid-stale
+concept: OrderAuthorizationBoundaryDataset
+expected: {valid: false, error_codes: [ORDER_AUTHORIZATION_BOUNDARY_EVIDENCE_STALE]}
+dataset:
+  boundary_request: {request_id: REQUEST-SYNTH-STALE, question: mandatory_order, rule_ref: mandatory-order-establishment-boundary@1, subject_operation_ref: OPERATION-SYNTH-STALE, authorization_snapshot_ref: SNAPSHOT-SYNTH-STALE, stored_result: indeterminate}
+  authorization_snapshots:
+    - {snapshot_ref: SNAPSHOT-SYNTH-STALE, subject_operation_ref: OPERATION-SYNTH-STALE, source_contract_ref: OCP-018@0.2.1, source_owner_ref: OWNER-SYNTH-STALE, input_snapshot_ref: INPUT-SYNTH-STALE, evaluation_context_ref: CONTEXT-SYNTH-STALE, evidence_state: stale, source_result: accepted, order_candidate_ref: ORDER-CANDIDATE-SYNTH-STALE}
+  claims: {}
