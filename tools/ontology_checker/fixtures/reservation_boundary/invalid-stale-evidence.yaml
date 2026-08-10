@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-stale-evidence
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_EVIDENCE_STALE]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-STALE
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-STALE
+    context_ref: CONTEXT-SYNTH-STALE
+    resource_snapshot_ref: SNAPSHOT-SYNTH-STALE
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-STALE
+      resource_ref: RESOURCE-SYNTH-STALE
+      context_ref: CONTEXT-SYNTH-STALE
+      evidence_state: stale
+      assignment_refs: [ASSIGNMENT-SYNTH-STALE]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

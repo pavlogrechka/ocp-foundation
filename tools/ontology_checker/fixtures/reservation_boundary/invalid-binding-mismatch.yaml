@@ -1,0 +1,22 @@
+case_id: reservation-boundary-invalid-binding-mismatch
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_BINDING_MISMATCH]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-BINDING
+    branch: whole_resource_exclusivity
+    action: allocation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-BINDING
+    context_ref: CONTEXT-SYNTH-BINDING
+    resource_snapshot_ref: SNAPSHOT-SYNTH-BINDING
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-BINDING
+      resource_ref: RESOURCE-SYNTH-BINDING
+      context_ref: CONTEXT-SYNTH-BINDING-OTHER
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-BINDING]
+      constraint_evaluation_refs: []
+      quantitative_input_snapshot_ref: null

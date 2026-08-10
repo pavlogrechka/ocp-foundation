@@ -14,6 +14,7 @@ Implemented validators:
 - Accepted OCP-018 authorization-source profiles, identified decision records, authorizer Organization/Capability/level bindings, effectivity, supersession and OCP-017 acceptance derivation;
 - Draft OCP-019 negative Conflict-establishment requests with exact ConstraintEvaluationRecord references and fail-safe incomplete/conflicting/stale evidence handling;
 - Accepted OCP-020 quantitative profile/unit/snapshot bindings and exact-unit `demand | consumed` aggregation without capacity or reservation authority;
+- Draft OCP-021 separate whole-Resource and partial/quantitative Reservation/Allocation negative composition boundaries;
 - Assignment transition history, projections, applicability and participation derivation;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
@@ -70,6 +71,7 @@ The checker uses exact module manifests:
 - `operation-authorization-rules.yaml` — Accepted OCP-018 exact source-profile, decision, level, eligibility, effectivity, supersession and OCP-017 acceptance rules.
 - `conflict-derivation-rules.yaml` — Draft OCP-019 negative establishment-boundary and prohibited positive-authority rules.
 - `quantitative-input-rules.yaml` — Accepted OCP-020 exact quantitative-input envelope, fail-safe validation and neutral exact-unit sum.
+- `reservation-boundary-rules.yaml` — Draft OCP-021 separate E/Q evidence envelopes, negative establishment results and prohibited positive authority.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
@@ -188,7 +190,9 @@ For Draft OCP-019, `conflict-establishment-boundary@1` exact-binds a derivation 
 
 For Accepted OCP-020, `exact-unit-quantity-sum@1` exact-binds one profile owner, measurement profile, context and current input snapshot. It derives only a canonical decimal total for exact same-role, same-unit and same-dimension `demand` or `consumed` operands. Mixed, missing, ambiguous, stale, cross-bound or forbidden capacity/reservation coupling fails closed. The checker neither authenticates a production profile nor compares demand with capacity.
 
-Manifests may opt into direct fixture coverage with `fixture_coverage.status: complete` and one fixture concept. A generic test requires the exact validation-ID set to be named by direct fixture expectations. OCP-018, OCP-019 and OCP-020 opt in; legacy manifests make no untrue completeness claim.
+For Draft OCP-021, `whole-resource-reservation-allocation-boundary@1` and `quantitative-reservation-allocation-boundary@1` remain mechanically separate. Exact current Resource/Assignment/Constraint evidence derives only the E-specific negative result; Q additionally requires exact `OCP-020@0.2.0` and one quantitative snapshot reference, but still derives only the Q-specific negative result. Branch crossover, stale/ambiguous/cross-bound evidence, caller self-supply and every positive Reservation/Allocation/availability/capacity coupling fail closed as `indeterminate`.
+
+Manifests may opt into direct fixture coverage with `fixture_coverage.status: complete` and one fixture concept. A generic test requires the exact validation-ID set to be named by direct fixture expectations. OCP-018, OCP-019, OCP-020 and OCP-021 opt in; legacy manifests make no untrue completeness claim.
 
 Every transition exact-binds one domain completeness profile and passed input snapshot. Only the transition to `Authorized` carries an exact external authorization-evidence binding; the checker validates its structural agreement but neither authenticates the source owner nor grants permission. Terminal transitions exact-enumerate Assignment dispositions at the transition time using OCP-005 `assignment_effective_at`; the evidence cannot mutate Assignment.
 

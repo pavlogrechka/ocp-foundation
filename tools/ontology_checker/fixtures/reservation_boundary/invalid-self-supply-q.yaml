@@ -1,0 +1,23 @@
+case_id: reservation-boundary-invalid-self-supply-q
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_REQUEST_INVALID, RESERVATION_BOUNDARY_SELF_SUPPLY_FORBIDDEN]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-SELF-Q
+    branch: partial_quantitative
+    action: reservation
+    rule_ref: quantitative-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-SELF-Q
+    context_ref: CONTEXT-SYNTH-SELF-Q
+    resource_snapshot_ref: SNAPSHOT-SYNTH-SELF-Q
+    quantitative_contract_ref: OCP-020@0.2.0
+    stored_result: indeterminate
+    activation_attempt: {consumer_ref: CONSUMER-SYNTH-Q, consumer_status: Accepted, baseline_contract_ref: BASELINE-SYNTH-Q@1, result_need_ref: NEED-SYNTH-Q@1, positive_rule_ref: RULE-SYNTH-Q@1, input_snapshot_ref: SNAPSHOT-SYNTH-SELF-Q, evaluation_context_ref: CONTEXT-SYNTH-SELF-Q, criterion_owner_ref: OWNER-SYNTH-Q, evaluator_ref: EVALUATOR-SYNTH-Q, object_class_decision_ref: FORM-SYNTH-Q@1}
+  resource_snapshots:
+    - snapshot_ref: SNAPSHOT-SYNTH-SELF-Q
+      resource_ref: RESOURCE-SYNTH-SELF-Q
+      context_ref: CONTEXT-SYNTH-SELF-Q
+      evidence_state: current
+      assignment_refs: [ASSIGNMENT-SYNTH-SELF-Q]
+      constraint_evaluation_refs: [EVALUATION-SYNTH-SELF-Q]
+      quantitative_input_snapshot_ref: QUANTITATIVE-SNAPSHOT-SYNTH-SELF-Q

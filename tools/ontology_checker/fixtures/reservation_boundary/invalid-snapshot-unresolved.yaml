@@ -1,0 +1,15 @@
+case_id: reservation-boundary-invalid-snapshot-unresolved
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_SNAPSHOT_UNRESOLVED]}
+dataset:
+  establishment_request:
+    request_id: REQUEST-SYNTH-UNRESOLVED
+    branch: whole_resource_exclusivity
+    action: reservation
+    rule_ref: whole-resource-reservation-allocation-boundary@1
+    resource_ref: RESOURCE-SYNTH-UNRESOLVED
+    context_ref: CONTEXT-SYNTH-UNRESOLVED
+    resource_snapshot_ref: SNAPSHOT-SYNTH-UNRESOLVED
+    quantitative_contract_ref: null
+    stored_result: indeterminate
+  resource_snapshots: []

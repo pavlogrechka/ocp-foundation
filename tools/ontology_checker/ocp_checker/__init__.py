@@ -139,6 +139,14 @@ from .quantitative_input import (
     validate_quantitative_input_dataset,
     validate_quantitative_input_fixture,
 )
+from .reservation_boundary import (
+    RESERVATION_BOUNDARY_DERIVATION_RULES,
+    RESERVATION_BOUNDARY_ERROR_CODES,
+    derive_quantitative_reservation_boundary,
+    derive_whole_resource_reservation_boundary,
+    validate_reservation_boundary_dataset,
+    validate_reservation_boundary_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -218,6 +226,8 @@ def validate_reference_fixture(fixture):
         return validate_conflict_derivation_fixture(fixture)
     if concept == "QuantitativeInputDataset":
         return validate_quantitative_input_fixture(fixture)
+    if concept == "ReservationBoundaryDataset":
+        return validate_reservation_boundary_fixture(fixture)
     return validate_fixture(fixture)
 
 

@@ -1,0 +1,40 @@
+fixture_coverage:
+  status: complete
+  concept: ReservationBoundaryDataset
+rules:
+  - id: RESERVATION_BOUNDARY_FIXTURE_INVALID
+    source: OCP-021 §12
+  - id: RESERVATION_BOUNDARY_REQUEST_INVALID
+    source: OCP-021 §§5–9
+  - id: RESERVATION_BOUNDARY_BRANCH_INVALID
+    source: OCP-021 §§3, 6–9
+  - id: RESERVATION_BOUNDARY_ACTION_INVALID
+    source: OCP-021 §§5–9
+  - id: RESERVATION_BOUNDARY_SNAPSHOT_INVALID
+    source: OCP-021 §§5, 9
+  - id: RESERVATION_BOUNDARY_SNAPSHOT_UNRESOLVED
+    source: OCP-021 §§5, 9
+  - id: RESERVATION_BOUNDARY_SNAPSHOT_AMBIGUOUS
+    source: OCP-021 §§5, 9
+  - id: RESERVATION_BOUNDARY_BINDING_MISMATCH
+    source: OCP-021 §§5, 9
+  - id: RESERVATION_BOUNDARY_EVIDENCE_STALE
+    source: OCP-021 §§5, 9
+  - id: RESERVATION_BOUNDARY_QUANTITATIVE_PREREQUISITE_INVALID
+    source: OCP-021 §§4, 7, 9
+  - id: RESERVATION_BOUNDARY_BRANCH_COUPLING_FORBIDDEN
+    source: OCP-021 §§3, 6, 9
+  - id: RESERVATION_BOUNDARY_POSITIVE_AUTHORITY_FORBIDDEN
+    source: OCP-021 §§3–4, 8–11
+  - id: RESERVATION_BOUNDARY_SELF_SUPPLY_FORBIDDEN
+    source: OCP-021 §§3–4, 11
+  - id: RESERVATION_BOUNDARY_FORBIDDEN_COUPLING
+    source: OCP-021 §§8–10
+  - id: RESERVATION_BOUNDARY_RESULT_MISMATCH
+    source: OCP-021 §§8–9, 12
+  - id: derive_whole_resource_reservation_boundary
+    kind: derivation
+    source: OCP-021 §6
+  - id: derive_quantitative_reservation_boundary
+    kind: derivation
+    source: OCP-021 §7

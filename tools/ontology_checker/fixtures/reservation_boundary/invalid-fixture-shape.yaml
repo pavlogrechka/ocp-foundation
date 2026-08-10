@@ -1,0 +1,4 @@
+case_id: reservation-boundary-invalid-fixture-shape
+concept: ReservationBoundaryDataset
+expected: {valid: false, error_codes: [RESERVATION_BOUNDARY_FIXTURE_INVALID]}
+payload: {synthetic: true}
