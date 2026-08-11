@@ -13,16 +13,16 @@ FOUNDATION_PROMOTION_GATE_L2_MISMATCH = "FOUNDATION_PROMOTION_GATE_L2_MISMATCH"
 FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED = "FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED"
 
 REQUIRED_COMPLETED_STEPS = frozenset(
-    {"T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z"}
+    {"T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"}
 )
 REQUIRED_COMPLETED_STEP_ORDER = (
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
 )
 REQUIRED_NEXT_GATES = frozenset(
-    {"Y10D_DISCOVERY", "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"}
+    {"POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"}
 )
 REQUIRED_NEXT_GATE_ORDER = (
-    "Y10D_DISCOVERY", "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
+    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
 )
 CANDIDATE_IDS = frozenset({"OCP-005", "OCP-006", "OCP-010"})
 ALLOWED_L2_RESULTS = frozenset({"pass", "fail"})
@@ -123,7 +123,7 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         or set(sequence.get("completed_steps") or ()) != REQUIRED_COMPLETED_STEPS
         or tuple(sequence.get("completed_steps") or ()) != REQUIRED_COMPLETED_STEP_ORDER
         or sequence.get("selected_next_scope") != "Y10D"
-        or sequence.get("selected_next_scope_state") != "absent"
+        or sequence.get("selected_next_scope_state") != "complete"
         or set(sequence.get("required_before_promotion") or ()) != REQUIRED_NEXT_GATES
         or tuple(sequence.get("required_before_promotion") or ()) != REQUIRED_NEXT_GATE_ORDER
         or selections != []
