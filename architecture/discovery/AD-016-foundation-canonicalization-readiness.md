@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.27.2
+Version: 0.28.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -5259,3 +5259,112 @@ AD-016Z requires on one unchanged head: exact-head Fable external review, explic
 AD-022 closes the four current-facing carrier-counter statements registered by OCP-018 §25. Section 23 is bound to exact AD-016A baseline `main@37d8b672`; both §218 statements are bound to exact AD-016U baseline `main@2793d930`; §234 is bound to exact AD-016V baseline `main@844b6fdf`. Independent structured metadata confirms that each named baseline had exactly six primary P-001 invokers.
 
 No six-count is replaced by a later live total. The edits change only tense and temporal scope, preserve the original historical evidence and change no selection, obligation, authority, dependency, Pattern binding or `Review-After`. AD-016 therefore moves `0.27.1 → 0.27.2 / Accepted` by PATCH. This closure does not claim a complete natural-language counter detector or authorize another carrier repair.
+
+## 285. AD-016AA mandate, criterion and exact baseline
+
+Pavlo / Architecture Board mandated an attempt to promote the Assignment, Constraint and Event defining documents to `Canonical`, but expressly preserved the existing R4/L2 sequence and prohibited every status change unless its reassessment and candidate-specific Board-selection prerequisites already exist. The criterion is fixed before applying it:
+
+1. a sequence step is complete only when the current repository contains its lifecycle result or an accepted, merge-anchored decision record;
+2. L2 is derived independently for each candidate from current structured `Depends-On` metadata and current document statuses under OCP-001 §Direct OCP dependency floor — L2;
+3. a prior Board selection is usable only for the candidate and preparation scope it names; a recommendation, discovery scope, completed sibling or green checker cannot transfer authority;
+4. a required act exists only if a separately tracked accepted act or incorporated accepted section records it; prose predicting a future act is negative evidence, not that act; and
+5. any missing prerequisite selects hold before document version or status editing.
+
+The exact baseline is `main@e35da281351f8796b7fb01af5a7fef0e78e8fe48`, tree `12e018dbb82fc6d5586b820a850896df72a6d4ce`. Open PR inventory is empty. Contrary to the carried `252` count in the technical mandate, the exact-base repository command and exact-head CI accounting reproduce **246 unit tests** and **274 fixtures**; this act adds six real governance tests, so the proposed head becomes 252/274 rather than inheriting an unverified baseline.
+
+## 286. Full-chain anchors
+
+Every current anchor below resolves path → Git blob → SHA-256, and `git ls-tree -r --name-only` reverse-resolves the claimed path exactly:
+
+| Evidence | Exact current state | Blob | SHA-256 |
+|---|---|---|---|
+| OCP-000 / T0 | `1.5.0 / Canonical` | `7da7d7aad6ba505603cfbfa98ff1349c84892720` | `3f76ae4b55f01ce388bd865330f386c3ec0a6f6416e1aaed522145df96cfb7d6` |
+| OCP-016 / T1 | `1.0.0 / Canonical` | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| OCP-001 / T2 | `1.0.0 / Canonical`; owns L2 | `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| OCP-002 / T3 | `1.5.0 / Canonical` | `aaa4ac27a7d77c52b74833a1c088c037538f1f06` | `335f3e8c2f51110f192ceb608188437b6d2fe5b908bbf12894c31e45a651e7c6` |
+| P-001 / T3 | `0.1.0 / Accepted` | `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+| OCP-003 / T4 | `1.0.0 / Canonical` | `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` |
+| OCP-007 / T4 | `1.1.1 / Canonical` | `9b89bbac9ae08e73e2b8fbe1e85a5aec86824e33` | `eee22fbfb9580960101e9ced677625a02aec6368ccdacd2283a1b7e9946fd810` |
+| OCP-008 / T4 | `1.0.0 / Canonical` | `24ed01e0f5d6bc8f349a7aedae4c5f100eb449ee` | `46f1ecb7b956b106f9c66da0626ec4266961e07492059e594110f63736be6f0d` |
+| OCP-009 / T4 | `1.0.0 / Canonical` | `31163eacb0ca2a78b17b9d2466d99ef0c8b2d272` | `29362c815cb14f07bfd06775d1398498a27ace5ee5a4acaafde0eb39e902152a` |
+| OCP-005 Assignment | `0.2.7 / Draft`; Concept `Accepted` | `7a82a051cfb572e31cceded52bdfbb8e917bffba` | `fbdbe9b4547f7b1f14c766e1925ff28d620c671a271cfc8721f8d6b8d4db7b5a` |
+| OCP-006 Constraint | `0.3.1 / Draft`; Concept `Accepted` | `95ef13a917e0f579cdd656672a6bd883060bb818` | `d1d2a8c4d85ffba3bbe22d38ed443946e8196558e42c67d929347436468632b6` |
+| OCP-010 Event | `0.2.1 / Draft`; Concept `Accepted` | `3a49b75bfa479e24debb89a130b7a05d6c790a88` | `5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706` |
+| AD-016 before this act | `0.27.2 / Accepted` | `af5e15445d75c66b2e341ee6f62dc87336fc0367` | `0f20417ae406a37f37b80f3b15801a2b162870625716ee5f914ee7bd6807e6ac` |
+| roadmap | post-T5 sequence, Y10D next | `b77edcd3eee86ae537b53c74a9bd3489f821cb18` | `72a48ec584d459560d34cd939f8ccb1844fe4f1cf8f4cc8c205c48a9c6e59e74` |
+
+The historical AD-016C merge `b0ae0636d01a5e35c87bc4620314e6491b3b89d5` resolves this same path to blob `ba691d09ac4a5c8f49e8f58becc72d38155aa1c3`, SHA-256 `6f8d6ef22f5fb3379602c8c303ce6b57daa61de4262defab0299ceb41013348d`. The separate AD-016D merge `2748ed4a749a70aa332d75667cd49ecbbff5e33b` resolves it to blob `3c7a113df3fd8caddcbb5ea682d429f09f42818c`, SHA-256 `f8279570e2eb0db9c084e46dcef49ada67bc3968e3245f953769add84f07b465`. Thus both acts exist; neither is inferred from current prose alone.
+
+## 287. Sequence replay — completed versus absent
+
+| Step | Current result | Adjudication |
+|---|---|---|
+| T0 | OCP-000 is Canonical | complete |
+| T1 | OCP-016 is Canonical | complete |
+| T2 | OCP-001 is Canonical and owns L2 | complete |
+| T3 | OCP-002 is Canonical; P-001 is Accepted | complete |
+| AD-016C | accepted post-enabling reassessment in PR #88 | complete |
+| AD-016D | accepted G2/L2 Board selection in PR #89 | complete but its preparation scope was **OCP-009 only** |
+| T4 | OCP-003/007/008/009 and their Concepts are Canonical through separate micro-waves | complete |
+| T5 | OCP-004/Operation is Canonical and OCP-017 is Accepted | complete; transfers no T6 authority |
+| AD-016Y | post-T5 reassessment recommends Y10D | complete, recommendation only |
+| AD-016Z | selects Y10D as a future discovery scope | complete, but explicitly neither creates nor authorizes the discovery and does not open T6 |
+| Y10D discovery | no separately tracked act or accepted incorporated section; after AD-016Z, OCP-010 changed only in AD-028 open-question hygiene | **absent** |
+| post-discovery reassessment | cannot precede the absent discovery | **absent** |
+| candidate-specific promotion selection | no current act selects OCP-005, OCP-006 or OCP-010 for promotion | **absent** |
+
+AD-016C and AD-016D therefore satisfy the historical before-T4 condition but do not authorize these later candidates. Section 50 limited AD-016D to OCP-009, §53 required a new scope act before the next candidate, and every later T4/T5 unit repeated that boundary. Treating their existence as reusable T6 authority would contradict their exact text.
+
+## 288. Fresh per-candidate L2 derivation
+
+The dependency criterion is applied to each current candidate independently. Accepted ADs and P-001 are governed by their own floors and are not misclassified as OCP dependencies.
+
+| Candidate | Direct OCP dependencies from current metadata | Current status of every dependency | L2 result |
+|---|---|---|---|
+| OCP-005 Assignment | OCP-000, OCP-001, OCP-002, OCP-003, OCP-004 | Canonical, Canonical, Canonical, Canonical, Canonical | **pass** |
+| OCP-006 Constraint | OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005 | first five Canonical; OCP-005 `0.2.7 / Draft` | **fail on OCP-005** |
+| OCP-010 Event | OCP-000, OCP-001, OCP-002, OCP-004, OCP-008 | Canonical, Canonical, Canonical, Canonical, Canonical | **pass** |
+
+The AD-016Y result remains structurally correct despite intervening PATCHes: Assignment and Event pass L2; Constraint does not. L2 is necessary, not sufficient. Passing it supplies no discovery, compatibility, Board-selection or promotion authority.
+
+## 289. Legally permitted result now
+
+The requested promotion is **prohibited on this baseline**. No `Status: Canonical`, major-version change or Concept-status projection may enter this act for any of the three candidates. Assignment and Event lack the selected Y10D discovery, a fresh post-discovery comparison and candidate-specific Board selection. Constraint lacks all three and additionally fails L2 on Draft OCP-005. Combining all three would not cure either defect; it would hide the distinct L2 and authority results.
+
+This act may only:
+
+1. accept the negative gate result and exact dependency inventory;
+2. add a fail-safe machine witness that keeps all three documents Draft while the three named prerequisites remain absent;
+3. synchronize non-authoritative accounting; and
+4. name the shortest lawful continuation.
+
+It may not reinterpret this promotion mandate as the separately scoped Y10D owner mandate required by §281, because doing so would make the requested lifecycle outcome self-supply its missing discovery.
+
+## 290. Executable negative promotion gate
+
+`architecture/foundation-promotion-gate.yaml` records the completed sequence, the absent Y10D/post-discovery/selection gates and the current three-candidate dependency/L2 results. `foundation_promotion_gate.py` validates the map, exact candidate paths, current document and Concept statuses, ordered direct OCP dependencies and derived L2 blockers; it rejects a candidate becoming Canonical while promotion selection remains absent.
+
+Six repository-level tests raise the exact base from **246 → 252** while fixtures remain **274**. The mandated test pattern is transferred by its exact name, `test_every_defensive_value_is_individually_fixture_and_mutation_live`. Its independent static oracle covers every completed-step token, every missing-gate token, every candidate ID and both L2 result values. Separate tests mutate each candidate to Canonical, every declared dependency, each derived L2 edge, every document/Concept status pair and both self-supply routes. No loop derives its oracle from the production set it protects.
+
+The checker is a structural fail-safe witness, not Board approval. A future discovery or selection changes this map and validator only in its own separately reviewed act; editing the map in a promotion proposal cannot by itself create authority.
+
+## 291. Shortest lawful path
+
+1. Pavlo separately mandates the outcome-fair Y10D Event dependency/stable-surface discovery selected by AD-016Z; it completes four fresh gates and merges without promoting OCP-010.
+2. A fresh post-discovery reassessment compares hold, Assignment, Event, any justified joint unit and Constraint remediation against current blockers and L2. Its recommendation has no selection authority.
+3. A separate Board-selection act names at most the exact candidate unit that survives that comparison and its compatibility/migration/rollback contract.
+4. Only then may a separately reviewed promotion proposal change the selected document status. Constraint additionally waits until OCP-005 is already Canonical or a specifically selected same-act unit satisfies L2 and gives each document its own compatibility surface.
+
+No step may be collapsed into its successor. The three requested subjects remain an upper bound, not a required atomic group.
+
+## 292. Version, footprint, migration and rollback
+
+AD-016 moves `0.27.2 → 0.28.0 / Accepted` by MINOR because the act adds a compatible enforceable governance obligation and a machine-readable gate without changing R4, L2 or any semantic contract. README, roadmap, AB-062 accounting and checker documentation synchronize that result.
+
+OCP-005 remains `0.2.7 / Draft`, OCP-006 `0.3.1 / Draft` and OCP-010 `0.2.1 / Draft`; their Concept statuses remain Accepted. OCP-000, OCP-002, taxonomy, graph, foundation map, P-001, snapshots, every OCP body, dependency and AB status remain byte-identical. There is no data, reference, consumer or schema migration.
+
+Rollback removes the gate map/module/tests/integration and restores AD-016/accounting text as one reviewed unit. Partial rollback is invalid because prose without the executable stop would overstate enforcement, while enforcement without AD-016AA would lack its human-readable owner and shortest-path boundary.
+
+## 293. Exact-head gates and non-transfer
+
+This act requires exact-head Fable external review, Codex adjudication, green CI on the same head and fresh explicit Pavlo authorization naming that head. Any head change resets all four gates. Merge accepts only the negative gate and checker obligation; it does not authorize Y10D, the post-discovery reassessment, a Board selection, any promotion, T6/T7, YR, a `Review-After` normative act or another architecture act.

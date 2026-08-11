@@ -400,6 +400,7 @@ The suite includes, among other cases:
 - spatial context/binding version reuse and forbidden authority coupling;
 - valid and invalid integrated scenarios;
 - artifact, Pattern, Concept-status, graph and Git-history governance probes.
+- foundation promotion-gate probes that independently pin T0–T5/AD-016C/D/Y/Z evidence, every OCP-005/006/010 dependency and L2 result, and reject candidate self-promotion while Y10D, reassessment and Board selection are absent.
 
 ## Time handling
 
