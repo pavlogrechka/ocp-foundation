@@ -13,19 +13,25 @@ FOUNDATION_PROMOTION_GATE_L2_MISMATCH = "FOUNDATION_PROMOTION_GATE_L2_MISMATCH"
 FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED = "FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED"
 
 REQUIRED_COMPLETED_STEPS = frozenset(
-    {"T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"}
+    {
+        "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
+        "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+    }
 )
 REQUIRED_COMPLETED_STEP_ORDER = (
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
+    "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
 )
-REQUIRED_NEXT_GATES = frozenset(
-    {"POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"}
+REQUIRED_NEXT_GATES = frozenset({"CANDIDATE_BOARD_SELECTION"})
+REQUIRED_NEXT_GATE_ORDER = ("CANDIDATE_BOARD_SELECTION",)
+FINAL_COMPLETED_STEPS = frozenset(
+    {*REQUIRED_COMPLETED_STEPS, "CANDIDATE_BOARD_SELECTION"}
 )
-REQUIRED_NEXT_GATE_ORDER = (
-    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
-)
+FINAL_COMPLETED_STEP_ORDER = (*REQUIRED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
 CANDIDATE_IDS = frozenset({"OCP-005", "OCP-006", "OCP-010"})
 ALLOWED_L2_RESULTS = frozenset({"pass", "fail"})
+ALLOWED_STATUS_PAIRS = frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
+SLOT_IDS = frozenset({"T6", "T7"})
 
 MAP_KEYS = {
     "schema_version",
@@ -116,20 +122,47 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
     candidates = payload.get("candidates")
     selections = payload.get("promotion_selections")
     if (
-        payload.get("schema_version") != 1
-        or payload.get("rule_owner") != "AD-016AA"
+        payload.get("schema_version") != 2
+        or payload.get("rule_owner") != "AD-016AB"
         or not isinstance(sequence, dict)
         or set(sequence) != SEQUENCE_KEYS
-        or set(sequence.get("completed_steps") or ()) != REQUIRED_COMPLETED_STEPS
-        or tuple(sequence.get("completed_steps") or ()) != REQUIRED_COMPLETED_STEP_ORDER
         or sequence.get("selected_next_scope") != "Y10D"
         or sequence.get("selected_next_scope_state") != "complete"
-        or set(sequence.get("required_before_promotion") or ()) != REQUIRED_NEXT_GATES
-        or tuple(sequence.get("required_before_promotion") or ()) != REQUIRED_NEXT_GATE_ORDER
-        or selections != []
         or not isinstance(candidates, list)
         or not candidates
     ):
+        errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
+
+    if (
+        set(REQUIRED_COMPLETED_STEP_ORDER) != REQUIRED_COMPLETED_STEPS
+        or set(REQUIRED_NEXT_GATE_ORDER) != REQUIRED_NEXT_GATES
+        or FINAL_COMPLETED_STEP_ORDER
+        != (*REQUIRED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
+        or set(FINAL_COMPLETED_STEP_ORDER) != FINAL_COMPLETED_STEPS
+        or ALLOWED_STATUS_PAIRS
+        != frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
+    ):
+        errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
+
+    completed = tuple(sequence.get("completed_steps") or ()) if isinstance(sequence, dict) else ()
+    remaining = tuple(sequence.get("required_before_promotion") or ()) if isinstance(sequence, dict) else ()
+    reassessed_unselected = (
+        completed == REQUIRED_COMPLETED_STEP_ORDER
+        and set(completed) == REQUIRED_COMPLETED_STEPS
+        and remaining == REQUIRED_NEXT_GATE_ORDER
+        and set(remaining) == REQUIRED_NEXT_GATES
+        and selections == []
+    )
+    fully_gated = (
+        completed == FINAL_COMPLETED_STEP_ORDER
+        and set(completed) == FINAL_COMPLETED_STEPS
+        and remaining == ()
+        and isinstance(selections, list)
+        and bool(selections)
+        and len(selections) == len(set(selections))
+        and set(selections) <= CANDIDATE_IDS
+    )
+    if not reassessed_unselected and not fully_gated:
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
 
     ocps = _ocp_index(repo_root)
@@ -155,9 +188,11 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
             or not isinstance(blockers, list)
             or len(blockers) != len(set(blockers))
             or expected_l2 not in ALLOWED_L2_RESULTS
-            or candidate.get("slot") not in {"T6", "T7"}
-            or candidate.get("expected_document_status") != "Draft"
-            or candidate.get("expected_concept_status") != "Accepted"
+            or candidate.get("slot") not in SLOT_IDS
+            or (
+                candidate.get("expected_document_status"),
+                candidate.get("expected_concept_status"),
+            ) not in ALLOWED_STATUS_PAIRS
         ):
             errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
             continue
@@ -188,7 +223,11 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         actual_l2 = "pass" if not actual_blockers else "fail"
         if actual_l2 != expected_l2 or actual_blockers != tuple(blockers):
             errors.append(FOUNDATION_PROMOTION_GATE_L2_MISMATCH)
-        if metadata.get("Status") == "Canonical" and document_id not in selections:
+        if metadata.get("Status") == "Canonical" and actual_l2 != "pass":
+            errors.append(FOUNDATION_PROMOTION_GATE_L2_MISMATCH)
+        if metadata.get("Status") == "Canonical" and (
+            not fully_gated or document_id not in selections
+        ):
             errors.append(FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED)
 
     if seen != CANDIDATE_IDS:

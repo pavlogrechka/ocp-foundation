@@ -49,19 +49,17 @@ BLOCKER_IDS = frozenset(
         "UNRESOLVED_OPERATION_EVENT_OWNER",
         "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP",
         "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS",
-        "NEXT_LIFECYCLE_GATES_ABSENT",
+        "CANDIDATE_BOARD_SELECTION_ABSENT",
     }
 )
-REMAINING_GATE_IDS = frozenset(
-    {"POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"}
-)
-REMAINING_GATE_ORDER = ("POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION")
+REMAINING_GATE_IDS = frozenset({"CANDIDATE_BOARD_SELECTION"})
+REMAINING_GATE_ORDER = ("CANDIDATE_BOARD_SELECTION",)
 FORBIDDEN_OUTCOMES = frozenset(
     {
         "OCP010_ACCEPTANCE",
         "CANONICAL_PROMOTION",
         "T6_OPEN",
-        "POST_DISCOVERY_REASSESSMENT",
+        "DISCOVERY_SELF_SUPPLIED_REASSESSMENT",
         "CANDIDATE_BOARD_SELECTION",
     }
 )
@@ -141,7 +139,7 @@ EXPECTED_DISPOSITIONS = {
     "UNRESOLVED_OPERATION_EVENT_OWNER": "blocks_whole_document_freeze",
     "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP": "blocks_whole_document_freeze",
     "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS": "requires_consumer_compatibility_evidence",
-    "NEXT_LIFECYCLE_GATES_ABSENT": "blocks_promotion",
+    "CANDIDATE_BOARD_SELECTION_ABSENT": "blocks_promotion",
 }
 EXPECTED_EVIDENCE = {
     "EVENT_IDENTITY_KERNEL": (
@@ -187,8 +185,8 @@ EXPECTED_EVIDENCE = {
         ("docs/011-outcome-assessment-record/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010",)),
         ("docs/017-operation-lifecycle/README.md", ("Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010",)),
     ),
-    "NEXT_LIFECYCLE_GATES_ABSENT": (
-        ("architecture/foundation-promotion-gate.yaml", ("POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),
+    "CANDIDATE_BOARD_SELECTION_ABSENT": (
+        ("architecture/foundation-promotion-gate.yaml", ("CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),
     ),
 }
 RECORD_REF_PATTERN = re.compile(r"\b(?:event|observation-record)@[0-9]+(?:\.[0-9]+){0,2}\b", re.I)
@@ -448,6 +446,7 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
         or sequence.get("selected_next_scope") != "Y10D"
         or sequence.get("selected_next_scope_state") != "complete"
         or "Y10D" not in (sequence.get("completed_steps") or [])
+        or "POST_DISCOVERY_REASSESSMENT" not in (sequence.get("completed_steps") or [])
         or tuple(sequence.get("required_before_promotion") or ()) != REMAINING_GATE_ORDER
         or gate.get("promotion_selections") != []
     ):
