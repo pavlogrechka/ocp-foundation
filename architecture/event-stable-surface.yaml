@@ -1,0 +1,140 @@
+schema_version: 1
+rule_owner: AD-031
+subject:
+  document_id: OCP-010
+  primary: docs/010-event-concept/README.md
+  expected_version: 0.2.1
+  expected_status: Draft
+  expected_concept_status: Accepted
+  expected_pattern_binding: P-001@0.1.0
+discovery_result: stable_candidate_not_selected
+direct_dependencies:
+  - artifact_id: OCP-000
+    declared_reference: OCP-000
+    binding: unversioned-document
+    additional_exact_binding: null
+  - artifact_id: OCP-001
+    declared_reference: OCP-001
+    binding: unversioned-document
+    additional_exact_binding: null
+  - artifact_id: OCP-002
+    declared_reference: OCP-002
+    binding: unversioned-document
+    additional_exact_binding: null
+  - artifact_id: OCP-004
+    declared_reference: OCP-004
+    binding: unversioned-document
+    additional_exact_binding: null
+  - artifact_id: OCP-008
+    declared_reference: OCP-008
+    binding: unversioned-document
+    additional_exact_binding: null
+  - artifact_id: AD-006
+    declared_reference: AD-006
+    binding: unversioned-decision
+    additional_exact_binding: null
+  - artifact_id: P-001
+    declared_reference: P-001
+    binding: unversioned-pattern-plus-exact-use
+    additional_exact_binding: P-001@0.1.0
+direct_consumers:
+  - document_id: OCP-011
+    primary: docs/011-outcome-assessment-record/README.md
+    expected_version: 0.3.0
+    expected_status: Accepted
+    document_binding: unversioned-document
+    exact_record_refs: [event@1, observation-record@1]
+  - document_id: OCP-017
+    primary: docs/017-operation-lifecycle/README.md
+    expected_version: 0.2.0
+    expected_status: Accepted
+    document_binding: unversioned-document
+    exact_record_refs: []
+stable_candidates:
+  - surface_id: EVENT_IDENTITY_KERNEL
+    disposition: candidate
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["## 4. Event identity", "`event_id` є єдиною Core identity Event", "## 8. Exact Event resolution"]
+  - surface_id: OBSERVATION_RECORD_KERNEL
+    disposition: candidate
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["## 6. ObservationRecord", "має власну identity", "## 9. Observation collection derivation"]
+  - surface_id: P001_OBSERVATION_BINDING
+    disposition: candidate
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["invokes `P-001@0.1.0` для ObservationRecord", "## 20. P-001 conformance for ObservationRecord"]
+  - surface_id: CROSS_DOMAIN_NON_IMPLICATIONS
+    disposition: candidate
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["## 10. Operation boundary", "## 11. Objective and assessment boundary", "## 12. Constraint, Conflict and Risk boundary", "## 13. Capability, Readiness and State boundary"]
+  - surface_id: EXECUTABLE_REFERENCE_BOUNDARY
+    disposition: candidate
+    evidence:
+      - path: tools/ontology_checker/rules.yaml
+        tokens: ["source: OCP-010 §8 exact Event reference contract", "source: OCP-010 §9"]
+      - path: tools/ontology_checker/ocp_checker/event.py
+        tokens: ["EVENT_DERIVATION_RULES", "def resolve_event(", "def observations_for_event("]
+moving_surfaces:
+  - surface_id: TEMPORAL_EXTENSION
+    disposition: moving
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["не визначає interval, uncertainty range, timezone policy", "окремого temporal interval module"]
+  - surface_id: OPERATION_EVENT_RELATION
+    disposition: moving
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["не вводить current Concept edge `Event → Operation` або `Operation → Event`", "Operation-to-Event relationship record"]
+  - surface_id: EVENT_CORRELATION
+    disposition: moving
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["не визначає автоматичну occurrence deduplication", "domain correlation rules"]
+  - surface_id: EVENT_KIND_GOVERNANCE
+    disposition: moving
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["canonical Event taxonomy", "governed Event-kind registry"]
+  - surface_id: LEGACY_ASSESSMENT_ENVELOPE
+    disposition: moving
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["checker-local assessment envelope", "не є normative OutcomeAssessmentRecord contract"]
+      - path: docs/011-outcome-assessment-record/README.md
+        tokens: ["Status: Accepted", "event@1", "observation-record@1"]
+blockers:
+  - blocker_id: UNRESOLVED_OPERATION_EVENT_OWNER
+    disposition: blocks_whole_document_freeze
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["Який normative owner визначить Operation-to-Event relationship record"]
+  - blocker_id: LEGACY_ASSESSMENT_ENVELOPE_OVERLAP
+    disposition: blocks_whole_document_freeze
+    evidence:
+      - path: docs/010-event-concept/README.md
+        tokens: ["checker-local assessment envelope", "General OutcomeAssessmentRecord contract належить AB-056"]
+      - path: docs/011-outcome-assessment-record/README.md
+        tokens: ["Status: Accepted", "OutcomeAssessmentRecord"]
+  - blocker_id: UNVERSIONED_PRIMARY_CONSUMER_BINDINGS
+    disposition: requires_consumer_compatibility_evidence
+    evidence:
+      - path: docs/011-outcome-assessment-record/README.md
+        tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010"]
+      - path: docs/017-operation-lifecycle/README.md
+        tokens: ["Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010"]
+  - blocker_id: NEXT_LIFECYCLE_GATES_ABSENT
+    disposition: blocks_promotion
+    evidence:
+      - path: architecture/foundation-promotion-gate.yaml
+        tokens: ["POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION", "promotion_selections: []"]
+remaining_gates: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]
+forbidden_outcomes:
+  - OCP010_ACCEPTANCE
+  - CANONICAL_PROMOTION
+  - T6_OPEN
+  - POST_DISCOVERY_REASSESSMENT
+  - CANDIDATE_BOARD_SELECTION

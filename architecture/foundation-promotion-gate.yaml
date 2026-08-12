@@ -1,11 +1,10 @@
 schema_version: 1
 rule_owner: AD-016AA
 sequence:
-  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z]
+  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D]
   selected_next_scope: Y10D
-  selected_next_scope_state: absent
+  selected_next_scope_state: complete
   required_before_promotion:
-    - Y10D_DISCOVERY
     - POST_DISCOVERY_REASSESSMENT
     - CANDIDATE_BOARD_SELECTION
 promotion_selections: []

@@ -24,16 +24,16 @@ from ocp_checker.foundation_promotion_gate import (  # noqa: E402
 
 
 EXPECTED_COMPLETED_STEPS = {
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
 }
 EXPECTED_COMPLETED_STEP_ORDER = (
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
 )
 EXPECTED_NEXT_GATES = {
-    "Y10D_DISCOVERY", "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
+    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
 }
 EXPECTED_NEXT_GATE_ORDER = (
-    "Y10D_DISCOVERY", "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
+    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
 )
 EXPECTED_CANDIDATES = {"OCP-005", "OCP-006", "OCP-010"}
 EXPECTED_L2_RESULTS = {"pass", "fail"}
@@ -194,14 +194,14 @@ class FoundationPromotionGateTests(unittest.TestCase):
                         validate_foundation_promotion_gate(root).errors,
                     )
 
-    def test_selected_scope_cannot_be_completed_or_self_supplied(self) -> None:
-        for mutation in ("complete_scope", "self_supply_selection"):
+    def test_completed_scope_cannot_regress_or_self_supply_selection(self) -> None:
+        for mutation in ("regress_scope", "self_supply_selection"):
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
                 payload = self.payload(root)
-                if mutation == "complete_scope":
-                    payload["sequence"]["selected_next_scope_state"] = "completed"
+                if mutation == "regress_scope":
+                    payload["sequence"]["selected_next_scope_state"] = "absent"
                 else:
                     payload["promotion_selections"] = ["OCP-010"]
                 self.write_payload(root, payload)
