@@ -24,19 +24,20 @@ from ocp_checker.foundation_promotion_gate import (  # noqa: E402
 
 
 EXPECTED_COMPLETED_STEPS = {
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
+    "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
 }
 EXPECTED_COMPLETED_STEP_ORDER = (
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"
+    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
+    "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
 )
-EXPECTED_NEXT_GATES = {
-    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
-}
-EXPECTED_NEXT_GATE_ORDER = (
-    "POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"
-)
+EXPECTED_NEXT_GATES = {"CANDIDATE_BOARD_SELECTION"}
+EXPECTED_NEXT_GATE_ORDER = ("CANDIDATE_BOARD_SELECTION",)
+EXPECTED_FINAL_STEPS = {*EXPECTED_COMPLETED_STEPS, "CANDIDATE_BOARD_SELECTION"}
+EXPECTED_FINAL_STEP_ORDER = (*EXPECTED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
 EXPECTED_CANDIDATES = {"OCP-005", "OCP-006", "OCP-010"}
 EXPECTED_L2_RESULTS = {"pass", "fail"}
+EXPECTED_STATUS_PAIRS = {("Draft", "Accepted"), ("Canonical", "Accepted")}
 EXPECTED_DEPENDENCIES = {
     "OCP-005": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004"),
     "OCP-006": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005"),
@@ -80,8 +81,14 @@ class FoundationPromotionGateTests(unittest.TestCase):
         categories = (
             ("REQUIRED_COMPLETED_STEPS", EXPECTED_COMPLETED_STEPS),
             ("REQUIRED_NEXT_GATES", EXPECTED_NEXT_GATES),
+            ("FINAL_COMPLETED_STEPS", EXPECTED_FINAL_STEPS),
             ("CANDIDATE_IDS", EXPECTED_CANDIDATES),
             ("ALLOWED_L2_RESULTS", EXPECTED_L2_RESULTS),
+            ("ALLOWED_STATUS_PAIRS", EXPECTED_STATUS_PAIRS),
+            ("SLOT_IDS", {"T6", "T7"}),
+            ("MAP_KEYS", {"schema_version", "rule_owner", "sequence", "promotion_selections", "candidates"}),
+            ("SEQUENCE_KEYS", {"completed_steps", "selected_next_scope", "selected_next_scope_state", "required_before_promotion"}),
+            ("CANDIDATE_KEYS", {"document_id", "primary", "slot", "expected_document_status", "expected_concept_status", "direct_ocp_dependencies", "expected_l2", "l2_blockers"}),
         )
         for attribute, expected_values in categories:
             production_values = getattr(foundation_promotion_gate, attribute)
@@ -100,6 +107,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
         ordered_categories = (
             ("REQUIRED_COMPLETED_STEP_ORDER", EXPECTED_COMPLETED_STEP_ORDER),
             ("REQUIRED_NEXT_GATE_ORDER", EXPECTED_NEXT_GATE_ORDER),
+            ("FINAL_COMPLETED_STEP_ORDER", EXPECTED_FINAL_STEP_ORDER),
         )
         for attribute, expected_values in ordered_categories:
             production_values = getattr(foundation_promotion_gate, attribute)
@@ -120,18 +128,68 @@ class FoundationPromotionGateTests(unittest.TestCase):
             with self.subTest(document_id=document_id), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
+                payload = self.payload(root)
                 entry = next(
-                    item for item in self.payload(root)["candidates"] if item["document_id"] == document_id
+                    item for item in payload["candidates"] if item["document_id"] == document_id
                 )
                 primary = root / entry["primary"]
                 text = primary.read_text(encoding="utf-8")
                 text = text.replace("Status: Draft", "Status: Canonical", 1)
                 text = text.replace("Version: 0.", "Version: 1.", 1)
                 primary.write_text(text, encoding="utf-8")
+                entry["expected_document_status"] = "Canonical"
+                self.write_payload(root, payload)
                 self.assertIn(
                     FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
                     validate_foundation_promotion_gate(root).errors,
                 )
+
+    def test_hypothetical_fully_gated_event_promotion_is_reachable(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            payload = self.payload(root)
+            payload["sequence"]["completed_steps"].append("CANDIDATE_BOARD_SELECTION")
+            payload["sequence"]["required_before_promotion"] = []
+            payload["promotion_selections"] = ["OCP-010"]
+            entry = next(
+                item for item in payload["candidates"] if item["document_id"] == "OCP-010"
+            )
+            entry["expected_document_status"] = "Canonical"
+            primary = root / entry["primary"]
+            text = primary.read_text(encoding="utf-8")
+            primary.write_text(
+                text.replace("Version: 0.2.1", "Version: 1.0.0", 1)
+                .replace("Status: Draft", "Status: Canonical", 1),
+                encoding="utf-8",
+            )
+            self.write_payload(root, payload)
+            self.assertTrue(validate_foundation_promotion_gate(root).valid)
+
+    def test_fully_gated_candidate_still_requires_live_l2_pass(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            payload = self.payload(root)
+            payload["sequence"]["completed_steps"].append("CANDIDATE_BOARD_SELECTION")
+            payload["sequence"]["required_before_promotion"] = []
+            payload["promotion_selections"] = ["OCP-006"]
+            entry = next(
+                item for item in payload["candidates"] if item["document_id"] == "OCP-006"
+            )
+            entry["expected_document_status"] = "Canonical"
+            primary = root / entry["primary"]
+            primary.write_text(
+                primary.read_text(encoding="utf-8")
+                .replace("Version: 0.3.1", "Version: 1.0.0", 1)
+                .replace("Status: Draft", "Status: Canonical", 1),
+                encoding="utf-8",
+            )
+            self.write_payload(root, payload)
+            self.assertIn(
+                FOUNDATION_PROMOTION_GATE_L2_MISMATCH,
+                validate_foundation_promotion_gate(root).errors,
+            )
 
     def test_each_declared_dependency_and_l2_result_is_live(self) -> None:
         for document_id, dependencies in EXPECTED_DEPENDENCIES.items():

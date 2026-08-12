@@ -50,14 +50,14 @@ EXPECTED_BLOCKERS = {
     "UNRESOLVED_OPERATION_EVENT_OWNER",
     "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP",
     "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS",
-    "NEXT_LIFECYCLE_GATES_ABSENT",
+    "CANDIDATE_BOARD_SELECTION_ABSENT",
 }
-EXPECTED_REMAINING_GATES = {"POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"}
+EXPECTED_REMAINING_GATES = {"CANDIDATE_BOARD_SELECTION"}
 EXPECTED_FORBIDDEN_OUTCOMES = {
     "OCP010_ACCEPTANCE",
     "CANONICAL_PROMOTION",
     "T6_OPEN",
-    "POST_DISCOVERY_REASSESSMENT",
+    "DISCOVERY_SELF_SUPPLIED_REASSESSMENT",
     "CANDIDATE_BOARD_SELECTION",
 }
 EXPECTED_DISPOSITIONS = {
@@ -74,7 +74,7 @@ EXPECTED_DISPOSITIONS = {
     "UNRESOLVED_OPERATION_EVENT_OWNER": "blocks_whole_document_freeze",
     "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP": "blocks_whole_document_freeze",
     "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS": "requires_consumer_compatibility_evidence",
-    "NEXT_LIFECYCLE_GATES_ABSENT": "blocks_promotion",
+    "CANDIDATE_BOARD_SELECTION_ABSENT": "blocks_promotion",
 }
 EXPECTED_EVIDENCE = {
     "EVENT_IDENTITY_KERNEL": (("docs/010-event-concept/README.md", ("## 4. Event identity", "`event_id` є єдиною Core identity Event", "## 8. Exact Event resolution")),),
@@ -90,7 +90,7 @@ EXPECTED_EVIDENCE = {
     "UNRESOLVED_OPERATION_EVENT_OWNER": (("docs/010-event-concept/README.md", ("Який normative owner визначить Operation-to-Event relationship record",)),),
     "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP": (("docs/010-event-concept/README.md", ("checker-local assessment envelope", "General OutcomeAssessmentRecord contract належить AB-056")), ("docs/011-outcome-assessment-record/README.md", ("Status: Accepted", "OutcomeAssessmentRecord"))),
     "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS": (("docs/011-outcome-assessment-record/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010",)), ("docs/017-operation-lifecycle/README.md", ("Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010",))),
-    "NEXT_LIFECYCLE_GATES_ABSENT": (("architecture/foundation-promotion-gate.yaml", ("POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),),
+    "CANDIDATE_BOARD_SELECTION_ABSENT": (("architecture/foundation-promotion-gate.yaml", ("CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),),
 }
 
 
@@ -247,7 +247,7 @@ class EventStableSurfaceTests(unittest.TestCase):
                             )
 
     def test_discovery_cannot_self_supply_reassessment_selection_or_promotion(self) -> None:
-        mutations = ("regress_discovery", "complete_reassessment", "self_select")
+        mutations = ("regress_discovery", "regress_reassessment", "self_select")
         for mutation in mutations:
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
@@ -255,8 +255,11 @@ class EventStableSurfaceTests(unittest.TestCase):
                 gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
                 if mutation == "regress_discovery":
                     gate["sequence"]["selected_next_scope_state"] = "absent"
-                elif mutation == "complete_reassessment":
-                    gate["sequence"]["required_before_promotion"].remove("POST_DISCOVERY_REASSESSMENT")
+                elif mutation == "regress_reassessment":
+                    gate["sequence"]["completed_steps"].remove("POST_DISCOVERY_REASSESSMENT")
+                    gate["sequence"]["required_before_promotion"].insert(
+                        0, "POST_DISCOVERY_REASSESSMENT"
+                    )
                 else:
                     gate["promotion_selections"] = ["OCP-010"]
                 self.write_yaml(root, self.gate_path, gate)

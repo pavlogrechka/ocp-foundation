@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.28.0
+Version: 0.29.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -5368,3 +5368,102 @@ Rollback removes the gate map/module/tests/integration and restores AD-016/accou
 ## 293. Exact-head gates and non-transfer
 
 This act requires exact-head Fable external review, Codex adjudication, green CI on the same head and fresh explicit Pavlo authorization naming that head. Any head change resets all four gates. Merge accepts only the negative gate and checker obligation; it does not authorize Y10D, the post-discovery reassessment, a Board selection, any promotion, T6/T7, YR, a `Review-After` normative act or another architecture act.
+
+## 294. AD-016AB mandate, form gate and exact baseline
+
+Pavlo / Architecture Board separately mandated step 2 of §291 on exact `main@53d254405e6f75c7198e3e989d14a5a5678628ce`: a fresh post-Y10D reassessment, one common comparison across hold, Assignment, Event, any justified joint unit and Constraint remediation, and a recommendation with **no selection authority**. AD-031 completed only Y10D discovery. Step 3 candidate-specific Board selection and step 4 lifecycle promotion remain separate acts and cannot be collapsed here.
+
+The form question is answered before choosing a result. This act creates a governance reassessment, comparison witness and promotion-gate state transition. It does not create a positive-capable operational rule, result or consumer profile, so OCP-016 G4 does not apply and no Accepted activation consumer is required. A form that activated Event, Assignment, Constraint, Conflict, capacity, reservation, precedence or Order would require G4; no such form is admitted or compared as this act's output.
+
+The version classification is independently derived. AD-016 moves `0.28.0 → 0.29.0 / Accepted` by MINOR because it adds a compatible governance state, comparison obligation and reachable promotion-gate transition without changing R4, L2 or an OCP semantic contract. The foundation-promotion map moves schema `1 → 2` because its accepted state language expands from one frozen stop to an ordered reassessed/unselected state plus a future fully gated state. The new reassessment map starts at schema `1`. Event discovery evidence is current-state synchronized without changing AD-031: its broad forbidden token becomes `DISCOVERY_SELF_SUPPLIED_REASSESSMENT`, preserving the discovery-act boundary while allowing this separately owned step. Repository README, roadmap, AB-062 text and checker guide are non-normative accounting/documentation edits and carry no artifact SemVer. No OCP, Pattern, registry, taxonomy, graph or snapshot document changes version.
+
+## 295. Full-chain exact-base anchors
+
+Each row was derived from the exact base as path → Git blob, reverse-resolved by `git ls-tree -r` to the same claimed path, inspected for the stated lifecycle/evidence, and re-hashed as SHA-256:
+
+| Evidence | Declared state at exact base | Blob | SHA-256 |
+|---|---|---|---|
+| `architecture/discovery/AD-016-foundation-canonicalization-readiness.md` | `0.28.0 / Accepted`; §§288–291 own L2 and the four-step path | `19bee8d85670548cf93b81649a391f5c99f8bca7` | `487df31da4dc3cccbb81728f70e2897b29da05f947c94d782f55365de440dea5` |
+| `architecture/discovery/AD-031-event-dependency-stable-surface.md` | `0.1.0 / Discovery`; Y10D complete, YK leading but unselected | `609701e1046145c03691afe73e1d0e57415d33cb` | `49bb62434c36577384f294ffb42f69092f61e03f8841d55226b5d7c319682368` |
+| `architecture/foundation-promotion-gate.yaml` | schema 1; reassessment and Board selection both required | `8cf1631288edcf924c86f1463dd97b813f2c7ab2` | `0d27f60e0c06397377167c7d79503d5b5312c2df2321d4f36921a1083340f4eb` |
+| `docs/001-ontology-governance/README.md` | `1.0.0 / Canonical`; direct-OCP L2 owner | `33524fa3d18f3253faa9a854500be7ddfb20815f` | `da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc` |
+| `docs/016-core-boundary/README.md` | `1.0.0 / Canonical`; G4 current | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| `docs/005-assignment-concept/README.md` | `0.2.7 / Draft`; Assignment `Accepted` | `7a82a051cfb572e31cceded52bdfbb8e917bffba` | `fbdbe9b4547f7b1f14c766e1925ff28d620c671a271cfc8721f8d6b8d4db7b5a` |
+| `docs/006-constraint-concept/README.md` | `0.3.1 / Draft`; Constraint `Accepted` | `95ef13a917e0f579cdd656672a6bd883060bb818` | `d1d2a8c4d85ffba3bbe22d38ed443946e8196558e42c67d929347436468632b6` |
+| `docs/010-event-concept/README.md` | `0.2.1 / Draft`; Event `Accepted` | `3a49b75bfa479e24debb89a130b7a05d6c790a88` | `5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706` |
+| `patterns/P-001-identified-record-pattern.md` | `0.1.0 / Accepted`; exact bytes protected | `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+
+All nine blob lookups reverse-resolve to exactly the path shown; no same-blob alias is substituted. These are base anchors, not claims that changed map or AD bytes retain their prior hashes.
+
+## 296. Live L2 derivation and map cross-check
+
+L2 is derived from each candidate's current `Depends-On` metadata and the current `Status` of every referenced OCP. The executable reassessment reads the OCP frontmatter directly; it does not read `expected_l2` or `l2_blockers` as premises. Only after deriving the result does it compare the existing promotion-map claims.
+
+| Candidate | Live direct OCP dependencies | Live dependency status result | Derived L2 | Promotion-map claim | Cross-check |
+|---|---|---|---|---|---|
+| Assignment / OCP-005 | OCP-000/001/002/003/004 | all Canonical | **pass** | pass, no blocker | match |
+| Constraint / OCP-006 | OCP-000/001/002/003/004/005 | OCP-000–004 Canonical; OCP-005 `Draft` | **fail: OCP-005** | fail, blocker OCP-005 | match |
+| Event / OCP-010 | OCP-000/001/002/004/008 | all Canonical | **pass** | pass, no blocker | match |
+
+The match is a result of an independent replay, not map self-confirmation. A test changes a live dependency status while leaving both maps untouched and requires `FOUNDATION_REASSESSMENT_L2_MISMATCH`; another changes only the promotion-map L2 claim and requires the same error.
+
+## 297. One comparison criterion fixed before application
+
+Every option is evaluated in the following order:
+
+1. **LIVE_L2** — current direct-OCP dependency floor, including each member of a proposed unit;
+2. **CURRENT_BLOCKERS** — unresolved compatibility, ownership, evidence and lifecycle stops on this tree;
+3. **COST** — bounded checker/consumer/document migration or discovery burden, without inventing production data;
+4. **UNLOCKS** — the exact next lifecycle or dependency gate made possible, not implied authority; and
+5. **LEGALITY_GAP** — the separately reviewed evidence, remediation and Board act still needed before a lifecycle proposal is legal.
+
+No age, ordering, test count, recommendation, checker success or author identity is a tie-breaker. Any unresolved positive requirement makes immediate promotion illegal and preserves hold.
+
+## 298. Outcome-fair five-option comparison
+
+| Option | Live blockers and L2 | Cost | Exact unlock | Missing before legal promotion | Result |
+|---|---|---|---|---|---|
+| **hold** | no L2 assertion is needed; no unresolved prerequisite is waived | delay only; no semantic or consumer migration | none | nothing is missing for hold itself | **only legal current promotion disposition** |
+| **Assignment / OCP-005** | L2 passes; nine current §19 questions and no bounded stable/compatibility surface leave amendment, intervals, roles and replacement unresolved; Board selection absent | broad Assignment discovery plus consumer compatibility and rollback work | a bounded Assignment candidate and, after actual promotion, Constraint's OCP-005 L2 edge | bounded Assignment surface and candidate-specific Board selection | not ready |
+| **Event / OCP-010** | L2 passes; AD-031 leaves Operation/Event owner, legacy assessment overlap and two unversioned primary-consumer bindings live; Board selection absent | bounded YK remediation preserving five stable candidates, five moving surfaces and OCP-011/OCP-017 compatibility | a reviewable Event T6 candidate | exact YK remediation contract and candidate-specific Board selection | **leading continuation, not selected** |
+| **joint Assignment + Constraint** | this is the only currently justified joint unit because OCP-006 directly depends on OCP-005; live L2 is mixed—Assignment passes, Constraint fails on Draft OCP-005 | highest: Assignment surface, Constraint remediation, joint compatibility/migration/rollback and separate per-document evidence | could make Assignment T6 and Constraint T7 jointly reviewable only after a Board act accepts same-unit L2 treatment | both bounded surfaces, a joint compatibility contract and candidate-specific Board selection | not ready |
+| **Constraint remediation / OCP-006** | current L2 fails on OCP-005; open expression/freshness and later interaction surfaces remain; Board selection absent | sequenced remediation that cannot self-promote its dependency | a future T7 candidate after Assignment is Canonical or a specifically selected joint unit satisfies L2 | OCP-005 Canonical or selected joint treatment, Constraint remediation contract and Board selection | sequenced only |
+
+No other joint unit survives the inclusion rule. Assignment + Event has no direct dependency or demonstrated semantic inseparability; Event + Constraint omits Constraint's Assignment dependency; all three merely adds uncoupled Event cost to the only structural pair. Their exclusion is therefore derived, not silent.
+
+## 299. Executed gate experiments and repair
+
+Two isolated exact-base mutations were run before editing the mechanism.
+
+1. Moving `POST_DISCOVERY_REASSESSMENT` from required to completed while leaving selection absent produced 259-test failure plus both-context checker failures: the promotion map returned `FOUNDATION_PROMOTION_GATE_MAP_INVALID`, and Event discovery returned `EVENT_STABLE_SURFACE_NEXT_GATE_REQUIRED`. The prior construction could not express the mandated intermediate state.
+2. Completing both gates, selecting OCP-010 and changing its document lifecycle to Canonical while retaining Event `Concept-Status: Accepted` produced a five-failure/one-error unit result and both-context checker failure: the promotion map returned map-invalid and candidate-drift. The prior construction also had no allowed terminal transition.
+
+Schema 2 repairs the state language without completing a future gate. The current repository is valid only with ordered `POST_DISCOVERY_REASSESSMENT` completed, `CANDIDATE_BOARD_SELECTION` still required and `promotion_selections: []`. A permanent mutation test then appends the Board gate, removes the final requirement, selects OCP-010, changes its expected and live document/Concept pair to `Canonical/Accepted`, and requires the foundation gate validator to return valid. A separate negative mutation selects OCP-006 while OCP-005 remains Draft and proves that completed lifecycle gates cannot bypass a live L2 failure. This proves reachability for the **foundation promotion gate only**; `foundation_promotion_reassessment` and `event_stable_surface` remain current-intermediate-state witnesses and require synchronous treatment by step 3 before a full-repository final state can pass.
+
+That limitation registers an explicit step-3 governance debt: decide whether completed-step evidence validates against its immutable `baseline` or must continue to track the current gate state. This act does not choose either model. Until step 3 resolves it, the two current-state witnesses intentionally fail on a hypothetical selection/final lifecycle tree even when the promotion gate itself is reachable.
+
+The final-state mutation is reachability proof, not authorization or a proposed lifecycle diff. It changes only an isolated temporary copy inside the test and supplies no Pavlo decision, compatibility contract or merge gate.
+
+## 300. Recommendation without selection authority
+
+The current promotion recommendation is **hold**: none of the four positive paths is legal on this exact tree. The leading continuation for the next, separately mandated Board-selection act is **Event YK remediation**, because Event alone combines live L2 pass with completed current-tree discovery and a bounded, falsifiable consumer cost. Assignment remains legitimate but needs a broader discovery; the Assignment + Constraint unit has mixed live L2 and much larger unproven compatibility; Constraint alone is dependency-blocked.
+
+This recommendation does not select Event, YK, OCP-010 or any remediation. The machine record states `selection_authority: false`, keeps `selected_candidates: []`, leaves `promotion_selections: []`, and requires `CANDIDATE_BOARD_SELECTION`. Only step 3 may choose hold, Event remediation, another candidate/unit or a different evidence demand.
+
+## 301. Executable evidence, coverage and accounting
+
+`architecture/foundation-promotion-reassessment.yaml` records the G4 disposition, ordered criterion, independently replayed L2, all five options, every blocker/cost/unlock/legality gap and the non-selecting recommendation. `foundation_promotion_reassessment.py` derives current L2 from OCP frontmatter, cross-checks the promotion map, verifies every named evidence token and rejects selection self-supply.
+
+The exact mandated test name `test_every_defensive_value_is_individually_fixture_and_mutation_live` covers every value in the criterion, candidate, option, L2, blocker, cost, unlock, missing-contract, result and recommendation collections; it also mutates every dependency, option field and evidence token individually. The existing same-named promotion-gate test covers both ordered current and future sequence states, all status pairs and every candidate. A separate mutation proves the fully gated Event lifecycle state is accepted by the repaired gate.
+
+The exact base remains 259 unit tests and 274 synthetic fixtures. This act adds seven repository tests and no fixtures, producing **266 tests / 274 fixtures**. The fixtures remain fully synthetic; no real operation, location, time window, unit, person, credential or external-project material enters the tree.
+
+## 302. Footprint, rollback, stops and exact-head gates
+
+OCP-005 stays `0.2.7 / Draft`, OCP-006 `0.3.1 / Draft`, OCP-010 `0.2.1 / Draft`; Assignment, Constraint and Event remain `Accepted`. OCP-000, OCP-002, every Concept status, graph/edges, foundation map, P-001 bytes, all snapshots, all OCP bodies, every AB status except synchronized AB-062 descriptive text, `Review-After` fields and all 274 fixtures remain byte-identical. OCP-019/OCP-021/OCP-022 remain Draft; AB-018 and AB-005 remain Open. No Conflict, capacity, reservation, precedence, waiver, Order or production profile is activated.
+
+Rollback removes the reassessment map/module/tests/integration, restores gate schema 1 with both gates required, restores the Event discovery current-gate witness and reverts AD-016/accounting as one reviewed unit. Partial rollback is invalid: a prose-complete reassessment without the intermediate state would be indistinguishable from absence, while a state transition without the comparison would self-certify.
+
+Return to hold and require a fresh reassessment if live dependencies/statuses change, map cross-check diverges, any evidence token drifts, a new primary Event consumer appears, a blocker closes or opens, the final-state reachability mutation fails, or any text/tool treats the recommendation as selection.
+
+AD-016AB requires exact-head Fable review, explicit Codex adjudication, green CI on the same head and fresh Pavlo authorization naming that head. Merge completes only §291 step 2. It does not complete `CANDIDATE_BOARD_SELECTION`, authorize a lifecycle proposal, open T6/T7, select YK/Event/Assignment/a joint unit/Constraint remediation, or authorize the next act.

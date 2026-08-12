@@ -126,15 +126,15 @@ blockers:
         tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010"]
       - path: docs/017-operation-lifecycle/README.md
         tokens: ["Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010"]
-  - blocker_id: NEXT_LIFECYCLE_GATES_ABSENT
+  - blocker_id: CANDIDATE_BOARD_SELECTION_ABSENT
     disposition: blocks_promotion
     evidence:
       - path: architecture/foundation-promotion-gate.yaml
-        tokens: ["POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION", "promotion_selections: []"]
-remaining_gates: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]
+        tokens: ["CANDIDATE_BOARD_SELECTION", "promotion_selections: []"]
+remaining_gates: [CANDIDATE_BOARD_SELECTION]
 forbidden_outcomes:
   - OCP010_ACCEPTANCE
   - CANONICAL_PROMOTION
   - T6_OPEN
-  - POST_DISCOVERY_REASSESSMENT
+  - DISCOVERY_SELF_SUPPLIED_REASSESSMENT
   - CANDIDATE_BOARD_SELECTION

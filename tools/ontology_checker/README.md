@@ -400,8 +400,9 @@ The suite includes, among other cases:
 - spatial context/binding version reuse and forbidden authority coupling;
 - valid and invalid integrated scenarios;
 - artifact, Pattern, Concept-status, graph and Git-history governance probes.
-- foundation promotion-gate probes that independently pin T0–T5/AD-016C/D/Y/Z plus completed Y10D evidence, every OCP-005/006/010 dependency and L2 result, and reject candidate self-promotion while reassessment and Board selection remain absent;
-- Event stable-surface discovery probes that independently derive all seven OCP-010 inputs and both primary consumers, distinguish exact Pattern/record-kind bindings from unversioned document bindings, pin every declared stable/moving/blocker evidence token and reject reassessment, selection or promotion self-supply.
+- foundation promotion-gate probes that independently pin T0–T5/AD-016C/D/Y/Z plus completed Y10D and post-discovery reassessment, every OCP-005/006/010 dependency and L2 result, reject selection self-supply, and prove a separately selected fully gated lifecycle state is reachable rather than permanently walled;
+- foundation post-discovery reassessment probes that derive L2 from live OCP frontmatter before cross-checking gate claims, pin the common five-axis comparison across hold/Assignment/Event/joint Assignment+Constraint/Constraint remediation, and reject recommendation-to-selection transfer;
+- Event stable-surface discovery probes that independently derive all seven OCP-010 inputs and both primary consumers, distinguish exact Pattern/record-kind bindings from unversioned document bindings, pin every declared stable/moving/blocker evidence token and retain candidate-specific Board selection as the sole remaining lifecycle gate.
 
 ## Time handling
 

@@ -15,6 +15,7 @@ from ocp_checker.accepted_snapshot import validate_accepted_snapshots
 from ocp_checker.concept_graph import validate_and_render_concept_graph
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.foundation_promotion_gate import validate_foundation_promotion_gate
+from ocp_checker.foundation_promotion_reassessment import validate_foundation_promotion_reassessment
 from ocp_checker.open_question_sync import validate_open_question_sync
 
 
@@ -84,6 +85,13 @@ def main() -> int:
     )
     failures += 0 if promotion_gate_result.valid else 1
 
+    reassessment_result = validate_foundation_promotion_reassessment(repo_root)
+    print(
+        f"{'PASS' if reassessment_result.valid else 'FAIL'} "
+        f"foundation-promotion-reassessment errors={list(reassessment_result.errors)}"
+    )
+    failures += 0 if reassessment_result.valid else 1
+
     event_surface_result = validate_event_stable_surface(repo_root)
     print(
         f"{'PASS' if event_surface_result.valid else 'FAIL'} "
@@ -129,7 +137,7 @@ def main() -> int:
 
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
-        f"foundation promotion gate, "
+        f"foundation promotion gate and reassessment, "
         f"open-question resolution sync, accepted snapshot governance, process audit, "
         f"Concept graph and generated map; "
         f"failures={failures}"
