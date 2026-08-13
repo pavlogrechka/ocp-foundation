@@ -104,15 +104,39 @@ EXPECTED_EVIDENCE = {
 }
 
 MAP_KEYS = {
-    "schema_version", "rule_owner", "baseline", "baseline_gate_state", "gate_applicability", "criterion",
+    "schema_version", "rule_owner", "baseline", "baseline_gate_state",
+    "baseline_evidence_objects", "gate_applicability", "criterion",
     "live_l2", "options", "recommendation", "evidence",
 }
+BASELINE_OBJECT_KEYS = {"path", "blob", "sha256"}
 L2_KEYS = {"document_id", "direct_ocp_dependencies", "result", "blockers"}
 OPTION_KEYS = {
     "option_id", "candidate_documents", "l2_result", "blocker_ids", "cost_id",
     "unlock_ids", "missing_for_legality", "result",
 }
 EVIDENCE_KEYS = {"path", "tokens"}
+EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
+    "docs/005-assignment-concept/README.md": (
+        "7a82a051cfb572e31cceded52bdfbb8e917bffba",
+        "fbdbe9b4547f7b1f14c766e1925ff28d620c671a271cfc8721f8d6b8d4db7b5a",
+    ),
+    "docs/006-constraint-concept/README.md": (
+        "95ef13a917e0f579cdd656672a6bd883060bb818",
+        "d1d2a8c4d85ffba3bbe22d38ed443946e8196558e42c67d929347436468632b6",
+    ),
+    "docs/010-event-concept/README.md": (
+        "3a49b75bfa479e24debb89a130b7a05d6c790a88",
+        "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706",
+    ),
+    "docs/011-outcome-assessment-record/README.md": (
+        "ff2608a372c6305db4c290f05c15e961ca96e6f6",
+        "1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5",
+    ),
+    "docs/017-operation-lifecycle/README.md": (
+        "0b2ea683df308babd1111ff47e9272c9b0742f78",
+        "061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -176,6 +200,22 @@ def validate_foundation_promotion_reassessment(
     payload = _load_yaml(repo_root / "architecture/foundation-promotion-reassessment.yaml")
     if not isinstance(payload, dict) or set(payload) != MAP_KEYS:
         return _result((FOUNDATION_REASSESSMENT_MAP_INVALID,))
+    baseline_objects = payload.get("baseline_evidence_objects")
+    normalized_objects: dict[str, tuple[str, str]] = {}
+    if not isinstance(baseline_objects, list):
+        errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
+    else:
+        for item in baseline_objects:
+            if not isinstance(item, dict) or set(item) != BASELINE_OBJECT_KEYS:
+                errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
+                continue
+            path = item.get("path")
+            if not isinstance(path, str) or path in normalized_objects:
+                errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
+                continue
+            normalized_objects[path] = (str(item.get("blob")), str(item.get("sha256")))
+        if normalized_objects != EXPECTED_BASELINE_EVIDENCE_OBJECTS:
+            errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
     gate_applicability = payload.get("gate_applicability")
     if (
         payload.get("schema_version") != 1
@@ -333,4 +373,11 @@ def validate_foundation_promotion_reassessment(
             normalized_items.append((fpath, tuple(tokens)))
         if tuple(normalized_items) != expected_items:
             errors.append(FOUNDATION_REASSESSMENT_MAP_INVALID)
+    # Tokens in this map's own baseline_gate_state are executable schema
+    # invariants, not claims about a pre-existing baseline object.
+    evidence_paths = {
+        path for expected_items in EXPECTED_EVIDENCE.values() for path, _ in expected_items
+    } - {"architecture/foundation-promotion-reassessment.yaml"}
+    if evidence_paths != set(EXPECTED_BASELINE_EVIDENCE_OBJECTS):
+        errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
     return _result(errors)

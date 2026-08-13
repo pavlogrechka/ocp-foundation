@@ -192,6 +192,22 @@ class EventStableSurfaceTests(unittest.TestCase):
                     validate_event_stable_surface(root).errors,
                 )
 
+    def test_every_baseline_evidence_object_value_is_individually_live(self) -> None:
+        payload = self.payload()
+        self.assertEqual(set(event_stable_surface.BASELINE_OBJECT_KEYS), {"path", "blob", "sha256"})
+        for item_index, item in enumerate(payload["baseline_evidence_objects"]):
+            for key in sorted(event_stable_surface.BASELINE_OBJECT_KEYS):
+                with self.subTest(item=item_index, key=key), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    mutated = self.payload(root)
+                    mutated["baseline_evidence_objects"][item_index][key] = item[key] + "-mutated"
+                    self.write_yaml(root, self.map_path, mutated)
+                    self.assertIn(
+                        EVENT_STABLE_SURFACE_EVIDENCE_DRIFT,
+                        validate_event_stable_surface(root).errors,
+                    )
+
     def test_every_direct_dependency_and_exact_pattern_binding_is_live(self) -> None:
         for dependency in event_stable_surface.DIRECT_DEPENDENCY_ORDER:
             with self.subTest(dependency=dependency), tempfile.TemporaryDirectory() as tmp:

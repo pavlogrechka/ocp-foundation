@@ -117,6 +117,31 @@ class EventPromotionSelectionTests(unittest.TestCase):
                     ):
                         self.assertIn(EVENT_PROMOTION_SELECTION_MAP_INVALID, validate_event_promotion_selection(ROOT).errors)
 
+    def test_every_baseline_subject_and_evidence_object_value_is_individually_live(self) -> None:
+        for key, value in self.payload()["baseline_subject_state"].items():
+            with self.subTest(subject_key=key), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                payload = self.payload(root)
+                payload["baseline_subject_state"][key] = str(value) + "-mutated"
+                self.write_yaml(root, self.map_path, payload)
+                self.assertIn(
+                    EVENT_PROMOTION_SELECTION_SUBJECT_DRIFT,
+                    validate_event_promotion_selection(root).errors,
+                )
+        for item_index, item in enumerate(self.payload()["baseline_evidence_objects"]):
+            for key in ("path", "blob", "sha256"):
+                with self.subTest(item=item_index, key=key), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    payload = self.payload(root)
+                    payload["baseline_evidence_objects"][item_index][key] = item[key] + "-mutated"
+                    self.write_yaml(root, self.map_path, payload)
+                    self.assertIn(
+                        EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT,
+                        validate_event_promotion_selection(root).errors,
+                    )
+
     def test_historical_selection_gate_and_subject_are_not_live(self) -> None:
         for mutation, expected_error in (
             ("remove_selection", EVENT_PROMOTION_SELECTION_GATE_DRIFT),

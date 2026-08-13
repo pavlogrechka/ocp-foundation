@@ -152,7 +152,7 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016AD `0.31.0 / Accepted` виконує крок 4: окремо доводить стабільне Core-виключення Operation↔Event, OCP-011 assessment ownership і OCP-011/OCP-017 consumer compatibility, закриває subject-state witness debt і просуває документ OCP-010 до `1.0.0 / Canonical`, лишаючи Concept Event `Accepted` без нового edge;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 274 non-sensitive fixtures і 280 unit tests;
+- reference suite містить 274 non-sensitive fixtures і 283 unit tests;
 - не-нормативна оцінка загальної foundation-готовності — **≈72%**; п'ять Concepts Canonical, три лишаються Accepted, OCP-017, OCP-018 і OCP-020 є Accepted Route C contracts, OCP-019, OCP-021 та OCP-022 лишаються Draft negative boundaries, OCP-006 додає три owner-local negative interaction boundaries, а positive Conflict/capacity/reservation/Order/precedence/override/waiver activation, production profiles та T6–T10 потребують власних рішень і свіжих Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).
