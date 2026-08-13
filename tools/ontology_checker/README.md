@@ -403,6 +403,7 @@ The suite includes, among other cases:
 - foundation promotion-gate probes that independently pin T0–T5/AD-016C/D/Y/Z plus completed Y10D and post-discovery reassessment, every OCP-005/006/010 dependency and L2 result, reject selection self-supply, and prove a separately selected fully gated lifecycle state is reachable rather than permanently walled;
 - foundation post-discovery reassessment probes that derive L2 from live OCP frontmatter before cross-checking gate claims, pin the common five-axis comparison across hold/Assignment/Event/joint Assignment+Constraint/Constraint remediation, and reject recommendation-to-selection transfer;
 - Event stable-surface discovery probes that independently derive all seven OCP-010 inputs and both primary consumers, distinguish exact Pattern/record-kind bindings from unversioned document bindings, pin every declared stable/moving/blocker evidence token and retain candidate-specific Board selection as the sole remaining lifecycle gate.
+- Event promotion-selection probes that keep OCP-010 Draft while binding the exact Board selection, both Accepted consumers, all three compatibility blockers, zero-at-selection migration and atomic rollback; completed discovery/reassessment witnesses bind immutable baselines while the live gate separately requires the Event lifecycle promotion act.
 
 ## Time handling
 

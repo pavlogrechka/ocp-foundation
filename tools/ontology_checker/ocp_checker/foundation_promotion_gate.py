@@ -16,18 +16,20 @@ REQUIRED_COMPLETED_STEPS = frozenset(
     {
         "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
         "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+        "CANDIDATE_BOARD_SELECTION",
     }
 )
 REQUIRED_COMPLETED_STEP_ORDER = (
     "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
     "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+    "CANDIDATE_BOARD_SELECTION",
 )
-REQUIRED_NEXT_GATES = frozenset({"CANDIDATE_BOARD_SELECTION"})
-REQUIRED_NEXT_GATE_ORDER = ("CANDIDATE_BOARD_SELECTION",)
+REQUIRED_NEXT_GATES = frozenset({"EVENT_LIFECYCLE_PROMOTION_ACT"})
+REQUIRED_NEXT_GATE_ORDER = ("EVENT_LIFECYCLE_PROMOTION_ACT",)
 FINAL_COMPLETED_STEPS = frozenset(
-    {*REQUIRED_COMPLETED_STEPS, "CANDIDATE_BOARD_SELECTION"}
+    {*REQUIRED_COMPLETED_STEPS, "EVENT_LIFECYCLE_PROMOTION_ACT"}
 )
-FINAL_COMPLETED_STEP_ORDER = (*REQUIRED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
+FINAL_COMPLETED_STEP_ORDER = (*REQUIRED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
 CANDIDATE_IDS = frozenset({"OCP-005", "OCP-006", "OCP-010"})
 ALLOWED_L2_RESULTS = frozenset({"pass", "fail"})
 ALLOWED_STATUS_PAIRS = frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
@@ -122,12 +124,12 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
     candidates = payload.get("candidates")
     selections = payload.get("promotion_selections")
     if (
-        payload.get("schema_version") != 2
-        or payload.get("rule_owner") != "AD-016AB"
+        payload.get("schema_version") != 3
+        or payload.get("rule_owner") != "AD-016AC"
         or not isinstance(sequence, dict)
         or set(sequence) != SEQUENCE_KEYS
-        or sequence.get("selected_next_scope") != "Y10D"
-        or sequence.get("selected_next_scope_state") != "complete"
+        or sequence.get("selected_next_scope") != "OCP-010"
+        or sequence.get("selected_next_scope_state") != "selected"
         or not isinstance(candidates, list)
         or not candidates
     ):
@@ -137,7 +139,7 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         set(REQUIRED_COMPLETED_STEP_ORDER) != REQUIRED_COMPLETED_STEPS
         or set(REQUIRED_NEXT_GATE_ORDER) != REQUIRED_NEXT_GATES
         or FINAL_COMPLETED_STEP_ORDER
-        != (*REQUIRED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
+        != (*REQUIRED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
         or set(FINAL_COMPLETED_STEP_ORDER) != FINAL_COMPLETED_STEPS
         or ALLOWED_STATUS_PAIRS
         != frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
@@ -146,12 +148,12 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
 
     completed = tuple(sequence.get("completed_steps") or ()) if isinstance(sequence, dict) else ()
     remaining = tuple(sequence.get("required_before_promotion") or ()) if isinstance(sequence, dict) else ()
-    reassessed_unselected = (
+    selected_unpromoted = (
         completed == REQUIRED_COMPLETED_STEP_ORDER
         and set(completed) == REQUIRED_COMPLETED_STEPS
         and remaining == REQUIRED_NEXT_GATE_ORDER
         and set(remaining) == REQUIRED_NEXT_GATES
-        and selections == []
+        and selections == ["OCP-010"]
     )
     fully_gated = (
         completed == FINAL_COMPLETED_STEP_ORDER
@@ -162,7 +164,7 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         and len(selections) == len(set(selections))
         and set(selections) <= CANDIDATE_IDS
     )
-    if not reassessed_unselected and not fully_gated:
+    if not selected_unpromoted and not fully_gated:
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
 
     ocps = _ocp_index(repo_root)
@@ -232,4 +234,6 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
 
     if seen != CANDIDATE_IDS:
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
+    if fully_gated and any(statuses.get(document_id) != "Canonical" for document_id in selections):
+        errors.append(FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED)
     return _result(errors)

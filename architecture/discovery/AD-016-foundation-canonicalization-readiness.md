@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.29.0
+Version: 0.30.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -5467,3 +5467,82 @@ Rollback removes the reassessment map/module/tests/integration, restores gate sc
 Return to hold and require a fresh reassessment if live dependencies/statuses change, map cross-check diverges, any evidence token drifts, a new primary Event consumer appears, a blocker closes or opens, the final-state reachability mutation fails, or any text/tool treats the recommendation as selection.
 
 AD-016AB requires exact-head Fable review, explicit Codex adjudication, green CI on the same head and fresh Pavlo authorization naming that head. Merge completes only §291 step 2. It does not complete `CANDIDATE_BOARD_SELECTION`, authorize a lifecycle proposal, open T6/T7, select YK/Event/Assignment/a joint unit/Constraint remediation, or authorize the next act.
+
+## 303. AD-016AC Board input, gate-first result and boundary
+
+Pavlo / Architecture Board separately supplied the step-3 input on exact `main@ffc698ecc7fabab9d0f8ade9c85913f7cc95eadc`: select the exact candidate unit `OCP-010 / Event`. This act records that decision; it does not infer Event's superiority from AD-016AB and does not acquire selection authority from its recommendation. The selected artifact remains exact `OCP-010 0.2.1 / Draft`, while Concept `Event` remains `Accepted`.
+
+Before choosing the output form, the OCP-016 G4 check was applied. A governance selection plus compatibility/migration/rollback witness neither introduces a positive operational rule/result nor activates a profile, so G4 and an Accepted activation consumer are not required. The selected form is therefore `governance-selection-compatibility-witness`, not an OCP semantic contract, profile or production authorization.
+
+Step 4 remains separate. The live gate completes `CANDIDATE_BOARD_SELECTION`, records `promotion_selections: [OCP-010]`, and requires `EVENT_LIFECYCLE_PROMOTION_ACT`. That final gate names the separately authorized act which must carry the remediation and promotion evidence; it does not authorize that act, create T6 or change a status here.
+
+## 304. Full-chain exact-base anchors
+
+The base tree is `9ccab11976f7f2d1dd660daf14bcbc0afd6cbc50`. Each row was resolved to a Git blob, reverse-resolved by `git ls-tree -r --name-only`, checked for the declared state inside that exact object and independently SHA-256 hashed; every declared path equalled the reverse result.
+
+| Evidence | Declared state in exact object | Git blob | SHA-256 |
+|---|---|---|---|
+| `architecture/discovery/AD-016-foundation-canonicalization-readiness.md` | `0.29.0 / Accepted`; step 2 complete, step 3 absent | `28a353eda45a5d443da070b38b3fd6cfe0ac886f` | `d7e3409502d353221181d3744a6caab46208bc0a2704fbec75b61c7eb27cb41b` |
+| `architecture/discovery/AD-031-event-dependency-stable-surface.md` | `0.1.0 / Discovery`; exact Y10D inventory | `609701e1046145c03691afe73e1d0e57415d33cb` | `49bb62434c36577384f294ffb42f69092f61e03f8841d55226b5d7c319682368` |
+| `architecture/foundation-promotion-gate.yaml` | schema 2; reassessed/unselected | `11693c96393beb68781d5b1c5ab6ca6be5e65c0d` | `6fdea5b2faff3a7a34ce361661f805ce2bbc5ed6bfdec50494449c566d0fd646` |
+| `architecture/foundation-promotion-reassessment.yaml` | schema 1; recommendation has no selection authority | `2713cdccb30dbec1cf330cd4e1eb13bed3dc64c4` | `f679d70c076c9a3d5b52853d981e7c83cf2ba7cd7eb7396c20c83ed506b266b9` |
+| `architecture/event-stable-surface.yaml` | schema 1; three semantic blockers plus absent selection | `6a21eb2a312d1e8e406f1d2c9c8a0977aa512a1b` | `2564c361cd46b8c73efebf1c587d5b0d0505d2e3b23b615ea321834332eb2aef` |
+| `docs/010-event-concept/README.md` | `0.2.1 / Draft`; Event `Accepted` | `3a49b75bfa479e24debb89a130b7a05d6c790a88` | `5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706` |
+| `docs/011-outcome-assessment-record/README.md` | `0.3.0 / Accepted`; primary Event consumer | `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| `docs/017-operation-lifecycle/README.md` | `0.2.0 / Accepted`; primary Event consumer | `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
+| `patterns/P-001-identified-record-pattern.md` | `0.1.0 / Accepted` | `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+
+Hashes identify evidence; they neither select nor promote.
+
+## 305. Compatibility against all three live Event blockers
+
+The Board selection is compatible with AD-016AB precisely because selection is not promotion and the contract preserves every named blocker instead of treating the recommendation as remediation.
+
+| Live blocker | Compatibility treatment now | Required before promotion |
+|---|---|---|
+| unresolved normative owner for Operation↔Event | exclude any positive relation/edge from the selected unit; OCP-004 identity and the current no-edge/non-generation boundary remain intact | a separately owned remediation must make the exclusion stable or establish a governed owner without changing this selection |
+| legacy checker-local assessment envelope overlaps OCP-011 | OCP-011 remains the Accepted OutcomeAssessmentRecord owner; no assessment authority transfers to OCP-010 | remove or bound the local envelope while preserving OCP-011 exact `event@1` and `observation-record@1` behavior |
+| OCP-011 and OCP-017 bind bare `OCP-010` | both consumers remain `Accepted` and byte-unchanged; their present bindings are preserved, not mislabelled exact-versioned | executable compatibility evidence must show that the promoted surface preserves OCP-011 record references and OCP-017 occurrence/provenance/non-causation behavior |
+
+Thus the selected unit is exact OCP-010, but whole-document freeze remains blocked. The Board choice survives the comparison; none of the comparison's three blockers is contradicted or silently closed.
+
+## 306. Migration and rollback contract
+
+Selection changes no stored data, reference, schema, fixture or OCP body, so data/reference/schema migration is **none at selection**, proved by the protected-file diff and unchanged 274-fixture corpus. This does not claim that promotion remediation costs nothing: step 4 must satisfy the three named preconditions and demonstrate its own migration result.
+
+Rollback is one reviewed unit: AD-016AC text, selection map, live promotion gate, baseline-bound historical witnesses, checker integration/tests and accounting. It restores the exact reassessed/unselected state. Partial rollback is invalid because a selected map without its gate is unverifiable, a gate without the compatibility contract has no migration/rollback meaning, and reverting only a baseline-bound witness would reintroduce live-state history invalidation.
+
+## 307. State-witness model comparison and selection
+
+The criterion was fixed before enumeration. A gate-state dependency is any current location that (a) reads `promotion_selections`, `required_before_promotion`, `completed_steps` or `selected_next_scope(_state)`; (b) carries those values as executable evidence tokens/constants; (c) validates a historical record against the live gate; or (d) claims current gate state in accounting. PR comments and historical Git objects are external immutable evidence, not mutation targets.
+
+| Model | Validity rule | Consequence | Verdict |
+|---|---|---|---|
+| immutable baseline-bound | a completed-step record validates the gate-state witness stored inside that record against its immutable named baseline; the live gate separately validates current progression | later legal steps do not rewrite history; tampering with the stored witness still fails | **selected** |
+| live gate tracking | every completed-step record revalidates its historical claim against the current gate | step 3 makes truthful Y10D and reassessment records fail and forces cascading history rewrites | rejected |
+
+An executed base mutation completed selection and set `promotion_selections: [OCP-010]` while leaving OCP-010 Draft. The live foundation gate returned valid; `foundation_promotion_reassessment` failed with `FOUNDATION_REASSESSMENT_GATE_STATE_INVALID` and `FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT`, while `event_stable_surface` failed with `EVENT_STABLE_SURFACE_EVIDENCE_DRIFT` and `EVENT_STABLE_SURFACE_NEXT_GATE_REQUIRED`. This is the rejected model's concrete harm, not a preference.
+
+The repair embeds each completed step's gate snapshot in its own machine record and validates it as immutable evidence. Permanent mutations show both directions: the unchanged historical snapshots remain valid after the live selection, while deleting or changing any stored baseline gate value fails. The new selection witness continues to bind the live gate and fails if the selection, remaining lifecycle act or Draft subject state changes.
+
+## 308. Complete dependency inventory
+
+The declared criterion finds exactly these current locations:
+
+- executable current state: `architecture/foundation-promotion-gate.yaml` plus `foundation_promotion_gate.py`;
+- executable completed-step witnesses: `foundation-promotion-reassessment.yaml` / its validator and `event-stable-surface.yaml` / its validator;
+- corresponding mutation tests, which are verification rather than a fourth authority;
+- descriptive history/accounting in AD-016, AD-031, README, roadmap, AB-062 and checker README; and
+- `check.py`, which invokes validators but reads no gate field and therefore is integration, not a gate-state dependency.
+
+No third historical executable witness exists. AD-031 prose remains historical and byte-unchanged; current accounting is synchronized rather than used as proof.
+
+## 309. Version, executable coverage and exact boundary
+
+AD-016 moves `0.29.0 → 0.30.0 / Accepted` by MINOR: it adds a compatible Board-selection state, compatibility/migration/rollback obligations and reusable baseline-bound witness semantics without changing an OCP contract. The promotion map moves schema `2 → 3` because its state language adds selected-but-unpromoted plus the final separately authorized promotion transition. The new Event selection witness begins at schema 1. Historical reassessment and discovery maps remain schema 1 because only their evidence-binding interpretation is repaired; no discovery/comparison conclusion changes. README, roadmap, AB-062 and checker guide have no artifact SemVer.
+
+Every declared set, key, consumer, blocker, treatment, promotion effect, precondition, dependency class, location and evidence token is individually mutation-live under the exact test name `test_every_defensive_value_is_individually_fixture_and_mutation_live`. The gate proves selected-but-Draft is valid, Draft→Canonical fails before the final act, completing the final act while still Draft also fails, and a hypothetical separately completed Event lifecycle act plus Canonical transition is reachable; it therefore neither self-promotes nor permanently walls the path.
+
+OCP-005 remains `0.2.7 / Draft`, OCP-006 `0.3.1 / Draft`, OCP-010 `0.2.1 / Draft`; all three Concepts remain `Accepted`. OCP-000/OCP-002, Concept graph/map, P-001, snapshots, AB statuses, Review-After values, all OCP bodies and all 274 fixtures remain byte-identical. OCP-019/OCP-021/OCP-022 remain Draft; AB-018 and AB-005 remain Open. No T6/T7, Event remediation, positive conflict/capacity/reservation/precedence/Order model, production profile or next-act authority is created.
+
+AD-016AC requires exact-head Fable review, explicit Codex adjudication, green CI on the same head and fresh Pavlo authorization naming that head. Merge completes only §291 step 3. It does not complete step 4 or transfer authorization to it.

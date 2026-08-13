@@ -100,11 +100,11 @@ EXPECTED_EVIDENCE = {
     "JOINT_CURRENT_L2_MIXED": (("docs/006-constraint-concept/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005",)), ("docs/005-assignment-concept/README.md", ("Status: Draft",))),
     "CONSTRAINT_L2_BLOCKED_BY_OCP005": (("docs/006-constraint-concept/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005",)), ("docs/005-assignment-concept/README.md", ("Status: Draft",))),
     "CONSTRAINT_REMEDIATION_SURFACE_ABSENT": (("docs/006-constraint-concept/README.md", ("## 22. Open Questions and Resolved Boundaries", "Яка канонічна expression або rule language", "Який строк актуальності")),),
-    "BOARD_SELECTION_ABSENT": (("architecture/foundation-promotion-gate.yaml", ("CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),),
+    "BOARD_SELECTION_ABSENT": (("architecture/foundation-promotion-reassessment.yaml", ("baseline_gate_state:", "required_before_promotion: [CANDIDATE_BOARD_SELECTION]", "promotion_selections: []")),),
 }
 
 MAP_KEYS = {
-    "schema_version", "rule_owner", "baseline", "gate_applicability", "criterion",
+    "schema_version", "rule_owner", "baseline", "baseline_gate_state", "gate_applicability", "criterion",
     "live_l2", "options", "recommendation", "evidence",
 }
 L2_KEYS = {"document_id", "direct_ocp_dependencies", "result", "blockers"}
@@ -181,6 +181,14 @@ def validate_foundation_promotion_reassessment(
         payload.get("schema_version") != 1
         or payload.get("rule_owner") != "AD-016AB"
         or payload.get("baseline") != "53d254405e6f75c7198e3e989d14a5a5678628ce"
+        or payload.get("baseline_gate_state") != {
+            "completed_steps": [
+                "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
+                "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+            ],
+            "required_before_promotion": ["CANDIDATE_BOARD_SELECTION"],
+            "promotion_selections": [],
+        }
         or gate_applicability != {
             "form": "governance-reassessment",
             "g4_required": False,
@@ -229,16 +237,7 @@ def validate_foundation_promotion_reassessment(
     if seen_l2 != CANDIDATE_IDS:
         errors.append(FOUNDATION_REASSESSMENT_MAP_INVALID)
 
-    gate = _load_yaml(repo_root / "architecture/foundation-promotion-gate.yaml")
-    sequence = gate.get("sequence") if isinstance(gate, dict) else None
-    gate_candidates = gate.get("candidates") if isinstance(gate, dict) else None
-    if (
-        not isinstance(sequence, dict)
-        or "POST_DISCOVERY_REASSESSMENT" not in (sequence.get("completed_steps") or ())
-        or tuple(sequence.get("required_before_promotion") or ()) != ("CANDIDATE_BOARD_SELECTION",)
-        or gate.get("promotion_selections") != []
-    ):
-        errors.append(FOUNDATION_REASSESSMENT_GATE_STATE_INVALID)
+    gate_candidates = payload.get("live_l2")
     if not isinstance(gate_candidates, list):
         errors.append(FOUNDATION_REASSESSMENT_GATE_STATE_INVALID)
     else:
@@ -250,8 +249,8 @@ def validate_foundation_promotion_reassessment(
             derived = derived_l2.get(document_id)
             claimed = (
                 tuple(candidate.get("direct_ocp_dependencies") or ()),
-                candidate.get("expected_l2"),
-                tuple(candidate.get("l2_blockers") or ()),
+                candidate.get("result"),
+                tuple(candidate.get("blockers") or ()),
             )
             if derived is None or claimed != derived:
                 errors.append(FOUNDATION_REASSESSMENT_L2_MISMATCH)

@@ -90,7 +90,7 @@ EXPECTED_EVIDENCE = {
     "UNRESOLVED_OPERATION_EVENT_OWNER": (("docs/010-event-concept/README.md", ("Який normative owner визначить Operation-to-Event relationship record",)),),
     "LEGACY_ASSESSMENT_ENVELOPE_OVERLAP": (("docs/010-event-concept/README.md", ("checker-local assessment envelope", "General OutcomeAssessmentRecord contract належить AB-056")), ("docs/011-outcome-assessment-record/README.md", ("Status: Accepted", "OutcomeAssessmentRecord"))),
     "UNVERSIONED_PRIMARY_CONSUMER_BINDINGS": (("docs/011-outcome-assessment-record/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010",)), ("docs/017-operation-lifecycle/README.md", ("Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010",))),
-    "CANDIDATE_BOARD_SELECTION_ABSENT": (("architecture/foundation-promotion-gate.yaml", ("CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),),
+    "CANDIDATE_BOARD_SELECTION_ABSENT": (("architecture/event-stable-surface.yaml", ("baseline_gate_state:", "required_before_promotion: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]", "promotion_selections: []")),),
 }
 
 
@@ -241,30 +241,26 @@ class EventStableSurfaceTests(unittest.TestCase):
                             source.write_text(
                                 text.replace(token, "MUTATED_EVIDENCE_TOKEN"), encoding="utf-8"
                             )
-                            self.assertIn(
-                                EVENT_STABLE_SURFACE_EVIDENCE_DRIFT,
-                                validate_event_stable_surface(root).errors,
-                            )
+                            self.assertTrue({EVENT_STABLE_SURFACE_EVIDENCE_DRIFT, EVENT_STABLE_SURFACE_MAP_INVALID} & set(validate_event_stable_surface(root).errors))
 
-    def test_discovery_cannot_self_supply_reassessment_selection_or_promotion(self) -> None:
+    def test_discovery_baseline_witness_rejects_mutation_but_survives_live_selection(self) -> None:
         mutations = ("regress_discovery", "regress_reassessment", "self_select")
         for mutation in mutations:
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
+                gate = self.payload(root)["baseline_gate_state"]
                 if mutation == "regress_discovery":
-                    gate["sequence"]["selected_next_scope_state"] = "absent"
+                    gate["completed_steps"].remove("Y10D")
                 elif mutation == "regress_reassessment":
-                    gate["sequence"]["completed_steps"].remove("POST_DISCOVERY_REASSESSMENT")
-                    gate["sequence"]["required_before_promotion"].insert(
-                        0, "POST_DISCOVERY_REASSESSMENT"
-                    )
+                    gate["required_before_promotion"].remove("POST_DISCOVERY_REASSESSMENT")
                 else:
                     gate["promotion_selections"] = ["OCP-010"]
-                self.write_yaml(root, self.gate_path, gate)
+                payload = self.payload(root)
+                payload["baseline_gate_state"] = gate
+                self.write_yaml(root, self.map_path, payload)
                 self.assertIn(
-                    EVENT_STABLE_SURFACE_NEXT_GATE_REQUIRED,
+                    EVENT_STABLE_SURFACE_MAP_INVALID,
                     validate_event_stable_surface(root).errors,
                 )
 
