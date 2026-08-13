@@ -14,9 +14,12 @@ EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT = "EVENT_PROMOTION_SELECTION_EVIDENCE_D
 EVENT_PROMOTION_SELECTION_GATE_DRIFT = "EVENT_PROMOTION_SELECTION_GATE_DRIFT"
 
 MAP_KEYS = frozenset({
-    "schema_version", "rule_owner", "baseline", "gate_applicability", "selected_unit",
+    "schema_version", "rule_owner", "baseline", "baseline_subject_state",
+    "baseline_evidence_objects", "gate_applicability", "selected_unit",
     "compatibility", "migration", "rollback", "witness_model", "evidence",
 })
+BASELINE_SUBJECT_KEYS = frozenset({"version", "status", "concept_status", "blob", "sha256"})
+BASELINE_OBJECT_KEYS = frozenset({"path", "blob", "sha256"})
 SELECTED_UNIT_KEYS = frozenset({
     "document_id", "primary", "expected_version", "expected_status",
     "expected_concept_status", "selection_input", "disposition",
@@ -87,6 +90,27 @@ EXPECTED_EVIDENCE = {
     "EVENT_LEGACY_OVERLAP": (("docs/010-event-concept/README.md", ("checker-local assessment envelope", "не є normative OutcomeAssessmentRecord contract")), ("docs/011-outcome-assessment-record/README.md", ("Status: Accepted", "OutcomeAssessmentRecord"))),
     "EVENT_CONSUMER_BINDINGS_UNVERSIONED": (("docs/011-outcome-assessment-record/README.md", ("Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010",)), ("docs/017-operation-lifecycle/README.md", ("Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010",))),
 }
+EXPECTED_BASELINE_SUBJECT_STATE = {
+    "version": "0.2.1",
+    "status": "Draft",
+    "concept_status": "Accepted",
+    "blob": "3a49b75bfa479e24debb89a130b7a05d6c790a88",
+    "sha256": "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706",
+}
+EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
+    "docs/010-event-concept/README.md": (
+        "3a49b75bfa479e24debb89a130b7a05d6c790a88",
+        "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706",
+    ),
+    "docs/011-outcome-assessment-record/README.md": (
+        "ff2608a372c6305db4c290f05c15e961ca96e6f6",
+        "1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5",
+    ),
+    "docs/017-operation-lifecycle/README.md": (
+        "0b2ea683df308babd1111ff47e9272c9b0742f78",
+        "061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -141,9 +165,32 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
     ):
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
 
+    baseline_subject = payload.get("baseline_subject_state")
+    if (
+        not isinstance(baseline_subject, dict)
+        or set(baseline_subject) != BASELINE_SUBJECT_KEYS
+        or baseline_subject != EXPECTED_BASELINE_SUBJECT_STATE
+    ):
+        errors.append(EVENT_PROMOTION_SELECTION_SUBJECT_DRIFT)
+
+    baseline_objects = payload.get("baseline_evidence_objects")
+    normalized_objects: dict[str, tuple[str, str]] = {}
+    if not isinstance(baseline_objects, list):
+        errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+    else:
+        for item in baseline_objects:
+            if not isinstance(item, dict) or set(item) != BASELINE_OBJECT_KEYS:
+                errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+                continue
+            path = item.get("path")
+            if not isinstance(path, str) or path in normalized_objects:
+                errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+                continue
+            normalized_objects[path] = (str(item.get("blob")), str(item.get("sha256")))
+        if normalized_objects != EXPECTED_BASELINE_EVIDENCE_OBJECTS:
+            errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+
     selected = payload.get("selected_unit")
-    primary = repo_root / "docs/010-event-concept/README.md"
-    metadata = _frontmatter(primary)
     if not isinstance(selected, dict) or set(selected) != SELECTED_UNIT_KEYS:
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
     elif selected != {
@@ -153,8 +200,6 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
         "disposition": "SELECTED_NOT_PROMOTED",
     }:
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
-    if metadata is None or str(metadata.get("Version")) != "0.2.1" or metadata.get("Status") != "Draft" or metadata.get("Concept-Status") != "Accepted":
-        errors.append(EVENT_PROMOTION_SELECTION_SUBJECT_DRIFT)
 
     compatibility = payload.get("compatibility")
     if not isinstance(compatibility, dict) or set(compatibility) != COMPATIBILITY_KEYS:
@@ -217,14 +262,15 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
             path = item.get("path")
             tokens = item.get("tokens")
             normalized.append((path, tuple(tokens or ())))
-            text = (repo_root / str(path)).read_text(encoding="utf-8") if isinstance(path, str) and (repo_root / path).is_file() else ""
-            if not isinstance(tokens, list) or not tokens or any(token not in text for token in tokens):
-                errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+            if not isinstance(tokens, list) or not tokens:
+                errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
         if tuple(normalized) != expected_items:
             errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
 
-    gate = _load(repo_root / "architecture/foundation-promotion-gate.yaml")
-    sequence = gate.get("sequence") if isinstance(gate, dict) else None
-    if not isinstance(sequence, dict) or "CANDIDATE_BOARD_SELECTION" not in (sequence.get("completed_steps") or ()) or tuple(sequence.get("required_before_promotion") or ()) != ("EVENT_LIFECYCLE_PROMOTION_ACT",) or gate.get("promotion_selections") != ["OCP-010"] or sequence.get("selected_next_scope") != "OCP-010" or sequence.get("selected_next_scope_state") != "selected":
-        errors.append(EVENT_PROMOTION_SELECTION_GATE_DRIFT)
+    evidence_paths = {
+        path for expected_items in EXPECTED_EVIDENCE.values() for path, _ in expected_items
+    }
+    if evidence_paths != set(EXPECTED_BASELINE_EVIDENCE_OBJECTS):
+        errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+
     return _result(errors)

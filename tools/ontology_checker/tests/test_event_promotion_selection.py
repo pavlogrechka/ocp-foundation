@@ -51,14 +51,14 @@ class EventPromotionSelectionTests(unittest.TestCase):
     def write_yaml(self, root: Path, relative: Path, payload: dict) -> None:
         (root / relative).write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
-    def test_repository_selection_is_valid_and_does_not_promote_event(self) -> None:
+    def test_repository_historical_selection_is_valid_after_promotion(self) -> None:
         self.assertTrue(validate_event_promotion_selection(ROOT).valid)
         payload = self.payload()
         self.assertEqual(payload["selected_unit"]["document_id"], "OCP-010")
         self.assertEqual(payload["selected_unit"]["expected_status"], "Draft")
         gate = yaml.safe_load((ROOT / self.gate_path).read_text(encoding="utf-8"))
         self.assertEqual(gate["promotion_selections"], ["OCP-010"])
-        self.assertEqual(gate["sequence"]["required_before_promotion"], ["EVENT_LIFECYCLE_PROMOTION_ACT"])
+        self.assertIn("EVENT_LIFECYCLE_PROMOTION_ACT", gate["sequence"]["completed_steps"])
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         categories = (
@@ -117,7 +117,32 @@ class EventPromotionSelectionTests(unittest.TestCase):
                     ):
                         self.assertIn(EVENT_PROMOTION_SELECTION_MAP_INVALID, validate_event_promotion_selection(ROOT).errors)
 
-    def test_selection_gate_and_subject_are_live(self) -> None:
+    def test_every_baseline_subject_and_evidence_object_value_is_individually_live(self) -> None:
+        for key, value in self.payload()["baseline_subject_state"].items():
+            with self.subTest(subject_key=key), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                payload = self.payload(root)
+                payload["baseline_subject_state"][key] = str(value) + "-mutated"
+                self.write_yaml(root, self.map_path, payload)
+                self.assertIn(
+                    EVENT_PROMOTION_SELECTION_SUBJECT_DRIFT,
+                    validate_event_promotion_selection(root).errors,
+                )
+        for item_index, item in enumerate(self.payload()["baseline_evidence_objects"]):
+            for key in ("path", "blob", "sha256"):
+                with self.subTest(item=item_index, key=key), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    payload = self.payload(root)
+                    payload["baseline_evidence_objects"][item_index][key] = item[key] + "-mutated"
+                    self.write_yaml(root, self.map_path, payload)
+                    self.assertIn(
+                        EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT,
+                        validate_event_promotion_selection(root).errors,
+                    )
+
+    def test_historical_selection_gate_and_subject_are_not_live(self) -> None:
         for mutation, expected_error in (
             ("remove_selection", EVENT_PROMOTION_SELECTION_GATE_DRIFT),
             ("remove_promotion_gate", EVENT_PROMOTION_SELECTION_GATE_DRIFT),
@@ -136,9 +161,9 @@ class EventPromotionSelectionTests(unittest.TestCase):
                     else:
                         gate["sequence"]["required_before_promotion"] = []
                     self.write_yaml(root, self.gate_path, gate)
-                self.assertIn(expected_error, validate_event_promotion_selection(root).errors)
+                self.assertNotIn(expected_error, validate_event_promotion_selection(root).errors)
 
-    def test_each_consumer_and_evidence_token_is_repository_live(self) -> None:
+    def test_consumers_remain_live_and_blocker_evidence_is_historical(self) -> None:
         payload = self.payload()
         for consumer in payload["compatibility"]["consumers"]:
             for token in ["OCP-010", *consumer["preserved_refs"]]:
@@ -162,7 +187,7 @@ class EventPromotionSelectionTests(unittest.TestCase):
                         self.copy_inputs(root)
                         path = root / item["path"]
                         path.write_text(path.read_text(encoding="utf-8").replace(token, "MUTATED_EVIDENCE"), encoding="utf-8")
-                        self.assertIn(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT, validate_event_promotion_selection(root).errors)
+                        self.assertNotIn(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT, validate_event_promotion_selection(root).errors)
 
     def test_baseline_bound_history_survives_live_selection_and_rejected_live_model_breaks(self) -> None:
         self.assertTrue(validate_foundation_promotion_reassessment(ROOT).valid)
@@ -177,7 +202,7 @@ class EventPromotionSelectionTests(unittest.TestCase):
             }]
             self.write_yaml(root, Path("architecture/foundation-promotion-reassessment.yaml"), reassessment)
             self.assertIn(
-                "FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT",
+                "FOUNDATION_REASSESSMENT_MAP_INVALID",
                 validate_foundation_promotion_reassessment(root).errors,
             )
 

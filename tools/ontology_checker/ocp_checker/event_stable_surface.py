@@ -65,7 +65,7 @@ FORBIDDEN_OUTCOMES = frozenset(
 )
 
 MAP_KEYS = {
-    "schema_version", "baseline", "baseline_gate_state",
+    "schema_version", "baseline", "baseline_gate_state", "baseline_evidence_objects",
     "rule_owner",
     "subject",
     "discovery_result",
@@ -77,6 +77,7 @@ MAP_KEYS = {
     "remaining_gates",
     "forbidden_outcomes",
 }
+BASELINE_OBJECT_KEYS = {"path", "blob", "sha256"}
 SUBJECT_KEYS = {
     "document_id",
     "primary",
@@ -84,6 +85,9 @@ SUBJECT_KEYS = {
     "expected_status",
     "expected_concept_status",
     "expected_pattern_binding",
+    "state_axis",
+    "baseline_blob",
+    "baseline_sha256",
 }
 DEPENDENCY_KEYS = {
     "artifact_id",
@@ -189,6 +193,28 @@ EXPECTED_EVIDENCE = {
         ("architecture/event-stable-surface.yaml", ("baseline_gate_state:", "required_before_promotion: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]", "promotion_selections: []")),
     ),
 }
+EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
+    "docs/010-event-concept/README.md": (
+        "3a49b75bfa479e24debb89a130b7a05d6c790a88",
+        "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706",
+    ),
+    "docs/011-outcome-assessment-record/README.md": (
+        "ff2608a372c6305db4c290f05c15e961ca96e6f6",
+        "1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5",
+    ),
+    "docs/017-operation-lifecycle/README.md": (
+        "0b2ea683df308babd1111ff47e9272c9b0742f78",
+        "061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030",
+    ),
+    "tools/ontology_checker/rules.yaml": (
+        "8d00050e32cea2ceb27d13c3d7788b5e8554cc84",
+        "e861e860f576cf824aff755d99f0da3118256f20d742f25eb4b0434503c6042d",
+    ),
+    "tools/ontology_checker/ocp_checker/event.py": (
+        "e04b9bedbe4fe1d4923e4d0acc0cbd5f471ee5ea",
+        "d034fae851e8dd5e00c360cd19bbb3c38b0462856010af955a430ceaa1b7de64",
+    ),
+}
 RECORD_REF_PATTERN = re.compile(r"\b(?:event|observation-record)@[0-9]+(?:\.[0-9]+){0,2}\b", re.I)
 
 
@@ -286,13 +312,6 @@ def _validate_evidence(repo_root: Path, entries: Any, id_key: str, expected_ids:
                 errors.append(EVENT_STABLE_SURFACE_MAP_INVALID)
                 continue
             normalized_evidence.append((str(item.get("path")), tuple(tokens)))
-            try:
-                text = (repo_root / relative).read_text(encoding="utf-8")
-            except OSError:
-                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
-                continue
-            if any(token not in text for token in tokens):
-                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
         if tuple(normalized_evidence) != EXPECTED_EVIDENCE.get(str(entry_id)):
             errors.append(EVENT_STABLE_SURFACE_MAP_INVALID)
     return errors
@@ -307,6 +326,23 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
         return _result((EVENT_STABLE_SURFACE_MAP_INVALID,))
     if not isinstance(payload, dict) or set(payload) != MAP_KEYS:
         return _result((EVENT_STABLE_SURFACE_MAP_INVALID,))
+
+    baseline_objects = payload.get("baseline_evidence_objects")
+    normalized_objects: dict[str, tuple[str, str]] = {}
+    if not isinstance(baseline_objects, list):
+        errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
+    else:
+        for item in baseline_objects:
+            if not isinstance(item, dict) or set(item) != BASELINE_OBJECT_KEYS:
+                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
+                continue
+            path = item.get("path")
+            if not isinstance(path, str) or path in normalized_objects:
+                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
+                continue
+            normalized_objects[path] = (str(item.get("blob")), str(item.get("sha256")))
+        if normalized_objects != EXPECTED_BASELINE_EVIDENCE_OBJECTS:
+            errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
 
     subject = payload.get("subject")
     if (
@@ -335,14 +371,14 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
             subject.get("document_id") != "OCP-010"
             or subject.get("primary") != "docs/010-event-concept/README.md"
             or primary != expected_primary
-            or str(metadata.get("Version")) != "0.2.1"
-            or metadata.get("Status") != "Draft"
-            or metadata.get("Concept-Status") != "Accepted"
             or tuple(_references(metadata.get("Uses-Patterns"))) != ("P-001@0.1.0",)
             or subject.get("expected_version") != "0.2.1"
             or subject.get("expected_status") != "Draft"
             or subject.get("expected_concept_status") != "Accepted"
             or subject.get("expected_pattern_binding") != "P-001@0.1.0"
+            or subject.get("state_axis") != "immutable-baseline"
+            or subject.get("baseline_blob") != "3a49b75bfa479e24debb89a130b7a05d6c790a88"
+            or subject.get("baseline_sha256") != "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706"
         ):
             errors.append(EVENT_STABLE_SURFACE_SUBJECT_DRIFT)
 
@@ -427,6 +463,14 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
     errors.extend(_validate_evidence(repo_root, payload.get("stable_candidates"), "surface_id", STABLE_SURFACE_IDS))
     errors.extend(_validate_evidence(repo_root, payload.get("moving_surfaces"), "surface_id", MOVING_SURFACE_IDS))
     errors.extend(_validate_evidence(repo_root, payload.get("blockers"), "blocker_id", BLOCKER_IDS))
+
+    # Tokens in this map's own baseline_gate_state are executable schema
+    # invariants, not claims about a pre-existing baseline object.
+    evidence_paths = {
+        path for expected_items in EXPECTED_EVIDENCE.values() for path, _ in expected_items
+    } - {"architecture/event-stable-surface.yaml"}
+    if evidence_paths != set(EXPECTED_BASELINE_EVIDENCE_OBJECTS):
+        errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
 
     remaining_gates = payload.get("remaining_gates")
     forbidden = payload.get("forbidden_outcomes")

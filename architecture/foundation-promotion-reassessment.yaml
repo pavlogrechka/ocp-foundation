@@ -5,6 +5,22 @@ baseline_gate_state:
   completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D, POST_DISCOVERY_REASSESSMENT]
   required_before_promotion: [CANDIDATE_BOARD_SELECTION]
   promotion_selections: []
+baseline_evidence_objects:
+  - path: docs/005-assignment-concept/README.md
+    blob: 7a82a051cfb572e31cceded52bdfbb8e917bffba
+    sha256: fbdbe9b4547f7b1f14c766e1925ff28d620c671a271cfc8721f8d6b8d4db7b5a
+  - path: docs/006-constraint-concept/README.md
+    blob: 95ef13a917e0f579cdd656672a6bd883060bb818
+    sha256: d1d2a8c4d85ffba3bbe22d38ed443946e8196558e42c67d929347436468632b6
+  - path: docs/010-event-concept/README.md
+    blob: 3a49b75bfa479e24debb89a130b7a05d6c790a88
+    sha256: 5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706
+  - path: docs/011-outcome-assessment-record/README.md
+    blob: ff2608a372c6305db4c290f05c15e961ca96e6f6
+    sha256: 1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5
+  - path: docs/017-operation-lifecycle/README.md
+    blob: 0b2ea683df308babd1111ff47e9272c9b0742f78
+    sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030
 gate_applicability:
   form: governance-reassessment
   g4_required: false

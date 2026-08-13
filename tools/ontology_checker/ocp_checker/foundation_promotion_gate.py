@@ -124,12 +124,12 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
     candidates = payload.get("candidates")
     selections = payload.get("promotion_selections")
     if (
-        payload.get("schema_version") != 3
-        or payload.get("rule_owner") != "AD-016AC"
+        payload.get("schema_version") != 4
+        or payload.get("rule_owner") != "AD-016AD"
         or not isinstance(sequence, dict)
         or set(sequence) != SEQUENCE_KEYS
         or sequence.get("selected_next_scope") != "OCP-010"
-        or sequence.get("selected_next_scope_state") != "selected"
+        or sequence.get("selected_next_scope_state") != "promoted"
         or not isinstance(candidates, list)
         or not candidates
     ):
@@ -165,6 +165,8 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         and set(selections) <= CANDIDATE_IDS
     )
     if not selected_unpromoted and not fully_gated:
+        errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
+    if not fully_gated:
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
 
     ocps = _ocp_index(repo_root)

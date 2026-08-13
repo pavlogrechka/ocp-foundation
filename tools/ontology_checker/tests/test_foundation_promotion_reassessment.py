@@ -72,6 +72,21 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                         validate_foundation_promotion_reassessment(ROOT).errors,
                     )
 
+    def test_every_baseline_evidence_object_value_is_individually_live(self) -> None:
+        payload = self.payload()
+        for item_index, item in enumerate(payload["baseline_evidence_objects"]):
+            for key in sorted(foundation_promotion_reassessment.BASELINE_OBJECT_KEYS):
+                with self.subTest(item=item_index, key=key), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    mutated = self.payload(root)
+                    mutated["baseline_evidence_objects"][item_index][key] = item[key] + "-mutated"
+                    self.write_yaml(root, self.map_path, mutated)
+                    self.assertIn(
+                        FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT,
+                        validate_foundation_promotion_reassessment(root).errors,
+                    )
+
         for value in foundation_promotion_reassessment.CRITERION_ORDER:
             with self.subTest(attribute="CRITERION_ORDER", value=value), patch.object(
                 foundation_promotion_reassessment,
@@ -191,7 +206,7 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                 validate_foundation_promotion_reassessment(root).errors,
             )
 
-    def test_each_repository_evidence_token_is_live(self) -> None:
+    def test_each_historical_evidence_token_is_snapshot_live(self) -> None:
         payload = self.payload()
         for blocker_id, items in payload["evidence"].items():
             for evidence in items:
@@ -199,10 +214,11 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                     with self.subTest(blocker_id=blocker_id, token=token), tempfile.TemporaryDirectory() as tmp:
                         root = Path(tmp)
                         self.copy_inputs(root)
-                        source = root / evidence["path"]
-                        text = source.read_text(encoding="utf-8")
-                        source.write_text(text.replace(token, "MUTATED_EVIDENCE"), encoding="utf-8")
-                        self.assertTrue({FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT, FOUNDATION_REASSESSMENT_MAP_INVALID} & set(validate_foundation_promotion_reassessment(root).errors))
+                        snapshot = self.payload(root)
+                        item = next(value for value in snapshot["evidence"][blocker_id] if value["path"] == evidence["path"])
+                        item["tokens"].remove(token)
+                        self.write_yaml(root, self.map_path, snapshot)
+                        self.assertIn(FOUNDATION_REASSESSMENT_MAP_INVALID, validate_foundation_promotion_reassessment(root).errors)
 
     def test_reassessment_cannot_self_supply_selection(self) -> None:
         for mutation in ("name_selection", "claim_authority"):

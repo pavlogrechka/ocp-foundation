@@ -1,0 +1,64 @@
+schema_version: 1
+rule_owner: AD-016AD
+baseline: 3b956d68255ef7b9a8fcf589737b5fe3b182f24a
+gate_applicability:
+  form: existing-concept-document-lifecycle-remediation
+  route: OCP-016-F
+  g4_required: false
+  accepted_consumer_required: false
+subject:
+  document_id: OCP-010
+  primary: docs/010-event-concept/README.md
+  expected_version: 1.0.0
+  expected_status: Canonical
+  expected_concept_status: Accepted
+  selected_by: AD-016AC
+  disposition: PROMOTED_AFTER_PROVED_REMEDIATION
+promotion_preconditions:
+  - precondition_id: EVENT_OWNER_BOUNDARY_REMEDIATED
+    proof: STABLE_CORE_EXCLUSION
+    status: proved
+  - precondition_id: LEGACY_ASSESSMENT_OVERLAP_REMEDIATED
+    proof: OCP011_GOVERNED_ENVELOPE
+    status: proved
+  - precondition_id: PRIMARY_CONSUMER_COMPATIBILITY_PROVED
+    proof: ACCEPTED_CONSUMERS_PRESERVED
+    status: proved
+compatibility:
+  - document_id: OCP-011
+    primary: docs/011-outcome-assessment-record/README.md
+    expected_version: 0.3.0
+    expected_status: Accepted
+    preserved_refs: [event@1, observation-record@1]
+    executable_fixture: tools/ontology_checker/fixtures/event/valid-integrated-scenario.yaml
+  - document_id: OCP-017
+    primary: docs/017-operation-lifecycle/README.md
+    expected_version: 0.2.0
+    expected_status: Accepted
+    preserved_refs: [independent Event occurrence, provenance, does not create or prove that Event]
+    executable_fixture: tools/ontology_checker/fixtures/operation_lifecycle/valid-q3i-completed.yaml
+migration:
+  data: NONE
+  references: PRESERVED_UNVERSIONED_DOCUMENT_BINDINGS
+  schemas: NONE
+rollback:
+  unit: EVENT_BODY_PROMOTION_PROOFS_GATE_WITNESSES_AND_ACCOUNTING
+  partial_rollback: FORBIDDEN
+  restores: OCP010_0_2_1_DRAFT_SELECTED
+evidence:
+  EVENT_OWNER_BOUNDARY_REMEDIATED:
+    - path: docs/010-event-concept/README.md
+      tokens: ["Core exclusion is stable", "no current Concept edge `Event → Operation` or `Operation → Event`", "separately mandated owner act"]
+    - path: architecture/baselines/foundation-map.md
+      absent_current_edges: ["`Event → Operation`", "`Operation → Event`"]
+  LEGACY_ASSESSMENT_OVERLAP_REMEDIATED:
+    - path: docs/010-event-concept/README.md
+      tokens: ["governed `OutcomeAssessmentRecord` owned by OCP-011", "event@1", "observation-record@1"]
+      absent_tokens: ["ScenarioAssessmentEnvelope", "checker-local assessment envelope"]
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Status: Accepted", "event@1", "observation-record@1"]
+  PRIMARY_CONSUMER_COMPATIBILITY_PROVED:
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Status: Accepted", "event@1", "observation-record@1"]
+    - path: docs/017-operation-lifecycle/README.md
+      tokens: ["Status: Accepted", "independent Event occurrence", "provenance", "does not create or prove that Event"]

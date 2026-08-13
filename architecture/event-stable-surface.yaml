@@ -5,6 +5,22 @@ baseline_gate_state:
   completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D]
   required_before_promotion: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]
   promotion_selections: []
+baseline_evidence_objects:
+  - path: docs/010-event-concept/README.md
+    blob: 3a49b75bfa479e24debb89a130b7a05d6c790a88
+    sha256: 5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706
+  - path: docs/011-outcome-assessment-record/README.md
+    blob: ff2608a372c6305db4c290f05c15e961ca96e6f6
+    sha256: 1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5
+  - path: docs/017-operation-lifecycle/README.md
+    blob: 0b2ea683df308babd1111ff47e9272c9b0742f78
+    sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030
+  - path: tools/ontology_checker/rules.yaml
+    blob: 8d00050e32cea2ceb27d13c3d7788b5e8554cc84
+    sha256: e861e860f576cf824aff755d99f0da3118256f20d742f25eb4b0434503c6042d
+  - path: tools/ontology_checker/ocp_checker/event.py
+    blob: e04b9bedbe4fe1d4923e4d0acc0cbd5f471ee5ea
+    sha256: d034fae851e8dd5e00c360cd19bbb3c38b0462856010af955a430ceaa1b7de64
 subject:
   document_id: OCP-010
   primary: docs/010-event-concept/README.md
@@ -12,6 +28,9 @@ subject:
   expected_status: Draft
   expected_concept_status: Accepted
   expected_pattern_binding: P-001@0.1.0
+  state_axis: immutable-baseline
+  baseline_blob: 3a49b75bfa479e24debb89a130b7a05d6c790a88
+  baseline_sha256: 5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706
 discovery_result: stable_candidate_not_selected
 direct_dependencies:
   - artifact_id: OCP-000

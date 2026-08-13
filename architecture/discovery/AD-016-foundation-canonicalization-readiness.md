@@ -1,7 +1,7 @@
 ---
 Decision-ID: AD-016
 Title: Foundation Canonicalization Readiness Discovery
-Version: 0.30.0
+Version: 0.31.0
 Status: Accepted
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-016, P-001, AD-015
@@ -5549,3 +5549,56 @@ That reachability proof does not cover the subject-state axis of historical AD-0
 OCP-005 remains `0.2.7 / Draft`, OCP-006 `0.3.1 / Draft`, OCP-010 `0.2.1 / Draft`; all three Concepts remain `Accepted`. OCP-000/OCP-002, Concept graph/map, P-001, snapshots, AB statuses, Review-After values, all OCP bodies and all 274 fixtures remain byte-identical. OCP-019/OCP-021/OCP-022 remain Draft; AB-018 and AB-005 remain Open. No T6/T7, Event remediation, positive conflict/capacity/reservation/precedence/Order model, production profile or next-act authority is created.
 
 AD-016AC requires exact-head Fable review, explicit Codex adjudication, green CI on the same head and fresh Pavlo authorization naming that head. Merge completes only §291 step 3. It does not complete step 4 or transfer authorization to it.
+
+## 310. AD-016AD mandate, gate-first result and reachability criterion
+
+Pavlo / Architecture Board separately mandated §291 step 4 on exact `main@3b956d68255ef7b9a8fcf589737b5fe3b182f24a`. Candidate selection and comparison are inputs, not questions: exact OCP-010/Event was selected by AD-016AC and is not reconsidered.
+
+The form gate was resolved before the result. This is Route F lifecycle/remediation of an existing Concept document and a stable negative relation boundary; it introduces no positive-capable rule, result or profile. OCP-016 G4 therefore does not apply and no Accepted consumer is required for admission. OCP-011 and OCP-017 nevertheless are real Accepted consumers and are used as compatibility evidence, not as self-approval.
+
+A promotion precondition is proved only when (a) current normative evidence entails the positive state, (b) an independent validator checks it, (c) a negative mutation fails, and (d) setting a `status: proved` token alone cannot satisfy the check. Whole-document promotion is reachable only if all three preconditions pass together. The executed attempt showed that the final foundation-gate state is expressible; only the known live subject-axis witnesses rejected it before their synchronous baseline repair.
+
+## 311. Exact-base anchors
+
+Each anchor was read from the exact base, reverse-resolved through `git ls-tree -r`, checked for its internal state and independently SHA-256 recalculated.
+
+| Object | Base state | blob | SHA-256 |
+|---|---|---|---|
+| `architecture/discovery/AD-016-foundation-canonicalization-readiness.md` | `0.30.0 / Accepted` | `e8d0fd6391d2ff777072e9373c1b40b90746da60` | `cfffb6432f2c2a97f65015481fdf8e2ae1e04c93e2207b39f6bed5e80d549991` |
+| `docs/010-event-concept/README.md` | `0.2.1 / Draft`; Event Accepted | `3a49b75bfa479e24debb89a130b7a05d6c790a88` | `5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706` |
+| `docs/011-outcome-assessment-record/README.md` | `0.3.0 / Accepted` | `ff2608a372c6305db4c290f05c15e961ca96e6f6` | `1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5` |
+| `docs/017-operation-lifecycle/README.md` | `0.2.0 / Accepted` | `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
+| `architecture/event-promotion-selection.yaml` | AD-016AC selected/Draft witness | `8d6b7fae18b10ff229d750cabd62983dd92809b8` | `f2884a8f1af6b147001f031504f77fb8e576d93ac66f8913edc35b685d9cb9a6` |
+| `architecture/event-stable-surface.yaml` | AD-031 discovery witness | `3c079a43d0aba9938b6a2e7b63da97a842bec496` | `ae73acb3c3b1c949ae1f04eab21a39dd4d92a5906b8e0b5120cb808062e3946f` |
+| `architecture/foundation-promotion-gate.yaml` | schema 3; final act required | `173ebf0d94625718ad46bc999246cc3883816e0a` | `f02edaa6d4365a13d5ff026a86d92d6655fa21a7eeb259e62ee67d89d03d0b7d` |
+| `docs/016-core-boundary/README.md` | `1.0.0 / Canonical`; Routes F/C/E/D/I and G4 | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
+| `patterns/P-001-identified-record-pattern.md` | `0.1.0 / Accepted` | `c679f3e35eb015aecf6cb9a839aacd75a432e844` | `2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797` |
+| `tools/ontology_checker/ocp_checker/event.py` | Event/Observation executable surface | `e04b9bedbe4fe1d4923e4d0acc0cbd5f471ee5ea` | `d034fae851e8dd5e00c360cd19bbb3c38b0462856010af955a430ceaa1b7de64` |
+| `tools/ontology_checker/ocp_checker/assessment.py` | OCP-011 executable surface | `1a6e52e62f38f8b39fde300dfb0dd8707d43465f` | `239a981ef9822a6fb3de1b47becf582bb0f593e067dfd872ca2d4c949736b243` |
+| `tools/ontology_checker/ocp_checker/operation_lifecycle.py` | OCP-017 executable surface | `b3b44fab9602d46e59586d8767635263afd3c4ab` | `77b7cf4e818815a220a1284f37ba1925bb137483c7f96aa20a76426b652e28a0` |
+
+Claimed paths equal their reverse-resolved paths. Hashes identify evidence; they neither remediate nor promote.
+
+## 312. Three independently proved preconditions
+
+| Precondition | Executable positive state | Negative mutation | Result |
+|---|---|---|---|
+| `EVENT_OWNER_BOUNDARY_REMEDIATED` | OCP-010 §10 freezes the Core exclusion of both Operation↔Event directions; the generated map contains neither current edge | remove the stable exclusion or inject either edge into current dependencies | proved |
+| `LEGACY_ASSESSMENT_OVERLAP_REMEDIATED` | OCP-010 §14 names the governed OCP-011 envelope and exact `event@1` / `observation-record@1`; the valid integrated fixture executes it | restore either legacy envelope token or remove any governed binding | proved |
+| `PRIMARY_CONSUMER_COMPATIBILITY_PROVED` | OCP-011 stays Accepted with both exact refs and a valid fixture; OCP-017 stays Accepted with occurrence/provenance/non-causation plus valid Q3I fixture | mutate each consumer token or executable fixture | proved |
+
+The precondition map is not authority: changing any `proved` to `declared` fails independently. No stored data, document reference, schema or fixture changes. The two primary consumers keep unversioned OCP-010 document bindings intentionally; the promoted surface preserves the behavior those bindings consume.
+
+## 313. Promotion, Concept axis and historical witnesses
+
+All three proofs pass simultaneously, live L2 remains `pass`, and the selected exact candidate is OCP-010. The act therefore completes `EVENT_LIFECYCLE_PROMOTION_ACT`, changes OCP-010 to `1.0.0 / Canonical` and leaves Event `Concept-Status: Accepted`. That split is derived, not accidental: this mandate promotes the document, while OCP-000/OCP-002 are protected and remain the Concept lifecycle authority. No registry row, taxonomy projection, Concept edge or generated map changes.
+
+The AD-031 discovery subject now carries its own immutable `0.2.1 / Draft` blob/SHA snapshot. AD-031 discovery, AD-016AB comparison and AD-016AC selection also bind every declared evidence path to the exact baseline object's blob and recomputed SHA-256. Their prose tokens are therefore baseline-explanatory coordinates, not assertions that the same bytes remain in the live tree. The only self-map gate tokens are executable schema invariants and do not pretend that their maps pre-existed their own baselines. AD-016AC additionally records the complete historical subject state. Permanent mutations prove both required directions: legal promotion leaves each historical record valid; changing any stored subject field or any evidence `path`/`blob`/`sha256` fails. The current promotion map and gate separately validate OCP-010 `1.0.0 / Canonical`.
+
+## 314. Migration, rollback, versioning and boundary
+
+Migration is zero for data and schemas; OCP-011/OCP-017 unversioned document references remain valid and their exact behavior is re-executed. Rollback is one unit: OCP-010 body/status, promotion proof/map, final gate, historical-witness repair, checker/tests and accounting. Partial rollback is invalid because it would leave either an unproved Canonical status, a promoted gate over a Draft document or corrupted history.
+
+OCP-010 moves `0.2.1 → 1.0.0` by MAJOR: first Canonical release plus a frozen negative owner boundary and removal of obsolete assessment-envelope semantics. AD-016 moves `0.30.0 → 0.31.0 / Accepted` by MINOR: it adds the compatible completed step and reusable proof obligations without changing R4/L2. The gate map moves schema `3 → 4`; the new lifecycle-promotion map begins at schema 1. Historical maps stay schema 1 because their conclusions do not change.
+
+Every declared key, precondition, proof, consumer, preserved reference and evidence member is individually mutation-live under `test_every_defensive_value_is_individually_fixture_and_mutation_live`. OCP-005 and OCP-006 remain Draft/Accepted; OCP-011 and OCP-017 remain Accepted; P-001, OCP-000/OCP-002, graph/map, snapshots, AB statuses and all 274 fixtures remain unchanged. This act opens neither T7 nor any next act, accepts no OCP-019/OCP-021/OCP-022, and creates no authority for AB-018, AB-005, positive Operation↔Event relations or Concept promotion.
