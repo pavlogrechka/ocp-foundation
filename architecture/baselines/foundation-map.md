@@ -11,7 +11,7 @@
 | Capability | Canonical |
 | Constraint | Accepted |
 | Coordination | Proposed |
-| Event | Accepted |
+| Event | Canonical |
 | Objective | Canonical |
 | Operation | Canonical |
 | Operational Space | Proposed |
@@ -39,5 +39,5 @@
 - `Resource ⇢ Capability` — AB-004
 - `Constraint ⇢ Conflict` — AB-038
 - `Organization ⇢ Resource` (dashed) — AB-052
-- `Operation ⇢ Event` — OCP-010 Event Accepted; relation owner remains unresolved
+- `Operation ⇢ Event` — OCP-010 Event Canonical; relation owner remains unresolved
 - `Organization ⇢ Coordination` — AB-003 and OCP-000 Coordination Proposed

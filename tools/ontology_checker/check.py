@@ -16,6 +16,7 @@ from ocp_checker.concept_graph import validate_and_render_concept_graph
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.event_promotion_selection import validate_event_promotion_selection
 from ocp_checker.event_lifecycle_promotion import validate_event_lifecycle_promotion
+from ocp_checker.event_concept_canonicalization import validate_event_concept_canonicalization
 from ocp_checker.foundation_promotion_gate import validate_foundation_promotion_gate
 from ocp_checker.foundation_promotion_reassessment import validate_foundation_promotion_reassessment
 from ocp_checker.open_question_sync import validate_open_question_sync
@@ -115,6 +116,13 @@ def main() -> int:
     )
     failures += 0 if event_promotion_result.valid else 1
 
+    event_concept_result = validate_event_concept_canonicalization(repo_root)
+    print(
+        f"{'PASS' if event_concept_result.valid else 'FAIL'} "
+        f"event-concept-canonicalization errors={list(event_concept_result.errors)}"
+    )
+    failures += 0 if event_concept_result.valid else 1
+
     question_sync_result = validate_open_question_sync(repo_root)
     print(
         f"{'PASS' if question_sync_result.valid else 'FAIL'} "
@@ -153,7 +161,7 @@ def main() -> int:
 
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
-        f"foundation promotion gate, reassessment, Event selection and lifecycle promotion, "
+        f"foundation promotion gate, reassessment, Event selection, lifecycle promotion and Concept canonicalization, "
         f"open-question resolution sync, accepted snapshot governance, process audit, "
         f"Concept graph and generated map; "
         f"failures={failures}"

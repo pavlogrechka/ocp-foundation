@@ -124,8 +124,8 @@ def validate_event_lifecycle_promotion(repo_root: Path) -> EventLifecyclePromoti
         or set(subject) != SUBJECT_KEYS
         or subject != {
             "document_id": "OCP-010", "primary": "docs/010-event-concept/README.md",
-            "expected_version": "1.0.0", "expected_status": "Canonical",
-            "expected_concept_status": "Accepted", "selected_by": "AD-016AC",
+            "expected_version": "1.0.1", "expected_status": "Canonical",
+            "expected_concept_status": "Canonical", "selected_by": "AD-016AC",
             "disposition": "PROMOTED_AFTER_PROVED_REMEDIATION",
         }
     ):
@@ -134,9 +134,9 @@ def validate_event_lifecycle_promotion(repo_root: Path) -> EventLifecyclePromoti
     metadata = _frontmatter(repo_root / "docs/010-event-concept/README.md")
     if metadata is None or any((
         metadata.get("Document-ID") != "OCP-010",
-        str(metadata.get("Version")) != "1.0.0",
+        str(metadata.get("Version")) != "1.0.1",
         metadata.get("Status") != "Canonical",
-        metadata.get("Concept-Status") != "Accepted",
+        metadata.get("Concept-Status") != "Canonical",
     )):
         errors.append(EVENT_LIFECYCLE_PROMOTION_SUBJECT_DRIFT)
 

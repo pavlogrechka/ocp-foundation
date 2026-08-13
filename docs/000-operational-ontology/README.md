@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-000
 Title: Operational Ontology
-Version: 1.5.0
+Version: 1.6.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: ADR-000
 Used-By: Product Vision, Domain Model, Business Rules, Architecture, API, UI
-Last-Review: 2026-08-08
+Last-Review: 2026-08-13
 ---
 
 # Operational Ontology
@@ -85,7 +85,7 @@ Version OCP-000 не є версією жодного Concept або defining OC
 | Operational Space | Proposed | — |
 | Organization | Canonical | OCP-007; AD-019A; AD-016T; separately authorized O9C lifecycle act |
 | Objective | Canonical | OCP-008; AD-003; AD-017; AD-016G; separately authorized T4 act |
-| Event | Accepted | OCP-010; AD-006C E3 occurrence/observation model; Architecture Board approval of PR-0012 |
+| Event | Canonical | OCP-010; AD-006C; AD-016AD; AD-032; separately authorized Event Concept canonicalization act |
 | Spectrum | Proposed | — |
 | Constraint | Accepted | OCP-006; Architecture Board approval of PR-0005 |
 | Risk | Proposed | AB-005; після Constraint |
@@ -207,3 +207,11 @@ Registry membership, row identity, status vocabulary, Board authority, Proposed 
 Exact Canonical provenance є `OCP-004; AD-020A; AD-016X; separately authorized WJ lifecycle act`. Первинне прийняття Operation у PR-0003 лишається історією acceptance, а не provenance цього Canonical переходу.
 
 Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Operation stage, authorization source, Event relation, outcome, Readiness, Assignment mutation, IO2 record identity або production semantics: defining authority залишається в OCP-004, а OCP-000 лише відображає окремо авторизований status.
+
+## Revision `1.6.0` — Event status transition
+
+Окремий Event Concept canonicalization act змінює рівно один active registry value: `Event: Accepted → Canonical`. За SemVer policy OCP-000 це MINOR revision, тому document version синхронно переходить `1.5.0 → 1.6.0`.
+
+Exact Canonical provenance є `OCP-010; AD-006C; AD-016AD; AD-032; separately authorized Event Concept canonicalization act`. PR-0012 лишається історією acceptance, AD-016AD — окремим просуванням defining document, а AD-032 доводить OCP-001 canonicalization prerequisites і атомарну status synchronization.
+
+Registry membership, row identity, status vocabulary, Board authority, Proposed markers, negative identity verdicts і всі інші Concept rows лишаються незмінними. Revision не додає Operation↔Event edge, relation owner, temporal interval, correlation, Event-kind registry, truth, assessment, Conflict, Risk, Readiness, authorization або production semantics: defining authority залишається в OCP-010, а OCP-000 лише відображає окремо авторизований Concept status.

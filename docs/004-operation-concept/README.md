@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-004
 Title: Operation Concept
-Version: 1.0.0
+Version: 1.0.1
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-008, AD-014, P-001
@@ -10,7 +10,7 @@ Used-By: Assignment Concept, Operation Lifecycle, Coordination Model, Business R
 Defines-Concepts: Operation
 Concept-Depends-On: [Objective]
 Concept-Status: Canonical
-Last-Review: 2026-08-08
+Last-Review: 2026-08-13
 ---
 
 # Operation Concept
@@ -65,7 +65,7 @@ Operation не визначає сама по собі:
 | Assignment | Accepted | авторитетний контекст участі Resource; OCP-005 |
 | Objective | Canonical | intended outcome, condition або effect; OCP-008 |
 | Constraint | Accepted | обмеження Operation та Assignment; OCP-006 |
-| Event | Accepted | значущий occurrence або change; OCP-010 |
+| Event | Canonical | значущий occurrence або change; OCP-010 |
 | Order | Proposed | можливе джерело авторизації; не визначене цим документом |
 | Coordination | Proposed | модель взаємодії між Operation |
 | Capability | Canonical | reusable definition layer; OCP-009 |
@@ -107,7 +107,7 @@ Operation
 ├── Lifecycle Reference
 │   └── OCP-017 transition history [Route C non-Concept contract]
 └── Outcome
-    ├── Event [Accepted]
+    ├── Event [Canonical]
     └── OutcomeAssessmentRecord [Accepted record contract; not a Concept]
 ```
 
@@ -867,3 +867,7 @@ Corrective rollback requires a new reviewed act that restores the complete twelv
 The act stops before merge if either independent readiness proof fails, the footprint differs from exactly twelve files, a current projection is missing, any byte outside the bounded wrappers/projections changes, a Pattern/rule/checker/test/fixture edit appears, a consumer rebinds, a new edge/dependency is required, the snapshot differs from the reviewed Draft or any `AD-016 §244` reopening route gains concrete evidence. Failure of either side returns the whole proposal to W0; the passing side receives no promotion by default.
 
 When exact-head reviewed, separately authorized and squash-merged, this act completes the T5 Operation lifecycle transition only. It does not authorize T6–T10, change Assignment/Constraint/Event status, resolve AB-015/016/017/018/019/020/023/028, define an authorization source, create a Concept/edge/Pattern/schema or grant production authority. Preparation and external review do not authorize merge: the unchanged head still requires Fable approval, Codex adjudication, green CI and a fresh explicit Pavlo/Architecture Board authorization.
+
+## 32. Current Event Concept-status projection — v1.0.1
+
+Revision `1.0.1` is a PATCH that synchronizes only the volatile current Event status renderings in §4 and the decomposition view with the separately authorized Event Concept canonicalization act. Operation identity, Q3I semantics, all record contracts, consumers, dependencies and graph edges are unchanged. Historical sections and exact-baseline tables that record Event as `Accepted` remain byte-stable statements about their own reviewed baselines.

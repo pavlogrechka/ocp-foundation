@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.3.1
+Version: 0.3.2
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
@@ -9,7 +9,7 @@ Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Read
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-10
+Last-Review: 2026-08-13
 ---
 
 # Constraint Concept
@@ -79,7 +79,7 @@ Constraint може бути джерелом derivation для цих моде�
 | Operation | Canonical | можливий context або subject |
 | Assignment | Accepted | основний subject для перевірки сумісності та залучення |
 | Capability | Canonical | можливий вхід перевірки відповідності; не визначається тут |
-| Event | Accepted | можливе evidence або trigger повторного оцінювання |
+| Event | Canonical | можливе evidence або trigger повторного оцінювання |
 | Risk | Proposed | не виводиться автоматично з порушення |
 | Conflict | не зареєстрований окремо | порушення Constraint не канонізує Conflict |
 | Readiness | не зареєстрований окремо | AD-011 R0; Constraint decision не є Readiness |
@@ -768,3 +768,9 @@ Revision `0.3.1` synchronizes §22 questions 5 and 9 with the already Resolved A
 Questions 1, 2 and 6–8, 10–12 remain open. The Conflict question remains open because AD-022/OCP-019 selected only the negative establishment boundary and explicitly left AB-018's positive model unresolved; the general freshness question remains open because AD-012/OCP-011 activates one exact assessment kind rather than every dynamic Constraint input.
 
 This PATCH changes no Constraint identity, field, lifecycle, applicability, evaluation, interaction rule, Concept status, dependency, graph edge, P-001 invocation, rule manifest, checker behavior or fixture.
+
+## 29. PATCH accounting — v0.3.2
+
+Revision `0.3.2` synchronizes only the volatile current Event status rendering in §4 with the separately authorized Event Concept canonicalization act: the row now shows Event as `Canonical`. Historical §25 accounting about the earlier `Accepted` projection remains unchanged.
+
+Constraint remains `Draft` and its Concept remains `Accepted`. The Event status cell creates no evidence sufficiency, trigger behavior, violation, Conflict, Risk, Readiness, precedence, override, waiver or Event inference. Constraint identity/lifecycle/evaluation, dependencies, graph edges, P-001 invocation, rules, checker behavior and fixtures remain unchanged.

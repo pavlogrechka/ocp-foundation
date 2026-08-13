@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.7
+Version: 0.2.8
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -9,7 +9,7 @@ Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coor
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-10
+Last-Review: 2026-08-13
 ---
 
 # Assignment Concept
@@ -65,7 +65,7 @@ Assignment може бути підставою для перевірки цих
 | Organization | Canonical | не створює Assignment автоматично |
 | Capability | Canonical | може перевіряти відповідність ролі |
 | Constraint | Accepted | може обмежувати одночасні чи часові Assignment |
-| Event | Accepted | можливе джерело історії Assignment |
+| Event | Canonical | можливе джерело історії Assignment |
 | Readiness | не зареєстрований окремо | AD-011 R0; не виводиться з Assignment |
 | State | не зареєстрований окремо | AD-011 S0; lifecycle Assignment не є shared State |
 
@@ -523,3 +523,9 @@ Revision `0.2.7` synchronizes two §19 questions with the already Resolved AB-02
 The remaining nine questions stay open. In particular, simultaneous-Assignment Conflict remains open because AD-022/OCP-019 establishes only a negative lower boundary and AB-018 still owns any positive model; replacement remains open because OCP-013 expressly owns eligibility rather than replacement authority.
 
 This PATCH changes no Assignment identity, structure, lifecycle, derivation, Concept status, dependency, graph edge, P-001 invocation, rule manifest, checker behavior or fixture.
+
+## 26. PATCH accounting — v0.2.8
+
+Revision `0.2.8` synchronizes only the volatile current Event status rendering in §4 with the separately authorized Event Concept canonicalization act: the row now shows Event as `Canonical`. Historical §22 accounting about the earlier `Accepted` projection remains unchanged.
+
+Assignment remains `Draft` and its Concept remains `Accepted`. The Event status cell creates no Assignment, history, participation, causation, authority, availability, Readiness, outcome or Event inference. Assignment identity/lifecycle, Resource/Operation binding, dependencies, graph edges, P-001 invocation, rules, checker behavior and fixtures remain unchanged.
