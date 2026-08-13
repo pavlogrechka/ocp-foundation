@@ -60,9 +60,11 @@ EXECUTABLE_LOCATIONS = frozenset({
     "architecture/foundation-promotion-gate.yaml",
     "architecture/foundation-promotion-reassessment.yaml",
     "architecture/event-stable-surface.yaml",
+    "architecture/event-promotion-selection.yaml",
     "tools/ontology_checker/ocp_checker/foundation_promotion_gate.py",
     "tools/ontology_checker/ocp_checker/foundation_promotion_reassessment.py",
     "tools/ontology_checker/ocp_checker/event_stable_surface.py",
+    "tools/ontology_checker/ocp_checker/event_promotion_selection.py",
 })
 DESCRIPTIVE_LOCATIONS = frozenset({
     "architecture/discovery/AD-016-foundation-canonicalization-readiness.md",

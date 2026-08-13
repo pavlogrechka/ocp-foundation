@@ -5530,6 +5530,7 @@ The repair embeds each completed step's gate snapshot in its own machine record 
 The declared criterion finds exactly these current locations:
 
 - executable current state: `architecture/foundation-promotion-gate.yaml` plus `foundation_promotion_gate.py`;
+- executable current selection state: `architecture/event-promotion-selection.yaml` plus `event_promotion_selection.py`, which bind the four named live gate fields;
 - executable completed-step witnesses: `foundation-promotion-reassessment.yaml` / its validator and `event-stable-surface.yaml` / its validator;
 - corresponding mutation tests, which are verification rather than a fourth authority;
 - descriptive history/accounting in AD-016, AD-031, README, roadmap, AB-062 and checker README; and
@@ -5541,7 +5542,9 @@ No third historical executable witness exists. AD-031 prose remains historical a
 
 AD-016 moves `0.29.0 → 0.30.0 / Accepted` by MINOR: it adds a compatible Board-selection state, compatibility/migration/rollback obligations and reusable baseline-bound witness semantics without changing an OCP contract. The promotion map moves schema `2 → 3` because its state language adds selected-but-unpromoted plus the final separately authorized promotion transition. The new Event selection witness begins at schema 1. Historical reassessment and discovery maps remain schema 1 because only their evidence-binding interpretation is repaired; no discovery/comparison conclusion changes. README, roadmap, AB-062 and checker guide have no artifact SemVer.
 
-Every declared set, key, consumer, blocker, treatment, promotion effect, precondition, dependency class, location and evidence token is individually mutation-live under the exact test name `test_every_defensive_value_is_individually_fixture_and_mutation_live`. The gate proves selected-but-Draft is valid, Draft→Canonical fails before the final act, completing the final act while still Draft also fails, and a hypothetical separately completed Event lifecycle act plus Canonical transition is reachable; it therefore neither self-promotes nor permanently walls the path.
+Every declared set, key, consumer, blocker, treatment, promotion effect, precondition, dependency class, location and evidence token is individually mutation-live under the exact test name `test_every_defensive_value_is_individually_fixture_and_mutation_live`. The foundation gate proves selected-but-Draft is valid, Draft→Canonical fails before the final act, completing the final act while still Draft also fails, and the gate itself accepts a hypothetical separately completed Event lifecycle act plus Canonical transition; it therefore neither self-promotes nor permanently walls the **gate-state axis**.
+
+That reachability proof does not cover the subject-state axis of historical AD-031 or current AD-016AC witnesses: both intentionally bind current `OCP-010 0.2.1 / Draft` and will reject the later Canonical document until step 4 treats those bindings synchronously. This is registered as step-4 debt rather than hidden behind the gate-only proof. The promotion act must preserve AD-031's historical subject state without making it a live claim, while updating or superseding the current selection witness as part of the same reviewed promotion unit.
 
 OCP-005 remains `0.2.7 / Draft`, OCP-006 `0.3.1 / Draft`, OCP-010 `0.2.1 / Draft`; all three Concepts remain `Accepted`. OCP-000/OCP-002, Concept graph/map, P-001, snapshots, AB statuses, Review-After values, all OCP bodies and all 274 fixtures remain byte-identical. OCP-019/OCP-021/OCP-022 remain Draft; AB-018 and AB-005 remain Open. No T6/T7, Event remediation, positive conflict/capacity/reservation/precedence/Order model, production profile or next-act authority is created.
 
