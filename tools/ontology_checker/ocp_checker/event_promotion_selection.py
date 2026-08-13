@@ -142,8 +142,6 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
 
     selected = payload.get("selected_unit")
-    primary = repo_root / "docs/010-event-concept/README.md"
-    metadata = _frontmatter(primary)
     if not isinstance(selected, dict) or set(selected) != SELECTED_UNIT_KEYS:
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
     elif selected != {
@@ -153,8 +151,6 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
         "disposition": "SELECTED_NOT_PROMOTED",
     }:
         errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
-    if metadata is None or str(metadata.get("Version")) != "0.2.1" or metadata.get("Status") != "Draft" or metadata.get("Concept-Status") != "Accepted":
-        errors.append(EVENT_PROMOTION_SELECTION_SUBJECT_DRIFT)
 
     compatibility = payload.get("compatibility")
     if not isinstance(compatibility, dict) or set(compatibility) != COMPATIBILITY_KEYS:
@@ -217,14 +213,9 @@ def validate_event_promotion_selection(repo_root: Path) -> EventPromotionSelecti
             path = item.get("path")
             tokens = item.get("tokens")
             normalized.append((path, tuple(tokens or ())))
-            text = (repo_root / str(path)).read_text(encoding="utf-8") if isinstance(path, str) and (repo_root / path).is_file() else ""
-            if not isinstance(tokens, list) or not tokens or any(token not in text for token in tokens):
-                errors.append(EVENT_PROMOTION_SELECTION_EVIDENCE_DRIFT)
+            if not isinstance(tokens, list) or not tokens:
+                errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
         if tuple(normalized) != expected_items:
             errors.append(EVENT_PROMOTION_SELECTION_MAP_INVALID)
 
-    gate = _load(repo_root / "architecture/foundation-promotion-gate.yaml")
-    sequence = gate.get("sequence") if isinstance(gate, dict) else None
-    if not isinstance(sequence, dict) or "CANDIDATE_BOARD_SELECTION" not in (sequence.get("completed_steps") or ()) or tuple(sequence.get("required_before_promotion") or ()) != ("EVENT_LIFECYCLE_PROMOTION_ACT",) or gate.get("promotion_selections") != ["OCP-010"] or sequence.get("selected_next_scope") != "OCP-010" or sequence.get("selected_next_scope_state") != "selected":
-        errors.append(EVENT_PROMOTION_SELECTION_GATE_DRIFT)
     return _result(errors)

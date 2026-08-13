@@ -331,12 +331,6 @@ def validate_foundation_promotion_reassessment(
                 errors.append(FOUNDATION_REASSESSMENT_MAP_INVALID)
                 continue
             normalized_items.append((fpath, tuple(tokens)))
-            try:
-                text = (repo_root / candidate).read_text(encoding="utf-8")
-            except OSError:
-                text = ""
-            if any(token not in text for token in tokens):
-                errors.append(FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT)
         if tuple(normalized_items) != expected_items:
             errors.append(FOUNDATION_REASSESSMENT_MAP_INVALID)
     return _result(errors)

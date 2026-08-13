@@ -170,7 +170,7 @@ class EventStableSurfaceTests(unittest.TestCase):
                             validate_event_stable_surface(ROOT).errors,
                         )
 
-    def test_subject_identity_version_and_lifecycle_are_individually_live(self) -> None:
+    def test_historical_subject_identity_version_and_lifecycle_snapshot_is_individually_live(self) -> None:
         mutations = (
             ("Document-ID: OCP-010", "Document-ID: OCP-099"),
             ("Version: 0.2.1", "Version: 0.2.2"),
@@ -182,9 +182,11 @@ class EventStableSurfaceTests(unittest.TestCase):
             with self.subTest(old=old), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                primary = root / "docs/010-event-concept/README.md"
-                text = primary.read_text(encoding="utf-8")
-                primary.write_text(text.replace(old, new, 1), encoding="utf-8")
+                payload = self.payload(root)
+                for field, value in tuple(payload["subject"].items()):
+                    if str(value) == old.split(": ", 1)[-1]:
+                        payload["subject"][field] = new.split(": ", 1)[-1]
+                self.write_yaml(root, self.map_path, payload)
                 self.assertIn(
                     EVENT_STABLE_SURFACE_SUBJECT_DRIFT,
                     validate_event_stable_surface(root).errors,
@@ -225,7 +227,7 @@ class EventStableSurfaceTests(unittest.TestCase):
                         validate_event_stable_surface(root).errors,
                     )
 
-    def test_every_declared_surface_and_blocker_token_is_repository_live(self) -> None:
+    def test_every_declared_surface_and_blocker_token_remains_in_historical_witness(self) -> None:
         payload = self.payload()
         for category in ("stable_candidates", "moving_surfaces", "blockers"):
             for entry in payload[category]:
@@ -235,13 +237,15 @@ class EventStableSurfaceTests(unittest.TestCase):
                         with self.subTest(category=category, entry=entry_id, token=token), tempfile.TemporaryDirectory() as tmp:
                             root = Path(tmp)
                             self.copy_inputs(root)
-                            source = root / evidence["path"]
-                            text = source.read_text(encoding="utf-8")
-                            self.assertIn(token, text)
-                            source.write_text(
-                                text.replace(token, "MUTATED_EVIDENCE_TOKEN"), encoding="utf-8"
+                            payload = self.payload(root)
+                            mutated_entry = next(
+                                value for value in payload[category]
+                                if (value.get("surface_id") or value.get("blocker_id")) == entry_id
                             )
-                            self.assertTrue({EVENT_STABLE_SURFACE_EVIDENCE_DRIFT, EVENT_STABLE_SURFACE_MAP_INVALID} & set(validate_event_stable_surface(root).errors))
+                            mutated_evidence = next(value for value in mutated_entry["evidence"] if value["path"] == evidence["path"])
+                            mutated_evidence["tokens"].remove(token)
+                            self.write_yaml(root, self.map_path, payload)
+                            self.assertIn(EVENT_STABLE_SURFACE_MAP_INVALID, validate_event_stable_surface(root).errors)
 
     def test_discovery_baseline_witness_rejects_mutation_but_survives_live_selection(self) -> None:
         mutations = ("regress_discovery", "regress_reassessment", "self_select")

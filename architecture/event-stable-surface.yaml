@@ -12,6 +12,9 @@ subject:
   expected_status: Draft
   expected_concept_status: Accepted
   expected_pattern_binding: P-001@0.1.0
+  state_axis: immutable-baseline
+  baseline_blob: 3a49b75bfa479e24debb89a130b7a05d6c790a88
+  baseline_sha256: 5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706
 discovery_result: stable_candidate_not_selected
 direct_dependencies:
   - artifact_id: OCP-000

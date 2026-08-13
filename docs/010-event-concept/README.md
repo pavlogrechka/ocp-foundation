@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-010
 Title: Event Concept
-Version: 0.2.1
-Status: Draft
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-008, AD-006, P-001
 Uses-Patterns: P-001@0.1.0
@@ -10,7 +10,7 @@ Used-By: Operation Evidence, Objective Achievement Assessment, Coordination Mode
 Defines-Concepts: Event
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-10
+Last-Review: 2026-08-13
 ---
 
 # OCP-010 — Event Concept
@@ -260,6 +260,8 @@ Event identity не залежить від Operation.
 
 OCP-010 не вводить current Concept edge `Event → Operation` або `Operation → Event`.
 
+Core exclusion is stable: OCP-010 defines no current Concept edge `Event → Operation` or `Operation → Event`, no positive Core relation record, and no implicit owner for either direction. Direct domain references remain outside this Concept contract. A future positive relation requires a separately mandated owner act; it cannot be inferred from this Canonical document, its lifecycle promotion or a consumer reference.
+
 Operation lifecycle transition не стає Event автоматично. Domain може створити Event для independently identified occurrence, пов'язаної з transition, але transition record та Event зберігають різні identities і authority.
 
 `Completed`, `Cancelled` або `Aborted` не є Objective achievement assessment.
@@ -310,14 +312,14 @@ OCP-010 вводить перший integrated non-sensitive checker fixture, я
 - one applicable Constraint;
 - one Event occurrence;
 - two attributable conflicting ObservationRecord;
-- one checker-local assessment envelope з conclusion `indeterminate`.
+- one governed `OutcomeAssessmentRecord` owned by OCP-011 with conclusion `indeterminate`.
 
 Scenario використовує нейтральний приклад перевірки стану generic infrastructure asset і не містить coordinates, real unit names, personal data або operationally sensitive details.
 
-Checker-local assessment envelope існує лише для доказу AD-006 fail-safe boundary:
+The scenario exact-binds OCP-011 evidence kinds `event@1` and `observation-record@1` through the governed assessment fixture:
 
 ```text
-ScenarioAssessmentEnvelope
+OutcomeAssessmentRecord
 - assessment_id
 - target_objective_ref
 - rule_ref
@@ -329,7 +331,7 @@ ScenarioAssessmentEnvelope
 - provenance_ref
 ```
 
-Ця envelope не є normative OutcomeAssessmentRecord contract, не invok-ить P-001 і не завершує AB-056.
+Цей документ не перевизначає OutcomeAssessmentRecord: identity, target, criterion, evidence, snapshots, evaluator, time, conclusion, provenance та authority лишаються під normative ownership OCP-011. OCP-010 лише показує його fail-safe використання з Event/Observation evidence.
 
 Scenario validator повинен довести:
 
@@ -471,7 +473,7 @@ OCP-010 свідомо не визначає:
 - causal inference;
 - event interval або uncertainty representation;
 - automatic Event creation from lifecycle or Constraint records;
-- Operation-to-Event relationship record;
+- positive Core Operation-to-Event relationship record; the stable exclusion in §10 reserves any future owner decision to a separate act;
 - Objective achievement semantics;
 - normative OutcomeAssessmentRecord contract;
 - Result registry resolution;
@@ -483,7 +485,7 @@ OCP-010 свідомо не визначає:
 ## 22. Open questions and resolved boundaries
 
 - Чи потребує Event окремого temporal interval module після появи canonical time model?
-- Який normative owner визначить Operation-to-Event relationship record, якщо direct references стануть недостатніми?
+- ~~Який normative owner визначить Operation-to-Event relationship record, якщо direct references стануть недостатніми?~~ AD-016AD закриває лише promotion blocker: §10 фіксує стабільне Core-виключення; будь-яка позитивна relation й її owner лишаються предметом окремого мандата.
 - Які domain correlation rules можуть пропонувати candidate Event linkage без зміни Core identity?
 - Чи потрібна governed Event-kind registry або достатньо exact domain references?
 - ~~Як AB-056 визначить allowed assessment targets, conclusions, supersession та authority?~~ OCP-011 §§2–8 приймає exact target/criterion/evidence/input/evaluator/time/provenance bindings, bounded conclusions і history-preserving supersession without generic assessment authority.
@@ -502,7 +504,7 @@ Attempt to falsify OCP-010 with cases where:
 8. Event implies Objective achievement, Capability, Readiness або Conflict;
 9. P-001 invocation omits endpoint, provenance, authority або supersession obligations;
 10. integrated scenario cannot reuse current Concept validators and derivations;
-11. checker-local assessment envelope silently becomes the normative AB-056 contract;
+11. OCP-010 silently takes OutcomeAssessmentRecord ownership from OCP-011;
 12. current Concept graph gains an unjustified cycle.
 
 ## 24. Architecture Board decision — PR-0012
@@ -520,7 +522,7 @@ Architecture Board прийняла OCP-010 і Concept `Event` **4 серпня 
 - не вводити Operation-to-Event relation, truth/consensus model, normative OutcomeAssessmentRecord, fundamental Result, Conflict, Risk, State, Readiness, Capability claim, authorization або production schema;
 - залишити AB-056 окремим наступним normative cycle для OutcomeAssessmentRecord та атомарної резолюції registry entry `Result`.
 
-`Accepted` не означає `Canonical`. Подальші зміни Event identity, ObservationRecord authority, supersession contract або occurrence/observation boundary потребують нового явного normative cycle.
+This historical Board decision accepted the Concept and did not itself make the document Canonical. Later document promotion remains a separate reviewed cycle; changes to Event identity, ObservationRecord authority, supersession contract or occurrence/observation boundary still require a new explicit normative cycle.
 
 ## 25. PATCH accounting — v0.2.1
 
@@ -529,3 +531,11 @@ Revision `0.2.1` synchronizes the fifth §22 prompt with Resolved AB-056 and the
 The first four questions remain open because AB-055 accepted Event/ObservationRecord identity and evidence only; it did not select a canonical time model, Operation-to-Event relation owner, domain correlation rule or Event-kind registry.
 
 This PATCH changes no Event or ObservationRecord identity, structure, lifecycle, derivation, Concept status, dependency, graph edge, P-001 invocation, checker behavior, rule manifest or fixture.
+
+## 26. Canonical promotion — v1.0.0
+
+AD-016AD derives Route F lifecycle/remediation for this existing Concept document before choosing form. The result is not an OCP-016 G4 positive-capable rule, result or profile, so G4 and an exact Accepted-consumer admission are not required. OCP-011 and OCP-017 nevertheless remain real Accepted consumers and supply compatibility evidence; neither is used as self-approval.
+
+Three separately executable preconditions make whole-document promotion reachable. Section 10 stabilizes the negative Core relation boundary without creating a Concept edge or positive owner. Section 14 removes the obsolete local assessment-envelope description and binds the already-governed OCP-011 behavior with exact `event@1` and `observation-record@1` evidence. The compatibility proof preserves OCP-011 references and OCP-017 occurrence, provenance and non-causation semantics without changing either consumer, stored data, references, schemas or fixtures.
+
+`0.2.1 → 1.0.0` is MAJOR because the first Canonical release freezes the Event/Observation identity kernel, makes the Operation↔Event exclusion a stable compatibility boundary and replaces a stale local envelope description with the Accepted OCP-011 authority. Event `Concept-Status` remains `Accepted`: document lifecycle and Concept lifecycle are distinct, and this act neither changes OCP-000/OCP-002 nor claims the separately gated Concept promotion. Rollback is atomic across this body, its executable promotion proof, the gate, historical witnesses and accounting; partial rollback would make the Canonical status unverifiable.

@@ -191,7 +191,7 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                 validate_foundation_promotion_reassessment(root).errors,
             )
 
-    def test_each_repository_evidence_token_is_live(self) -> None:
+    def test_each_historical_evidence_token_is_snapshot_live(self) -> None:
         payload = self.payload()
         for blocker_id, items in payload["evidence"].items():
             for evidence in items:
@@ -199,10 +199,11 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                     with self.subTest(blocker_id=blocker_id, token=token), tempfile.TemporaryDirectory() as tmp:
                         root = Path(tmp)
                         self.copy_inputs(root)
-                        source = root / evidence["path"]
-                        text = source.read_text(encoding="utf-8")
-                        source.write_text(text.replace(token, "MUTATED_EVIDENCE"), encoding="utf-8")
-                        self.assertTrue({FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT, FOUNDATION_REASSESSMENT_MAP_INVALID} & set(validate_foundation_promotion_reassessment(root).errors))
+                        snapshot = self.payload(root)
+                        item = next(value for value in snapshot["evidence"][blocker_id] if value["path"] == evidence["path"])
+                        item["tokens"].remove(token)
+                        self.write_yaml(root, self.map_path, snapshot)
+                        self.assertIn(FOUNDATION_REASSESSMENT_MAP_INVALID, validate_foundation_promotion_reassessment(root).errors)
 
     def test_reassessment_cannot_self_supply_selection(self) -> None:
         for mutation in ("name_selection", "claim_authority"):

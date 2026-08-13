@@ -71,10 +71,8 @@ class FoundationPromotionGateTests(unittest.TestCase):
     def test_repository_foundation_promotion_gate_is_valid(self) -> None:
         self.assertTrue(validate_foundation_promotion_gate(ROOT).valid)
         payload = self.payload()
-        self.assertEqual(set(payload["sequence"]["completed_steps"]), EXPECTED_COMPLETED_STEPS)
-        self.assertEqual(
-            set(payload["sequence"]["required_before_promotion"]), EXPECTED_NEXT_GATES
-        )
+        self.assertEqual(set(payload["sequence"]["completed_steps"]), EXPECTED_FINAL_STEPS)
+        self.assertEqual(payload["sequence"]["required_before_promotion"], [])
         self.assertEqual(payload["promotion_selections"], ["OCP-010"])
         self.assertEqual(
             {entry["document_id"] for entry in payload["candidates"]}, EXPECTED_CANDIDATES
@@ -128,6 +126,8 @@ class FoundationPromotionGateTests(unittest.TestCase):
 
     def test_each_candidate_requires_prior_selection_before_canonical(self) -> None:
         for document_id in sorted(EXPECTED_CANDIDATES):
+            if document_id == "OCP-010":
+                continue
             with self.subTest(document_id=document_id), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
@@ -147,35 +147,19 @@ class FoundationPromotionGateTests(unittest.TestCase):
                     validate_foundation_promotion_gate(root).errors,
                 )
 
-    def test_hypothetical_fully_gated_event_promotion_is_reachable(self) -> None:
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            self.copy_inputs(root)
-            payload = self.payload(root)
-            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
-            payload["sequence"]["required_before_promotion"] = []
-            payload["promotion_selections"] = ["OCP-010"]
-            entry = next(
-                item for item in payload["candidates"] if item["document_id"] == "OCP-010"
-            )
-            entry["expected_document_status"] = "Canonical"
-            primary = root / entry["primary"]
-            text = primary.read_text(encoding="utf-8")
-            primary.write_text(
-                text.replace("Version: 0.2.1", "Version: 1.0.0", 1)
-                .replace("Status: Draft", "Status: Canonical", 1),
-                encoding="utf-8",
-            )
-            self.write_payload(root, payload)
-            self.assertTrue(validate_foundation_promotion_gate(root).valid)
+    def test_fully_gated_event_promotion_is_reachable(self) -> None:
+        self.assertTrue(validate_foundation_promotion_gate(ROOT).valid)
 
     def test_completed_lifecycle_act_requires_selected_document_to_be_canonical(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
             payload = self.payload(root)
-            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
-            payload["sequence"]["required_before_promotion"] = []
+            entry = next(item for item in payload["candidates"] if item["document_id"] == "OCP-010")
+            entry["expected_document_status"] = "Draft"
+            primary = root / entry["primary"]
+            primary.write_text(primary.read_text(encoding="utf-8").replace("Status: Canonical", "Status: Draft", 1), encoding="utf-8")
+            self.write_payload(root, payload)
             self.write_payload(root, payload)
             self.assertIn(
                 FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
@@ -249,8 +233,9 @@ class FoundationPromotionGateTests(unittest.TestCase):
 
     def test_candidate_document_and_concept_statuses_are_individually_live(self) -> None:
         for document_id in sorted(EXPECTED_CANDIDATES):
+            status_old = "Status: Canonical" if document_id == "OCP-010" else "Status: Draft"
             for field, old, new in (
-                ("document", "Status: Draft", "Status: Accepted"),
+                ("document", status_old, "Status: Accepted"),
                 ("concept", "Concept-Status: Accepted", "Concept-Status: Proposed"),
             ):
                 with self.subTest(document_id=document_id, field=field), tempfile.TemporaryDirectory() as tmp:

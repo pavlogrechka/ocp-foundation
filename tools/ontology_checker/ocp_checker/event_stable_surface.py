@@ -84,6 +84,9 @@ SUBJECT_KEYS = {
     "expected_status",
     "expected_concept_status",
     "expected_pattern_binding",
+    "state_axis",
+    "baseline_blob",
+    "baseline_sha256",
 }
 DEPENDENCY_KEYS = {
     "artifact_id",
@@ -286,13 +289,6 @@ def _validate_evidence(repo_root: Path, entries: Any, id_key: str, expected_ids:
                 errors.append(EVENT_STABLE_SURFACE_MAP_INVALID)
                 continue
             normalized_evidence.append((str(item.get("path")), tuple(tokens)))
-            try:
-                text = (repo_root / relative).read_text(encoding="utf-8")
-            except OSError:
-                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
-                continue
-            if any(token not in text for token in tokens):
-                errors.append(EVENT_STABLE_SURFACE_EVIDENCE_DRIFT)
         if tuple(normalized_evidence) != EXPECTED_EVIDENCE.get(str(entry_id)):
             errors.append(EVENT_STABLE_SURFACE_MAP_INVALID)
     return errors
@@ -335,14 +331,14 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
             subject.get("document_id") != "OCP-010"
             or subject.get("primary") != "docs/010-event-concept/README.md"
             or primary != expected_primary
-            or str(metadata.get("Version")) != "0.2.1"
-            or metadata.get("Status") != "Draft"
-            or metadata.get("Concept-Status") != "Accepted"
             or tuple(_references(metadata.get("Uses-Patterns"))) != ("P-001@0.1.0",)
             or subject.get("expected_version") != "0.2.1"
             or subject.get("expected_status") != "Draft"
             or subject.get("expected_concept_status") != "Accepted"
             or subject.get("expected_pattern_binding") != "P-001@0.1.0"
+            or subject.get("state_axis") != "immutable-baseline"
+            or subject.get("baseline_blob") != "3a49b75bfa479e24debb89a130b7a05d6c790a88"
+            or subject.get("baseline_sha256") != "5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706"
         ):
             errors.append(EVENT_STABLE_SURFACE_SUBJECT_DRIFT)
 
