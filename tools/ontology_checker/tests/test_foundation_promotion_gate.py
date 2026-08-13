@@ -26,15 +26,17 @@ from ocp_checker.foundation_promotion_gate import (  # noqa: E402
 EXPECTED_COMPLETED_STEPS = {
     "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
     "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+    "CANDIDATE_BOARD_SELECTION",
 }
 EXPECTED_COMPLETED_STEP_ORDER = (
     "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
     "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
+    "CANDIDATE_BOARD_SELECTION",
 )
-EXPECTED_NEXT_GATES = {"CANDIDATE_BOARD_SELECTION"}
-EXPECTED_NEXT_GATE_ORDER = ("CANDIDATE_BOARD_SELECTION",)
-EXPECTED_FINAL_STEPS = {*EXPECTED_COMPLETED_STEPS, "CANDIDATE_BOARD_SELECTION"}
-EXPECTED_FINAL_STEP_ORDER = (*EXPECTED_COMPLETED_STEP_ORDER, "CANDIDATE_BOARD_SELECTION")
+EXPECTED_NEXT_GATES = {"EVENT_LIFECYCLE_PROMOTION_ACT"}
+EXPECTED_NEXT_GATE_ORDER = ("EVENT_LIFECYCLE_PROMOTION_ACT",)
+EXPECTED_FINAL_STEPS = {*EXPECTED_COMPLETED_STEPS, "EVENT_LIFECYCLE_PROMOTION_ACT"}
+EXPECTED_FINAL_STEP_ORDER = (*EXPECTED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
 EXPECTED_CANDIDATES = {"OCP-005", "OCP-006", "OCP-010"}
 EXPECTED_L2_RESULTS = {"pass", "fail"}
 EXPECTED_STATUS_PAIRS = {("Draft", "Accepted"), ("Canonical", "Accepted")}
@@ -73,6 +75,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
         self.assertEqual(
             set(payload["sequence"]["required_before_promotion"]), EXPECTED_NEXT_GATES
         )
+        self.assertEqual(payload["promotion_selections"], ["OCP-010"])
         self.assertEqual(
             {entry["document_id"] for entry in payload["candidates"]}, EXPECTED_CANDIDATES
         )
@@ -149,7 +152,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
             root = Path(tmp)
             self.copy_inputs(root)
             payload = self.payload(root)
-            payload["sequence"]["completed_steps"].append("CANDIDATE_BOARD_SELECTION")
+            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
             payload["sequence"]["required_before_promotion"] = []
             payload["promotion_selections"] = ["OCP-010"]
             entry = next(
@@ -166,12 +169,25 @@ class FoundationPromotionGateTests(unittest.TestCase):
             self.write_payload(root, payload)
             self.assertTrue(validate_foundation_promotion_gate(root).valid)
 
+    def test_completed_lifecycle_act_requires_selected_document_to_be_canonical(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            payload = self.payload(root)
+            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
+            payload["sequence"]["required_before_promotion"] = []
+            self.write_payload(root, payload)
+            self.assertIn(
+                FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
+                validate_foundation_promotion_gate(root).errors,
+            )
+
     def test_fully_gated_candidate_still_requires_live_l2_pass(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
             payload = self.payload(root)
-            payload["sequence"]["completed_steps"].append("CANDIDATE_BOARD_SELECTION")
+            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
             payload["sequence"]["required_before_promotion"] = []
             payload["promotion_selections"] = ["OCP-006"]
             entry = next(
@@ -261,7 +277,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
                 if mutation == "regress_scope":
                     payload["sequence"]["selected_next_scope_state"] = "absent"
                 else:
-                    payload["promotion_selections"] = ["OCP-010"]
+                    payload["promotion_selections"] = []
                 self.write_payload(root, payload)
                 self.assertIn(
                     FOUNDATION_PROMOTION_GATE_MAP_INVALID,

@@ -1,6 +1,10 @@
 schema_version: 1
 rule_owner: AD-016AB
 baseline: 53d254405e6f75c7198e3e989d14a5a5678628ce
+baseline_gate_state:
+  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D, POST_DISCOVERY_REASSESSMENT]
+  required_before_promotion: [CANDIDATE_BOARD_SELECTION]
+  promotion_selections: []
 gate_applicability:
   form: governance-reassessment
   g4_required: false
@@ -101,5 +105,5 @@ evidence:
     - path: docs/006-constraint-concept/README.md
       tokens: ["## 22. Open Questions and Resolved Boundaries", "Яка канонічна expression або rule language", "Який строк актуальності"]
   BOARD_SELECTION_ABSENT:
-    - path: architecture/foundation-promotion-gate.yaml
-      tokens: ["CANDIDATE_BOARD_SELECTION", "promotion_selections: []"]
+    - path: architecture/foundation-promotion-reassessment.yaml
+      tokens: ["baseline_gate_state:", "required_before_promotion: [CANDIDATE_BOARD_SELECTION]", "promotion_selections: []"]

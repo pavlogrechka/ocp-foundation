@@ -46,12 +46,12 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
 
     def test_repository_reassessment_is_valid_and_machine_distinct(self) -> None:
         self.assertTrue(validate_foundation_promotion_reassessment(ROOT).valid)
-        gate = yaml.safe_load((ROOT / self.gate_path).read_text(encoding="utf-8"))
-        self.assertIn("POST_DISCOVERY_REASSESSMENT", gate["sequence"]["completed_steps"])
+        evidence = self.payload()["baseline_gate_state"]
+        self.assertIn("POST_DISCOVERY_REASSESSMENT", evidence["completed_steps"])
         self.assertEqual(
-            gate["sequence"]["required_before_promotion"], ["CANDIDATE_BOARD_SELECTION"]
+            evidence["required_before_promotion"], ["CANDIDATE_BOARD_SELECTION"]
         )
-        self.assertEqual(gate["promotion_selections"], [])
+        self.assertEqual(evidence["promotion_selections"], [])
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         categories = (
@@ -181,11 +181,11 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
-            entry = next(item for item in gate["candidates"] if item["document_id"] == "OCP-010")
-            entry["expected_l2"] = "fail"
-            entry["l2_blockers"] = ["OCP-008"]
-            self.write_yaml(root, self.gate_path, gate)
+            reassessment = self.payload(root)
+            entry = next(item for item in reassessment["live_l2"] if item["document_id"] == "OCP-010")
+            entry["result"] = "fail"
+            entry["blockers"] = ["OCP-008"]
+            self.write_yaml(root, self.map_path, reassessment)
             self.assertIn(
                 FOUNDATION_REASSESSMENT_L2_MISMATCH,
                 validate_foundation_promotion_reassessment(root).errors,
@@ -202,30 +202,20 @@ class FoundationPromotionReassessmentTests(unittest.TestCase):
                         source = root / evidence["path"]
                         text = source.read_text(encoding="utf-8")
                         source.write_text(text.replace(token, "MUTATED_EVIDENCE"), encoding="utf-8")
-                        self.assertIn(
-                            FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT,
-                            validate_foundation_promotion_reassessment(root).errors,
-                        )
+                        self.assertTrue({FOUNDATION_REASSESSMENT_EVIDENCE_DRIFT, FOUNDATION_REASSESSMENT_MAP_INVALID} & set(validate_foundation_promotion_reassessment(root).errors))
 
     def test_reassessment_cannot_self_supply_selection(self) -> None:
-        for mutation in ("complete_selection", "name_selection", "claim_authority"):
+        for mutation in ("name_selection", "claim_authority"):
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                if mutation == "complete_selection":
-                    gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
-                    gate["sequence"]["completed_steps"].append("CANDIDATE_BOARD_SELECTION")
-                    gate["sequence"]["required_before_promotion"] = []
-                    self.write_yaml(root, self.gate_path, gate)
-                    expected_error = FOUNDATION_REASSESSMENT_GATE_STATE_INVALID
+                payload = self.payload(root)
+                if mutation == "name_selection":
+                    payload["recommendation"]["selected_candidates"] = ["OCP-010"]
                 else:
-                    payload = self.payload(root)
-                    if mutation == "name_selection":
-                        payload["recommendation"]["selected_candidates"] = ["OCP-010"]
-                    else:
-                        payload["recommendation"]["selection_authority"] = True
-                    self.write_yaml(root, self.map_path, payload)
-                    expected_error = FOUNDATION_REASSESSMENT_SELECTION_FORBIDDEN
+                    payload["recommendation"]["selection_authority"] = True
+                self.write_yaml(root, self.map_path, payload)
+                expected_error = FOUNDATION_REASSESSMENT_SELECTION_FORBIDDEN
                 self.assertIn(
                     expected_error,
                     validate_foundation_promotion_reassessment(root).errors,

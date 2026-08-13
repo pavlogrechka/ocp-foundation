@@ -1,0 +1,91 @@
+schema_version: 1
+rule_owner: AD-016AC
+baseline: ffc698ecc7fabab9d0f8ade9c85913f7cc95eadc
+gate_applicability:
+  form: governance-selection-compatibility-witness
+  g4_required: false
+  accepted_consumer_required: false
+selected_unit:
+  document_id: OCP-010
+  primary: docs/010-event-concept/README.md
+  expected_version: 0.2.1
+  expected_status: Draft
+  expected_concept_status: Accepted
+  selection_input: ARCHITECTURE_BOARD_EVENT
+  disposition: SELECTED_NOT_PROMOTED
+compatibility:
+  consumers:
+    - document_id: OCP-011
+      primary: docs/011-outcome-assessment-record/README.md
+      expected_version: 0.3.0
+      expected_status: Accepted
+      document_binding: unversioned-document
+      preserved_refs: [event@1, observation-record@1]
+    - document_id: OCP-017
+      primary: docs/017-operation-lifecycle/README.md
+      expected_version: 0.2.0
+      expected_status: Accepted
+      document_binding: unversioned-document
+      preserved_refs: []
+  blocker_contracts:
+    - blocker_id: EVENT_OWNER_UNRESOLVED
+      treatment: EXCLUDE_POSITIVE_OPERATION_EVENT_RELATION_UNTIL_SEPARATE_OWNER_ACT
+      promotion_effect: BLOCKS_WHOLE_DOCUMENT_FREEZE
+    - blocker_id: EVENT_LEGACY_OVERLAP
+      treatment: PRESERVE_OCP011_ASSESSMENT_AUTHORITY_AND_REMEDIATE_LOCAL_ENVELOPE
+      promotion_effect: REQUIRES_EVENT_REMEDIATION
+    - blocker_id: EVENT_CONSUMER_BINDINGS_UNVERSIONED
+      treatment: PROVE_OCP011_OCP017_COMPATIBILITY_WITH_SELECTED_SURFACE
+      promotion_effect: REQUIRES_CONSUMER_COMPATIBILITY_EVIDENCE
+migration:
+  data: NONE_AT_SELECTION
+  references: NONE_AT_SELECTION
+  schemas: NONE_AT_SELECTION
+  promotion_preconditions:
+    - EVENT_OWNER_BOUNDARY_REMEDIATED
+    - LEGACY_ASSESSMENT_OVERLAP_REMEDIATED
+    - PRIMARY_CONSUMER_COMPATIBILITY_PROVED
+rollback:
+  unit: SELECTION_GATE_WITNESS_AND_ACCOUNTING
+  partial_rollback: FORBIDDEN
+  restores: REASSESSED_UNSELECTED_STATE
+witness_model:
+  selected: IMMUTABLE_BASELINE_BOUND
+  rejected: LIVE_GATE_TRACKING
+  selected_consequence: COMPLETED_STEP_EVIDENCE_REMAINS_VALID_AFTER_LATER_GATE_TRANSITIONS
+  rejected_harm: LEGAL_SELECTION_INVALIDATES_DISCOVERY_AND_REASSESSMENT_HISTORY
+  dependency_criterion:
+    - READS_GATE_STATE_FIELDS
+    - CARRIES_GATE_STATE_AS_EVIDENCE_TOKENS
+    - VALIDATES_HISTORICAL_RECORD_AGAINST_LIVE_GATE
+    - CLAIMS_CURRENT_GATE_STATE_IN_ACCOUNTING
+  executable_locations:
+    - architecture/foundation-promotion-gate.yaml
+    - architecture/foundation-promotion-reassessment.yaml
+    - architecture/event-stable-surface.yaml
+    - architecture/event-promotion-selection.yaml
+    - tools/ontology_checker/ocp_checker/foundation_promotion_gate.py
+    - tools/ontology_checker/ocp_checker/foundation_promotion_reassessment.py
+    - tools/ontology_checker/ocp_checker/event_stable_surface.py
+    - tools/ontology_checker/ocp_checker/event_promotion_selection.py
+  descriptive_locations:
+    - architecture/discovery/AD-016-foundation-canonicalization-readiness.md
+    - architecture/discovery/AD-031-event-dependency-stable-surface.md
+    - README.md
+    - backlog/roadmap.md
+    - backlog/architecture-backlog.md
+    - tools/ontology_checker/README.md
+evidence:
+  EVENT_OWNER_UNRESOLVED:
+    - path: docs/010-event-concept/README.md
+      tokens: ["не вводить current Concept edge `Event → Operation` або `Operation → Event`", "Operation-to-Event relationship record"]
+  EVENT_LEGACY_OVERLAP:
+    - path: docs/010-event-concept/README.md
+      tokens: ["checker-local assessment envelope", "не є normative OutcomeAssessmentRecord contract"]
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Status: Accepted", "OutcomeAssessmentRecord"]
+  EVENT_CONSUMER_BINDINGS_UNVERSIONED:
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010"]
+    - path: docs/017-operation-lifecycle/README.md
+      tokens: ["Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010"]

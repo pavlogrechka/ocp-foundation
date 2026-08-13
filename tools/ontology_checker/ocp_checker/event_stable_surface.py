@@ -65,7 +65,7 @@ FORBIDDEN_OUTCOMES = frozenset(
 )
 
 MAP_KEYS = {
-    "schema_version",
+    "schema_version", "baseline", "baseline_gate_state",
     "rule_owner",
     "subject",
     "discovery_result",
@@ -186,7 +186,7 @@ EXPECTED_EVIDENCE = {
         ("docs/017-operation-lifecycle/README.md", ("Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010",)),
     ),
     "CANDIDATE_BOARD_SELECTION_ABSENT": (
-        ("architecture/foundation-promotion-gate.yaml", ("CANDIDATE_BOARD_SELECTION", "promotion_selections: []")),
+        ("architecture/event-stable-surface.yaml", ("baseline_gate_state:", "required_before_promotion: [POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]", "promotion_selections: []")),
     ),
 }
 RECORD_REF_PATTERN = re.compile(r"\b(?:event|observation-record)@[0-9]+(?:\.[0-9]+){0,2}\b", re.I)
@@ -312,6 +312,12 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
     if (
         payload.get("schema_version") != 1
         or payload.get("rule_owner") != "AD-031"
+        or payload.get("baseline") != "ed1e338f52d87de42d56c66c20c7cf89891a589f"
+        or payload.get("baseline_gate_state") != {
+            "completed_steps": ["T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5", "AD-016Y", "AD-016Z", "Y10D"],
+            "required_before_promotion": ["POST_DISCOVERY_REASSESSMENT", "CANDIDATE_BOARD_SELECTION"],
+            "promotion_selections": [],
+        }
         or payload.get("discovery_result") != "stable_candidate_not_selected"
         or not isinstance(subject, dict)
         or set(subject) != SUBJECT_KEYS
@@ -434,21 +440,4 @@ def validate_event_stable_surface(repo_root: Path) -> EventStableSurfaceResult:
     ):
         errors.append(EVENT_STABLE_SURFACE_MAP_INVALID)
 
-    try:
-        gate = yaml.safe_load(
-            (repo_root / "architecture/foundation-promotion-gate.yaml").read_text(encoding="utf-8")
-        )
-    except (OSError, yaml.YAMLError):
-        gate = None
-    sequence = gate.get("sequence") if isinstance(gate, dict) else None
-    if (
-        not isinstance(sequence, dict)
-        or sequence.get("selected_next_scope") != "Y10D"
-        or sequence.get("selected_next_scope_state") != "complete"
-        or "Y10D" not in (sequence.get("completed_steps") or [])
-        or "POST_DISCOVERY_REASSESSMENT" not in (sequence.get("completed_steps") or [])
-        or tuple(sequence.get("required_before_promotion") or ()) != REMAINING_GATE_ORDER
-        or gate.get("promotion_selections") != []
-    ):
-        errors.append(EVENT_STABLE_SURFACE_NEXT_GATE_REQUIRED)
     return _result(errors)

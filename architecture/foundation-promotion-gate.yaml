@@ -1,12 +1,12 @@
-schema_version: 2
-rule_owner: AD-016AB
+schema_version: 3
+rule_owner: AD-016AC
 sequence:
-  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D, POST_DISCOVERY_REASSESSMENT]
-  selected_next_scope: Y10D
-  selected_next_scope_state: complete
+  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D, POST_DISCOVERY_REASSESSMENT, CANDIDATE_BOARD_SELECTION]
+  selected_next_scope: OCP-010
+  selected_next_scope_state: selected
   required_before_promotion:
-    - CANDIDATE_BOARD_SELECTION
-promotion_selections: []
+    - EVENT_LIFECYCLE_PROMOTION_ACT
+promotion_selections: [OCP-010]
 candidates:
   - document_id: OCP-005
     primary: docs/005-assignment-concept/README.md
