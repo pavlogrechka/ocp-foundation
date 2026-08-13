@@ -30,6 +30,7 @@ Implemented validators:
 - accepted OCP-015 proposal/response record validation and fail-safe coordination-evidence projection;
 - the integrated non-sensitive foundation scenario;
 - Concept status synchronization and dependency graph;
+- Event Concept canonicalization probes that independently derive its empty Concept dependency set, Canonical direct-OCP floor and exact Accepted P-001 binding, execute four frozen semantic surfaces, require every current registry/taxonomy/peer/generated/gate carrier to say `Canonical`, and keep three baseline-bound Accepted witnesses valid and immutable;
 - declared Resolved-AB/open-question synchronization with exact current-document strikeout and disposition-reference checks;
 - declared Accepted-OCP reviewed-snapshot coverage with exact primary/status, reviewed-version filename, content digest, primary link and retained OCP-016 evidence checks;
 - artifact governance and complete-history process audit.
@@ -404,6 +405,7 @@ The suite includes, among other cases:
 - foundation post-discovery reassessment probes that derive L2 from live OCP frontmatter before cross-checking gate claims, pin the common five-axis comparison across hold/Assignment/Event/joint Assignment+Constraint/Constraint remediation, reject recommendation-to-selection transfer, and bind every historical evidence path to its baseline blob/SHA-256;
 - Event stable-surface discovery probes that independently derive all seven OCP-010 inputs and both primary consumers, distinguish exact Pattern/record-kind bindings from unversioned document bindings, pin every declared stable/moving/blocker evidence token and retain candidate-specific Board selection as the sole remaining lifecycle gate.
 - Event promotion-selection probes that keep the recorded OCP-010 subject Draft while binding its exact baseline state and per-path evidence blob/SHA-256, the exact Board selection, both Accepted consumers, all three compatibility blockers, zero-at-selection migration and atomic rollback; completed discovery/reassessment witnesses bind immutable baseline objects while the live gate separately requires the Event lifecycle promotion act.
+- Event Concept canonicalization probes separate current status carriers from immutable baseline witnesses, reject any registry/taxonomy/defining/current-projection drift, rederive stable dependencies from live metadata and replay Event identity, observation-history, integrated-assessment and primary-consumer evidence without changing fixtures.
 - Event lifecycle-promotion probes independently require all three precondition proofs, stable absence of a Core Operation↔Event edge, OCP-011 governed assessment ownership, live OCP-011/OCP-017 compatibility fixtures, atomic final-gate completion and immutable historical subject witnesses before OCP-010 may be `1.0.0 / Canonical`.
 
 ## Time handling

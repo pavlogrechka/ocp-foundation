@@ -32,7 +32,9 @@ FINAL_COMPLETED_STEPS = frozenset(
 FINAL_COMPLETED_STEP_ORDER = (*REQUIRED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
 CANDIDATE_IDS = frozenset({"OCP-005", "OCP-006", "OCP-010"})
 ALLOWED_L2_RESULTS = frozenset({"pass", "fail"})
-ALLOWED_STATUS_PAIRS = frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
+ALLOWED_STATUS_PAIRS = frozenset({
+    ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
+})
 SLOT_IDS = frozenset({"T6", "T7"})
 
 MAP_KEYS = {
@@ -142,7 +144,9 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         != (*REQUIRED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
         or set(FINAL_COMPLETED_STEP_ORDER) != FINAL_COMPLETED_STEPS
         or ALLOWED_STATUS_PAIRS
-        != frozenset({("Draft", "Accepted"), ("Canonical", "Accepted")})
+        != frozenset({
+            ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
+        })
     ):
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)
 

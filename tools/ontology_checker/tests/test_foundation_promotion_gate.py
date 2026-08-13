@@ -39,7 +39,9 @@ EXPECTED_FINAL_STEPS = {*EXPECTED_COMPLETED_STEPS, "EVENT_LIFECYCLE_PROMOTION_AC
 EXPECTED_FINAL_STEP_ORDER = (*EXPECTED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
 EXPECTED_CANDIDATES = {"OCP-005", "OCP-006", "OCP-010"}
 EXPECTED_L2_RESULTS = {"pass", "fail"}
-EXPECTED_STATUS_PAIRS = {("Draft", "Accepted"), ("Canonical", "Accepted")}
+EXPECTED_STATUS_PAIRS = {
+    ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
+}
 EXPECTED_DEPENDENCIES = {
     "OCP-005": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004"),
     "OCP-006": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005"),
@@ -234,9 +236,10 @@ class FoundationPromotionGateTests(unittest.TestCase):
     def test_candidate_document_and_concept_statuses_are_individually_live(self) -> None:
         for document_id in sorted(EXPECTED_CANDIDATES):
             status_old = "Status: Canonical" if document_id == "OCP-010" else "Status: Draft"
+            concept_old = "Concept-Status: Canonical" if document_id == "OCP-010" else "Concept-Status: Accepted"
             for field, old, new in (
                 ("document", status_old, "Status: Accepted"),
-                ("concept", "Concept-Status: Accepted", "Concept-Status: Proposed"),
+                ("concept", concept_old, "Concept-Status: Proposed"),
             ):
                 with self.subTest(document_id=document_id, field=field), tempfile.TemporaryDirectory() as tmp:
                     root = Path(tmp)

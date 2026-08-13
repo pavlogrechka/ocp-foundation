@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-002
 Title: Concept Taxonomy
-Version: 1.5.0
+Version: 1.6.0
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001
@@ -14,8 +14,8 @@ Concept-Statuses:
   Organization: Canonical
   Objective: Canonical
   Capability: Canonical
-  Event: Accepted
-Last-Review: 2026-08-08
+  Event: Canonical
+Last-Review: 2026-08-13
 ---
 
 # Concept Taxonomy
@@ -163,7 +163,7 @@ Operation
 ├── Constraints
 │   └── Constraint [Accepted]
 └── Outcome
-    ├── Event [Accepted]
+    ├── Event [Canonical]
     └── OutcomeAssessmentRecord [Accepted record contract; not a Concept]
 ```
 
@@ -189,7 +189,7 @@ Objective не має поточної фундаментальної Concept de
 
 ## Event
 
-Concept `Event` має статус `Accepted` і визначений у [OCP-010 — Event Concept](../010-event-concept/README.md) на підставі outcome E3 у AD-006C та рішення Architecture Board по PR-0012.
+Concept `Event` має статус `Canonical` і визначений у [OCP-010 — Event Concept](../010-event-concept/README.md) на підставі outcome E3 у AD-006C, окремого document-promotion act AD-016AD та Event Concept canonicalization act AD-032.
 
 Event представляє reusable occurrence або change identity, незалежну від конкретного report, observer, Operation, Objective або assessment. Event може мати zero, one або many observations.
 
@@ -318,3 +318,9 @@ Projection owner, exact set/value rules, category exclusions і fail-safe mismat
 Окремий T5 WJ lifecycle act exact-sync-ить одну projection value: `Operation: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.4.0 → 1.5.0`.
 
 Поряд із frontmatter projection синхронізовано поточне human-readable status sentence у секції Operation. Taxonomy authority, category/decomposition trees, registry membership, dependencies, Operation identity, `Operation → Objective`, Event non-edge та всі інші projected values лишаються незмінними. Жоден non-Concept lifecycle contract не додається до taxonomy.
+
+## Revision `1.6.0` — Event status projection
+
+Окремий Event Concept canonicalization act exact-sync-ить одну projection value: `Event: Accepted → Canonical`. За SemVer policy OCP-002 це MINOR revision, тому document version синхронно переходить `1.5.0 → 1.6.0`.
+
+Поряд із frontmatter projection синхронізовано два поточні human-readable views: Event label у ненормативному Operation decomposition tree та status sentence у секції Event. Projection owner, exact set/value rules, category exclusions, fail-safe mismatch behavior, Event identity, empty `Concept-Depends-On`, `Operation → Objective`, відсутність Operation↔Event current edge та всі інші projected values лишаються незмінними.

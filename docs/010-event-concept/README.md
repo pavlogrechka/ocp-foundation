@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-010
 Title: Event Concept
-Version: 1.0.0
+Version: 1.0.1
 Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-008, AD-006, P-001
@@ -9,7 +9,7 @@ Uses-Patterns: P-001@0.1.0
 Used-By: Operation Evidence, Objective Achievement Assessment, Coordination Model, Audit, AB-056
 Defines-Concepts: Event
 Concept-Depends-On: []
-Concept-Status: Accepted
+Concept-Status: Canonical
 Last-Review: 2026-08-13
 ---
 
@@ -539,3 +539,11 @@ AD-016AD derives Route F lifecycle/remediation for this existing Concept documen
 Three separately executable preconditions make whole-document promotion reachable. Section 10 stabilizes the negative Core relation boundary without creating a Concept edge or positive owner. Section 14 removes the obsolete local assessment-envelope description and binds the already-governed OCP-011 behavior with exact `event@1` and `observation-record@1` evidence. The compatibility proof preserves OCP-011 references and OCP-017 occurrence, provenance and non-causation semantics without changing either consumer, stored data, references, schemas or fixtures.
 
 `0.2.1 → 1.0.0` is MAJOR because the first Canonical release freezes the Event/Observation identity kernel, makes the Operation↔Event exclusion a stable compatibility boundary and replaces a stale local envelope description with the Accepted OCP-011 authority. Event `Concept-Status` remains `Accepted`: document lifecycle and Concept lifecycle are distinct, and this act neither changes OCP-000/OCP-002 nor claims the separately gated Concept promotion. Rollback is atomic across this body, its executable promotion proof, the gate, historical witnesses and accounting; partial rollback would make the Canonical status unverifiable.
+
+## 27. Event Concept canonicalization — v1.0.1
+
+AD-032 applies the separate OCP-001 Concept lifecycle act after OCP-010 became `1.0.0 / Canonical`. It proves the current empty Concept dependency set, the Canonical direct-OCP floor, exact Accepted `P-001@0.1.0` binding and the existing executable Event/ObservationRecord and consumer surfaces before synchronously changing Event `Concept-Status: Accepted → Canonical` in OCP-000, OCP-002, this metadata and generated current-state projections.
+
+`1.0.0 → 1.0.1` is PATCH: Concept canonicalization changes lifecycle metadata and freezes the already-Canonical Event semantic surface; it adds no Event identity, field, rule, relation, edge, dependency, record authority or behavior. Sections 1–26 keep their semantics and section anchors. In particular, §24 and §26 remain historical records of the distinct acceptance and document-promotion acts; their earlier `Accepted` statements do not override this current section or frontmatter.
+
+Canonical Event freezes identity, ObservationRecord authority, history-preserving supersession, zero/one/many observation semantics and the occurrence/observation boundary as separately governed compatibility commitments. It does not create an Operation↔Event edge or owner, temporal interval model, correlation rule, Event-kind registry, truth, OutcomeAssessmentRecord authority, Conflict, Risk, Readiness, authorization or production schema. Rollback is a new reviewed atomic Concept lifecycle act across OCP-000, OCP-002, defining metadata, current peer/status views, generated projection, executable witness and accounting; partial rollback is invalid.

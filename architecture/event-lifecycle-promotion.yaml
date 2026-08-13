@@ -9,9 +9,9 @@ gate_applicability:
 subject:
   document_id: OCP-010
   primary: docs/010-event-concept/README.md
-  expected_version: 1.0.0
+  expected_version: 1.0.1
   expected_status: Canonical
-  expected_concept_status: Accepted
+  expected_concept_status: Canonical
   selected_by: AD-016AC
   disposition: PROMOTED_AFTER_PROVED_REMEDIATION
 promotion_preconditions:

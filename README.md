@@ -51,7 +51,7 @@ backlog/                 відкриті питання та дорожня к�
 
 **Foundation Wave 2 — Governed Executable Foundation.**
 
-- Capability, Objective, Resource, Organization та Operation мають статус `Canonical`; Assignment, Constraint та Event лишаються `Accepted`;
+- Capability, Objective, Resource, Organization, Operation та Event мають статус `Canonical`; Assignment та Constraint лишаються `Accepted`, а Event є `Canonical`;
 - OCP-010 реалізує AD-006C outcome E3: Event має незалежну occurrence identity, може існувати з zero observations, а kind, timestamp, source count і record order не визначають identity або truth;
 - ObservationRecord invokes `P-001@0.1.0`, має власну identity, optional exact Event linkage, attributable provenance і history-preserving supersession з дозволеним branching;
 - PR-0012 створив перший integrated non-sensitive scenario з виконуваними `derived_participates_in`, `constraint_applicable_to` та `effective_constraint_result` joints;
@@ -150,9 +150,10 @@ backlog/                 відкриті питання та дорожня к�
 - AD-016AB `0.29.0 / Accepted` виконує лише post-Y10D reassessment: live L2 заново виводиться з OCP metadata і збігається з gate claims, п'ять опцій порівнюються одним критерієм, current hold та Event-YK remediation continuation лишаються recommendation-only, а schema-2 gate відрізняє completed reassessment від відсутнього Board selection і доводить досяжність законного fully-gated стану;
 - AD-016AC `0.30.0 / Accepted` фіксує вхідний Board-вибір exact OCP-010/Event без promotion, додає сумісність/міграцію/атомарний rollback для двох Accepted consumers і трьох live blockers, переводить completed-step evidence на immutable-baseline witnesses та лишає окремий `EVENT_LIFECYCLE_PROMOTION_ACT` єдиним live gate кроку 4;
 - AD-016AD `0.31.0 / Accepted` виконує крок 4: окремо доводить стабільне Core-виключення Operation↔Event, OCP-011 assessment ownership і OCP-011/OCP-017 consumer compatibility, закриває subject-state witness debt і просуває документ OCP-010 до `1.0.0 / Canonical`, лишаючи Concept Event `Accepted` без нового edge;
+- AD-032 `0.1.0 / Accepted` виконує окрему OCP-001 canonicalization дію: виводить порожню Concept-залежність і Canonical OCP floors з живих метаданих, зв'язує чотири виконувані Event surfaces, зберігає три baseline-bound історичні свідки та синхронно просуває Concept Event до `Canonical` без нового edge або зміни Event semantics;
 - AB-011 / AD-008 Resource interchangeability, AB-003 consumer profile та AB-058 workflow-evidence scope завершено через Accepted OCP-013–OCP-015; залишкові visibility-policy та agreement-semantics питання обліковуються окремо в AB-059;
 - checker не є production validator, persistence schema або незалежним нормативним джерелом;
-- reference suite містить 274 non-sensitive fixtures і 283 unit tests;
+- reference suite містить 274 non-sensitive fixtures і 291 unit tests;
 - не-нормативна оцінка загальної foundation-готовності — **≈72%**; п'ять Concepts Canonical, три лишаються Accepted, OCP-017, OCP-018 і OCP-020 є Accepted Route C contracts, OCP-019, OCP-021 та OCP-022 лишаються Draft negative boundaries, OCP-006 додає три owner-local negative interaction boundaries, а positive Conflict/capacity/reservation/Order/precedence/override/waiver activation, production profiles та T6–T10 потребують власних рішень і свіжих Board gates.
 
 Детальна не-нормативна оцінка та послідовність робіт наведені в [Foundation Roadmap](backlog/roadmap.md).

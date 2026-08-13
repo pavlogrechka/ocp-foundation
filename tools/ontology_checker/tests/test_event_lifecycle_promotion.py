@@ -226,6 +226,12 @@ class EventLifecyclePromotionTests(unittest.TestCase):
                 self.write_yaml(root, map_path, payload)
                 self.assertFalse(validate_event_stable_surface(root).valid)
 
+    def test_historical_witnesses_survive_separate_concept_canonicalization(self) -> None:
+        self.assertTrue(validate_event_stable_surface(ROOT).valid)
+        self.assertTrue(validate_event_promotion_selection(ROOT).valid)
+        payload = self.payload()
+        self.assertEqual(payload["subject"]["expected_concept_status"], "Canonical")
+
 
 if __name__ == "__main__":
     unittest.main()

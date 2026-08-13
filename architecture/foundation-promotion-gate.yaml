@@ -27,7 +27,7 @@ candidates:
     primary: docs/010-event-concept/README.md
     slot: T6
     expected_document_status: Canonical
-    expected_concept_status: Accepted
+    expected_concept_status: Canonical
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-004, OCP-008]
     expected_l2: pass
     l2_blockers: []

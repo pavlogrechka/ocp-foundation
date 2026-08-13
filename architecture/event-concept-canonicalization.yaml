@@ -1,0 +1,100 @@
+schema_version: 1
+rule_owner: AD-032
+baseline: 060b801e78b0ce88c0eb858be127cecce3e6569f
+gate_applicability:
+  form: existing-concept-status-canonicalization
+  route: OCP-016-F
+  g4_required: false
+  accepted_consumer_required: false
+board_decision:
+  concept: Event
+  transition: ACCEPTED_TO_CANONICAL
+  authority: EXPLICIT_ARCHITECTURE_BOARD_INPUT
+requirements:
+  stable_dependencies:
+    concept_dependencies: []
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-004, OCP-008]
+    required_direct_ocp_status: Canonical
+    pattern_binding: P-001@0.1.0
+    required_pattern_status: Accepted
+    result: proved
+  machine_readable_checks:
+    semantic_surfaces:
+      - EVENT_IDENTITY_AND_REFERENCE
+      - OBSERVATION_COLLECTION_AND_SUPERSESSION
+      - INTEGRATED_EVENT_ASSESSMENT_SCENARIO
+      - PRIMARY_CONSUMER_COMPATIBILITY
+    result: proved
+current_status_carriers:
+  - path: docs/000-operational-ontology/README.md
+    carrier: REGISTRY_ROW
+    expected_status: Canonical
+  - path: docs/002-concept-taxonomy/README.md
+    carrier: TAXONOMY_METADATA_AND_CURRENT_VIEWS
+    expected_status: Canonical
+  - path: docs/010-event-concept/README.md
+    carrier: DEFINING_METADATA_AND_CURRENT_SECTION
+    expected_status: Canonical
+  - path: docs/004-operation-concept/README.md
+    carrier: CURRENT_PEER_AND_DECOMPOSITION_VIEWS
+    expected_status: Canonical
+  - path: docs/005-assignment-concept/README.md
+    carrier: CURRENT_PEER_VIEW
+    expected_status: Canonical
+  - path: docs/006-constraint-concept/README.md
+    carrier: CURRENT_PEER_VIEW
+    expected_status: Canonical
+  - path: architecture/baselines/foundation-map.md
+    carrier: GENERATED_CURRENT_PROJECTION
+    expected_status: Canonical
+  - path: architecture/baselines/foundation-future-edges.yaml
+    carrier: CURRENT_FUTURE_INTENT_BASIS
+    expected_status: Canonical
+  - path: architecture/event-lifecycle-promotion.yaml
+    carrier: CURRENT_COMPLETED_PROMOTION_SUBJECT
+    expected_status: Canonical
+  - path: architecture/foundation-promotion-gate.yaml
+    carrier: CURRENT_PROMOTED_CANDIDATE
+    expected_status: Canonical
+  - path: README.md
+    carrier: CURRENT_REPOSITORY_SUMMARY
+    expected_status: Canonical
+  - path: backlog/roadmap.md
+    carrier: CURRENT_ROADMAP_SUMMARY
+    expected_status: Canonical
+  - path: backlog/architecture-backlog.md
+    carrier: CURRENT_AB062_SUMMARY
+    expected_status: Canonical
+historical_witnesses:
+  - path: architecture/event-stable-surface.yaml
+    baseline: ed1e338f52d87de42d56c66c20c7cf89891a589f
+    expected_historical_status: Accepted
+  - path: architecture/foundation-promotion-reassessment.yaml
+    baseline: 53d254405e6f75c7198e3e989d14a5a5678628ce
+    expected_historical_status: Accepted
+  - path: architecture/event-promotion-selection.yaml
+    baseline: ffc698ecc7fabab9d0f8ade9c85913f7cc95eadc
+    expected_historical_status: Accepted
+executable_evidence:
+  - path: tools/ontology_checker/rules.yaml
+    tokens: [OCP-010 §8 exact Event reference contract, OCP-010 §9]
+  - path: tools/ontology_checker/ocp_checker/event.py
+    tokens: [EVENT_DERIVATION_RULES, "def resolve_event(", "def observations_for_event("]
+  - path: tools/ontology_checker/fixtures/event/valid-integrated-scenario.yaml
+    tokens: [event_id, observation-record@1, event_ref]
+  - path: architecture/event-lifecycle-promotion.yaml
+    tokens: [PRIMARY_CONSUMER_COMPATIBILITY_PROVED, OCP-011, OCP-017, ACCEPTED_CONSUMERS_PRESERVED]
+freeze_boundary:
+  - EVENT_IDENTITY
+  - OBSERVATION_RECORD_AUTHORITY
+  - HISTORY_PRESERVING_SUPERSESSION
+  - OCCURRENCE_OBSERVATION_BOUNDARY
+forbidden_implications:
+  - OPERATION_EVENT_EDGE
+  - POSITIVE_RELATION_OWNER
+  - TEMPORAL_INTERVAL_MODEL
+  - CORRELATION_RULE
+  - EVENT_KIND_REGISTRY
+  - TRUTH_OR_ASSESSMENT_AUTHORITY
+  - CONFLICT_RISK_READINESS
+  - AUTHORIZATION_OR_PRODUCTION_SCHEMA
