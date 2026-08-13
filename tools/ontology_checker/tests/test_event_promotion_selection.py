@@ -57,8 +57,9 @@ class EventPromotionSelectionTests(unittest.TestCase):
         self.assertEqual(payload["selected_unit"]["document_id"], "OCP-010")
         self.assertEqual(payload["selected_unit"]["expected_status"], "Draft")
         gate = yaml.safe_load((ROOT / self.gate_path).read_text(encoding="utf-8"))
-        self.assertEqual(gate["promotion_selections"], ["OCP-010"])
-        self.assertIn("EVENT_LIFECYCLE_PROMOTION_ACT", gate["sequence"]["completed_steps"])
+        event_cycle = next(item for item in gate["cycles"] if item["candidate_id"] == "OCP-010")
+        self.assertEqual(event_cycle["steps"]["CANDIDATE_BOARD_SELECTION"], "completed")
+        self.assertEqual(event_cycle["steps"]["DOCUMENT_PROMOTION"], "completed")
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         categories = (
@@ -157,9 +158,17 @@ class EventPromotionSelectionTests(unittest.TestCase):
                 else:
                     gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
                     if mutation == "remove_selection":
-                        gate["promotion_selections"] = []
+                        event_cycle = next(
+                            item for item in gate["cycles"] if item["candidate_id"] == "OCP-010"
+                        )
+                        event_cycle["steps"]["CANDIDATE_BOARD_SELECTION"] = "pending"
+                        event_cycle["evidence"].pop("CANDIDATE_BOARD_SELECTION")
                     else:
-                        gate["sequence"]["required_before_promotion"] = []
+                        event_cycle = next(
+                            item for item in gate["cycles"] if item["candidate_id"] == "OCP-010"
+                        )
+                        event_cycle["steps"]["DOCUMENT_PROMOTION"] = "pending"
+                        event_cycle["evidence"].pop("DOCUMENT_PROMOTION")
                     self.write_yaml(root, self.gate_path, gate)
                 self.assertNotIn(expected_error, validate_event_promotion_selection(root).errors)
 
