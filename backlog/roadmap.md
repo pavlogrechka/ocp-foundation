@@ -114,6 +114,7 @@
 - [x] AD-016AD Event lifecycle remediation and document promotion — prove all three selection preconditions independently, preserve AD-031/AD-016AC as baseline-bound history, complete the final gate and promote OCP-010 to `1.0.0 / Canonical` while Event remains `Accepted`
 - [x] AD-032 Event Concept canonicalization — apply the separate OCP-001 lifecycle decision, prove empty Concept dependencies plus Canonical direct OCP floors and four executable semantic surfaces, preserve historical baseline witnesses and synchronize all current Event status carriers to `Canonical`
 - [x] AD-033 multicycle promotion-gate infrastructure — replace the one-cycle schema with an append-only generic cycle journal, prove an entire later selection/document/Concept cycle reachable without code changes, retain skipped-step/L2 failure and leave no active next cycle
+- [x] AD-035 Assignment bounded stable-surface discovery — derive two Concept dependencies and all six structured consumers from live metadata, classify all eleven OCP-005 questions, and pin six bounded candidates, seven moving surfaces and four blockers without selecting Assignment or starting a cycle
 
 ## Milestone 1A — Governed Executable Validation Loop
 
