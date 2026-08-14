@@ -1,12 +1,11 @@
 ---
 Document-ID: OCP-022
 Title: Order Authorization Establishment Boundary
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-030, OCP-001, OCP-004, OCP-016, OCP-017, OCP-018
 Used-By: Order authorization review, Operation authorization review, Audit
-Last-Review: 2026-08-14
 ---
 
 # OCP-022 — Order Authorization Establishment Boundary
@@ -155,27 +154,3 @@ AB-002 is Resolved only at the three negative establishment results in §4. Orde
 No data, source profile, authorization decision, Operation, Assignment or provenance reference migrates. OCP-018 remains byte-unchanged. Rollback removes OCP-022, its module, manifest, tests, fixtures and accounting and restores AB-002 Open; rollback does not create positive Order authority.
 
 Merge requires exact-head external review, Codex adjudication, green required CI and fresh explicit owner authorization naming the unchanged head. Preparation and review authorize no production use or next act.
-
-## 15. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts OCP-022 revision `0.2.0` as the governed Route C negative Order-authorization establishment boundary selected by AD-030. The complete externally reviewed `0.1.0 / Draft` is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md) and incorporated without alteration.
-
-The original §§1–14 remain byte-identical to that reviewed snapshot. Their Draft lifecycle wording, pre-acceptance caution and pre-merge wording are immutable historical review evidence; this README frontmatter and §§15–18 are the current lifecycle authority. Acceptance approves only the three distinct negative establishment results plus `indeterminate`. It does not make Order mandatory, sufficient or admissible, define Order, grant authorization or claim production readiness.
-
-## 16. Readiness and dependency boundary
-
-The AD-037 readiness test is satisfied independently for OCP-022: all three inquiry questions have exact rules and distinct negative results; the evidence envelope and fail-safe derivation are complete; every declared field and defensive value has executable evidence; and §11 is a future positive reopening gate rather than a missing current result. The §4 questions are closed machine inquiries, not unresolved Open Questions.
-
-All direct OCP dependencies are already Accepted or Canonical: OCP-001, OCP-004 and OCP-016 are Canonical, while OCP-017 and OCP-018 are Accepted. OCP-022 exact-consumes `OCP-018@0.2.1` without changing that source contract or its owner-local open questions. Accepted status adds no Order-specific consumer, owner, evaluator, object form or positive rule.
-
-## 17. Acceptance evidence and unchanged semantics
-
-The reviewed snapshot has SHA-256 `8e2562153738d140510d21742b9c50ee8d37588ecbfe2a3221ae79f04268a60a`, equal to the exact Draft on acceptance base `main@24fff146bf1f44fc06cd7c9f0d1a2997383f4b2f`. AD-029 snapshot governance binds its name, bytes, current primary and Accepted status in the shared map; loss, rename, content substitution, declaration removal or lifecycle drift fails the repository suite.
-
-The OCP-022 rule manifest, checker module, focused tests and all Order-boundary fixtures are unchanged. No question, rule, result, field, source-contract binding, source section or non-implication moves.
-
-## 18. Version, rollback and non-transfer
-
-OCP-022 moves `0.1.0 / Draft → 0.2.0 / Accepted`. This is a pre-canonical MINOR lifecycle change because the unchanged negative contract becomes an approved basis for dependents. PATCH is false because status authority changes; MAJOR/`1.0.0` is false because no semantic contract is broken or removed and no Canonical stability promise is granted.
-
-Rollback is one separately reviewed lifecycle act that restores `0.1.0 / Draft` together with the snapshot-map and accounting projections while retaining immutable historical evidence. Acceptance leaves Order Proposed, does not change OCP-018 or AB-017, does not activate an Order profile or Concept route, does not open AB-018/AB-005 or a promotion cycle and does not authorize another act.

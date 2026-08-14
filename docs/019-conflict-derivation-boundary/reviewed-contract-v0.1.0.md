@@ -1,12 +1,11 @@
 ---
 Document-ID: OCP-019
 Title: Conflict Derivation Boundary
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-022, OCP-001, OCP-006, OCP-016
 Used-By: Conflict derivation review, Audit
-Last-Review: 2026-08-14
 ---
 
 # OCP-019 — Conflict Derivation Boundary
@@ -144,29 +143,3 @@ All fixtures use synthetic identifiers and abstract snapshots. They contain no r
 `0.1.0 / Draft` is the first compatible contract surface. No prior OCP-019 exists, so PATCH or MINOR classification is inapplicable; Accepted or Canonical would overstate absent consumer and production evidence.
 
 There is no data migration. Existing OCP-006 evaluations remain owned by OCP-006 and are not rebound. Rollback removes OCP-019, its manifest, module, tests and fixtures atomically; it does not rewrite evaluation history or restore a positive Conflict authority because none is created.
-
-## 15. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts OCP-019 revision `0.2.0` as the governed Route C negative Conflict-establishment boundary selected by AD-022. The complete externally reviewed `0.1.0 / Draft` is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md) and incorporated without alteration.
-
-The original §§1–14 remain byte-identical to that reviewed snapshot. Their Draft lifecycle wording, pre-acceptance caution and rollback wording are immutable historical review evidence; this README frontmatter and §§15–18 are the current lifecycle authority. Acceptance approves only `conflict_not_established | indeterminate` as a basis for dependent specifications. It does not establish Conflict, admit a positive result, authenticate a criterion owner or claim production readiness.
-
-## 16. Readiness and dependency boundary
-
-The AD-037 readiness test is satisfied independently for OCP-019: its exact negative vocabulary and fail-safe derivation are complete; every declared rule and defensive value has executable evidence; no current open question leaves the negative contract undefined; and §9 is an explicit future positive reopening gate rather than a missing current result.
-
-OCP-006 remains `0.3.2 / Draft`. OCP-001 imposes the direct-OCP dependency floor L2 on Canonical documents, not on Accepted documents, and existing Accepted contracts already exact-depend on Draft OCP-006. OCP-019 consumes only OCP-006's current §§11–13 evaluation boundary and makes no `1.x` stability claim. The dependency therefore permits Accepted status while remaining a named blocker for any later Canonical proposal.
-
-The §10 AB-status ledger describes the `0.1.0` Draft baseline. Current status authority is the backlog: AB-036, AB-037 and AB-002 are Resolved only at their separately governed negative boundaries, while AB-018 and AB-005 remain Open. This time binding changes no §10 semantic exclusion and does not import those other contracts into OCP-019.
-
-## 17. Acceptance evidence and unchanged semantics
-
-The reviewed snapshot has SHA-256 `8689327a770eecccd40a7d43dd147659c24eb2e1dc0cd117dfe3e75114676bec`, equal to the exact Draft on acceptance base `main@24fff146bf1f44fc06cd7c9f0d1a2997383f4b2f`. AD-029 snapshot governance binds its name, bytes, current primary and Accepted status in the shared map; loss, rename, content substitution, declaration removal or lifecycle drift fails the repository suite.
-
-The OCP-019 rule manifest, checker module, focused tests and fixtures are unchanged. No rule identifier, result, field, validation behavior, evidence shape, source section or non-implication moves.
-
-## 18. Version, rollback and non-transfer
-
-OCP-019 moves `0.1.0 / Draft → 0.2.0 / Accepted`. This is a pre-canonical MINOR lifecycle change: the Board now approves the unchanged negative semantics as a basis for dependents. PATCH is false because status authority changes; MAJOR/`1.0.0` is false because no semantic contract is broken or removed and no Canonical stability promise is granted.
-
-Rollback is one separately reviewed lifecycle act that restores `0.1.0 / Draft` together with the snapshot-map and accounting projections while retaining immutable historical evidence. Acceptance does not resolve AB-018 or AB-005, introduce Conflict or Policy as Concepts, authorize positive Conflict activation, change OCP-006, open a promotion cycle or authorize another act.
