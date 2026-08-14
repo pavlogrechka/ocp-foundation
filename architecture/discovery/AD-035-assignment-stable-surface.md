@@ -133,6 +133,8 @@ Six surfaces satisfy the predeclared candidate rule.
 
 This bounded set is useful but not a whole-document freeze. In particular, the current effective-at implementation is executable evidence but its temporal extension remains moving under Q3/Q9. A future contract must distinguish preserving current consumer behavior from freezing every future temporal option.
 
+Stability of `ASSIGNMENT_IDENTITY_REFERENCE_KERNEL` is not sufficient identity compatibility for OCP-013 or OCP-015 while Q5 remains open: immutable `resource_ref` preserves the reference value, but a future partial-scope model could change what subject that value denotes, so any later selection must separately prove denotational compatibility.
+
 ## 9. Moving surfaces
 
 | ID | Question(s) | Why moving | Required future owner/result |
