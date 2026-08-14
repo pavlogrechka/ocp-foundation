@@ -117,6 +117,7 @@
 - [x] AD-035 Assignment bounded stable-surface discovery — derive two Concept dependencies and all six structured consumers from live metadata, classify all eleven OCP-005 questions, and pin six bounded candidates, seven moving surfaces and four blockers without selecting Assignment or starting a cycle
 - [x] AD-036 positive consumer-need discovery — enumerate all 19 current Accepted/Canonical lifecycle artifacts plus 30 Accepted governance acts, apply one predeclared own-obligation test, distinguish established positive outputs from negative/deferred mentions, and mechanically preserve the empty unmet-positive-need result without activation or a new cycle
 - [x] AD-037 negative-boundary acceptance — independently prove OCP-019/OCP-021/OCP-022 ready for Accepted status, preserve each `0.1.0` reviewed body byte-for-byte, move each primary to `0.2.0 / Accepted`, and extend the AD-029 snapshot guard without changing negative semantics or activating a positive model
+- [x] AD-038 Assignment Q2 negative-closure attempt — falsify the supersession-only hypothesis against current OCP-005, all five live Accepted consumers and two executable field-change probes; keep Q2/AB-026 open because closure requires new positive immutability, successor-binding and provenance rules under G4
 
 ## Milestone 1A — Governed Executable Validation Loop
 
