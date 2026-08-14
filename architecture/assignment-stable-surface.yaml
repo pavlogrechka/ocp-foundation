@@ -1,0 +1,232 @@
+schema_version: 1
+rule_owner: AD-035
+baseline: 6e83f34292fa818f62b1170e4b77aae98515a9a8
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  reason: discovery-evidence-is-not-a-positive-capable-rule-result-or-profile
+  accepted_consumer_activation_required: false
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+baseline_evidence_objects:
+  - path: docs/005-assignment-concept/README.md
+    blob: 6e6c00e723b15a348e7610d4ca5a1ae23526c52b
+    sha256: a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065
+  - path: docs/006-constraint-concept/README.md
+    blob: 50f149cf5563083bb84d5d2197ec32c2ed15fa9b
+    sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10
+  - path: docs/013-resource-interchangeability/README.md
+    blob: 658a291b4c3b9a0229aba09d485c1137723fe70b
+    sha256: a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74
+  - path: docs/015-coordination-workflow/README.md
+    blob: ea60634e54faedabb8c5e08b036030c2f0e4e20b
+    sha256: 6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d
+  - path: docs/017-operation-lifecycle/README.md
+    blob: 0b2ea683df308babd1111ff47e9272c9b0742f78
+    sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030
+  - path: docs/020-quantitative-constraint-input/README.md
+    blob: 0e1e7d0947ab3c7d1c0355258651179f618636a2
+    sha256: 1783c32094aee9f09ca50ececb12bf9ec8f3c6599590331dba3894ad727d9b5c
+  - path: docs/021-reservation-allocation-boundary/README.md
+    blob: af96e2a9a67977cf5de8c4c566b1e9293e23687f
+    sha256: 85cdc7e3bb5281a6b2fe0af4d11b31bc47040b762de5786a0a8a10c2e000f683
+  - path: tools/ontology_checker/ocp_checker/checker.py
+    blob: 120ada9dd00b1df0b46cf3060aef2b0c290948b1
+    sha256: 3a093f0d76113bb5dd2799c7d0aaf73b51b752569dc13de145bb3d158a7b4a47
+  - path: tools/ontology_checker/rules.yaml
+    blob: 8d00050e32cea2ceb27d13c3d7788b5e8554cc84
+    sha256: e861e860f576cf824aff755d99f0da3118256f20d742f25eb4b0434503c6042d
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  expected_version: 0.2.8
+  expected_status: Draft
+  expected_concept_status: Accepted
+  discovery_result: bounded_stable_candidate_not_selected
+concept_dependencies:
+  - concept: Resource
+    defining_document: OCP-003
+    expected_document_status: Canonical
+    expected_concept_status: Canonical
+    consequence: dependency-floor-passes-without-freezing-assignment
+  - concept: Operation
+    defining_document: OCP-004
+    expected_document_status: Canonical
+    expected_concept_status: Canonical
+    consequence: dependency-floor-passes-without-freezing-assignment
+direct_consumers:
+  - document_id: OCP-006
+    primary: docs/006-constraint-concept/README.md
+    expected_status: Draft
+    lifecycle_class: draft
+    consumed_elements:
+      - "кілька ефективних Assignment одного Resource"
+      - "Сам `supersedes_assignment_ref` не визначає допустимі часові межі"
+  - document_id: OCP-013
+    primary: docs/013-resource-interchangeability/README.md
+    expected_status: Accepted
+    lifecycle_class: accepted
+    consumed_elements:
+      - "retain every exclusion of availability, authorization, ranking, selection, replacement and Assignment mutation"
+  - document_id: OCP-015
+    primary: docs/015-coordination-workflow/README.md
+    expected_status: Accepted
+    lifecycle_class: accepted
+    consumed_elements:
+      - "preserves Resource and Assignment identity"
+      - "alter Resource or Assignment identity"
+  - document_id: OCP-017
+    primary: docs/017-operation-lifecycle/README.md
+    expected_status: Accepted
+    lifecycle_class: accepted
+    consumed_elements:
+      - "if OCP-005 `assignment_effective_at` is true at that instant"
+      - "whose `operation_ref` names the Operation"
+      - "never edits an Assignment transition history"
+  - document_id: OCP-020
+    primary: docs/020-quantitative-constraint-input/README.md
+    expected_status: Accepted
+    lifecycle_class: accepted
+    consumed_elements:
+      - "create, amend, activate, suspend or terminate an Assignment"
+      - "Existing Resource, Operation, Assignment and Constraint artifacts remain valid"
+  - document_id: OCP-021
+    primary: docs/021-reservation-allocation-boundary/README.md
+    expected_status: Draft
+    lifecycle_class: draft
+    consumed_elements:
+      - "Their truth remains owned by OCP-005/OCP-006"
+      - "creates, blocks, cancels, supersedes or mutates an Assignment"
+open_question_inventory:
+  - question_id: Q1
+    state: resolved-historical
+    classification: outside-open-set
+    surface: RESERVATION_OBJECT_FORM
+    evidence_token: "Чи потрібен окремий фундаментальний Concept `Reservation`"
+  - question_id: Q2
+    state: open
+    classification: blocks-whole-document-freeze
+    surface: AMENDMENT_AFTER_ESTABLISHMENT
+    evidence_token: "Яка amendment model потрібна для зміни role або applicability після Establishment?"
+  - question_id: Q3
+    state: open
+    classification: blocks-whole-document-freeze
+    surface: RETROACTIVE_ESTABLISHMENT
+    evidence_token: "Чи допускається ретроактивне Establishment Assignment?"
+  - question_id: Q4
+    state: open
+    classification: local-after-bounded-freeze
+    surface: ROLE_TAXONOMY
+    evidence_token: "Чи потрібна окрема Role Taxonomy у Core?"
+  - question_id: Q5
+    state: open
+    classification: blocks-whole-document-freeze
+    surface: COMPOSITE_RESOURCE_SCOPE
+    evidence_token: "Чи повинен Assignment мати окремий scope для частини складеного Resource"
+  - question_id: Q6
+    state: resolved-historical
+    classification: outside-open-set
+    surface: QUANTITATIVE_INPUT
+    evidence_token: "Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?"
+  - question_id: Q7
+    state: open
+    classification: local-after-bounded-freeze
+    surface: ROLE_SPECIALIZATIONS
+    evidence_token: "Чи потрібен окремий тип Assignment для coordination, approval або observation roles?"
+  - question_id: Q8
+    state: open
+    classification: outside-bounded-surface
+    surface: CONSTRAINT_CONFLICT_HANDOFF
+    evidence_token: "Як Constraint визначає конфлікт одночасних Assignment?"
+  - question_id: Q9
+    state: open
+    classification: blocks-whole-document-freeze
+    surface: MULTIPLE_APPLICABILITY_INTERVALS
+    evidence_token: "Чи може один Assignment мати кілька неперервних applicability intervals"
+  - question_id: Q10
+    state: open
+    classification: local-after-bounded-freeze
+    surface: PROVENANCE_TAXONOMY
+    evidence_token: "Які provenance types повинні бути канонічними"
+  - question_id: Q11
+    state: open
+    classification: local-after-bounded-freeze
+    surface: REPLACEMENT_POLICY
+    evidence_token: "Яка replacement policy визначає допустимі overlap і gap"
+stable_candidates:
+  - surface_id: ASSIGNMENT_IDENTITY_REFERENCE_KERNEL
+    disposition: candidate
+    evidence:
+      - path: docs/005-assignment-concept/README.md
+        tokens: ["## 5. Identity", "його `resource_ref` і `operation_ref` не змінюються"]
+  - surface_id: TRANSITION_HISTORY_LIFECYCLE_KERNEL
+    disposition: candidate
+    evidence:
+      - path: docs/005-assignment-concept/README.md
+        tokens: ["## 7. Working Lifecycle", "### 7.6 Authoritative transition history", "рівно один із допустимих лінійних шляхів"]
+  - surface_id: STRUCTURAL_ROLE_PROVENANCE_KERNEL
+    disposition: candidate
+    evidence:
+      - path: docs/005-assignment-concept/README.md
+        tokens: ["## 6. Minimum Structural Contract", "### 6.2 RoleSpecification", "### 6.4 Provenance"]
+  - surface_id: NON_INHERITANCE_NON_AUTHORITY_BOUNDARY
+    disposition: candidate
+    evidence:
+      - path: docs/005-assignment-concept/README.md
+        tokens: ["## 11. Composition and Non-Inheritance", "Assignment не означає автоматично", "Встановлення Assignment не підтверджує Readiness"]
+  - surface_id: SUPERSESSION_IDENTITY_BOUNDARY
+    disposition: candidate
+    evidence:
+      - path: docs/005-assignment-concept/README.md
+        tokens: ["## 12. Replacement and Supersession", "саме по собі не завершує, не відкликає"]
+  - surface_id: EXECUTABLE_ASSIGNMENT_BOUNDARY
+    disposition: candidate
+    evidence:
+      - path: tools/ontology_checker/ocp_checker/checker.py
+        tokens: ["def validate_assignment(", "def assignment_effective_at(", "def derived_participates_in("]
+      - path: tools/ontology_checker/rules.yaml
+        tokens: ["source: OCP-005 §8", "source: OCP-005 §9"]
+moving_surfaces:
+  - surface_id: AMENDMENT_AFTER_ESTABLISHMENT
+    disposition: moving
+    question_ids: [Q2]
+  - surface_id: TEMPORAL_EFFECTIVITY_EXTENSION
+    disposition: moving
+    question_ids: [Q3, Q9]
+  - surface_id: ROLE_GOVERNANCE
+    disposition: moving
+    question_ids: [Q4, Q7]
+  - surface_id: COMPOSITE_RESOURCE_SCOPE
+    disposition: moving
+    question_ids: [Q5]
+  - surface_id: CONSTRAINT_CONFLICT_HANDOFF
+    disposition: moving-external-owner
+    question_ids: [Q8]
+  - surface_id: PROVENANCE_TAXONOMY
+    disposition: moving
+    question_ids: [Q10]
+  - surface_id: REPLACEMENT_POLICY
+    disposition: moving
+    question_ids: [Q11]
+blockers:
+  - blocker_id: AMENDMENT_MODEL_ABSENT
+    disposition: blocks-whole-document-freeze
+    question_ids: [Q2]
+  - blocker_id: TEMPORAL_MODEL_UNRESOLVED
+    disposition: blocks-whole-document-freeze
+    question_ids: [Q3, Q9]
+  - blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
+    disposition: blocks-whole-document-freeze
+    question_ids: [Q5]
+  - blocker_id: ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN
+    disposition: blocks-promotion-not-discovery
+    consumer_ids: [OCP-013, OCP-015, OCP-017, OCP-020]
+forbidden_outcomes:
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - OCP005_PROMOTION
+  - ASSIGNMENT_CONCEPT_CANONICALIZATION
+  - OPEN_QUESTION_CLOSURE
+  - T7_OPEN
