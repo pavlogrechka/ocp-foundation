@@ -43,7 +43,10 @@ eligible_lifecycle_documents:
   - {artifact_id: OCP-016, path: docs/016-core-boundary/README.md, version: 1.0.0, status: Canonical}
   - {artifact_id: OCP-017, path: docs/017-operation-lifecycle/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-018, path: docs/018-operation-authorization-source/README.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: OCP-019, path: docs/019-conflict-derivation-boundary/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-020, path: docs/020-quantitative-constraint-input/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-021, path: docs/021-reservation-allocation-boundary/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-022, path: docs/022-order-authorization-boundary/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: P-001, path: patterns/P-001-identified-record-pattern.md, version: 0.1.0, status: Accepted}
 eligible_governance_acts:
   - {artifact_id: AD-002, path: architecture/discovery/AD-002-state-readiness-review.md, version: 0.2.1, status: Accepted}
@@ -76,6 +79,7 @@ eligible_governance_acts:
   - {artifact_id: AD-032, path: architecture/discovery/AD-032-event-concept-canonicalization.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-033, path: architecture/discovery/AD-033-multicycle-promotion-gates.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-034, path: architecture/discovery/AD-034-current-numeric-accounting.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-037, path: architecture/discovery/AD-037-negative-boundary-acceptance.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003
@@ -147,6 +151,27 @@ candidate_mentions:
     positive_result: capacity-sufficiency-or-reservation-result
     can_complete_without_new_result: true
     disposition: explicit-negative-boundary
+  - candidate_id: CONFLICT_POSITIVE_REOPENING
+    artifact_id: OCP-019
+    path: docs/019-conflict-derivation-boundary/README.md
+    token: "A later positive-capable model must be a separate Board act."
+    positive_result: positive-conflict-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
+  - candidate_id: RESERVATION_POSITIVE_REOPENING
+    artifact_id: OCP-021
+    path: docs/021-reservation-allocation-boundary/README.md
+    token: "Each branch can be reopened only by a separate Board act"
+    positive_result: positive-reservation-or-allocation-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
+  - candidate_id: ORDER_POSITIVE_REOPENING
+    artifact_id: OCP-022
+    path: docs/022-order-authorization-boundary/README.md
+    token: "A future positive proposal requires a separate Board act."
+    positive_result: positive-order-authorization-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
 established_positive_outputs:
   - {artifact_id: OCP-011, path: docs/011-outcome-assessment-record/README.md, token: "`sufficient` | `achieved`, `not_achieved`, `partially_achieved` or `indeterminate`", result: outcome-assessment-conclusion}
   - {artifact_id: OCP-012, path: docs/012-capability-claim-record/README.md, token: "`effective_capability_claim` may project an activated evidence-backed assertion", result: effective-capability-claim}

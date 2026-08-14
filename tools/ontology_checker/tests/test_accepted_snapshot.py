@@ -5,6 +5,7 @@ import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import yaml
 
@@ -12,10 +13,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "tools/ontology_checker"))
 
+from ocp_checker import accepted_snapshot  # noqa: E402
 from ocp_checker.accepted_snapshot import (  # noqa: E402
     ACCEPTED_SNAPSHOT_CONTENT_MISMATCH,
     ACCEPTED_SNAPSHOT_COVERAGE_MISMATCH,
     ACCEPTED_SNAPSHOT_DECLARATION_MISSING,
+    ACCEPTED_SNAPSHOT_MAP_INVALID,
     ACCEPTED_SNAPSHOT_MISSING,
     ACCEPTED_SNAPSHOT_NAME_MISMATCH,
     ACCEPTED_SNAPSHOT_PRIMARY_INVALID,
@@ -88,12 +91,36 @@ EXPECTED = {
         "7b60d478ac15ced656eaee2d6a7062ca1c0291e6dadc6dccae85787f700df077",
         "current-accepted",
     ),
+    "OCP-019": (
+        "docs/019-conflict-derivation-boundary/README.md",
+        "Accepted",
+        "0.1.0",
+        "docs/019-conflict-derivation-boundary/reviewed-contract-v0.1.0.md",
+        "8689327a770eecccd40a7d43dd147659c24eb2e1dc0cd117dfe3e75114676bec",
+        "current-accepted",
+    ),
     "OCP-020": (
         "docs/020-quantitative-constraint-input/README.md",
         "Accepted",
         "0.1.0",
         "docs/020-quantitative-constraint-input/reviewed-contract-v0.1.0.md",
         "05992f1006dee9c2dca137e6145f3c5c70ce57746bb0febb79a3ca9598146bb8",
+        "current-accepted",
+    ),
+    "OCP-021": (
+        "docs/021-reservation-allocation-boundary/README.md",
+        "Accepted",
+        "0.1.0",
+        "docs/021-reservation-allocation-boundary/reviewed-contract-v0.1.0.md",
+        "85cdc7e3bb5281a6b2fe0af4d11b31bc47040b762de5786a0a8a10c2e000f683",
+        "current-accepted",
+    ),
+    "OCP-022": (
+        "docs/022-order-authorization-boundary/README.md",
+        "Accepted",
+        "0.1.0",
+        "docs/022-order-authorization-boundary/reviewed-contract-v0.1.0.md",
+        "8e2562153738d140510d21742b9c50ee8d37588ecbfe2a3221ae79f04268a60a",
         "current-accepted",
     ),
 }
@@ -199,7 +226,7 @@ class AcceptedSnapshotTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            new_acceptance = root / "docs/019-conflict-derivation-boundary/README.md"
+            new_acceptance = root / "docs/005-assignment-concept/README.md"
             text = new_acceptance.read_text(encoding="utf-8")
             new_acceptance.write_text(
                 text.replace("Status: Draft", "Status: Accepted", 1), encoding="utf-8"
@@ -235,6 +262,29 @@ class AcceptedSnapshotTests(unittest.TestCase):
                     ACCEPTED_SNAPSHOT_PRIMARY_INVALID,
                     validate_accepted_snapshots(root).errors,
                 )
+
+    def test_new_accepted_boundaries_preserve_exact_reviewed_bodies(self) -> None:
+        for document_id in ("OCP-019", "OCP-021", "OCP-022"):
+            with self.subTest(document=document_id):
+                entry = next(
+                    item for item in self.entries() if item["document_id"] == document_id
+                )
+                primary = (ROOT / entry["primary"]).read_bytes().split(b"\n---\n", 1)[1]
+                snapshot = (ROOT / entry["snapshot"]).read_bytes().split(b"\n---\n", 1)[1]
+                marker = b"\n## 15. Accepted authority and incorporated reviewed body\n"
+                self.assertTrue(primary.startswith(snapshot + marker))
+
+    def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
+        for attribute in ("ENTRY_KEYS", "BASES"):
+            values = getattr(accepted_snapshot, attribute)
+            for value in sorted(values):
+                with self.subTest(attribute=attribute, value=value), patch.object(
+                    accepted_snapshot, attribute, values - {value}
+                ):
+                    self.assertIn(
+                        ACCEPTED_SNAPSHOT_MAP_INVALID,
+                        validate_accepted_snapshots(ROOT).errors,
+                    )
 
 
 if __name__ == "__main__":

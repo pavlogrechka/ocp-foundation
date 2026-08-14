@@ -1,12 +1,11 @@
 ---
 Document-ID: OCP-021
 Title: Reservation and Allocation Establishment Boundary
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-026, OCP-001, OCP-003, OCP-005, OCP-006, OCP-016, OCP-020
 Used-By: Reservation and Allocation review, Constraint composition review, Audit
-Last-Review: 2026-08-14
 ---
 
 # OCP-021 — Reservation and Allocation Establishment Boundary
@@ -162,29 +161,3 @@ AB-025 is resolved only at the EN/QN negative establishment boundary. AB-037 rem
 No migration is required. Existing Resource, Assignment, Constraint and quantitative-input artifacts remain valid and are not required to carry OCP-021 data. Rollback removes this Draft, its manifest, module, tests, fixtures and accounting and restores AB-025 Open; it cannot create positive Reservation/Allocation authority by implication.
 
 Merge requires exact-head external review, Codex adjudication, green required CI and fresh explicit owner authorization naming the unchanged head. Draft preparation and review authorize no production use or next act.
-
-## 15. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts OCP-021 revision `0.2.0` as the governed Route C negative Reservation/Allocation establishment boundary selected by AD-026. The complete externally reviewed `0.1.0 / Draft` is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md) and incorporated without alteration.
-
-The original §§1–14 remain byte-identical to that reviewed snapshot. Their Draft lifecycle wording, pre-acceptance caution and pre-merge wording are immutable historical review evidence; this README frontmatter and §§15–18 are the current lifecycle authority. Acceptance approves only the four branch-specific negative results plus `indeterminate`. It does not establish Reservation, Allocation, exclusivity, capacity, availability, permission or production readiness.
-
-## 16. Readiness and dependency boundary
-
-The AD-037 readiness test is satisfied independently for OCP-021: E and Q remain separately defined; each branch has a complete exact request, result and fail-safe derivation; every declared field, rule, action, result and defensive value has executable evidence; and §11 is a future positive reopening gate rather than a missing current result.
-
-OCP-005 and OCP-006 remain Draft while OCP-020 remains Accepted. OCP-001 reserves direct-OCP floor L2 for Canonical documents, and current Accepted precedents already depend on OCP-005/OCP-006. OCP-021 exact-consumes only the current Assignment/Constraint negative boundaries and, for Q, exact Accepted `OCP-020@0.2.0`; it promises neither Canonical stability nor a positive result. Those Draft dependencies permit Accepted status and remain explicit prerequisites for any later Canonical proposal.
-
-The §14 status ledger describes the `0.1.0` Draft baseline. In the current atomic act OCP-019 is also `0.2.0 / Accepted`; AB-002 and AB-036 are Resolved only at their separately governed negative boundaries; AB-018 and AB-005 remain Open. The EN/QN boundary, AB-025/AB-037 disposition and all positive reopening requirements remain unchanged.
-
-## 17. Acceptance evidence and unchanged semantics
-
-The reviewed snapshot has SHA-256 `85cdc7e3bb5281a6b2fe0af4d11b31bc47040b762de5786a0a8a10c2e000f683`, equal to the exact Draft on acceptance base `main@24fff146bf1f44fc06cd7c9f0d1a2997383f4b2f`. AD-029 snapshot governance binds its name, bytes, current primary and Accepted status in the shared map; loss, rename, content substitution, declaration removal or lifecycle drift fails the repository suite.
-
-The OCP-021 rule manifest, checker module, focused tests and all Reservation/Allocation fixtures are unchanged. No branch, action, rule, result, field, OCP-020 binding, source section or non-implication moves.
-
-## 18. Version, rollback and non-transfer
-
-OCP-021 moves `0.1.0 / Draft → 0.2.0 / Accepted`. This is a pre-canonical MINOR lifecycle change because the unchanged negative contract becomes an approved basis for dependents. PATCH is false because status authority changes; MAJOR/`1.0.0` is false because no semantic contract is broken or removed and no Canonical stability promise is granted.
-
-Rollback is one separately reviewed lifecycle act that restores `0.1.0 / Draft` together with the snapshot-map and accounting projections while retaining immutable historical evidence. Acceptance does not create Reservation, Allocation or Capacity Concepts, activate either positive branch, change Assignment or Constraint, reopen AB-025, open a promotion cycle or authorize another act.

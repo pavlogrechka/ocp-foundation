@@ -59,10 +59,31 @@ entries:
     snapshot: docs/018-operation-authorization-source/reviewed-contract-v0.1.0.md
     sha256: 7b60d478ac15ced656eaee2d6a7062ca1c0291e6dadc6dccae85787f700df077
     basis: current-accepted
+  - document_id: OCP-019
+    primary: docs/019-conflict-derivation-boundary/README.md
+    current_status: Accepted
+    reviewed_version: 0.1.0
+    snapshot: docs/019-conflict-derivation-boundary/reviewed-contract-v0.1.0.md
+    sha256: 8689327a770eecccd40a7d43dd147659c24eb2e1dc0cd117dfe3e75114676bec
+    basis: current-accepted
   - document_id: OCP-020
     primary: docs/020-quantitative-constraint-input/README.md
     current_status: Accepted
     reviewed_version: 0.1.0
     snapshot: docs/020-quantitative-constraint-input/reviewed-contract-v0.1.0.md
     sha256: 05992f1006dee9c2dca137e6145f3c5c70ce57746bb0febb79a3ca9598146bb8
+    basis: current-accepted
+  - document_id: OCP-021
+    primary: docs/021-reservation-allocation-boundary/README.md
+    current_status: Accepted
+    reviewed_version: 0.1.0
+    snapshot: docs/021-reservation-allocation-boundary/reviewed-contract-v0.1.0.md
+    sha256: 85cdc7e3bb5281a6b2fe0af4d11b31bc47040b762de5786a0a8a10c2e000f683
+    basis: current-accepted
+  - document_id: OCP-022
+    primary: docs/022-order-authorization-boundary/README.md
+    current_status: Accepted
+    reviewed_version: 0.1.0
+    snapshot: docs/022-order-authorization-boundary/reviewed-contract-v0.1.0.md
+    sha256: 8e2562153738d140510d21742b9c50ee8d37588ecbfe2a3221ae79f04268a60a
     basis: current-accepted

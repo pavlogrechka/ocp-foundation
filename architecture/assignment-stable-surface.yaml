@@ -94,8 +94,8 @@ direct_consumers:
       - "Existing Resource, Operation, Assignment and Constraint artifacts remain valid"
   - document_id: OCP-021
     primary: docs/021-reservation-allocation-boundary/README.md
-    expected_status: Draft
-    lifecycle_class: draft
+    expected_status: Accepted
+    lifecycle_class: accepted
     consumed_elements:
       - "Their truth remains owned by OCP-005/OCP-006"
       - "creates, blocks, cancels, supersedes or mutates an Assignment"

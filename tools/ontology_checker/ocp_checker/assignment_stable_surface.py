@@ -19,8 +19,8 @@ CONCEPT_DEPENDENCY_IDS = frozenset({"Resource", "Operation"})
 DIRECT_CONSUMER_IDS = frozenset(
     {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"}
 )
-ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020"})
-DRAFT_CONSUMER_IDS = frozenset({"OCP-006", "OCP-021"})
+ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"})
+DRAFT_CONSUMER_IDS = frozenset({"OCP-006"})
 QUESTION_IDS = frozenset({f"Q{number}" for number in range(1, 12)})
 QUESTION_CLASSIFICATIONS = frozenset(
     {
@@ -119,8 +119,8 @@ EXPECTED_CONSUMERS = {
     ),
     "OCP-021": (
         "docs/021-reservation-allocation-boundary/README.md",
-        "Draft",
-        "draft",
+        "Accepted",
+        "accepted",
         (
             "Their truth remains owned by OCP-005/OCP-006",
             "creates, blocks, cancels, supersedes or mutates an Assignment",
