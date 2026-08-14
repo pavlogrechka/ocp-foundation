@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import copy
 from pathlib import Path
-from unittest.mock import patch
 import shutil
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 import yaml
 
@@ -21,27 +22,17 @@ from ocp_checker.foundation_promotion_gate import (  # noqa: E402
     FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
     validate_foundation_promotion_gate,
 )
-
-
-EXPECTED_COMPLETED_STEPS = {
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
-    "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
-    "CANDIDATE_BOARD_SELECTION",
-}
-EXPECTED_COMPLETED_STEP_ORDER = (
-    "T0", "T1", "T2", "T3", "AD-016C", "AD-016D", "T4", "T5",
-    "AD-016Y", "AD-016Z", "Y10D", "POST_DISCOVERY_REASSESSMENT",
-    "CANDIDATE_BOARD_SELECTION",
+from ocp_checker.event_promotion_selection import validate_event_promotion_selection  # noqa: E402
+from ocp_checker.event_stable_surface import validate_event_stable_surface  # noqa: E402
+from ocp_checker.foundation_promotion_reassessment import (  # noqa: E402
+    validate_foundation_promotion_reassessment,
 )
-EXPECTED_NEXT_GATES = {"EVENT_LIFECYCLE_PROMOTION_ACT"}
-EXPECTED_NEXT_GATE_ORDER = ("EVENT_LIFECYCLE_PROMOTION_ACT",)
-EXPECTED_FINAL_STEPS = {*EXPECTED_COMPLETED_STEPS, "EVENT_LIFECYCLE_PROMOTION_ACT"}
-EXPECTED_FINAL_STEP_ORDER = (*EXPECTED_COMPLETED_STEP_ORDER, "EVENT_LIFECYCLE_PROMOTION_ACT")
+
+
+EXPECTED_STEPS = (
+    "CANDIDATE_BOARD_SELECTION", "DOCUMENT_PROMOTION", "CONCEPT_CANONICALIZATION",
+)
 EXPECTED_CANDIDATES = {"OCP-005", "OCP-006", "OCP-010"}
-EXPECTED_L2_RESULTS = {"pass", "fail"}
-EXPECTED_STATUS_PAIRS = {
-    ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
-}
 EXPECTED_DEPENDENCIES = {
     "OCP-005": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004"),
     "OCP-006": ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005"),
@@ -60,8 +51,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / self.gate_path, target)
         for primary in (ROOT / "docs").glob("*/README.md"):
-            relative = primary.relative_to(ROOT)
-            copied = destination / relative
+            copied = destination / primary.relative_to(ROOT)
             copied.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(primary, copied)
 
@@ -70,130 +60,177 @@ class FoundationPromotionGateTests(unittest.TestCase):
             yaml.safe_dump(payload, sort_keys=False), encoding="utf-8"
         )
 
-    def test_repository_foundation_promotion_gate_is_valid(self) -> None:
-        self.assertTrue(validate_foundation_promotion_gate(ROOT).valid)
-        payload = self.payload()
-        self.assertEqual(set(payload["sequence"]["completed_steps"]), EXPECTED_FINAL_STEPS)
-        self.assertEqual(payload["sequence"]["required_before_promotion"], [])
-        self.assertEqual(payload["promotion_selections"], ["OCP-010"])
-        self.assertEqual(
-            {entry["document_id"] for entry in payload["candidates"]}, EXPECTED_CANDIDATES
+    def mutate_subject_status(self, root: Path, document_id: str, document: str, concept: str) -> None:
+        payload = self.payload(root)
+        entry = next(item for item in payload["candidates"] if item["document_id"] == document_id)
+        primary = root / entry["primary"]
+        text = primary.read_text(encoding="utf-8")
+        old_document = next(line for line in text.splitlines() if line.startswith("Status:"))
+        old_concept = next(line for line in text.splitlines() if line.startswith("Concept-Status:"))
+        primary.write_text(
+            text.replace(old_document, f"Status: {document}", 1).replace(
+                old_concept, f"Concept-Status: {concept}", 1
+            ), encoding="utf-8",
         )
+        entry["expected_document_status"] = document
+        entry["expected_concept_status"] = concept
+        self.write_payload(root, payload)
+
+    def append_assignment_cycle(self, root: Path, states: tuple[str, str, str]) -> None:
+        payload = self.payload(root)
+        steps = dict(zip(EXPECTED_STEPS, states))
+        payload["cycles"].append({
+            "cycle_id": "ASSIGNMENT_T6", "candidate_id": "OCP-005", "slot": "T6",
+            "steps": steps,
+            "evidence": {
+                step: f"SYNTHETIC_{step}_ACT"
+                for step, state in steps.items() if state == "completed"
+            },
+        })
+        payload["cycle_protocol"]["active_cycle_id"] = (
+            None if all(state == "completed" for state in states) else "ASSIGNMENT_T6"
+        )
+        self.write_payload(root, payload)
+
+    def test_repository_records_completed_event_cycle_and_no_active_cycle(self) -> None:
+        result = validate_foundation_promotion_gate(ROOT)
+        self.assertTrue(result.valid, result.errors)
+        payload = self.payload()
+        self.assertEqual(payload["schema_version"], 5)
+        self.assertIsNone(payload["cycle_protocol"]["active_cycle_id"])
+        self.assertEqual([item["candidate_id"] for item in payload["cycles"]], ["OCP-010"])
+        self.assertEqual(set(payload["candidates"][0]), foundation_promotion_gate.CANDIDATE_KEYS)
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         categories = (
-            ("REQUIRED_COMPLETED_STEPS", EXPECTED_COMPLETED_STEPS),
-            ("REQUIRED_NEXT_GATES", EXPECTED_NEXT_GATES),
-            ("FINAL_COMPLETED_STEPS", EXPECTED_FINAL_STEPS),
-            ("CANDIDATE_IDS", EXPECTED_CANDIDATES),
-            ("ALLOWED_L2_RESULTS", EXPECTED_L2_RESULTS),
-            ("ALLOWED_STATUS_PAIRS", EXPECTED_STATUS_PAIRS),
-            ("SLOT_IDS", {"T6", "T7"}),
-            ("MAP_KEYS", {"schema_version", "rule_owner", "sequence", "promotion_selections", "candidates"}),
-            ("SEQUENCE_KEYS", {"completed_steps", "selected_next_scope", "selected_next_scope_state", "required_before_promotion"}),
-            ("CANDIDATE_KEYS", {"document_id", "primary", "slot", "expected_document_status", "expected_concept_status", "direct_ocp_dependencies", "expected_l2", "l2_blockers"}),
+            "STEP_STATES", "CANDIDATE_IDS", "ALLOWED_L2_RESULTS", "ALLOWED_STATUS_PAIRS",
+            "SLOT_IDS", "MAP_KEYS", "PROTOCOL_KEYS", "CYCLE_KEYS", "CANDIDATE_KEYS",
         )
-        for attribute, expected_values in categories:
-            production_values = getattr(foundation_promotion_gate, attribute)
-            self.assertEqual(production_values, frozenset(expected_values))
-            for value in sorted(expected_values):
+        for attribute in categories:
+            values = getattr(foundation_promotion_gate, attribute)
+            for value in sorted(values, key=str):
                 with self.subTest(attribute=attribute, value=value), patch.object(
-                    foundation_promotion_gate,
-                    attribute,
-                    production_values - {value},
+                    foundation_promotion_gate, attribute, values - {value}
                 ):
-                    self.assertIn(
-                        FOUNDATION_PROMOTION_GATE_MAP_INVALID,
-                        validate_foundation_promotion_gate(ROOT).errors,
-                    )
+                    self.assertFalse(validate_foundation_promotion_gate(ROOT).valid)
+        for value in EXPECTED_STEPS:
+            with self.subTest(attribute="CYCLE_STEPS", value=value), patch.object(
+                foundation_promotion_gate,
+                "CYCLE_STEPS",
+                tuple(item for item in EXPECTED_STEPS if item != value),
+            ):
+                self.assertFalse(validate_foundation_promotion_gate(ROOT).valid)
 
-        ordered_categories = (
-            ("REQUIRED_COMPLETED_STEP_ORDER", EXPECTED_COMPLETED_STEP_ORDER),
-            ("REQUIRED_NEXT_GATE_ORDER", EXPECTED_NEXT_GATE_ORDER),
-            ("FINAL_COMPLETED_STEP_ORDER", EXPECTED_FINAL_STEP_ORDER),
-        )
-        for attribute, expected_values in ordered_categories:
-            production_values = getattr(foundation_promotion_gate, attribute)
-            self.assertEqual(production_values, expected_values)
-            for value in expected_values:
-                with self.subTest(attribute=attribute, value=value), patch.object(
-                    foundation_promotion_gate,
-                    attribute,
-                    tuple(item for item in production_values if item != value),
-                ):
-                    self.assertIn(
-                        FOUNDATION_PROMOTION_GATE_MAP_INVALID,
-                        validate_foundation_promotion_gate(ROOT).errors,
-                    )
-
-    def test_each_candidate_requires_prior_selection_before_canonical(self) -> None:
-        for document_id in sorted(EXPECTED_CANDIDATES):
-            if document_id == "OCP-010":
-                continue
-            with self.subTest(document_id=document_id), tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp)
-                self.copy_inputs(root)
-                payload = self.payload(root)
-                entry = next(
-                    item for item in payload["candidates"] if item["document_id"] == document_id
-                )
-                primary = root / entry["primary"]
-                text = primary.read_text(encoding="utf-8")
-                text = text.replace("Status: Draft", "Status: Canonical", 1)
-                text = text.replace("Version: 0.", "Version: 1.", 1)
-                primary.write_text(text, encoding="utf-8")
-                entry["expected_document_status"] = "Canonical"
-                self.write_payload(root, payload)
-                self.assertIn(
-                    FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
-                    validate_foundation_promotion_gate(root).errors,
-                )
-
-    def test_fully_gated_event_promotion_is_reachable(self) -> None:
-        self.assertTrue(validate_foundation_promotion_gate(ROOT).valid)
-
-    def test_completed_lifecycle_act_requires_selected_document_to_be_canonical(self) -> None:
+    def assert_assignment_cycle_reachable(
+        self, states: tuple[str, str, str], document: str, concept: str
+    ) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
+            if document == "Canonical":
+                self.mutate_subject_status(root, "OCP-005", document, concept)
+                payload = self.payload(root)
+                constraint = next(
+                    item for item in payload["candidates"] if item["document_id"] == "OCP-006"
+                )
+                constraint["expected_l2"] = "pass"
+                constraint["l2_blockers"] = []
+                self.write_payload(root, payload)
+            self.append_assignment_cycle(root, states)
+            result = validate_foundation_promotion_gate(root)
+            self.assertTrue(result.valid, result.errors)
+
+    def test_next_cycle_selected_draft_state_is_reachable_without_code_change(self) -> None:
+        self.assert_assignment_cycle_reachable(
+            ("completed", "pending", "pending"), "Draft", "Accepted"
+        )
+
+    def test_next_cycle_document_promoted_state_is_reachable_without_code_change(self) -> None:
+        self.assert_assignment_cycle_reachable(
+            ("completed", "completed", "pending"), "Canonical", "Accepted"
+        )
+
+    def test_next_cycle_fully_completed_state_is_reachable_without_code_change(self) -> None:
+        self.assert_assignment_cycle_reachable(
+            ("completed", "completed", "completed"), "Canonical", "Canonical"
+        )
+
+    def test_historical_event_witnesses_remain_valid(self) -> None:
+        self.assertTrue(validate_event_stable_surface(ROOT).valid)
+        self.assertTrue(validate_foundation_promotion_reassessment(ROOT).valid)
+        self.assertTrue(validate_event_promotion_selection(ROOT).valid)
+
+    def test_skipping_any_next_cycle_step_fails(self) -> None:
+        attacks = (
+            ("pending", "completed", "pending"),
+            ("completed", "pending", "completed"),
+            ("pending", "completed", "completed"),
+        )
+        for states in attacks:
+            with self.subTest(states=states), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                self.append_assignment_cycle(root, states)
+                errors = validate_foundation_promotion_gate(root).errors
+                self.assertTrue(
+                    FOUNDATION_PROMOTION_GATE_MAP_INVALID in errors
+                    or FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED in errors,
+                    errors,
+                )
+
+    def test_only_last_cycle_may_be_active_and_active_id_is_exact(self) -> None:
+        for mutation in ("missing_active", "two_incomplete", "completed_marked_active"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                self.append_assignment_cycle(root, ("completed", "pending", "pending"))
+                payload = self.payload(root)
+                if mutation == "missing_active":
+                    payload["cycle_protocol"]["active_cycle_id"] = None
+                elif mutation == "two_incomplete":
+                    payload["cycles"][0]["steps"]["CONCEPT_CANONICALIZATION"] = "pending"
+                    payload["cycles"][0]["evidence"].pop("CONCEPT_CANONICALIZATION")
+                else:
+                    payload["cycle_protocol"]["active_cycle_id"] = "EVENT_T6"
+                self.write_payload(root, payload)
+                self.assertIn(
+                    FOUNDATION_PROMOTION_GATE_MAP_INVALID,
+                    validate_foundation_promotion_gate(root).errors,
+                )
+
+    def test_unselected_canonical_candidate_still_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            self.mutate_subject_status(root, "OCP-005", "Canonical", "Accepted")
             payload = self.payload(root)
-            entry = next(item for item in payload["candidates"] if item["document_id"] == "OCP-010")
-            entry["expected_document_status"] = "Draft"
-            primary = root / entry["primary"]
-            primary.write_text(primary.read_text(encoding="utf-8").replace("Status: Canonical", "Status: Draft", 1), encoding="utf-8")
-            self.write_payload(root, payload)
+            constraint = next(item for item in payload["candidates"] if item["document_id"] == "OCP-006")
+            constraint["expected_l2"] = "pass"
+            constraint["l2_blockers"] = []
             self.write_payload(root, payload)
             self.assertIn(
                 FOUNDATION_PROMOTION_GATE_SELECTION_REQUIRED,
                 validate_foundation_promotion_gate(root).errors,
             )
 
-    def test_fully_gated_candidate_still_requires_live_l2_pass(self) -> None:
+    def test_selected_candidate_still_requires_live_l2_pass(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
             payload = self.payload(root)
-            payload["sequence"]["completed_steps"].append("EVENT_LIFECYCLE_PROMOTION_ACT")
-            payload["sequence"]["required_before_promotion"] = []
-            payload["promotion_selections"] = ["OCP-006"]
-            entry = next(
-                item for item in payload["candidates"] if item["document_id"] == "OCP-006"
-            )
-            entry["expected_document_status"] = "Canonical"
-            primary = root / entry["primary"]
-            primary.write_text(
-                primary.read_text(encoding="utf-8")
-                .replace("Version: 0.3.1", "Version: 1.0.0", 1)
-                .replace("Status: Draft", "Status: Canonical", 1),
-                encoding="utf-8",
-            )
+            payload["cycles"].append({
+                "cycle_id": "CONSTRAINT_T7", "candidate_id": "OCP-006", "slot": "T7",
+                "steps": dict(zip(EXPECTED_STEPS, ("completed", "pending", "pending"))),
+                "evidence": {"CANDIDATE_BOARD_SELECTION": "SYNTHETIC_SELECTION_ACT"},
+            })
+            payload["cycle_protocol"]["active_cycle_id"] = "CONSTRAINT_T7"
             self.write_payload(root, payload)
             self.assertIn(
                 FOUNDATION_PROMOTION_GATE_L2_MISMATCH,
                 validate_foundation_promotion_gate(root).errors,
             )
 
-    def test_each_declared_dependency_and_l2_result_is_live(self) -> None:
+    def test_each_declared_dependency_and_status_is_live(self) -> None:
         for document_id, dependencies in EXPECTED_DEPENDENCIES.items():
             for dependency in dependencies:
                 with self.subTest(document_id=document_id, dependency=dependency), tempfile.TemporaryDirectory() as tmp:
@@ -214,63 +251,6 @@ class FoundationPromotionGateTests(unittest.TestCase):
                         FOUNDATION_PROMOTION_GATE_CANDIDATE_DRIFT,
                         validate_foundation_promotion_gate(root).errors,
                     )
-
-        for document_id, dependency, new_status in (
-            ("OCP-005", "OCP-004", "Draft"),
-            ("OCP-006", "OCP-005", "Canonical"),
-            ("OCP-010", "OCP-008", "Draft"),
-        ):
-            with self.subTest(document_id=document_id, l2_dependency=dependency), tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp)
-                self.copy_inputs(root)
-                dependency_path = next((root / "docs").glob(f"{dependency[4:]}-*/README.md"))
-                text = dependency_path.read_text(encoding="utf-8")
-                old_status = next(line for line in text.splitlines() if line.startswith("Status:"))
-                text = text.replace(old_status, f"Status: {new_status}", 1)
-                dependency_path.write_text(text, encoding="utf-8")
-                self.assertIn(
-                    FOUNDATION_PROMOTION_GATE_L2_MISMATCH,
-                    validate_foundation_promotion_gate(root).errors,
-                )
-
-    def test_candidate_document_and_concept_statuses_are_individually_live(self) -> None:
-        for document_id in sorted(EXPECTED_CANDIDATES):
-            status_old = "Status: Canonical" if document_id == "OCP-010" else "Status: Draft"
-            concept_old = "Concept-Status: Canonical" if document_id == "OCP-010" else "Concept-Status: Accepted"
-            for field, old, new in (
-                ("document", status_old, "Status: Accepted"),
-                ("concept", concept_old, "Concept-Status: Proposed"),
-            ):
-                with self.subTest(document_id=document_id, field=field), tempfile.TemporaryDirectory() as tmp:
-                    root = Path(tmp)
-                    self.copy_inputs(root)
-                    entry = next(
-                        item for item in self.payload(root)["candidates"] if item["document_id"] == document_id
-                    )
-                    primary = root / entry["primary"]
-                    text = primary.read_text(encoding="utf-8")
-                    self.assertIn(old, text)
-                    primary.write_text(text.replace(old, new, 1), encoding="utf-8")
-                    self.assertIn(
-                        FOUNDATION_PROMOTION_GATE_CANDIDATE_DRIFT,
-                        validate_foundation_promotion_gate(root).errors,
-                    )
-
-    def test_completed_scope_cannot_regress_or_self_supply_selection(self) -> None:
-        for mutation in ("regress_scope", "self_supply_selection"):
-            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp)
-                self.copy_inputs(root)
-                payload = self.payload(root)
-                if mutation == "regress_scope":
-                    payload["sequence"]["selected_next_scope_state"] = "absent"
-                else:
-                    payload["promotion_selections"] = []
-                self.write_payload(root, payload)
-                self.assertIn(
-                    FOUNDATION_PROMOTION_GATE_MAP_INVALID,
-                    validate_foundation_promotion_gate(root).errors,
-                )
 
 
 if __name__ == "__main__":

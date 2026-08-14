@@ -207,9 +207,14 @@ class EventLifecyclePromotionTests(unittest.TestCase):
                 else:
                     gate_path = Path("architecture/foundation-promotion-gate.yaml")
                     gate = yaml.safe_load((root / gate_path).read_text(encoding="utf-8"))
-                    gate["sequence"]["completed_steps"].remove("EVENT_LIFECYCLE_PROMOTION_ACT")
-                    gate["sequence"]["required_before_promotion"] = ["EVENT_LIFECYCLE_PROMOTION_ACT"]
-                    gate["sequence"]["selected_next_scope_state"] = "selected"
+                    event_cycle = next(
+                        item for item in gate["cycles"] if item["candidate_id"] == "OCP-010"
+                    )
+                    event_cycle["steps"]["DOCUMENT_PROMOTION"] = "pending"
+                    event_cycle["steps"]["CONCEPT_CANONICALIZATION"] = "pending"
+                    event_cycle["evidence"].pop("DOCUMENT_PROMOTION")
+                    event_cycle["evidence"].pop("CONCEPT_CANONICALIZATION")
+                    gate["cycle_protocol"]["active_cycle_id"] = "EVENT_T6"
                     self.write_yaml(root, gate_path, gate)
                 self.assertIn(expected, validate_event_lifecycle_promotion(root).errors)
 

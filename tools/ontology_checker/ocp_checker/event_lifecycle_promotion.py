@@ -242,14 +242,22 @@ def validate_event_lifecycle_promotion(repo_root: Path) -> EventLifecyclePromoti
                 errors.append(EVENT_LIFECYCLE_PROMOTION_EVIDENCE_DRIFT)
 
     gate = _load(repo_root / "architecture/foundation-promotion-gate.yaml")
-    sequence = gate.get("sequence") if isinstance(gate, dict) else None
+    cycles = gate.get("cycles") if isinstance(gate, dict) else None
+    event_cycle = next(
+        (item for item in cycles if isinstance(item, dict) and item.get("candidate_id") == "OCP-010"),
+        None,
+    ) if isinstance(cycles, list) else None
     if (
-        not isinstance(sequence, dict)
-        or "EVENT_LIFECYCLE_PROMOTION_ACT" not in (sequence.get("completed_steps") or ())
-        or sequence.get("required_before_promotion") != []
-        or sequence.get("selected_next_scope") != "OCP-010"
-        or sequence.get("selected_next_scope_state") != "promoted"
-        or gate.get("promotion_selections") != ["OCP-010"]
+        not isinstance(gate, dict)
+        or gate.get("schema_version") != 5
+        or not isinstance(event_cycle, dict)
+        or event_cycle.get("cycle_id") != "EVENT_T6"
+        or event_cycle.get("steps") != {
+            "CANDIDATE_BOARD_SELECTION": "completed",
+            "DOCUMENT_PROMOTION": "completed",
+            "CONCEPT_CANONICALIZATION": "completed",
+        }
+        or event_cycle.get("evidence", {}).get("DOCUMENT_PROMOTION") != "AD-016AD"
     ):
         errors.append(EVENT_LIFECYCLE_PROMOTION_GATE_DRIFT)
     return _result(errors)
