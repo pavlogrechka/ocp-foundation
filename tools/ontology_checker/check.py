@@ -13,6 +13,7 @@ from ocp_checker import load_fixture, validate_reference_fixture, validate_repos
 from ocp_checker.artifact_governance import validate_artifact_governance, validate_process_audit
 from ocp_checker.accepted_snapshot import validate_accepted_snapshots
 from ocp_checker.concept_graph import validate_and_render_concept_graph
+from ocp_checker.current_numeric_accounting import validate_current_numeric_accounting
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.event_promotion_selection import validate_event_promotion_selection
 from ocp_checker.event_lifecycle_promotion import validate_event_lifecycle_promotion
@@ -137,6 +138,13 @@ def main() -> int:
     )
     failures += 0 if snapshot_result.valid else 1
 
+    accounting_result = validate_current_numeric_accounting(repo_root)
+    print(
+        f"{'PASS' if accounting_result.valid else 'FAIL'} "
+        f"current-numeric-accounting errors={list(accounting_result.errors)}"
+    )
+    failures += 0 if accounting_result.valid else 1
+
     process_result = validate_process_audit(repo_root, context=context)
     print(f"{'PASS' if process_result.valid else 'FAIL'} process-audit context={context} errors={list(process_result.errors)}")
     failures += 0 if process_result.valid else 1
@@ -162,7 +170,7 @@ def main() -> int:
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
         f"foundation promotion gate, reassessment, Event selection, lifecycle promotion and Concept canonicalization, "
-        f"open-question resolution sync, accepted snapshot governance, process audit, "
+        f"open-question resolution sync, accepted snapshot governance, current numeric accounting, process audit, "
         f"Concept graph and generated map; "
         f"failures={failures}"
     )
