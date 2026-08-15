@@ -17,6 +17,7 @@ from ocp_checker.current_numeric_accounting import validate_current_numeric_acco
 from ocp_checker.consumer_need_discovery import validate_consumer_need_discovery
 from ocp_checker.assignment_amendment_q2 import validate_assignment_amendment_q2
 from ocp_checker.assignment_temporal_scope import validate_assignment_temporal_scope
+from ocp_checker.assignment_consumer_compatibility import validate_assignment_consumer_compatibility
 from ocp_checker.assignment_stable_surface import validate_assignment_stable_surface
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.event_promotion_selection import validate_event_promotion_selection
@@ -128,6 +129,13 @@ def main() -> int:
     )
     failures += 0 if assignment_temporal_scope_result.valid else 1
 
+    assignment_compatibility_result = validate_assignment_consumer_compatibility(repo_root)
+    print(
+        f"{'PASS' if assignment_compatibility_result.valid else 'FAIL'} "
+        f"assignment-consumer-compatibility errors={list(assignment_compatibility_result.errors)}"
+    )
+    failures += 0 if assignment_compatibility_result.valid else 1
+
     consumer_need_result = validate_consumer_need_discovery(repo_root)
     print(
         f"{'PASS' if consumer_need_result.valid else 'FAIL'} "
@@ -202,7 +210,8 @@ def main() -> int:
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
         f"foundation promotion gate, reassessment, Event and Assignment stable-surface discovery, "
-        f"Assignment amendment-Q2 and temporal/partial-scope attempts, consumer-need discovery, "
+        f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, "
+        f"consumer-need discovery, "
         f"Event selection, lifecycle promotion and Concept canonicalization, "
         f"open-question resolution sync, accepted snapshot governance, current numeric accounting, process audit, "
         f"Concept graph and generated map; "

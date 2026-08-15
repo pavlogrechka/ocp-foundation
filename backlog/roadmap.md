@@ -119,6 +119,7 @@
 - [x] AD-037 negative-boundary acceptance — independently prove OCP-019/OCP-021/OCP-022 ready for Accepted status, preserve each `0.1.0` reviewed body byte-for-byte, move each primary to `0.2.0 / Accepted`, and extend the AD-029 snapshot guard without changing negative semantics or activating a positive model
 - [x] AD-038 Assignment Q2 negative-closure attempt — falsify the supersession-only hypothesis against current OCP-005, all five live Accepted consumers and two executable field-change probes; keep Q2/AB-026 open because closure requires new positive immutability, successor-binding and provenance rules under G4
 - [x] AD-039 Assignment temporal/partial-scope negative-closure attempts — isolate the existing pre-establishment effectivity boundary, reproduce accepted backdated-establishment, extra-interval and partial-scope probes, and keep Q3/Q9/Q5 plus both freeze blockers open because closure requires new positive rules under G4
+- [x] AD-040 Assignment Accepted-consumer compatibility evidence — rederive five live Accepted consumers, replay four negative exclusions and OCP-017 positive terminal alignment on unchanged fixtures, remove only the compatibility-evidence blocker and retain all three semantic blockers without selecting Assignment or starting a cycle
 
 ## Milestone 1A — Governed Executable Validation Loop
 
