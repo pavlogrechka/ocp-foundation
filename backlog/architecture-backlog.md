@@ -10,7 +10,7 @@
 | AB-006 | Межа Organization / Resource | Open | Уточнити після Organization Concept; перевірити модель Organizational Resource |
 | AB-007 | Межа State та Readiness | Resolved | AD-011 `0.3.0` окремо приймає S0 і R0 no-new-authority controls; State/Readiness deregistered як Concept candidates, а R1 можна reopen лише через окремий mandate з concrete consumer та legitimate criterion/target/freshness owners |
 | AB-008 | Межа Infrastructure Resource / Environment | Resolved | OCP-004 `0.8.0` реалізує AD-014B Outcome A: Operation-owned exact local spatial binding, opaque profile/snapshot envelope і fail-safe evidence; Operational Area marker атомарно видалено, managed sites лишаються Resource, Environment — category/domain input |
-| AB-009 | Resource Group як окремий Concept | Open | Перевірити групове залучення після OCP-005 |
+| AB-009 | Resource Group як окремий Concept | Open | AD-039 підтверджує, що OCP-005 composition non-inheritance не вирішує Q5 partial composite-Resource scope: validator приймає невизнане scope extension, а prohibition або subject-identity/derivation rule потребує окремого Accepted consumer та OCP-016 G4 |
 | AB-010 | Модель кількості, резервування і споживання Consumable Resource | Deferred | Після Assignment і Constraint; використовувати managed stock як гранулярність Resource |
 | AB-011 | Взаємозамінність Resource | Resolved | PR #49 / OCP-013: прийнято consumer-owned exact requirement, deterministic directional eligibility, fail-safe replay і всі AD-008 §12 counterexamples без availability, authorization, selection чи replacement authority |
 | AB-012 | Автоматична перевірка нормативних Concept references | Resolved | OCP-001 `0.8.0` і artifact taxonomy `0.5.0` вимагають global uniqueness primary artifact/rule IDs, exact-resolvable `Depends-On` та exact OCP source binding; semantic duplicate prose залишається external-review obligation, а не машинно доведеним reference property |
@@ -30,7 +30,7 @@
 | AB-026 | Amendment model для Assignment | Open | AD-038 спростовує негативне закриття через наявний supersession: OCP-005 не робить role/applicability immutable, не вимагає successor binding і не має amendment provenance; окреме позитивне правило потребує Accepted consumer need та OCP-016 G4 |
 | AB-027 | Role Taxonomy | Open | Визначити межі Core role codes і domain role namespaces |
 | AB-028 | Узгодження lifecycle Operation та Assignment | Open | Визначити правила для незавершених Assignment при Completed, Cancelled або Aborted Operation після Constraint |
-| AB-029 | Кілька applicability intervals в Assignment | Open | Вирішити: один Assignment з кількома інтервалами чи окремий Assignment на інтервал |
+| AB-029 | Кілька applicability intervals в Assignment | Open | AD-039 відділяє чинну заборону effectivity до записаного `established_at` від невирішених Q3/Q9: backdated Establishment і додатковий two-interval extension проходять validator; retroactivity/cardinality rules потребують окремого Accepted consumer та OCP-016 G4 |
 | AB-030 | Масове створення Assignment | Open | Визначити механізм для груп Resource без неявного успадкування участі |
 | AB-031 | Lifecycle record consistency | Resolved | OCP-005 використовує authoritative linear transition history; regression fixture у PR-0006; узагальнення форми винесено в P-001 |
 | AB-032 | Canonical rule reference integrity | Resolved | OCP-001 вимагає єдине defining location; PR-0006 додає source-bound manifests, а OCP-001 `0.8.0` та taxonomy `0.5.0` механічно забороняють duplicate rule IDs і unresolved structured sources |

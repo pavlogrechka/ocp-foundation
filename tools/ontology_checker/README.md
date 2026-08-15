@@ -18,6 +18,7 @@ Implemented validators:
 - Accepted OCP-022 separate mandatory, sufficient and admissible-source Order authorization negative establishment boundaries;
 - Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
 - Assignment transition history, projections, applicability and participation derivation;
+- Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
 - Capability definition identity, namespace, supersession and exact resolution;

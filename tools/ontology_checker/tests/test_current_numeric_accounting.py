@@ -60,7 +60,7 @@ class CurrentNumericAccountingTests(unittest.TestCase):
                 "snapshot_retained": 1,
                 "p001_invokers": 9,
                 "fixtures": 274,
-                "tests": 324,
+                "tests": 331,
             },
         )
 
