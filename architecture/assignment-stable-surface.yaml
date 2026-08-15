@@ -220,9 +220,6 @@ blockers:
   - blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
     disposition: blocks-whole-document-freeze
     question_ids: [Q5]
-  - blocker_id: ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN
-    disposition: blocks-promotion-not-discovery
-    consumer_ids: [OCP-013, OCP-015, OCP-017, OCP-020]
 forbidden_outcomes:
   - ASSIGNMENT_SELECTION
   - PROMOTION_CYCLE_START

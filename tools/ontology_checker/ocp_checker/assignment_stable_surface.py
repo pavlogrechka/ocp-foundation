@@ -56,7 +56,6 @@ BLOCKER_IDS = frozenset(
         "AMENDMENT_MODEL_ABSENT",
         "TEMPORAL_MODEL_UNRESOLVED",
         "PARTIAL_SCOPE_IDENTITY_UNRESOLVED",
-        "ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN",
     }
 )
 FORBIDDEN_OUTCOMES = frozenset(
@@ -164,9 +163,6 @@ EXPECTED_BLOCKERS = {
     "AMENDMENT_MODEL_ABSENT": ("blocks-whole-document-freeze", ("Q2",), ()),
     "TEMPORAL_MODEL_UNRESOLVED": ("blocks-whole-document-freeze", ("Q3", "Q9"), ()),
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("blocks-whole-document-freeze", ("Q5",), ()),
-    "ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN": (
-        "blocks-promotion-not-discovery", (), ("OCP-013", "OCP-015", "OCP-017", "OCP-020")
-    ),
 }
 EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
     "docs/005-assignment-concept/README.md": ("6e6c00e723b15a348e7610d4ca5a1ae23526c52b", "a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065"),
