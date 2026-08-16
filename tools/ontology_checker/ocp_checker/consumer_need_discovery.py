@@ -29,7 +29,7 @@ ELIGIBLE_GOVERNANCE_IDS = frozenset(
         "AD-009", "AD-010", "AD-011", "AD-012", "AD-013", "AD-014", "AD-015",
         "AD-016", "AD-017", "AD-018", "AD-019", "AD-020", "AD-021", "AD-022",
         "AD-025", "AD-026", "AD-027", "AD-028", "AD-029", "AD-030", "AD-032",
-        "AD-033", "AD-034", "AD-037",
+        "AD-033", "AD-034", "AD-037", "AD-041",
     }
 )
 CANDIDATE_IDS = frozenset(

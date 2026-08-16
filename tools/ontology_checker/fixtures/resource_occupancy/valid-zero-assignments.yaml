@@ -1,0 +1,17 @@
+case_id: resource-occupancy-valid-zero-assignments
+concept: ResourceOccupancyDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  occupancy_request:
+    request_id: OCC-REQUEST-001
+    rule_ref: resource-occupancy-at@0.1.0
+    resource_ref: R-001
+    evaluation_time: 2026-08-02T10:00:00Z
+    assignment_snapshot_ref: OCC-SNAPSHOT-001
+    stored_occupied: false
+    stored_witness_assignment_refs: []
+  assignment_snapshots:
+    - snapshot_ref: OCC-SNAPSHOT-001
+      resource_ref: R-001
+      completeness_evidence_ref: SYNTH-COMPLETE-001
+      assignments: []

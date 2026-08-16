@@ -80,6 +80,7 @@ eligible_governance_acts:
   - {artifact_id: AD-033, path: architecture/discovery/AD-033-multicycle-promotion-gates.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-034, path: architecture/discovery/AD-034-current-numeric-accounting.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-037, path: architecture/discovery/AD-037-negative-boundary-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-041, path: architecture/discovery/AD-041-resource-occupancy-route-d.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003

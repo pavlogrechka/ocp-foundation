@@ -1,0 +1,31 @@
+case_id: resource-occupancy-valid-end-boundary
+concept: ResourceOccupancyDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  occupancy_request:
+    request_id: OCC-REQUEST-006
+    rule_ref: resource-occupancy-at@0.1.0
+    resource_ref: R-001
+    evaluation_time: 2026-08-02T12:00:00Z
+    assignment_snapshot_ref: OCC-SNAPSHOT-006
+    stored_occupied: false
+    stored_witness_assignment_refs: []
+  assignment_snapshots:
+    - snapshot_ref: OCC-SNAPSHOT-006
+      resource_ref: R-001
+      completeness_evidence_ref: SYNTH-COMPLETE-006
+      assignments:
+        - assignment_id: A-001
+          resource_ref: R-001
+          operation_ref: OP-001
+          role_specification: {role_code: executor}
+          applicability_start: 2026-08-02T10:00:00Z
+          applicability_end: 2026-08-02T12:00:00Z
+          transition_history:
+            - {transition_id: AT-001, assignment_ref: A-001, from_stage: Draft, to_stage: Established, occurred_at: 2026-08-02T09:55:00Z, provenance_ref: SYNTH-DECISION-001}
+          lifecycle_stage: Established
+          created_at: 2026-08-02T09:50:00Z
+          established_at: 2026-08-02T09:55:00Z
+          terminal_at: null
+          provenance_ref: SYNTH-DECISION-001
+          supersedes_assignment_ref: null

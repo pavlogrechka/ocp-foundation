@@ -17,6 +17,7 @@ Implemented validators:
 - Accepted OCP-021 separate whole-Resource and partial/quantitative Reservation/Allocation negative composition boundaries;
 - Accepted OCP-022 separate mandatory, sufficient and admissible-source Order authorization negative establishment boundaries;
 - Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
+- Draft OCP-023 Route D Resource-occupancy reference derivation over one exact synthetic complete Assignment snapshot, with all effective Assignment witnesses and no activation or adjacent authority;
 - Assignment transition history, projections, applicability and participation derivation;
 - Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
@@ -65,6 +66,7 @@ Implemented reference derivations include:
 - `organization_established_at`;
 - `organization_relationship_effective_at`;
 - `organization_relationship_successor_ids` (all exact successors, never a head).
+- `derive_resource_occupancy` (Draft synthetic reference only; not an activated Resource-state authority).
 
 ## Manifest discipline
 
@@ -83,6 +85,7 @@ The checker uses exact module manifests:
 - `reservation-boundary-rules.yaml` — Accepted OCP-021 separate E/Q evidence envelopes, negative establishment results and prohibited positive authority.
 - `order-authorization-boundary-rules.yaml` — Accepted OCP-022 three-question evidence envelope, negative establishment results and individually guarded authority/Concept/selector/self-supply/side-effect fields.
 - `constraint-interaction-rules.yaml` — Draft OCP-006 separate application-order, override and contextual-waiver evidence envelopes, negative results and prohibited positive authority.
+- `resource-occupancy-rules.yaml` — Draft OCP-023 exact request/snapshot binding, one occupancy derivation, synthetic completeness evidence and individually guarded activation/adjacent-authority exclusions.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 
@@ -409,6 +412,7 @@ The suite includes, among other cases:
 - Assignment Q2 amendment-attempt probes keep the question and `AMENDMENT_MODEL_ABSENT` blocker open, derive all five current Accepted consumers, bind four absent owner obligations and prove with unchanged-history variants that current validation accepts changed established role/applicability values without supersession or amendment provenance; the evidence itself remains non-positive while the hypothetical closure is G4-gated.
 - consumer-need discovery probes derive every current Accepted/Canonical lifecycle artifact and Accepted governance act from live frontmatter, now including the three Accepted negative boundaries and AD-037; they distinguish current own-obligation need from negative, deferred, historical and already-satisfied statements, pin every candidate/output/gate token and reject any invented unmet need, activation or promotion-cycle start.
 - Assignment consumer-compatibility evidence derives all five current Accepted `Depends-On: OCP-005` documents, pins each consumed text token to the AD-035 bounded surface, replays four negative-exclusion fixtures and the positive OCP-017 terminal-alignment fixture, rejects any restored compatibility blocker or changed consumer result, and leaves all moving surfaces, three semantic blockers and promotion gates unchanged.
+- Draft Route D Resource-occupancy probes reuse current single-Assignment effectivity over an exact synthetic complete Resource snapshot, retain every effective witness in identity order, cover zero/one/overlap/gap/start/end cases and fail closed on missing completeness, activation or conflict/priority/capacity/reservation/authorization coupling.
 - Event promotion-selection probes that keep the recorded OCP-010 subject Draft while binding its exact baseline state and per-path evidence blob/SHA-256, the exact Board selection, both Accepted consumers, all three compatibility blockers, zero-at-selection migration and atomic rollback; completed discovery/reassessment witnesses bind immutable baseline objects while the live gate separately requires the Event lifecycle promotion act.
 - Event Concept canonicalization probes separate current status carriers from immutable baseline witnesses, reject any registry/taxonomy/defining/current-projection drift, rederive stable dependencies from live metadata and replay Event identity, observation-history, integrated-assessment and primary-consumer evidence without changing fixtures.
 - Event lifecycle-promotion probes independently require all three precondition proofs, stable absence of a Core Operation↔Event edge, OCP-011 governed assessment ownership, live OCP-011/OCP-017 compatibility fixtures, atomic final-gate completion and immutable historical subject witnesses before OCP-010 may be `1.0.0 / Canonical`.
