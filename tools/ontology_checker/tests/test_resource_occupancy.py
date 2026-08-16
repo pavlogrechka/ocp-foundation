@@ -270,6 +270,26 @@ class ResourceOccupancyTests(unittest.TestCase):
                     self.assertNotIn("ResourceOccupancyDataset", text)
 
     def test_protected_existing_artifacts_and_fixtures_are_byte_identical(self) -> None:
+        baseline_fixture_paths = subprocess.check_output(
+            [
+                "git",
+                "ls-tree",
+                "-r",
+                "--name-only",
+                self.baseline,
+                "--",
+                "tools/ontology_checker/fixtures",
+            ],
+            cwd=REPO_ROOT,
+            text=True,
+        ).splitlines()
+        self.assertTrue(baseline_fixture_paths)
+        self.assertFalse(
+            any(
+                path.startswith("tools/ontology_checker/fixtures/resource_occupancy/")
+                for path in baseline_fixture_paths
+            )
+        )
         protected = [
             *(
                 str(next(REPO_ROOT.glob(f"docs/{number:03d}-*"))).replace(
@@ -280,7 +300,7 @@ class ResourceOccupancyTests(unittest.TestCase):
             "patterns",
             "architecture/foundation-promotion-gate.yaml",
             "architecture/baselines/foundation-map.md",
-            "tools/ontology_checker/fixtures",
+            *baseline_fixture_paths,
         ]
         completed = subprocess.run(
             ["git", "diff", "--quiet", self.baseline, "--", *protected],
