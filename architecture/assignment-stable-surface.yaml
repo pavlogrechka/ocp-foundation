@@ -99,6 +99,13 @@ direct_consumers:
     consumed_elements:
       - "Their truth remains owned by OCP-005/OCP-006"
       - "creates, blocks, cancels, supersedes or mutates an Assignment"
+  - document_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    expected_status: Draft
+    lifecycle_class: draft
+    consumed_elements:
+      - "assignment_effective_at(assignment, at)"
+      - "Every Assignment must independently satisfy the current OCP-005 reference validator"
 open_question_inventory:
   - question_id: Q1
     state: resolved-historical

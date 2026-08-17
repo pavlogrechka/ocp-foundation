@@ -17,10 +17,10 @@ ASSIGNMENT_STABLE_SURFACE_GATE_DRIFT = "ASSIGNMENT_STABLE_SURFACE_GATE_DRIFT"
 
 CONCEPT_DEPENDENCY_IDS = frozenset({"Resource", "Operation"})
 DIRECT_CONSUMER_IDS = frozenset(
-    {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"}
+    {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
 )
 ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"})
-DRAFT_CONSUMER_IDS = frozenset({"OCP-006"})
+DRAFT_CONSUMER_IDS = frozenset({"OCP-006", "OCP-023"})
 QUESTION_IDS = frozenset({f"Q{number}" for number in range(1, 12)})
 QUESTION_CLASSIFICATIONS = frozenset(
     {
@@ -123,6 +123,15 @@ EXPECTED_CONSUMERS = {
         (
             "Their truth remains owned by OCP-005/OCP-006",
             "creates, blocks, cancels, supersedes or mutates an Assignment",
+        ),
+    ),
+    "OCP-023": (
+        "docs/023-resource-occupancy/README.md",
+        "Draft",
+        "draft",
+        (
+            "assignment_effective_at(assignment, at)",
+            "Every Assignment must independently satisfy the current OCP-005 reference validator",
         ),
     ),
 }

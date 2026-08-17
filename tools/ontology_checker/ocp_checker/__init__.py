@@ -163,6 +163,14 @@ from .order_authorization_boundary import (
     validate_order_authorization_boundary_dataset,
     validate_order_authorization_boundary_fixture,
 )
+from .resource_occupancy import (
+    RESOURCE_OCCUPANCY_DERIVATION_RULES,
+    RESOURCE_OCCUPANCY_ERROR_CODES,
+    ResourceOccupancyResult,
+    derive_resource_occupancy,
+    validate_resource_occupancy_dataset,
+    validate_resource_occupancy_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -181,6 +189,8 @@ DERIVATION_RULES = (
 
 def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
+    if concept == "ResourceOccupancyDataset":
+        return validate_resource_occupancy_fixture(fixture)
     if concept == "Organization":
         return validate_organization(fixture.get("entity") or {})
     if concept == "OrganizationRelationshipRecord":
