@@ -48,10 +48,10 @@ class CurrentNumericAccountingTests(unittest.TestCase):
         self.assertEqual(
             derive_current_numeric_accounting(ROOT),
             {
-                "ocp_total": 24,
+                "ocp_total": 25,
                 "ocp_canonical": 10,
                 "ocp_accepted": 12,
-                "ocp_draft": 2,
+                "ocp_draft": 3,
                 "concept_total": 8,
                 "concept_canonical": 6,
                 "concept_accepted": 2,
@@ -59,8 +59,8 @@ class CurrentNumericAccountingTests(unittest.TestCase):
                 "snapshot_current": 12,
                 "snapshot_retained": 1,
                 "p001_invokers": 9,
-                "fixtures": 280,
-                "tests": 353,
+                "fixtures": 286,
+                "tests": 362,
             },
         )
 

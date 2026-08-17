@@ -1,0 +1,9 @@
+case_id: completeness-evaluator-invalid-unresolved-authority
+concept: CompletenessEvaluatorDataset
+expected: {valid: false, error_codes: [COMPLETENESS_EVALUATOR_AUTHORITY_UNRESOLVED]}
+dataset:
+  recognition_request: {request_id: CER-REQUEST-003, rule_ref: assignment-set-completeness-recognition@0.1.0, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, assignment_snapshot_ref: SYNTH-SNAPSHOT-003, evaluator_profile_ref: SYNTH-PROFILE-003, completeness_evidence_ref: SYNTH-EVIDENCE-003, stored_result: indeterminate}
+  evaluator_profiles:
+    - {evaluator_profile_ref: SYNTH-PROFILE-003, evaluator_ref: UNPROVEN-EVALUATOR, domain_ref: resource-occupancy, subject_kind: resource-assignment-set-completeness, authority_basis_ref: UNPROVEN-AUTHORITY, valid_from: 2026-08-02T00:00:00Z, valid_until: 2026-08-03T00:00:00Z}
+  completeness_evidence:
+    - {completeness_evidence_ref: SYNTH-EVIDENCE-003, evaluator_profile_ref: SYNTH-PROFILE-003, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, assignment_snapshot_ref: SYNTH-SNAPSHOT-003, produced_at: 2026-08-02T09:59:00Z, coverage_kind: all-assignments-for-resource-at-time, claim: assignment_set_complete_for_resource}

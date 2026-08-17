@@ -18,6 +18,7 @@ Implemented validators:
 - Accepted OCP-022 separate mandatory, sufficient and admissible-source Order authorization negative establishment boundaries;
 - Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
 - Accepted OCP-023 Route D Resource-occupancy reference derivation over one exact synthetic complete Assignment snapshot, with all effective Assignment witnesses and no activation or adjacent authority;
+- Draft OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy and no real evaluator or activation;
 - Assignment transition history, projections, applicability and participation derivation;
 - Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
@@ -86,6 +87,7 @@ The checker uses exact module manifests:
 - `order-authorization-boundary-rules.yaml` — Accepted OCP-022 three-question evidence envelope, negative establishment results and individually guarded authority/Concept/selector/self-supply/side-effect fields.
 - `constraint-interaction-rules.yaml` — Draft OCP-006 separate application-order, override and contextual-waiver evidence envelopes, negative results and prohibited positive authority.
 - `resource-occupancy-rules.yaml` — Accepted OCP-023 exact request/snapshot binding, one occupancy derivation, synthetic completeness evidence and individually guarded activation/adjacent-authority exclusions; Accepted status supplies no production activation.
+- `completeness-evaluator-rules.yaml` — Draft OCP-024 synthetic recognition envelope; invalid, stale, mismatched, ambiguous, conflicting or ungrounded evidence stays indeterminate and no production authority is inferred.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 

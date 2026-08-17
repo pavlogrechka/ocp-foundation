@@ -171,6 +171,14 @@ from .resource_occupancy import (
     validate_resource_occupancy_dataset,
     validate_resource_occupancy_fixture,
 )
+from .completeness_evaluator import (
+    COMPLETENESS_EVALUATOR_DERIVATION_RULES,
+    COMPLETENESS_EVALUATOR_ERROR_CODES,
+    CompletenessEvidenceRecognition,
+    derive_completeness_evidence_recognition,
+    validate_completeness_evaluator_dataset,
+    validate_completeness_evaluator_fixture,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -189,6 +197,8 @@ DERIVATION_RULES = (
 
 def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
+    if concept == "CompletenessEvaluatorDataset":
+        return validate_completeness_evaluator_fixture(fixture)
     if concept == "ResourceOccupancyDataset":
         return validate_resource_occupancy_fixture(fixture)
     if concept == "Organization":
