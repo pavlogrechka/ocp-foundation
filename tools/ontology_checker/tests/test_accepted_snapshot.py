@@ -123,6 +123,14 @@ EXPECTED = {
         "8e2562153738d140510d21742b9c50ee8d37588ecbfe2a3221ae79f04268a60a",
         "current-accepted",
     ),
+    "OCP-023": (
+        "docs/023-resource-occupancy/README.md",
+        "Accepted",
+        "0.1.0",
+        "docs/023-resource-occupancy/reviewed-contract-v0.1.0.md",
+        "c8a765053c3bd398eba18508c080f15dbe49a784565faa59bb8a88d266d872d4",
+        "current-accepted",
+    ),
 }
 
 
@@ -264,14 +272,23 @@ class AcceptedSnapshotTests(unittest.TestCase):
                 )
 
     def test_new_accepted_boundaries_preserve_exact_reviewed_bodies(self) -> None:
-        for document_id in ("OCP-019", "OCP-021", "OCP-022"):
+        markers = {
+            "OCP-019": 15,
+            "OCP-021": 15,
+            "OCP-022": 15,
+            "OCP-023": 11,
+        }
+        for document_id, section in markers.items():
             with self.subTest(document=document_id):
                 entry = next(
                     item for item in self.entries() if item["document_id"] == document_id
                 )
                 primary = (ROOT / entry["primary"]).read_bytes().split(b"\n---\n", 1)[1]
                 snapshot = (ROOT / entry["snapshot"]).read_bytes().split(b"\n---\n", 1)[1]
-                marker = b"\n## 15. Accepted authority and incorporated reviewed body\n"
+                marker = (
+                    f"\n## {section}. Accepted authority and incorporated reviewed body\n"
+                    .encode("utf-8")
+                )
                 self.assertTrue(primary.startswith(snapshot + marker))
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:

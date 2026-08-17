@@ -94,6 +94,12 @@ accepted_consumer_review:
     evidence_token: creates, blocks, cancels, supersedes or mutates an Assignment
     requires_in_place_amendment: false
     consequence: treats-assignment-truth-as-upstream-and-opaque
+  - document_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    expected_status: Accepted
+    evidence_token: Every Assignment must independently satisfy the current OCP-005 reference validator
+    requires_in_place_amendment: false
+    consequence: consumes-current-assignment-truth-without-amendment-authority
 executable_gap_probes:
   fixture: tools/ontology_checker/fixtures/assignment/valid-established.yaml
   unchanged_fields: [transition_history, provenance_ref, supersedes_assignment_ref]

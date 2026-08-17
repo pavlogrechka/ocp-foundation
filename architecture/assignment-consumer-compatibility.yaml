@@ -93,6 +93,20 @@ consumer_results:
     expected_control: valid
     expected_probe: RESERVATION_BOUNDARY_FORBIDDEN_COUPLING+RESERVATION_BOUNDARY_REQUEST_INVALID
     result: preserved
+  - consumer_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    consumer_class: positive-derivation
+    consumed_tokens:
+      - assignment_effective_at(assignment, at)
+      - Every Assignment must independently satisfy the current OCP-005 reference validator
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, EXECUTABLE_ASSIGNMENT_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/resource_occupancy/valid-one-effective.yaml
+    probe: completeness_evidence_removed
+    expected_control: occupied:A-001
+    expected_probe: indeterminate
+    result: preserved
 projection:
   blocker_removed: ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN
   remaining_blockers: [AMENDMENT_MODEL_ABSENT, TEMPORAL_MODEL_UNRESOLVED, PARTIAL_SCOPE_IDENTITY_UNRESOLVED]
