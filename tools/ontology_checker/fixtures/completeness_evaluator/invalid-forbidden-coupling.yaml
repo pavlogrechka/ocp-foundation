@@ -1,0 +1,9 @@
+case_id: completeness-evaluator-invalid-forbidden-coupling
+concept: CompletenessEvaluatorDataset
+expected: {valid: false, error_codes: [COMPLETENESS_EVALUATOR_FORBIDDEN_COUPLING, COMPLETENESS_EVALUATOR_EVIDENCE_INVALID]}
+dataset:
+  recognition_request: {request_id: CER-REQUEST-006, rule_ref: assignment-set-completeness-recognition@0.1.0, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, assignment_snapshot_ref: SYNTH-SNAPSHOT-006, evaluator_profile_ref: SYNTH-PROFILE-006, completeness_evidence_ref: SYNTH-EVIDENCE-006, stored_result: indeterminate}
+  evaluator_profiles:
+    - {evaluator_profile_ref: SYNTH-PROFILE-006, evaluator_ref: SYNTH-EVALUATOR-006, domain_ref: resource-occupancy, subject_kind: resource-assignment-set-completeness, authority_basis_ref: SYNTH-AUTHORITY-006, valid_from: 2026-08-02T00:00:00Z, valid_until: 2026-08-03T00:00:00Z}
+  completeness_evidence:
+    - {completeness_evidence_ref: SYNTH-EVIDENCE-006, evaluator_profile_ref: SYNTH-PROFILE-006, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, assignment_snapshot_ref: SYNTH-SNAPSHOT-006, produced_at: 2026-08-02T09:59:00Z, coverage_kind: all-assignments-for-resource-at-time, claim: assignment_set_complete_for_resource, occupied: false}

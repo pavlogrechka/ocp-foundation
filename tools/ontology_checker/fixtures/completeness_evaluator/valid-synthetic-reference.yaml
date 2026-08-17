@@ -1,0 +1,30 @@
+case_id: completeness-evaluator-valid-synthetic-reference
+concept: CompletenessEvaluatorDataset
+expected: {valid: true, error_codes: []}
+dataset:
+  recognition_request:
+    request_id: CER-REQUEST-001
+    rule_ref: assignment-set-completeness-recognition@0.1.0
+    resource_ref: R-001
+    evaluation_time: 2026-08-02T10:00:00Z
+    assignment_snapshot_ref: SYNTH-SNAPSHOT-001
+    evaluator_profile_ref: SYNTH-PROFILE-001
+    completeness_evidence_ref: SYNTH-EVIDENCE-001
+    stored_result: synthetic-reference-recognized
+  evaluator_profiles:
+    - evaluator_profile_ref: SYNTH-PROFILE-001
+      evaluator_ref: SYNTH-EVALUATOR-001
+      domain_ref: resource-occupancy
+      subject_kind: resource-assignment-set-completeness
+      authority_basis_ref: SYNTH-AUTHORITY-001
+      valid_from: 2026-08-02T00:00:00Z
+      valid_until: 2026-08-03T00:00:00Z
+  completeness_evidence:
+    - completeness_evidence_ref: SYNTH-EVIDENCE-001
+      evaluator_profile_ref: SYNTH-PROFILE-001
+      resource_ref: R-001
+      evaluation_time: 2026-08-02T10:00:00Z
+      assignment_snapshot_ref: SYNTH-SNAPSHOT-001
+      produced_at: 2026-08-02T09:59:00Z
+      coverage_kind: all-assignments-for-resource-at-time
+      claim: assignment_set_complete_for_resource
