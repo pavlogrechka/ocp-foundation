@@ -20,7 +20,7 @@ ELIGIBLE_LIFECYCLE_IDS = frozenset(
         "OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-007",
         "OCP-008", "OCP-009", "OCP-010", "OCP-011", "OCP-012", "OCP-013",
         "OCP-014", "OCP-015", "OCP-016", "OCP-017", "OCP-018", "OCP-019",
-        "OCP-020", "OCP-021", "OCP-022", "P-001",
+        "OCP-020", "OCP-021", "OCP-022", "OCP-023", "P-001",
     }
 )
 ELIGIBLE_GOVERNANCE_IDS = frozenset(
@@ -29,7 +29,7 @@ ELIGIBLE_GOVERNANCE_IDS = frozenset(
         "AD-009", "AD-010", "AD-011", "AD-012", "AD-013", "AD-014", "AD-015",
         "AD-016", "AD-017", "AD-018", "AD-019", "AD-020", "AD-021", "AD-022",
         "AD-025", "AD-026", "AD-027", "AD-028", "AD-029", "AD-030", "AD-032",
-        "AD-033", "AD-034", "AD-037", "AD-041",
+        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042",
     }
 )
 CANDIDATE_IDS = frozenset(
@@ -39,6 +39,7 @@ CANDIDATE_IDS = frozenset(
         "COORDINATION_RESIDUAL", "G4_ACTIVATION_RULE", "LIFECYCLE_DOMAIN_RESPONSIBILITY",
         "PRODUCTION_SOURCE_PROFILE", "CAPACITY_RESULT", "CONFLICT_POSITIVE_REOPENING",
         "RESERVATION_POSITIVE_REOPENING", "ORDER_POSITIVE_REOPENING",
+        "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS",
     }
 )
 ESTABLISHED_POSITIVE_IDS = frozenset(
@@ -121,6 +122,12 @@ EXPECTED_CANDIDATES = {
         "A future positive proposal requires a separate Board act.",
         "positive-order-authorization-model", True, "deferred-separate-positive-act",
     ),
+    "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS": (
+        "OCP-023", "docs/023-resource-occupancy/README.md",
+        "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)",
+        "assignment-set-completeness-for-resource", False,
+        "current-unmet-positive-consumer-need",
+    ),
 }
 
 EXPECTED_POSITIVE_OUTPUTS = {
@@ -201,7 +208,8 @@ EXPECTED_BASELINE_OBJECTS = {
 }
 
 MAP_KEYS = {
-    "schema_version", "rule_owner", "baseline", "gate_first", "criterion", "result",
+    "schema_version", "rule_owner", "current_projection_owner", "baseline", "gate_first",
+    "criterion", "historical_result", "current_result",
     "promotion_gate_guard", "eligible_lifecycle_documents", "eligible_governance_acts",
     "candidate_mentions", "established_positive_outputs", "negative_gate_history",
     "baseline_evidence_objects", "forbidden_outcomes",
@@ -332,8 +340,9 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
         return _result((CONSUMER_NEED_MAP_INVALID,))
 
     if (
-        payload.get("schema_version") != 1
+        payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-036"
+        or payload.get("current_projection_owner") != "AD-042"
         or payload.get("baseline") != "f64b3a23419092649cfb4059d4853eabd93fbbc2"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",
@@ -353,9 +362,15 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
                 "historical-baseline-or-review-snapshot",
             ],
         }
-        or payload.get("result") != {
+        or payload.get("historical_result") != {
+            "scope": "baseline",
             "disposition": "no_unmet_positive_consumer_need_declared",
             "unmet_positive_needs": [],
+        }
+        or payload.get("current_result") != {
+            "scope": "current",
+            "disposition": "unmet_positive_consumer_need_declared",
+            "unmet_positive_needs": ["RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS"],
         }
     ):
         errors.append(CONSUMER_NEED_MAP_INVALID)

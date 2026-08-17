@@ -51,7 +51,7 @@ MISSING_OBLIGATION_IDS = frozenset(
         "AMENDMENT_PROVENANCE_BINDING",
     }
 )
-ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"})
+ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 PROBE_IDS = frozenset(
     {"ESTABLISHED_ROLE_VALUE_REPLACEMENT", "ESTABLISHED_APPLICABILITY_VALUE_REPLACEMENT"}
 )
@@ -165,6 +165,11 @@ EXPECTED_CONSUMERS = {
         "docs/021-reservation-allocation-boundary/README.md",
         "creates, blocks, cancels, supersedes or mutates an Assignment",
         "treats-assignment-truth-as-upstream-and-opaque",
+    ),
+    "OCP-023": (
+        "docs/023-resource-occupancy/README.md",
+        "Every Assignment must independently satisfy the current OCP-005 reference validator",
+        "consumes-current-assignment-truth-without-amendment-authority",
     ),
 }
 EXPECTED_PROBES = {

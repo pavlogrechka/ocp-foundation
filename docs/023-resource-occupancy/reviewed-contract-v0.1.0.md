@@ -1,8 +1,8 @@
 ---
 Document-ID: OCP-023
 Title: Resource Occupancy Derivation
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-041, OCP-001, OCP-003, OCP-005, OCP-016
 Used-By: Resource occupancy domain review and synthetic reference validation
@@ -116,44 +116,3 @@ No request, snapshot, result or witness in OCP-023:
 No existing artifact or stored data migrates. Rollback removes OCP-023, its manifest, module, tests, six new fixtures and descriptive accounting. It cannot alter Resource, Assignment or any Core truth because all existing documents, fixtures, snapshots, patterns, registries, graphs and promotion gates remain byte-identical.
 
 Merge requires exact-head external review, Codex adjudication, green required CI and fresh explicit Pavlo authorization naming the unchanged head. Preparation or merge of this Draft authorizes neither acceptance, G4 activation nor a next act.
-
-## 11. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts OCP-023 revision `0.2.0` as the governed Route D Resource-occupancy contract in exactly the partial form reviewed at `0.1.0 / Draft`. The complete externally reviewed Draft is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md) and incorporated without alteration.
-
-The original §§1–10 remain byte-identical to that reviewed snapshot. Their Draft lifecycle wording, pre-acceptance caution and rollback wording are immutable historical review evidence; this README frontmatter and §§11–14 are the current lifecycle authority. Acceptance approves the bounded derivation as a basis for dependent specifications. It does not make OCP-023 Canonical, move it into Core, authenticate a completeness producer or activate a production rule.
-
-## 12. Predeclared readiness criterion and result
-
-The readiness criterion was fixed before applying it:
-
-1. the Architecture Board explicitly selects the exact reviewed semantics for acceptance;
-2. the current contract has one bounded result, complete executable evidence and no unresolved question that makes that result ambiguous now;
-3. every direct dependency resolves, while the OCP-001 direct-OCP floor L2 is required for `Canonical`, not `Accepted`;
-4. any deliberate partiality is stated as a fail-safe boundary and unmet input need rather than hidden as completeness; and
-5. lifecycle acceptance is separated from any positive-capable activation governed by OCP-016 G4.
-
-OCP-023 satisfies that criterion. The Board decision is explicit. Sections 2 and 5–9 plus the unchanged manifest, module, tests and six fixtures define and exercise one exact result. AD-041, OCP-001, OCP-003, OCP-005 and OCP-016 all resolve; OCP-005 remains Draft, but OCP-001 §Direct OCP dependency floor applies L2 only to Canonical OCPs. Existing Accepted contracts likewise depend on current pre-canonical OCP-005 or OCP-006 surfaces without claiming `1.x` stability.
-
-The remaining inability to derive `occupied=false` without complete Resource-wide Assignment-set evidence is not an unresolved contract choice. It is the explicit fail-safe boundary of the accepted form: absent completeness yields `occupied=None`, never a fabricated `false`. No other open question makes the current bounded result incomplete.
-
-## 13. Current consumer need, G4 and unchanged partiality
-
-Acceptance makes OCP-023 an Accepted document that directly declares the unmet positive input need `assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)`. The historical AD-036 result remains true only on its exact baseline, before OCP-023 existed. The current consumer-need projection therefore contains this one declared unmet need and no longer states that the current set is empty.
-
-This lifecycle act does not itself require G4: accepting a reviewed document is not activation of a positive-capable rule, result or profile. OCP-016 G4 still applies to any production activation of `occupied=true` or of the missing completeness result. Accepted status supplies only the consumer-status element; no baseline activation binding, non-synthetic completeness producer, protected rule version, production snapshot/context or legitimate domain owner/evaluator is created here.
-
-The accepted partiality is exact and intentional:
-
-- one effective Assignment remains sufficient evidence for `occupied=true` with every effective Assignment retained as a witness;
-- `occupied=false` remains derivable only from an exact complete snapshot;
-- absent or unauthenticated completeness remains `occupied=None`; and
-- the accepted contract still derives no Conflict, priority, capacity, reservation, allocation, permission, authorization, Assignment lifecycle change or action recommendation.
-
-## 14. Version, migration, rollback and non-transfer
-
-OCP-023 moves `0.1.0 / Draft → 0.2.0 / Accepted`. Under OCP-001 pre-canonical versioning, this is a MINOR lifecycle change: unchanged reviewed semantics become a Board-approved basis for dependent specifications. PATCH is false because lifecycle authority changes; MAJOR/`1.0.0` is false because no semantic contract is broken or removed, Canonical stability is not promised and Route D remains domain-local.
-
-No Resource, Assignment, request, snapshot, result, witness, fixture, rule or stored data migrates. The resource-occupancy module, manifest, tests and six fixtures remain byte-identical to the acceptance baseline. Rollback is one separately reviewed lifecycle act that restores `0.1.0 / Draft` with snapshot-map, consumer-projection and accounting updates while retaining historical evidence.
-
-Acceptance does not activate any positive Core model, change OCP-005 or another Core contract, remove any Assignment blocker, create a Concept or graph edge, select a promotion candidate, open a cycle, resolve AB-018/AB-005 or authorize another act. It becomes effective only after exact-head Fable review, Codex adjudication, green CI on the same head, fresh explicit Pavlo authorization naming that head and squash merge.

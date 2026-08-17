@@ -138,7 +138,7 @@ class ConsumerNeedDiscoveryTests(unittest.TestCase):
                 self.copy_inputs(root)
                 path = root / candidate["path"]
                 text = path.read_text(encoding="utf-8")
-                path.write_text(text.replace(candidate["token"], "MUTATED-NEED-TOKEN", 1), encoding="utf-8")
+                path.write_text(text.replace(candidate["token"], "MUTATED-NEED-TOKEN"), encoding="utf-8")
                 self.assertIn(
                     CONSUMER_NEED_CANDIDATE_DRIFT,
                     validate_consumer_need_discovery(root).errors,
@@ -159,10 +159,12 @@ class ConsumerNeedDiscoveryTests(unittest.TestCase):
                     path.write_text(text.replace(item["token"], "MUTATED-EVIDENCE-TOKEN", 1), encoding="utf-8")
                     self.assertIn(expected_error, validate_consumer_need_discovery(root).errors)
 
-    def test_negative_result_cannot_be_promoted_into_activation(self) -> None:
+    def test_historical_result_and_current_need_cannot_be_conflated(self) -> None:
         mutations = (
-            ("result", "disposition", "positive_consumer_need_found"),
-            ("result", "unmet_positive_needs", ["SYNTH-NEED"]),
+            ("historical_result", "disposition", "unmet_positive_consumer_need_declared"),
+            ("historical_result", "unmet_positive_needs", ["SYNTH-NEED"]),
+            ("current_result", "disposition", "no_unmet_positive_consumer_need_declared"),
+            ("current_result", "unmet_positive_needs", []),
             ("gate_first", "applies", True),
             ("gate_first", "accepted_consumer_activation_required", True),
         )

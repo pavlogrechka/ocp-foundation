@@ -111,7 +111,7 @@ class AssignmentConsumerCompatibilityTests(unittest.TestCase):
                 ):
                     self.assertFalse(validate_assignment_consumer_compatibility(ROOT).valid)
 
-    def test_all_five_accepted_consumers_and_each_consumed_token_are_live(self) -> None:
+    def test_all_six_accepted_consumers_and_each_consumed_token_are_live(self) -> None:
         for consumer_id, consumer in EXPECTED_CONSUMERS.items():
             for mutation in ("status", "dependency", *consumer["consumed_tokens"]):
                 with self.subTest(consumer=consumer_id, mutation=mutation), tempfile.TemporaryDirectory() as tmp:
@@ -144,6 +144,7 @@ class AssignmentConsumerCompatibilityTests(unittest.TestCase):
             "OCP-017": ("remains_effective_independently", "not_effective_at_transition"),
             "OCP-020": ("role: demand", "role: capacity_limit"),
             "OCP-021": ("assignment_mutation", "assignment_mutation_removed"),
+            "OCP-023": ("SYNTH-COMPLETE-002", "MUTATED-COMPLETENESS"),
         }
         for consumer_id, (old, new) in mutations.items():
             with self.subTest(consumer=consumer_id), tempfile.TemporaryDirectory() as tmp:
@@ -158,7 +159,7 @@ class AssignmentConsumerCompatibilityTests(unittest.TestCase):
                     validate_assignment_consumer_compatibility(root).errors,
                 )
 
-    def test_removed_blocker_and_five_consumer_projection_are_enforced(self) -> None:
+    def test_removed_blocker_and_six_consumer_projection_are_enforced(self) -> None:
         mutations = ("restore-blocker", "remove-consumer", "remove-stable-surface")
         for mutation in mutations:
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
@@ -169,7 +170,7 @@ class AssignmentConsumerCompatibilityTests(unittest.TestCase):
                     surface["blockers"].append({
                         "blocker_id": "ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN",
                         "disposition": "blocks-promotion-not-discovery",
-                        "consumer_ids": ["OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"],
+                        "consumer_ids": ["OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"],
                     })
                 elif mutation == "remove-consumer":
                     surface["direct_consumers"] = [

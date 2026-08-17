@@ -28,8 +28,8 @@ from ocp_checker.assignment_stable_surface import (  # noqa: E402
 
 EXPECTED_CONCEPT_DEPENDENCIES = {"Resource", "Operation"}
 EXPECTED_DIRECT_CONSUMERS = {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
-EXPECTED_ACCEPTED_CONSUMERS = {"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"}
-EXPECTED_DRAFT_CONSUMERS = {"OCP-006", "OCP-023"}
+EXPECTED_ACCEPTED_CONSUMERS = {"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
+EXPECTED_DRAFT_CONSUMERS = {"OCP-006"}
 EXPECTED_QUESTION_IDS = {f"Q{number}" for number in range(1, 12)}
 EXPECTED_QUESTION_CLASSIFICATIONS = {
     "outside-open-set", "blocks-whole-document-freeze", "local-after-bounded-freeze",

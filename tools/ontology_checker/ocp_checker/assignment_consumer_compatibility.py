@@ -13,6 +13,7 @@ from .interchangeability import derive_resource_interchangeability
 from .operation_lifecycle import validate_operation_q3i_fixture
 from .quantitative_input import validate_quantitative_input_fixture
 from .reservation_boundary import validate_reservation_boundary_fixture
+from .resource_occupancy import derive_resource_occupancy
 
 
 ASSIGNMENT_CONSUMER_COMPATIBILITY_MAP_INVALID = "ASSIGNMENT_CONSUMER_COMPATIBILITY_MAP_INVALID"
@@ -29,9 +30,9 @@ MAP_KEYS = frozenset(
         "baseline_evidence_objects", "forbidden_outcomes",
     }
 )
-CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021"})
+CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 NEGATIVE_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-020", "OCP-021"})
-POSITIVE_CONSUMER_IDS = frozenset({"OCP-017"})
+POSITIVE_CONSUMER_IDS = frozenset({"OCP-017", "OCP-023"})
 STABLE_SURFACE_IDS = frozenset(
     {
         "ASSIGNMENT_IDENTITY_REFERENCE_KERNEL", "TRANSITION_HISTORY_LIFECYCLE_KERNEL",
@@ -155,6 +156,18 @@ EXPECTED_CONSUMERS = {
         "expected_control": "valid",
         "expected_probe": "RESERVATION_BOUNDARY_FORBIDDEN_COUPLING+RESERVATION_BOUNDARY_REQUEST_INVALID",
         "result": "preserved",
+    },
+    "OCP-023": {
+        "primary": "docs/023-resource-occupancy/README.md", "consumer_class": "positive-derivation",
+        "consumed_tokens": (
+            "assignment_effective_at(assignment, at)",
+            "Every Assignment must independently satisfy the current OCP-005 reference validator",
+        ),
+        "stable_surface_ids": ("ASSIGNMENT_IDENTITY_REFERENCE_KERNEL", "EXECUTABLE_ASSIGNMENT_BOUNDARY"),
+        "moving_consumed_surface_ids": (), "moving_probe_surface_ids": (),
+        "fixture": "tools/ontology_checker/fixtures/resource_occupancy/valid-one-effective.yaml",
+        "probe": "completeness_evidence_removed", "expected_control": "occupied:A-001",
+        "expected_probe": "indeterminate", "result": "preserved",
     },
 }
 EXPECTED_PROJECTION = {
@@ -303,6 +316,20 @@ def _probe(repo_root: Path, consumer_id: str, consumer: dict[str, Any]) -> tuple
         control = validate_reservation_boundary_fixture(controlled)
         probe = validate_reservation_boundary_fixture(fixture)
         return ("valid" if control.valid else "+".join(sorted(control.errors))), "+".join(sorted(probe.errors))
+    if consumer_id == "OCP-023":
+        control = derive_resource_occupancy(fixture["dataset"])
+        mutated = copy.deepcopy(fixture["dataset"])
+        mutated["assignment_snapshots"][0]["completeness_evidence_ref"] = None
+        probe = derive_resource_occupancy(mutated)
+        control_value = (
+            f"occupied:{','.join(control.witness_assignment_refs)}"
+            if control.occupied is True else "indeterminate"
+        )
+        probe_value = (
+            f"occupied:{','.join(probe.witness_assignment_refs)}"
+            if probe.occupied is True else "indeterminate"
+        )
+        return control_value, probe_value
     return None
 
 

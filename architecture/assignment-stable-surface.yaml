@@ -101,8 +101,8 @@ direct_consumers:
       - "creates, blocks, cancels, supersedes or mutates an Assignment"
   - document_id: OCP-023
     primary: docs/023-resource-occupancy/README.md
-    expected_status: Draft
-    lifecycle_class: draft
+    expected_status: Accepted
+    lifecycle_class: accepted
     consumed_elements:
       - "assignment_effective_at(assignment, at)"
       - "Every Assignment must independently satisfy the current OCP-005 reference validator"

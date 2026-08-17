@@ -87,3 +87,10 @@ entries:
     snapshot: docs/022-order-authorization-boundary/reviewed-contract-v0.1.0.md
     sha256: 8e2562153738d140510d21742b9c50ee8d37588ecbfe2a3221ae79f04268a60a
     basis: current-accepted
+  - document_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    current_status: Accepted
+    reviewed_version: 0.1.0
+    snapshot: docs/023-resource-occupancy/reviewed-contract-v0.1.0.md
+    sha256: c8a765053c3bd398eba18508c080f15dbe49a784565faa59bb8a88d266d872d4
+    basis: current-accepted

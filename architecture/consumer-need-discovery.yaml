@@ -1,5 +1,6 @@
-schema_version: 1
+schema_version: 2
 rule_owner: AD-036
+current_projection_owner: AD-042
 baseline: f64b3a23419092649cfb4059d4853eabd93fbbc2
 gate_first:
   ocp016_gate: G4
@@ -18,9 +19,14 @@ criterion:
     - already-satisfied-positive-output
     - governance-act-is-not-consumer-contract
     - historical-baseline-or-review-snapshot
-result:
+historical_result:
+  scope: baseline
   disposition: no_unmet_positive_consumer_need_declared
   unmet_positive_needs: []
+current_result:
+  scope: current
+  disposition: unmet_positive_consumer_need_declared
+  unmet_positive_needs: [RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS]
 promotion_gate_guard:
   schema_version: 5
   completed_cycle_ids: [EVENT_T6]
@@ -47,6 +53,7 @@ eligible_lifecycle_documents:
   - {artifact_id: OCP-020, path: docs/020-quantitative-constraint-input/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-021, path: docs/021-reservation-allocation-boundary/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-022, path: docs/022-order-authorization-boundary/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-023, path: docs/023-resource-occupancy/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: P-001, path: patterns/P-001-identified-record-pattern.md, version: 0.1.0, status: Accepted}
 eligible_governance_acts:
   - {artifact_id: AD-002, path: architecture/discovery/AD-002-state-readiness-review.md, version: 0.2.1, status: Accepted}
@@ -81,6 +88,7 @@ eligible_governance_acts:
   - {artifact_id: AD-034, path: architecture/discovery/AD-034-current-numeric-accounting.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-037, path: architecture/discovery/AD-037-negative-boundary-acceptance.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-041, path: architecture/discovery/AD-041-resource-occupancy-route-d.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-042, path: architecture/discovery/AD-042-resource-occupancy-acceptance.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003
@@ -173,6 +181,13 @@ candidate_mentions:
     positive_result: positive-order-authorization-model
     can_complete_without_new_result: true
     disposition: deferred-separate-positive-act
+  - candidate_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+    artifact_id: OCP-023
+    path: docs/023-resource-occupancy/README.md
+    token: "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)"
+    positive_result: assignment-set-completeness-for-resource
+    can_complete_without_new_result: false
+    disposition: current-unmet-positive-consumer-need
 established_positive_outputs:
   - {artifact_id: OCP-011, path: docs/011-outcome-assessment-record/README.md, token: "`sufficient` | `achieved`, `not_achieved`, `partially_achieved` or `indeterminate`", result: outcome-assessment-conclusion}
   - {artifact_id: OCP-012, path: docs/012-capability-claim-record/README.md, token: "`effective_capability_claim` may project an activated evidence-backed assertion", result: effective-capability-claim}

@@ -140,22 +140,27 @@ class AssignmentAmendmentQ2Tests(unittest.TestCase):
                 fpath.write_text(text.replace(token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
                 self.assertIn(expected_error, validate_assignment_amendment_q2(root).errors)
 
-    def test_live_consumer_inventory_includes_newly_accepted_ocp021(self) -> None:
-        for mutation in ("dependency", "status"):
-            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp)
-                self.copy_inputs(root)
-                fpath = root / "docs/021-reservation-allocation-boundary/README.md"
-                text = fpath.read_text(encoding="utf-8")
-                if mutation == "dependency":
-                    text = text.replace("OCP-005, ", "", 1)
-                else:
-                    text = text.replace("Status: Accepted", "Status: Draft", 1)
-                fpath.write_text(text, encoding="utf-8")
-                self.assertIn(
-                    ASSIGNMENT_AMENDMENT_Q2_CONSUMER_DRIFT,
-                    validate_assignment_amendment_q2(root).errors,
-                )
+    def test_live_consumer_inventory_includes_later_accepted_consumers(self) -> None:
+        for document_id in ("OCP-021", "OCP-023"):
+            for mutation in ("dependency", "status"):
+                with self.subTest(document=document_id, mutation=mutation), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    relative = next(
+                        entry[0] for key, entry in assignment_amendment_q2.EXPECTED_CONSUMERS.items()
+                        if key == document_id
+                    )
+                    fpath = root / relative
+                    text = fpath.read_text(encoding="utf-8")
+                    if mutation == "dependency":
+                        text = text.replace("OCP-005, ", "", 1)
+                    else:
+                        text = text.replace("Status: Accepted", "Status: Draft", 1)
+                    fpath.write_text(text, encoding="utf-8")
+                    self.assertIn(
+                        ASSIGNMENT_AMENDMENT_Q2_CONSUMER_DRIFT,
+                        validate_assignment_amendment_q2(root).errors,
+                    )
 
     def test_current_checker_exposes_both_post_establishment_value_change_gaps(self) -> None:
         fixture = load_fixture(ROOT / self.fixture_path)
