@@ -19,7 +19,7 @@ Implemented validators:
 - Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
 - Accepted OCP-023 Route D Resource-occupancy reference derivation over one exact synthetic complete Assignment snapshot, with all effective Assignment witnesses and no activation or adjacent authority;
 - Draft OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy and no real evaluator or activation;
-- Assignment consumer-pressure discovery with exact enumeration of three whole-freeze blockers, ten resolution classes and fail-closed `undecidable-from-inside` results while external completeness authority is absent;
+- Assignment consumer-pressure discovery with exact enumeration of three whole-freeze blockers and ten resolution classes, per-resolution binding adequacy, two `pressured` results and one fail-closed `undecidable-from-inside` result;
 - Assignment transition history, projections, applicability and participation derivation;
 - Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;

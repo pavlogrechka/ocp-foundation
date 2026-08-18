@@ -46,8 +46,11 @@ BASELINE = "6099a1ce042624b86fb4289f75d396a53fa9addb"
 CONSUMER_REF = "OCP-023@0.2.0"
 NEED_ID = "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS"
 NEED_TOKEN = "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)"
-LIVE_CLASSIFICATION = "undecidable-from-inside"
-SIGNATURE_EFFECT = "preserved"
+LIVE_SATISFACTION = "undecidable-from-inside"
+PRESSURED_CLASSIFICATION = "pressured"
+CURRENT_BINDINGS_ADEQUATE = "current-three-bindings-adequate"
+OBSERVATION_CUT_REQUIRED = "additional-observation-cut-binding-required"
+SCOPE_CLOSURE_REQUIRED = "additional-part-whole-closure-binding-required"
 ABSENT_AUTHORITY = "absent"
 
 BLOCKER_QUESTIONS = {
@@ -85,10 +88,32 @@ RESOLUTION_DETAILS = {
     "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": ("assignment-adds-part-scope-under-resource-reference", "pressure-q5-explicit-scope.yaml"),
     "PART_AS_RESOURCE_IDENTITY": ("part-receives-own-resource-identity", "pressure-q5-part-identity.yaml"),
 }
+RESOLUTION_ADEQUACY = {
+    "IN_PLACE_TRACEABLE_AMENDMENT": CURRENT_BINDINGS_ADEQUATE,
+    "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": CURRENT_BINDINGS_ADEQUATE,
+    "POST_ESTABLISHMENT_IMMUTABILITY": CURRENT_BINDINGS_ADEQUATE,
+    "PROSPECTIVE_ONLY_SINGLE_INTERVAL": CURRENT_BINDINGS_ADEQUATE,
+    "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS": CURRENT_BINDINGS_ADEQUATE,
+    "RETROACTIVE_ALLOWED_SINGLE_INTERVAL": OBSERVATION_CUT_REQUIRED,
+    "RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS": OBSERVATION_CUT_REQUIRED,
+    "WHOLE_RESOURCE_ONLY": CURRENT_BINDINGS_ADEQUATE,
+    "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": CURRENT_BINDINGS_ADEQUATE,
+    "PART_AS_RESOURCE_IDENTITY": SCOPE_CLOSURE_REQUIRED,
+}
+EXPECTED_BLOCKER_CLASSIFICATIONS = {
+    "AMENDMENT_MODEL_ABSENT": "undecidable-from-inside",
+    "TEMPORAL_MODEL_UNRESOLVED": "pressured",
+    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "pressured",
+}
+BLOCKER_ADEQUACY_SUMMARIES = {
+    "AMENDMENT_MODEL_ABSENT": "current-bindings-adequate-for-all-resolutions",
+    "TEMPORAL_MODEL_UNRESOLVED": "current-bindings-adequate-only-for-prospective-resolutions",
+    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "current-bindings-adequate-except-part-as-resource-identity",
+}
 BLOCKER_REASONS = {
-    "AMENDMENT_MODEL_ABSENT": "every-amendment-representation-can-bind-the-same-resource-time-snapshot-need-but-none-supplies-real-set-completeness",
-    "TEMPORAL_MODEL_UNRESOLVED": "every-retroactivity-interval-combination-can-bind-a-snapshot-but-only-an-external-coverage-source-can-prove-that-later-or-omitted-records-do-not-exist",
-    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "whole-resource-explicit-scope-and-part-identity-forms-can-each-name-a-resource-bound-snapshot-but-none-proves-coverage",
+    "AMENDMENT_MODEL_ABSENT": "all-amendment-resolutions-fit-the-current-signature-but-live-satisfaction-still-requires-external-completeness",
+    "TEMPORAL_MODEL_UNRESOLVED": "retroactive-resolutions-require-an-observation-cut-binding-that-the-current-signature-does-not-carry",
+    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "part-as-resource-identity-requires-part-whole-closure-that-the-current-signature-does-not-carry",
 }
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",
@@ -97,10 +122,10 @@ EXPECTED_GATE_FIRST = {
     "hypothetical_activation_still_requires_g4": True,
 }
 EXPECTED_CRITERION = {
-    "pressured": "at-least-one-resolution-cannot-satisfy-the-need-while-another-can",
-    "neutral": "every-resolution-satisfies-the-need-on-live-inputs",
-    "undecidable-from-inside": "satisfaction-test-requires-a-real-completeness-authority-or-coverage-observation-absent-from-the-repository",
-    "negative_proof_rule": "enumerate-every-resolution-and-show-no-repository-input-selects-exactly-one",
+    "pressured": "declared-need-bindings-are-adequate-for-some-but-not-all-resolutions",
+    "neutral": "declared-need-bindings-are-adequate-and-live-satisfaction-is-proven-for-every-resolution",
+    "undecidable-from-inside": "no-resolution-dependent-adequacy-difference-and-live-satisfaction-requires-missing-external-input",
+    "negative_proof_rule": "enumerate-every-resolution-and-derive-adequacy-before-testing-live-satisfaction",
 }
 EXPECTED_MISSING_INPUTS = [
     "legitimate-completeness-owner-evaluator",
@@ -128,8 +153,9 @@ PROBE_FIELDS = frozenset(
         "snapshot_ref",
         "completeness_authority_state",
         "completeness_authority_ref",
-        "stored_signature_effect",
-        "stored_classification",
+        "stored_adequacy_effect",
+        "stored_live_satisfaction",
+        "stored_blocker_classification",
     }
 )
 FORBIDDEN_FIELDS = frozenset(
@@ -159,8 +185,9 @@ FORBIDDEN_OUTCOMES = frozenset(
 
 @dataclass(frozen=True)
 class AssignmentConsumerPressureResult:
-    signature_effect: str | None
-    classification: str | None
+    adequacy_effect: str | None
+    live_satisfaction: str | None
+    blocker_classification: str | None
 
 
 @dataclass(frozen=True)
@@ -202,26 +229,44 @@ def _probe_shape_valid(probe: Any) -> bool:
     )
 
 
+def _derive_blocker_classification(blocker: str) -> str | None:
+    resolutions = BLOCKER_SOLUTIONS.get(blocker)
+    if not resolutions:
+        return None
+    effects = {RESOLUTION_ADEQUACY.get(resolution) for resolution in resolutions}
+    if None in effects:
+        return None
+    if len(effects) > 1:
+        return PRESSURED_CLASSIFICATION
+    if effects == {CURRENT_BINDINGS_ADEQUATE}:
+        return LIVE_SATISFACTION
+    return None
+
+
 def derive_assignment_consumer_pressure(probe: Any) -> AssignmentConsumerPressureResult:
     if not _probe_shape_valid(probe) or _contains_named(probe, FORBIDDEN_FIELDS):
-        return AssignmentConsumerPressureResult(None, None)
+        return AssignmentConsumerPressureResult(None, None, None)
     blocker = str(probe["blocker_id"])
     resolution = str(probe["resolution_id"])
     if blocker not in BLOCKER_SOLUTIONS or resolution not in BLOCKER_SOLUTIONS[blocker]:
-        return AssignmentConsumerPressureResult(None, None)
+        return AssignmentConsumerPressureResult(None, None, None)
     if tuple(probe["question_ids"]) != BLOCKER_QUESTIONS[blocker]:
-        return AssignmentConsumerPressureResult(None, None)
+        return AssignmentConsumerPressureResult(None, None, None)
     if (
         probe.get("accepted_consumer_ref") != CONSUMER_REF
         or probe.get("consumer_need_id") != NEED_ID
         or probe.get("consumer_need_token") != NEED_TOKEN
     ):
-        return AssignmentConsumerPressureResult(None, None)
+        return AssignmentConsumerPressureResult(None, None, None)
+    adequacy = RESOLUTION_ADEQUACY.get(resolution)
+    classification = _derive_blocker_classification(blocker)
+    if adequacy is None or classification is None:
+        return AssignmentConsumerPressureResult(None, None, None)
     if probe.get("completeness_authority_ref") is not None:
-        return AssignmentConsumerPressureResult(SIGNATURE_EFFECT, None)
+        return AssignmentConsumerPressureResult(adequacy, None, classification)
     if probe.get("completeness_authority_state") != ABSENT_AUTHORITY:
-        return AssignmentConsumerPressureResult(SIGNATURE_EFFECT, None)
-    return AssignmentConsumerPressureResult(SIGNATURE_EFFECT, LIVE_CLASSIFICATION)
+        return AssignmentConsumerPressureResult(adequacy, None, classification)
+    return AssignmentConsumerPressureResult(adequacy, LIVE_SATISFACTION, classification)
 
 
 def validate_assignment_consumer_pressure_probe(probe: Any) -> ValidationResult:
@@ -247,8 +292,9 @@ def validate_assignment_consumer_pressure_probe(probe: Any) -> ValidationResult:
         errors.append(ASSIGNMENT_PRESSURE_SELF_SUPPLY_FORBIDDEN)
     derived = derive_assignment_consumer_pressure(probe)
     if (
-        probe.get("stored_signature_effect") != derived.signature_effect
-        or probe.get("stored_classification") != derived.classification
+        probe.get("stored_adequacy_effect") != derived.adequacy_effect
+        or probe.get("stored_live_satisfaction") != derived.live_satisfaction
+        or probe.get("stored_blocker_classification") != derived.blocker_classification
     ):
         errors.append(ASSIGNMENT_PRESSURE_RESULT_MISMATCH)
     return result(errors)
@@ -289,6 +335,8 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
         or payload.get("criterion") != EXPECTED_CRITERION
         or payload.get("external_missing_inputs") != EXPECTED_MISSING_INPUTS
         or payload.get("forbidden_outcomes") != sorted(FORBIDDEN_OUTCOMES)
+        or set(RESOLUTION_ADEQUACY.values())
+        != {CURRENT_BINDINGS_ADEQUATE, OBSERVATION_CUT_REQUIRED, SCOPE_CLOSURE_REQUIRED}
     ):
         errors.append(ASSIGNMENT_PRESSURE_MAP_INVALID)
 
@@ -328,8 +376,9 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
                         "question_ids": list(BLOCKER_QUESTIONS[blocker]),
                         "resolution_id": resolution,
                         "externally_visible_form": visible_form,
-                        "need_signature_effect": SIGNATURE_EFFECT,
-                        "live_satisfaction": LIVE_CLASSIFICATION,
+                        "need_adequacy_effect": RESOLUTION_ADEQUACY[resolution],
+                        "live_satisfaction": LIVE_SATISFACTION,
+                        "blocker_classification": _derive_blocker_classification(blocker),
                         "probe_fixture": fixture_name,
                     }
                 )
@@ -357,8 +406,8 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
             {
                 "blocker_id": blocker,
                 "question_ids": list(BLOCKER_QUESTIONS[blocker]),
-                "classification": LIVE_CLASSIFICATION,
-                "structural_signature_effect": "preserved-by-all-resolutions",
+                "classification": _derive_blocker_classification(blocker),
+                "need_adequacy_effect": BLOCKER_ADEQUACY_SUMMARIES[blocker],
                 "reason": BLOCKER_REASONS[blocker],
                 "resolution_ids": list(resolutions),
             }
@@ -366,13 +415,18 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
         item = result_map.get(blocker, {})
         if (
             item.get("question_ids") != list(BLOCKER_QUESTIONS[blocker])
-            or item.get("classification") != LIVE_CLASSIFICATION
-            or item.get("structural_signature_effect") != "preserved-by-all-resolutions"
+            or item.get("classification") != _derive_blocker_classification(blocker)
+            or item.get("need_adequacy_effect") != BLOCKER_ADEQUACY_SUMMARIES[blocker]
             or item.get("reason") != BLOCKER_REASONS[blocker]
             or item.get("resolution_ids") != list(resolutions)
         ):
             errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
     if results != expected_results:
+        errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
+    if {
+        blocker: _derive_blocker_classification(blocker)
+        for blocker in BLOCKER_SOLUTIONS
+    } != EXPECTED_BLOCKER_CLASSIFICATIONS:
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
 
     guard = payload.get("promotion_gate_guard") if isinstance(payload, dict) else None

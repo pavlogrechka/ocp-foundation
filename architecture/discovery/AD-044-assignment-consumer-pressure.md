@@ -13,11 +13,11 @@ Review-After: A real externally grounded completeness authority exists or a sepa
 
 ## 1. Question and result
 
-This act asks whether the one current Accepted consumer need forces a particular resolution of any live `blocks-whole-document-freeze` Assignment blocker. A blocker is pressured only if a repository-grounded input makes the need satisfiable under some but not all of its exhaustive resolution classes.
+This act asks whether the one current Accepted consumer need forces or narrows a resolution of any live `blocks-whole-document-freeze` Assignment blocker. Pressure is tested on two ordered axes: first whether the need's declared `(resource_ref, evaluation_time, snapshot_ref)` bindings are adequate for each resolution, then whether a live grounded input proves satisfaction.
 
-The result is **not established from inside the repository** for all three blockers. Every enumerated resolution preserves the exact need signature, but the live tree has no legitimate completeness owner/evaluator or externally grounded all-Assignment coverage observation. Therefore no repository input proves satisfaction under any resolution, and no input selects exactly one.
+The result differs by blocker. Q2 is `undecidable-from-inside`: all three amendment representations fit the current bindings, while live satisfaction still lacks a legitimate completeness evaluator and coverage observation. Q3/Q9 and Q5 are `pressured`: retroactive resolutions need an observation-cut binding, and part-as-Resource identity needs a part–whole closure binding, neither of which the current three-argument need carries.
 
-This is not `neutral`: neutrality would require evidence that every resolution satisfies the need. It is not `pressured`: no resolution is excluded by a live satisfaction result. Each blocker is classified `undecidable-from-inside` and remains unchanged.
+The pressure does **not** select a unique resolution. It narrows Q3/Q9 from four classes to the two prospective classes and Q5 from three classes to whole-Resource or explicit Assignment part scope. All questions and blockers remain unchanged.
 
 ## 2. Gate-first before evidence form
 
@@ -29,13 +29,13 @@ The chosen form is a Discovery AD plus an executable governance witness. It chan
 
 ## 3. Criterion declared before enumeration
 
-The classifications are mutually exclusive:
+The classifications are mutually exclusive and are applied in order:
 
-- `pressured`: at least one resolution cannot satisfy the need while at least one other can on a live grounded input;
-- `neutral`: every resolution satisfies the need on live grounded inputs; and
-- `undecidable-from-inside`: testing satisfaction itself requires a real completeness authority or coverage observation absent from the repository.
+- `pressured`: the declared need bindings are adequate for some but not all resolutions;
+- `neutral`: the declared bindings are adequate and live grounded satisfaction is proved for every resolution; and
+- `undecidable-from-inside`: no resolution-dependent adequacy difference exists, but testing live satisfaction requires an external input absent from the repository.
 
-The negative-proof rule is separate: enumerate every resolution class and show that no repository-grounded input selects exactly one. Structural preservation of the need token is necessary but is not counted as satisfaction.
+The negative-proof rule is separate: enumerate every resolution, derive adequacy before testing satisfaction, and do not treat a common missing authority as evidence that resolution shapes are equivalent. A shared token is not by itself an adequate signature.
 
 ## 4. Complete blocker and resolution inventory
 
@@ -53,39 +53,41 @@ No local-after-freeze or outside-bounded-surface question is imported. Q2, Q3, Q
 
 ## 5. Q2 — amendment model
 
-All three classes can expose an exact Assignment set for the same `resource_ref`, `evaluation_time` and `snapshot_ref`:
+All three classes can expose an exact Assignment set through the same `resource_ref`, `evaluation_time` and `snapshot_ref` bindings:
 
 1. an in-place model includes the attributable version current in the named snapshot;
 2. a superseding model includes the relevant predecessor/successor records; and
 3. immutability includes the unchanged established record.
 
-The consumer need cannot choose among them. What is missing is evidence that the named set contains every relevant Assignment/version. That external coverage problem is identical in all three classes. Classification: `undecidable-from-inside`.
+No amendment representation needs a fourth binding. The consumer need therefore cannot narrow the three classes. What is missing is evidence that the named set contains every relevant Assignment/version. That external coverage problem is identical in all three classes. Classification: `undecidable-from-inside`.
 
 This does not overturn AD-038: Q2 still lacks an owner rule and `AMENDMENT_MODEL_ABSENT` remains blocking.
 
 ## 6. Q3/Q9 — retroactivity and interval cardinality
 
-The four Boolean combinations all preserve the need signature. Prospective-only models do not prove that the producer observed every Assignment; retroactive models additionally make later backdated records relevant, but a snapshot may still bind a closed observation cut if an external authority establishes it. One or several applicability intervals change effectivity representation, not whether a producer can attest complete set coverage.
+The interval-count axis does not add a binding: one or several intervals can be evaluated at the named instant. The retroactivity axis does. Two otherwise identical synthetic snapshots for `(R-001, 2026-08-02T11:00:00Z, SYNTH-SNAPSHOT-RETRO)` are accepted separately by the committed occupancy derivation: the earlier observation without a backdated Assignment yields `occupied=false`; the later observation including an Assignment effective at the same past instant yields `occupied=true`. The current envelope records no observation cut with which to distinguish them.
 
-The repository has neither the real coverage source nor an authority that can establish the observation cut. It therefore cannot demonstrate satisfaction for any of the four combinations or use the need to exclude one. Classification: `undecidable-from-inside`.
+Under prospective-only resolutions, the set effective at `t` cannot later gain a backdated member, so the existing three bindings are adequate. Under retroactive resolutions, an additional observation-cut binding is required before the same past-time claim is stable. This is a repository-grounded adequacy difference even though neither branch has a real completeness authority. Classification: `pressured`.
+
+The pressure narrows the four classes to `PROSPECTIVE_ONLY_SINGLE_INTERVAL` and `PROSPECTIVE_ONLY_MULTIPLE_INTERVALS`; it does not choose between them.
 
 AD-039 remains intact: Q3/Q9 stay open and `TEMPORAL_MODEL_UNRESOLVED` remains blocking.
 
 ## 7. Q5 — composite Resource scope
 
-Whole-Resource-only, explicit part scope and part-as-Resource identity can each bind a Resource-named snapshot. Their identity granularity differs, but OCP-023's current need asks whether the exact snapshot contains every Assignment relevant to the named Resource and instant. None of the three representations proves that coverage by itself.
+Whole-Resource-only and explicit part scope on an Assignment keep `resource_ref=R-001`, so the current Resource/time/snapshot bindings can carry a whole-Resource occupancy query. Part-as-Resource identity does not: a synthetic effective Assignment bound to `R-001-PART-A` is rejected from an `R-001` snapshot as cross-bound, while an exact-bound empty `R-001` snapshot yields `occupied=false` even though the part is occupied. The whole-Resource control yields `occupied=true` with `A-001` as witness.
 
-Because the external coverage observation is absent, no current input establishes satisfaction under one class or all classes. Classification: `undecidable-from-inside`.
+Closing that gap requires a part–whole closure binding that OCP-023's current need does not carry. Classification: `pressured`. The pressure excludes `PART_AS_RESOURCE_IDENTITY` for the current need but does not choose between whole-Resource-only and explicit part scope.
 
 AD-039 remains intact: Q5 stays open and `PARTIAL_SCOPE_IDENTITY_UNRESOLVED` remains blocking.
 
 ## 8. Executable proof and individual coverage
 
-`architecture/assignment-consumer-pressure.yaml` binds the exact blocker inventory, criterion, one current need, ten resolution classes, external missing inputs and unchanged promotion gate. Ten synthetic fixtures provide exactly one probe per resolution.
+`architecture/assignment-consumer-pressure.yaml` binds the exact blocker inventory, ordered criterion, one current need, ten resolution classes, per-resolution adequacy effects, external missing inputs and unchanged promotion gate. Ten synthetic fixtures provide exactly one probe per resolution.
 
-Every probe binds `OCP-023@0.2.0`, the exact need token, `R-001`, a synthetic snapshot and `2026-08-02T10:00:00Z`. Each derives `signature_effect=preserved` and `classification=undecidable-from-inside`; `completeness_authority_ref` is null. Supplying an authority locally is rejected as self-supply rather than converted into satisfaction.
+Every probe binds `OCP-023@0.2.0`, the exact need token, `R-001`, a synthetic snapshot and `2026-08-02T10:00:00Z`. Derivation reads the resolution and distinguishes three effects: current bindings adequate, observation cut required, or part–whole closure required. Live satisfaction remains `undecidable-from-inside` for every probe because `completeness_authority_ref` is null; supplying one locally is rejected as self-supply rather than converted into satisfaction. Blocker classification is derived separately from the full adequacy set.
 
-The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` covers every declared probe field, forbidden field/outcome, blocker/question mapping, resolution value/detail, reason, gate/criterion value and scalar binding individually. Separate mutations prove blocker, current-need, probe and promotion-gate drift.
+The focused test replays both distinguishing demonstrations through the committed `derive_resource_occupancy` implementation and its existing synthetic fixtures. The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` covers every declared probe field, forbidden field/outcome, blocker/question mapping, resolution value/detail, adequacy value, blocker classification/summary, reason, gate/criterion value and scalar binding individually. Separate mutations prove blocker, current-need, probe and promotion-gate drift.
 
 ## 9. Exact baseline and full-chain anchors
 
@@ -113,6 +115,6 @@ Rollback removes AD-044, its witness, checker integration, tests, ten fixtures a
 
 OCP-005, its open questions, all three blocker entries, OCP-023, OCP-024, every Concept/status/graph edge, P-001, reviewed snapshots, historical `baseline_*` objects and the promotion gate remain byte-identical. `EVENT_T6` remains the only completed cycle and `active_cycle_id` remains null.
 
-This act does not select an Assignment rule, remove a blocker, resolve a question, activate completeness or occupancy, change a Concept, start T7, authorize a future act or establish that consumer pressure is absent in reality. It establishes only that pressure cannot be attributed from the current repository evidence.
+This act does not select an Assignment rule, remove a blocker, resolve a question, activate completeness or occupancy, change a Concept, start T7 or authorize a future act. It establishes pressure on two blockers and an internal undecidability boundary on the third; none of those results is a resolution choice.
 
 Merge still requires exact-head Fable review, Codex adjudication, green CI on the same head and fresh explicit Pavlo authorization naming that head.

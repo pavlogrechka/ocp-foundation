@@ -28,7 +28,7 @@ from ocp_checker.assignment_consumer_pressure import (  # noqa: E402
     validate_assignment_consumer_pressure,
 )
 from ocp_checker.checker import load_fixture  # noqa: E402
-from ocp_checker import validate_reference_fixture  # noqa: E402
+from ocp_checker import derive_resource_occupancy, validate_reference_fixture  # noqa: E402
 
 
 class AssignmentConsumerPressureTests(unittest.TestCase):
@@ -85,6 +85,10 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         cls.fixtures = {
             path.name: load_fixture(path) for path in sorted(fixture_root.glob("*.yaml"))
         }
+        occupancy_root = CHECKER_ROOT / "fixtures/resource_occupancy"
+        cls.occupancy_fixtures = {
+            path.stem: load_fixture(path) for path in sorted(occupancy_root.glob("*.yaml"))
+        }
 
     def copy_inputs(self, destination: Path) -> None:
         for relative in self.copied_paths:
@@ -118,25 +122,97 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
             with self.subTest(fixture=name):
                 validation = validate_reference_fixture(fixture)
                 derived = derive_assignment_consumer_pressure(fixture["probe"])
+                resolution = fixture["probe"]["resolution_id"]
+                blocker = fixture["probe"]["blocker_id"]
                 self.assertTrue(validation.valid)
-                self.assertEqual(derived.signature_effect, "preserved")
-                self.assertEqual(derived.classification, "undecidable-from-inside")
+                self.assertEqual(
+                    derived.adequacy_effect,
+                    assignment_consumer_pressure.RESOLUTION_ADEQUACY[resolution],
+                )
+                self.assertEqual(derived.live_satisfaction, "undecidable-from-inside")
+                self.assertEqual(
+                    derived.blocker_classification,
+                    assignment_consumer_pressure.EXPECTED_BLOCKER_CLASSIFICATIONS[blocker],
+                )
 
-    def test_negative_result_is_independently_proven_for_each_blocker(self) -> None:
+    def test_pressure_result_is_discriminating_and_replayed_on_live_derivation(self) -> None:
         payload = yaml.safe_load((ROOT / self.map_path).read_text(encoding="utf-8"))
         results = {item["blocker_id"]: item for item in payload["blocker_results"]}
         self.assertEqual(set(results), set(assignment_consumer_pressure.BLOCKER_SOLUTIONS))
         for blocker, resolutions in assignment_consumer_pressure.BLOCKER_SOLUTIONS.items():
             with self.subTest(blocker=blocker):
-                self.assertEqual(results[blocker]["classification"], "undecidable-from-inside")
+                self.assertEqual(
+                    results[blocker]["classification"],
+                    assignment_consumer_pressure.EXPECTED_BLOCKER_CLASSIFICATIONS[blocker],
+                )
                 self.assertEqual(results[blocker]["resolution_ids"], list(resolutions))
                 probes = [
                     derive_assignment_consumer_pressure(item["probe"])
                     for item in self.fixtures.values()
                     if item["probe"]["blocker_id"] == blocker
                 ]
-                self.assertEqual({item.signature_effect for item in probes}, {"preserved"})
-                self.assertEqual({item.classification for item in probes}, {"undecidable-from-inside"})
+                self.assertEqual(
+                    {item.adequacy_effect for item in probes},
+                    {assignment_consumer_pressure.RESOLUTION_ADEQUACY[item] for item in resolutions},
+                )
+                self.assertEqual(
+                    {item.live_satisfaction for item in probes},
+                    {"undecidable-from-inside"},
+                )
+                self.assertEqual(
+                    {item.blocker_classification for item in probes},
+                    {assignment_consumer_pressure.EXPECTED_BLOCKER_CLASSIFICATIONS[blocker]},
+                )
+
+        q2_effects = {
+            assignment_consumer_pressure.RESOLUTION_ADEQUACY[item]
+            for item in assignment_consumer_pressure.BLOCKER_SOLUTIONS["AMENDMENT_MODEL_ABSENT"]
+        }
+        temporal_effects = {
+            assignment_consumer_pressure.RESOLUTION_ADEQUACY[item]
+            for item in assignment_consumer_pressure.BLOCKER_SOLUTIONS["TEMPORAL_MODEL_UNRESOLVED"]
+        }
+        scope_effects = {
+            assignment_consumer_pressure.RESOLUTION_ADEQUACY[item]
+            for item in assignment_consumer_pressure.BLOCKER_SOLUTIONS["PARTIAL_SCOPE_IDENTITY_UNRESOLVED"]
+        }
+        self.assertEqual(q2_effects, {"current-three-bindings-adequate"})
+        self.assertEqual(
+            temporal_effects,
+            {"current-three-bindings-adequate", "additional-observation-cut-binding-required"},
+        )
+        self.assertEqual(
+            scope_effects,
+            {"current-three-bindings-adequate", "additional-part-whole-closure-binding-required"},
+        )
+
+        control = copy.deepcopy(self.occupancy_fixtures["valid-one-effective"])
+        self.assertEqual(derive_resource_occupancy(control["dataset"]).occupied, True)
+        cross_bound_part = copy.deepcopy(control)
+        cross_bound_part["dataset"]["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001-PART-A"
+        self.assertIsNone(derive_resource_occupancy(cross_bound_part["dataset"]).occupied)
+        exact_bound_whole = copy.deepcopy(self.occupancy_fixtures["valid-zero-assignments"])
+        exact_bound_whole["dataset"]["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
+        self.assertTrue(validate_reference_fixture(exact_bound_whole).valid)
+        self.assertEqual(derive_resource_occupancy(exact_bound_whole["dataset"]).occupied, False)
+
+        before_retroactive_record = copy.deepcopy(exact_bound_whole)
+        before_retroactive_record["dataset"]["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
+        before_retroactive_record["dataset"]["assignment_snapshots"][0]["snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
+        after_retroactive_record = copy.deepcopy(before_retroactive_record)
+        assignment = copy.deepcopy(
+            control["dataset"]["assignment_snapshots"][0]["assignments"][0]
+        )
+        assignment["assignment_id"] = "A-RETRO"
+        assignment["transition_history"][0]["transition_id"] = "AT-RETRO"
+        assignment["transition_history"][0]["assignment_ref"] = "A-RETRO"
+        after_retroactive_record["dataset"]["assignment_snapshots"][0]["assignments"] = [assignment]
+        after_retroactive_record["dataset"]["occupancy_request"]["stored_occupied"] = True
+        after_retroactive_record["dataset"]["occupancy_request"]["stored_witness_assignment_refs"] = ["A-RETRO"]
+        self.assertTrue(validate_reference_fixture(before_retroactive_record).valid)
+        self.assertTrue(validate_reference_fixture(after_retroactive_record).valid)
+        self.assertEqual(derive_resource_occupancy(before_retroactive_record["dataset"]).occupied, False)
+        self.assertEqual(derive_resource_occupancy(after_retroactive_record["dataset"]).occupied, True)
 
     def test_each_fixture_validation_boundary_is_executable(self) -> None:
         base = next(iter(self.fixtures.values()))
@@ -160,7 +236,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         candidate["probe"]["selected_resolution"] = True
         attacks["ASSIGNMENT_PRESSURE_FORBIDDEN_OUTCOME"] = candidate
         candidate = copy.deepcopy(base)
-        candidate["probe"]["stored_classification"] = "pressured"
+        candidate["probe"]["stored_blocker_classification"] = "pressured"
         attacks["ASSIGNMENT_PRESSURE_RESULT_MISMATCH"] = candidate
         self.assertEqual(set(attacks), set(ASSIGNMENT_PRESSURE_ERROR_CODES))
         for error, candidate in attacks.items():
@@ -196,7 +272,9 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
 
         defensive_structures = (
             "BLOCKER_QUESTIONS", "BLOCKER_SOLUTIONS", "RESOLUTION_DETAILS",
-            "BLOCKER_REASONS", "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
+            "RESOLUTION_ADEQUACY", "EXPECTED_BLOCKER_CLASSIFICATIONS",
+            "BLOCKER_ADEQUACY_SUMMARIES", "BLOCKER_REASONS",
+            "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
             "EXPECTED_MISSING_INPUTS", "EXPECTED_CONSUMER",
         )
 
@@ -243,8 +321,11 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
             "CONSUMER_REF": "MUTATED-CONSUMER",
             "NEED_ID": "MUTATED-NEED",
             "NEED_TOKEN": "mutated_need()",
-            "LIVE_CLASSIFICATION": "pressured",
-            "SIGNATURE_EFFECT": "mutated",
+            "LIVE_SATISFACTION": "satisfied",
+            "PRESSURED_CLASSIFICATION": "mutated-pressured",
+            "CURRENT_BINDINGS_ADEQUATE": "mutated-adequacy",
+            "OBSERVATION_CUT_REQUIRED": "mutated-observation-cut",
+            "SCOPE_CLOSURE_REQUIRED": "mutated-scope-closure",
             "ABSENT_AUTHORITY": "present",
         }
         for attribute, mutation in scalar_mutations.items():
