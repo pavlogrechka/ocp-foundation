@@ -155,6 +155,13 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
             {"Draft", "Accepted", "Canonical"},
         )
         self.assertEqual(payload["source_sweep"]["document_scope"]["document_count"], 25)
+        self.assertEqual(
+            payload["source_sweep"]["claim_boundary"]["proof_scope"],
+            "declared-vocabulary-hit-completeness-only",
+        )
+        self.assertFalse(
+            payload["source_sweep"]["claim_boundary"]["semantic_axis_completeness_claimed"]
+        )
         self.assertEqual(len(payload["source_sweep"]["hits"]), 64)
         self.assertEqual(
             {item["disposition"] for item in payload["source_sweep"]["hits"]},
@@ -176,6 +183,13 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         )
         self.assertTrue(
             all(item["evidence_mode"] == "analytic" for item in payload["source_sweep"]["hits"])
+        )
+        self.assertEqual(len(payload["source_sweep"]["known_out_of_vocabulary"]), 3)
+        self.assertTrue(
+            all(
+                item["evidence_mode"] == "analytic"
+                for item in payload["source_sweep"]["known_out_of_vocabulary"]
+            )
         )
         self.assertIn(
             "ASSIGNMENT_AMENDMENT_MODEL_OPEN",
@@ -327,10 +341,11 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                 self.assertFalse(validate_assignment_norm_compatibility(ROOT).valid)
 
     def test_live_source_survivor_probe_and_gate_mutations_fail_independently(self) -> None:
-        cases = ("source", "source-sweep", "survivor", "probe", "gate")
+        cases = ("source", "source-sweep", "out-of-vocabulary", "survivor", "probe", "gate")
         expected_errors = {
             "source": ASSIGNMENT_NORM_SOURCE_DRIFT,
             "source-sweep": ASSIGNMENT_NORM_SOURCE_DRIFT,
+            "out-of-vocabulary": ASSIGNMENT_NORM_SOURCE_DRIFT,
             "survivor": ASSIGNMENT_NORM_SURVIVOR_DRIFT,
             "probe": ASSIGNMENT_NORM_PROBE_DRIFT,
             "gate": ASSIGNMENT_NORM_GATE_DRIFT,
@@ -348,6 +363,17 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                     text = (root / relative).read_text(encoding="utf-8")
                     (root / relative).write_text(
                         text + "\nAssignment may have multiple applicability intervals.\n",
+                        encoding="utf-8",
+                    )
+                elif case == "out-of-vocabulary":
+                    relative = Path("docs/004-operation-concept/README.md")
+                    text = (root / relative).read_text(encoding="utf-8")
+                    (root / relative).write_text(
+                        text.replace(
+                            "Остаточна модель часу буде визначена окремо.",
+                            "Остаточну модель часу буде визначено окремо.",
+                            1,
+                        ),
                         encoding="utf-8",
                     )
                 elif case == "survivor":

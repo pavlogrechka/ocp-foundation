@@ -243,7 +243,7 @@ SWEEP_VOCABULARY = {
         ("`contains`", "`part_of`"),
     ),
 }
-SOURCE_SWEEP_SHA256 = "80f6b94826afc5865ac3cd1419c3f9adbba558f69b711c70f70036febeee974a"
+SOURCE_SWEEP_SHA256 = "a747871ba4a3e4e413c65eabc0b72ba632ab2256a322714a7b303e1850dcf6db"
 
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",
@@ -500,7 +500,8 @@ def _source_sweep_hits(repo_root: Path) -> list[dict[str, str]] | None:
 
 def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
     if not isinstance(payload, dict) or set(payload) != {
-        "document_scope", "vocabulary", "hits",
+        "document_scope", "claim_boundary", "vocabulary", "hits",
+        "known_out_of_vocabulary",
     }:
         return False
     vocabulary = {
@@ -512,6 +513,11 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         "statuses": list(SWEEP_DOCUMENT_STATUSES),
         "document_count": 25,
         "subject_inventory_and_source_eligibility_are_separate": True,
+    } or payload.get("claim_boundary") != {
+        "proof_scope": "declared-vocabulary-hit-completeness-only",
+        "vocabulary_origin": "derived-from-preidentified-statements-not-from-the-axes-themselves",
+        "semantic_axis_completeness_claimed": False,
+        "out_of_vocabulary_axis_statements_can_exist": True,
     } or payload.get("vocabulary") != vocabulary:
         return False
     rows = payload.get("hits")
@@ -538,6 +544,17 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
             or not nonempty(row.get("reason"))
         ):
             return False
+        try:
+            text = (repo_root / row["path"]).read_text(encoding="utf-8")
+        except OSError:
+            return False
+        section = _section(text, row["section"])
+        if (
+            _frontmatter(text).get("Status") != row["status"]
+            or section is None
+            or section.count(row["quote"]) != 1
+        ):
+            return False
         matching_sources = sorted(
             statement_id
             for statement_id, statement in NORMATIVE_STATEMENTS.items()
@@ -549,6 +566,42 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         if row["statement_ids"] != matching_sources or (
             row["disposition"] == "classification-source"
         ) != bool(matching_sources):
+            return False
+    out_of_vocabulary = payload.get("known_out_of_vocabulary")
+    if not isinstance(out_of_vocabulary, list) or len(out_of_vocabulary) != 3:
+        return False
+    out_keys = {
+        "axes", "path", "status", "section", "quote", "disposition", "reason",
+        "evidence_mode",
+    }
+    observed_identity = {
+        (row["path"], row["section"], row["quote"])
+        for row in rows
+    }
+    for row in out_of_vocabulary:
+        if (
+            not isinstance(row, dict)
+            or set(row) != out_keys
+            or not isinstance(row.get("axes"), list)
+            or not row["axes"]
+            or any(axis not in SWEEP_VOCABULARY for axis in row["axes"])
+            or row.get("status") not in SWEEP_DOCUMENT_STATUSES
+            or row.get("disposition") != "known-out-of-vocabulary-deferral"
+            or row.get("evidence_mode") != ANALYTIC
+            or not nonempty(row.get("reason"))
+            or (row["path"], row["section"], row["quote"]) in observed_identity
+        ):
+            return False
+        try:
+            text = (repo_root / row["path"]).read_text(encoding="utf-8")
+        except OSError:
+            return False
+        section = _section(text, row["section"])
+        if (
+            _frontmatter(text).get("Status") != row["status"]
+            or section is None
+            or section.count(row["quote"]) != 1
+        ):
             return False
     observed = _source_sweep_hits(repo_root)
     if observed is None:
