@@ -51,6 +51,38 @@ BLOCKER_QUESTIONS = {
     "TEMPORAL_MODEL_UNRESOLVED": ("Q3", "Q9"),
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("Q5",),
 }
+CURRENT_BLOCKER_QUESTIONS = {
+    "AMENDMENT_MODEL_ABSENT": ("Q2",),
+    "TEMPORAL_MODEL_UNRESOLVED": ("Q9",),
+    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("Q5",),
+}
+Q3_LIFECYCLE_SUCCESSORS = {
+    (
+        "docs/005-assignment-concept/README.md",
+        "8. Temporal Effectivity",
+        "До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.",
+    ): (
+        "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. "
+        "Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity "
+        "до авторитетного `established_at`."
+    ),
+    (
+        "docs/005-assignment-concept/README.md",
+        "19. Open Questions and Resolved Boundaries",
+        "3. Чи допускається ретроактивне Establishment Assignment?",
+    ): (
+        "3. ~~Чи допускається ретроактивне Establishment Assignment?~~ AD-046/OCP-005 §8 "
+        "остаточно забороняють виводити effectivity раніше авторитетного `established_at`; "
+        "recording/correction lineage не визначаються, а Q9 лишається відкритим."
+    ),
+}
+Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES = (
+        (
+            "docs/005-assignment-concept/README.md",
+            "8. Temporal Effectivity",
+            "Ця межа не визначає recording time, ingestion time, correction lineage або автентичність `occurred_at`; вона лише фіксує часову межу derivation над авторитетною transition history. Кардинальність applicability intervals лишається окремим відкритим Q9.",
+        ),
+)
 
 SURVIVOR_CLAIMS = {
     "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": {
@@ -452,11 +484,15 @@ def _live_sources_valid(repo_root: Path) -> bool:
             return False
         metadata = _frontmatter(text)
         section = _section(text, statement["section"])
+        expected_quote = Q3_LIFECYCLE_SUCCESSORS.get(
+            (statement["path"], statement["section"], statement["quote"]),
+            statement["quote"],
+        )
         if (
             metadata.get("Status") != statement["status"]
             or metadata.get("Status") not in CURRENT_DOCUMENT_STATUSES
             or section is None
-            or section.count(statement["quote"]) != 1
+            or section.count(expected_quote) != 1
         ):
             return False
     return True
@@ -549,10 +585,14 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         except OSError:
             return False
         section = _section(text, row["section"])
+        expected_quote = Q3_LIFECYCLE_SUCCESSORS.get(
+            (row["path"], row["section"], row["quote"]),
+            row["quote"],
+        )
         if (
             _frontmatter(text).get("Status") != row["status"]
             or section is None
-            or section.count(row["quote"]) != 1
+            or section.count(expected_quote) != 1
         ):
             return False
         matching_sources = sorted(
@@ -606,11 +646,25 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
     observed = _source_sweep_hits(repo_root)
     if observed is None:
         return False
+    successor_rows = {
+        (path, section, successor): historical
+        for (path, section, historical), successor in Q3_LIFECYCLE_SUCCESSORS.items()
+    }
+    normalized_observed: list[dict[str, str]] = []
+    for item in observed:
+        identity = (item["path"], item["section"], item["quote"])
+        if identity in Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES:
+            continue
+        historical_quote = successor_rows.get(identity)
+        normalized = dict(item)
+        if historical_quote is not None:
+            normalized["quote"] = historical_quote
+        normalized_observed.append(normalized)
     projected = [
         {key: row.get(key) for key in ("axis", "path", "status", "section", "quote")}
         for row in rows if isinstance(row, dict)
     ]
-    if len(projected) != len(rows) or projected != observed:
+    if len(projected) != len(rows) or projected != normalized_observed:
         return False
     return len({tuple(item.values()) for item in projected}) == len(projected)
 
@@ -737,7 +791,7 @@ def validate_assignment_norm_compatibility(
         for item in surface.get("blockers", [])
         if item.get("disposition") == "blocks-whole-document-freeze"
     } if isinstance(surface, dict) else {}
-    if pressure_survivors != set(SURVIVOR_CLAIMS) or live_blockers != BLOCKER_QUESTIONS:
+    if pressure_survivors != set(SURVIVOR_CLAIMS) or live_blockers != CURRENT_BLOCKER_QUESTIONS:
         errors.append(ASSIGNMENT_NORM_SURVIVOR_DRIFT)
 
     try:

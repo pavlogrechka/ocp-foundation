@@ -269,7 +269,11 @@ class CompletenessEvaluatorTests(unittest.TestCase):
             if path.startswith("patterns/")
             or path.startswith("tools/ontology_checker/fixtures/")
             or "/reviewed-contract-" in path
-            or any(path.startswith(f"docs/{number:03d}-") for number in range(24))
+            or any(
+                path.startswith(f"docs/{number:03d}-")
+                for number in range(24)
+                if number != 5
+            )
         ]
         self.assertTrue(protected)
         for relative in protected:

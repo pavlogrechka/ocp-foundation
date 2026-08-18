@@ -81,6 +81,7 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
             "EXPECTED_CONTROL",
             "EXPECTED_PROBES",
             "EXPECTED_PROJECTION",
+            "CURRENT_PROJECTION",
             "EXPECTED_GATE_GUARD",
         )
 
@@ -135,8 +136,13 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
                 self.copy_inputs(root)
                 fpath = root / relative
                 text = fpath.read_text(encoding="utf-8")
-                self.assertIn(token, text)
-                fpath.write_text(text.replace(token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
+                live_token = (
+                    assignment_temporal_scope.CURRENT_Q3_BOUNDARY
+                    if token.startswith("До окремого рішення про ретроактивне Establishment")
+                    else token
+                )
+                self.assertIn(live_token, text)
+                fpath.write_text(text.replace(live_token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
                 self.assertIn(
                     ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT,
                     validate_assignment_temporal_scope(root).errors,
@@ -180,7 +186,7 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
             with self.subTest(probe=label):
                 self.assertTrue(validate_assignment(mutated).valid)
 
-    def test_q3_q9_q5_and_both_blockers_must_remain_open(self) -> None:
+    def test_historical_q3_result_survives_while_current_q3_is_closed_only(self) -> None:
         mutations = (
             "Q3",
             "Q9",
@@ -200,7 +206,11 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
                         item for item in surface["open_question_inventory"]
                         if item["question_id"] == mutation
                     )
-                    target["classification"] = "local-after-bounded-freeze"
+                    if mutation == "Q3":
+                        target["state"] = "open"
+                        target["classification"] = "blocks-whole-document-freeze"
+                    else:
+                        target["classification"] = "local-after-bounded-freeze"
                 elif mutation in {"TEMPORAL_EFFECTIVITY_EXTENSION", "COMPOSITE_RESOURCE_SCOPE"}:
                     surface["moving_surfaces"] = [
                         item for item in surface["moving_surfaces"]

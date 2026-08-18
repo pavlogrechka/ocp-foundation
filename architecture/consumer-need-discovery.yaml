@@ -1,6 +1,6 @@
 schema_version: 2
 rule_owner: AD-036
-current_projection_owner: AD-043
+current_projection_owner: AD-046
 baseline: f64b3a23419092649cfb4059d4853eabd93fbbc2
 gate_first:
   ocp016_gate: G4
@@ -90,6 +90,7 @@ eligible_governance_acts:
   - {artifact_id: AD-041, path: architecture/discovery/AD-041-resource-occupancy-route-d.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-042, path: architecture/discovery/AD-042-resource-occupancy-acceptance.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-043, path: architecture/discovery/AD-043-completeness-evaluator-contract.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-046, path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003

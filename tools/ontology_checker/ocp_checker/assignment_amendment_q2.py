@@ -394,7 +394,7 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.2.8"
+        or str(subject_metadata.get("Version")) != "0.3.0"
         or subject_metadata.get("Status") != "Draft"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or not q2_line

@@ -247,6 +247,26 @@ EXPECTED_PROJECTION = {
         "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ["Q5"],
     },
 }
+CURRENT_PROJECTION = {
+    "witness": "architecture/assignment-stable-surface.yaml",
+    "questions": {
+        "Q9": "blocks-whole-document-freeze",
+        "Q5": "blocks-whole-document-freeze",
+    },
+    "moving_surfaces": {
+        "TEMPORAL_EFFECTIVITY_EXTENSION": ["Q9"],
+        "COMPOSITE_RESOURCE_SCOPE": ["Q5"],
+    },
+    "blockers": {
+        "TEMPORAL_MODEL_UNRESOLVED": ["Q9"],
+        "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ["Q5"],
+    },
+}
+CURRENT_Q3_BOUNDARY = (
+    "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. "
+    "Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity "
+    "до авторитетного `established_at`."
+)
 EXPECTED_GATE_GUARD = {
     "schema_version": 5,
     "completed_cycle_ids": ["EVENT_T6"],
@@ -400,11 +420,16 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.2.8"
+        or str(subject_metadata.get("Version")) != "0.3.0"
         or subject_metadata.get("Status") != "Draft"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or set(question_lines) != QUESTION_IDS
-        or any(not line or "~~" in line for line in question_lines.values())
+        or not question_lines.get("Q3")
+        or "~~" not in question_lines["Q3"]
+        or any(
+            not question_lines.get(question_id) or "~~" in question_lines[question_id]
+            for question_id in ("Q9", "Q5")
+        )
     ):
         errors.append(ASSIGNMENT_TEMPORAL_SCOPE_PROJECTION_DRIFT)
 
@@ -417,7 +442,14 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
                 text = (repo_root / relative).read_text(encoding="utf-8")
             except OSError:
                 text = ""
-            if any(token not in text for token in tokens):
+            if any(
+                token not in text
+                and not (
+                    token.startswith("До окремого рішення про ретроактивне Establishment")
+                    and CURRENT_Q3_BOUNDARY in text
+                )
+                for token in tokens
+            ):
                 errors.append(ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT)
                 break
 
@@ -462,7 +494,7 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
 
     try:
         surface = yaml.safe_load(
-            (repo_root / EXPECTED_PROJECTION["witness"]).read_text(encoding="utf-8")
+            (repo_root / CURRENT_PROJECTION["witness"]).read_text(encoding="utf-8")
         )
     except (OSError, yaml.YAMLError):
         surface = None
@@ -480,19 +512,19 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
         actual_moving = {
             item.get("surface_id"): item.get("question_ids")
             for item in moving or []
-            if isinstance(item, dict) and item.get("surface_id") in EXPECTED_PROJECTION["moving_surfaces"]
+            if isinstance(item, dict) and item.get("surface_id") in CURRENT_PROJECTION["moving_surfaces"]
         }
         actual_blockers = {
             item.get("blocker_id"): item.get("question_ids")
             for item in blockers or []
             if isinstance(item, dict)
-            and item.get("blocker_id") in EXPECTED_PROJECTION["blockers"]
+            and item.get("blocker_id") in CURRENT_PROJECTION["blockers"]
             and item.get("disposition") == "blocks-whole-document-freeze"
         }
         if (
-            actual_questions != EXPECTED_PROJECTION["questions"]
-            or actual_moving != EXPECTED_PROJECTION["moving_surfaces"]
-            or actual_blockers != EXPECTED_PROJECTION["blockers"]
+            actual_questions != CURRENT_PROJECTION["questions"]
+            or actual_moving != CURRENT_PROJECTION["moving_surfaces"]
+            or actual_blockers != CURRENT_PROJECTION["blockers"]
         ):
             errors.append(ASSIGNMENT_TEMPORAL_SCOPE_PROJECTION_DRIFT)
 

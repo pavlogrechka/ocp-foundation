@@ -1,0 +1,141 @@
+schema_version: 1
+rule_owner: AD-046
+baseline: ca87815b0198c165cfeec759965656da2ef7b5b2
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  positive_capable: false
+  activation_created: false
+  reason: finalizing-an-existing-negative-effectivity-boundary-creates-no-positive-capable-rule-result-profile-or-activation
+sufficiency_criterion:
+  order:
+    - current-owner-boundary
+    - executable-behavior
+    - accepted-consumer-pressure
+    - surviving-current-norm-classes
+    - authority-and-baseline-separation
+  close_only_if:
+    - owner-text-and-executable-behavior-already-agree
+    - accepted-consumer-pressure-excludes-retroactive-effectivity-classes
+    - all-surviving-temporal-classes-share-prospective-only-effectivity
+    - no-new-recording-time-correction-or-interval-rule-is-needed
+  baseline_only_records_are_current_authority: false
+  result: sufficient-for-q3-effectivity-boundary-only
+evidence_ledger:
+  - evidence_id: CURRENT_OWNER_EFFECTIVITY_BOUNDARY
+    source_class: current-primary-owner
+    path: docs/005-assignment-concept/README.md
+    section: 8. Temporal Effectivity
+    status: Draft
+    evidence_mode: analytic
+    proves: authoritative-established-at-is-a-lower-bound-for-assignment-effectivity
+    does_not_prove: recording-ingestion-correction-lineage-or-interval-cardinality
+  - evidence_id: EXECUTABLE_PRE_ESTABLISHMENT_CONTROL
+    source_class: current-executable-behavior
+    path: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+    evidence_mode: observed
+    proves: query-before-established-at-is-ineffective-and-at-established-at-is-effective
+    does_not_prove: authenticity-or-immutability-of-the-transition-occurred-at-value
+  - evidence_id: AD039_BASELINE_GAP_SEPARATION
+    source_class: historical-baseline-evidence
+    path: architecture/assignment-temporal-scope-attempt.yaml
+    baseline: 94820489c7e6de17bc7eb1439a1c3dd78bfbc14f
+    evidence_mode: observed
+    proves: effectivity-control-holds-while-recording-time-and-q9-gaps-remain-separate
+    does_not_prove: current-lifecycle-authority-to-close-q3
+  - evidence_id: AD044_CONSUMER_PRESSURE
+    source_class: historical-baseline-evidence
+    path: architecture/assignment-consumer-pressure.yaml
+    baseline: 6099a1ce042624b86fb4289f75d396a53fa9addb
+    evidence_mode: observed
+    proves: accepted-consumer-bindings-retain-both-prospective-and-reject-both-retroactive-classes
+    does_not_prove: interval-cardinality-selection-or-question-closure-authority
+  - evidence_id: AD045_SURVIVING_NORM_CLASSES
+    source_class: historical-baseline-evidence
+    path: architecture/assignment-norm-compatibility.yaml
+    baseline: 734dd019425b636f47187bf1c342612550028400
+    evidence_mode: analytic
+    proves: both-surviving-temporal-classes-are-prospective-only-and-differ-only-on-q9
+    does_not_prove: repository-wide-semantic-axis-completeness-or-lifecycle-authority
+  - evidence_id: ACCEPTED_CONSUMER_TIME_BOUNDARY
+    source_class: current-accepted-consumer
+    path: docs/023-resource-occupancy/README.md
+    section: 7. Time and multiplicity boundaries
+    status: Accepted
+    evidence_mode: analytic
+    proves: accepted-consumer-reuses-established-at-lower-bound-without-own-retroactivity-rule
+    does_not_prove: completeness-authority-or-multiple-interval-policy
+decision:
+  question_id: Q3
+  question_text: Чи допускається ретроактивне Establishment Assignment?
+  disposition: resolved-negative
+  resolution: prospective-only-effectivity
+  normative_result: retroactive-establishment-cannot-derive-effectivity-before-authoritative-established-at
+  resolution_ref: AD-046/OCP-005 §8
+  recording_time_axis_defined: false
+  ingestion_time_axis_defined: false
+  correction_lineage_defined: false
+  occurred_at_authentication_defined: false
+  q9_unchanged: true
+subject_transition:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  before: {version: 0.2.8, status: Draft, concept_status: Accepted}
+  after: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  version_class: pre-canonical-content-change
+  version_reason: final-negative-q3-lifecycle-decision-changes-provisional-contract-meaning-without-promotion
+current_projection:
+  open_question_count_before: 9
+  open_question_count_after: 8
+  resolved_question_ids: [Q1, Q3, Q6]
+  open_question_ids: [Q2, Q4, Q5, Q7, Q8, Q9, Q10, Q11]
+  q3_state: resolved-current
+  q9_state: open
+  temporal_moving_surface_question_ids: [Q9]
+  temporal_blocker_id: TEMPORAL_MODEL_UNRESOLVED
+  temporal_blocker_disposition: blocks-whole-document-freeze
+  temporal_blocker_question_ids: [Q9]
+  other_blockers_unchanged:
+    AMENDMENT_MODEL_ABSENT: [Q2]
+    PARTIAL_SCOPE_IDENTITY_UNRESOLVED: [Q5]
+  pressure_resolution_inventory_unchanged: true
+  norm_survivor_inventory_unchanged: true
+migration:
+  assignment_data: none
+  references: none
+  schemas: none
+  consumer_behavior: unchanged-because-existing-derivation-already-enforces-the-final-boundary
+  rollback_unit:
+    - OCP-005-version-section-8-and-q3-line
+    - current-assignment-stable-surface-projection
+    - current-consumer-need-governance-scope
+    - AD-046-witness-checker-tests-and-accounting
+  rollback_effect: restores-0.2.8-provisional-boundary-and-reopens-q3-without-touching-q9
+protected_historical_artifacts:
+  - {path: architecture/discovery/AD-035-assignment-stable-surface.md, sha256: 85a10e965faaa7ba65484efe08e985b7a04bf06712553c914673d65faf1df805}
+  - {path: architecture/discovery/AD-038-assignment-amendment-q2-attempt.md, sha256: 3e9311901a261bb297c13c93616f3c65421757e6a8468ef013875106a22df1c9}
+  - {path: architecture/assignment-amendment-q2-attempt.yaml, sha256: 05792d9211c7520604101f8d3e7655377805bb89e8bb6b6e9600da388c608299}
+  - {path: architecture/discovery/AD-039-assignment-temporal-scope-attempt.md, sha256: 310d2c3bb36b1c788e2573d42593f113066f344be1e9ee279901b1b8f6ce68dc}
+  - {path: architecture/assignment-temporal-scope-attempt.yaml, sha256: 4a8899d58ddf9edcf613760d330ff0003a3f982c1d6c188c4283c52fc364f7fb}
+  - {path: architecture/discovery/AD-040-assignment-consumer-compatibility.md, sha256: 3c6a551779f5592a56999c8b135f1e94bd0a9bd72a953b8b3094d953fd55eb99}
+  - {path: architecture/assignment-consumer-compatibility.yaml, sha256: 755f7b8520c85676669834bba2ef84f0de8c908d517f9278b8b7fde3f2dcfc1b}
+  - {path: architecture/discovery/AD-044-assignment-consumer-pressure.md, sha256: 078a615572c864478929f9abfef7ae1ee287ebe1cca4919a010fb375d8676a6e}
+  - {path: architecture/assignment-consumer-pressure.yaml, sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2}
+  - {path: architecture/discovery/AD-045-assignment-norm-compatibility.md, sha256: 7a1c25d22bdf3179ff552dc1635ded320a6220ec6a205da091c26188bd590020}
+  - {path: architecture/assignment-norm-compatibility.yaml, sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd}
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+forbidden_outcomes:
+  - Q2_CLOSURE
+  - Q5_CLOSURE
+  - Q9_CLOSURE
+  - TEMPORAL_BLOCKER_REMOVAL
+  - POSITIVE_MODEL_ACTIVATION
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - OCP005_PROMOTION
+  - ASSIGNMENT_CONCEPT_CANONICALIZATION
+  - T7_OPEN
+  - NEXT_ACT_AUTHORIZATION

@@ -340,7 +340,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
                 self.assertFalse(validate_assignment_consumer_pressure(ROOT).valid)
 
         defensive_structures = (
-            "BLOCKER_QUESTIONS", "BLOCKER_SOLUTIONS", "RESOLUTION_DETAILS",
+            "BLOCKER_QUESTIONS", "CURRENT_BLOCKER_QUESTIONS", "BLOCKER_SOLUTIONS", "RESOLUTION_DETAILS",
             "RESOLUTION_ADEQUACY", "RESOLUTION_EVIDENCE_MODES", "EXPECTED_BLOCKER_CLASSIFICATIONS",
             "BLOCKER_ADEQUACY_SUMMARIES", "BLOCKER_REASONS",
             "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
@@ -463,7 +463,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         ).splitlines()
         protected = [
             relative for relative in listing
-            if relative.startswith("docs/")
+            if (relative.startswith("docs/") and relative != "docs/005-assignment-concept/README.md")
             or relative.startswith("patterns/")
             or relative.startswith("tools/ontology_checker/fixtures/")
             or "/reviewed-contract-" in relative

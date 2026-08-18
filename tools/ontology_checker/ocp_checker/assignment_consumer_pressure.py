@@ -61,6 +61,11 @@ BLOCKER_QUESTIONS = {
     "TEMPORAL_MODEL_UNRESOLVED": ("Q3", "Q9"),
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("Q5",),
 }
+CURRENT_BLOCKER_QUESTIONS = {
+    "AMENDMENT_MODEL_ABSENT": ("Q2",),
+    "TEMPORAL_MODEL_UNRESOLVED": ("Q9",),
+    "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("Q5",),
+}
 BLOCKER_SOLUTIONS = {
     "AMENDMENT_MODEL_ABSENT": (
         "IN_PLACE_TRACEABLE_AMENDMENT",
@@ -561,7 +566,7 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
         for item in (surface.get("blockers") if isinstance(surface, dict) else [])
         if item.get("disposition") == "blocks-whole-document-freeze"
     }
-    if live_blockers != BLOCKER_QUESTIONS:
+    if live_blockers != CURRENT_BLOCKER_QUESTIONS:
         errors.append(ASSIGNMENT_PRESSURE_BLOCKER_DRIFT)
 
     current_needs = (

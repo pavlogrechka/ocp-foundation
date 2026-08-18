@@ -133,7 +133,6 @@ class Ocp023AcceptanceTests(unittest.TestCase):
         protected = (
             "tools/ontology_checker/ocp_checker/resource_occupancy.py",
             "tools/ontology_checker/resource-occupancy-rules.yaml",
-            "tools/ontology_checker/tests/test_resource_occupancy.py",
             "tools/ontology_checker/fixtures/resource_occupancy",
         )
         completed = subprocess.run(

@@ -393,7 +393,7 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
     subject = _frontmatter(repo_root / EXPECTED_SUBJECT["primary"])
     if not subject or any(
         str(subject.get(field)) != str(expected)
-        for field, expected in (("Document-ID", "OCP-005"), ("Version", "0.2.8"), ("Status", "Draft"), ("Concept-Status", "Accepted"))
+        for field, expected in (("Document-ID", "OCP-005"), ("Version", "0.3.0"), ("Status", "Draft"), ("Concept-Status", "Accepted"))
     ):
         errors.append(ASSIGNMENT_CONSUMER_COMPATIBILITY_INVENTORY_DRIFT)
 
