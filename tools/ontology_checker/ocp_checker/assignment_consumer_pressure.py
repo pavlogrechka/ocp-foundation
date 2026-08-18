@@ -317,8 +317,77 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
     try:
         control = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-one-effective.yaml")["dataset"]
         empty = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-zero-assignments.yaml")["dataset"]
+        overlapping = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-two-overlapping.yaml")["dataset"]
     except (KeyError, OSError, TypeError, yaml.YAMLError):
         return None
+
+    def assignments(dataset: dict[str, Any]) -> list[dict[str, Any]]:
+        return dataset["assignment_snapshots"][0]["assignments"]
+
+    def retained_pre_change_payload(before: dict[str, Any], after: dict[str, Any]) -> bool:
+        fields = (
+            "assignment_id",
+            "resource_ref",
+            "operation_ref",
+            "role_specification",
+            "applicability_start",
+            "applicability_end",
+        )
+        before_payloads = {
+            tuple(yaml.safe_dump(item.get(field), sort_keys=True) for field in fields)
+            for item in assignments(before)
+        }
+        after_payloads = {
+            tuple(yaml.safe_dump(item.get(field), sort_keys=True) for field in fields)
+            for item in assignments(after)
+        }
+        return bool(before_payloads) and before_payloads <= after_payloads
+
+    def change_adequacy(before: dict[str, Any], after: dict[str, Any]) -> str | None:
+        if not (
+            validate_resource_occupancy_dataset(before).valid
+            and validate_resource_occupancy_dataset(after).valid
+        ):
+            return None
+        before_result = derive_resource_occupancy(before).occupied
+        after_result = derive_resource_occupancy(after).occupied
+        if before_result == after_result or retained_pre_change_payload(before, after):
+            return CURRENT_BINDINGS_ADEQUATE
+        return OBSERVATION_CUT_REQUIRED
+
+    def scope_adequacy(candidate: dict[str, Any], exact_bound_whole: dict[str, Any]) -> str | None:
+        candidate_result = derive_resource_occupancy(candidate).occupied
+        if validate_resource_occupancy_dataset(candidate).valid and candidate_result is not None:
+            return CURRENT_BINDINGS_ADEQUATE
+        if (
+            candidate_result is None
+            and validate_resource_occupancy_dataset(exact_bound_whole).valid
+            and derive_resource_occupancy(exact_bound_whole).occupied is False
+        ):
+            return SCOPE_CLOSURE_REQUIRED
+        return None
+
+    def late_assignment(template: dict[str, Any], suffix: str, established_at: str) -> dict[str, Any]:
+        item = copy.deepcopy(template)
+        item.update(
+            {
+                "assignment_id": f"A-LATE-{suffix}",
+                "applicability_end": "2026-08-02T13:00:00Z",
+                "created_at": "2026-08-02T11:50:00Z",
+                "established_at": established_at,
+                "provenance_ref": f"SYNTH-LATE-{suffix}",
+                "supersedes_assignment_ref": None,
+            }
+        )
+        item["transition_history"][0].update(
+            {
+                "transition_id": f"AT-LATE-{suffix}",
+                "assignment_ref": f"A-LATE-{suffix}",
+                "occurred_at": established_at,
+                "provenance_ref": f"SYNTH-LATE-{suffix}",
+            }
+        )
+        return item
 
     in_place = copy.deepcopy(control)
     in_place["assignment_snapshots"][0]["assignments"][0]["applicability_end"] = "2026-08-02T10:30:00Z"
@@ -362,6 +431,22 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
     superseding["occupancy_request"]["stored_occupied"] = False
     superseding["occupancy_request"]["stored_witness_assignment_refs"] = []
 
+    immutable = copy.deepcopy(control)
+
+    before_prospective = copy.deepcopy(empty)
+    before_prospective["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
+    before_prospective["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-PROSPECTIVE"
+    before_prospective["assignment_snapshots"][0]["snapshot_ref"] = "SYNTH-SNAPSHOT-PROSPECTIVE"
+    prospective_single = copy.deepcopy(before_prospective)
+    prospective_single["assignment_snapshots"][0]["assignments"] = [
+        late_assignment(control["assignment_snapshots"][0]["assignments"][0], "001", "2026-08-02T12:00:00Z")
+    ]
+    prospective_multiple = copy.deepcopy(before_prospective)
+    prospective_multiple["assignment_snapshots"][0]["assignments"] = [
+        late_assignment(overlapping["assignment_snapshots"][0]["assignments"][0], "001", "2026-08-02T12:00:00Z"),
+        late_assignment(overlapping["assignment_snapshots"][0]["assignments"][1], "002", "2026-08-02T12:05:00Z"),
+    ]
+
     before_retroactive = copy.deepcopy(empty)
     before_retroactive["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
     before_retroactive["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
@@ -375,45 +460,70 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
     after_retroactive["occupancy_request"]["stored_occupied"] = True
     after_retroactive["occupancy_request"]["stored_witness_assignment_refs"] = ["A-RETRO"]
 
+    before_retroactive_multiple = copy.deepcopy(before_retroactive)
+    before_retroactive_multiple["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO-MULTI"
+    before_retroactive_multiple["assignment_snapshots"][0]["snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO-MULTI"
+    after_retroactive_multiple = copy.deepcopy(before_retroactive_multiple)
+    retroactive_multiple = copy.deepcopy(overlapping["assignment_snapshots"][0]["assignments"])
+    for index, item in enumerate(retroactive_multiple, start=1):
+        item["assignment_id"] = f"A-RETRO-{index}"
+        item["transition_history"][0]["transition_id"] = f"AT-RETRO-{index}"
+        item["transition_history"][0]["assignment_ref"] = f"A-RETRO-{index}"
+    after_retroactive_multiple["assignment_snapshots"][0]["assignments"] = retroactive_multiple
+    after_retroactive_multiple["occupancy_request"]["stored_occupied"] = True
+    after_retroactive_multiple["occupancy_request"]["stored_witness_assignment_refs"] = [
+        "A-RETRO-1",
+        "A-RETRO-2",
+    ]
+
+    whole_resource = copy.deepcopy(control)
+    explicit_part_scope = copy.deepcopy(control)
+    explicit_part_scope["assignment_snapshots"][0]["assignments"][0]["part_scope_ref"] = "R-001-PART-A"
+
     cross_bound_part = copy.deepcopy(control)
     cross_bound_part["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001-PART-A"
     exact_bound_whole = copy.deepcopy(empty)
     exact_bound_whole["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
+    exact_bound_whole["occupancy_request"]["assignment_snapshot_ref"] = control["occupancy_request"][
+        "assignment_snapshot_ref"
+    ]
+    exact_bound_whole["assignment_snapshots"][0]["snapshot_ref"] = control["assignment_snapshots"][0][
+        "snapshot_ref"
+    ]
 
-    valid_datasets = (control, in_place, superseding, before_retroactive, after_retroactive, exact_bound_whole)
+    valid_datasets = (
+        control,
+        in_place,
+        superseding,
+        immutable,
+        before_prospective,
+        prospective_single,
+        prospective_multiple,
+        before_retroactive,
+        after_retroactive,
+        before_retroactive_multiple,
+        after_retroactive_multiple,
+        whole_resource,
+        explicit_part_scope,
+        exact_bound_whole,
+    )
     if not all(validate_resource_occupancy_dataset(item).valid for item in valid_datasets):
         return None
-    observed = {
-        "control": derive_resource_occupancy(control).occupied,
-        "in_place": derive_resource_occupancy(in_place).occupied,
-        "superseding": derive_resource_occupancy(superseding).occupied,
-        "before_retroactive": derive_resource_occupancy(before_retroactive).occupied,
-        "after_retroactive": derive_resource_occupancy(after_retroactive).occupied,
-        "cross_bound_part": derive_resource_occupancy(cross_bound_part).occupied,
-        "exact_bound_whole": derive_resource_occupancy(exact_bound_whole).occupied,
+    evidence = {
+        "IN_PLACE_TRACEABLE_AMENDMENT": change_adequacy(control, in_place),
+        "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": change_adequacy(control, superseding),
+        "POST_ESTABLISHMENT_IMMUTABILITY": change_adequacy(control, immutable),
+        "PROSPECTIVE_ONLY_SINGLE_INTERVAL": change_adequacy(before_prospective, prospective_single),
+        "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS": change_adequacy(before_prospective, prospective_multiple),
+        "RETROACTIVE_ALLOWED_SINGLE_INTERVAL": change_adequacy(before_retroactive, after_retroactive),
+        "RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS": change_adequacy(
+            before_retroactive_multiple, after_retroactive_multiple
+        ),
+        "WHOLE_RESOURCE_ONLY": scope_adequacy(whole_resource, exact_bound_whole),
+        "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": scope_adequacy(explicit_part_scope, exact_bound_whole),
+        "PART_AS_RESOURCE_IDENTITY": scope_adequacy(cross_bound_part, exact_bound_whole),
     }
-    if observed != {
-        "control": True,
-        "in_place": False,
-        "superseding": False,
-        "before_retroactive": False,
-        "after_retroactive": True,
-        "cross_bound_part": None,
-        "exact_bound_whole": False,
-    }:
-        return None
-    return {
-        "IN_PLACE_TRACEABLE_AMENDMENT": OBSERVATION_CUT_REQUIRED,
-        "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": CURRENT_BINDINGS_ADEQUATE,
-        "POST_ESTABLISHMENT_IMMUTABILITY": CURRENT_BINDINGS_ADEQUATE,
-        "PROSPECTIVE_ONLY_SINGLE_INTERVAL": CURRENT_BINDINGS_ADEQUATE,
-        "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS": CURRENT_BINDINGS_ADEQUATE,
-        "RETROACTIVE_ALLOWED_SINGLE_INTERVAL": OBSERVATION_CUT_REQUIRED,
-        "RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS": OBSERVATION_CUT_REQUIRED,
-        "WHOLE_RESOURCE_ONLY": CURRENT_BINDINGS_ADEQUATE,
-        "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": CURRENT_BINDINGS_ADEQUATE,
-        "PART_AS_RESOURCE_IDENTITY": SCOPE_CLOSURE_REQUIRED,
-    }
+    return evidence if None not in evidence.values() else None
 
 
 def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumerPressureMapResult:

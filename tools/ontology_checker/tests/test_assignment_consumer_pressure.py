@@ -193,6 +193,24 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
             assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
             assignment_consumer_pressure.RESOLUTION_ADEQUACY,
         )
+        transposed_q2 = dict(assignment_consumer_pressure.RESOLUTION_ADEQUACY)
+        transposed_q2["IN_PLACE_TRACEABLE_AMENDMENT"] = "current-three-bindings-adequate"
+        transposed_q2["SUPERSEDING_ASSIGNMENT_FOR_CHANGE"] = (
+            "additional-observation-cut-binding-required"
+        )
+        self.assertNotEqual(
+            assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
+            transposed_q2,
+        )
+        with patch.object(
+            assignment_consumer_pressure,
+            "RESOLUTION_ADEQUACY",
+            transposed_q2,
+        ):
+            self.assertIn(
+                "ASSIGNMENT_PRESSURE_PROBE_DRIFT",
+                validate_assignment_consumer_pressure(ROOT).errors,
+            )
 
         control = copy.deepcopy(self.occupancy_fixtures["valid-one-effective"])
         self.assertEqual(derive_resource_occupancy(control["dataset"]).occupied, True)

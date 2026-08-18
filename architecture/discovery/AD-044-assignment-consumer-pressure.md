@@ -109,6 +109,8 @@ AD-044 begins `0.1.0 / Discovery`: it is a new evidence record, not an OCP rule 
 
 Current accounting changes only by ten synthetic fixtures and focused tests; OCP, Concept, snapshot and P-001 counts do not move. Fixtures contain no real operation, coordinate, route, unit, organization, person, credential, key or token.
 
+The governance validator intentionally reads the existing `resource_occupancy` fixtures as live consumer evidence. A legitimate future change to those fixtures or their derivation may invalidate this discovery and must update or supersede AD-044 in the same reviewed unit; silently preserving the old adequacy map is forbidden.
+
 Rollback removes AD-044, its witness, checker integration, tests, ten fixtures and descriptive accounting as one unit. It cannot remove a blocker or resolve a question.
 
 ## 11. Non-implications
