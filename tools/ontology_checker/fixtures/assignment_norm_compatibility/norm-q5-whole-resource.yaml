@@ -1,0 +1,14 @@
+case_id: assignment-norm-q5-whole-resource
+concept: AssignmentNormCompatibilityProbe
+probe:
+  probe_id: SYNTH-NORM-005
+  blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
+  question_ids: [Q5]
+  resolution_id: WHOLE_RESOURCE_ONLY
+  claims: {resource_cardinality: one, automatic_component_inheritance: 'false'}
+  source_statement_ids: [ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, COMPONENT_ASSIGNMENT_NON_INHERITANCE]
+  evidence_mode: analytic
+  stored_classification: compatible
+  stored_violation_statement_ids: []
+  stored_underdetermined_axes: []
+expected: {valid: true, error_codes: []}

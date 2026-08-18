@@ -186,6 +186,13 @@ from .assignment_consumer_pressure import (
     validate_assignment_consumer_pressure_fixture,
     validate_assignment_consumer_pressure_probe,
 )
+from .assignment_norm_compatibility import (
+    ASSIGNMENT_NORM_ERROR_CODES,
+    AssignmentNormCompatibilityResult,
+    derive_assignment_norm_compatibility,
+    validate_assignment_norm_compatibility_fixture,
+    validate_assignment_norm_compatibility_probe,
+)
 
 ERROR_CODES = (
     CORE_ERROR_CODES
@@ -204,6 +211,8 @@ DERIVATION_RULES = (
 
 def validate_reference_fixture(fixture):
     concept = fixture.get("concept")
+    if concept == "AssignmentNormCompatibilityProbe":
+        return validate_assignment_norm_compatibility_fixture(fixture)
     if concept == "AssignmentConsumerPressureProbe":
         return validate_assignment_consumer_pressure_fixture(fixture)
     if concept == "CompletenessEvaluatorDataset":

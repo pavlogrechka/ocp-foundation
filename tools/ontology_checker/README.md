@@ -20,6 +20,7 @@ Implemented validators:
 - Accepted OCP-023 Route D Resource-occupancy reference derivation over one exact synthetic complete Assignment snapshot, with all effective Assignment witnesses and no activation or adjacent authority;
 - Draft OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy and no real evaluator or activation;
 - Assignment consumer-pressure discovery with exact enumeration of three whole-freeze blockers and ten resolution classes, live consumer replays, per-resolution binding adequacy and three non-unique `pressured` results;
+- Assignment survivor norm-compatibility discovery with all 25 current primary bodies, a bounded 64-hit six-axis lexical sweep with explicit source/rejection dispositions, three exact-guarded known out-of-vocabulary temporal deferrals, six pressure survivors, one compatible and five underdetermined results, plus causal exact-Resource/non-inheritance counterexamples; the sweep does not claim semantic-axis completeness;
 - Assignment transition history, projections, applicability and participation derivation;
 - Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;

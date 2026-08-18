@@ -1,0 +1,14 @@
+case_id: assignment-norm-q5-explicit-part-scope
+concept: AssignmentNormCompatibilityProbe
+probe:
+  probe_id: SYNTH-NORM-006
+  blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
+  question_ids: [Q5]
+  resolution_id: EXPLICIT_PART_SCOPE_ON_ASSIGNMENT
+  claims: {resource_cardinality: one, automatic_component_inheritance: 'false', part_scope_representation: explicit-under-resource}
+  source_statement_ids: [ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, COMPONENT_ASSIGNMENT_NON_INHERITANCE, COMPOSITION_REPRESENTATION_DEFERRED]
+  evidence_mode: analytic
+  stored_classification: underdetermined
+  stored_violation_statement_ids: []
+  stored_underdetermined_axes: [part_scope_representation]
+expected: {valid: true, error_codes: []}
