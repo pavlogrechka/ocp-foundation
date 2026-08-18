@@ -15,9 +15,9 @@ Review-After: A real externally grounded completeness authority exists or a sepa
 
 This act asks whether the one current Accepted consumer need forces or narrows a resolution of any live `blocks-whole-document-freeze` Assignment blocker. Pressure is tested on two ordered axes: first whether the need's declared `(resource_ref, evaluation_time, snapshot_ref)` bindings are adequate for each resolution, then whether a live grounded input proves satisfaction.
 
-The result differs by blocker. Q2 is `undecidable-from-inside`: all three amendment representations fit the current bindings, while live satisfaction still lacks a legitimate completeness evaluator and coverage observation. Q3/Q9 and Q5 are `pressured`: retroactive resolutions need an observation-cut binding, and part-as-Resource identity needs a part–whole closure binding, neither of which the current three-argument need carries.
+All three blockers are `pressured`, but on different resolution boundaries. In-place amendment and retroactive temporal resolutions need an observation-cut binding; part-as-Resource identity needs a part–whole closure binding. The current three-argument need carries neither.
 
-The pressure does **not** select a unique resolution. It narrows Q3/Q9 from four classes to the two prospective classes and Q5 from three classes to whole-Resource or explicit Assignment part scope. All questions and blockers remain unchanged.
+The pressure does **not** select a unique resolution. It narrows Q2 from three classes to superseding Assignment or post-Establishment immutability, Q3/Q9 from four classes to the two prospective classes, and Q5 from three classes to whole-Resource or explicit Assignment part scope. All questions and blockers remain unchanged.
 
 ## 2. Gate-first before evidence form
 
@@ -53,13 +53,13 @@ No local-after-freeze or outside-bounded-surface question is imported. Q2, Q3, Q
 
 ## 5. Q2 — amendment model
 
-All three classes can expose an exact Assignment set through the same `resource_ref`, `evaluation_time` and `snapshot_ref` bindings:
+The three classes do not have equal binding needs:
 
-1. an in-place model includes the attributable version current in the named snapshot;
-2. a superseding model includes the relevant predecessor/successor records; and
-3. immutability includes the unchanged established record.
+1. an in-place model can rewrite `applicability_end` on the same Assignment identity after Establishment. Two separately valid synthetic snapshots for the same Resource/time binding yield `occupied=true` before `12:00 → 10:30` and `occupied=false` after it. The current envelope carries no observation cut or Assignment-version binding that says which value governs;
+2. a superseding model keeps the prior Assignment, adds a distinct successor and, under OCP-005 §14 item 8, records an explicit terminal transition for the prior Assignment. The executable control closes the prior record at `10:30`, adds `A-002` with `supersedes_assignment_ref=A-001`, remains valid and derives `occupied=false` at `11:00` without rewriting either identity; and
+3. immutability admits no post-Establishment value rewrite, so the established record is stable under the current bindings.
 
-No amendment representation needs a fourth binding. The consumer need therefore cannot narrow the three classes. What is missing is evidence that the named set contains every relevant Assignment/version. That external coverage problem is identical in all three classes. Classification: `undecidable-from-inside`.
+In-place amendment therefore requires an additional observation-cut binding, while superseding and immutability are adequate under the current signature. Classification: `pressured`. The need narrows Q2 to two classes but does not choose between them. A real completeness evaluator and coverage observation remain absent for both surviving classes.
 
 This does not overturn AD-038: Q2 still lacks an owner rule and `AMENDMENT_MODEL_ABSENT` remains blocking.
 
@@ -87,7 +87,7 @@ AD-039 remains intact: Q5 stays open and `PARTIAL_SCOPE_IDENTITY_UNRESOLVED` rem
 
 Every probe binds `OCP-023@0.2.0`, the exact need token, `R-001`, a synthetic snapshot and `2026-08-02T10:00:00Z`. Derivation reads the resolution and distinguishes three effects: current bindings adequate, observation cut required, or part–whole closure required. Live satisfaction remains `undecidable-from-inside` for every probe because `completeness_authority_ref` is null; supplying one locally is rejected as self-supply rather than converted into satisfaction. Blocker classification is derived separately from the full adequacy set.
 
-The focused test replays both distinguishing demonstrations through the committed `derive_resource_occupancy` implementation and its existing synthetic fixtures. The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` covers every declared probe field, forbidden field/outcome, blocker/question mapping, resolution value/detail, adequacy value, blocker classification/summary, reason, gate/criterion value and scalar binding individually. Separate mutations prove blocker, current-need, probe and promotion-gate drift.
+The production governance validator itself replays all three distinguishing demonstrations—Q2 in-place versus superseding, Q3/Q9 observation cut, and Q5 part–whole closure—through the committed `derive_resource_occupancy` implementation and existing synthetic fixtures, then requires the observed adequacy map to equal the declared ten-resolution map. The focused test asserts that causal binding. The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` covers every declared probe field, forbidden field/outcome, blocker/question mapping, resolution value/detail, adequacy value, blocker classification/summary, reason, gate/criterion value and scalar binding individually. Separate mutations prove blocker, current-need, probe and promotion-gate drift.
 
 ## 9. Exact baseline and full-chain anchors
 
@@ -115,6 +115,6 @@ Rollback removes AD-044, its witness, checker integration, tests, ten fixtures a
 
 OCP-005, its open questions, all three blocker entries, OCP-023, OCP-024, every Concept/status/graph edge, P-001, reviewed snapshots, historical `baseline_*` objects and the promotion gate remain byte-identical. `EVENT_T6` remains the only completed cycle and `active_cycle_id` remains null.
 
-This act does not select an Assignment rule, remove a blocker, resolve a question, activate completeness or occupancy, change a Concept, start T7 or authorize a future act. It establishes pressure on two blockers and an internal undecidability boundary on the third; none of those results is a resolution choice.
+This act does not select an Assignment rule, remove a blocker, resolve a question, activate completeness or occupancy, change a Concept, start T7 or authorize a future act. It establishes non-unique pressure on all three blockers; none of those results is a resolution choice.
 
 Merge still requires exact-head Fable review, Codex adjudication, green CI on the same head and fresh explicit Pavlo authorization naming that head.

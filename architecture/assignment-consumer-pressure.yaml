@@ -20,9 +20,9 @@ consumer_need:
 blocker_results:
   - blocker_id: AMENDMENT_MODEL_ABSENT
     question_ids: [Q2]
-    classification: undecidable-from-inside
-    need_adequacy_effect: current-bindings-adequate-for-all-resolutions
-    reason: all-amendment-resolutions-fit-the-current-signature-but-live-satisfaction-still-requires-external-completeness
+    classification: pressured
+    need_adequacy_effect: current-bindings-adequate-except-in-place-amendment
+    reason: in-place-amendment-requires-an-observation-cut-binding-that-the-current-signature-does-not-carry
     resolution_ids:
       - IN_PLACE_TRACEABLE_AMENDMENT
       - SUPERSEDING_ASSIGNMENT_FOR_CHANGE
@@ -47,9 +47,9 @@ blocker_results:
       - EXPLICIT_PART_SCOPE_ON_ASSIGNMENT
       - PART_AS_RESOURCE_IDENTITY
 resolution_inventory:
-  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: IN_PLACE_TRACEABLE_AMENDMENT, externally_visible_form: same-assignment-identity-with-attributable-versioned-change, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: undecidable-from-inside, probe_fixture: pressure-q2-in-place.yaml}
-  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: SUPERSEDING_ASSIGNMENT_FOR_CHANGE, externally_visible_form: new-assignment-identity-linked-to-predecessor, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: undecidable-from-inside, probe_fixture: pressure-q2-superseding.yaml}
-  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: POST_ESTABLISHMENT_IMMUTABILITY, externally_visible_form: change-forbidden-after-establishment, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: undecidable-from-inside, probe_fixture: pressure-q2-immutable.yaml}
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: IN_PLACE_TRACEABLE_AMENDMENT, externally_visible_form: same-assignment-identity-with-attributable-versioned-change, need_adequacy_effect: additional-observation-cut-binding-required, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-in-place.yaml}
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: SUPERSEDING_ASSIGNMENT_FOR_CHANGE, externally_visible_form: new-assignment-identity-linked-to-predecessor, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-superseding.yaml}
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: POST_ESTABLISHMENT_IMMUTABILITY, externally_visible_form: change-forbidden-after-establishment, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-immutable.yaml}
   - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: PROSPECTIVE_ONLY_SINGLE_INTERVAL, externally_visible_form: no-retroactivity-and-one-interval, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-prospective-single.yaml}
   - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: PROSPECTIVE_ONLY_MULTIPLE_INTERVALS, externally_visible_form: no-retroactivity-and-many-intervals, need_adequacy_effect: current-three-bindings-adequate, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-prospective-multiple.yaml}
   - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: RETROACTIVE_ALLOWED_SINGLE_INTERVAL, externally_visible_form: retroactivity-and-one-interval, need_adequacy_effect: additional-observation-cut-binding-required, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-retroactive-single.yaml}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -8,6 +9,7 @@ import yaml
 
 from ._common import nonempty, parse_time, result
 from .checker import ValidationResult
+from .resource_occupancy import derive_resource_occupancy, validate_resource_occupancy_dataset
 
 
 ASSIGNMENT_PRESSURE_MAP_INVALID = "ASSIGNMENT_PRESSURE_MAP_INVALID"
@@ -41,6 +43,7 @@ SURFACE_PATH = Path("architecture/assignment-stable-surface.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 FIXTURE_ROOT = Path("tools/ontology_checker/fixtures/assignment_consumer_pressure")
+OCCUPANCY_FIXTURE_ROOT = Path("tools/ontology_checker/fixtures/resource_occupancy")
 
 BASELINE = "6099a1ce042624b86fb4289f75d396a53fa9addb"
 CONSUMER_REF = "OCP-023@0.2.0"
@@ -89,7 +92,7 @@ RESOLUTION_DETAILS = {
     "PART_AS_RESOURCE_IDENTITY": ("part-receives-own-resource-identity", "pressure-q5-part-identity.yaml"),
 }
 RESOLUTION_ADEQUACY = {
-    "IN_PLACE_TRACEABLE_AMENDMENT": CURRENT_BINDINGS_ADEQUATE,
+    "IN_PLACE_TRACEABLE_AMENDMENT": OBSERVATION_CUT_REQUIRED,
     "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": CURRENT_BINDINGS_ADEQUATE,
     "POST_ESTABLISHMENT_IMMUTABILITY": CURRENT_BINDINGS_ADEQUATE,
     "PROSPECTIVE_ONLY_SINGLE_INTERVAL": CURRENT_BINDINGS_ADEQUATE,
@@ -101,17 +104,17 @@ RESOLUTION_ADEQUACY = {
     "PART_AS_RESOURCE_IDENTITY": SCOPE_CLOSURE_REQUIRED,
 }
 EXPECTED_BLOCKER_CLASSIFICATIONS = {
-    "AMENDMENT_MODEL_ABSENT": "undecidable-from-inside",
+    "AMENDMENT_MODEL_ABSENT": "pressured",
     "TEMPORAL_MODEL_UNRESOLVED": "pressured",
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "pressured",
 }
 BLOCKER_ADEQUACY_SUMMARIES = {
-    "AMENDMENT_MODEL_ABSENT": "current-bindings-adequate-for-all-resolutions",
+    "AMENDMENT_MODEL_ABSENT": "current-bindings-adequate-except-in-place-amendment",
     "TEMPORAL_MODEL_UNRESOLVED": "current-bindings-adequate-only-for-prospective-resolutions",
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "current-bindings-adequate-except-part-as-resource-identity",
 }
 BLOCKER_REASONS = {
-    "AMENDMENT_MODEL_ABSENT": "all-amendment-resolutions-fit-the-current-signature-but-live-satisfaction-still-requires-external-completeness",
+    "AMENDMENT_MODEL_ABSENT": "in-place-amendment-requires-an-observation-cut-binding-that-the-current-signature-does-not-carry",
     "TEMPORAL_MODEL_UNRESOLVED": "retroactive-resolutions-require-an-observation-cut-binding-that-the-current-signature-does-not-carry",
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": "part-as-resource-identity-requires-part-whole-closure-that-the-current-signature-does-not-carry",
 }
@@ -310,6 +313,109 @@ def _load_yaml(repo_root: Path, relative: Path) -> Any:
     return yaml.safe_load((repo_root / relative).read_text(encoding="utf-8"))
 
 
+def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
+    try:
+        control = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-one-effective.yaml")["dataset"]
+        empty = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-zero-assignments.yaml")["dataset"]
+    except (KeyError, OSError, TypeError, yaml.YAMLError):
+        return None
+
+    in_place = copy.deepcopy(control)
+    in_place["assignment_snapshots"][0]["assignments"][0]["applicability_end"] = "2026-08-02T10:30:00Z"
+    in_place["occupancy_request"]["stored_occupied"] = False
+    in_place["occupancy_request"]["stored_witness_assignment_refs"] = []
+
+    superseding = copy.deepcopy(control)
+    prior = superseding["assignment_snapshots"][0]["assignments"][0]
+    prior["transition_history"].append(
+        {
+            "transition_id": "AT-OLD-TERM",
+            "assignment_ref": "A-001",
+            "from_stage": "Established",
+            "to_stage": "Revoked",
+            "occurred_at": "2026-08-02T10:30:00Z",
+            "provenance_ref": "SYNTH-DECISION-TERM",
+        }
+    )
+    prior["lifecycle_stage"] = "Revoked"
+    prior["terminal_at"] = "2026-08-02T10:30:00Z"
+    successor = copy.deepcopy(control["assignment_snapshots"][0]["assignments"][0])
+    successor.update(
+        {
+            "assignment_id": "A-002",
+            "applicability_end": "2026-08-02T10:30:00Z",
+            "created_at": "2026-08-02T10:15:00Z",
+            "established_at": "2026-08-02T10:20:00Z",
+            "provenance_ref": "SYNTH-DECISION-002",
+            "supersedes_assignment_ref": "A-001",
+        }
+    )
+    successor["transition_history"][0].update(
+        {
+            "transition_id": "AT-002",
+            "assignment_ref": "A-002",
+            "occurred_at": "2026-08-02T10:20:00Z",
+            "provenance_ref": "SYNTH-DECISION-002",
+        }
+    )
+    superseding["assignment_snapshots"][0]["assignments"].append(successor)
+    superseding["occupancy_request"]["stored_occupied"] = False
+    superseding["occupancy_request"]["stored_witness_assignment_refs"] = []
+
+    before_retroactive = copy.deepcopy(empty)
+    before_retroactive["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
+    before_retroactive["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
+    before_retroactive["assignment_snapshots"][0]["snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
+    after_retroactive = copy.deepcopy(before_retroactive)
+    retroactive = copy.deepcopy(control["assignment_snapshots"][0]["assignments"][0])
+    retroactive["assignment_id"] = "A-RETRO"
+    retroactive["transition_history"][0]["transition_id"] = "AT-RETRO"
+    retroactive["transition_history"][0]["assignment_ref"] = "A-RETRO"
+    after_retroactive["assignment_snapshots"][0]["assignments"] = [retroactive]
+    after_retroactive["occupancy_request"]["stored_occupied"] = True
+    after_retroactive["occupancy_request"]["stored_witness_assignment_refs"] = ["A-RETRO"]
+
+    cross_bound_part = copy.deepcopy(control)
+    cross_bound_part["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001-PART-A"
+    exact_bound_whole = copy.deepcopy(empty)
+    exact_bound_whole["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
+
+    valid_datasets = (control, in_place, superseding, before_retroactive, after_retroactive, exact_bound_whole)
+    if not all(validate_resource_occupancy_dataset(item).valid for item in valid_datasets):
+        return None
+    observed = {
+        "control": derive_resource_occupancy(control).occupied,
+        "in_place": derive_resource_occupancy(in_place).occupied,
+        "superseding": derive_resource_occupancy(superseding).occupied,
+        "before_retroactive": derive_resource_occupancy(before_retroactive).occupied,
+        "after_retroactive": derive_resource_occupancy(after_retroactive).occupied,
+        "cross_bound_part": derive_resource_occupancy(cross_bound_part).occupied,
+        "exact_bound_whole": derive_resource_occupancy(exact_bound_whole).occupied,
+    }
+    if observed != {
+        "control": True,
+        "in_place": False,
+        "superseding": False,
+        "before_retroactive": False,
+        "after_retroactive": True,
+        "cross_bound_part": None,
+        "exact_bound_whole": False,
+    }:
+        return None
+    return {
+        "IN_PLACE_TRACEABLE_AMENDMENT": OBSERVATION_CUT_REQUIRED,
+        "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": CURRENT_BINDINGS_ADEQUATE,
+        "POST_ESTABLISHMENT_IMMUTABILITY": CURRENT_BINDINGS_ADEQUATE,
+        "PROSPECTIVE_ONLY_SINGLE_INTERVAL": CURRENT_BINDINGS_ADEQUATE,
+        "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS": CURRENT_BINDINGS_ADEQUATE,
+        "RETROACTIVE_ALLOWED_SINGLE_INTERVAL": OBSERVATION_CUT_REQUIRED,
+        "RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS": OBSERVATION_CUT_REQUIRED,
+        "WHOLE_RESOURCE_ONLY": CURRENT_BINDINGS_ADEQUATE,
+        "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": CURRENT_BINDINGS_ADEQUATE,
+        "PART_AS_RESOURCE_IDENTITY": SCOPE_CLOSURE_REQUIRED,
+    }
+
+
 def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumerPressureMapResult:
     errors: list[str] = []
     try:
@@ -396,6 +502,8 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
     except (OSError, yaml.YAMLError):
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
     if inventory != expected_inventory or fixture_pairs != expected_pairs:
+        errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
+    if _derive_live_adequacy_evidence(repo_root) != RESOLUTION_ADEQUACY:
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
 
     results = payload.get("blocker_results") if isinstance(payload, dict) else None

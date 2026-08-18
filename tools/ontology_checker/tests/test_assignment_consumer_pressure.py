@@ -40,6 +40,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         Path("architecture/consumer-need-discovery.yaml"),
         Path("architecture/foundation-promotion-gate.yaml"),
         Path("tools/ontology_checker/fixtures/assignment_consumer_pressure"),
+        Path("tools/ontology_checker/fixtures/resource_occupancy"),
     )
     baseline_anchors = {
         "docs/005-assignment-concept/README.md": (
@@ -176,7 +177,10 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
             assignment_consumer_pressure.RESOLUTION_ADEQUACY[item]
             for item in assignment_consumer_pressure.BLOCKER_SOLUTIONS["PARTIAL_SCOPE_IDENTITY_UNRESOLVED"]
         }
-        self.assertEqual(q2_effects, {"current-three-bindings-adequate"})
+        self.assertEqual(
+            q2_effects,
+            {"current-three-bindings-adequate", "additional-observation-cut-binding-required"},
+        )
         self.assertEqual(
             temporal_effects,
             {"current-three-bindings-adequate", "additional-observation-cut-binding-required"},
@@ -184,6 +188,10 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         self.assertEqual(
             scope_effects,
             {"current-three-bindings-adequate", "additional-part-whole-closure-binding-required"},
+        )
+        self.assertEqual(
+            assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
+            assignment_consumer_pressure.RESOLUTION_ADEQUACY,
         )
 
         control = copy.deepcopy(self.occupancy_fixtures["valid-one-effective"])
@@ -236,7 +244,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         candidate["probe"]["selected_resolution"] = True
         attacks["ASSIGNMENT_PRESSURE_FORBIDDEN_OUTCOME"] = candidate
         candidate = copy.deepcopy(base)
-        candidate["probe"]["stored_blocker_classification"] = "pressured"
+        candidate["probe"]["stored_blocker_classification"] = "neutral"
         attacks["ASSIGNMENT_PRESSURE_RESULT_MISMATCH"] = candidate
         self.assertEqual(set(attacks), set(ASSIGNMENT_PRESSURE_ERROR_CODES))
         for error, candidate in attacks.items():
