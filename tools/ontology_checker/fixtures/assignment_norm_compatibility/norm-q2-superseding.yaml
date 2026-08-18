@@ -1,0 +1,14 @@
+case_id: assignment-norm-q2-superseding
+concept: AssignmentNormCompatibilityProbe
+probe:
+  probe_id: SYNTH-NORM-001
+  blocker_id: AMENDMENT_MODEL_ABSENT
+  question_ids: [Q2]
+  resolution_id: SUPERSEDING_ASSIGNMENT_FOR_CHANGE
+  claims: {resource_cardinality: one, automatic_component_inheritance: 'false', post_establishment_change_model: superseding-assignment}
+  source_statement_ids: [ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER, ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, COMPONENT_ASSIGNMENT_NON_INHERITANCE]
+  evidence_mode: analytic
+  stored_classification: underdetermined
+  stored_violation_statement_ids: []
+  stored_underdetermined_axes: [post_establishment_change_model]
+expected: {valid: true, error_codes: []}
