@@ -41,7 +41,7 @@ baseline_evidence_objects:
 subject:
   document_id: OCP-005
   primary: docs/005-assignment-concept/README.md
-  expected_version: 0.2.8
+  expected_version: 0.3.0
   expected_status: Draft
   expected_concept_status: Accepted
   discovery_result: bounded_stable_candidate_not_selected
@@ -118,8 +118,8 @@ open_question_inventory:
     surface: AMENDMENT_AFTER_ESTABLISHMENT
     evidence_token: "Яка amendment model потрібна для зміни role або applicability після Establishment?"
   - question_id: Q3
-    state: open
-    classification: blocks-whole-document-freeze
+    state: resolved-current
+    classification: outside-open-set
     surface: RETROACTIVE_ESTABLISHMENT
     evidence_token: "Чи допускається ретроактивне Establishment Assignment?"
   - question_id: Q4
@@ -201,7 +201,7 @@ moving_surfaces:
     question_ids: [Q2]
   - surface_id: TEMPORAL_EFFECTIVITY_EXTENSION
     disposition: moving
-    question_ids: [Q3, Q9]
+    question_ids: [Q9]
   - surface_id: ROLE_GOVERNANCE
     disposition: moving
     question_ids: [Q4, Q7]
@@ -223,7 +223,7 @@ blockers:
     question_ids: [Q2]
   - blocker_id: TEMPORAL_MODEL_UNRESOLVED
     disposition: blocks-whole-document-freeze
-    question_ids: [Q3, Q9]
+    question_ids: [Q9]
   - blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
     disposition: blocks-whole-document-freeze
     question_ids: [Q5]

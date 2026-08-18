@@ -296,6 +296,7 @@ class ResourceOccupancyTests(unittest.TestCase):
                     str(REPO_ROOT) + "/", ""
                 )
                 for number in range(23)
+                if number != 5
             ),
             "patterns",
             "architecture/foundation-promotion-gate.yaml",

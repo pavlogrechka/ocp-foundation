@@ -8,6 +8,7 @@ from typing import Any, Iterable
 
 import yaml
 
+from .assignment_q3_lifecycle import load_q3_source_quote_successions
 from .checker import assignment_effective_at, load_fixture, validate_assignment
 
 
@@ -247,6 +248,21 @@ EXPECTED_PROJECTION = {
         "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ["Q5"],
     },
 }
+CURRENT_PROJECTION = {
+    "witness": "architecture/assignment-stable-surface.yaml",
+    "questions": {
+        "Q9": "blocks-whole-document-freeze",
+        "Q5": "blocks-whole-document-freeze",
+    },
+    "moving_surfaces": {
+        "TEMPORAL_EFFECTIVITY_EXTENSION": ["Q9"],
+        "COMPOSITE_RESOURCE_SCOPE": ["Q5"],
+    },
+    "blockers": {
+        "TEMPORAL_MODEL_UNRESOLVED": ["Q9"],
+        "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ["Q5"],
+    },
+}
 EXPECTED_GATE_GUARD = {
     "schema_version": 5,
     "completed_cycle_ids": ["EVENT_T6"],
@@ -282,6 +298,20 @@ def _frontmatter(path: Path) -> dict[str, Any] | None:
     except yaml.YAMLError:
         return None
     return value if isinstance(value, dict) else None
+
+
+def _section(text: str, heading: str) -> str | None:
+    marker = f"## {heading}"
+    lines = text.splitlines()
+    starts = [index for index, line in enumerate(lines) if line == marker]
+    if len(starts) != 1:
+        return None
+    start = starts[0]
+    end = next(
+        (index for index in range(start + 1, len(lines)) if lines[index].startswith("## ")),
+        len(lines),
+    )
+    return "\n".join(lines[start:end])
 
 
 def _canonical_time(value: Any) -> Any:
@@ -400,15 +430,28 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.2.8"
+        or str(subject_metadata.get("Version")) != "0.3.0"
         or subject_metadata.get("Status") != "Draft"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or set(question_lines) != QUESTION_IDS
-        or any(not line or "~~" in line for line in question_lines.values())
+        or not question_lines.get("Q3")
+        or "~~" not in question_lines["Q3"]
+        or any(
+            not question_lines.get(question_id) or "~~" in question_lines[question_id]
+            for question_id in ("Q9", "Q5")
+        )
     ):
         errors.append(ASSIGNMENT_TEMPORAL_SCOPE_PROJECTION_DRIFT)
 
     evidence = _normalize_evidence(payload.get("owner_text_evidence"))
+    succession_rows = load_q3_source_quote_successions(repo_root)
+    succession_by_source = {
+        (row["source_path"], row["historical_quote"]): (
+            row["section"],
+            row["current_successor_quote"],
+        )
+        for row in succession_rows.values()
+    } if succession_rows is not None else {}
     if evidence != EXPECTED_OWNER_EVIDENCE or set(evidence or {}) != OWNER_EVIDENCE_IDS:
         errors.append(ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT)
     else:
@@ -417,7 +460,20 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
                 text = (repo_root / relative).read_text(encoding="utf-8")
             except OSError:
                 text = ""
-            if any(token not in text for token in tokens):
+            unresolved = False
+            for token in tokens:
+                if token in text:
+                    continue
+                successor = succession_by_source.get((relative, token))
+                if successor is None:
+                    unresolved = True
+                    break
+                section_name, current_quote = successor
+                section = _section(text, section_name)
+                if section is None or section.count(current_quote) != 1:
+                    unresolved = True
+                    break
+            if unresolved:
                 errors.append(ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT)
                 break
 
@@ -462,7 +518,7 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
 
     try:
         surface = yaml.safe_load(
-            (repo_root / EXPECTED_PROJECTION["witness"]).read_text(encoding="utf-8")
+            (repo_root / CURRENT_PROJECTION["witness"]).read_text(encoding="utf-8")
         )
     except (OSError, yaml.YAMLError):
         surface = None
@@ -480,19 +536,19 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
         actual_moving = {
             item.get("surface_id"): item.get("question_ids")
             for item in moving or []
-            if isinstance(item, dict) and item.get("surface_id") in EXPECTED_PROJECTION["moving_surfaces"]
+            if isinstance(item, dict) and item.get("surface_id") in CURRENT_PROJECTION["moving_surfaces"]
         }
         actual_blockers = {
             item.get("blocker_id"): item.get("question_ids")
             for item in blockers or []
             if isinstance(item, dict)
-            and item.get("blocker_id") in EXPECTED_PROJECTION["blockers"]
+            and item.get("blocker_id") in CURRENT_PROJECTION["blockers"]
             and item.get("disposition") == "blocks-whole-document-freeze"
         }
         if (
-            actual_questions != EXPECTED_PROJECTION["questions"]
-            or actual_moving != EXPECTED_PROJECTION["moving_surfaces"]
-            or actual_blockers != EXPECTED_PROJECTION["blockers"]
+            actual_questions != CURRENT_PROJECTION["questions"]
+            or actual_moving != CURRENT_PROJECTION["moving_surfaces"]
+            or actual_blockers != CURRENT_PROJECTION["blockers"]
         ):
             errors.append(ASSIGNMENT_TEMPORAL_SCOPE_PROJECTION_DRIFT)
 

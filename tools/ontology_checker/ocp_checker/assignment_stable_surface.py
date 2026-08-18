@@ -140,7 +140,7 @@ EXPECTED_CONSUMERS = {
 EXPECTED_QUESTIONS = {
     "Q1": ("resolved-historical", "outside-open-set", "RESERVATION_OBJECT_FORM", "Чи потрібен окремий фундаментальний Concept `Reservation`"),
     "Q2": ("open", "blocks-whole-document-freeze", "AMENDMENT_AFTER_ESTABLISHMENT", "Яка amendment model потрібна для зміни role або applicability після Establishment?"),
-    "Q3": ("open", "blocks-whole-document-freeze", "RETROACTIVE_ESTABLISHMENT", "Чи допускається ретроактивне Establishment Assignment?"),
+    "Q3": ("resolved-current", "outside-open-set", "RETROACTIVE_ESTABLISHMENT", "Чи допускається ретроактивне Establishment Assignment?"),
     "Q4": ("open", "local-after-bounded-freeze", "ROLE_TAXONOMY", "Чи потрібна окрема Role Taxonomy у Core?"),
     "Q5": ("open", "blocks-whole-document-freeze", "COMPOSITE_RESOURCE_SCOPE", "Чи повинен Assignment мати окремий scope для частини складеного Resource"),
     "Q6": ("resolved-historical", "outside-open-set", "QUANTITATIVE_INPUT", "Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?"),
@@ -163,7 +163,7 @@ EXPECTED_EVIDENCE = {
 }
 EXPECTED_MOVING = {
     "AMENDMENT_AFTER_ESTABLISHMENT": ("moving", ("Q2",)),
-    "TEMPORAL_EFFECTIVITY_EXTENSION": ("moving", ("Q3", "Q9")),
+    "TEMPORAL_EFFECTIVITY_EXTENSION": ("moving", ("Q9",)),
     "ROLE_GOVERNANCE": ("moving", ("Q4", "Q7")),
     "COMPOSITE_RESOURCE_SCOPE": ("moving", ("Q5",)),
     "CONSTRAINT_CONFLICT_HANDOFF": ("moving-external-owner", ("Q8",)),
@@ -172,7 +172,7 @@ EXPECTED_MOVING = {
 }
 EXPECTED_BLOCKERS = {
     "AMENDMENT_MODEL_ABSENT": ("blocks-whole-document-freeze", ("Q2",), ()),
-    "TEMPORAL_MODEL_UNRESOLVED": ("blocks-whole-document-freeze", ("Q3", "Q9"), ()),
+    "TEMPORAL_MODEL_UNRESOLVED": ("blocks-whole-document-freeze", ("Q9",), ()),
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("blocks-whole-document-freeze", ("Q5",), ()),
 }
 EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
@@ -362,13 +362,13 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             subject != {
                 "document_id": "OCP-005",
                 "primary": "docs/005-assignment-concept/README.md",
-                "expected_version": "0.2.8",
+                "expected_version": "0.3.0",
                 "expected_status": "Draft",
                 "expected_concept_status": "Accepted",
                 "discovery_result": "bounded_stable_candidate_not_selected",
             }
             or primary != repo_root / "docs/005-assignment-concept/README.md"
-            or str(metadata.get("Version")) != "0.2.8"
+            or str(metadata.get("Version")) != "0.3.0"
             or metadata.get("Status") != "Draft"
             or metadata.get("Concept-Status") != "Accepted"
         ):
@@ -489,7 +489,7 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             entry.get("state"), entry.get("classification"), entry.get("surface"), entry.get("evidence_token")
         )
         matching_lines = [line for line in current_question_lines if str(entry.get("evidence_token")) in line]
-        expected_resolved = entry.get("state") == "resolved-historical"
+        expected_resolved = entry.get("state") in {"resolved-historical", "resolved-current"}
         if (
             expected is None
             or actual != expected
@@ -502,7 +502,7 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
         errors.append(ASSIGNMENT_STABLE_SURFACE_QUESTION_DRIFT)
     if (
         len(current_question_lines) != 11
-        or sum(1 for item in questions if isinstance(item, dict) and item.get("state") == "open") != 9
+        or sum(1 for item in questions if isinstance(item, dict) and item.get("state") == "open") != 8
     ):
         errors.append(ASSIGNMENT_STABLE_SURFACE_QUESTION_DRIFT)
 

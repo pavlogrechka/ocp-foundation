@@ -1,7 +1,7 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.2.8
+Version: 0.3.0
 Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
@@ -272,7 +272,9 @@ Derivation використовує проєкції з авторитетної
 
 `terminal_at` означає час `Closed` або `Revoked`. Поточний terminal lifecycle stage не скасовує історичну ефективність до `terminal_at`.
 
-До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.
+Assignment не може бути ефективним для часу раніше авторитетного `established_at`. Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity до авторитетного `established_at`.
+
+Ця межа не визначає recording time, ingestion time, correction lineage або автентичність `occurred_at`; вона лише фіксує часову межу derivation над авторитетною transition history. Кардинальність applicability intervals лишається окремим відкритим Q9.
 
 Точна модель часових значень і часових зон буде визначена окремо. OCP-005 фіксує лише логічні межі derivation.
 
@@ -440,7 +442,7 @@ Assignment у stage `Established` із довільно заповненим `te
 
 1. ~~Чи потрібен окремий фундаментальний Concept `Reservation`, чи це спеціалізація Assignment або Constraint?~~ AD-026/OCP-021 §§8–12 приймають EN/QN negative establishment boundaries: жоден із цих object/Concept outcomes не встановлений; позитивна модель потребує окремого reopening.
 2. Яка amendment model потрібна для зміни role або applicability після Establishment?
-3. Чи допускається ретроактивне Establishment Assignment?
+3. ~~Чи допускається ретроактивне Establishment Assignment?~~ AD-046/OCP-005 §8 остаточно забороняють виводити effectivity раніше авторитетного `established_at`; recording/correction lineage не визначаються, а Q9 лишається відкритим.
 4. Чи потрібна окрема Role Taxonomy у Core?
 5. Чи повинен Assignment мати окремий scope для частини складеного Resource без створення нового Resource?
 6. ~~Як представляти кількість Consumable Resource, зарезервовану або спожиту в Operation?~~ AD-025/OCP-020 §§5–8, 11 and AD-026/OCP-021 §§8–12 розділяють відповідь: exact-unit `demand`/`consumed` inputs і neutral aggregation прийняті, тоді як reservation/allocation з цієї композиції не встановлюються.

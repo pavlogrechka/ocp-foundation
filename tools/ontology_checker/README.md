@@ -21,8 +21,9 @@ Implemented validators:
 - Draft OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy and no real evaluator or activation;
 - Assignment consumer-pressure discovery with exact enumeration of three whole-freeze blockers and ten resolution classes, live consumer replays, per-resolution binding adequacy and three non-unique `pressured` results;
 - Assignment survivor norm-compatibility discovery with all 25 current primary bodies, a bounded 64-hit six-axis lexical sweep with explicit source/rejection dispositions, three exact-guarded known out-of-vocabulary temporal deferrals, six pressure survivors, one compatible and five underdetermined results, plus causal exact-Resource/non-inheritance counterexamples; the sweep does not claim semantic-axis completeness;
+- Assignment Q3 lifecycle resolution with an exact final `established_at` effectivity lower bound, ordered sufficiency ledger, causal before/at-boundary probe, Q3-only closure guard, Q9-only temporal blocker projection and immutable historical discovery witnesses;
 - Assignment transition history, projections, applicability and participation derivation;
-- Assignment Q2 amendment plus Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
+- Assignment Q2 amendment plus historical Q3/Q9 temporal and Q5 partial-scope negative-boundary attempts, with exact owner-text drift guards, an isolated pre-establishment effectivity control and executable accepted-gap probes;
 - Constraint structure, lifecycle, effectivity, applicability and exact-version evaluation;
 - Organization exact dataset identity/lifecycle and OrganizationRelationshipRecord kind, endpoint, partition, graph and supersession validation;
 - Capability definition identity, namespace, supersession and exact resolution;

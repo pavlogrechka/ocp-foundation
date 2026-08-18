@@ -159,7 +159,7 @@ class AssignmentStableSurfaceTests(unittest.TestCase):
 
     def test_subject_and_concept_dependency_state_are_live(self) -> None:
         subject_mutations = (
-            ("Version: 0.2.8", "Version: 0.2.9"),
+            ("Version: 0.3.0", "Version: 0.3.1"),
             ("Status: Draft", "Status: Accepted"),
             ("Concept-Status: Accepted", "Concept-Status: Canonical"),
             ("Concept-Depends-On: [Resource, Operation]", "Concept-Depends-On: [Resource]"),
@@ -242,7 +242,7 @@ class AssignmentStableSurfaceTests(unittest.TestCase):
                 path = root / "docs/005-assignment-concept/README.md"
                 text = path.read_text(encoding="utf-8")
                 line = next(value for value in text.splitlines() if question["evidence_token"] in value)
-                if question["state"] == "resolved-historical":
+                if question["state"] in {"resolved-historical", "resolved-current"}:
                     replacement = line.replace("~~", "")
                 else:
                     replacement = line.replace(

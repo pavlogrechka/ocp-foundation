@@ -29,11 +29,18 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
     map_path = Path("architecture/assignment-temporal-scope-attempt.yaml")
     surface_path = Path("architecture/assignment-stable-surface.yaml")
     gate_path = Path("architecture/foundation-promotion-gate.yaml")
+    q3_resolution_path = Path("architecture/assignment-retroactivity-q3-resolution.yaml")
     fixture_path = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
     def copy_inputs(self, destination: Path) -> None:
         shutil.copytree(ROOT / "docs", destination / "docs")
-        for relative in (self.map_path, self.surface_path, self.gate_path, self.fixture_path):
+        for relative in (
+            self.map_path,
+            self.surface_path,
+            self.gate_path,
+            self.q3_resolution_path,
+            self.fixture_path,
+        ):
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / relative, target)
@@ -81,6 +88,7 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
             "EXPECTED_CONTROL",
             "EXPECTED_PROBES",
             "EXPECTED_PROJECTION",
+            "CURRENT_PROJECTION",
             "EXPECTED_GATE_GUARD",
         )
 
@@ -135,8 +143,20 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
                 self.copy_inputs(root)
                 fpath = root / relative
                 text = fpath.read_text(encoding="utf-8")
-                self.assertIn(token, text)
-                fpath.write_text(text.replace(token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
+                successions = assignment_temporal_scope.load_q3_source_quote_successions(root)
+                self.assertIsNotNone(successions)
+                successor = next(
+                    (
+                        row["current_successor_quote"]
+                        for row in successions.values()
+                        if row["source_path"] == relative and row["historical_quote"] == token
+                    ),
+                    None,
+                )
+                live_token = token if token in text else successor
+                self.assertIsNotNone(live_token)
+                self.assertIn(live_token, text)
+                fpath.write_text(text.replace(live_token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
                 self.assertIn(
                     ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT,
                     validate_assignment_temporal_scope(root).errors,
@@ -180,7 +200,7 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
             with self.subTest(probe=label):
                 self.assertTrue(validate_assignment(mutated).valid)
 
-    def test_q3_q9_q5_and_both_blockers_must_remain_open(self) -> None:
+    def test_historical_q3_result_survives_while_current_q3_is_closed_only(self) -> None:
         mutations = (
             "Q3",
             "Q9",
@@ -200,7 +220,11 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
                         item for item in surface["open_question_inventory"]
                         if item["question_id"] == mutation
                     )
-                    target["classification"] = "local-after-bounded-freeze"
+                    if mutation == "Q3":
+                        target["state"] = "open"
+                        target["classification"] = "blocks-whole-document-freeze"
+                    else:
+                        target["classification"] = "local-after-bounded-freeze"
                 elif mutation in {"TEMPORAL_EFFECTIVITY_EXTENSION", "COMPOSITE_RESOURCE_SCOPE"}:
                     surface["moving_surfaces"] = [
                         item for item in surface["moving_surfaces"]
