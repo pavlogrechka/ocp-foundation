@@ -1,0 +1,4 @@
+case_id: assignment-pressure-q5-explicit-scope
+concept: AssignmentConsumerPressureProbe
+expected: {valid: true, error_codes: []}
+probe: {probe_id: SYNTH-PRESSURE-009, accepted_consumer_ref: OCP-023@0.2.0, consumer_need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS, consumer_need_token: "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)", blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED, question_ids: [Q5], resolution_id: EXPLICIT_PART_SCOPE_ON_ASSIGNMENT, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, snapshot_ref: SYNTH-SNAPSHOT-009, completeness_authority_state: absent, completeness_authority_ref: null, stored_signature_effect: preserved, stored_classification: undecidable-from-inside}

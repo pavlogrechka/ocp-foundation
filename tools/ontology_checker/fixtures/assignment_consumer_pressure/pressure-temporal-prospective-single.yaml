@@ -1,0 +1,4 @@
+case_id: assignment-pressure-temporal-prospective-single
+concept: AssignmentConsumerPressureProbe
+expected: {valid: true, error_codes: []}
+probe: {probe_id: SYNTH-PRESSURE-004, accepted_consumer_ref: OCP-023@0.2.0, consumer_need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS, consumer_need_token: "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)", blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: PROSPECTIVE_ONLY_SINGLE_INTERVAL, resource_ref: R-001, evaluation_time: 2026-08-02T10:00:00Z, snapshot_ref: SYNTH-SNAPSHOT-004, completeness_authority_state: absent, completeness_authority_ref: null, stored_signature_effect: preserved, stored_classification: undecidable-from-inside}
