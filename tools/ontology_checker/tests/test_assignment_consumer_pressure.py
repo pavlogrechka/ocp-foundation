@@ -189,18 +189,32 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
             scope_effects,
             {"current-three-bindings-adequate", "additional-part-whole-closure-binding-required"},
         )
+        observed_adequacy = {
+            resolution: adequacy
+            for resolution, adequacy in assignment_consumer_pressure.RESOLUTION_ADEQUACY.items()
+            if assignment_consumer_pressure.RESOLUTION_EVIDENCE_MODES[resolution] == "observed"
+        }
         self.assertEqual(
             assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
-            assignment_consumer_pressure.RESOLUTION_ADEQUACY,
+            observed_adequacy,
+        )
+        self.assertNotIn(
+            "POST_ESTABLISHMENT_IMMUTABILITY",
+            assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
         )
         transposed_q2 = dict(assignment_consumer_pressure.RESOLUTION_ADEQUACY)
         transposed_q2["IN_PLACE_TRACEABLE_AMENDMENT"] = "current-three-bindings-adequate"
         transposed_q2["SUPERSEDING_ASSIGNMENT_FOR_CHANGE"] = (
             "additional-observation-cut-binding-required"
         )
+        transposed_observed_q2 = {
+            resolution: adequacy
+            for resolution, adequacy in transposed_q2.items()
+            if assignment_consumer_pressure.RESOLUTION_EVIDENCE_MODES[resolution] == "observed"
+        }
         self.assertNotEqual(
             assignment_consumer_pressure._derive_live_adequacy_evidence(ROOT),
-            transposed_q2,
+            transposed_observed_q2,
         )
         with patch.object(
             assignment_consumer_pressure,
@@ -217,10 +231,39 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         cross_bound_part = copy.deepcopy(control)
         cross_bound_part["dataset"]["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001-PART-A"
         self.assertIsNone(derive_resource_occupancy(cross_bound_part["dataset"]).occupied)
+        whole_bound_twin = copy.deepcopy(cross_bound_part)
+        whole_bound_twin["dataset"]["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001"
+        self.assertTrue(validate_reference_fixture(whole_bound_twin).valid)
+        self.assertEqual(derive_resource_occupancy(whole_bound_twin["dataset"]).occupied, True)
+        self.assertEqual(
+            assignment_consumer_pressure._scope_adequacy(
+                cross_bound_part["dataset"], whole_bound_twin["dataset"]
+            ),
+            "additional-part-whole-closure-binding-required",
+        )
+        for defect in ("rule_ref", "duplicate_assignment_id", "snapshot_ref"):
+            invalid_part = copy.deepcopy(cross_bound_part["dataset"])
+            invalid_whole = copy.deepcopy(whole_bound_twin["dataset"])
+            if defect == "rule_ref":
+                invalid_part["occupancy_request"]["rule_ref"] = "OCP-023@9.9.9"
+                invalid_whole["occupancy_request"]["rule_ref"] = "OCP-023@9.9.9"
+            elif defect == "duplicate_assignment_id":
+                invalid_part["assignment_snapshots"][0]["assignments"].append(
+                    copy.deepcopy(invalid_part["assignment_snapshots"][0]["assignments"][0])
+                )
+                invalid_whole["assignment_snapshots"][0]["assignments"].append(
+                    copy.deepcopy(invalid_whole["assignment_snapshots"][0]["assignments"][0])
+                )
+            else:
+                invalid_part["occupancy_request"]["assignment_snapshot_ref"] = "MISSING-SNAPSHOT"
+                invalid_whole["occupancy_request"]["assignment_snapshot_ref"] = "MISSING-SNAPSHOT"
+            with self.subTest(unrelated_scope_rejection=defect):
+                self.assertIsNone(
+                    assignment_consumer_pressure._scope_adequacy(invalid_part, invalid_whole)
+                )
+
         exact_bound_whole = copy.deepcopy(self.occupancy_fixtures["valid-zero-assignments"])
         exact_bound_whole["dataset"]["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
-        self.assertTrue(validate_reference_fixture(exact_bound_whole).valid)
-        self.assertEqual(derive_resource_occupancy(exact_bound_whole["dataset"]).occupied, False)
 
         before_retroactive_record = copy.deepcopy(exact_bound_whole)
         before_retroactive_record["dataset"]["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-RETRO"
@@ -298,7 +341,7 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
 
         defensive_structures = (
             "BLOCKER_QUESTIONS", "BLOCKER_SOLUTIONS", "RESOLUTION_DETAILS",
-            "RESOLUTION_ADEQUACY", "EXPECTED_BLOCKER_CLASSIFICATIONS",
+            "RESOLUTION_ADEQUACY", "RESOLUTION_EVIDENCE_MODES", "EXPECTED_BLOCKER_CLASSIFICATIONS",
             "BLOCKER_ADEQUACY_SUMMARIES", "BLOCKER_REASONS",
             "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
             "EXPECTED_MISSING_INPUTS", "EXPECTED_CONSUMER",

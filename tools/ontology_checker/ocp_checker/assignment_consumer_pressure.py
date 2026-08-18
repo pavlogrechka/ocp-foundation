@@ -103,6 +103,12 @@ RESOLUTION_ADEQUACY = {
     "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": CURRENT_BINDINGS_ADEQUATE,
     "PART_AS_RESOURCE_IDENTITY": SCOPE_CLOSURE_REQUIRED,
 }
+RESOLUTION_EVIDENCE_MODES = {
+    resolution: (
+        "analytic" if resolution == "POST_ESTABLISHMENT_IMMUTABILITY" else "observed"
+    )
+    for resolution in RESOLUTION_ADEQUACY
+}
 EXPECTED_BLOCKER_CLASSIFICATIONS = {
     "AMENDMENT_MODEL_ABSENT": "pressured",
     "TEMPORAL_MODEL_UNRESOLVED": "pressured",
@@ -313,6 +319,20 @@ def _load_yaml(repo_root: Path, relative: Path) -> Any:
     return yaml.safe_load((repo_root / relative).read_text(encoding="utf-8"))
 
 
+def _scope_adequacy(
+    candidate: dict[str, Any], whole_bound_twin: dict[str, Any]
+) -> str | None:
+    candidate_valid = validate_resource_occupancy_dataset(candidate).valid
+    candidate_result = derive_resource_occupancy(candidate).occupied
+    if candidate_valid and candidate_result is not None:
+        return CURRENT_BINDINGS_ADEQUATE
+    twin_valid = validate_resource_occupancy_dataset(whole_bound_twin).valid
+    twin_result = derive_resource_occupancy(whole_bound_twin).occupied
+    if not candidate_valid and candidate_result is None and twin_valid and twin_result is not None:
+        return SCOPE_CLOSURE_REQUIRED
+    return None
+
+
 def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
     try:
         control = _load_yaml(repo_root, OCCUPANCY_FIXTURE_ROOT / "valid-one-effective.yaml")["dataset"]
@@ -354,18 +374,6 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
         if before_result == after_result or retained_pre_change_payload(before, after):
             return CURRENT_BINDINGS_ADEQUATE
         return OBSERVATION_CUT_REQUIRED
-
-    def scope_adequacy(candidate: dict[str, Any], exact_bound_whole: dict[str, Any]) -> str | None:
-        candidate_result = derive_resource_occupancy(candidate).occupied
-        if validate_resource_occupancy_dataset(candidate).valid and candidate_result is not None:
-            return CURRENT_BINDINGS_ADEQUATE
-        if (
-            candidate_result is None
-            and validate_resource_occupancy_dataset(exact_bound_whole).valid
-            and derive_resource_occupancy(exact_bound_whole).occupied is False
-        ):
-            return SCOPE_CLOSURE_REQUIRED
-        return None
 
     def late_assignment(template: dict[str, Any], suffix: str, established_at: str) -> dict[str, Any]:
         item = copy.deepcopy(template)
@@ -431,8 +439,6 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
     superseding["occupancy_request"]["stored_occupied"] = False
     superseding["occupancy_request"]["stored_witness_assignment_refs"] = []
 
-    immutable = copy.deepcopy(control)
-
     before_prospective = copy.deepcopy(empty)
     before_prospective["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
     before_prospective["occupancy_request"]["assignment_snapshot_ref"] = "SYNTH-SNAPSHOT-PROSPECTIVE"
@@ -482,20 +488,13 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
 
     cross_bound_part = copy.deepcopy(control)
     cross_bound_part["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001-PART-A"
-    exact_bound_whole = copy.deepcopy(empty)
-    exact_bound_whole["occupancy_request"]["evaluation_time"] = "2026-08-02T11:00:00Z"
-    exact_bound_whole["occupancy_request"]["assignment_snapshot_ref"] = control["occupancy_request"][
-        "assignment_snapshot_ref"
-    ]
-    exact_bound_whole["assignment_snapshots"][0]["snapshot_ref"] = control["assignment_snapshots"][0][
-        "snapshot_ref"
-    ]
+    whole_bound_twin = copy.deepcopy(cross_bound_part)
+    whole_bound_twin["assignment_snapshots"][0]["assignments"][0]["resource_ref"] = "R-001"
 
     valid_datasets = (
         control,
         in_place,
         superseding,
-        immutable,
         before_prospective,
         prospective_single,
         prospective_multiple,
@@ -505,23 +504,24 @@ def _derive_live_adequacy_evidence(repo_root: Path) -> dict[str, str] | None:
         after_retroactive_multiple,
         whole_resource,
         explicit_part_scope,
-        exact_bound_whole,
+        whole_bound_twin,
     )
     if not all(validate_resource_occupancy_dataset(item).valid for item in valid_datasets):
         return None
     evidence = {
         "IN_PLACE_TRACEABLE_AMENDMENT": change_adequacy(control, in_place),
         "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": change_adequacy(control, superseding),
-        "POST_ESTABLISHMENT_IMMUTABILITY": change_adequacy(control, immutable),
         "PROSPECTIVE_ONLY_SINGLE_INTERVAL": change_adequacy(before_prospective, prospective_single),
         "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS": change_adequacy(before_prospective, prospective_multiple),
         "RETROACTIVE_ALLOWED_SINGLE_INTERVAL": change_adequacy(before_retroactive, after_retroactive),
         "RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS": change_adequacy(
             before_retroactive_multiple, after_retroactive_multiple
         ),
-        "WHOLE_RESOURCE_ONLY": scope_adequacy(whole_resource, exact_bound_whole),
-        "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": scope_adequacy(explicit_part_scope, exact_bound_whole),
-        "PART_AS_RESOURCE_IDENTITY": scope_adequacy(cross_bound_part, exact_bound_whole),
+        "WHOLE_RESOURCE_ONLY": _scope_adequacy(whole_resource, whole_resource),
+        "EXPLICIT_PART_SCOPE_ON_ASSIGNMENT": _scope_adequacy(
+            explicit_part_scope, explicit_part_scope
+        ),
+        "PART_AS_RESOURCE_IDENTITY": _scope_adequacy(cross_bound_part, whole_bound_twin),
     }
     return evidence if None not in evidence.values() else None
 
@@ -593,6 +593,7 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
                         "resolution_id": resolution,
                         "externally_visible_form": visible_form,
                         "need_adequacy_effect": RESOLUTION_ADEQUACY[resolution],
+                        "evidence_mode": RESOLUTION_EVIDENCE_MODES[resolution],
                         "live_satisfaction": LIVE_SATISFACTION,
                         "blocker_classification": _derive_blocker_classification(blocker),
                         "probe_fixture": fixture_name,
@@ -613,7 +614,20 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
     if inventory != expected_inventory or fixture_pairs != expected_pairs:
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
-    if _derive_live_adequacy_evidence(repo_root) != RESOLUTION_ADEQUACY:
+    observed_adequacy = {
+        resolution: adequacy
+        for resolution, adequacy in RESOLUTION_ADEQUACY.items()
+        if RESOLUTION_EVIDENCE_MODES[resolution] == "observed"
+    }
+    if (
+        set(RESOLUTION_EVIDENCE_MODES.values()) != {"observed", "analytic"}
+        or [
+            resolution
+            for resolution, mode in RESOLUTION_EVIDENCE_MODES.items()
+            if mode == "analytic"
+        ] != ["POST_ESTABLISHMENT_IMMUTABILITY"]
+        or _derive_live_adequacy_evidence(repo_root) != observed_adequacy
+    ):
         errors.append(ASSIGNMENT_PRESSURE_PROBE_DRIFT)
 
     results = payload.get("blocker_results") if isinstance(payload, dict) else None
