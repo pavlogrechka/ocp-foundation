@@ -295,7 +295,35 @@ class CompletenessEvaluatorTests(unittest.TestCase):
         self.assertIn("Route D", source)
         self.assertIn("Actual legitimacy cannot be established", source)
         self.assertIn("does not assert that any real Assignment set is complete", source)
-        self.assertNotIn("Status: Accepted", source)
+        self.assertIn("Status: Accepted", source)
+
+        observed_results = {
+            derive_completeness_evidence_recognition(fixture["dataset"]).result
+            for fixture in self.fixtures.values()
+        }
+        self.assertEqual(
+            observed_results,
+            {"synthetic-reference-recognized", "indeterminate"},
+        )
+        self.assertNotIn(False, observed_results)
+        self.assertNotIn("complete", observed_results)
+        self.assertNotIn("occupied=false", observed_results)
+
+        valid = self.fixtures["valid-synthetic-reference"]["dataset"]
+        for field, replacement in (
+            ("evaluator_ref", "PRODUCTION-EVALUATOR-001"),
+            ("authority_basis_ref", "PRODUCTION-AUTHORITY-001"),
+        ):
+            with self.subTest(field=field):
+                mutated = copy.deepcopy(valid)
+                mutated["evaluator_profiles"][0][field] = replacement
+                self.assertEqual(
+                    derive_completeness_evidence_recognition(mutated).result,
+                    "indeterminate",
+                )
+                self.assertFalse(
+                    completeness_evaluator.validate_completeness_evaluator_dataset(mutated).valid
+                )
 
 
 if __name__ == "__main__":

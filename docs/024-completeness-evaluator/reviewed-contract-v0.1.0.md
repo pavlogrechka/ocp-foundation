@@ -1,12 +1,12 @@
 ---
 Document-ID: OCP-024
 Title: Assignment-Set Completeness Evidence Recognition
-Version: 0.2.0
-Status: Accepted
+Version: 0.1.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: AD-042, AD-043, OCP-001, OCP-016, OCP-023
 Used-By: Resource occupancy completeness-evidence review and synthetic reference validation
-Last-Review: 2026-08-19
+Last-Review: 2026-08-17
 ---
 
 # OCP-024 — Assignment-Set Completeness Evidence Recognition
@@ -85,40 +85,3 @@ This contract does not:
 `0.1.0` is the first bounded Draft of this Route D contract. It adds no migration duty because no production representation is activated. Rollback removes OCP-024, AD-043, the isolated module, manifest, tests, fixtures and current accounting together; partial rollback would leave registered evidence without its owner.
 
 Acceptance of this exact body, naming a real authority relation, or activation of completeness each requires a separate mandate and fresh gates. None is implied here.
-
-## 11. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts OCP-024 revision `0.2.0` as the governed Route D Assignment-set completeness-evidence recognition contract in exactly the synthetic-only form reviewed at `0.1.0 / Draft`. The complete externally reviewed Draft is preserved byte-for-byte in [`reviewed-contract-v0.1.0.md`](reviewed-contract-v0.1.0.md) and incorporated without alteration.
-
-The original §§1–10 remain byte-identical to that reviewed snapshot. Their Draft lifecycle wording and next-act language are immutable historical review evidence; this README frontmatter and §§11–14 are the current lifecycle authority. Acceptance approves the synthetic recognition and fail-safe rejection boundary as a basis for dependent specifications. It does not make OCP-024 Canonical, recognize a production input, name a legitimate evaluator or authority, establish completeness, satisfy any OCP-016 G4 binding, activate resource occupancy or permit OCP-023 to derive `occupied=false`.
-
-## 12. Predeclared readiness criterion and result
-
-The readiness criterion was fixed before application:
-
-1. Accepted must fix a useful current contract, not merely a well-formed envelope: the exact `synthetic-reference-recognized`/`indeterminate` boundary must be deterministic, executable and fail-safe;
-2. synthetic-only scope is admissible only when production-shaped evaluator or authority values are rejected and no production legitimacy, completeness, negative occupancy or activation follows;
-3. every recognition property, result and non-implication is executable rather than prose-only;
-4. dependencies resolve and no Canonical-only L2 claim is implied;
-5. the exact reviewed body is preserved through the standard AD-029 snapshot mechanism; and
-6. consumer, unmet-need, status and accounting projections remain synchronized without manufacturing a new need or activation.
-
-OCP-024 satisfies the criterion. Its useful subject is producer-independent conformance and rejection: exact subject, coverage, time, provenance/authority reference shape and uniqueness can be checked, while invalid, ambiguous, stale, conflicting, ungrounded, activation-bearing or production-shaped evidence remains `indeterminate`. This is more than accepting form without a subject; the recognized synthetic case and every fail-safe rejection class are observable and independently tested.
-
-AD-042/AD-043 are Accepted, OCP-001/OCP-016 are Canonical and OCP-023 is Accepted. Accepted status requires exact dependency resolution but does not claim the Canonical L2 floor or production authority. No unresolved choice makes the current synthetic-only contract ambiguous.
-
-## 13. Consumer, need and activation invariants
-
-No current primary document depends on OCP-024, so acceptance adds no Accepted consumer to any existing contract. In particular, the six Accepted OCP-005 consumers remain OCP-013, OCP-015, OCP-017, OCP-020, OCP-021 and OCP-023.
-
-The current unmet-positive-need set remains exactly `[RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS]`, declared by OCP-023. OCP-024 does not satisfy it: `synthetic-reference-recognized` proves reference coherence only, not that a real Assignment set is complete. Its statement that a real evaluator needs separate external authority is a deferred production responsibility outside the accepted synthetic recognition obligation, not a second current unmet need.
-
-This lifecycle act is not positive-capable activation under OCP-016 G4. Acceptance changes that answer for no other document. OCP-023 still lacks an exact activation baseline, protected rule binding, production input snapshot/context and legitimate owner/evaluator. Missing or invalid completeness evidence remains indeterminate; `occupied=false` remains unavailable without a separately legitimate complete snapshot.
-
-## 14. Version, migration, rollback and non-transfer
-
-OCP-024 moves `0.1.0 / Draft → 0.2.0 / Accepted`. Under OCP-001 pre-canonical versioning this is MINOR: lifecycle authority changes while the reviewed semantic bytes remain unchanged. PATCH is false because Accepted status changes downstream admissibility; MAJOR/`1.0.0` is false because no contract is broken or removed and Canonical stability is not claimed.
-
-No Assignment, occupancy, recognition request, evaluator profile, evidence, rule, result, fixture or stored data migrates. The completeness-evaluator module, manifest and fixtures remain byte-identical to the acceptance baseline. Rollback is one separately reviewed lifecycle act restoring `0.1.0 / Draft` together with snapshot-map, current lifecycle inventory and accounting projections while preserving the reviewed snapshot and historical AD-043 evidence.
-
-Acceptance does not name or legitimize a real evaluator or authority, establish Assignment-set completeness, satisfy any G4 element, activate completeness or occupancy, change OCP-023/OCP-005, remove an Assignment blocker, create a Concept or edge, select a candidate, start a cycle, open T7 or authorize another act.

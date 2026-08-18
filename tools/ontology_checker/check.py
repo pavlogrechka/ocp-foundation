@@ -31,6 +31,7 @@ from ocp_checker.event_concept_canonicalization import validate_event_concept_ca
 from ocp_checker.foundation_promotion_gate import validate_foundation_promotion_gate
 from ocp_checker.foundation_promotion_reassessment import validate_foundation_promotion_reassessment
 from ocp_checker.open_question_sync import validate_open_question_sync
+from ocp_checker.ocp024_acceptance import validate_ocp024_acceptance
 
 
 def validate_any_fixture(fixture: dict):
@@ -183,6 +184,13 @@ def main() -> int:
     )
     failures += 0 if consumer_need_result.valid else 1
 
+    ocp024_acceptance_result = validate_ocp024_acceptance(repo_root)
+    print(
+        f"{'PASS' if ocp024_acceptance_result.valid else 'FAIL'} "
+        f"ocp024-acceptance errors={list(ocp024_acceptance_result.errors)}"
+    )
+    failures += 0 if ocp024_acceptance_result.valid else 1
+
     event_selection_result = validate_event_promotion_selection(repo_root)
     print(
         f"{'PASS' if event_selection_result.valid else 'FAIL'} "
@@ -251,7 +259,7 @@ def main() -> int:
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
         f"foundation promotion gate, reassessment, Event and Assignment stable-surface discovery, "
         f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, pressure, norm compatibility, Q3 lifecycle and Q2/Q9 sufficiency, "
-        f"consumer-need discovery, "
+        f"consumer-need discovery, OCP-024 acceptance, "
         f"Event selection, lifecycle promotion and Concept canonicalization, "
         f"open-question resolution sync, accepted snapshot governance, current numeric accounting, process audit, "
         f"Concept graph and generated map; "

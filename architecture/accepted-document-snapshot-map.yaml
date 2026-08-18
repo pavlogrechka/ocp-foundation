@@ -94,3 +94,10 @@ entries:
     snapshot: docs/023-resource-occupancy/reviewed-contract-v0.1.0.md
     sha256: c8a765053c3bd398eba18508c080f15dbe49a784565faa59bb8a88d266d872d4
     basis: current-accepted
+  - document_id: OCP-024
+    primary: docs/024-completeness-evaluator/README.md
+    current_status: Accepted
+    reviewed_version: 0.1.0
+    snapshot: docs/024-completeness-evaluator/reviewed-contract-v0.1.0.md
+    sha256: 0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753
+    basis: current-accepted
