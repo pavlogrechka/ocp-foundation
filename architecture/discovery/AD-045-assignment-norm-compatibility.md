@@ -6,14 +6,14 @@ Status: Discovery
 Owner: Architecture Board
 Depends-On: AD-035, AD-039, AD-044, OCP-002, OCP-003, OCP-004, OCP-005, OCP-016, OCP-017, OCP-023
 Applies-To: OCP-005 §19.2, §19.3, §19.5, §19.9
-Review-After: An Accepted or Canonical source changes one evaluated axis, or a separately mandated Assignment lifecycle resolution is proposed
+Review-After: A current primary source changes one evaluated axis, or a separately mandated Assignment lifecycle resolution is proposed
 ---
 
 # AD-045 — Assignment Survivor Norm-Compatibility Discovery
 
 ## 1. Question and result
 
-This act asks whether current normative text excludes any of the six Assignment resolution classes that survived AD-044 consumer pressure. It tests norm compatibility only. It does not repeat completeness or consumer-need analysis.
+This act asks whether current primary text excludes any of the six Assignment resolution classes that survived AD-044 consumer pressure. It tests norm compatibility only. It does not repeat completeness or consumer-need analysis.
 
 No surviving class is `incompatible`. `WHOLE_RESOURCE_ONLY` is `compatible`: every defining axis is addressed by current exact-one-Resource and component non-inheritance guarantees. The other five are `underdetermined`: current norm explicitly delegates or defers the axis that distinguishes them.
 
@@ -21,7 +21,7 @@ The result excludes nothing and selects nothing. Q2, Q3, Q9 and Q5 stay open; al
 
 ## 2. Gate-first before evidence form
 
-OCP-016 G4 does not apply to this discovery classification. AD-045 creates no positive-capable rule, result, profile or activation. It only compares already inventoried candidate classes with current Accepted/Canonical statements.
+OCP-016 G4 does not apply to this discovery classification. AD-045 creates no positive-capable rule, result, profile or activation. It only compares already inventoried candidate classes with current primary statements.
 
 Any later act that defines or activates an Assignment resolution remains separately gated. Discovery cannot convert compatibility, silence or underdetermination into permission. The selected form is a Discovery AD, a machine-readable witness and synthetic probes; no Core or Route D semantic contract changes.
 
@@ -29,11 +29,13 @@ Any later act that defines or activates an Assignment resolution remains separat
 
 Classification is ordered and mutually exclusive:
 
-1. `incompatible`: at least one current Accepted or Canonical statement is violated; the statement id, document, section and exact quote are required;
+1. `incompatible`: at least one current primary statement is violated; the statement id, document, section and exact quote are required;
 2. `underdetermined`: no violation exists, but at least one defining axis is explicitly unowned, undefined or deferred by current norm; and
 3. `compatible`: every defining axis is addressed and no current statement is violated.
 
-Only the current body of an `Accepted` or `Canonical` OCP is a normative source. OCP-005 is `Draft`, so it supplies the open-question and class subject but cannot prove incompatibility. AD-035, AD-039 and AD-044 supply current discovery inventory only. Historical reviewed snapshots and every `baseline_*` object are evidence of earlier states, never sources for this classification.
+Source eligibility and subject-inventory status are separate questions. The sweep reads every current primary OCP body across `Draft`, `Accepted` and `Canonical`: lifecycle strength affects stability and promotion eligibility, but does not make a current Draft body semantically silent. In particular, OCP-005 supplies both the Q2/Q3/Q5/Q9 subject inventory and its current provisional constraints. This does not let a Draft dependency supply an unversioned moving dependency to a Canonical consumer, close its own questions or acquire Accepted/Canonical authority.
+
+The declared vocabulary sweep covers all six defining axes and all 25 primary OCP bodies. Every one of its 64 exact line hits is either a `classification-source` or an explicit `considered-no-exclusion` row with path, lifecycle status, section, quote, analytic reason and individual digest protection. Seven hits drive axis policy; 57 are considered and rejected. The separately inventoried OCP-017 ownership quote lacks the declared lexical tokens but remains an explicit classification source. Historical reviewed snapshots and every `baseline_*` object are never scanned as sources. Historical/accounting prose encountered inside a current primary body is retained as a hit and explicitly rejected rather than silently treated as authority.
 
 The negative proof is its own enumeration: every survivor is tested against every current statement on its defining axes. Failure to find an incompatibility is not converted to `compatible` when the relevant owner says the axis is deferred.
 
@@ -59,21 +61,29 @@ Canonical OCP-004 §10 adds:
 
 > Кожен Assignment пов’язує рівно один Resource з рівно однією Operation, має власну ідентичність, RoleSpecification, applicability interval та lifecycle record.
 
-Both superseding Assignment and post-Establishment immutability can preserve those guarantees. Accepted OCP-017 §10 then places the differentiating axis outside its authority:
+Both superseding Assignment and post-Establishment immutability can preserve those guarantees. Draft OCP-005 §14.6 directly states the current provisional boundary:
+
+> Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.
+
+Accepted OCP-017 §10 independently keeps lifecycle coordination with a separate owner:
 
 > Any such lifecycle coordination requires a separate owner and Board act.
 
-No current Accepted/Canonical source chooses whether post-Establishment role/applicability change creates a successor or is forbidden. OCP-005 asks that question while Draft and is not promoted into authority by this discovery. Both classes are therefore `underdetermined`, not incompatible and not selected.
+OCP-005 §14.2 requires a new Assignment for Resource or Operation replacement, but it does not extend that choice to role/applicability. No current primary source chooses whether post-Establishment role/applicability change creates a successor or is forbidden. Both classes are therefore `underdetermined`, not incompatible and not selected. Using OCP-005 here records a current provisional constraint; it does not promote the Draft or resolve Q2.
 
 ## 6. Q3/Q9 — both prospective survivors are underdetermined
 
-The two classes preserve exact-one-Resource binding. Their difference is interval cardinality, while both also assert a prospective-only policy. Accepted OCP-023 §7 explicitly says:
+The two classes preserve exact-one-Resource binding. Draft OCP-005 §8 already supplies the current prospective boundary shared by both:
+
+> До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.
+
+This addresses the tested `retroactivity_policy` without closing Q3: a later lifecycle act may still replace the provisional boundary. The remaining differentiator is interval cardinality. Accepted OCP-023 §7 explicitly says:
 
 > It neither defines retroactivity nor multiple applicability intervals.
 
 OCP-004's singular phrase `applicability interval` identifies the current bounded field but does not say that a future owner must forbid additional intervals, nor does it establish prospective-only behavior. Treating English grammatical number as an `incompatible` rule would invent a quote the document does not contain.
 
-Both `PROSPECTIVE_ONLY_SINGLE_INTERVAL` and `PROSPECTIVE_ONLY_MULTIPLE_INTERVALS` are therefore `underdetermined`. Neither is excluded or preferred.
+Both `PROSPECTIVE_ONLY_SINGLE_INTERVAL` and `PROSPECTIVE_ONLY_MULTIPLE_INTERVALS` comply with the prospective boundary and remain `underdetermined` only on `interval_cardinality`. Neither is excluded or preferred. The complete sweep also records OCP-004 Business Rule 12 — `Наявність Established Assignment не означає фактичної участі поза його applicability interval.` — as considered but non-excluding: it constrains participation effectivity, while grammatical singular does not quantify the number of intervals.
 
 ## 7. Q5 — whole Resource compatible; explicit part scope underdetermined
 
@@ -91,13 +101,13 @@ The representation needed to distinguish an explicit part scope is deliberately 
 
 ## 8. Executable evidence and causal discrimination
 
-`architecture/assignment-norm-compatibility.yaml` binds the source floor, six exact current statements, six AD-044 survivors, per-class claims and the unchanged promotion gate. Six fully synthetic `SYNTH-NORM-001..006` probes provide one record per survivor.
+`architecture/assignment-norm-compatibility.yaml` binds the current-primary source policy, eight exact classification statements, the 25-document/64-hit vocabulary sweep, six AD-044 survivors, per-class claims and the unchanged promotion gate. Six fully synthetic `SYNTH-NORM-001..006` probes provide one record per survivor.
 
-All six classifications are explicitly `evidence_mode: analytic`. The machine can observe the source floor and tokens: it reads each named current document, requires its live status to be `Accepted` or `Canonical`, isolates the named section and requires the exact quote once. Missing, moved, duplicated, rewritten or lifecycle-demoted source text fails rather than becoming `underdetermined`. But the reference checker cannot derive natural-language entailment or contradiction, so the mapping from those exact quotes to `allow-only`, `forbid` or `underdetermined` is a human-reviewed analytic policy, not a fabricated behavioral observation.
+All six classifications and all 64 hit dispositions are explicitly `evidence_mode: analytic`. The machine observes current primary status, section and exact text. It scans all 25 current primary bodies with the declared vocabulary and fails if any hit is missing from the inventory or any inventoried hit disappears. Missing, moved, duplicated, rewritten or lifecycle-changed classification text fails rather than becoming `underdetermined`. But the reference checker cannot derive natural-language entailment or contradiction, so axis policies and hit dispositions remain human-reviewed analytic judgments, not fabricated behavioral observations.
 
 The classifier is not a constant-result guard. A control that changes `resource_cardinality` from `one` to `many` becomes `incompatible` with both exact-one-Resource statements. A separate control that asserts automatic component inheritance becomes `incompatible` with OCP-003. An unknown axis or malformed probe produces no classification. Thus an unrelated invalid input cannot carry the negative result.
 
-The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` mutates every probe field, forbidden field/outcome, blocker/question/resolution binding, candidate claim, source path/status/section/quote/axis/effect, axis-policy kind/value/source, criterion, gate value and scalar token individually. Source, survivor, probe and gate drift are also attacked separately.
+The named test `test_every_defensive_value_is_individually_fixture_and_mutation_live` mutates every probe field, forbidden field/outcome, blocker/question/resolution binding, candidate claim, source path/status/section/quote/axis/effect, vocabulary term, every scalar in all 64 sweep rows, axis-policy kind/value/source, criterion, gate value and scalar token individually. A new unclassified vocabulary hit, source, survivor, probe and gate drift are attacked separately.
 
 ## 9. Exact baseline and full-chain anchors
 
@@ -108,7 +118,7 @@ The baseline is `main@734dd019425b636f47187bf1c342612550028400`, tree `5bfc5e0d0
 | OCP-002 | `docs/002-concept-taxonomy/README.md`; `1.6.0 / Canonical`, exact Assignment pair | `295512bdfaffd679ae021d0876072cdbcb2be75e` | `d49e9f896508d246994fd954174f04c69e0b4d32dfacc1dd612659263118df77` |
 | OCP-003 | `docs/003-resource-concept/README.md`; `1.0.0 / Canonical`, non-inheritance and deferred composition form | `71485bb337cfd59def2e0f1b18b474a7959bd30c` | `f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315` |
 | OCP-004 | `docs/004-operation-concept/README.md`; `1.0.1 / Canonical`, Assignment identity/interval/lifecycle boundary | `37fab136c578d2b8fafd6e900261ef64144943d9` | `ff0480913044b4dff8abcf69808b2d1cafe80a7d9f58c7ec06d2adeb33745538` |
-| OCP-005 subject | `docs/005-assignment-concept/README.md`; `0.2.8 / Draft`, Q2/Q3/Q5/Q9 open; excluded as normative source | `6e6c00e723b15a348e7610d4ca5a1ae23526c52b` | `a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065` |
+| OCP-005 subject/current provisional source | `docs/005-assignment-concept/README.md`; `0.2.8 / Draft`, Q2/Q3/Q5/Q9 open; §8 and §14.6 constrain the current tree without closing the questions | `6e6c00e723b15a348e7610d4ca5a1ae23526c52b` | `a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065` |
 | OCP-016 | `docs/016-core-boundary/README.md`; `1.0.0 / Canonical`, G4 | `94f5d997deea0168a3c553c2ac9f19d2ee03b4fb` | `78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4` |
 | OCP-017 | `docs/017-operation-lifecycle/README.md`; `0.2.0 / Accepted`, separate Assignment owner/act | `0b2ea683df308babd1111ff47e9272c9b0742f78` | `061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030` |
 | OCP-023 | `docs/023-resource-occupancy/README.md`; `0.2.0 / Accepted`, temporal axes not defined | `a846333fae80aff2b3697e811d2b155c91f04122` | `5ec9aca56de4524b4ab78a9e98e2cf5d7561d6f13bac8cf7778d66a99f5490d9` |

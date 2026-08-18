@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import hashlib
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -39,7 +40,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 FIXTURE_ROOT = Path("tools/ontology_checker/fixtures/assignment_norm_compatibility")
 
 BASELINE = "734dd019425b636f47187bf1c342612550028400"
-CURRENT_DOCUMENT_STATUSES = frozenset({"Accepted", "Canonical"})
+CURRENT_DOCUMENT_STATUSES = frozenset({"Draft", "Accepted", "Canonical"})
 COMPATIBLE = "compatible"
 INCOMPATIBLE = "incompatible"
 UNDERDETERMINED = "underdetermined"
@@ -133,12 +134,28 @@ NORMATIVE_STATEMENTS = {
         "axis": "post_establishment_change_model",
         "effect": "underdetermined",
     },
-    "TEMPORAL_AXES_NOT_DEFINED": {
+    "ASSIGNMENT_AMENDMENT_MODEL_OPEN": {
+        "path": "docs/005-assignment-concept/README.md",
+        "status": "Draft",
+        "section": "14. Business Rules",
+        "quote": "6. Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.",
+        "axis": "post_establishment_change_model",
+        "effect": "underdetermined",
+    },
+    "ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY": {
+        "path": "docs/005-assignment-concept/README.md",
+        "status": "Draft",
+        "section": "8. Temporal Effectivity",
+        "quote": "До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.",
+        "axis": "retroactivity_policy",
+        "effect": "allow-only:prospective-only",
+    },
+    "CONSUMER_INTERVAL_CARDINALITY_NOT_DEFINED": {
         "path": "docs/023-resource-occupancy/README.md",
         "status": "Accepted",
         "section": "7. Time and multiplicity boundaries",
         "quote": "It neither defines retroactivity nor multiple applicability intervals.",
-        "axis": "retroactivity_policy,interval_cardinality",
+        "axis": "interval_cardinality",
         "effect": "underdetermined",
     },
 }
@@ -160,17 +177,20 @@ AXIS_POLICIES = {
     "post_establishment_change_model": {
         "kind": "underdetermined",
         "values": (),
-        "statement_ids": ("ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER",),
+        "statement_ids": (
+            "ASSIGNMENT_AMENDMENT_MODEL_OPEN",
+            "ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER",
+        ),
     },
     "retroactivity_policy": {
-        "kind": "underdetermined",
-        "values": (),
-        "statement_ids": ("TEMPORAL_AXES_NOT_DEFINED",),
+        "kind": "allow-only",
+        "values": ("prospective-only",),
+        "statement_ids": ("ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY",),
     },
     "interval_cardinality": {
         "kind": "underdetermined",
         "values": (),
-        "statement_ids": ("TEMPORAL_AXES_NOT_DEFINED",),
+        "statement_ids": ("CONSUMER_INTERVAL_CARDINALITY_NOT_DEFINED",),
     },
     "part_scope_representation": {
         "kind": "underdetermined",
@@ -178,6 +198,52 @@ AXIS_POLICIES = {
         "statement_ids": ("COMPOSITION_REPRESENTATION_DEFERRED",),
     },
 }
+
+SWEEP_DOCUMENT_STATUSES = ("Draft", "Accepted", "Canonical")
+SWEEP_VOCABULARY = {
+    "resource_cardinality": (
+        ("assignment", "рівно одного resource", "рівно однією operation"),
+        ("assignment", "рівно один resource", "рівно однією operation"),
+        ("assignment", "one resource", "one operation"),
+    ),
+    "automatic_component_inheritance": (
+        ("assignment", "успадков"),
+        ("assignment", "inherit"),
+        ("composite assignment", "component", "автоматично"),
+    ),
+    "post_establishment_change_model": (
+        ("assignment", "amend"),
+        ("supersedes_assignment_ref",),
+        ("superseding assignment",),
+        ("assignment", "immutab"),
+        ("assignment", "traceab"),
+        ("assignment", "простежув"),
+        ("role_code", "immutab"),
+        ("role_code", "change"),
+        ("applicability", "immutab"),
+        ("applicability", "amend"),
+        ("applicability", "supersed"),
+        ("зміна ролі", "applicability"),
+        ("після встановлення assignment",),
+        ("established assignment", "замін"),
+        ("established assignment", "редагув"),
+    ),
+    "retroactivity_policy": (("retroactiv",), ("ретроактив",)),
+    "interval_cardinality": (
+        ("applicability interval",),
+        ("кілька неперервних applicability interval",),
+    ),
+    "part_scope_representation": (
+        ("part_scope",),
+        ("part scope",),
+        ("partial scope",),
+        ("assignment", "component"),
+        ("assignment", "composite"),
+        ("assignment", "composition"),
+        ("`contains`", "`part_of`"),
+    ),
+}
+SOURCE_SWEEP_SHA256 = "80f6b94826afc5865ac3cd1419c3f9adbba558f69b711c70f70036febeee974a"
 
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",
@@ -190,7 +256,7 @@ EXPECTED_CRITERION = {
     "incompatible": "a-current-accepted-or-canonical-statement-is-violated",
     "underdetermined": "a-defining-axis-is-explicitly-unowned-or-deferred-by-current-norm",
     "compatible": "every-defining-axis-is-addressed-and-no-current-statement-is-violated",
-    "source_floor": ["Accepted", "Canonical"],
+    "source_floor": ["current-primary-body"],
     "historical_and_baseline_sources_forbidden": True,
 }
 FORBIDDEN_FIELDS = frozenset(
@@ -396,6 +462,106 @@ def _live_sources_valid(repo_root: Path) -> bool:
     return True
 
 
+def _source_sweep_hits(repo_root: Path) -> list[dict[str, str]] | None:
+    hits: list[dict[str, str]] = []
+    paths = sorted(repo_root.glob("docs/[0-9][0-9][0-9]-*/README.md"))
+    if len(paths) != 25:
+        return None
+    for path in paths:
+        try:
+            text = path.read_text(encoding="utf-8")
+        except OSError:
+            return None
+        status = _frontmatter(text).get("Status")
+        if status not in SWEEP_DOCUMENT_STATUSES:
+            return None
+        section = "frontmatter"
+        for raw_line in text.splitlines():
+            if raw_line.startswith("## "):
+                section = raw_line[3:]
+                continue
+            quote = raw_line.strip()
+            if not quote:
+                continue
+            folded = quote.casefold()
+            for axis, term_groups in SWEEP_VOCABULARY.items():
+                if any(all(term.casefold() in folded for term in group) for group in term_groups):
+                    hits.append(
+                        {
+                            "axis": axis,
+                            "path": str(path.relative_to(repo_root)),
+                            "status": str(status),
+                            "section": section,
+                            "quote": quote,
+                        }
+                    )
+    return hits
+
+
+def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
+    if not isinstance(payload, dict) or set(payload) != {
+        "document_scope", "vocabulary", "hits",
+    }:
+        return False
+    vocabulary = {
+        axis: [list(group) for group in groups]
+        for axis, groups in SWEEP_VOCABULARY.items()
+    }
+    if payload.get("document_scope") != {
+        "primary_glob": "docs/[0-9][0-9][0-9]-*/README.md",
+        "statuses": list(SWEEP_DOCUMENT_STATUSES),
+        "document_count": 25,
+        "subject_inventory_and_source_eligibility_are_separate": True,
+    } or payload.get("vocabulary") != vocabulary:
+        return False
+    rows = payload.get("hits")
+    if not isinstance(rows, list):
+        return False
+    digest = hashlib.sha256(
+        yaml.safe_dump(payload, sort_keys=True, allow_unicode=True).encode("utf-8")
+    ).hexdigest()
+    if digest != SOURCE_SWEEP_SHA256:
+        return False
+    row_keys = {
+        "axis", "path", "status", "section", "quote", "disposition",
+        "statement_ids", "reason", "evidence_mode",
+    }
+    for row in rows:
+        if (
+            not isinstance(row, dict)
+            or set(row) != row_keys
+            or row.get("disposition") not in {
+                "classification-source", "considered-no-exclusion",
+            }
+            or row.get("evidence_mode") != ANALYTIC
+            or not isinstance(row.get("statement_ids"), list)
+            or not nonempty(row.get("reason"))
+        ):
+            return False
+        matching_sources = sorted(
+            statement_id
+            for statement_id, statement in NORMATIVE_STATEMENTS.items()
+            if statement["path"] == row["path"]
+            and statement["status"] == row["status"]
+            and statement["axis"] == row["axis"]
+            and statement["quote"] in row["quote"]
+        )
+        if row["statement_ids"] != matching_sources or (
+            row["disposition"] == "classification-source"
+        ) != bool(matching_sources):
+            return False
+    observed = _source_sweep_hits(repo_root)
+    if observed is None:
+        return False
+    projected = [
+        {key: row.get(key) for key in ("axis", "path", "status", "section", "quote")}
+        for row in rows if isinstance(row, dict)
+    ]
+    if len(projected) != len(rows) or projected != observed:
+        return False
+    return len({tuple(item.values()) for item in projected}) == len(projected)
+
+
 def _expected_results() -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
     for resolution, claims in SURVIVOR_CLAIMS.items():
@@ -432,7 +598,7 @@ def validate_assignment_norm_compatibility(
 
     expected_keys = {
         "schema_version", "rule_owner", "baseline", "gate_first", "criterion",
-        "source_policy", "normative_sources", "survivor_results",
+        "source_policy", "normative_sources", "source_sweep", "survivor_results",
         "blocker_disposition", "promotion_gate_guard", "forbidden_outcomes",
     }
     source_rows = [
@@ -456,17 +622,20 @@ def validate_assignment_norm_compatibility(
         "post_establishment_change_model": {
             "kind": "underdetermined",
             "values": (),
-            "statement_ids": ("ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER",),
+            "statement_ids": (
+                "ASSIGNMENT_AMENDMENT_MODEL_OPEN",
+                "ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER",
+            ),
         },
         "retroactivity_policy": {
-            "kind": "underdetermined",
-            "values": (),
-            "statement_ids": ("TEMPORAL_AXES_NOT_DEFINED",),
+            "kind": "allow-only",
+            "values": ("prospective-only",),
+            "statement_ids": ("ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY",),
         },
         "interval_cardinality": {
             "kind": "underdetermined",
             "values": (),
-            "statement_ids": ("TEMPORAL_AXES_NOT_DEFINED",),
+            "statement_ids": ("CONSUMER_INTERVAL_CARDINALITY_NOT_DEFINED",),
         },
         "part_scope_representation": {
             "kind": "underdetermined",
@@ -483,9 +652,9 @@ def validate_assignment_norm_compatibility(
         or payload.get("gate_first") != EXPECTED_GATE_FIRST
         or payload.get("criterion") != EXPECTED_CRITERION
         or payload.get("source_policy") != {
-            "current_document_statuses": ["Accepted", "Canonical"],
+            "current_document_statuses": ["Draft", "Accepted", "Canonical"],
+            "subject_inventory_and_source_eligibility_are_separate": True,
             "historical_snapshots_and_baseline_objects_are_sources": False,
-            "draft_documents_are_sources": False,
             "classification_evidence_mode": "analytic",
             "reason": "natural-language-compatibility-cannot-be-derived-by-the-reference-checker",
         }
@@ -498,6 +667,11 @@ def validate_assignment_norm_compatibility(
         errors.append(ASSIGNMENT_NORM_MAP_INVALID)
 
     if not _live_sources_valid(repo_root):
+        errors.append(ASSIGNMENT_NORM_SOURCE_DRIFT)
+    if not _source_sweep_payload_valid(
+        payload.get("source_sweep") if isinstance(payload, dict) else None,
+        repo_root,
+    ):
         errors.append(ASSIGNMENT_NORM_SOURCE_DRIFT)
 
     pressure_survivors = {

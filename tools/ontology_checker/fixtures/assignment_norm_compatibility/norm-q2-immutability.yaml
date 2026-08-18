@@ -6,7 +6,7 @@ probe:
   question_ids: [Q2]
   resolution_id: POST_ESTABLISHMENT_IMMUTABILITY
   claims: {resource_cardinality: one, automatic_component_inheritance: 'false', post_establishment_change_model: immutable-role-and-applicability}
-  source_statement_ids: [ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER, ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, COMPONENT_ASSIGNMENT_NON_INHERITANCE]
+  source_statement_ids: [ASSIGNMENT_AMENDMENT_MODEL_OPEN, ASSIGNMENT_CHANGE_REQUIRES_SEPARATE_OWNER, ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, COMPONENT_ASSIGNMENT_NON_INHERITANCE]
   evidence_mode: analytic
   stored_classification: underdetermined
   stored_violation_statement_ids: []

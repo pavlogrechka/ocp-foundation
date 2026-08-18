@@ -40,13 +40,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         Path("architecture/assignment-stable-surface.yaml"),
         Path("architecture/foundation-promotion-gate.yaml"),
         Path("tools/ontology_checker/fixtures/assignment_norm_compatibility"),
-        Path("docs/002-concept-taxonomy/README.md"),
-        Path("docs/003-resource-concept/README.md"),
-        Path("docs/004-operation-concept/README.md"),
-        Path("docs/005-assignment-concept/README.md"),
-        Path("docs/016-core-boundary/README.md"),
-        Path("docs/017-operation-lifecycle/README.md"),
-        Path("docs/023-resource-occupancy/README.md"),
+        Path("docs"),
     )
     baseline_anchors = {
         "docs/002-concept-taxonomy/README.md": (
@@ -147,13 +141,45 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
     def test_current_authoritative_source_floor_and_exact_tokens_are_live(self) -> None:
         self.assertTrue(assignment_norm_compatibility._live_sources_valid(ROOT))
         payload = yaml.safe_load((ROOT / self.map_path).read_text(encoding="utf-8"))
-        self.assertEqual(payload["source_policy"]["current_document_statuses"], ["Accepted", "Canonical"])
-        self.assertFalse(payload["source_policy"]["draft_documents_are_sources"])
+        self.assertEqual(
+            payload["source_policy"]["current_document_statuses"],
+            ["Draft", "Accepted", "Canonical"],
+        )
+        self.assertTrue(
+            payload["source_policy"]["subject_inventory_and_source_eligibility_are_separate"]
+        )
         self.assertFalse(payload["source_policy"]["historical_snapshots_and_baseline_objects_are_sources"])
         self.assertEqual(payload["source_policy"]["classification_evidence_mode"], "analytic")
         self.assertEqual(
             {item["status"] for item in payload["normative_sources"]},
-            {"Accepted", "Canonical"},
+            {"Draft", "Accepted", "Canonical"},
+        )
+        self.assertEqual(payload["source_sweep"]["document_scope"]["document_count"], 25)
+        self.assertEqual(len(payload["source_sweep"]["hits"]), 64)
+        self.assertEqual(
+            {item["disposition"] for item in payload["source_sweep"]["hits"]},
+            {"classification-source", "considered-no-exclusion"},
+        )
+        self.assertEqual(
+            sum(
+                item["disposition"] == "classification-source"
+                for item in payload["source_sweep"]["hits"]
+            ),
+            7,
+        )
+        self.assertEqual(
+            sum(
+                item["disposition"] == "considered-no-exclusion"
+                for item in payload["source_sweep"]["hits"]
+            ),
+            57,
+        )
+        self.assertTrue(
+            all(item["evidence_mode"] == "analytic" for item in payload["source_sweep"]["hits"])
+        )
+        self.assertIn(
+            "ASSIGNMENT_AMENDMENT_MODEL_OPEN",
+            {item["statement_id"] for item in payload["normative_sources"]},
         )
 
     def test_rule_discriminates_real_norm_violations_and_invalid_inputs(self) -> None:
@@ -234,7 +260,8 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
 
         defensive_structures = (
             "BLOCKER_QUESTIONS", "SURVIVOR_CLAIMS", "SURVIVOR_BLOCKERS",
-            "NORMATIVE_STATEMENTS", "AXIS_POLICIES", "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
+            "NORMATIVE_STATEMENTS", "AXIS_POLICIES", "SWEEP_DOCUMENT_STATUSES",
+            "SWEEP_VOCABULARY", "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
         )
 
         def scalar_paths(value, prefix=()):
@@ -276,12 +303,22 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                 ):
                     self.assertFalse(validate_assignment_norm_compatibility(ROOT).valid)
 
+        source_sweep = yaml.safe_load((ROOT / self.map_path).read_text(encoding="utf-8"))["source_sweep"]
+        for value_path in scalar_paths(source_sweep):
+            with self.subTest(attribute="source_sweep", value_path=value_path):
+                self.assertFalse(
+                    assignment_norm_compatibility._source_sweep_payload_valid(
+                        mutate_scalar(source_sweep, value_path), ROOT
+                    )
+                )
+
         scalar_mutations = {
             "BASELINE": "MUTATED-BASELINE",
             "COMPATIBLE": "mutated-compatible",
             "INCOMPATIBLE": "mutated-incompatible",
             "UNDERDETERMINED": "mutated-underdetermined",
             "ANALYTIC": "observed",
+            "SOURCE_SWEEP_SHA256": "mutated-source-sweep-digest",
         }
         for attribute, mutation in scalar_mutations.items():
             with self.subTest(attribute=attribute), patch.object(
@@ -290,9 +327,10 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                 self.assertFalse(validate_assignment_norm_compatibility(ROOT).valid)
 
     def test_live_source_survivor_probe_and_gate_mutations_fail_independently(self) -> None:
-        cases = ("source", "survivor", "probe", "gate")
+        cases = ("source", "source-sweep", "survivor", "probe", "gate")
         expected_errors = {
             "source": ASSIGNMENT_NORM_SOURCE_DRIFT,
+            "source-sweep": ASSIGNMENT_NORM_SOURCE_DRIFT,
             "survivor": ASSIGNMENT_NORM_SURVIVOR_DRIFT,
             "probe": ASSIGNMENT_NORM_PROBE_DRIFT,
             "gate": ASSIGNMENT_NORM_GATE_DRIFT,
@@ -305,6 +343,13 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                     relative = Path("docs/023-resource-occupancy/README.md")
                     text = (root / relative).read_text(encoding="utf-8")
                     (root / relative).write_text(text.replace("Status: Accepted", "Status: Draft", 1), encoding="utf-8")
+                elif case == "source-sweep":
+                    relative = Path("docs/004-operation-concept/README.md")
+                    text = (root / relative).read_text(encoding="utf-8")
+                    (root / relative).write_text(
+                        text + "\nAssignment may have multiple applicability intervals.\n",
+                        encoding="utf-8",
+                    )
                 elif case == "survivor":
                     relative = Path("architecture/assignment-consumer-pressure.yaml")
                     payload = yaml.safe_load((root / relative).read_text(encoding="utf-8"))

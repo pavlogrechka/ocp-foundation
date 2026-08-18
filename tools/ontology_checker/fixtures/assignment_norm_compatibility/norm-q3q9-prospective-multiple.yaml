@@ -6,9 +6,9 @@ probe:
   question_ids: [Q3, Q9]
   resolution_id: PROSPECTIVE_ONLY_MULTIPLE_INTERVALS
   claims: {resource_cardinality: one, retroactivity_policy: prospective-only, interval_cardinality: multiple}
-  source_statement_ids: [ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, TEMPORAL_AXES_NOT_DEFINED]
+  source_statement_ids: [ASSIGNMENT_EXACT_ONE_RESOURCE_OPERATION, ASSIGNMENT_OWNS_IDENTITY_INTERVAL_LIFECYCLE, ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY, CONSUMER_INTERVAL_CARDINALITY_NOT_DEFINED]
   evidence_mode: analytic
   stored_classification: underdetermined
   stored_violation_statement_ids: []
-  stored_underdetermined_axes: [interval_cardinality, retroactivity_policy]
+  stored_underdetermined_axes: [interval_cardinality]
 expected: {valid: true, error_codes: []}
