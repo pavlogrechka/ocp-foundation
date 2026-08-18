@@ -21,6 +21,7 @@ from ocp_checker.assignment_consumer_compatibility import validate_assignment_co
 from ocp_checker.assignment_consumer_pressure import validate_assignment_consumer_pressure
 from ocp_checker.assignment_norm_compatibility import validate_assignment_norm_compatibility
 from ocp_checker.assignment_q3_lifecycle import validate_assignment_q3_lifecycle
+from ocp_checker.assignment_q2_sufficiency import validate_assignment_q2_sufficiency
 from ocp_checker.assignment_q9_sufficiency import validate_assignment_q9_sufficiency
 from ocp_checker.assignment_stable_surface import validate_assignment_stable_surface
 from ocp_checker.event_stable_surface import validate_event_stable_surface
@@ -161,6 +162,13 @@ def main() -> int:
     )
     failures += 0 if assignment_q3_result.valid else 1
 
+    assignment_q2_sufficiency_result = validate_assignment_q2_sufficiency(repo_root)
+    print(
+        f"{'PASS' if assignment_q2_sufficiency_result.valid else 'FAIL'} "
+        f"assignment-q2-sufficiency errors={list(assignment_q2_sufficiency_result.errors)}"
+    )
+    failures += 0 if assignment_q2_sufficiency_result.valid else 1
+
     assignment_q9_result = validate_assignment_q9_sufficiency(repo_root)
     print(
         f"{'PASS' if assignment_q9_result.valid else 'FAIL'} "
@@ -242,7 +250,7 @@ def main() -> int:
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
         f"foundation promotion gate, reassessment, Event and Assignment stable-surface discovery, "
-        f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, pressure, norm compatibility, Q3 lifecycle and Q9 sufficiency, "
+        f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, pressure, norm compatibility, Q3 lifecycle and Q2/Q9 sufficiency, "
         f"consumer-need discovery, "
         f"Event selection, lifecycle promotion and Concept canonicalization, "
         f"open-question resolution sync, accepted snapshot governance, current numeric accounting, process audit, "
