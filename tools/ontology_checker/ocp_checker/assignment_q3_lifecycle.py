@@ -27,7 +27,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 PROBE_FIXTURE = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
 BASELINE = "ca87815b0198c165cfeec759965656da2ef7b5b2"
-MAP_SHA256 = "edd32a7178a90ca4c6780b600472e9cfc6bf7c61ba1622362d3754da42124007"
+MAP_SHA256 = "a6f01849e0b23db0fdbf5ab94d397834cf11363bd46d07dd5086056bf8c5f2e7"
 Q3_TOKEN = "Чи допускається ретроактивне Establishment Assignment?"
 Q9_TOKEN = "Чи може один Assignment мати кілька неперервних applicability intervals"
 FINAL_BOUNDARY = (
@@ -102,10 +102,28 @@ EXPECTED_MAP_KEYS = frozenset(
         "decision",
         "subject_transition",
         "current_projection",
+        "superseded_source_quotes",
         "migration",
         "protected_historical_artifacts",
         "promotion_gate_guard",
         "forbidden_outcomes",
+    }
+)
+EXPECTED_SUCCESSION_ROW_KEYS = frozenset(
+    {
+        "witness_path",
+        "statement_id",
+        "source_path",
+        "section",
+        "historical_quote",
+        "current_successor_quote",
+        "reason",
+    }
+)
+EXPECTED_SUCCESSION_STATEMENT_IDS = frozenset(
+    {
+        "ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY",
+        "AD045_SOURCE_SWEEP_Q3_OPEN_QUESTION",
     }
 )
 EXPECTED_FORBIDDEN_OUTCOMES = frozenset(
@@ -143,6 +161,26 @@ def _load(path: Path) -> Any:
         return yaml.safe_load(path.read_text(encoding="utf-8"))
     except (OSError, yaml.YAMLError):
         return None
+
+
+def load_q3_source_quote_successions(repo_root: Path) -> dict[str, dict[str, str]] | None:
+    payload = _load(repo_root / MAP_PATH)
+    rows = payload.get("superseded_source_quotes") if isinstance(payload, dict) else None
+    if not isinstance(rows, list):
+        return None
+    result: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if (
+            not isinstance(row, dict)
+            or set(row) != EXPECTED_SUCCESSION_ROW_KEYS
+            or any(not isinstance(value, str) or not value for value in row.values())
+        ):
+            return None
+        statement_id = row["statement_id"]
+        if statement_id in result:
+            return None
+        result[statement_id] = dict(row)
+    return result
 
 
 def _frontmatter(text: str) -> dict[str, Any] | None:
@@ -191,11 +229,23 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
     ).hexdigest()
     if (
         digest != MAP_SHA256
-        or payload.get("schema_version") != 1
+        or payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-046"
         or payload.get("baseline") != BASELINE
         or set(payload.get("forbidden_outcomes") or ()) != EXPECTED_FORBIDDEN_OUTCOMES
         or len(payload.get("forbidden_outcomes") or ()) != len(EXPECTED_FORBIDDEN_OUTCOMES)
+    ):
+        errors.append(ASSIGNMENT_Q3_MAP_INVALID)
+
+    successions = load_q3_source_quote_successions(repo_root)
+    if (
+        successions is None
+        or set(successions) != EXPECTED_SUCCESSION_STATEMENT_IDS
+        or any(
+            row.get("witness_path") != str(NORM_PATH)
+            or row.get("source_path") != str(SUBJECT_PATH)
+            for row in successions.values()
+        )
     ):
         errors.append(ASSIGNMENT_Q3_MAP_INVALID)
 

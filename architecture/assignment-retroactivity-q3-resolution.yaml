@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 rule_owner: AD-046
 baseline: ca87815b0198c165cfeec759965656da2ef7b5b2
 gate_first:
@@ -100,6 +100,21 @@ current_projection:
     PARTIAL_SCOPE_IDENTITY_UNRESOLVED: [Q5]
   pressure_resolution_inventory_unchanged: true
   norm_survivor_inventory_unchanged: true
+superseded_source_quotes:
+  - witness_path: architecture/assignment-norm-compatibility.yaml
+    statement_id: ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY
+    source_path: docs/005-assignment-concept/README.md
+    section: 8. Temporal Effectivity
+    historical_quote: До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.
+    current_successor_quote: 'Assignment не може бути ефективним для часу раніше авторитетного `established_at`. Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity до авторитетного `established_at`.'
+    reason: AD-045-preserves-the-baseline-source-row-while-AD-046-finalizes-its-provisional-boundary
+  - witness_path: architecture/assignment-norm-compatibility.yaml
+    statement_id: AD045_SOURCE_SWEEP_Q3_OPEN_QUESTION
+    source_path: docs/005-assignment-concept/README.md
+    section: 19. Open Questions and Resolved Boundaries
+    historical_quote: 3. Чи допускається ретроактивне Establishment Assignment?
+    current_successor_quote: '3. ~~Чи допускається ретроактивне Establishment Assignment?~~ AD-046/OCP-005 §8 остаточно забороняють виводити effectivity раніше авторитетного `established_at`; recording/correction lineage не визначаються, а Q9 лишається відкритим.'
+    reason: AD-045-preserves-the-baseline-source-sweep-row-while-AD-046-closes-only-Q3
 migration:
   assignment_data: none
   references: none

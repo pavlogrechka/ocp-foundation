@@ -39,6 +39,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         Path("architecture/assignment-consumer-pressure.yaml"),
         Path("architecture/assignment-stable-surface.yaml"),
         Path("architecture/foundation-promotion-gate.yaml"),
+        Path("architecture/assignment-retroactivity-q3-resolution.yaml"),
         Path("tools/ontology_checker/fixtures/assignment_norm_compatibility"),
         Path("docs"),
     )
@@ -275,8 +276,8 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         defensive_structures = (
             "BLOCKER_QUESTIONS", "CURRENT_BLOCKER_QUESTIONS", "SURVIVOR_CLAIMS", "SURVIVOR_BLOCKERS",
             "NORMATIVE_STATEMENTS", "AXIS_POLICIES", "SWEEP_DOCUMENT_STATUSES",
-            "SWEEP_VOCABULARY", "Q3_LIFECYCLE_SUCCESSORS",
-            "Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES", "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
+            "SWEEP_VOCABULARY", "Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES",
+            "EXPECTED_GATE_FIRST", "EXPECTED_CRITERION",
         )
 
         def scalar_paths(value, prefix=()):

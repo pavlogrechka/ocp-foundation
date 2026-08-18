@@ -8,6 +8,7 @@ from typing import Any, Iterable
 import yaml
 
 from ._common import nonempty, result
+from .assignment_q3_lifecycle import load_q3_source_quote_successions
 from .checker import ValidationResult
 
 
@@ -56,26 +57,6 @@ CURRENT_BLOCKER_QUESTIONS = {
     "TEMPORAL_MODEL_UNRESOLVED": ("Q9",),
     "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ("Q5",),
 }
-Q3_LIFECYCLE_SUCCESSORS = {
-    (
-        "docs/005-assignment-concept/README.md",
-        "8. Temporal Effectivity",
-        "До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.",
-    ): (
-        "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. "
-        "Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity "
-        "до авторитетного `established_at`."
-    ),
-    (
-        "docs/005-assignment-concept/README.md",
-        "19. Open Questions and Resolved Boundaries",
-        "3. Чи допускається ретроактивне Establishment Assignment?",
-    ): (
-        "3. ~~Чи допускається ретроактивне Establishment Assignment?~~ AD-046/OCP-005 §8 "
-        "остаточно забороняють виводити effectivity раніше авторитетного `established_at`; "
-        "recording/correction lineage не визначаються, а Q9 лишається відкритим."
-    ),
-}
 Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES = (
         (
             "docs/005-assignment-concept/README.md",
@@ -83,6 +64,16 @@ Q3_LIFECYCLE_ADDITIONAL_LEXICAL_LINES = (
             "Ця межа не визначає recording time, ingestion time, correction lineage або автентичність `occurred_at`; вона лише фіксує часову межу derivation над авторитетною transition history. Кардинальність applicability intervals лишається окремим відкритим Q9.",
         ),
 )
+
+
+def _q3_lifecycle_successors(repo_root: Path) -> dict[tuple[str, str, str], str] | None:
+    rows = load_q3_source_quote_successions(repo_root)
+    if rows is None:
+        return None
+    return {
+        (row["source_path"], row["section"], row["historical_quote"]): row["current_successor_quote"]
+        for row in rows.values()
+    }
 
 SURVIVOR_CLAIMS = {
     "SUPERSEDING_ASSIGNMENT_FOR_CHANGE": {
@@ -477,6 +468,9 @@ def _section(text: str, heading: str) -> str | None:
 
 
 def _live_sources_valid(repo_root: Path) -> bool:
+    q3_successors = _q3_lifecycle_successors(repo_root)
+    if q3_successors is None:
+        return False
     for statement in NORMATIVE_STATEMENTS.values():
         try:
             text = (repo_root / statement["path"]).read_text(encoding="utf-8")
@@ -484,7 +478,7 @@ def _live_sources_valid(repo_root: Path) -> bool:
             return False
         metadata = _frontmatter(text)
         section = _section(text, statement["section"])
-        expected_quote = Q3_LIFECYCLE_SUCCESSORS.get(
+        expected_quote = q3_successors.get(
             (statement["path"], statement["section"], statement["quote"]),
             statement["quote"],
         )
@@ -535,6 +529,9 @@ def _source_sweep_hits(repo_root: Path) -> list[dict[str, str]] | None:
 
 
 def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
+    q3_successors = _q3_lifecycle_successors(repo_root)
+    if q3_successors is None:
+        return False
     if not isinstance(payload, dict) or set(payload) != {
         "document_scope", "claim_boundary", "vocabulary", "hits",
         "known_out_of_vocabulary",
@@ -585,7 +582,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         except OSError:
             return False
         section = _section(text, row["section"])
-        expected_quote = Q3_LIFECYCLE_SUCCESSORS.get(
+        expected_quote = q3_successors.get(
             (row["path"], row["section"], row["quote"]),
             row["quote"],
         )
@@ -648,7 +645,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         return False
     successor_rows = {
         (path, section, successor): historical
-        for (path, section, historical), successor in Q3_LIFECYCLE_SUCCESSORS.items()
+        for (path, section, historical), successor in q3_successors.items()
     }
     normalized_observed: list[dict[str, str]] = []
     for item in observed:

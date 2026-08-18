@@ -29,11 +29,18 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
     map_path = Path("architecture/assignment-temporal-scope-attempt.yaml")
     surface_path = Path("architecture/assignment-stable-surface.yaml")
     gate_path = Path("architecture/foundation-promotion-gate.yaml")
+    q3_resolution_path = Path("architecture/assignment-retroactivity-q3-resolution.yaml")
     fixture_path = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
     def copy_inputs(self, destination: Path) -> None:
         shutil.copytree(ROOT / "docs", destination / "docs")
-        for relative in (self.map_path, self.surface_path, self.gate_path, self.fixture_path):
+        for relative in (
+            self.map_path,
+            self.surface_path,
+            self.gate_path,
+            self.q3_resolution_path,
+            self.fixture_path,
+        ):
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / relative, target)
@@ -136,11 +143,18 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
                 self.copy_inputs(root)
                 fpath = root / relative
                 text = fpath.read_text(encoding="utf-8")
-                live_token = (
-                    assignment_temporal_scope.CURRENT_Q3_BOUNDARY
-                    if token.startswith("До окремого рішення про ретроактивне Establishment")
-                    else token
+                successions = assignment_temporal_scope.load_q3_source_quote_successions(root)
+                self.assertIsNotNone(successions)
+                successor = next(
+                    (
+                        row["current_successor_quote"]
+                        for row in successions.values()
+                        if row["source_path"] == relative and row["historical_quote"] == token
+                    ),
+                    None,
                 )
+                live_token = token if token in text else successor
+                self.assertIsNotNone(live_token)
                 self.assertIn(live_token, text)
                 fpath.write_text(text.replace(live_token, "MUTATED-LIVE-TOKEN"), encoding="utf-8")
                 self.assertIn(

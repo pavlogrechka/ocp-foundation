@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[3]
 CHECKER_ROOT = ROOT / "tools/ontology_checker"
 sys.path.insert(0, str(CHECKER_ROOT))
 
-from ocp_checker import assignment_q3_lifecycle  # noqa: E402
+from ocp_checker import assignment_norm_compatibility, assignment_q3_lifecycle  # noqa: E402
+from ocp_checker import assignment_temporal_scope  # noqa: E402
 from ocp_checker.assignment_q3_lifecycle import (  # noqa: E402
     ASSIGNMENT_Q3_HISTORICAL_DRIFT,
     ASSIGNMENT_Q3_PROJECTION_DRIFT,
@@ -142,6 +143,21 @@ class AssignmentQ3LifecycleTests(unittest.TestCase):
                 ASSIGNMENT_Q3_HISTORICAL_DRIFT,
                 validate_assignment_q3_lifecycle(root).errors,
             )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            map_path = root / self.map_path
+            mutated = self.payload(root)
+            mutated["superseded_source_quotes"][0]["current_successor_quote"] += " MUTATED"
+            map_path.write_text(
+                yaml.safe_dump(mutated, sort_keys=False, allow_unicode=True),
+                encoding="utf-8",
+            )
+            self.assertFalse(assignment_norm_compatibility._live_sources_valid(root))
+            self.assertIn(
+                assignment_temporal_scope.ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT,
+                assignment_temporal_scope.validate_assignment_temporal_scope(root).errors,
+            )
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         def scalar_paths(value, prefix=()):
@@ -220,6 +236,8 @@ class AssignmentQ3LifecycleTests(unittest.TestCase):
             "EXPECTED_NORM_SURVIVORS",
             "EXPECTED_MAP_KEYS",
             "EXPECTED_FORBIDDEN_OUTCOMES",
+            "EXPECTED_SUCCESSION_ROW_KEYS",
+            "EXPECTED_SUCCESSION_STATEMENT_IDS",
         )
         for attribute in sets:
             original = getattr(assignment_q3_lifecycle, attribute)

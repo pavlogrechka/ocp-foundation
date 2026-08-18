@@ -8,6 +8,7 @@ from typing import Any, Iterable
 
 import yaml
 
+from .assignment_q3_lifecycle import load_q3_source_quote_successions
 from .checker import assignment_effective_at, load_fixture, validate_assignment
 
 
@@ -262,11 +263,6 @@ CURRENT_PROJECTION = {
         "PARTIAL_SCOPE_IDENTITY_UNRESOLVED": ["Q5"],
     },
 }
-CURRENT_Q3_BOUNDARY = (
-    "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. "
-    "Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity "
-    "до авторитетного `established_at`."
-)
 EXPECTED_GATE_GUARD = {
     "schema_version": 5,
     "completed_cycle_ids": ["EVENT_T6"],
@@ -302,6 +298,20 @@ def _frontmatter(path: Path) -> dict[str, Any] | None:
     except yaml.YAMLError:
         return None
     return value if isinstance(value, dict) else None
+
+
+def _section(text: str, heading: str) -> str | None:
+    marker = f"## {heading}"
+    lines = text.splitlines()
+    starts = [index for index, line in enumerate(lines) if line == marker]
+    if len(starts) != 1:
+        return None
+    start = starts[0]
+    end = next(
+        (index for index in range(start + 1, len(lines)) if lines[index].startswith("## ")),
+        len(lines),
+    )
+    return "\n".join(lines[start:end])
 
 
 def _canonical_time(value: Any) -> Any:
@@ -434,6 +444,14 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
         errors.append(ASSIGNMENT_TEMPORAL_SCOPE_PROJECTION_DRIFT)
 
     evidence = _normalize_evidence(payload.get("owner_text_evidence"))
+    succession_rows = load_q3_source_quote_successions(repo_root)
+    succession_by_source = {
+        (row["source_path"], row["historical_quote"]): (
+            row["section"],
+            row["current_successor_quote"],
+        )
+        for row in succession_rows.values()
+    } if succession_rows is not None else {}
     if evidence != EXPECTED_OWNER_EVIDENCE or set(evidence or {}) != OWNER_EVIDENCE_IDS:
         errors.append(ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT)
     else:
@@ -442,14 +460,20 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
                 text = (repo_root / relative).read_text(encoding="utf-8")
             except OSError:
                 text = ""
-            if any(
-                token not in text
-                and not (
-                    token.startswith("До окремого рішення про ретроактивне Establishment")
-                    and CURRENT_Q3_BOUNDARY in text
-                )
-                for token in tokens
-            ):
+            unresolved = False
+            for token in tokens:
+                if token in text:
+                    continue
+                successor = succession_by_source.get((relative, token))
+                if successor is None:
+                    unresolved = True
+                    break
+                section_name, current_quote = successor
+                section = _section(text, section_name)
+                if section is None or section.count(current_quote) != 1:
+                    unresolved = True
+                    break
+            if unresolved:
                 errors.append(ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT)
                 break
 

@@ -61,18 +61,20 @@ The result is not “backdating is impossible.” A transition record may still 
 
 ## 6. Current projections and historical separation
 
-The complete current projection sweep found two semantic carriers that must change with OCP-005:
+The complete current-projection and historical-succession sweep found four carriers that must change with OCP-005:
 
 1. `docs/005-assignment-concept/README.md`: version, §8 final boundary and §19 Q3 strikeout;
 2. `architecture/assignment-stable-surface.yaml`: current expected version, Q3 state/classification, and Q9-only membership of `TEMPORAL_EFFECTIVITY_EXTENSION` and `TEMPORAL_MODEL_UNRESOLVED`.
+3. `architecture/consumer-need-discovery.yaml`: the current Accepted-governance inventory and latest current-projection owner, while its AD-036 historical result and current unmet OCP-023 need remain unchanged; and
+4. `architecture/assignment-retroactivity-q3-resolution.yaml`: exact `superseded_source_quotes` bindings from the byte-stable AD-045 witness rows to their current OCP-005 successors, including the witness path, statement identifier, historical quote, successor quote and reason.
 
-A third current carrier changes for a different mechanical reason: `architecture/consumer-need-discovery.yaml` enumerates every current Accepted governance act, so it adds AD-046 and names AD-046 as the latest current-projection owner while preserving the AD-036 historical result and the current unmet OCP-023 need. Checker modules that read these current carriers advance to `0.3.0` and distinguish current projections from historical baseline assertions. Repository accounting and navigation gain AD-046 descriptions; their status distributions do not change.
+The fourth carrier makes succession durable without mutating history: both checker readers resolve the same exact data-side binding instead of carrying independent code literals. Checker modules that read current carriers advance to `0.3.0` and distinguish current projections from historical baseline assertions. Repository accounting and navigation gain AD-046 descriptions; their status distributions do not change.
 
 AD-035, AD-038, AD-039, AD-040, AD-044 and AD-045 documents and witnesses remain byte-identical. Their `baseline`, `baseline_evidence_objects`, pressure inventory and survivor inventory describe completed observations at their own commits. In particular, AD-039 truthfully records that Q3 was open then, while AD-044 and AD-045 truthfully preserve the classes they enumerated. Rewriting any of them would falsify evidence rather than synchronize current state.
 
 ## 7. Executable enforcement
 
-`architecture/assignment-retroactivity-q3-resolution.yaml` binds the exact baseline, gate result, ordered sufficiency criterion, six-row evidence ledger, narrow decision, version transition, current projections, migration/rollback unit, historical hashes and unchanged promotion gate.
+`architecture/assignment-retroactivity-q3-resolution.yaml` binds the exact baseline, gate result, ordered sufficiency criterion, six-row evidence ledger, narrow decision, version transition, current projections, exact historical-to-current quote successions, migration/rollback unit, historical hashes and unchanged promotion gate.
 
 The checker requires:
 
