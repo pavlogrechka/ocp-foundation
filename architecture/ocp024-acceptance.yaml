@@ -25,6 +25,8 @@ subject:
   before: {version: 0.1.0, status: Draft}
   after: {version: 0.2.0, status: Accepted}
   semantic_delta: none
+  current_blob: d26f701bb90447d337cba4e19789b592316f09a6
+  current_sha256: 7871b530f94c4bbbd249fcc8c9aa5e4306ed1dc642134dd4fd1a20d057212688
 reviewed_snapshot:
   path: docs/024-completeness-evaluator/reviewed-contract-v0.1.0.md
   reviewed_version: 0.1.0
@@ -76,7 +78,7 @@ document_status_projection:
 protected_artifacts:
   - {path: tools/ontology_checker/ocp_checker/completeness_evaluator.py, sha256: 607cc8fb2baefb3730d1dadfddae262d8c01c43b97070dadb9c49e16d39910be}
   - {path: tools/ontology_checker/completeness-evaluator-rules.yaml, sha256: 87a5fc028ce33f052a914f17f3d7c4b48f9e8d3a9add0b3587ede1c6fb266f8b}
-  - {path: tools/ontology_checker/tests/test_completeness_evaluator.py, sha256: 78b8a0e9c31dde6bbf9dba8e97029e0ac9204373c9353833c63cf64c1ecc2906}
+  - {path: tools/ontology_checker/tests/test_completeness_evaluator.py, sha256: ab39b4efef693249418117e5b409860c77ac92858792732d2521424c49a1317a}
   - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-activation.yaml, sha256: aa06112e2d4d8217e9f563d84cbc5ec83ec0296ddbe1d7a4f16a0b632a127300}
   - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-conflicting-evidence.yaml, sha256: 9ac08a2d2859db40134da586f81afe9b8a41f83da9f10d1fcc8ea547afc5853e}
   - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-forbidden-coupling.yaml, sha256: 9f56be2f15620251627df4191b609f043abd0978d7b480a7aacd395097e989d1}

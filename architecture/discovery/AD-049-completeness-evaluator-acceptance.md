@@ -67,4 +67,6 @@ No Assignment, occupancy request, recognition request, profile, evidence, result
 
 The act changes no fixture. All exercised values are existing synthetic `R-001`, `SYNTH-*` and `2026-08-02` references; no real operations, coordinate, unit, person, credential, key or token is introduced. Accounting is derived by the repository checker.
 
+The first exact-head request incorrectly reported `410/410` from an incomplete local invocation. Independent review and required CI both measured all 410 tests and found two failures: an AD-044 current-primary pin still targeted the historical OCP-024 bytes, and the OCP-024 non-activation test used Draft status as a proxy. This reviewed unit preserves the AD-044 baseline anchor, advances the live primary pin through this witness, and replaces the proxy with direct result-space and production-namespace rejection proofs. The corrected full run, not the earlier expectation, is the accounting evidence.
+
 AD-049 does not activate anything; satisfy the OCP-023 need; change OCP-023, OCP-005, another status, Concept, graph, promotion candidate or cycle; remove an Assignment blocker; open T7; or authorize another act.

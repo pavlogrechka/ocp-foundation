@@ -463,7 +463,13 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
         ).splitlines()
         protected = [
             relative for relative in listing
-            if (relative.startswith("docs/") and relative != "docs/005-assignment-concept/README.md")
+            if (
+                relative.startswith("docs/")
+                and relative not in {
+                    "docs/005-assignment-concept/README.md",
+                    "docs/024-completeness-evaluator/README.md",
+                }
+            )
             or relative.startswith("patterns/")
             or relative.startswith("tools/ontology_checker/fixtures/")
             or "/reviewed-contract-" in relative
@@ -478,6 +484,21 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
                     ["git", "hash-object", relative], cwd=ROOT, text=True
                 ).strip()
                 self.assertEqual(actual, expected)
+
+        successor = yaml.safe_load(
+            (ROOT / "architecture/ocp024-acceptance.yaml").read_text(encoding="utf-8")
+        )["subject"]
+        current_path = ROOT / successor["path"]
+        self.assertEqual(
+            subprocess.check_output(
+                ["git", "hash-object", successor["path"]], cwd=ROOT, text=True
+            ).strip(),
+            successor["current_blob"],
+        )
+        self.assertEqual(
+            hashlib.sha256(current_path.read_bytes()).hexdigest(),
+            successor["current_sha256"],
+        )
 
 
 if __name__ == "__main__":
