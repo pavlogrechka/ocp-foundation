@@ -20,7 +20,7 @@ ELIGIBLE_LIFECYCLE_IDS = frozenset(
         "OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-007",
         "OCP-008", "OCP-009", "OCP-010", "OCP-011", "OCP-012", "OCP-013",
         "OCP-014", "OCP-015", "OCP-016", "OCP-017", "OCP-018", "OCP-019",
-        "OCP-020", "OCP-021", "OCP-022", "OCP-023", "P-001",
+        "OCP-020", "OCP-021", "OCP-022", "OCP-023", "OCP-024", "P-001",
     }
 )
 ELIGIBLE_GOVERNANCE_IDS = frozenset(
@@ -29,7 +29,7 @@ ELIGIBLE_GOVERNANCE_IDS = frozenset(
         "AD-009", "AD-010", "AD-011", "AD-012", "AD-013", "AD-014", "AD-015",
         "AD-016", "AD-017", "AD-018", "AD-019", "AD-020", "AD-021", "AD-022",
         "AD-025", "AD-026", "AD-027", "AD-028", "AD-029", "AD-030", "AD-032",
-        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046",
+        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046", "AD-049",
     }
 )
 CANDIDATE_IDS = frozenset(
@@ -39,7 +39,7 @@ CANDIDATE_IDS = frozenset(
         "COORDINATION_RESIDUAL", "G4_ACTIVATION_RULE", "LIFECYCLE_DOMAIN_RESPONSIBILITY",
         "PRODUCTION_SOURCE_PROFILE", "CAPACITY_RESULT", "CONFLICT_POSITIVE_REOPENING",
         "RESERVATION_POSITIVE_REOPENING", "ORDER_POSITIVE_REOPENING",
-        "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS",
+        "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS", "COMPLETENESS_REAL_EVALUATOR",
     }
 )
 ESTABLISHED_POSITIVE_IDS = frozenset(
@@ -127,6 +127,12 @@ EXPECTED_CANDIDATES = {
         "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)",
         "assignment-set-completeness-for-resource", False,
         "current-unmet-positive-consumer-need",
+    ),
+    "COMPLETENESS_REAL_EVALUATOR": (
+        "OCP-024", "docs/024-completeness-evaluator/README.md",
+        "A real evaluator remains unresolved and requires a separate act grounded in an external domain authority.",
+        "production-completeness-evaluator-legitimacy", True,
+        "explicitly-outside-synthetic-recognition-contract",
     ),
 }
 
@@ -342,7 +348,7 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
     if (
         payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-036"
-        or payload.get("current_projection_owner") != "AD-046"
+        or payload.get("current_projection_owner") != "AD-049"
         or payload.get("baseline") != "f64b3a23419092649cfb4059d4853eabd93fbbc2"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",

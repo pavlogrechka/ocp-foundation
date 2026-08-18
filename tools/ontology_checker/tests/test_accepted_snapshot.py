@@ -131,6 +131,14 @@ EXPECTED = {
         "c8a765053c3bd398eba18508c080f15dbe49a784565faa59bb8a88d266d872d4",
         "current-accepted",
     ),
+    "OCP-024": (
+        "docs/024-completeness-evaluator/README.md",
+        "Accepted",
+        "0.1.0",
+        "docs/024-completeness-evaluator/reviewed-contract-v0.1.0.md",
+        "0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753",
+        "current-accepted",
+    ),
 }
 
 

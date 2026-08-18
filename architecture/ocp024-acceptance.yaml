@@ -1,0 +1,113 @@
+schema_version: 1
+rule_owner: AD-049
+baseline: 954e2d76317a993d228d45a77ccfddec0c0f379a
+gate_first:
+  route: Route-D
+  positive_capable: false
+  ocp016_g4_applies: false
+  reason: lifecycle-admission-of-non-activated-synthetic-recognition-contract
+  changes_other_document_g4_answer: false
+readiness_criterion:
+  declared_before_application: true
+  conditions:
+    - useful-current-conformance-and-rejection-contract
+    - synthetic-only-boundary-is-deterministic-and-fail-safe
+    - no-production-legitimacy-completeness-negative-occupancy-or-activation
+    - every-property-and-non-implication-is-executable
+    - dependencies-resolve-without-canonical-floor-or-self-authority
+    - reviewed-body-preserved-by-ad029-mechanism
+    - consumer-need-status-and-accounting-projections-synchronized
+  result: satisfied
+  useful_subject: synthetic-reference-conformance-and-fail-safe-rejection
+subject:
+  document_id: OCP-024
+  path: docs/024-completeness-evaluator/README.md
+  before: {version: 0.1.0, status: Draft}
+  after: {version: 0.2.0, status: Accepted}
+  semantic_delta: none
+reviewed_snapshot:
+  path: docs/024-completeness-evaluator/reviewed-contract-v0.1.0.md
+  reviewed_version: 0.1.0
+  sha256: 0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753
+  baseline_blob: 2713c99ca6653d35fc52435eaeaeb8f9f5174b1d
+  basis: current-accepted
+consumer_need_projection:
+  documents_depending_on_ocp024: []
+  accepted_ocp005_consumers: [OCP-013, OCP-015, OCP-017, OCP-020, OCP-021, OCP-023]
+  unmet_positive_needs: [RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS]
+  ocp024_real_evaluator_disposition: deferred-outside-synthetic-obligation
+runtime_boundary:
+  accepted_result: synthetic-reference-recognized
+  invalid_result: indeterminate
+  synthetic_evaluator_prefix: SYNTH-EVALUATOR-
+  synthetic_authority_prefix: SYNTH-AUTHORITY-
+  production_shaped_values_are_recognized: false
+  activation_fields_are_recognized: false
+  establishes_completeness: false
+  permits_ocp023_occupied_false: false
+  is_completeness_provider: false
+  is_g4_binding: false
+document_status_projection:
+  OCP-000: [1.6.0, Canonical]
+  OCP-001: [1.0.0, Canonical]
+  OCP-002: [1.6.0, Canonical]
+  OCP-003: [1.0.0, Canonical]
+  OCP-004: [1.0.1, Canonical]
+  OCP-005: [0.3.0, Draft]
+  OCP-006: [0.3.2, Draft]
+  OCP-007: [1.1.1, Canonical]
+  OCP-008: [1.0.0, Canonical]
+  OCP-009: [1.0.0, Canonical]
+  OCP-010: [1.0.1, Canonical]
+  OCP-011: [0.3.0, Accepted]
+  OCP-012: [0.3.0, Accepted]
+  OCP-013: [0.2.0, Accepted]
+  OCP-014: [0.2.0, Accepted]
+  OCP-015: [0.2.0, Accepted]
+  OCP-016: [1.0.0, Canonical]
+  OCP-017: [0.2.0, Accepted]
+  OCP-018: [0.2.1, Accepted]
+  OCP-019: [0.2.0, Accepted]
+  OCP-020: [0.2.0, Accepted]
+  OCP-021: [0.2.0, Accepted]
+  OCP-022: [0.2.0, Accepted]
+  OCP-023: [0.2.0, Accepted]
+  OCP-024: [0.2.0, Accepted]
+protected_artifacts:
+  - {path: tools/ontology_checker/ocp_checker/completeness_evaluator.py, sha256: 607cc8fb2baefb3730d1dadfddae262d8c01c43b97070dadb9c49e16d39910be}
+  - {path: tools/ontology_checker/completeness-evaluator-rules.yaml, sha256: 87a5fc028ce33f052a914f17f3d7c4b48f9e8d3a9add0b3587ede1c6fb266f8b}
+  - {path: tools/ontology_checker/tests/test_completeness_evaluator.py, sha256: 78b8a0e9c31dde6bbf9dba8e97029e0ac9204373c9353833c63cf64c1ecc2906}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-activation.yaml, sha256: aa06112e2d4d8217e9f563d84cbc5ec83ec0296ddbe1d7a4f16a0b632a127300}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-conflicting-evidence.yaml, sha256: 9ac08a2d2859db40134da586f81afe9b8a41f83da9f10d1fcc8ea547afc5853e}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-forbidden-coupling.yaml, sha256: 9f56be2f15620251627df4191b609f043abd0978d7b480a7aacd395097e989d1}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-stale-evidence.yaml, sha256: e8eace5314170df3f4cafda2b7faaf381427084108cff7731c1fd2c038b4ee93}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/invalid-unresolved-authority.yaml, sha256: 731eb61919db746c7186f65da6fd086e9d6e91b275a7aba81e96f6ec9196ceff}
+  - {path: tools/ontology_checker/fixtures/completeness_evaluator/valid-synthetic-reference.yaml, sha256: 6e8250335bb97d0150acac4ea0426a52ac6159573cb8b3635a7a22f531887866}
+  - {path: docs/023-resource-occupancy/README.md, sha256: 5ec9aca56de4524b4ab78a9e98e2cf5d7561d6f13bac8cf7778d66a99f5490d9}
+  - {path: architecture/foundation-promotion-gate.yaml, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd}
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+versioning:
+  OCP-024: 0.1.0-to-0.2.0-precanonical-minor-lifecycle-acceptance-no-semantic-delta
+  AD-049: 0.1.0-Accepted
+migration:
+  data: none
+  references: none
+  schemas: none
+  runtime_behavior: unchanged
+  rollback_unit: [OCP-024-primary, snapshot-map, lifecycle-and-need-projections, accounting]
+forbidden_outcomes:
+  - REAL_EVALUATOR_OR_AUTHORITY_LEGITIMIZED
+  - ASSIGNMENT_SET_COMPLETENESS_ESTABLISHED
+  - G4_BINDING_SATISFIED
+  - POSITIVE_MODEL_ACTIVATED
+  - OCP023_NEGATIVE_RESULT_ENABLED
+  - OCP024_COMPLETENESS_PROVIDER
+  - OTHER_DOCUMENT_STATUS_CHANGE
+  - OCP005_OR_OCP023_CHANGE
+  - CONCEPT_OR_GRAPH_CHANGE
+  - ASSIGNMENT_BLOCKER_REMOVAL
+  - PROMOTION_CYCLE_START
+  - NEXT_ACT_AUTHORIZATION

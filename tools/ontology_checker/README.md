@@ -18,7 +18,7 @@ Implemented validators:
 - Accepted OCP-022 separate mandatory, sufficient and admissible-source Order authorization negative establishment boundaries;
 - Draft OCP-006 separate Constraint application-order, override and contextual-waiver negative boundaries;
 - Accepted OCP-023 Route D Resource-occupancy reference derivation over one exact synthetic complete Assignment snapshot, with all effective Assignment witnesses and no activation or adjacent authority;
-- Draft OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy and no real evaluator or activation;
+- Accepted OCP-024 Route D Assignment-set completeness-evidence recognition envelope with exact subject/scope/time/provenance/authority bindings, fail-safe indeterminacy, preserved reviewed body and no real evaluator, completeness supply or activation;
 - Assignment consumer-pressure discovery with exact enumeration of three whole-freeze blockers and ten resolution classes, live consumer replays, per-resolution binding adequacy and three non-unique `pressured` results;
 - Assignment survivor norm-compatibility discovery with all 25 current primary bodies, a bounded 64-hit six-axis lexical sweep with explicit source/rejection dispositions, three exact-guarded known out-of-vocabulary temporal deferrals, six pressure survivors, one compatible and five underdetermined results, plus causal exact-Resource/non-inheritance counterexamples; the sweep does not claim semantic-axis completeness;
 - Assignment Q3 lifecycle resolution with an exact final `established_at` effectivity lower bound, ordered sufficiency ledger, causal before/at-boundary probe, Q3-only closure guard, Q9-only temporal blocker projection and immutable historical discovery witnesses;
@@ -92,7 +92,7 @@ The checker uses exact module manifests:
 - `order-authorization-boundary-rules.yaml` — Accepted OCP-022 three-question evidence envelope, negative establishment results and individually guarded authority/Concept/selector/self-supply/side-effect fields.
 - `constraint-interaction-rules.yaml` — Draft OCP-006 separate application-order, override and contextual-waiver evidence envelopes, negative results and prohibited positive authority.
 - `resource-occupancy-rules.yaml` — Accepted OCP-023 exact request/snapshot binding, one occupancy derivation, synthetic completeness evidence and individually guarded activation/adjacent-authority exclusions; Accepted status supplies no production activation.
-- `completeness-evaluator-rules.yaml` — Draft OCP-024 synthetic recognition envelope; invalid, stale, mismatched, ambiguous, conflicting or ungrounded evidence stays indeterminate and no production authority is inferred.
+- `completeness-evaluator-rules.yaml` — Accepted OCP-024 synthetic recognition envelope; invalid, stale, mismatched, ambiguous, conflicting or ungrounded evidence stays indeterminate and no production authority, completeness or activation is inferred.
 
 Each manifest is checked for exact equality against its exported code and derivation sets. Adding an emitted code or derivation without a cited defining source fails unit tests. Artifact governance additionally requires rule identifiers to be globally unique across manifests and every rule source to begin with an exact-resolvable OCP identifier.
 

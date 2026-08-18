@@ -1,6 +1,6 @@
 schema_version: 2
 rule_owner: AD-036
-current_projection_owner: AD-046
+current_projection_owner: AD-049
 baseline: f64b3a23419092649cfb4059d4853eabd93fbbc2
 gate_first:
   ocp016_gate: G4
@@ -54,6 +54,7 @@ eligible_lifecycle_documents:
   - {artifact_id: OCP-021, path: docs/021-reservation-allocation-boundary/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-022, path: docs/022-order-authorization-boundary/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: OCP-023, path: docs/023-resource-occupancy/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-024, path: docs/024-completeness-evaluator/README.md, version: 0.2.0, status: Accepted}
   - {artifact_id: P-001, path: patterns/P-001-identified-record-pattern.md, version: 0.1.0, status: Accepted}
 eligible_governance_acts:
   - {artifact_id: AD-002, path: architecture/discovery/AD-002-state-readiness-review.md, version: 0.2.1, status: Accepted}
@@ -91,6 +92,7 @@ eligible_governance_acts:
   - {artifact_id: AD-042, path: architecture/discovery/AD-042-resource-occupancy-acceptance.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-043, path: architecture/discovery/AD-043-completeness-evaluator-contract.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-046, path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-049, path: architecture/discovery/AD-049-completeness-evaluator-acceptance.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003
@@ -190,6 +192,13 @@ candidate_mentions:
     positive_result: assignment-set-completeness-for-resource
     can_complete_without_new_result: false
     disposition: current-unmet-positive-consumer-need
+  - candidate_id: COMPLETENESS_REAL_EVALUATOR
+    artifact_id: OCP-024
+    path: docs/024-completeness-evaluator/README.md
+    token: "A real evaluator remains unresolved and requires a separate act grounded in an external domain authority."
+    positive_result: production-completeness-evaluator-legitimacy
+    can_complete_without_new_result: true
+    disposition: explicitly-outside-synthetic-recognition-contract
 established_positive_outputs:
   - {artifact_id: OCP-011, path: docs/011-outcome-assessment-record/README.md, token: "`sufficient` | `achieved`, `not_achieved`, `partially_achieved` or `indeterminate`", result: outcome-assessment-conclusion}
   - {artifact_id: OCP-012, path: docs/012-capability-claim-record/README.md, token: "`effective_capability_claim` may project an activated evidence-backed assertion", result: effective-capability-claim}
