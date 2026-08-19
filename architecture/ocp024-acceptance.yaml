@@ -1,5 +1,6 @@
-schema_version: 1
+schema_version: 2
 rule_owner: AD-049
+current_projection_owner: AD-053
 baseline: 954e2d76317a993d228d45a77ccfddec0c0f379a
 gate_first:
   route: Route-D
@@ -35,7 +36,7 @@ reviewed_snapshot:
   basis: current-accepted
 consumer_need_projection:
   documents_depending_on_ocp024: []
-  accepted_ocp005_consumers: [OCP-013, OCP-015, OCP-017, OCP-020, OCP-021, OCP-023]
+  accepted_ocp005_consumers: [OCP-006, OCP-013, OCP-015, OCP-017, OCP-020, OCP-021, OCP-023]
   unmet_positive_needs: [RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS]
   ocp024_real_evaluator_disposition: deferred-outside-synthetic-obligation
 runtime_boundary:
@@ -56,7 +57,7 @@ document_status_projection:
   OCP-003: [1.0.0, Canonical]
   OCP-004: [1.0.1, Canonical]
   OCP-005: [0.3.0, Draft]
-  OCP-006: [0.3.2, Draft]
+  OCP-006: [0.4.0, Accepted]
   OCP-007: [1.1.1, Canonical]
   OCP-008: [1.0.0, Canonical]
   OCP-009: [1.0.0, Canonical]

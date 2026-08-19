@@ -38,6 +38,15 @@ class ConstraintDocumentAcceptanceTests(unittest.TestCase):
             acceptance.SNAPSHOT_PATH,
             Path("architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml"),
             Path("architecture/baselines/foundation-map.md"),
+            Path("architecture/baselines/assignment-stable-surface-pre-ocp006-acceptance.yaml"),
+            Path("architecture/baselines/assignment-consumer-compatibility-pre-ocp006-acceptance.yaml"),
+            Path("architecture/baselines/assignment-amendment-q2-attempt-pre-ocp006-acceptance.yaml"),
+            Path("architecture/baselines/constraint-document-status-readiness-pre-ocp006-acceptance.yaml"),
+            Path("architecture/assignment-stable-surface.yaml"),
+            Path("architecture/assignment-consumer-compatibility.yaml"),
+            Path("architecture/assignment-amendment-q2-attempt.yaml"),
+            Path("architecture/ocp024-acceptance.yaml"),
+            Path("architecture/discovery/AD-052-constraint-document-status-readiness.md"),
             Path("architecture/constraint-document-status-readiness.yaml"),
         }
         for source in (ROOT / "docs").glob("[0-9][0-9][0-9]-*/README.md"):

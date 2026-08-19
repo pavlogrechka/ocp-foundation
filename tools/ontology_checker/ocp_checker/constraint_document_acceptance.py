@@ -30,7 +30,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 
 BASELINE = "8bfeffb2e2e8928a36d0179a831fa3899ca7cd6a"
-MAP_SHA256 = "a36a4459d6ba48e128ab1444be290b9544670bd35b07b1ca23af402859b5d0bb"
+MAP_SHA256 = "2d9109d1d8877251a35eff7f13d916a9ceeca4f5961f51908935b261ff9883d8"
 SNAPSHOT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 SNAPSHOT_BLOB = "50f149cf5563083bb84d5d2197ec32c2ed15fa9b"
 DIRECT_DEPENDENCIES = (
@@ -66,12 +66,33 @@ NON_IMPLICATIONS = frozenset({
     "NOT_CANONICAL", "NO_QUESTION_CLOSURE", "NO_POSITIVE_ACTIVATION",
     "NO_CONCEPT_STATUS_CHANGE", "NO_CANDIDATE_SELECTION", "NO_PROMOTION_CYCLE_START",
     "NO_NEXT_ACT_AUTHORIZATION", "NO_OCP005_CHANGE", "NO_OCP016_CHANGE",
-    "NO_AD052_CHANGE", "NO_OTHER_DOCUMENT_PROMOTION",
+    "NO_AD052_CRITERIA_CHANGE", "NO_OTHER_DOCUMENT_PROMOTION",
 })
+CURRENT_PROJECTION_SYNC = {
+    "owner": "AD-053",
+    "historical_redirect_permitted_for_live_scans": False,
+    "live_scanners": [
+        "constraint-status-readiness", "assignment-stable-surface",
+        "assignment-consumer-compatibility", "assignment-amendment-q2",
+        "ocp024-status-projection", "ocp024-accepted-consumer-inventory",
+    ],
+    "expected": {
+        "ocp006_document_status": "Accepted",
+        "promoted_document_count": 24,
+        "ocp005_accepted_consumer_count": 7,
+    },
+    "new_consumer_compatibility_probe": {
+        "consumer_id": "OCP-006",
+        "fixture": "tools/ontology_checker/fixtures/constraint/valid-assignment-moving-surfaces-independent.yaml",
+        "expected_control": "satisfied",
+        "expected_probe": "moving:satisfied|binding:indeterminate|assignment:valid/valid",
+    },
+}
 EXPECTED_KEYS = frozenset({
     "schema_version", "rule_owner", "baseline", "gate_first", "subject", "criteria",
     "route_decision", "authority_ledger", "compatibility_surface", "consumers",
     "consumer_effect", "reviewed_snapshot", "historical_evidence_successions",
+    "current_projection_sync",
     "document_status_projection", "atomic_package", "versioning", "migration",
     "promotion_gate_guard", "protected_artifacts", "non_implications",
     "baseline_evidence_objects",
@@ -324,12 +345,48 @@ def validate_constraint_document_acceptance(repo_root: Path) -> ConstraintDocume
         errors.append(CONSTRAINT_ACCEPTANCE_ATOMICITY_DRIFT)
 
     successions = payload.get("historical_evidence_successions") or []
-    if len(successions) != 3:
+    if len(successions) != 7:
         errors.append(CONSTRAINT_ACCEPTANCE_PROTECTED_DRIFT)
     for row in successions:
         preserved = Path(str(row.get("preserved_path", "")))
         if preserved.is_absolute() or ".." in preserved.parts or _hash(repo_root / preserved) != row.get("sha256"):
             errors.append(CONSTRAINT_ACCEPTANCE_PROTECTED_DRIFT)
+
+    sync = payload.get("current_projection_sync") or {}
+    readiness = _load(repo_root / "architecture/constraint-document-status-readiness.yaml") or {}
+    stable = _load(repo_root / "architecture/assignment-stable-surface.yaml") or {}
+    compatibility = _load(repo_root / "architecture/assignment-consumer-compatibility.yaml") or {}
+    amendment = _load(repo_root / "architecture/assignment-amendment-q2-attempt.yaml") or {}
+    ocp024 = _load(repo_root / "architecture/ocp024-acceptance.yaml") or {}
+    stable_consumers = {
+        row.get("document_id"): row for row in stable.get("direct_consumers", [])
+        if isinstance(row, dict)
+    }
+    compatibility_consumers = {
+        row.get("consumer_id"): row for row in compatibility.get("consumer_results", [])
+        if isinstance(row, dict)
+    }
+    amendment_consumers = {
+        row.get("document_id"): row for row in amendment.get("accepted_consumer_review", [])
+        if isinstance(row, dict)
+    }
+    if (
+        sync != CURRENT_PROJECTION_SYNC
+        or readiness.get("current_projection_owner") != "AD-053"
+        or readiness.get("precedent_sweep", {}).get("promoted_document_count") != 24
+        or stable.get("current_projection_owner") != "AD-053"
+        or stable_consumers.get("OCP-006", {}).get("expected_status") != "Accepted"
+        or stable_consumers.get("OCP-006", {}).get("lifecycle_class") != "accepted"
+        or compatibility.get("current_projection_owner") != "AD-053"
+        or compatibility_consumers.get("OCP-006", {}).get("result") != "preserved"
+        or compatibility_consumers.get("OCP-006", {}).get("fixture") != CURRENT_PROJECTION_SYNC["new_consumer_compatibility_probe"]["fixture"]
+        or amendment.get("current_projection_owner") != "AD-053"
+        or "OCP-006" not in amendment_consumers
+        or ocp024.get("current_projection_owner") != "AD-053"
+        or ocp024.get("document_status_projection", {}).get("OCP-006") != ["0.4.0", "Accepted"]
+        or "OCP-006" not in ocp024.get("consumer_need_projection", {}).get("accepted_ocp005_consumers", [])
+    ):
+        errors.append(CONSTRAINT_ACCEPTANCE_ATOMICITY_DRIFT)
 
     for item in payload.get("protected_artifacts") or ():
         if _hash(repo_root / Path(str(item.get("path", "")))) != item.get("sha256"):

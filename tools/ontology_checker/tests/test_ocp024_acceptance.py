@@ -117,10 +117,7 @@ class Ocp024AcceptanceTests(unittest.TestCase):
                 metadata = ocp024_acceptance._frontmatter(path)
                 if metadata and metadata.get("Document-ID") != "OCP-024":
                     with self.subTest(document=metadata.get("Document-ID")):
-                        target = (
-                            root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
-                            if metadata.get("Document-ID") == "OCP-006" else path
-                        )
+                        target = path
                         target_metadata = ocp024_acceptance._frontmatter(target)
                         original = target.read_text(encoding="utf-8")
                         old = f"Status: {target_metadata['Status']}"

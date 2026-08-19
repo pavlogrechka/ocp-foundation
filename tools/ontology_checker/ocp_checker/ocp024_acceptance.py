@@ -39,10 +39,10 @@ VALID_FIXTURE = Path("tools/ontology_checker/fixtures/completeness_evaluator/val
 ZERO_OCCUPANCY_FIXTURE = Path("tools/ontology_checker/fixtures/resource_occupancy/valid-zero-assignments.yaml")
 
 BASELINE = "954e2d76317a993d228d45a77ccfddec0c0f379a"
-MAP_SHA256 = "de1028c0435939a5ba7ef64d957bba4c4ad3cbf4be597882e56a21af7119e1f4"
+MAP_SHA256 = "31a7e67e3b28679fefeaba520e01b3948fc974bb7d71d57b97d39f3433d90553"
 SNAPSHOT_SHA256 = "0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753"
 SNAPSHOT_BLOB = "2713c99ca6653d35fc52435eaeaeb8f9f5174b1d"
-ACCEPTED_CONSUMERS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
+ACCEPTED_CONSUMERS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 UNMET_NEEDS = ("RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS",)
 FORBIDDEN_OUTCOMES = frozenset(
     {
@@ -55,7 +55,7 @@ FORBIDDEN_OUTCOMES = frozenset(
 )
 EXPECTED_MAP_KEYS = frozenset(
     {
-        "schema_version", "rule_owner", "baseline", "gate_first", "readiness_criterion",
+        "schema_version", "rule_owner", "current_projection_owner", "baseline", "gate_first", "readiness_criterion",
         "subject", "reviewed_snapshot", "consumer_need_projection", "runtime_boundary",
         "document_status_projection", "protected_artifacts", "promotion_gate_guard",
         "versioning", "migration", "forbidden_outcomes",
@@ -114,12 +114,7 @@ def _body(path: Path) -> str:
 def _status_projection(root: Path) -> dict[str, list[str]]:
     result: dict[str, list[str]] = {}
     for path in sorted((root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        relative = path.relative_to(root)
-        source = historical_path(
-            root, relative,
-            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
-        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
-        metadata = _frontmatter(root / source)
+        metadata = _frontmatter(path)
         if metadata and isinstance(metadata.get("Document-ID"), str):
             result[metadata["Document-ID"]] = [str(metadata.get("Version")), str(metadata.get("Status"))]
     return result
@@ -134,12 +129,7 @@ def _depends_on(metadata: dict[str, Any], target: str) -> bool:
 def _accepted_consumers(root: Path, target: str) -> frozenset[str]:
     values = set()
     for path in (root / "docs").glob("[0-9][0-9][0-9]-*/README.md"):
-        relative = path.relative_to(root)
-        source = historical_path(
-            root, relative,
-            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
-        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
-        metadata = _frontmatter(root / source)
+        metadata = _frontmatter(path)
         if metadata and metadata.get("Status") == "Accepted" and _depends_on(metadata, target):
             values.add(str(metadata.get("Document-ID")))
     return frozenset(values)
@@ -165,8 +155,9 @@ def validate_ocp024_acceptance(repo_root: Path) -> Ocp024AcceptanceResult:
     if (
         digest != MAP_SHA256
         or
-        payload.get("schema_version") != 1
+        payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-049"
+        or payload.get("current_projection_owner") != "AD-053"
         or payload.get("baseline") != BASELINE
         or set(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
         or len(payload.get("forbidden_outcomes") or ()) != len(FORBIDDEN_OUTCOMES)

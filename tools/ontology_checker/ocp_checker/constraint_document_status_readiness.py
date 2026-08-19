@@ -24,7 +24,7 @@ SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
 ASSIGNMENT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd"
-MAP_SHA256 = "da5712d71c021c2e97de63f256da786ecbc18922449bab634cc8ed8c26e7f943"
+MAP_SHA256 = "e19a01f6d65aa356a5c04435fd18b11dbb840e452c1927597a6271d2f772d320"
 SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 EXPECTED_INTERPRETATION = "confirms-open-question-closure-is-not-a-governance-promotion-criterion"
 OPEN_LEXICAL_VOCABULARY = (
@@ -36,7 +36,7 @@ OPEN_LEXICAL_PATTERN = re.compile(
     flags=re.IGNORECASE,
 )
 EXPECTED_MAP_KEYS = frozenset({
-    "schema_version", "rule_owner", "baseline", "gate_first", "subject",
+    "schema_version", "rule_owner", "current_projection_owner", "baseline", "gate_first", "subject",
     "norm_vs_practice", "governance_sweep", "promotion_criteria", "ocp006_live_inputs",
     "precedent_sweep", "result", "versioning", "migration",
     "forbidden_outcomes", "baseline_evidence_objects",
@@ -86,6 +86,7 @@ PROMOTED_OPEN_CARRIERS = {
     "OCP-007": "## 7. Material-event continuity is unresolved",
     "OCP-008": "## 16. Open Questions",
     "OCP-010": "The first four questions remain open",
+    "OCP-006": "The following questions remain open exactly as recorded in §22",
 }
 EXPECTED_DEPENDENCIES = (
     "OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005",
@@ -191,8 +192,9 @@ def validate_constraint_document_status_readiness(
     ).hexdigest()
     if (
         digest != MAP_SHA256
-        or payload.get("schema_version") != 1
+        or payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-052"
+        or payload.get("current_projection_owner") != "AD-053"
         or payload.get("baseline") != BASELINE
         or frozenset(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
     ):
@@ -309,13 +311,6 @@ def validate_constraint_document_status_readiness(
         errors.append(CONSTRAINT_STATUS_READINESS_ASSESSMENT_DRIFT)
 
     documents = _primary_documents(repo_root)
-    historical_text = ""
-    try:
-        historical_text = (repo_root / historical_subject).read_text(encoding="utf-8")
-    except OSError:
-        pass
-    if subject and historical_text:
-        documents["OCP-006"] = (repo_root / historical_subject, subject, historical_text)
     promoted = {
         doc_id: item for doc_id, item in documents.items()
         if item[1].get("Status") in {"Accepted", "Canonical"}
@@ -324,7 +319,7 @@ def validate_constraint_document_status_readiness(
     carriers = sweep.get("carriers") or []
     claimed = {row.get("document_id"): row for row in carriers if isinstance(row, dict)}
     if (
-        len(promoted) != 23
+        len(promoted) != 24
         or sweep.get("promoted_document_count") != len(promoted)
         or set(claimed) != set(PROMOTED_OPEN_CARRIERS)
         or sweep.get("interpretation") != EXPECTED_INTERPRETATION
@@ -340,7 +335,7 @@ def validate_constraint_document_status_readiness(
         doc_id for doc_id, (_, _, text) in promoted.items()
         if re.search(r"^##(?:\s+\d+\.)?\s+Open questions", text, flags=re.IGNORECASE | re.MULTILINE)
     }
-    if formal != {"OCP-004", "OCP-008", "OCP-010"}:
+    if formal != {"OCP-004", "OCP-006", "OCP-008", "OCP-010"}:
         errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
     unresolved_headings = {
         doc_id for doc_id, (_, _, text) in promoted.items()

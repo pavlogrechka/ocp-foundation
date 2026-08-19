@@ -133,7 +133,10 @@ class AssignmentQ3LifecycleTests(unittest.TestCase):
         self.assertEqual(payload["migration"]["assignment_data"], "none")
         self.assertIn("OCP-005-version-section-8-and-q3-line", payload["migration"]["rollback_unit"])
         for item in payload["protected_historical_artifacts"]:
-            self.assertEqual(hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest(), item["sha256"])
+            resolved = assignment_q3_lifecycle.historical_path(
+                ROOT, Path(item["path"]), item["sha256"]
+            )
+            self.assertEqual(hashlib.sha256((ROOT / resolved).read_bytes()).hexdigest(), item["sha256"])
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)

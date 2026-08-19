@@ -1,6 +1,5 @@
-schema_version: 2
+schema_version: 1
 rule_owner: AD-038
-current_projection_owner: AD-053
 baseline: 448d7d10fe3a3213da8479ce991995e01102cf3b
 gate_first:
   evidence_form:
@@ -65,12 +64,6 @@ missing_obligations:
   - SUPERSESSION_REQUIRED_FOR_ROLE_OR_APPLICABILITY_CHANGE
   - AMENDMENT_PROVENANCE_BINDING
 accepted_consumer_review:
-  - document_id: OCP-006
-    primary: docs/006-constraint-concept/README.md
-    expected_status: Accepted
-    evidence_token: Сам `supersedes_assignment_ref` не визначає допустимі часові межі
-    requires_in_place_amendment: false
-    consequence: consumes-supersession-as-identity-boundary-without-amendment-authority
   - document_id: OCP-013
     primary: docs/013-resource-interchangeability/README.md
     expected_status: Accepted

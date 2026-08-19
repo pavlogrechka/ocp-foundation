@@ -8,8 +8,6 @@ from typing import Any, Iterable
 
 import yaml
 
-from .historical_evidence import historical_path
-
 from .checker import load_fixture, validate_assignment
 
 
@@ -24,6 +22,7 @@ MAP_KEYS = frozenset(
     {
         "schema_version",
         "rule_owner",
+        "current_projection_owner",
         "baseline",
         "gate_first",
         "subject",
@@ -53,7 +52,7 @@ MISSING_OBLIGATION_IDS = frozenset(
         "AMENDMENT_PROVENANCE_BINDING",
     }
 )
-ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
+ACCEPTED_CONSUMER_IDS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 PROBE_IDS = frozenset(
     {"ESTABLISHED_ROLE_VALUE_REPLACEMENT", "ESTABLISHED_APPLICABILITY_VALUE_REPLACEMENT"}
 )
@@ -143,6 +142,11 @@ EXPECTED_OWNER_EVIDENCE = {
     ),
 }
 EXPECTED_CONSUMERS = {
+    "OCP-006": (
+        "docs/006-constraint-concept/README.md",
+        "Сам `supersedes_assignment_ref` не визначає допустимі часові межі",
+        "consumes-supersession-as-identity-boundary-without-amendment-authority",
+    ),
     "OCP-013": (
         "docs/013-resource-interchangeability/README.md",
         "Assignment mutation",
@@ -368,8 +372,9 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
         return _result((ASSIGNMENT_AMENDMENT_Q2_MAP_INVALID,))
 
     if (
-        payload.get("schema_version") != 1
+        payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-038"
+        or payload.get("current_projection_owner") != "AD-053"
         or payload.get("baseline") != "448d7d10fe3a3213da8479ce991995e01102cf3b"
         or payload.get("gate_first") != EXPECTED_GATE_FIRST
         or payload.get("subject") != EXPECTED_SUBJECT
@@ -422,12 +427,7 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
         errors.append(ASSIGNMENT_AMENDMENT_Q2_CONSUMER_DRIFT)
     actual_accepted: set[str] = set()
     for primary in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        relative = primary.relative_to(repo_root)
-        source = historical_path(
-            repo_root, relative,
-            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
-        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
-        metadata = _frontmatter(repo_root / source)
+        metadata = _frontmatter(primary)
         if metadata is None:
             continue
         if "OCP-005" in _references(metadata.get("Depends-On")) and metadata.get("Status") in {"Accepted", "Canonical"}:

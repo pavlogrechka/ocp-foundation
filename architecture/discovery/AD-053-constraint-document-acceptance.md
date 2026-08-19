@@ -61,7 +61,9 @@ Q6 requires an explicit additional warning. AD-051 found that OCP-006's fail-saf
 
 The exact baseline body is preserved byte-for-byte as `docs/006-constraint-concept/reviewed-contract-v0.3.2.md`, with blob `50f149cf5563083bb84d5d2197ec32c2ed15fa9b` and SHA-256 `0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10`. The AD-029 map binds it as the current Accepted snapshot. The new primary body starts with that exact reviewed body and appends only the lifecycle/compatibility accounting in §30.
 
-AD-050, AD-051 and AD-052 remain statements about their own baselines. Their maps and prose are not rewritten. A data-owned succession relation points their historical OCP-006 path to the exact reviewed snapshot. The old gate bytes protected by AD-051 are likewise preserved, while the live gate changes only the OCP-006 document-status projection. This keeps history immutable without making old `Draft` assertions current.
+AD-050, AD-051 and AD-052 remain statements about their own baselines. Their historical bytes and `baseline_*` objects are not rewritten. A data-owned succession relation points historical OCP-006, gate and four mutable current-projection paths to exact preserved predecessors. The live status-readiness, Assignment stable-surface, Assignment compatibility, Q2 consumer-review and OCP-024 status/consumer maps instead advance under `current_projection_owner: AD-053`; none may redirect a current scan to old `Draft` bytes. This keeps history immutable without making old `Draft` assertions current.
+
+The synchronized current state is independently executable: the status sweep has 24 Accepted-or-Canonical primaries; OCP-006 is the seventh Accepted consumer of Draft OCP-005; and its predeclared synthetic Constraint probe remains `satisfied` after all seven moving Assignment surfaces vary, while an exact input-snapshot mismatch yields `indeterminate`. Thus OCP-006 consumes only the bounded Assignment identity, supersession and executable-validation kernels, not any moving Assignment surface.
 
 ## 7. Version, migration and rollback
 
@@ -73,4 +75,4 @@ Rollback is one reviewed unit: restore `0.3.2 / Draft`, remove §30 and the curr
 
 ## 8. Non-implications
 
-This act does not make OCP-006 Canonical; close any question; activate a positive model; change any Concept or Concept status; select a candidate; start a promotion cycle; authorize a next act; modify OCP-005; modify OCP-016; rewrite AD-052; or promote another document. The Event cycle remains the only completed cycle and `active_cycle_id` remains null. Any later canonicalization, candidate selection or cycle start requires a separate mandate and new exact-head gates.
+This act does not make OCP-006 Canonical; close any question; activate a positive model; change any Concept or Concept status; select a candidate; start a promotion cycle; authorize a next act; modify OCP-005; modify OCP-016; alter AD-052's criteria or historical conclusion; or promote another document. The Event cycle remains the only completed cycle and `active_cycle_id` remains null. Any later canonicalization, candidate selection or cycle start requires a separate mandate and new exact-head gates.

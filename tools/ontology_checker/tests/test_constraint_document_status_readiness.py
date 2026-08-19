@@ -124,7 +124,7 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
 
     def test_all_promoted_documents_are_swept_and_open_question_precedent_is_live(self) -> None:
         payload = self.payload()
-        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 23)
+        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 24)
         self.assertEqual(
             {row["document_id"] for row in payload["precedent_sweep"]["carriers"]},
             set(readiness.PROMOTED_OPEN_CARRIERS),

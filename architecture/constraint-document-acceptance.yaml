@@ -139,6 +139,35 @@ historical_evidence_successions:
     preserved_path: architecture/baselines/test-completeness-evaluator-pre-ocp006-acceptance.py
     sha256: ab39b4efef693249418117e5b409860c77ac92858792732d2521424c49a1317a
     reason: test-now-resolves-accepted-subject-history-without-rewriting-AD049-protected-baseline
+  - original_path: architecture/assignment-stable-surface.yaml
+    preserved_path: architecture/baselines/assignment-stable-surface-pre-ocp006-acceptance.yaml
+    sha256: cd093bd36ab29a203ad56ccded32baee671989be768b7ad415f65850e2b6d3d9
+    reason: live-consumer-status-advances-without-rewriting-the-AD035-baseline
+  - original_path: architecture/assignment-consumer-compatibility.yaml
+    preserved_path: architecture/baselines/assignment-consumer-compatibility-pre-ocp006-acceptance.yaml
+    sha256: 755f7b8520c85676669834bba2ef84f0de8c908d517f9278b8b7fde3f2dcfc1b
+    reason: live-consumer-inventory-advances-without-rewriting-the-AD040-baseline
+  - original_path: architecture/assignment-amendment-q2-attempt.yaml
+    preserved_path: architecture/baselines/assignment-amendment-q2-attempt-pre-ocp006-acceptance.yaml
+    sha256: 05792d9211c7520604101f8d3e7655377805bb89e8bb6b6e9600da388c608299
+    reason: live-consumer-review-advances-without-rewriting-the-AD038-baseline
+  - original_path: architecture/constraint-document-status-readiness.yaml
+    preserved_path: architecture/baselines/constraint-document-status-readiness-pre-ocp006-acceptance.yaml
+    sha256: 23ac5f4e57ecb42a370d5a3f72eb48affbb09f7296b8c8adbac59d8ab8e71dcb
+    reason: live-precedent-sweep-advances-without-rewriting-the-AD052-baseline
+current_projection_sync:
+  owner: AD-053
+  historical_redirect_permitted_for_live_scans: false
+  live_scanners: [constraint-status-readiness, assignment-stable-surface, assignment-consumer-compatibility, assignment-amendment-q2, ocp024-status-projection, ocp024-accepted-consumer-inventory]
+  expected:
+    ocp006_document_status: Accepted
+    promoted_document_count: 24
+    ocp005_accepted_consumer_count: 7
+  new_consumer_compatibility_probe:
+    consumer_id: OCP-006
+    fixture: tools/ontology_checker/fixtures/constraint/valid-assignment-moving-surfaces-independent.yaml
+    expected_control: satisfied
+    expected_probe: "moving:satisfied|binding:indeterminate|assignment:valid/valid"
 document_status_projection:
   OCP-000: [1.6.0, Canonical]
   OCP-001: [1.0.0, Canonical]
@@ -188,7 +217,7 @@ promotion_gate_guard:
 protected_artifacts:
   - {path: docs/005-assignment-concept/README.md, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b}
   - {path: docs/016-core-boundary/README.md, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4}
-  - {path: architecture/constraint-document-status-readiness.yaml, sha256: 23ac5f4e57ecb42a370d5a3f72eb48affbb09f7296b8c8adbac59d8ab8e71dcb}
+  - {path: architecture/discovery/AD-052-constraint-document-status-readiness.md, sha256: 4cb90dff6ef98b6e871b15a309d20d4b0ed5610df4a9a6ba34179c140979121e}
   - {path: docs/000-operational-ontology/README.md, sha256: 120071c48f398d59b283ff71c8bb18fd0467f5e87e90dcef43ea8ad3f1af3dbe}
   - {path: docs/002-concept-taxonomy/README.md, sha256: d49e9f896508d246994fd954174f04c69e0b4d32dfacc1dd612659263118df77}
   - {path: architecture/baselines/foundation-map.md, sha256: 8471d41afb25fc1fb933c72b95521e1a5309cf4ae030bc2d7e2bb31755b4dbc9}
@@ -217,5 +246,5 @@ non_implications:
   - NO_NEXT_ACT_AUTHORIZATION
   - NO_OCP005_CHANGE
   - NO_OCP016_CHANGE
-  - NO_AD052_CHANGE
+  - NO_AD052_CRITERIA_CHANGE
   - NO_OTHER_DOCUMENT_PROMOTION

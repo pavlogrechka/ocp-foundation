@@ -1,6 +1,5 @@
-schema_version: 2
+schema_version: 1
 rule_owner: AD-040
-current_projection_owner: AD-053
 baseline: 747d5aa2e71bd87c4e024d62f80d8cfa122d8279
 gate_first:
   evidence_form:
@@ -24,21 +23,6 @@ criterion:
   positive_consumer: exact-current-assignment-alignment-remains-valid-with-the-same-terminal-disposition
 stable_surface_witness: architecture/assignment-stable-surface.yaml
 consumer_results:
-  - consumer_id: OCP-006
-    primary: docs/006-constraint-concept/README.md
-    consumer_class: positive-derivation
-    consumed_tokens:
-      - кілька ефективних Assignment одного Resource
-      - Сам `supersedes_assignment_ref` не визначає допустимі часові межі
-      - Без цього Constraint сам факт кількох Assignment не є порушенням
-    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, SUPERSESSION_IDENTITY_BOUNDARY, EXECUTABLE_ASSIGNMENT_BOUNDARY]
-    moving_consumed_surface_ids: []
-    moving_probe_surface_ids: [AMENDMENT_AFTER_ESTABLISHMENT, TEMPORAL_EFFECTIVITY_EXTENSION, ROLE_GOVERNANCE, COMPOSITE_RESOURCE_SCOPE, CONSTRAINT_CONFLICT_HANDOFF, PROVENANCE_TAXONOMY, REPLACEMENT_POLICY]
-    fixture: tools/ontology_checker/fixtures/constraint/valid-assignment-moving-surfaces-independent.yaml
-    probe: assignment_moving_surfaces_do_not_change_exact_snapshot_result
-    expected_control: satisfied
-    expected_probe: moving:satisfied|binding:indeterminate|assignment:valid/valid
-    result: preserved
   - consumer_id: OCP-013
     primary: docs/013-resource-interchangeability/README.md
     consumer_class: negative-exclusion
