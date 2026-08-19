@@ -21,10 +21,22 @@ norm_vs_practice:
     - docs/016-core-boundary/reviewed-contract-v0.1.0.md
   practice_source: architecture/constraint-stable-surface.yaml
   axes:
-    - {axis: open-question-count, kind: discovery-practice-not-promotion-criterion, token: question_inventory}
-    - {axis: bounded-stable-surface, kind: discovery-practice-not-promotion-criterion, token: stable_candidates}
-    - {axis: whole-document-freeze, kind: discovery-practice-not-promotion-criterion, token: blocks-whole-document-freeze}
-    - {axis: moving-surface-classification, kind: discovery-practice-not-promotion-criterion, token: moving_surfaces}
+    - axis: open-question-count
+      kind: discovery-practice-not-promotion-criterion
+      token: question_inventory
+      norm_guard_terms: [question_inventory, open-question-count, "open question count"]
+    - axis: bounded-stable-surface
+      kind: discovery-practice-not-promotion-criterion
+      token: stable_candidates
+      norm_guard_terms: [stable_candidates, bounded-stable-surface, "bounded stable surface"]
+    - axis: whole-document-freeze
+      kind: discovery-practice-not-promotion-criterion
+      token: blocks-whole-document-freeze
+      norm_guard_terms: [blocks-whole-document-freeze, whole-document-freeze, "whole-document freeze", "whole document freeze"]
+    - axis: moving-surface-classification
+      kind: discovery-practice-not-promotion-criterion
+      token: moving_surfaces
+      norm_guard_terms: [moving_surfaces, moving-surface-classification, "moving surface classification"]
 governance_sweep:
   scope: all-current-foundation-governance-owners-and-machine-classification
   sources:

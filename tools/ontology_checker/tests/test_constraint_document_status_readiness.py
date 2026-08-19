@@ -101,18 +101,23 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
             {row["criterion_id"] for row in payload["promotion_criteria"]},
         )
         for row in payload["norm_vs_practice"]["axes"]:
-            with self.subTest(negative_norm_axis=row["axis"]), tempfile.TemporaryDirectory() as tmp:
-                root = Path(tmp)
-                self.copy_inputs(root)
-                path = root / "docs/001-ontology-governance/README.md"
-                path.write_text(
-                    path.read_text(encoding="utf-8") + f"\n{row['token']}\n",
-                    encoding="utf-8",
-                )
-                self.assertIn(
-                    CONSTRAINT_STATUS_READINESS_NORM_DRIFT,
-                    validate_constraint_document_status_readiness(root).errors,
-                )
+            self.assertEqual(
+                frozenset(row["norm_guard_terms"]),
+                readiness.PRACTICE_NORM_GUARDS[row["axis"]],
+            )
+            for term in row["norm_guard_terms"]:
+                with self.subTest(negative_norm_axis=row["axis"], term=term), tempfile.TemporaryDirectory() as tmp:
+                    root = Path(tmp)
+                    self.copy_inputs(root)
+                    path = root / "docs/001-ontology-governance/README.md"
+                    path.write_text(
+                        path.read_text(encoding="utf-8") + f"\n{term}\n",
+                        encoding="utf-8",
+                    )
+                    self.assertIn(
+                        CONSTRAINT_STATUS_READINESS_NORM_DRIFT,
+                        validate_constraint_document_status_readiness(root).errors,
+                    )
 
     def test_all_promoted_documents_are_swept_and_open_question_precedent_is_live(self) -> None:
         payload = self.payload()

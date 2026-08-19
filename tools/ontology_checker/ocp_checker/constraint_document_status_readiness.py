@@ -22,7 +22,7 @@ SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
 ASSIGNMENT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd"
-MAP_SHA256 = "c5db1428b160376e2b3600e8e372a99833b1b672847387fda8f3c3def3295663"
+MAP_SHA256 = "da5712d71c021c2e97de63f256da786ecbc18922449bab634cc8ed8c26e7f943"
 SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 EXPECTED_INTERPRETATION = "confirms-open-question-closure-is-not-a-governance-promotion-criterion"
 OPEN_LEXICAL_VOCABULARY = (
@@ -50,6 +50,21 @@ PRACTICE_AXES = frozenset({
     "open-question-count", "bounded-stable-surface", "whole-document-freeze",
     "moving-surface-classification",
 })
+PRACTICE_NORM_GUARDS = {
+    "open-question-count": frozenset({
+        "question_inventory", "open-question-count", "open question count",
+    }),
+    "bounded-stable-surface": frozenset({
+        "stable_candidates", "bounded-stable-surface", "bounded stable surface",
+    }),
+    "whole-document-freeze": frozenset({
+        "blocks-whole-document-freeze", "whole-document-freeze",
+        "whole-document freeze", "whole document freeze",
+    }),
+    "moving-surface-classification": frozenset({
+        "moving_surfaces", "moving-surface-classification", "moving surface classification",
+    }),
+}
 GOVERNANCE_SOURCES = frozenset({
     "docs/000-operational-ontology/README.md",
     "docs/001-ontology-governance/README.md",
@@ -200,9 +215,17 @@ def validate_constraint_document_status_readiness(
     if (
         {row.get("axis") for row in axes if isinstance(row, dict)} != PRACTICE_AXES
         or any(row.get("kind") != "discovery-practice-not-promotion-criterion" for row in axes if isinstance(row, dict))
+        or any(
+            frozenset(row.get("norm_guard_terms") or ()) != PRACTICE_NORM_GUARDS.get(str(row.get("axis")))
+            for row in axes if isinstance(row, dict)
+        )
     ):
         errors.append(CONSTRAINT_STATUS_READINESS_NORM_DRIFT)
-    practice_tokens = tuple(str(row.get("token")) for row in axes if isinstance(row, dict))
+    practice_tokens = tuple(
+        str(term)
+        for row in axes if isinstance(row, dict)
+        for term in row.get("norm_guard_terms") or ()
+    )
     for source in norm.get("normative_sources") or ():
         try:
             text = (repo_root / source).read_text(encoding="utf-8")

@@ -17,7 +17,7 @@ Only current governance norm may define promotion criteria. Repeated discovery v
 
 ## 2. Norm versus discovery practice
 
-OCP-001 and OCP-016 do not define `open-question-count`, a bounded stable surface, `blocks-whole-document-freeze` or a moving-surface classification as document-status criteria. Those four axes are useful vocabulary owned by AD-050 and its witness, but their repeated use does not promote them into norm.
+OCP-001 and OCP-016 do not define `open-question-count`, a bounded stable surface, `blocks-whole-document-freeze` or a moving-surface classification as document-status criteria. Those four axes are useful vocabulary owned by AD-050 and its witness, but their repeated use does not promote them into norm. The executable absence guard binds both the machine tokens used by that witness and the natural prose forms by which each axis could enter governance; every bound form has its own mutation probe.
 
 Current governance instead requires, criterion by criterion:
 
