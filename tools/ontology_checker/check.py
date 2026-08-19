@@ -26,6 +26,7 @@ from ocp_checker.assignment_q9_sufficiency import validate_assignment_q9_suffici
 from ocp_checker.assignment_stable_surface import validate_assignment_stable_surface
 from ocp_checker.constraint_stable_surface import validate_constraint_stable_surface
 from ocp_checker.constraint_q6_sufficiency import validate_constraint_q6_sufficiency
+from ocp_checker.constraint_document_status_readiness import validate_constraint_document_status_readiness
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.event_promotion_selection import validate_event_promotion_selection
 from ocp_checker.event_lifecycle_promotion import validate_event_lifecycle_promotion
@@ -136,6 +137,13 @@ def main() -> int:
         f"constraint-q6-sufficiency errors={list(constraint_q6_result.errors)}"
     )
     failures += 0 if constraint_q6_result.valid else 1
+
+    constraint_status_result = validate_constraint_document_status_readiness(repo_root)
+    print(
+        f"{'PASS' if constraint_status_result.valid else 'FAIL'} "
+        f"constraint-document-status-readiness errors={list(constraint_status_result.errors)}"
+    )
+    failures += 0 if constraint_status_result.valid else 1
 
     assignment_amendment_result = validate_assignment_amendment_q2(repo_root)
     print(
@@ -273,7 +281,7 @@ def main() -> int:
 
     print(
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
-        f"foundation promotion gate, reassessment, Event, Assignment and Constraint stable-surface discovery and Constraint Q6 sufficiency, "
+        f"foundation promotion gate, reassessment, Event, Assignment and Constraint stable-surface discovery, Constraint Q6 sufficiency and document-status readiness, "
         f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, pressure, norm compatibility, Q3 lifecycle and Q2/Q9 sufficiency, "
         f"consumer-need discovery, OCP-024 acceptance, "
         f"Event selection, lifecycle promotion and Concept canonicalization, "

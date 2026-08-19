@@ -1,0 +1,122 @@
+schema_version: 1
+rule_owner: AD-052
+baseline: b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  positive_capable: false
+  activation_performed: false
+  reason: discovery-classifies-existing-governance-and-status-evidence-without-adding-a-rule-result-profile-or-activation
+subject:
+  document_id: OCP-006
+  primary: docs/006-constraint-concept/README.md
+  version: 0.3.2
+  status: Draft
+  concept_status: Accepted
+  changed: false
+norm_vs_practice:
+  normative_sources:
+    - docs/001-ontology-governance/README.md
+    - docs/016-core-boundary/README.md
+    - docs/016-core-boundary/reviewed-contract-v0.1.0.md
+  practice_source: architecture/constraint-stable-surface.yaml
+  axes:
+    - {axis: open-question-count, kind: discovery-practice-not-promotion-criterion, token: question_inventory}
+    - {axis: bounded-stable-surface, kind: discovery-practice-not-promotion-criterion, token: stable_candidates}
+    - {axis: whole-document-freeze, kind: discovery-practice-not-promotion-criterion, token: blocks-whole-document-freeze}
+    - {axis: moving-surface-classification, kind: discovery-practice-not-promotion-criterion, token: moving_surfaces}
+governance_sweep:
+  scope: all-current-foundation-governance-owners-and-machine-classification
+  sources:
+    - {source: docs/000-operational-ontology/README.md, role: concept-registry-not-document-promotion-owner, tokens: ["OCP-001 визначає lifecycle, status choreography, canonicalization і versioning rules"]}
+    - {source: docs/001-ontology-governance/README.md, role: document-lifecycle-and-promotion-criterion-owner, tokens: ["## Нормативні класи артефактів і review", "## Атомарні lifecycle acts і authorization boundary"]}
+    - {source: docs/002-concept-taxonomy/README.md, role: concept-status-projection-not-document-promotion-owner, tokens: ["не є другим Concept registry або defining source доменної семантики", "OCP-001 володіє lifecycle, atomic status choreography і canonicalization rules"]}
+    - {source: docs/016-core-boundary/README.md, role: semantic-route-and-admission-owner-not-status-owner, tokens: ["OCP-016 does not consume OCP-001 semantics to define F/C/E/D/I", "Candidate contracts cannot approve themselves"]}
+    - {source: architecture/artifact-taxonomy.yaml, role: machine-readable-artifact-class-and-review-obligation, tokens: ["document_status_authority: Architecture Board\n    concept_status_authority", "location: docs/\n    external_review_required: true"]}
+promotion_criteria:
+  - criterion_id: BINDING_REVIEW_LANE
+    applies_to: [Accepted, Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["окрема гілка та draft pull request", "зовнішнє adversarial review до рішення Architecture Board", "явне рішення Architecture Board", "squash merge після успішних required checks"]
+    ocp006_assessment: pending-separate-status-act
+    basis: no-ocp006-status-proposal-review-board-decision-or-merge-exists-in-this-discovery-act
+  - criterion_id: EXACT_ROUTE_AND_AUTHORITY_LEDGER
+    applies_to: [Accepted, Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["запропонувати один primary semantic-authority route", "authority ledger, concrete consumers, exact dependencies, evidence, non-implications і migration/reopening effect"]
+    ocp006_assessment: partially-present-but-pending-proposal-specific-package
+    basis: exact-subject-owner-dependencies-consumers-and-evidence-exist-but-route-f-is-only-a-precedent-guide-and-no-status-proposal-ledger-exists
+  - criterion_id: BOARD_ACCEPTS_CURRENT_SEMANTICS
+    applies_to: [Accepted]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["`Accepted` означає, що Architecture Board прийняла поточну семантику як основу залежних специфікацій"]
+    ocp006_assessment: pending-separate-status-act
+    basis: current-concept-acceptance-does-not-imply-document-acceptance
+  - criterion_id: ATOMIC_DOCUMENT_PROMOTION_UNIT
+    applies_to: [Accepted, Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["`Version`, `Status`, readable compatibility surface, exact direct dependencies, evidence та repository accounting"]
+    ocp006_assessment: partially-present-but-pending-atomic-status-unit
+    basis: exact-dependencies-and-evidence-exist-but-no-authorized-version-status-compatibility-and-accounting-unit-is-proposed
+  - criterion_id: CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT
+    applies_to: [Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Канонізація потребує стабільних залежностей, машинозчитуваних перевірок і окремого рішення Architecture Board"]
+    ocp006_assessment: not-satisfied
+    basis: machine-checks-exist-but-stable-dependency-and-separate-board-act-requirements-are-not-met
+  - criterion_id: CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2
+    applies_to: [Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Для OCP у статусі `Canonical` кожна direct dependency класу OCP повинна бути", "Draft або merely Accepted OCP не може постачати Canonical OCP"]
+    ocp006_assessment: not-satisfied
+    basis: direct-dependency-ocp005-is-draft
+  - criterion_id: EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT
+    applies_to: [Accepted, Canonical]
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Fable approval, Codex adjudication, green CI та Pavlo/Architecture Board authorization повинні стосуватися exact proposed head", "Lifecycle effect виникає лише після authorized squash merge"]
+    ocp006_assessment: pending-separate-status-act
+    basis: this-discovery-act-has-no-status-effect
+ocp006_live_inputs:
+  owner: Architecture Board
+  direct_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
+  draft_direct_dependencies: [OCP-005]
+  route_evidence:
+    source: docs/016-core-boundary/reviewed-contract-v0.1.0.md
+    token: "Resource, Operation, Assignment, Constraint, Organization, Objective, Capability, Event | F"
+    force: precedent-guide-not-automatic-reclassification
+  machine_evidence:
+    - tools/ontology_checker/ocp_checker/checker.py
+    - architecture/constraint-stable-surface.yaml
+    - architecture/constraint-q6-sufficiency.yaml
+precedent_sweep:
+  scope: every-current-primary-ocp-with-status-accepted-or-canonical
+  promoted_document_count: 23
+  current_open_question_carrier_criterion: owner-text-currently-states-an-unresolved-semantic-question-or-choice-excluding-historical-baselines-review-prompts-backlog-status-ledgers-and-explicitly-closed-reopening-gates
+  carriers:
+    - {document_id: OCP-002, status: Canonical, token: "Можливий mapping до Organizational Resource залишається відкритим"}
+    - {document_id: OCP-003, status: Canonical, token: "exact mapping `Organization ↔ Resource` лишаються відкритими"}
+    - {document_id: OCP-004, status: Canonical, token: "## 20. Open Questions"}
+    - {document_id: OCP-008, status: Canonical, token: "## 16. Open Questions"}
+    - {document_id: OCP-010, status: Canonical, token: "The first four questions remain open"}
+  interpretation: confirms-open-question-closure-is-not-a-governance-promotion-criterion
+result:
+  accepted: normatively-possible-only-through-a-separate-complete-status-act
+  canonical: not-admissible-now-because-l2-fails-on-ocp005-draft
+  open_questions: not-a-normative-status-bar
+  promotion_authorized: false
+  candidate_selected: false
+  cycle_opened: false
+versioning: {OCP-006: unchanged-0.3.2, AD-052: 0.1.0-Discovery}
+migration: {data: none, references: none, schemas: none, rollback_unit: [AD-052-witness-checker-tests-and-accounting]}
+forbidden_outcomes: [OCP006_CHANGE, OCP006_STATUS_OR_VERSION_CHANGE, QUESTION_CLOSURE, CONSTRAINT_SELECTION, PROMOTION_AUTHORIZATION, PROMOTION_CYCLE_START, CONCEPT_OR_GRAPH_CHANGE, OCP005_CHANGE, NEXT_ACT_AUTHORIZATION]
+baseline_evidence_objects:
+  - {path: docs/000-operational-ontology/README.md, blob: d09841be088ac9c1fffed42e4b8874094cba299c, sha256: 120071c48f398d59b283ff71c8bb18fd0467f5e87e90dcef43ea8ad3f1af3dbe, state_tokens: ["Status: Canonical", "| Constraint | Accepted | OCP-006"]}
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "## Атомарні lifecycle acts і authorization boundary"]}
+  - {path: docs/002-concept-taxonomy/README.md, blob: 295512bdfaffd679ae021d0876072cdbcb2be75e, sha256: d49e9f896508d246994fd954174f04c69e0b4d32dfacc1dd612659263118df77, state_tokens: ["Status: Canonical", "Constraint: Accepted"]}
+  - {path: architecture/artifact-taxonomy.yaml, blob: fa0b6b5ade944f09f12f8597f33d1cf1522b8db3, sha256: 247d15bb60afb5348d122fab07f43550e552ae615074830718b3f658e213c938, state_tokens: ["document_status_authority: Architecture Board", "external_review_required: true"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Status: Canonical", "G4"]}
+  - {path: docs/016-core-boundary/reviewed-contract-v0.1.0.md, blob: 3196f09f4a0b99160b42d1d1d27cc5a8387aae27, sha256: 111e676ac750a2bfbe17d34fb1e8d2984af860fd38c856b824b4aff8c261c155, state_tokens: ["## 11. Routing і Architecture Board decision", "Constraint, Organization, Objective, Capability, Event | F"]}
+  - {path: docs/006-constraint-concept/README.md, blob: 50f149cf5563083bb84d5d2197ec32c2ed15fa9b, sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10, state_tokens: ["Version: 0.3.2", "Status: Draft", "Concept-Status: Accepted"]}
+  - {path: docs/005-assignment-concept/README.md, blob: 1dd975a17ec65df751357fdd049c8ca928739bd1, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b, state_tokens: ["Document-ID: OCP-005", "Status: Draft"]}
+  - {path: architecture/constraint-stable-surface.yaml, blob: 18e3e7dc58e822785bbabbba48444c0bcd967271, sha256: b1a09881a778e9085594fc8633d7448007f1f87b0865718952f0e8c3d668a2cb, state_tokens: ["rule_owner: AD-050", "blocks-whole-document-freeze"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 78f5f75d84fe9b0bdbf43ad3922404fa34f6c2d1, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd, state_tokens: ["cycle_id: EVENT_T6", "active_cycle_id: null"]}
