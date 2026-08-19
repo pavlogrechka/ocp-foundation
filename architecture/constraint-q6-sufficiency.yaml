@@ -1,0 +1,110 @@
+schema_version: 1
+rule_owner: AD-051
+baseline: 50cfb512f17880218060619363774a9fa38a874a
+baseline_evidence_objects:
+  - {path: docs/000-operational-ontology/README.md, blob: d09841be088ac9c1fffed42e4b8874094cba299c, sha256: 120071c48f398d59b283ff71c8bb18fd0467f5e87e90dcef43ea8ad3f1af3dbe, state_tokens: ["Document-ID: OCP-000", "Status: Canonical", "жодна з них не створює глобального evidence lifetime"]}
+  - {path: docs/006-constraint-concept/README.md, blob: 50f149cf5563083bb84d5d2197ec32c2ed15fa9b, sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10, state_tokens: ["Document-ID: OCP-006", "Status: Draft", "Який строк актуальності має ConstraintEvaluationRecord для dynamic inputs?"]}
+  - {path: docs/011-outcome-assessment-record/README.md, blob: ff2608a372c6305db4c290f05c15e961ca96e6f6, sha256: 1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5, state_tokens: ["Document-ID: OCP-011", "Status: Accepted", "no other criterion or consumer may inherit them"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Document-ID: OCP-016", "Status: Canonical", "G4"]}
+  - {path: architecture/constraint-stable-surface.yaml, blob: 18e3e7dc58e822785bbabbba48444c0bcd967271, sha256: b1a09881a778e9085594fc8633d7448007f1f87b0865718952f0e8c3d668a2cb, state_tokens: ["rule_owner: AD-050", "EVALUATION_CURRENTNESS_UNRESOLVED", "question_ids: [Q6]"]}
+  - {path: tools/ontology_checker/ocp_checker/checker.py, blob: 120ada9dd00b1df0b46cf3060aef2b0c290948b1, sha256: 3a093f0d76113bb5dd2799c7d0aaf73b51b752569dc13de145bb3d158a7b4a47, state_tokens: ["def effective_constraint_result(", "def validate_constraint("]}
+  - {path: tools/ontology_checker/fixtures/constraint/valid-blocking.yaml, blob: b06e2f4bdc7845ddefbde12b154d71f3acc59498, sha256: 28280fdc18da6ee9fd621cb8032fdc5e2a3dbd239195b2ce428169537ef860fd, state_tokens: ["case_id: constraint-valid-blocking-001", "evaluated_at: 2026-08-02T10:30:01Z"]}
+  - {path: architecture/assignment-retroactivity-q3-resolution.yaml, blob: 0262964d9754325fe897871734ed2e1f0ec1ff9e, sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a, state_tokens: ["rule_owner: AD-046", "question_id: Q3"]}
+  - {path: architecture/assignment-q9-sufficiency.yaml, blob: 35fcda31e6254e0c1ba889506aa6f92ba755a769, sha256: 773ebb1d147850d4eec317f9ef544662b1dcf2688f53c590742eeece1d7889ef, state_tokens: ["rule_owner: AD-047", "question_id: Q9"]}
+  - {path: architecture/assignment-q2-sufficiency.yaml, blob: b701e7e77fc22105b4d22f379ddd0d3bd332ee75, sha256: 16c8b8e7a032ea0f09085e47acf128d7040cad928b2807c9fc5ca5149bff305e, state_tokens: ["rule_owner: AD-048", "question_id: Q2"]}
+gate_first:
+  evidence_form: {ocp016_gate: G4, applies: false, positive_capable: false, activation_created: false, reason: insufficiency-evidence-adds-no-positive-capable-rule-result-profile-or-activation}
+  hypothetical_answers:
+    magnitude-established: {applies: true, reason: definitive-freshness-horizon-would-be-a-positive-capable-evaluation-rule}
+    magnitude-unnecessary-with-replacement: {applies: true, reason: definitive-replacement-currentness-rule-would-be-positive-capable}
+    not-established-until-separate-decision: {applies: false, reason: fail-safe-deferral-adds-no-permissive-result}
+sufficiency_criterion:
+  declared_before_application: true
+  order: [exact-general-subject, answer-form-selected, basis-type-sufficient, executable-freshness-discrimination, no-current-owner-contradiction]
+  basis_types:
+    direct-normative-statement: may-be-sufficient-alone
+    inference-from-list: sufficient-only-when-list-explicitly-exhaustive
+    inference-from-silence: never-sufficient
+  close_only_if:
+    - evidence-governs-all-dynamic-constraint-evaluation-record-inputs
+    - exactly-one-of-magnitude-replacement-or-interim-boundary-is-fixed
+    - direct-owner-rule-or-explicitly-exhaustive-list-supports-that-answer
+    - executable-behavior-discriminates-the-relevant-freshness-property
+    - no-current-owner-text-says-the-same-general-question-remains-open
+  calibration:
+    Q3: {result: passed, direct_owner_rule: present, executable_discrimination: present}
+    Q9: {result: failed, direct_owner_rule: absent, executable_discrimination: absent}
+    Q2: {result: failed, direct_owner_rule: absent, explicit_open_statement: present}
+    Q6: {direct_owner_rule: absent, executable_discrimination: absent, explicit_open_statement: present}
+  result: insufficient-for-q6-closure
+normative_scope:
+  subject: OCP-006
+  direct_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
+  direct_consumers: [OCP-011, OCP-013, OCP-014, OCP-015, OCP-017, OCP-018, OCP-019, OCP-020, OCP-021]
+normative_inventory:
+  - {document_id: OCP-006, relation: subject, basis_type: direct-normative-statement, finding: explicit-general-question-open, sufficient: false, tokens: ["no current authoritative result exists", "Відсутність current evaluation ніколи не трактується як `satisfied`", "the general freshness question remains open because AD-012/OCP-011 activates one exact assessment kind rather than every dynamic Constraint input"]}
+  - {document_id: OCP-000, relation: direct-dependency, basis_type: direct-normative-statement, finding: contract-local-rules-create-no-global-lifetime, sufficient: false, tokens: ["жодна з них не створює глобального evidence lifetime"]}
+  - {document_id: OCP-001, relation: direct-dependency, basis_type: inference-from-silence, finding: no-q6-freshness-rule, sufficient: false, tokens: []}
+  - {document_id: OCP-002, relation: direct-dependency, basis_type: direct-normative-statement, finding: additional-freshness-rules-remain-future-work, sufficient: false, tokens: ["Які additional target/evidence kinds та freshness rules мають розширити Accepted OCP-011?"]}
+  - {document_id: OCP-003, relation: direct-dependency, basis_type: inference-from-silence, finding: no-q6-freshness-rule, sufficient: false, tokens: []}
+  - {document_id: OCP-004, relation: direct-dependency, basis_type: direct-normative-statement, finding: operation-local-evidence-fail-safe-only, sufficient: false, tokens: ["stale"]}
+  - {document_id: OCP-005, relation: direct-dependency, basis_type: inference-from-silence, finding: no-q6-freshness-rule, sufficient: false, tokens: []}
+  - {document_id: OCP-011, relation: direct-consumer, basis_type: direct-normative-statement, finding: exact-assessment-kind-local-horizons-non-transferable, sufficient: false, tokens: ["max_age_seconds", "inclusive 600-second", "inclusive 3600-second", "no other criterion or consumer may inherit them"]}
+  - {document_id: OCP-013, relation: direct-consumer, basis_type: direct-normative-statement, finding: caller-stale-fail-safe-no-horizon, sufficient: false, tokens: ["missing, stale, ambiguous, conflicting, withdrawn, mismatched or unresolved"]}
+  - {document_id: OCP-014, relation: direct-consumer, basis_type: inference-from-silence, finding: no-q6-freshness-rule, sufficient: false, tokens: []}
+  - {document_id: OCP-015, relation: direct-consumer, basis_type: direct-normative-statement, finding: workflow-local-stale-fail-safe-no-horizon, sufficient: false, tokens: ["missing, stale, conflicting, unresolved"]}
+  - {document_id: OCP-017, relation: direct-consumer, basis_type: direct-normative-statement, finding: transition-local-effective-state-no-horizon, sufficient: false, tokens: ["missing, stale, ambiguous, conflicting or incomparable input blocks the transition"]}
+  - {document_id: OCP-018, relation: direct-consumer, basis_type: direct-normative-statement, finding: authorization-local-effectivity-creates-no-global-lifetime, sufficient: false, tokens: ["it creates no global lifetime and does not change any other consumer"]}
+  - {document_id: OCP-019, relation: direct-consumer, basis_type: direct-normative-statement, finding: conflict-envelope-current-stale-no-general-horizon, sufficient: false, tokens: ["evidence_state = current | stale", "An evaluation after `derived_at` and an explicitly stale evidence state are non-current"]}
+  - {document_id: OCP-020, relation: direct-consumer, basis_type: direct-normative-statement, finding: quantitative-envelope-current-stale-no-general-horizon, sufficient: false, tokens: ["evidence_state = current | stale"]}
+  - {document_id: OCP-021, relation: direct-consumer, basis_type: direct-normative-statement, finding: reservation-envelope-current-stale-no-general-horizon, sufficient: false, tokens: ["evidence_state = current | stale", "evidence must be current"]}
+record_shape_basis:
+  basis_type: inference-from-list
+  explicitly_exhaustive: false
+  sufficient: false
+  tokens: ["evaluated_at", "ConstraintEvaluationContext.evaluation_time"]
+  finding: timestamps-are-listed-but-no-age-cutoff-currentness-authority-or-closed-world-replacement-is-defined
+explicit_obstacle:
+  section: "OCP-006 §29"
+  quote: "the general freshness question remains open because AD-012/OCP-011 activates one exact assessment kind rather than every dynamic Constraint input."
+  same_subject_as_q6: true
+executable_probe:
+  fixture: tools/ontology_checker/fixtures/constraint/valid-blocking.yaml
+  observed_mutations:
+    - {evaluated_at: "1900-01-01T00:00:00Z", expected_valid: true, expected_effective_result: satisfied}
+    - {evaluated_at: "2099-01-01T00:00:00Z", expected_valid: true, expected_effective_result: satisfied}
+  discriminating_control: {mutation: input_snapshot_ref-mismatch, expected_effective_result: indeterminate}
+  result: current-checker-does-not-discriminate-record-age
+answer_disposition:
+  magnitude-established: {supported: false, reason: no-general-duration-anchor-cutoff-or-clock-rule}
+  magnitude-unnecessary-with-replacement: {supported: false, reason: current-is-required-but-no-general-mechanism-determines-currentness}
+  not-established-until-separate-decision: {supported: false, reason: fail-safe-absence-boundary-presupposes-currentness-and-owner-explicitly-keeps-general-question-open}
+decision:
+  question_id: Q6
+  disposition: remains-open-insufficient-evidence
+  criterion_satisfied: false
+  closure_authorized_by_this_outcome: false
+  subject_changed: false
+  blocker_removed: false
+subject_preservation:
+  document_id: OCP-006
+  primary: docs/006-constraint-concept/README.md
+  before: {version: 0.3.2, status: Draft, concept_status: Accepted}
+  after: {version: 0.3.2, status: Draft, concept_status: Accepted}
+  sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10
+current_projection:
+  q6_state: open
+  blocker: {blocker_id: EVALUATION_CURRENTNESS_UNRESOLVED, question_ids: [Q6], disposition: blocks-whole-document-freeze}
+  whole_document_freeze_reachable: false
+versioning: {OCP-006: unchanged-0.3.2-because-conditional-closure-threshold-failed, AD-051: 0.1.0-Discovery}
+migration:
+  constraint_data: none
+  references: none
+  schemas: none
+  consumer_behavior: unchanged
+  rollback_unit: [AD-051-document-witness-checker-tests-and-accounting]
+forbidden_outcomes: [Q6_CLOSURE, ANY_OTHER_QUESTION_CLOSURE, OCP006_CHANGE, OCP006_STATUS_CHANGE, EVALUATION_CURRENTNESS_BLOCKER_REMOVAL, CONSTRAINT_READINESS_CHANGE, POSITIVE_MODEL_ACTIVATION, CONSTRAINT_SELECTION, PROMOTION_CYCLE_START, GRAPH_OR_REGISTRY_CHANGE, NEXT_ACT_AUTHORIZATION]
+protected_artifacts:
+  - {path: docs/006-constraint-concept/README.md, sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10}
+  - {path: architecture/constraint-stable-surface.yaml, sha256: b1a09881a778e9085594fc8633d7448007f1f87b0865718952f0e8c3d668a2cb}
+  - {path: architecture/foundation-promotion-gate.yaml, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd}
