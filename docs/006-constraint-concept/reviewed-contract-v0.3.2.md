@@ -1,15 +1,15 @@
 ---
 Document-ID: OCP-006
 Title: Constraint Concept
-Version: 0.4.0
-Status: Accepted
+Version: 0.3.2
+Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005
 Used-By: Assignment Conflict Model, Operation Planning, Coordination Model, Readiness Review, Domain Models, Conflict Engine
 Defines-Concepts: Constraint
 Concept-Depends-On: []
 Concept-Status: Accepted
-Last-Review: 2026-08-19
+Last-Review: 2026-08-13
 ---
 
 # Constraint Concept
@@ -774,19 +774,3 @@ This PATCH changes no Constraint identity, field, lifecycle, applicability, eval
 Revision `0.3.2` synchronizes only the volatile current Event status rendering in §4 with the separately authorized Event Concept canonicalization act: the row now shows Event as `Canonical`. Historical §25 accounting about the earlier `Accepted` projection remains unchanged.
 
 Constraint remains `Draft` and its Concept remains `Accepted`. The Event status cell creates no evidence sufficiency, trigger behavior, violation, Conflict, Risk, Readiness, precedence, override, waiver or Event inference. Constraint identity/lifecycle/evaluation, dependencies, graph edges, P-001 invocation, rules, checker behavior and fixtures remain unchanged.
-
-## 30. Accepted authority and incorporated reviewed body
-
-Revision `0.3.2 → 0.4.0` is a pre-Canonical MINOR lifecycle change: the Architecture Board accepts the exact `0.3.2` semantic body preserved in [reviewed-contract-v0.3.2.md](reviewed-contract-v0.3.2.md) as a basis for dependent specifications. The change adds no Constraint field, rule, result, profile, lifecycle transition, graph edge or runtime behavior. Existing data, schemas and unversioned `OCP-006` dependency references require no migration.
-
-Dependent specifications may build on the current identity and supersession kernel; structural lifecycle and temporal effectivity; the exact applicability, evaluation-result and admissibility shapes; the fail-safe non-satisfaction and non-authorization/non-Conflict boundaries; and target-scope non-inheritance. Acceptance supplies lifecycle assurance for those existing surfaces. It does not change the behavior or reference syntax of any existing consumer.
-
-The following questions remain open exactly as recorded in §22 and are not part of the authority granted for dependent construction: Q1 Conflict object or aggregation, Q2 predicate expression language, Q6 dynamic-input evaluation currentness, Q7 persistence mode, Q8 Operation authorization interaction, Q10 Readiness/availability handoff, Q11 kind taxonomy and Q12 domain relation language. In particular, §§11–12 continue to fail safe when no current authoritative result exists, but neither this acceptance nor that fail-safe language defines a freshness magnitude, a currentness evaluator or the moment at which a dynamic-input evaluation ceases to be current. A dependent specification may not infer those missing semantics from `Accepted` status.
-
-The nine current Accepted direct consumers—`OCP-011`, `OCP-013`, `OCP-014`, `OCP-015`, `OCP-017`, `OCP-018`, `OCP-019`, `OCP-020` and `OCP-021`—receive only that lifecycle assurance. Their data, schemas, references, evaluator ownership, derivations and negative boundaries remain unchanged; no previously conditional positive behavior becomes legitimate.
-
-OCP-006 itself becomes one additional Accepted direct consumer of Draft OCP-005. That changes only the current eligible-consumer inventory. The open and deferred Assignment references in this document do not state an exact new positive result without which its present obligation cannot complete, so the repository's unmet-positive-need result and every other document's G4 answer remain unchanged.
-
-This acceptance does not make `OCP-006` Canonical, close any open question, activate a positive model, change any Concept or `Concept-Status`, select a promotion candidate, open a promotion cycle or authorize another act. Canonicalization remains a separate lifecycle act and is presently outside this act: the direct dependency `OCP-005` is still Draft and therefore does not meet the Canonical L2 floor.
-
-Rollback is one reviewed unit: restore `0.3.2 / Draft`, remove this section and the current-accepted snapshot-map entry, restore the gate and repository-accounting projections, and remove the acceptance act, witness, checker and tests together. Partial rollback is invalid because it would separate lifecycle authority from its reviewed body, compatibility boundary and executable evidence.

@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 from .checker import assignment_effective_at, load_fixture, validate_assignment
 
 
@@ -407,7 +409,8 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
         if isinstance(item, dict)
     }
     if declared_hashes != EXPECTED_PROTECTED_HASHES or any(
-        _hash(repo_root / path) != sha256 for path, sha256 in EXPECTED_PROTECTED_HASHES.items()
+        _hash(repo_root / historical_path(repo_root, Path(path), sha256)) != sha256
+        for path, sha256 in EXPECTED_PROTECTED_HASHES.items()
     ):
         errors.append(ASSIGNMENT_Q9_PROTECTED_ARTIFACT_DRIFT)
 

@@ -28,7 +28,7 @@ candidates:
   - document_id: OCP-006
     primary: docs/006-constraint-concept/README.md
     slot: T7
-    expected_document_status: Accepted
+    expected_document_status: Draft
     expected_concept_status: Accepted
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
     expected_l2: fail

@@ -7,6 +7,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 from .checker import load_fixture
 from .coordination_workflow import derive_coordination_evidence
 from .interchangeability import derive_resource_interchangeability
@@ -385,7 +387,12 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
 
     current: set[str] = set()
     for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        metadata = _frontmatter(path)
+        relative = path.relative_to(repo_root)
+        source = historical_path(
+            repo_root, relative,
+            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
+        metadata = _frontmatter(repo_root / source)
         if metadata and metadata.get("Status") == "Accepted" and "OCP-005" in _refs(metadata.get("Depends-On")):
             current.add(str(metadata.get("Document-ID")))
     if current != CONSUMER_IDS:

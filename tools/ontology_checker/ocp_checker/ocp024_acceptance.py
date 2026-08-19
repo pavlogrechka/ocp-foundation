@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 from .completeness_evaluator import (
     ACTIVATION_FIELDS,
     INDETERMINATE,
@@ -112,7 +114,12 @@ def _body(path: Path) -> str:
 def _status_projection(root: Path) -> dict[str, list[str]]:
     result: dict[str, list[str]] = {}
     for path in sorted((root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        metadata = _frontmatter(path)
+        relative = path.relative_to(root)
+        source = historical_path(
+            root, relative,
+            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
+        metadata = _frontmatter(root / source)
         if metadata and isinstance(metadata.get("Document-ID"), str):
             result[metadata["Document-ID"]] = [str(metadata.get("Version")), str(metadata.get("Status"))]
     return result
@@ -127,7 +134,12 @@ def _depends_on(metadata: dict[str, Any], target: str) -> bool:
 def _accepted_consumers(root: Path, target: str) -> frozenset[str]:
     values = set()
     for path in (root / "docs").glob("[0-9][0-9][0-9]-*/README.md"):
-        metadata = _frontmatter(path)
+        relative = path.relative_to(root)
+        source = historical_path(
+            root, relative,
+            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
+        metadata = _frontmatter(root / source)
         if metadata and metadata.get("Status") == "Accepted" and _depends_on(metadata, target):
             values.add(str(metadata.get("Document-ID")))
     return frozenset(values)
@@ -282,7 +294,9 @@ def validate_ocp024_acceptance(repo_root: Path) -> Ocp024AcceptanceResult:
         errors.append(OCP024_ACCEPTANCE_PROTECTED_DRIFT)
     else:
         for item in protected:
-            if not isinstance(item, dict) or set(item) != {"path", "sha256"} or _hash(repo_root / Path(str(item.get("path")))) != item.get("sha256"):
+            original = Path(str(item.get("path"))) if isinstance(item, dict) else Path("")
+            resolved = historical_path(repo_root, original, str(item.get("sha256", ""))) if isinstance(item, dict) else original
+            if not isinstance(item, dict) or set(item) != {"path", "sha256"} or _hash(repo_root / resolved) != item.get("sha256"):
                 errors.append(OCP024_ACCEPTANCE_PROTECTED_DRIFT)
                 break
 

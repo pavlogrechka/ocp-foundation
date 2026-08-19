@@ -117,12 +117,17 @@ class Ocp024AcceptanceTests(unittest.TestCase):
                 metadata = ocp024_acceptance._frontmatter(path)
                 if metadata and metadata.get("Document-ID") != "OCP-024":
                     with self.subTest(document=metadata.get("Document-ID")):
-                        original = path.read_text(encoding="utf-8")
-                        old = f"Status: {metadata['Status']}"
-                        new = "Status: Draft" if metadata["Status"] != "Draft" else "Status: Accepted"
-                        path.write_text(original.replace(old, new, 1), encoding="utf-8")
+                        target = (
+                            root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
+                            if metadata.get("Document-ID") == "OCP-006" else path
+                        )
+                        target_metadata = ocp024_acceptance._frontmatter(target)
+                        original = target.read_text(encoding="utf-8")
+                        old = f"Status: {target_metadata['Status']}"
+                        new = "Status: Draft" if target_metadata["Status"] != "Draft" else "Status: Accepted"
+                        target.write_text(original.replace(old, new, 1), encoding="utf-8")
                         self.assertIn(OCP024_ACCEPTANCE_STATUS_DRIFT, validate_ocp024_acceptance(root).errors)
-                        path.write_text(original, encoding="utf-8")
+                        target.write_text(original, encoding="utf-8")
             need_path = root / ocp024_acceptance.NEED_MAP_PATH
             need = yaml.safe_load(need_path.read_text(encoding="utf-8"))
             need["current_result"]["unmet_positive_needs"] = []
@@ -155,7 +160,9 @@ class Ocp024AcceptanceTests(unittest.TestCase):
             with self.subTest(protected=item["path"]), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                path = root / item["path"]
+                original = Path(item["path"])
+                resolved = ocp024_acceptance.historical_path(root, original, item["sha256"])
+                path = root / resolved
                 path.write_bytes(path.read_bytes() + b"\nmutation\n")
                 self.assertFalse(validate_ocp024_acceptance(root).valid)
 

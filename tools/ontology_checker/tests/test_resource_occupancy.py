@@ -296,10 +296,9 @@ class ResourceOccupancyTests(unittest.TestCase):
                     str(REPO_ROOT) + "/", ""
                 )
                 for number in range(23)
-                if number != 5
+                if number not in {5, 6}
             ),
             "patterns",
-            "architecture/foundation-promotion-gate.yaml",
             "architecture/baselines/foundation-map.md",
             *baseline_fixture_paths,
         ]
@@ -309,6 +308,14 @@ class ResourceOccupancyTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(completed.returncode, 0)
+        self.assertEqual(
+            (REPO_ROOT / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md").read_bytes(),
+            subprocess.check_output(["git", "show", f"{self.baseline}:docs/006-constraint-concept/README.md"], cwd=REPO_ROOT),
+        )
+        self.assertEqual(
+            (REPO_ROOT / "architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml").read_bytes(),
+            subprocess.check_output(["git", "show", f"{self.baseline}:architecture/foundation-promotion-gate.yaml"], cwd=REPO_ROOT),
+        )
 
 
 if __name__ == "__main__":

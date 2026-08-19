@@ -150,7 +150,8 @@ class AssignmentQ2SufficiencyTests(unittest.TestCase):
                 self.assertTrue(all(token in text for token in item["state_tokens"]))
                 self.assertEqual(hashlib.sha256(raw).hexdigest(), item["sha256"])
         for item in payload["protected_artifacts"]:
-            self.assertEqual(hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest(), item["sha256"])
+            resolved = assignment_q2_sufficiency.historical_path(ROOT, Path(item["path"]), item["sha256"])
+            self.assertEqual(hashlib.sha256((ROOT / resolved).read_bytes()).hexdigest(), item["sha256"])
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)

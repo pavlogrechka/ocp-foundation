@@ -6,6 +6,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 
 ASSIGNMENT_STABLE_SURFACE_MAP_INVALID = "ASSIGNMENT_STABLE_SURFACE_MAP_INVALID"
 ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT = "ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT"
@@ -249,7 +251,11 @@ def _numbered_section(text: str, start_heading: str, end_heading: str) -> tuple[
 def _ocp_index(repo_root: Path) -> dict[str, tuple[Path, dict[str, Any]]]:
     result: dict[str, tuple[Path, dict[str, Any]]] = {}
     for path in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        metadata = _frontmatter(path)
+        source = historical_path(
+            repo_root, Path("docs/006-constraint-concept/README.md"),
+            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        ) if path.name == "README.md" and path.parent.name == "006-constraint-concept" else path.relative_to(repo_root)
+        metadata = _frontmatter(repo_root / source)
         if metadata is not None and isinstance(metadata.get("Document-ID"), str):
             result[str(metadata["Document-ID"])] = (path, metadata)
     return result

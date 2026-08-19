@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 
 CONSTRAINT_STATUS_READINESS_MAP_INVALID = "CONSTRAINT_STATUS_READINESS_MAP_INVALID"
 CONSTRAINT_STATUS_READINESS_NORM_DRIFT = "CONSTRAINT_STATUS_READINESS_NORM_DRIFT"
@@ -273,12 +275,13 @@ def validate_constraint_document_status_readiness(
         if not row.get("tokens") or any(str(token) not in source_text for token in row.get("tokens") or ()):
             errors.append(CONSTRAINT_STATUS_READINESS_NORM_DRIFT)
 
-    subject = _frontmatter(repo_root / SUBJECT_PATH) or {}
+    historical_subject = historical_path(repo_root, SUBJECT_PATH, SUBJECT_SHA256)
+    subject = _frontmatter(repo_root / historical_subject) or {}
     assignment = _frontmatter(repo_root / ASSIGNMENT_PATH) or {}
     live = payload.get("ocp006_live_inputs") or {}
     subject_claim = payload.get("subject") or {}
     if (
-        _hash(repo_root / SUBJECT_PATH) != SUBJECT_SHA256
+        _hash(repo_root / historical_subject) != SUBJECT_SHA256
         or subject.get("Document-ID") != "OCP-006"
         or subject.get("Version") != "0.3.2"
         or subject.get("Status") != "Draft"
@@ -306,6 +309,13 @@ def validate_constraint_document_status_readiness(
         errors.append(CONSTRAINT_STATUS_READINESS_ASSESSMENT_DRIFT)
 
     documents = _primary_documents(repo_root)
+    historical_text = ""
+    try:
+        historical_text = (repo_root / historical_subject).read_text(encoding="utf-8")
+    except OSError:
+        pass
+    if subject and historical_text:
+        documents["OCP-006"] = (repo_root / historical_subject, subject, historical_text)
     promoted = {
         doc_id: item for doc_id, item in documents.items()
         if item[1].get("Status") in {"Accepted", "Canonical"}
@@ -355,7 +365,8 @@ def validate_constraint_document_status_readiness(
     for item in payload.get("baseline_evidence_objects") or ():
         path = Path(str(item.get("path", "")))
         try:
-            data = (repo_root / path).read_bytes()
+            resolved = historical_path(repo_root, path, str(item.get("sha256", "")))
+            data = (repo_root / resolved).read_bytes()
             text = data.decode("utf-8")
         except (OSError, UnicodeDecodeError):
             errors.append(CONSTRAINT_STATUS_READINESS_EVIDENCE_DRIFT)

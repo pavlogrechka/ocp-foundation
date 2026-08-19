@@ -480,8 +480,12 @@ class AssignmentConsumerPressureTests(unittest.TestCase):
                 expected = subprocess.check_output(
                     ["git", "rev-parse", f"{self.baseline}:{relative}"], cwd=ROOT, text=True
                 ).strip()
+                current = {
+                    "docs/006-constraint-concept/README.md": "docs/006-constraint-concept/reviewed-contract-v0.3.2.md",
+                    "architecture/foundation-promotion-gate.yaml": "architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml",
+                }.get(relative, relative)
                 actual = subprocess.check_output(
-                    ["git", "hash-object", relative], cwd=ROOT, text=True
+                    ["git", "hash-object", current], cwd=ROOT, text=True
                 ).strip()
                 self.assertEqual(actual, expected)
 

@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 from .checker import load_fixture, validate_assignment
 
 
@@ -420,7 +422,12 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
         errors.append(ASSIGNMENT_AMENDMENT_Q2_CONSUMER_DRIFT)
     actual_accepted: set[str] = set()
     for primary in sorted((repo_root / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
-        metadata = _frontmatter(primary)
+        relative = primary.relative_to(repo_root)
+        source = historical_path(
+            repo_root, relative,
+            "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        ) if relative == Path("docs/006-constraint-concept/README.md") else relative
+        metadata = _frontmatter(repo_root / source)
         if metadata is None:
             continue
         if "OCP-005" in _references(metadata.get("Depends-On")) and metadata.get("Status") in {"Accepted", "Canonical"}:
