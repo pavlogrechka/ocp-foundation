@@ -35,7 +35,7 @@ No item in that list says all open questions must be closed. The checker binds e
 
 All 23 current primary OCP documents at `Accepted` or `Canonical` were inspected. The predeclared carrier criterion is current owner text that states an unresolved semantic question or choice; historical baselines, review prompts, backlog-status ledgers and explicitly closed reopening gates do not count.
 
-Five promoted documents carry such current questions: OCP-002, OCP-003, OCP-004, OCP-008 and OCP-010. OCP-004, OCP-008 and OCP-010 expose current Open Questions sections; OCP-002 and OCP-003 state the unresolved Organization↔Resource mapping in current prose. This precedent is not authority. It is consistent with the independently derived norm and would expose a practice/norm divergence if the norm had required an empty question set.
+Six promoted documents carry such current questions: OCP-002, OCP-003, OCP-004, OCP-007, OCP-008 and OCP-010. OCP-004, OCP-008 and OCP-010 expose current Open Questions sections; OCP-007 has a current section declaring material-event continuity unresolved; OCP-002 and OCP-003 state the unresolved Organization↔Resource mapping in current prose. A repository-wide lexical digest guards every current `unresolved`/`remain open` occurrence, including non-carriers and exclusions, so a future prose occurrence forces reclassification rather than passing silently. This precedent is not authority. It is consistent with the independently derived norm and would expose a practice/norm divergence if the norm had required an empty question set.
 
 ## 4. Criterion-by-criterion OCP-006 assessment
 

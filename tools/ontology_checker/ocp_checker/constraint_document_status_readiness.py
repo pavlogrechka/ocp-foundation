@@ -22,8 +22,17 @@ SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
 ASSIGNMENT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd"
-MAP_SHA256 = "07b3216249a888644ce46a2a818a7d4d70256cfbb90415b002d5d040c0d5212d"
+MAP_SHA256 = "c5db1428b160376e2b3600e8e372a99833b1b672847387fda8f3c3def3295663"
 SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
+EXPECTED_INTERPRETATION = "confirms-open-question-closure-is-not-a-governance-promotion-criterion"
+OPEN_LEXICAL_VOCABULARY = (
+    "unresolved", "remains-open", "remain-open", "залишається-відкрит",
+    "залишаються-відкрит", "лишається-відкрит", "лишаються-відкрит",
+)
+OPEN_LEXICAL_PATTERN = re.compile(
+    r"(?:\bunresolved\b|\bremains?\s+open\b|залиша(?:ється|ються)\s+відкрит|лиша(?:ється|ються)\s+відкрит)",
+    flags=re.IGNORECASE,
+)
 EXPECTED_MAP_KEYS = frozenset({
     "schema_version", "rule_owner", "baseline", "gate_first", "subject",
     "norm_vs_practice", "governance_sweep", "promotion_criteria", "ocp006_live_inputs",
@@ -57,6 +66,7 @@ PROMOTED_OPEN_CARRIERS = {
     "OCP-002": "Можливий mapping до Organizational Resource залишається відкритим",
     "OCP-003": "exact mapping `Organization ↔ Resource` лишаються відкритими",
     "OCP-004": "## 20. Open Questions",
+    "OCP-007": "## 7. Material-event continuity is unresolved",
     "OCP-008": "## 16. Open Questions",
     "OCP-010": "The first four questions remain open",
 }
@@ -140,6 +150,18 @@ def _primary_documents(repo_root: Path) -> dict[str, tuple[Path, dict[str, Any],
     return documents
 
 
+def _open_lexical_observations(
+    promoted: dict[str, tuple[Path, dict[str, Any], str]],
+) -> tuple[str, ...]:
+    observations: list[str] = []
+    for doc_id in sorted(promoted):
+        text = promoted[doc_id][2]
+        for line_number, line in enumerate(text.splitlines(), 1):
+            if OPEN_LEXICAL_PATTERN.search(line):
+                observations.append(f"{doc_id}:{line_number}:{line.strip()}")
+    return tuple(observations)
+
+
 def validate_constraint_document_status_readiness(
     repo_root: Path,
 ) -> ConstraintDocumentStatusReadinessResult:
@@ -180,12 +202,13 @@ def validate_constraint_document_status_readiness(
         or any(row.get("kind") != "discovery-practice-not-promotion-criterion" for row in axes if isinstance(row, dict))
     ):
         errors.append(CONSTRAINT_STATUS_READINESS_NORM_DRIFT)
+    practice_tokens = tuple(str(row.get("token")) for row in axes if isinstance(row, dict))
     for source in norm.get("normative_sources") or ():
         try:
             text = (repo_root / source).read_text(encoding="utf-8")
         except OSError:
             text = ""
-        if any(term in text for term in ("blocks-whole-document-freeze", "whole-document freeze", "bounded-stable-surface")):
+        if any(term in text for term in practice_tokens):
             errors.append(CONSTRAINT_STATUS_READINESS_NORM_DRIFT)
     practice_path = repo_root / str(norm.get("practice_source", ""))
     try:
@@ -267,7 +290,12 @@ def validate_constraint_document_status_readiness(
     sweep = payload.get("precedent_sweep") or {}
     carriers = sweep.get("carriers") or []
     claimed = {row.get("document_id"): row for row in carriers if isinstance(row, dict)}
-    if len(promoted) != 23 or sweep.get("promoted_document_count") != len(promoted) or set(claimed) != set(PROMOTED_OPEN_CARRIERS):
+    if (
+        len(promoted) != 23
+        or sweep.get("promoted_document_count") != len(promoted)
+        or set(claimed) != set(PROMOTED_OPEN_CARRIERS)
+        or sweep.get("interpretation") != EXPECTED_INTERPRETATION
+    ):
         errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
     for doc_id, token in PROMOTED_OPEN_CARRIERS.items():
         item = promoted.get(doc_id)
@@ -280,6 +308,21 @@ def validate_constraint_document_status_readiness(
         if re.search(r"^##(?:\s+\d+\.)?\s+Open questions", text, flags=re.IGNORECASE | re.MULTILINE)
     }
     if formal != {"OCP-004", "OCP-008", "OCP-010"}:
+        errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
+    unresolved_headings = {
+        doc_id for doc_id, (_, _, text) in promoted.items()
+        if re.search(r"^##\s.*\bunresolved\b", text, flags=re.IGNORECASE | re.MULTILINE)
+    }
+    if unresolved_headings != {"OCP-007"}:
+        errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
+    observations = _open_lexical_observations(promoted)
+    lexical = sweep.get("lexical_scan") or {}
+    observed_digest = hashlib.sha256("\n".join(observations).encode("utf-8")).hexdigest()
+    if (
+        tuple(lexical.get("vocabulary") or ()) != OPEN_LEXICAL_VOCABULARY
+        or lexical.get("observed_line_count") != len(observations)
+        or lexical.get("observed_sha256") != observed_digest
+    ):
         errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
 
     gate_payload = _load(repo_root / GATE_PATH)

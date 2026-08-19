@@ -92,10 +92,15 @@ precedent_sweep:
   scope: every-current-primary-ocp-with-status-accepted-or-canonical
   promoted_document_count: 23
   current_open_question_carrier_criterion: owner-text-currently-states-an-unresolved-semantic-question-or-choice-excluding-historical-baselines-review-prompts-backlog-status-ledgers-and-explicitly-closed-reopening-gates
+  lexical_scan:
+    vocabulary: [unresolved, remains-open, remain-open, залишається-відкрит, залишаються-відкрит, лишається-відкрит, лишаються-відкрит]
+    observed_line_count: 81
+    observed_sha256: f6b8a5e8390a40634e6db9688a5f03906988c741bb7ff7a1f32a4db141d1c747
   carriers:
     - {document_id: OCP-002, status: Canonical, token: "Можливий mapping до Organizational Resource залишається відкритим"}
     - {document_id: OCP-003, status: Canonical, token: "exact mapping `Organization ↔ Resource` лишаються відкритими"}
     - {document_id: OCP-004, status: Canonical, token: "## 20. Open Questions"}
+    - {document_id: OCP-007, status: Canonical, token: "## 7. Material-event continuity is unresolved"}
     - {document_id: OCP-008, status: Canonical, token: "## 16. Open Questions"}
     - {document_id: OCP-010, status: Canonical, token: "The first four questions remain open"}
   interpretation: confirms-open-question-closure-is-not-a-governance-promotion-criterion

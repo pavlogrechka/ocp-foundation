@@ -100,6 +100,19 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
             "open-question-count",
             {row["criterion_id"] for row in payload["promotion_criteria"]},
         )
+        for row in payload["norm_vs_practice"]["axes"]:
+            with self.subTest(negative_norm_axis=row["axis"]), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                self.copy_inputs(root)
+                path = root / "docs/001-ontology-governance/README.md"
+                path.write_text(
+                    path.read_text(encoding="utf-8") + f"\n{row['token']}\n",
+                    encoding="utf-8",
+                )
+                self.assertIn(
+                    CONSTRAINT_STATUS_READINESS_NORM_DRIFT,
+                    validate_constraint_document_status_readiness(root).errors,
+                )
 
     def test_all_promoted_documents_are_swept_and_open_question_precedent_is_live(self) -> None:
         payload = self.payload()
@@ -113,6 +126,28 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
             self.copy_inputs(root)
             path = root / "docs/011-outcome-assessment-record/README.md"
             path.write_text(path.read_text(encoding="utf-8") + "\n## 99. Open Questions\n\n1. Synthetic open question?\n", encoding="utf-8")
+            self.assertIn(
+                CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT,
+                validate_constraint_document_status_readiness(root).errors,
+            )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            path = root / "docs/011-outcome-assessment-record/README.md"
+            path.write_text(
+                path.read_text(encoding="utf-8") + "\nA new semantic choice remains open.\n",
+                encoding="utf-8",
+            )
+            self.assertIn(
+                CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT,
+                validate_constraint_document_status_readiness(root).errors,
+            )
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.copy_inputs(root)
+            changed = self.payload(root)
+            changed["precedent_sweep"]["interpretation"] = "open-question-closure-is-required"
+            self.write_payload(root, changed)
             self.assertIn(
                 CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT,
                 validate_constraint_document_status_readiness(root).errors,
@@ -236,6 +271,8 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
                     self.assertFalse(validate_constraint_document_status_readiness(ROOT).valid)
         for name, changed in {
             "BASELINE": "MUTATED", "MAP_SHA256": "MUTATED", "SUBJECT_SHA256": "MUTATED",
+            "EXPECTED_INTERPRETATION": "MUTATED",
+            "OPEN_LEXICAL_VOCABULARY": tuple(reversed(readiness.OPEN_LEXICAL_VOCABULARY)),
             "EXPECTED_DEPENDENCIES": tuple(reversed(readiness.EXPECTED_DEPENDENCIES)),
         }.items():
             with self.subTest(attribute=name), patch.object(readiness, name, changed):
