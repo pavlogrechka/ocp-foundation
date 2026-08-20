@@ -7,8 +7,6 @@ from typing import Any, Iterable
 
 import yaml
 
-from .historical_evidence import historical_path
-
 from ._common import nonempty, result
 from .assignment_q3_lifecycle import load_q3_source_quote_successions
 from .checker import ValidationResult
@@ -268,14 +266,7 @@ SWEEP_VOCABULARY = {
         ("`contains`", "`part_of`"),
     ),
 }
-SOURCE_SWEEP_SHA256 = "1b2a75e2c73b80ad3f07b89bb8368097aa089159a7bdf100351a39177d934425"
-OCP006_BASELINE_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
-
-
-def _historical_source(repo_root: Path, relative: Path) -> Path:
-    if relative == Path("docs/006-constraint-concept/README.md"):
-        return historical_path(repo_root, relative, OCP006_BASELINE_SHA256)
-    return relative
+SOURCE_SWEEP_SHA256 = "53bd24704ec4b4e460c66286307536679f8ed79ff2d62f436e0b2e1b7692cb38"
 
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",
@@ -508,7 +499,7 @@ def _source_sweep_hits(repo_root: Path) -> list[dict[str, str]] | None:
         return None
     for path in paths:
         try:
-            text = (repo_root / _historical_source(repo_root, path.relative_to(repo_root))).read_text(encoding="utf-8")
+            text = path.read_text(encoding="utf-8")
         except OSError:
             return None
         status = _frontmatter(text).get("Status")
@@ -587,8 +578,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         ):
             return False
         try:
-            relative = Path(row["path"])
-            text = (repo_root / _historical_source(repo_root, relative)).read_text(encoding="utf-8")
+            text = (repo_root / Path(row["path"])).read_text(encoding="utf-8")
         except OSError:
             return False
         section = _section(text, row["section"])
@@ -640,8 +630,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         ):
             return False
         try:
-            relative = Path(row["path"])
-            text = (repo_root / _historical_source(repo_root, relative)).read_text(encoding="utf-8")
+            text = (repo_root / Path(row["path"])).read_text(encoding="utf-8")
         except OSError:
             return False
         section = _section(text, row["section"])

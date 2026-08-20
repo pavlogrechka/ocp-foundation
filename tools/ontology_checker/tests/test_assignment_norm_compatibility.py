@@ -182,6 +182,13 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         self.assertTrue(
             all(item["evidence_mode"] == "analytic" for item in payload["source_sweep"]["hits"])
         )
+        for item in payload["source_sweep"]["hits"]:
+            with self.subTest(live_primary=item["path"], quote=item["quote"]):
+                live_text = (ROOT / item["path"]).read_text(encoding="utf-8")
+                self.assertEqual(
+                    item["status"],
+                    assignment_norm_compatibility._frontmatter(live_text)["Status"],
+                )
         self.assertEqual(len(payload["source_sweep"]["known_out_of_vocabulary"]), 3)
         self.assertTrue(
             all(
