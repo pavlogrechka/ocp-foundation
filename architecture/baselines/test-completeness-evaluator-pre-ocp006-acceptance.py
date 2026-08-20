@@ -283,12 +283,8 @@ class CompletenessEvaluatorTests(unittest.TestCase):
                     cwd=REPO_ROOT,
                     text=True,
                 ).strip()
-                current = {
-                    "docs/006-constraint-concept/README.md": "docs/006-constraint-concept/reviewed-contract-v0.3.2.md",
-                    "architecture/foundation-promotion-gate.yaml": "architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml",
-                }.get(relative, relative)
                 actual = subprocess.check_output(
-                    ["git", "hash-object", current], cwd=REPO_ROOT, text=True
+                    ["git", "hash-object", relative], cwd=REPO_ROOT, text=True
                 ).strip()
                 self.assertEqual(actual, expected)
 

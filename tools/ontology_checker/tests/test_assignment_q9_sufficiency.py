@@ -145,7 +145,8 @@ class AssignmentQ9SufficiencyTests(unittest.TestCase):
                 self.assertTrue(all(token in text for token in item["state_tokens"]))
                 self.assertEqual(hashlib.sha256(raw).hexdigest(), item["sha256"])
         for item in payload["protected_artifacts"]:
-            path = ROOT / item["path"]
+            resolved = assignment_q9_sufficiency.historical_path(ROOT, Path(item["path"]), item["sha256"])
+            path = ROOT / resolved
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), item["sha256"])
             declared = next(
                 row for row in payload["evidence_ledger"] if row.get("path") == item["path"]

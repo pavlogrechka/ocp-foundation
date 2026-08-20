@@ -19,7 +19,8 @@ STEP_STATES = frozenset({"pending", "completed"})
 CANDIDATE_IDS = frozenset({"OCP-005", "OCP-006", "OCP-010"})
 ALLOWED_L2_RESULTS = frozenset({"pass", "fail"})
 ALLOWED_STATUS_PAIRS = frozenset({
-    ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
+    ("Draft", "Accepted"), ("Accepted", "Accepted"),
+    ("Canonical", "Accepted"), ("Canonical", "Canonical"),
 })
 SLOT_IDS = frozenset({"T6", "T7"})
 
@@ -120,7 +121,8 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
         )
         or STEP_STATES != frozenset({"pending", "completed"})
         or ALLOWED_STATUS_PAIRS != frozenset({
-            ("Draft", "Accepted"), ("Canonical", "Accepted"), ("Canonical", "Canonical"),
+            ("Draft", "Accepted"), ("Accepted", "Accepted"),
+            ("Canonical", "Accepted"), ("Canonical", "Canonical"),
         })
     ):
         errors.append(FOUNDATION_PROMOTION_GATE_MAP_INVALID)

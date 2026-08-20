@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 
 CONSTRAINT_STABLE_SURFACE_MAP_INVALID = "CONSTRAINT_STABLE_SURFACE_MAP_INVALID"
 CONSTRAINT_STABLE_SURFACE_SUBJECT_DRIFT = "CONSTRAINT_STABLE_SURFACE_SUBJECT_DRIFT"
@@ -19,6 +21,7 @@ CONSTRAINT_STABLE_SURFACE_GATE_DRIFT = "CONSTRAINT_STABLE_SURFACE_GATE_DRIFT"
 
 MAP_PATH = Path("architecture/constraint-stable-surface.yaml")
 SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
+HISTORICAL_SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 MAP_KEYS = frozenset(
     {
@@ -212,7 +215,11 @@ def _git_blob(data: bytes) -> str:
 def _check_tokens(repo_root: Path, evidence: tuple[tuple[str, tuple[str, ...]], ...]) -> bool:
     for path, tokens in evidence:
         try:
-            text = (repo_root / path).read_text(encoding="utf-8")
+            relative = Path(path)
+            resolved = historical_path(
+                repo_root, relative, HISTORICAL_SUBJECT_SHA256
+            ) if relative == SUBJECT_PATH else relative
+            text = (repo_root / resolved).read_text(encoding="utf-8")
         except OSError:
             return False
         if any(token not in text for token in tokens):
@@ -244,7 +251,8 @@ def validate_constraint_stable_surface(repo_root: Path) -> ConstraintStableSurfa
     ):
         errors.append(CONSTRAINT_STABLE_SURFACE_MAP_INVALID)
 
-    metadata = _frontmatter(repo_root / SUBJECT_PATH)
+    historical_subject = historical_path(repo_root, SUBJECT_PATH, HISTORICAL_SUBJECT_SHA256)
+    metadata = _frontmatter(repo_root / historical_subject)
     if not metadata or any(
         metadata.get(field) != expected
         for field, expected in (
@@ -338,7 +346,8 @@ def validate_constraint_stable_surface(repo_root: Path) -> ConstraintStableSurfa
         errors.append(CONSTRAINT_STABLE_SURFACE_EVIDENCE_DRIFT)
     for path, (blob, sha256) in baseline_objects.items():
         try:
-            data = (repo_root / path).read_bytes()
+            resolved = historical_path(repo_root, Path(path), sha256)
+            data = (repo_root / resolved).read_bytes()
         except OSError:
             errors.append(CONSTRAINT_STABLE_SURFACE_EVIDENCE_DRIFT)
             continue

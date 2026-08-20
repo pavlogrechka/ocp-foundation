@@ -8,6 +8,7 @@ from typing import Any, Iterable
 import yaml
 
 from .checker import assignment_effective_at, load_fixture, validate_assignment
+from .historical_evidence import historical_path
 
 
 ASSIGNMENT_Q3_MAP_INVALID = "ASSIGNMENT_Q3_MAP_INVALID"
@@ -381,7 +382,7 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
         if isinstance(item, dict)
     }
     if declared_historical != EXPECTED_HISTORICAL_HASHES or any(
-        _hash(repo_root / path) != sha256
+        _hash(repo_root / historical_path(repo_root, Path(path), sha256)) != sha256
         for path, sha256 in EXPECTED_HISTORICAL_HASHES.items()
     ):
         errors.append(ASSIGNMENT_Q3_HISTORICAL_DRIFT)

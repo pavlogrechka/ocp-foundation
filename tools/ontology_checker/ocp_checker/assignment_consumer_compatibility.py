@@ -7,7 +7,7 @@ from typing import Any, Iterable
 
 import yaml
 
-from .checker import load_fixture
+from .checker import effective_constraint_result, load_fixture, validate_assignment
 from .coordination_workflow import derive_coordination_evidence
 from .interchangeability import derive_resource_interchangeability
 from .operation_lifecycle import validate_operation_q3i_fixture
@@ -25,14 +25,14 @@ ASSIGNMENT_CONSUMER_COMPATIBILITY_GATE_DRIFT = "ASSIGNMENT_CONSUMER_COMPATIBILIT
 
 MAP_KEYS = frozenset(
     {
-        "schema_version", "rule_owner", "baseline", "gate_first", "subject", "criterion",
+        "schema_version", "rule_owner", "current_projection_owner", "baseline", "gate_first", "subject", "criterion",
         "stable_surface_witness", "consumer_results", "projection", "promotion_gate_guard",
         "baseline_evidence_objects", "forbidden_outcomes",
     }
 )
-CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
+CONSUMER_IDS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 NEGATIVE_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-020", "OCP-021"})
-POSITIVE_CONSUMER_IDS = frozenset({"OCP-017", "OCP-023"})
+POSITIVE_CONSUMER_IDS = frozenset({"OCP-006", "OCP-017", "OCP-023"})
 STABLE_SURFACE_IDS = frozenset(
     {
         "ASSIGNMENT_IDENTITY_REFERENCE_KERNEL", "TRANSITION_HISTORY_LIFECYCLE_KERNEL",
@@ -58,8 +58,9 @@ FORBIDDEN_OUTCOMES = frozenset(
 )
 
 EXPECTED_IDENTITY = {
-    "schema_version": 1,
+    "schema_version": 2,
     "rule_owner": "AD-040",
+    "current_projection_owner": "AD-053",
     "baseline": "747d5aa2e71bd87c4e024d62f80d8cfa122d8279",
 }
 EXPECTED_GATE_FIRST = {
@@ -88,6 +89,29 @@ EXPECTED_CRITERION = {
     "positive_consumer": "exact-current-assignment-alignment-remains-valid-with-the-same-terminal-disposition",
 }
 EXPECTED_CONSUMERS = {
+    "OCP-006": {
+        "primary": "docs/006-constraint-concept/README.md", "consumer_class": "positive-derivation",
+        "consumed_tokens": (
+            "кілька ефективних Assignment одного Resource",
+            "Сам `supersedes_assignment_ref` не визначає допустимі часові межі",
+            "Без цього Constraint сам факт кількох Assignment не є порушенням",
+        ),
+        "stable_surface_ids": (
+            "ASSIGNMENT_IDENTITY_REFERENCE_KERNEL", "SUPERSESSION_IDENTITY_BOUNDARY",
+            "EXECUTABLE_ASSIGNMENT_BOUNDARY",
+        ),
+        "moving_consumed_surface_ids": (),
+        "moving_probe_surface_ids": (
+            "AMENDMENT_AFTER_ESTABLISHMENT", "TEMPORAL_EFFECTIVITY_EXTENSION", "ROLE_GOVERNANCE",
+            "COMPOSITE_RESOURCE_SCOPE", "CONSTRAINT_CONFLICT_HANDOFF", "PROVENANCE_TAXONOMY",
+            "REPLACEMENT_POLICY",
+        ),
+        "fixture": "tools/ontology_checker/fixtures/constraint/valid-assignment-moving-surfaces-independent.yaml",
+        "probe": "assignment_moving_surfaces_do_not_change_exact_snapshot_result",
+        "expected_control": "satisfied",
+        "expected_probe": "moving:satisfied|binding:indeterminate|assignment:valid/valid",
+        "result": "preserved",
+    },
     "OCP-013": {
         "primary": "docs/013-resource-interchangeability/README.md",
         "consumer_class": "negative-exclusion",
@@ -273,6 +297,29 @@ def _probe(repo_root: Path, consumer_id: str, consumer: dict[str, Any]) -> tuple
         fixture = load_fixture(repo_root / consumer["fixture"])
     except (OSError, ValueError, yaml.YAMLError):
         return None
+    if consumer_id == "OCP-006":
+        constraint = fixture["entity"]
+        context = fixture["contexts"][0]
+        version = fixture["reference"]["constraint_version_ref"]
+        assignment = fixture["assignments"][0]
+        control = effective_constraint_result(constraint, context, version)
+        mutated_assignment = copy.deepcopy(assignment)
+        mutated_assignment.update({
+            "amendment_model": {"synthetic": True},
+            "applicability_intervals": [{"start": "2026-08-02T10:00:00Z", "end": "2026-08-02T12:00:00Z"}],
+            "role_governance": {"synthetic": True},
+            "resource_scope": {"kind": "component", "component_ref": "R-SYNTH-COMPONENT"},
+            "constraint_conflict_handoff": {"synthetic": True},
+            "provenance_taxonomy": {"synthetic": True},
+            "replacement_policy": {"synthetic": True},
+        })
+        moving = effective_constraint_result(constraint, context, version)
+        mismatched_context = copy.deepcopy(context)
+        mismatched_context["input_snapshot_ref"] = "SNAP-MISMATCH"
+        binding = effective_constraint_result(constraint, mismatched_context, version)
+        original_valid = validate_assignment(assignment).valid
+        mutated_valid = validate_assignment(mutated_assignment).valid
+        return control, f"moving:{moving}|binding:{binding}|assignment:{'valid' if original_valid else 'invalid'}/{'valid' if mutated_valid else 'invalid'}"
     if consumer_id == "OCP-013":
         control = fixture["cases"]["b_substitutes_for_a"]
         probe = fixture["cases"][consumer["probe"]]

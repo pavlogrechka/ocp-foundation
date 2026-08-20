@@ -22,6 +22,7 @@ MAP_KEYS = frozenset(
     {
         "schema_version",
         "rule_owner",
+        "current_projection_owner",
         "baseline",
         "gate_first",
         "subject",
@@ -51,7 +52,7 @@ MISSING_OBLIGATION_IDS = frozenset(
         "AMENDMENT_PROVENANCE_BINDING",
     }
 )
-ACCEPTED_CONSUMER_IDS = frozenset({"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
+ACCEPTED_CONSUMER_IDS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
 PROBE_IDS = frozenset(
     {"ESTABLISHED_ROLE_VALUE_REPLACEMENT", "ESTABLISHED_APPLICABILITY_VALUE_REPLACEMENT"}
 )
@@ -141,6 +142,11 @@ EXPECTED_OWNER_EVIDENCE = {
     ),
 }
 EXPECTED_CONSUMERS = {
+    "OCP-006": (
+        "docs/006-constraint-concept/README.md",
+        "Сам `supersedes_assignment_ref` не визначає допустимі часові межі",
+        "consumes-supersession-as-identity-boundary-without-amendment-authority",
+    ),
     "OCP-013": (
         "docs/013-resource-interchangeability/README.md",
         "Assignment mutation",
@@ -366,8 +372,9 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
         return _result((ASSIGNMENT_AMENDMENT_Q2_MAP_INVALID,))
 
     if (
-        payload.get("schema_version") != 1
+        payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-038"
+        or payload.get("current_projection_owner") != "AD-053"
         or payload.get("baseline") != "448d7d10fe3a3213da8479ce991995e01102cf3b"
         or payload.get("gate_first") != EXPECTED_GATE_FIRST
         or payload.get("subject") != EXPECTED_SUBJECT

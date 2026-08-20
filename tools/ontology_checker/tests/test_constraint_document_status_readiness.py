@@ -40,6 +40,9 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
             Path("architecture/artifact-taxonomy.yaml"),
             readiness.GATE_PATH,
             Path("docs/016-core-boundary/reviewed-contract-v0.1.0.md"),
+            Path("docs/006-constraint-concept/reviewed-contract-v0.3.2.md"),
+            Path("architecture/constraint-document-acceptance.yaml"),
+            Path("architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml"),
         }
         for source in sorted((ROOT / "docs").glob("[0-9][0-9][0-9]-*/README.md")):
             paths.add(source.relative_to(ROOT))
@@ -121,7 +124,7 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
 
     def test_all_promoted_documents_are_swept_and_open_question_precedent_is_live(self) -> None:
         payload = self.payload()
-        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 23)
+        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 24)
         self.assertEqual(
             {row["document_id"] for row in payload["precedent_sweep"]["carriers"]},
             set(readiness.PROMOTED_OPEN_CARRIERS),
@@ -183,9 +186,9 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            subject = root / readiness.SUBJECT_PATH
+            subject = root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
             subject.write_text(
-                subject.read_text(encoding="utf-8").replace("Status: Draft", "Status: Accepted", 1),
+                subject.read_text(encoding="utf-8").replace("Status: Draft", "Status: Canonical", 1),
                 encoding="utf-8",
             )
             self.assertIn(

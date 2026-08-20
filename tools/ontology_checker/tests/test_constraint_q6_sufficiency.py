@@ -36,6 +36,9 @@ class ConstraintQ6SufficiencyTests(unittest.TestCase):
             constraint_q6_sufficiency.SURFACE_PATH,
             constraint_q6_sufficiency.GATE_PATH,
             constraint_q6_sufficiency.PROBE_FIXTURE,
+            Path("docs/006-constraint-concept/reviewed-contract-v0.3.2.md"),
+            Path("architecture/constraint-document-acceptance.yaml"),
+            Path("architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml"),
         }
         for relative in paths:
             target = destination / relative
@@ -137,7 +140,10 @@ class ConstraintQ6SufficiencyTests(unittest.TestCase):
                 self.assertEqual(hashlib.sha256(raw).hexdigest(), item["sha256"])
                 self.assertTrue(all(token in raw.decode("utf-8") for token in item["state_tokens"]))
         for item in payload["protected_artifacts"]:
-            self.assertEqual(hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest(), item["sha256"])
+            resolved = constraint_q6_sufficiency.historical_path(
+                ROOT, Path(item["path"]), item["sha256"]
+            )
+            self.assertEqual(hashlib.sha256((ROOT / resolved).read_bytes()).hexdigest(), item["sha256"])
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         def scalar_paths(value, prefix=()):

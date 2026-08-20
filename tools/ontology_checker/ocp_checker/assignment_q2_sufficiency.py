@@ -8,6 +8,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .historical_evidence import historical_path
+
 from .checker import load_fixture, validate_assignment
 
 
@@ -342,7 +344,8 @@ def validate_assignment_q2_sufficiency(repo_root: Path) -> AssignmentQ2Sufficien
         if isinstance(item, dict)
     }
     if declared_hashes != EXPECTED_PROTECTED_HASHES or any(
-        _hash(repo_root / path) != digest for path, digest in EXPECTED_PROTECTED_HASHES.items()
+        _hash(repo_root / historical_path(repo_root, Path(path), digest)) != digest
+        for path, digest in EXPECTED_PROTECTED_HASHES.items()
     ):
         errors.append(ASSIGNMENT_Q2_SUFFICIENCY_PROTECTED_DRIFT)
 

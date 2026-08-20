@@ -27,6 +27,14 @@ from ocp_checker.accepted_snapshot import (  # noqa: E402
 
 
 EXPECTED = {
+    "OCP-006": (
+        "docs/006-constraint-concept/README.md",
+        "Accepted",
+        "0.3.2",
+        "docs/006-constraint-concept/reviewed-contract-v0.3.2.md",
+        "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10",
+        "current-accepted",
+    ),
     "OCP-011": (
         "docs/011-outcome-assessment-record/README.md",
         "Accepted",
@@ -281,6 +289,7 @@ class AcceptedSnapshotTests(unittest.TestCase):
 
     def test_new_accepted_boundaries_preserve_exact_reviewed_bodies(self) -> None:
         markers = {
+            "OCP-006": 30,
             "OCP-019": 15,
             "OCP-021": 15,
             "OCP-022": 15,

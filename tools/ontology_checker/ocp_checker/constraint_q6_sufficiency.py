@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .checker import effective_constraint_result, load_fixture, validate_constraint
+from .historical_evidence import historical_path
 
 
 CONSTRAINT_Q6_MAP_INVALID = "CONSTRAINT_Q6_MAP_INVALID"
@@ -188,15 +189,17 @@ def validate_constraint_q6_sufficiency(repo_root: Path) -> ConstraintQ6Sufficien
             errors.append(CONSTRAINT_Q6_EVIDENCE_DRIFT)
             break
 
+    historical_subject = historical_path(repo_root, SUBJECT_PATH, SUBJECT_SHA256)
     subject_text = ""
     try:
-        subject_text = (repo_root / SUBJECT_PATH).read_text(encoding="utf-8")
+        subject_text = (repo_root / historical_subject).read_text(encoding="utf-8")
     except OSError:
         pass
     obstacle = payload.get("explicit_obstacle") or {}
     if (
-        _hash(repo_root / SUBJECT_PATH) != SUBJECT_SHA256
-        or subject_meta.get("Version") != "0.3.2" or subject_meta.get("Status") != "Draft"
+        _hash(repo_root / historical_subject) != SUBJECT_SHA256
+        or (_frontmatter(repo_root / historical_subject) or {}).get("Version") != "0.3.2"
+        or (_frontmatter(repo_root / historical_subject) or {}).get("Status") != "Draft"
         or subject_meta.get("Concept-Status") != "Accepted"
         or obstacle.get("same_subject_as_q6") is not True or obstacle.get("quote") not in subject_text
         or payload.get("subject_preservation", {}).get("sha256") != SUBJECT_SHA256
@@ -238,7 +241,9 @@ def validate_constraint_q6_sufficiency(repo_root: Path) -> ConstraintQ6Sufficien
         errors.append(CONSTRAINT_Q6_PROBE_DRIFT)
 
     for item in payload.get("protected_artifacts") or ():
-        if _hash(repo_root / Path(item.get("path", ""))) != item.get("sha256"):
+        original = Path(item.get("path", ""))
+        resolved = historical_path(repo_root, original, str(item.get("sha256", "")))
+        if _hash(repo_root / resolved) != item.get("sha256"):
             errors.append(CONSTRAINT_Q6_EVIDENCE_DRIFT)
             break
     gate_payload = _load(repo_root / GATE_PATH)

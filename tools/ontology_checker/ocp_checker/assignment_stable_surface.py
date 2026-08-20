@@ -20,9 +20,9 @@ DIRECT_CONSUMER_IDS = frozenset(
     {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
 )
 ACCEPTED_CONSUMER_IDS = frozenset(
-    {"OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
+    {"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"}
 )
-DRAFT_CONSUMER_IDS = frozenset({"OCP-006"})
+DRAFT_CONSUMER_IDS = frozenset()
 QUESTION_IDS = frozenset({f"Q{number}" for number in range(1, 12)})
 QUESTION_CLASSIFICATIONS = frozenset(
     {
@@ -78,8 +78,8 @@ EXPECTED_CONCEPT_DEPENDENCIES = {
 EXPECTED_CONSUMERS = {
     "OCP-006": (
         "docs/006-constraint-concept/README.md",
-        "Draft",
-        "draft",
+        "Accepted",
+        "accepted",
         (
             "кілька ефективних Assignment одного Resource",
             "Сам `supersedes_assignment_ref` не визначає допустимі часові межі",
@@ -188,7 +188,7 @@ EXPECTED_BASELINE_EVIDENCE_OBJECTS = {
 }
 
 MAP_KEYS = {
-    "schema_version", "rule_owner", "baseline", "gate_first", "promotion_gate_guard",
+    "schema_version", "rule_owner", "current_projection_owner", "baseline", "gate_first", "promotion_gate_guard",
     "baseline_evidence_objects", "subject", "concept_dependencies", "direct_consumers",
     "open_question_inventory", "stable_candidates", "moving_surfaces", "blockers",
     "forbidden_outcomes",
@@ -317,8 +317,9 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
         return _result((ASSIGNMENT_STABLE_SURFACE_MAP_INVALID,))
 
     if (
-        payload.get("schema_version") != 1
+        payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-035"
+        or payload.get("current_projection_owner") != "AD-053"
         or payload.get("baseline") != "6e83f34292fa818f62b1170e4b77aae98515a9a8"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",

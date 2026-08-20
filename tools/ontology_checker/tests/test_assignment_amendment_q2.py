@@ -141,7 +141,7 @@ class AssignmentAmendmentQ2Tests(unittest.TestCase):
                 self.assertIn(expected_error, validate_assignment_amendment_q2(root).errors)
 
     def test_live_consumer_inventory_includes_later_accepted_consumers(self) -> None:
-        for document_id in ("OCP-021", "OCP-023"):
+        for document_id in ("OCP-006", "OCP-021", "OCP-023"):
             for mutation in ("dependency", "status"):
                 with self.subTest(document=document_id, mutation=mutation), tempfile.TemporaryDirectory() as tmp:
                     root = Path(tmp)
@@ -153,7 +153,7 @@ class AssignmentAmendmentQ2Tests(unittest.TestCase):
                     fpath = root / relative
                     text = fpath.read_text(encoding="utf-8")
                     if mutation == "dependency":
-                        text = text.replace("OCP-005, ", "", 1)
+                        text = text.replace("OCP-005", "OCP-005-MUTATED", 1)
                     else:
                         text = text.replace("Status: Accepted", "Status: Draft", 1)
                     fpath.write_text(text, encoding="utf-8")

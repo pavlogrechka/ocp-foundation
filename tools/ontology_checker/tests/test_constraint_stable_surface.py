@@ -35,6 +35,9 @@ class ConstraintStableSurfaceTests(unittest.TestCase):
         Path("architecture/discovery/AD-026-reservation-allocation-boundary.md"),
         Path("architecture/discovery/AD-027-constraint-interaction-boundaries.md"),
         Path("docs/006-constraint-concept/README.md"),
+        Path("docs/006-constraint-concept/reviewed-contract-v0.3.2.md"),
+        Path("architecture/constraint-document-acceptance.yaml"),
+        Path("architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml"),
         Path("tools/ontology_checker/ocp_checker/checker.py"),
     )
 
@@ -176,7 +179,11 @@ class ConstraintStableSurfaceTests(unittest.TestCase):
                 with self.subTest(path=evidence["path"], token=token), tempfile.TemporaryDirectory() as tmp:
                     root = Path(tmp)
                     self.copy_inputs(root)
-                    path = root / evidence["path"]
+                    path = (
+                        root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
+                        if evidence["path"] == "docs/006-constraint-concept/README.md"
+                        else root / evidence["path"]
+                    )
                     text = path.read_text(encoding="utf-8")
                     path.write_text(text.replace(token, "MUTATED-EVIDENCE", 1), encoding="utf-8")
                     self.assertIn(
@@ -209,7 +216,7 @@ class ConstraintStableSurfaceTests(unittest.TestCase):
             with self.subTest(subject=old), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                path = root / "docs/006-constraint-concept/README.md"
+                path = root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
                 text = path.read_text(encoding="utf-8")
                 path.write_text(text.replace(old, new, 1), encoding="utf-8")
                 self.assertIn(
@@ -234,7 +241,11 @@ class ConstraintStableSurfaceTests(unittest.TestCase):
             with self.subTest(path=evidence["path"]), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
                 self.copy_inputs(root)
-                path = root / evidence["path"]
+                path = (
+                    root / "docs/006-constraint-concept/reviewed-contract-v0.3.2.md"
+                    if evidence["path"] == "docs/006-constraint-concept/README.md"
+                    else root / evidence["path"]
+                )
                 path.write_bytes(path.read_bytes() + b"\n")
                 self.assertIn(
                     CONSTRAINT_STABLE_SURFACE_EVIDENCE_DRIFT,

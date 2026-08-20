@@ -420,7 +420,11 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                     "docs/005-assignment-concept/README.md",
                     "architecture/assignment-stable-surface.yaml",
                 }:
-                    self.assertEqual((ROOT / path).read_bytes(), baseline_bytes)
+                    current = {
+                        "docs/006-constraint-concept/README.md": "docs/006-constraint-concept/reviewed-contract-v0.3.2.md",
+                        "architecture/foundation-promotion-gate.yaml": "architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml",
+                    }.get(path, path)
+                    self.assertEqual((ROOT / current).read_bytes(), baseline_bytes)
                 text = baseline_bytes.decode("utf-8")
                 self.assertTrue(all(token in text for token in tokens))
         fixture_text = "\n".join(
