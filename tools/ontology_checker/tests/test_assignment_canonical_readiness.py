@@ -109,6 +109,23 @@ class AssignmentCanonicalReadinessTests(unittest.TestCase):
             with self.subTest(validator=name):
                 self.assertTrue(valid)
         self.assertTrue(readiness.slot_reuse_probe(ROOT))
+        changed = self.payload()
+        changed["slot_occupancy"]["conclusion"] = "slot-reuse-forbidden"
+        changed_digest = hashlib.sha256(
+            yaml.safe_dump(changed, sort_keys=True, allow_unicode=True).encode()
+        ).hexdigest()
+        original_load = readiness._load
+
+        def changed_load(path: Path):
+            return changed if path == ROOT / self.map_path else original_load(path)
+
+        with patch.object(readiness, "_load", side_effect=changed_load), patch.object(
+            readiness, "MAP_SHA256", changed_digest
+        ):
+            self.assertIn(
+                ASSIGNMENT_CANONICAL_READINESS_SLOT_DRIFT,
+                validate_assignment_canonical_readiness(ROOT).errors,
+            )
 
     def test_baseline_anchors_are_full_chain(self) -> None:
         payload = self.payload()

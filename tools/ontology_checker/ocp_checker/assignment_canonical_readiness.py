@@ -325,8 +325,14 @@ def validate_assignment_canonical_readiness(root: Path) -> AssignmentCanonicalRe
         or [row.get("cycle_id") for row in cycles] != ["EVENT_T6"]
         or cycles[0].get("slot") != "T6"
         or (promotion_gate.get("cycle_protocol") or {}).get("active_cycle_id") is not None
+        or slot.get("candidate_id") != "OCP-005"
+        or slot.get("slot") != "T6"
+        or slot.get("completed_cycle_id") != "EVENT_T6"
+        or slot.get("active_cycle_id") is not None
         or slot.get("current_protocol_requires_unique") != ["cycle_id", "candidate_id"]
         or slot.get("current_protocol_does_not_require_unique") != ["slot"]
+        or slot.get("executable_reuse_probe") != "valid-CANDIDATE_BOARD_SELECTION-prefix-for-ASSIGNMENT_T6"
+        or slot.get("conclusion") != "slot-reuse-allowed-but-cycle-opening-still-requires-separate-authority"
         or not slot_reuse_probe(root)
     ):
         errors.append(ASSIGNMENT_CANONICAL_READINESS_SLOT_DRIFT)
