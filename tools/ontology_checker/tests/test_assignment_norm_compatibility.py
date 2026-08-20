@@ -151,10 +151,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         )
         self.assertFalse(payload["source_policy"]["historical_snapshots_and_baseline_objects_are_sources"])
         self.assertEqual(payload["source_policy"]["classification_evidence_mode"], "analytic")
-        self.assertEqual(
-            {item["status"] for item in payload["normative_sources"]},
-            {"Draft", "Accepted", "Canonical"},
-        )
+        self.assertEqual({item["status"] for item in payload["normative_sources"]}, {"Accepted", "Canonical"})
         self.assertEqual(payload["source_sweep"]["document_scope"]["document_count"], 25)
         self.assertEqual(
             payload["source_sweep"]["claim_boundary"]["proof_scope"],
@@ -163,7 +160,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         self.assertFalse(
             payload["source_sweep"]["claim_boundary"]["semantic_axis_completeness_claimed"]
         )
-        self.assertEqual(len(payload["source_sweep"]["hits"]), 64)
+        self.assertEqual(len(payload["source_sweep"]["hits"]), 68)
         self.assertEqual(
             {item["disposition"] for item in payload["source_sweep"]["hits"]},
             {"classification-source", "considered-no-exclusion"},
@@ -180,11 +177,18 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                 item["disposition"] == "considered-no-exclusion"
                 for item in payload["source_sweep"]["hits"]
             ),
-            57,
+            61,
         )
         self.assertTrue(
             all(item["evidence_mode"] == "analytic" for item in payload["source_sweep"]["hits"])
         )
+        for item in payload["source_sweep"]["hits"]:
+            with self.subTest(live_primary=item["path"], quote=item["quote"]):
+                live_text = (ROOT / item["path"]).read_text(encoding="utf-8")
+                self.assertEqual(
+                    item["status"],
+                    assignment_norm_compatibility._frontmatter(live_text)["Status"],
+                )
         self.assertEqual(len(payload["source_sweep"]["known_out_of_vocabulary"]), 3)
         self.assertTrue(
             all(

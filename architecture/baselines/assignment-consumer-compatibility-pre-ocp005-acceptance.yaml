@@ -1,6 +1,6 @@
 schema_version: 2
 rule_owner: AD-040
-current_projection_owner: AD-054
+current_projection_owner: AD-053
 baseline: 747d5aa2e71bd87c4e024d62f80d8cfa122d8279
 gate_first:
   evidence_form:
@@ -14,8 +14,8 @@ gate_first:
 subject:
   document_id: OCP-005
   primary: docs/005-assignment-concept/README.md
-  expected_version: 0.4.0
-  expected_status: Accepted
+  expected_version: 0.2.8
+  expected_status: Draft
   expected_concept_status: Accepted
 criterion:
   accepted_consumer: current-status-is-Accepted-and-Depends-On-exactly-includes-OCP-005

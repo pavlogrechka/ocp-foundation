@@ -109,9 +109,9 @@ class AssignmentQ2SufficiencyTests(unittest.TestCase):
     def test_blocker_status_readiness_candidates_and_cycle_changes_fail_independently(self) -> None:
         attacks = (
             (assignment_q2_sufficiency.SURFACE_PATH, ("blockers", 0, "question_ids"), []),
-            (assignment_q2_sufficiency.SURFACE_PATH, ("subject", "expected_status"), "Accepted"),
+            (assignment_q2_sufficiency.SURFACE_PATH, ("subject", "expected_status"), "Draft"),
             (assignment_q2_sufficiency.SURFACE_PATH, ("subject", "discovery_result"), "ready"),
-            (assignment_q2_sufficiency.GATE_PATH, ("candidates", 0, "expected_document_status"), "Accepted"),
+            (assignment_q2_sufficiency.GATE_PATH, ("candidates", 0, "expected_document_status"), "Draft"),
             (assignment_q2_sufficiency.GATE_PATH, ("candidates",), []),
             (assignment_q2_sufficiency.GATE_PATH, ("cycle_protocol", "active_cycle_id"), "ASSIGNMENT_T6"),
         )
@@ -155,7 +155,8 @@ class AssignmentQ2SufficiencyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            protected = root / payload["protected_artifacts"][0]["path"]
+            item = payload["protected_artifacts"][0]
+            protected = root / assignment_q2_sufficiency.historical_path(root, Path(item["path"]), item["sha256"])
             protected.write_text(protected.read_text(encoding="utf-8") + "\nmutation\n", encoding="utf-8")
             self.assertFalse(validate_assignment_q2_sufficiency(root).valid)
 

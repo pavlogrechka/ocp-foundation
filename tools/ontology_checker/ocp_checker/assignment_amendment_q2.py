@@ -85,8 +85,8 @@ EXPECTED_GATE_FIRST = {
 EXPECTED_SUBJECT = {
     "document_id": "OCP-005",
     "primary": "docs/005-assignment-concept/README.md",
-    "expected_version": "0.2.8",
-    "expected_status": "Draft",
+    "expected_version": "0.4.0",
+    "expected_status": "Accepted",
     "expected_concept_status": "Accepted",
     "question_id": "Q2",
     "question_state": "open",
@@ -374,7 +374,7 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
     if (
         payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-038"
-        or payload.get("current_projection_owner") != "AD-053"
+        or payload.get("current_projection_owner") != "AD-054"
         or payload.get("baseline") != "448d7d10fe3a3213da8479ce991995e01102cf3b"
         or payload.get("gate_first") != EXPECTED_GATE_FIRST
         or payload.get("subject") != EXPECTED_SUBJECT
@@ -401,8 +401,8 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.3.0"
-        or subject_metadata.get("Status") != "Draft"
+        or str(subject_metadata.get("Version")) != "0.4.0"
+        or subject_metadata.get("Status") != "Accepted"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or not q2_line
         or "~~" in q2_line

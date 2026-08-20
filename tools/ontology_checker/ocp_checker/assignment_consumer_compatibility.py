@@ -60,7 +60,7 @@ FORBIDDEN_OUTCOMES = frozenset(
 EXPECTED_IDENTITY = {
     "schema_version": 2,
     "rule_owner": "AD-040",
-    "current_projection_owner": "AD-053",
+    "current_projection_owner": "AD-054",
     "baseline": "747d5aa2e71bd87c4e024d62f80d8cfa122d8279",
 }
 EXPECTED_GATE_FIRST = {
@@ -78,8 +78,8 @@ EXPECTED_GATE_FIRST = {
 EXPECTED_SUBJECT = {
     "document_id": "OCP-005",
     "primary": "docs/005-assignment-concept/README.md",
-    "expected_version": "0.2.8",
-    "expected_status": "Draft",
+    "expected_version": "0.4.0",
+    "expected_status": "Accepted",
     "expected_concept_status": "Accepted",
 }
 EXPECTED_CRITERION = {
@@ -440,7 +440,7 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
     subject = _frontmatter(repo_root / EXPECTED_SUBJECT["primary"])
     if not subject or any(
         str(subject.get(field)) != str(expected)
-        for field, expected in (("Document-ID", "OCP-005"), ("Version", "0.3.0"), ("Status", "Draft"), ("Concept-Status", "Accepted"))
+        for field, expected in (("Document-ID", "OCP-005"), ("Version", "0.4.0"), ("Status", "Accepted"), ("Concept-Status", "Accepted"))
     ):
         errors.append(ASSIGNMENT_CONSUMER_COMPATIBILITY_INVENTORY_DRIFT)
 

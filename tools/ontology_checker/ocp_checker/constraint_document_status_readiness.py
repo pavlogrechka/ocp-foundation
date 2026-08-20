@@ -24,7 +24,7 @@ SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
 ASSIGNMENT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd"
-MAP_SHA256 = "e19a01f6d65aa356a5c04435fd18b11dbb840e452c1927597a6271d2f772d320"
+MAP_SHA256 = "37780494060708cbc24ce1075891b6cf6ce3e946daf463c6afe3f0f1cc0ca89e"
 SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 EXPECTED_INTERPRETATION = "confirms-open-question-closure-is-not-a-governance-promotion-criterion"
 OPEN_LEXICAL_VOCABULARY = (
@@ -83,6 +83,7 @@ PROMOTED_OPEN_CARRIERS = {
     "OCP-002": "Можливий mapping до Organizational Resource залишається відкритим",
     "OCP-003": "exact mapping `Organization ↔ Resource` лишаються відкритими",
     "OCP-004": "## 20. Open Questions",
+    "OCP-005": "## 19. Open Questions and Resolved Boundaries",
     "OCP-007": "## 7. Material-event continuity is unresolved",
     "OCP-008": "## 16. Open Questions",
     "OCP-010": "The first four questions remain open",
@@ -194,7 +195,7 @@ def validate_constraint_document_status_readiness(
         digest != MAP_SHA256
         or payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-052"
-        or payload.get("current_projection_owner") != "AD-053"
+        or payload.get("current_projection_owner") != "AD-054"
         or payload.get("baseline") != BASELINE
         or frozenset(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
     ):
@@ -289,9 +290,10 @@ def validate_constraint_document_status_readiness(
         or subject.get("Status") != "Draft"
         or subject.get("Concept-Status") != "Accepted"
         or _refs(subject.get("Depends-On")) != EXPECTED_DEPENDENCIES
-        or assignment.get("Status") != "Draft"
+        or assignment.get("Status") != "Accepted"
         or live.get("direct_dependencies") != list(EXPECTED_DEPENDENCIES)
-        or live.get("draft_direct_dependencies") != ["OCP-005"]
+        or live.get("draft_direct_dependencies") != []
+        or live.get("below_canonical_direct_dependencies") != ["OCP-005"]
         or subject_claim != {
             "document_id": "OCP-006", "primary": str(SUBJECT_PATH), "version": "0.3.2",
             "status": "Draft", "concept_status": "Accepted", "changed": False,
@@ -319,7 +321,7 @@ def validate_constraint_document_status_readiness(
     carriers = sweep.get("carriers") or []
     claimed = {row.get("document_id"): row for row in carriers if isinstance(row, dict)}
     if (
-        len(promoted) != 24
+        len(promoted) != 25
         or sweep.get("promoted_document_count") != len(promoted)
         or set(claimed) != set(PROMOTED_OPEN_CARRIERS)
         or sweep.get("interpretation") != EXPECTED_INTERPRETATION
@@ -335,7 +337,7 @@ def validate_constraint_document_status_readiness(
         doc_id for doc_id, (_, _, text) in promoted.items()
         if re.search(r"^##(?:\s+\d+\.)?\s+Open questions", text, flags=re.IGNORECASE | re.MULTILINE)
     }
-    if formal != {"OCP-004", "OCP-006", "OCP-008", "OCP-010"}:
+    if formal != {"OCP-004", "OCP-005", "OCP-006", "OCP-008", "OCP-010"}:
         errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
     unresolved_headings = {
         doc_id for doc_id, (_, _, text) in promoted.items()

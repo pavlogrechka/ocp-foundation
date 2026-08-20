@@ -30,7 +30,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 
 BASELINE = "8bfeffb2e2e8928a36d0179a831fa3899ca7cd6a"
-MAP_SHA256 = "2d9109d1d8877251a35eff7f13d916a9ceeca4f5961f51908935b261ff9883d8"
+MAP_SHA256 = "afb3d3a86e455761c34a4bf6153cd75e86844b3fed2d93569df2848fcbd17c05"
 SNAPSHOT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 SNAPSHOT_BLOB = "50f149cf5563083bb84d5d2197ec32c2ed15fa9b"
 DIRECT_DEPENDENCIES = (
@@ -69,16 +69,17 @@ NON_IMPLICATIONS = frozenset({
     "NO_AD052_CRITERIA_CHANGE", "NO_OTHER_DOCUMENT_PROMOTION",
 })
 CURRENT_PROJECTION_SYNC = {
-    "owner": "AD-053",
+    "owner": "AD-054",
     "historical_redirect_permitted_for_live_scans": False,
     "live_scanners": [
         "constraint-status-readiness", "assignment-stable-surface",
         "assignment-consumer-compatibility", "assignment-amendment-q2",
         "ocp024-status-projection", "ocp024-accepted-consumer-inventory",
+        "assignment-document-acceptance",
     ],
     "expected": {
         "ocp006_document_status": "Accepted",
-        "promoted_document_count": 24,
+        "promoted_document_count": 25,
         "ocp005_accepted_consumer_count": 7,
     },
     "new_consumer_compatibility_probe": {
@@ -372,24 +373,26 @@ def validate_constraint_document_acceptance(repo_root: Path) -> ConstraintDocume
     }
     if (
         sync != CURRENT_PROJECTION_SYNC
-        or readiness.get("current_projection_owner") != "AD-053"
-        or readiness.get("precedent_sweep", {}).get("promoted_document_count") != 24
-        or stable.get("current_projection_owner") != "AD-053"
+        or readiness.get("current_projection_owner") != "AD-054"
+        or readiness.get("precedent_sweep", {}).get("promoted_document_count") != 25
+        or stable.get("current_projection_owner") != "AD-054"
         or stable_consumers.get("OCP-006", {}).get("expected_status") != "Accepted"
         or stable_consumers.get("OCP-006", {}).get("lifecycle_class") != "accepted"
-        or compatibility.get("current_projection_owner") != "AD-053"
+        or compatibility.get("current_projection_owner") != "AD-054"
         or compatibility_consumers.get("OCP-006", {}).get("result") != "preserved"
         or compatibility_consumers.get("OCP-006", {}).get("fixture") != CURRENT_PROJECTION_SYNC["new_consumer_compatibility_probe"]["fixture"]
-        or amendment.get("current_projection_owner") != "AD-053"
+        or amendment.get("current_projection_owner") != "AD-054"
         or "OCP-006" not in amendment_consumers
-        or ocp024.get("current_projection_owner") != "AD-053"
+        or ocp024.get("current_projection_owner") != "AD-054"
         or ocp024.get("document_status_projection", {}).get("OCP-006") != ["0.4.0", "Accepted"]
         or "OCP-006" not in ocp024.get("consumer_need_projection", {}).get("accepted_ocp005_consumers", [])
     ):
         errors.append(CONSTRAINT_ACCEPTANCE_ATOMICITY_DRIFT)
 
     for item in payload.get("protected_artifacts") or ():
-        if _hash(repo_root / Path(str(item.get("path", "")))) != item.get("sha256"):
+        original = Path(str(item.get("path", "")))
+        resolved = historical_path(repo_root, original, str(item.get("sha256", "")))
+        if _hash(repo_root / resolved) != item.get("sha256"):
             errors.append(CONSTRAINT_ACCEPTANCE_PROTECTED_DRIFT)
 
     baseline_objects = payload.get("baseline_evidence_objects") or []

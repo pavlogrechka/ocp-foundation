@@ -7,8 +7,6 @@ from typing import Any, Iterable
 
 import yaml
 
-from .historical_evidence import historical_path
-
 from ._common import nonempty, result
 from .assignment_q3_lifecycle import load_q3_source_quote_successions
 from .checker import ValidationResult
@@ -161,7 +159,7 @@ NORMATIVE_STATEMENTS = {
     },
     "ASSIGNMENT_AMENDMENT_MODEL_OPEN": {
         "path": "docs/005-assignment-concept/README.md",
-        "status": "Draft",
+        "status": "Accepted",
         "section": "14. Business Rules",
         "quote": "6. Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.",
         "axis": "post_establishment_change_model",
@@ -169,9 +167,9 @@ NORMATIVE_STATEMENTS = {
     },
     "ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY": {
         "path": "docs/005-assignment-concept/README.md",
-        "status": "Draft",
+        "status": "Accepted",
         "section": "8. Temporal Effectivity",
-        "quote": "До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.",
+        "quote": "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity до авторитетного `established_at`.",
         "axis": "retroactivity_policy",
         "effect": "allow-only:prospective-only",
     },
@@ -268,14 +266,7 @@ SWEEP_VOCABULARY = {
         ("`contains`", "`part_of`"),
     ),
 }
-SOURCE_SWEEP_SHA256 = "a747871ba4a3e4e413c65eabc0b72ba632ab2256a322714a7b303e1850dcf6db"
-OCP006_BASELINE_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
-
-
-def _historical_source(repo_root: Path, relative: Path) -> Path:
-    if relative == Path("docs/006-constraint-concept/README.md"):
-        return historical_path(repo_root, relative, OCP006_BASELINE_SHA256)
-    return relative
+SOURCE_SWEEP_SHA256 = "53bd24704ec4b4e460c66286307536679f8ed79ff2d62f436e0b2e1b7692cb38"
 
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",
@@ -508,7 +499,7 @@ def _source_sweep_hits(repo_root: Path) -> list[dict[str, str]] | None:
         return None
     for path in paths:
         try:
-            text = (repo_root / _historical_source(repo_root, path.relative_to(repo_root))).read_text(encoding="utf-8")
+            text = path.read_text(encoding="utf-8")
         except OSError:
             return None
         status = _frontmatter(text).get("Status")
@@ -587,8 +578,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         ):
             return False
         try:
-            relative = Path(row["path"])
-            text = (repo_root / _historical_source(repo_root, relative)).read_text(encoding="utf-8")
+            text = (repo_root / Path(row["path"])).read_text(encoding="utf-8")
         except OSError:
             return False
         section = _section(text, row["section"])
@@ -608,7 +598,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
             if statement["path"] == row["path"]
             and statement["status"] == row["status"]
             and statement["axis"] == row["axis"]
-            and statement["quote"] in row["quote"]
+            and statement["quote"] in expected_quote
         )
         if row["statement_ids"] != matching_sources or (
             row["disposition"] == "classification-source"
@@ -640,8 +630,7 @@ def _source_sweep_payload_valid(payload: Any, repo_root: Path) -> bool:
         ):
             return False
         try:
-            relative = Path(row["path"])
-            text = (repo_root / _historical_source(repo_root, relative)).read_text(encoding="utf-8")
+            text = (repo_root / Path(row["path"])).read_text(encoding="utf-8")
         except OSError:
             return False
         section = _section(text, row["section"])
@@ -766,8 +755,8 @@ def validate_assignment_norm_compatibility(
         or payload.get("baseline") != BASELINE
         or payload.get("gate_first") != EXPECTED_GATE_FIRST
         or payload.get("criterion") != EXPECTED_CRITERION
-        or payload.get("source_policy") != {
-            "current_document_statuses": ["Draft", "Accepted", "Canonical"],
+        or set(payload.get("source_policy", {}).get("current_document_statuses", [])) != CURRENT_DOCUMENT_STATUSES
+        or {key: value for key, value in payload.get("source_policy", {}).items() if key != "current_document_statuses"} != {
             "subject_inventory_and_source_eligibility_are_separate": True,
             "historical_snapshots_and_baseline_objects_are_sources": False,
             "classification_evidence_mode": "analytic",

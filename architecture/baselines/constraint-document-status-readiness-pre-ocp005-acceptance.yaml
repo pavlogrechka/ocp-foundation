@@ -1,6 +1,6 @@
 schema_version: 2
 rule_owner: AD-052
-current_projection_owner: AD-054
+current_projection_owner: AD-053
 baseline: b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd
 gate_first:
   ocp016_gate: G4
@@ -82,7 +82,7 @@ promotion_criteria:
     source: docs/001-ontology-governance/README.md
     tokens: ["Для OCP у статусі `Canonical` кожна direct dependency класу OCP повинна бути", "Draft або merely Accepted OCP не може постачати Canonical OCP"]
     ocp006_assessment: not-satisfied
-    basis: direct-dependency-ocp005-is-Accepted-and-therefore-still-below-Canonical-L2
+    basis: direct-dependency-ocp005-is-draft
   - criterion_id: EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT
     applies_to: [Accepted, Canonical]
     source: docs/001-ontology-governance/README.md
@@ -92,8 +92,7 @@ promotion_criteria:
 ocp006_live_inputs:
   owner: Architecture Board
   direct_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
-  draft_direct_dependencies: []
-  below_canonical_direct_dependencies: [OCP-005]
+  draft_direct_dependencies: [OCP-005]
   route_evidence:
     source: docs/016-core-boundary/reviewed-contract-v0.1.0.md
     token: "Resource, Operation, Assignment, Constraint, Organization, Objective, Capability, Event | F"
@@ -104,17 +103,16 @@ ocp006_live_inputs:
     - architecture/constraint-q6-sufficiency.yaml
 precedent_sweep:
   scope: every-current-primary-ocp-with-status-accepted-or-canonical
-  promoted_document_count: 25
+  promoted_document_count: 24
   current_open_question_carrier_criterion: owner-text-currently-states-an-unresolved-semantic-question-or-choice-excluding-historical-baselines-review-prompts-backlog-status-ledgers-and-explicitly-closed-reopening-gates
   lexical_scan:
     vocabulary: [unresolved, remains-open, remain-open, залишається-відкрит, залишаються-відкрит, лишається-відкрит, лишаються-відкрит]
-    observed_line_count: 87
-    observed_sha256: 6898a4b39e3e22c3506beb38a03315c32c1f190579a22214128b1c38b72568b9
+    observed_line_count: 84
+    observed_sha256: e2f6c5ef1bc6d9e02ad1bfaeeb8fa7a8630173b61a5f685757f5d0a08c22af9b
   carriers:
     - {document_id: OCP-002, status: Canonical, token: "Можливий mapping до Organizational Resource залишається відкритим"}
     - {document_id: OCP-003, status: Canonical, token: "exact mapping `Organization ↔ Resource` лишаються відкритими"}
     - {document_id: OCP-004, status: Canonical, token: "## 20. Open Questions"}
-    - {document_id: OCP-005, status: Accepted, token: "## 19. Open Questions and Resolved Boundaries"}
     - {document_id: OCP-006, status: Accepted, token: "The following questions remain open exactly as recorded in §22"}
     - {document_id: OCP-007, status: Canonical, token: "## 7. Material-event continuity is unresolved"}
     - {document_id: OCP-008, status: Canonical, token: "## 16. Open Questions"}
@@ -122,7 +120,7 @@ precedent_sweep:
   interpretation: confirms-open-question-closure-is-not-a-governance-promotion-criterion
 result:
   accepted: normatively-possible-only-through-a-separate-complete-status-act
-  canonical: not-admissible-now-because-l2-fails-on-ocp005-below-Canonical
+  canonical: not-admissible-now-because-l2-fails-on-ocp005-draft
   open_questions: not-a-normative-status-bar
   promotion_authorized: false
   candidate_selected: false

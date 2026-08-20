@@ -20,7 +20,7 @@ candidates:
   - document_id: OCP-005
     primary: docs/005-assignment-concept/README.md
     slot: T6
-    expected_document_status: Accepted
+    expected_document_status: Draft
     expected_concept_status: Accepted
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004]
     expected_l2: pass

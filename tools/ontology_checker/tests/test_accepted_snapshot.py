@@ -27,6 +27,14 @@ from ocp_checker.accepted_snapshot import (  # noqa: E402
 
 
 EXPECTED = {
+    "OCP-005": (
+        "docs/005-assignment-concept/README.md",
+        "Accepted",
+        "0.3.0",
+        "docs/005-assignment-concept/reviewed-contract-v0.3.0.md",
+        "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b",
+        "current-accepted",
+    ),
     "OCP-006": (
         "docs/006-constraint-concept/README.md",
         "Accepted",
@@ -250,10 +258,10 @@ class AcceptedSnapshotTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            new_acceptance = root / "docs/005-assignment-concept/README.md"
+            new_acceptance = root / "docs/010-event-concept/README.md"
             text = new_acceptance.read_text(encoding="utf-8")
             new_acceptance.write_text(
-                text.replace("Status: Draft", "Status: Accepted", 1), encoding="utf-8"
+                text.replace("Status: Canonical", "Status: Accepted", 1), encoding="utf-8"
             )
             self.assertIn(
                 ACCEPTED_SNAPSHOT_COVERAGE_MISMATCH,
@@ -289,6 +297,7 @@ class AcceptedSnapshotTests(unittest.TestCase):
 
     def test_new_accepted_boundaries_preserve_exact_reviewed_bodies(self) -> None:
         markers = {
+            "OCP-005": 27,
             "OCP-006": 30,
             "OCP-019": 15,
             "OCP-021": 15,

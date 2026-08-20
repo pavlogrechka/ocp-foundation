@@ -140,7 +140,8 @@ class AssignmentQ3LifecycleTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            protected = root / payload["protected_historical_artifacts"][0]["path"]
+            item = payload["protected_historical_artifacts"][0]
+            protected = root / assignment_q3_lifecycle.historical_path(root, Path(item["path"]), item["sha256"])
             protected.write_text(protected.read_text(encoding="utf-8") + "\nmutation\n", encoding="utf-8")
             self.assertIn(
                 ASSIGNMENT_Q3_HISTORICAL_DRIFT,
@@ -156,7 +157,7 @@ class AssignmentQ3LifecycleTests(unittest.TestCase):
                 yaml.safe_dump(mutated, sort_keys=False, allow_unicode=True),
                 encoding="utf-8",
             )
-            self.assertFalse(assignment_norm_compatibility._live_sources_valid(root))
+            self.assertFalse(validate_assignment_q3_lifecycle(root).valid)
             self.assertIn(
                 assignment_temporal_scope.ASSIGNMENT_TEMPORAL_SCOPE_OWNER_TEXT_DRIFT,
                 assignment_temporal_scope.validate_assignment_temporal_scope(root).errors,
