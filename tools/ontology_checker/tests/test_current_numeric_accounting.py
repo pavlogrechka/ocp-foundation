@@ -50,17 +50,17 @@ class CurrentNumericAccountingTests(unittest.TestCase):
             {
                 "ocp_total": 25,
                 "ocp_canonical": 10,
-                "ocp_accepted": 14,
-                "ocp_draft": 1,
+                "ocp_accepted": 15,
+                "ocp_draft": 0,
                 "concept_total": 8,
                 "concept_canonical": 6,
                 "concept_accepted": 2,
-                "snapshot_total": 15,
-                "snapshot_current": 14,
+                "snapshot_total": 16,
+                "snapshot_current": 15,
                 "snapshot_retained": 1,
                 "p001_invokers": 9,
                 "fixtures": 303,
-                "tests": 443,
+                "tests": 452,
             },
         )
 

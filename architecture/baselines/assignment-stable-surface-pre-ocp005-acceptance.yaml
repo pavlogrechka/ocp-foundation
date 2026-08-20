@@ -1,6 +1,6 @@
 schema_version: 2
 rule_owner: AD-035
-current_projection_owner: AD-054
+current_projection_owner: AD-053
 baseline: 6e83f34292fa818f62b1170e4b77aae98515a9a8
 gate_first:
   ocp016_gate: G4
@@ -42,8 +42,8 @@ baseline_evidence_objects:
 subject:
   document_id: OCP-005
   primary: docs/005-assignment-concept/README.md
-  expected_version: 0.4.0
-  expected_status: Accepted
+  expected_version: 0.3.0
+  expected_status: Draft
   expected_concept_status: Accepted
   discovery_result: bounded_stable_candidate_not_selected
 concept_dependencies:

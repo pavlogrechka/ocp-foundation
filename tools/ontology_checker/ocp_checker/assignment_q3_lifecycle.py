@@ -250,11 +250,15 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
     ):
         errors.append(ASSIGNMENT_Q3_MAP_INVALID)
 
+    historical_subject = historical_path(repo_root, SUBJECT_PATH, "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b")
     try:
+        historical_text = (repo_root / historical_subject).read_text(encoding="utf-8")
         subject_text = (repo_root / SUBJECT_PATH).read_text(encoding="utf-8")
     except OSError:
+        historical_text = ""
         subject_text = ""
     metadata = _frontmatter(subject_text)
+    historical_metadata = _frontmatter(historical_text)
     questions = _section_lines(
         subject_text,
         "## 19. Open Questions and Resolved Boundaries",
@@ -264,9 +268,13 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
     if (
         metadata is None
         or metadata.get("Document-ID") != "OCP-005"
-        or str(metadata.get("Version")) != "0.3.0"
-        or metadata.get("Status") != "Draft"
+        or str(metadata.get("Version")) != "0.4.0"
+        or metadata.get("Status") != "Accepted"
         or metadata.get("Concept-Status") != "Accepted"
+        or historical_metadata is None
+        or str(historical_metadata.get("Version")) != "0.3.0"
+        or historical_metadata.get("Status") != "Draft"
+        or _hash(repo_root / historical_subject) != "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b"
         or subject_text.count(FINAL_BOUNDARY) != 1
         or subject_text.count(NON_IMPLICATION) != 1
         or not q3_line
@@ -316,7 +324,8 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
         surface_subject = surface.get("subject")
         if (
             not isinstance(surface_subject, dict)
-            or str(surface_subject.get("expected_version")) != "0.3.0"
+            or str(surface_subject.get("expected_version")) != "0.4.0"
+            or surface_subject.get("expected_status") != "Accepted"
             or surface_questions.get("Q3") != ("resolved-current", "outside-open-set")
             or surface_questions.get("Q9") != ("open", "blocks-whole-document-freeze")
             or moving.get("TEMPORAL_EFFECTIVITY_EXTENSION") != ["Q9"]

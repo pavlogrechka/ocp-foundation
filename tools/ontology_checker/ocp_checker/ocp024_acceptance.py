@@ -39,7 +39,7 @@ VALID_FIXTURE = Path("tools/ontology_checker/fixtures/completeness_evaluator/val
 ZERO_OCCUPANCY_FIXTURE = Path("tools/ontology_checker/fixtures/resource_occupancy/valid-zero-assignments.yaml")
 
 BASELINE = "954e2d76317a993d228d45a77ccfddec0c0f379a"
-MAP_SHA256 = "31a7e67e3b28679fefeaba520e01b3948fc974bb7d71d57b97d39f3433d90553"
+MAP_SHA256 = "b9d11c45235637367cf0a226cf71355937463767b8f6c375d8138fbab05fc9c1"
 SNAPSHOT_SHA256 = "0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753"
 SNAPSHOT_BLOB = "2713c99ca6653d35fc52435eaeaeb8f9f5174b1d"
 ACCEPTED_CONSUMERS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
@@ -157,7 +157,7 @@ def validate_ocp024_acceptance(repo_root: Path) -> Ocp024AcceptanceResult:
         or
         payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-049"
-        or payload.get("current_projection_owner") != "AD-053"
+        or payload.get("current_projection_owner") != "AD-054"
         or payload.get("baseline") != BASELINE
         or set(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
         or len(payload.get("forbidden_outcomes") or ()) != len(FORBIDDEN_OUTCOMES)

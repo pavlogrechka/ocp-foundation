@@ -159,8 +159,8 @@ class AssignmentStableSurfaceTests(unittest.TestCase):
 
     def test_subject_and_concept_dependency_state_are_live(self) -> None:
         subject_mutations = (
-            ("Version: 0.3.0", "Version: 0.3.1"),
-            ("Status: Draft", "Status: Accepted"),
+            ("Version: 0.4.0", "Version: 0.4.1"),
+            ("Status: Accepted", "Status: Draft"),
             ("Concept-Status: Accepted", "Concept-Status: Canonical"),
             ("Concept-Depends-On: [Resource, Operation]", "Concept-Depends-On: [Resource]"),
         )

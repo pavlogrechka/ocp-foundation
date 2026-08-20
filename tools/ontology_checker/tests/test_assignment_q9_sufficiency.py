@@ -108,9 +108,9 @@ class AssignmentQ9SufficiencyTests(unittest.TestCase):
     def test_blocker_status_readiness_and_candidate_changes_fail_independently(self) -> None:
         attacks = (
             (assignment_q9_sufficiency.SURFACE_PATH, ("blockers", 1, "question_ids"), []),
-            (assignment_q9_sufficiency.SURFACE_PATH, ("subject", "expected_status"), "Accepted"),
+            (assignment_q9_sufficiency.SURFACE_PATH, ("subject", "expected_status"), "Draft"),
             (assignment_q9_sufficiency.SURFACE_PATH, ("subject", "discovery_result"), "ready"),
-            (assignment_q9_sufficiency.GATE_PATH, ("candidates", 0, "expected_document_status"), "Accepted"),
+            (assignment_q9_sufficiency.GATE_PATH, ("candidates", 0, "expected_document_status"), "Draft"),
             (assignment_q9_sufficiency.GATE_PATH, ("candidates",), []),
         )
         for relative, value_path, replacement in attacks:
@@ -156,7 +156,8 @@ class AssignmentQ9SufficiencyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
-            protected = root / payload["protected_artifacts"][0]["path"]
+            item = payload["protected_artifacts"][0]
+            protected = root / assignment_q9_sufficiency.historical_path(root, Path(item["path"]), item["sha256"])
             protected.write_text(protected.read_text(encoding="utf-8") + "\nmutation\n", encoding="utf-8")
             self.assertFalse(validate_assignment_q9_sufficiency(root).valid)
 

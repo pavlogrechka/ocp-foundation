@@ -1,15 +1,15 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.4.0
-Status: Accepted
+Version: 0.3.0
+Status: Draft
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
 Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coordination Model, Constraint Model, Domain Models
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-20
+Last-Review: 2026-08-13
 ---
 
 # Assignment Concept
@@ -531,28 +531,3 @@ This PATCH changes no Assignment identity, structure, lifecycle, derivation, Con
 Revision `0.2.8` synchronizes only the volatile current Event status rendering in §4 with the separately authorized Event Concept canonicalization act: the row now shows Event as `Canonical`. Historical §22 accounting about the earlier `Accepted` projection remains unchanged.
 
 Assignment remains `Draft` and its Concept remains `Accepted`. The Event status cell creates no Assignment, history, participation, causation, authority, availability, Readiness, outcome or Event inference. Assignment identity/lifecycle, Resource/Operation binding, dependencies, graph edges, P-001 invocation, rules, checker behavior and fixtures remain unchanged.
-
-## 27. Accepted authority and incorporated reviewed body
-
-Architecture Board accepts the current `OCP-005` semantics as the basis on which dependent specifications may build, limited to the following reviewed surface:
-
-- stable Assignment identity and exact one-Resource/one-Operation references;
-- authoritative transition-history lifecycle and its deterministic projections;
-- single applicability interval and `assignment_effective_at` exactly as currently defined;
-- participation and operational-role derivations from effective Assignment records;
-- composition non-inheritance, non-authority and supersession identity boundaries;
-- the current structural, semantic and executable Assignment validation contract.
-
-The seven current Accepted direct consumers — `OCP-006`, `OCP-013`, `OCP-015`, `OCP-017`, `OCP-020`, `OCP-021` and `OCP-023` — receive lifecycle assurance for exactly those surfaces they already consume. The status transition changes no consumer runtime result, input contract, authority or positive capability.
-
-The following surfaces remain undefined and are withheld from dependent specifications: the post-Establishment amendment model (Q2), Role Taxonomy (Q4), partial scope for a composite Resource (Q5), role specializations (Q7), simultaneous-Assignment Conflict handoff (Q8), multiple applicability intervals (Q9), provenance taxonomy (Q10) and replacement overlap/gap policy (Q11). In particular, the existing single-interval record shape does not answer Q9, and the current supersession and traceability rules do not answer Q2. Dependent specifications may not infer, define by silence or treat as stable any withheld surface.
-
-`OCP-023` continues to require `assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)`. This acceptance neither supplies that completeness evidence nor names its legitimate evaluator. `occupied=false` therefore remains unavailable without separately valid completeness evidence, and no positive Core model is activated.
-
-## 28. Lifecycle accounting — v0.4.0
-
-Revision `0.4.0` is a pre-canonical MINOR lifecycle transition from `0.3.0 / Draft` to `0.4.0 / Accepted`. It adds the readable compatibility, consumer and non-implication accounting required by the atomic status act without changing the reviewed semantic body. The exact externally reviewed predecessor is preserved as [`reviewed-contract-v0.3.0.md`](reviewed-contract-v0.3.0.md).
-
-This acceptance does not make `OCP-005` Canonical; promote or canonicalize `OCP-006` or any other document; close any open question; activate any positive rule, result, profile or model; change `Assignment` or any other `Concept-Status`; satisfy the recorded unmet consumer need; select a promotion candidate; open a promotion cycle; or authorize another act.
-
-No data, reference, schema or runtime migration is required. The rollback boundary is the complete atomic unit: primary version/status and appended acceptance accounting, reviewed snapshot and snapshot-map entry, compatibility/dependency/consumer evidence, live repository projections, historical-successor bindings, checker/tests and repository accounting. A partial rollback is invalid and any reversal requires a new reviewed lifecycle act.

@@ -3,6 +3,13 @@ rule_owner: AD-029
 current_accepted_status: Accepted
 required_retained_evidence: [OCP-016]
 entries:
+  - document_id: OCP-005
+    primary: docs/005-assignment-concept/README.md
+    current_status: Accepted
+    reviewed_version: 0.3.0
+    snapshot: docs/005-assignment-concept/reviewed-contract-v0.3.0.md
+    sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+    basis: current-accepted
   - document_id: OCP-006
     primary: docs/006-constraint-concept/README.md
     current_status: Accepted

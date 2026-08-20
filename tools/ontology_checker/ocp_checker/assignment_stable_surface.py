@@ -319,7 +319,7 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
     if (
         payload.get("schema_version") != 2
         or payload.get("rule_owner") != "AD-035"
-        or payload.get("current_projection_owner") != "AD-053"
+        or payload.get("current_projection_owner") != "AD-054"
         or payload.get("baseline") != "6e83f34292fa818f62b1170e4b77aae98515a9a8"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",
@@ -363,14 +363,14 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             subject != {
                 "document_id": "OCP-005",
                 "primary": "docs/005-assignment-concept/README.md",
-                "expected_version": "0.3.0",
-                "expected_status": "Draft",
+                "expected_version": "0.4.0",
+                "expected_status": "Accepted",
                 "expected_concept_status": "Accepted",
                 "discovery_result": "bounded_stable_candidate_not_selected",
             }
             or primary != repo_root / "docs/005-assignment-concept/README.md"
-            or str(metadata.get("Version")) != "0.3.0"
-            or metadata.get("Status") != "Draft"
+            or str(metadata.get("Version")) != "0.4.0"
+            or metadata.get("Status") != "Accepted"
             or metadata.get("Concept-Status") != "Accepted"
         ):
             errors.append(ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT)

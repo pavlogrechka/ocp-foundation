@@ -124,7 +124,7 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
 
     def test_all_promoted_documents_are_swept_and_open_question_precedent_is_live(self) -> None:
         payload = self.payload()
-        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 24)
+        self.assertEqual(payload["precedent_sweep"]["promoted_document_count"], 25)
         self.assertEqual(
             {row["document_id"] for row in payload["precedent_sweep"]["carriers"]},
             set(readiness.PROMOTED_OPEN_CARRIERS),
@@ -169,14 +169,14 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
         )
         self.assertEqual(
             payload["result"]["canonical"],
-            "not-admissible-now-because-l2-fails-on-ocp005-draft",
+            "not-admissible-now-because-l2-fails-on-ocp005-below-Canonical",
         )
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
             path = root / readiness.ASSIGNMENT_PATH
             text = path.read_text(encoding="utf-8")
-            path.write_text(text.replace("Status: Draft", "Status: Canonical", 1), encoding="utf-8")
+            path.write_text(text.replace("Status: Accepted", "Status: Canonical", 1), encoding="utf-8")
             self.assertIn(
                 CONSTRAINT_STATUS_READINESS_SUBJECT_DRIFT,
                 validate_constraint_document_status_readiness(root).errors,

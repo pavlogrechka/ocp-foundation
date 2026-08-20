@@ -215,18 +215,22 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
     ):
         errors.append(ASSIGNMENT_Q9_EVIDENCE_DRIFT)
 
+    historical_subject = historical_path(repo_root, SUBJECT_PATH, SUBJECT_SHA256)
     try:
-        subject_text = (repo_root / SUBJECT_PATH).read_text(encoding="utf-8")
+        subject_text = (repo_root / historical_subject).read_text(encoding="utf-8")
+        current_text = (repo_root / SUBJECT_PATH).read_text(encoding="utf-8")
     except OSError:
         subject_text = ""
+        current_text = ""
     metadata = _frontmatter(subject_text)
+    current_metadata = _frontmatter(current_text)
     question_lines = _section_lines(
-        subject_text,
+        current_text,
         "## 19. Open Questions and Resolved Boundaries",
         "## 20. Deferred Decisions",
     )
     if (
-        _hash(repo_root / SUBJECT_PATH) != SUBJECT_SHA256
+        _hash(repo_root / historical_subject) != SUBJECT_SHA256
         or metadata is None
         or metadata.get("Document-ID") != "OCP-005"
         or str(metadata.get("Version")) != "0.3.0"
@@ -234,6 +238,9 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
         or metadata.get("Concept-Status") != "Accepted"
         or payload.get("subject_preservation", {}).get("sha256") != SUBJECT_SHA256
         or payload.get("subject_preservation", {}).get("version_class") != "no-subject-change"
+        or current_metadata is None
+        or str(current_metadata.get("Version")) != "0.4.0"
+        or current_metadata.get("Status") != "Accepted"
     ):
         errors.append(ASSIGNMENT_Q9_SUBJECT_DRIFT)
 
@@ -288,8 +295,8 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
             }
             or not isinstance(subject, dict)
             or subject.get("discovery_result") != "bounded_stable_candidate_not_selected"
-            or str(subject.get("expected_version")) != "0.3.0"
-            or subject.get("expected_status") != "Draft"
+            or str(subject.get("expected_version")) != "0.4.0"
+            or subject.get("expected_status") != "Accepted"
             or subject.get("expected_concept_status") != "Accepted"
             or payload.get("current_projection") != {
                 "q2_state": "open",
@@ -437,7 +444,7 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
         or protocol.get("active_cycle_id") is not None
         or completed != ["EVENT_T6"]
         or candidate_ids != ["OCP-005", "OCP-006", "OCP-010"]
-        or assignment_candidate.get("expected_document_status") != "Draft"
+        or assignment_candidate.get("expected_document_status") != "Accepted"
         or assignment_candidate.get("expected_concept_status") != "Accepted"
         or payload.get("promotion_gate_guard") != {
             "schema_version": 5,

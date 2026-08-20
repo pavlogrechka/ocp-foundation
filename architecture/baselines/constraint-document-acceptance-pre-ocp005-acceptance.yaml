@@ -156,12 +156,12 @@ historical_evidence_successions:
     sha256: 23ac5f4e57ecb42a370d5a3f72eb48affbb09f7296b8c8adbac59d8ab8e71dcb
     reason: live-precedent-sweep-advances-without-rewriting-the-AD052-baseline
 current_projection_sync:
-  owner: AD-054
+  owner: AD-053
   historical_redirect_permitted_for_live_scans: false
-  live_scanners: [constraint-status-readiness, assignment-stable-surface, assignment-consumer-compatibility, assignment-amendment-q2, ocp024-status-projection, ocp024-accepted-consumer-inventory, assignment-document-acceptance]
+  live_scanners: [constraint-status-readiness, assignment-stable-surface, assignment-consumer-compatibility, assignment-amendment-q2, ocp024-status-projection, ocp024-accepted-consumer-inventory]
   expected:
     ocp006_document_status: Accepted
-    promoted_document_count: 25
+    promoted_document_count: 24
     ocp005_accepted_consumer_count: 7
   new_consumer_compatibility_probe:
     consumer_id: OCP-006
@@ -174,7 +174,7 @@ document_status_projection:
   OCP-002: [1.6.0, Canonical]
   OCP-003: [1.0.0, Canonical]
   OCP-004: [1.0.1, Canonical]
-  OCP-005: [0.4.0, Accepted]
+  OCP-005: [0.3.0, Draft]
   OCP-006: [0.4.0, Accepted]
   OCP-007: [1.1.1, Canonical]
   OCP-008: [1.0.0, Canonical]
