@@ -74,7 +74,6 @@ class AssignmentAmendmentQ2Tests(unittest.TestCase):
             "EXPECTED_CONSUMERS",
             "EXPECTED_PROBES",
             "EXPECTED_PROJECTION",
-            "EXPECTED_GATE_GUARD",
         )
 
         def scalar_paths(value, prefix=()):

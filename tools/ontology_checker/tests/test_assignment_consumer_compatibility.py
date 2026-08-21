@@ -71,7 +71,7 @@ class AssignmentConsumerCompatibilityTests(unittest.TestCase):
 
         dictionaries = (
             "EXPECTED_IDENTITY", "EXPECTED_GATE_FIRST", "EXPECTED_SUBJECT", "EXPECTED_CRITERION",
-            "EXPECTED_CONSUMERS", "EXPECTED_PROJECTION", "EXPECTED_GATE_GUARD", "EXPECTED_ANCHORS",
+            "EXPECTED_CONSUMERS", "EXPECTED_PROJECTION", "EXPECTED_ANCHORS",
         )
 
         def scalar_paths(value, prefix=()):

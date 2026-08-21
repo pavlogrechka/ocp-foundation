@@ -1,0 +1,76 @@
+schema_version: 1
+rule_owner: AD-044
+baseline: 6099a1ce042624b86fb4289f75d396a53fa9addb
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  reason: discovery-classification-does-not-create-a-positive-capable-rule-result-profile-or-activation
+  hypothetical_activation_still_requires_g4: true
+criterion:
+  pressured: declared-need-bindings-are-adequate-for-some-but-not-all-resolutions
+  neutral: declared-need-bindings-are-adequate-and-live-satisfaction-is-proven-for-every-resolution
+  undecidable-from-inside: no-resolution-dependent-adequacy-difference-and-live-satisfaction-requires-missing-external-input
+  negative_proof_rule: enumerate-every-resolution-and-derive-adequacy-before-testing-live-satisfaction
+consumer_need:
+  accepted_consumer_ref: OCP-023@0.2.0
+  need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+  token: assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)
+  real_completeness_authority_available: false
+  current_disposition: unmet-positive-consumer-need
+blocker_results:
+  - blocker_id: AMENDMENT_MODEL_ABSENT
+    question_ids: [Q2]
+    classification: pressured
+    need_adequacy_effect: current-bindings-adequate-except-in-place-amendment
+    reason: in-place-amendment-requires-an-observation-cut-binding-that-the-current-signature-does-not-carry
+    resolution_ids:
+      - IN_PLACE_TRACEABLE_AMENDMENT
+      - SUPERSEDING_ASSIGNMENT_FOR_CHANGE
+      - POST_ESTABLISHMENT_IMMUTABILITY
+  - blocker_id: TEMPORAL_MODEL_UNRESOLVED
+    question_ids: [Q3, Q9]
+    classification: pressured
+    need_adequacy_effect: current-bindings-adequate-only-for-prospective-resolutions
+    reason: retroactive-resolutions-require-an-observation-cut-binding-that-the-current-signature-does-not-carry
+    resolution_ids:
+      - PROSPECTIVE_ONLY_SINGLE_INTERVAL
+      - PROSPECTIVE_ONLY_MULTIPLE_INTERVALS
+      - RETROACTIVE_ALLOWED_SINGLE_INTERVAL
+      - RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS
+  - blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
+    question_ids: [Q5]
+    classification: pressured
+    need_adequacy_effect: current-bindings-adequate-except-part-as-resource-identity
+    reason: part-as-resource-identity-requires-part-whole-closure-that-the-current-signature-does-not-carry
+    resolution_ids:
+      - WHOLE_RESOURCE_ONLY
+      - EXPLICIT_PART_SCOPE_ON_ASSIGNMENT
+      - PART_AS_RESOURCE_IDENTITY
+resolution_inventory:
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: IN_PLACE_TRACEABLE_AMENDMENT, externally_visible_form: same-assignment-identity-with-attributable-versioned-change, need_adequacy_effect: additional-observation-cut-binding-required, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-in-place.yaml}
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: SUPERSEDING_ASSIGNMENT_FOR_CHANGE, externally_visible_form: new-assignment-identity-linked-to-predecessor, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-superseding.yaml}
+  - {blocker_id: AMENDMENT_MODEL_ABSENT, question_ids: [Q2], resolution_id: POST_ESTABLISHMENT_IMMUTABILITY, externally_visible_form: change-forbidden-after-establishment, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: analytic, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q2-immutable.yaml}
+  - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: PROSPECTIVE_ONLY_SINGLE_INTERVAL, externally_visible_form: no-retroactivity-and-one-interval, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-prospective-single.yaml}
+  - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: PROSPECTIVE_ONLY_MULTIPLE_INTERVALS, externally_visible_form: no-retroactivity-and-many-intervals, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-prospective-multiple.yaml}
+  - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: RETROACTIVE_ALLOWED_SINGLE_INTERVAL, externally_visible_form: retroactivity-and-one-interval, need_adequacy_effect: additional-observation-cut-binding-required, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-retroactive-single.yaml}
+  - {blocker_id: TEMPORAL_MODEL_UNRESOLVED, question_ids: [Q3, Q9], resolution_id: RETROACTIVE_ALLOWED_MULTIPLE_INTERVALS, externally_visible_form: retroactivity-and-many-intervals, need_adequacy_effect: additional-observation-cut-binding-required, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-temporal-retroactive-multiple.yaml}
+  - {blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED, question_ids: [Q5], resolution_id: WHOLE_RESOURCE_ONLY, externally_visible_form: assignment-subject-is-whole-resource, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q5-whole-resource.yaml}
+  - {blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED, question_ids: [Q5], resolution_id: EXPLICIT_PART_SCOPE_ON_ASSIGNMENT, externally_visible_form: assignment-adds-part-scope-under-resource-reference, need_adequacy_effect: current-three-bindings-adequate, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q5-explicit-scope.yaml}
+  - {blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED, question_ids: [Q5], resolution_id: PART_AS_RESOURCE_IDENTITY, externally_visible_form: part-receives-own-resource-identity, need_adequacy_effect: additional-part-whole-closure-binding-required, evidence_mode: observed, live_satisfaction: undecidable-from-inside, blocker_classification: pressured, probe_fixture: pressure-q5-part-identity.yaml}
+external_missing_inputs:
+  - legitimate-completeness-owner-evaluator
+  - externally-grounded-all-assignments-coverage-observation
+  - activation-baseline-rule-snapshot-context-binding
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+forbidden_outcomes:
+  - ASSIGNMENT_RULE_SELECTION
+  - BLOCKER_REMOVAL
+  - CONCEPT_OR_GRAPH_CHANGE
+  - NEXT_ACT_AUTHORIZATION
+  - OCP005_CHANGE
+  - OPEN_QUESTION_RESOLUTION
+  - POSITIVE_MODEL_ACTIVATION
+  - PROMOTION_CYCLE_START

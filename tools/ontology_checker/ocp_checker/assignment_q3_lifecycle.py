@@ -9,6 +9,7 @@ import yaml
 
 from .checker import assignment_effective_at, load_fixture, validate_assignment
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_Q3_MAP_INVALID = "ASSIGNMENT_Q3_MAP_INVALID"
@@ -28,7 +29,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 PROBE_FIXTURE = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
 BASELINE = "ca87815b0198c165cfeec759965656da2ef7b5b2"
-MAP_SHA256 = "a6f01849e0b23db0fdbf5ab94d397834cf11363bd46d07dd5086056bf8c5f2e7"
+MAP_SHA256 = "021b98a956da88ac9d502401bc41fbd08ddd4443cad84882d801bc0afb9e04c8"
 Q3_TOKEN = "Чи допускається ретроактивне Establishment Assignment?"
 Q9_TOKEN = "Чи може один Assignment мати кілька неперервних applicability intervals"
 FINAL_BOUNDARY = (
@@ -408,10 +409,9 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
     protocol = gate.get("cycle_protocol") if isinstance(gate, dict) else None
     if (
         not isinstance(gate, dict)
-        or gate.get("schema_version") != 5
-        or completed != ["EVENT_T6"]
         or not isinstance(protocol, dict)
-        or protocol.get("active_cycle_id") is not None
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
+        or not promotion_gate_guard_is_current(gate, payload.get("promotion_gate_guard"))
     ):
         errors.append(ASSIGNMENT_Q3_GATE_DRIFT)
 

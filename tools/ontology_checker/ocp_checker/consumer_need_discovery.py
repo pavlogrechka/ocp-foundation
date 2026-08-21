@@ -6,6 +6,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .foundation_promotion_gate import promotion_gate_guard_is_current
+
 
 CONSUMER_NEED_MAP_INVALID = "CONSUMER_NEED_MAP_INVALID"
 CONSUMER_NEED_SCOPE_DRIFT = "CONSUMER_NEED_SCOPE_DRIFT"
@@ -29,7 +31,7 @@ ELIGIBLE_GOVERNANCE_IDS = frozenset(
         "AD-009", "AD-010", "AD-011", "AD-012", "AD-013", "AD-014", "AD-015",
         "AD-016", "AD-017", "AD-018", "AD-019", "AD-020", "AD-021", "AD-022",
         "AD-025", "AD-026", "AD-027", "AD-028", "AD-029", "AD-030", "AD-032",
-        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046", "AD-049", "AD-053", "AD-054",
+        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046", "AD-049", "AD-053", "AD-054", "AD-056",
     }
 )
 CANDIDATE_IDS = frozenset(
@@ -348,7 +350,7 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
     if (
         payload.get("schema_version") != 3
         or payload.get("rule_owner") != "AD-036"
-        or payload.get("current_projection_owner") != "AD-054"
+        or payload.get("current_projection_owner") != "AD-056"
         or payload.get("baseline") != "f64b3a23419092649cfb4059d4853eabd93fbbc2"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",
@@ -448,16 +450,11 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
         )
     except (OSError, yaml.YAMLError):
         promotion_gate = None
-    expected_guard = {"schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None}
-    if payload.get("promotion_gate_guard") != expected_guard or not isinstance(promotion_gate, dict):
+    guard = payload.get("promotion_gate_guard")
+    if set(guard or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"} or not isinstance(promotion_gate, dict):
         errors.append(CONSUMER_NEED_PROMOTION_GATE_DRIFT)
     else:
-        cycle_ids = [item.get("cycle_id") for item in promotion_gate.get("cycles", []) if isinstance(item, dict)]
-        if (
-            promotion_gate.get("schema_version") != 5
-            or promotion_gate.get("cycle_protocol", {}).get("active_cycle_id") is not None
-            or cycle_ids != ["EVENT_T6"]
-        ):
+        if not promotion_gate_guard_is_current(promotion_gate, guard):
             errors.append(CONSUMER_NEED_PROMOTION_GATE_DRIFT)
 
     return _result(errors)

@@ -10,6 +10,7 @@ import yaml
 from ._common import nonempty, parse_time, result
 from .checker import ValidationResult
 from .resource_occupancy import derive_resource_occupancy, validate_resource_occupancy_dataset
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_PRESSURE_MAP_INVALID = "ASSIGNMENT_PRESSURE_MAP_INVALID"
@@ -669,15 +670,9 @@ def validate_assignment_consumer_pressure(repo_root: Path) -> AssignmentConsumer
     guard = payload.get("promotion_gate_guard") if isinstance(payload, dict) else None
     cycle_protocol = gate.get("cycle_protocol") if isinstance(gate, dict) else None
     if (
-        guard != {"schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None}
-        or gate.get("schema_version") != 5
+        set(guard or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
         or not isinstance(cycle_protocol, dict)
-        or cycle_protocol.get("active_cycle_id") is not None
-        or [
-            item.get("cycle_id") for item in gate.get("cycles", [])
-            if isinstance(item.get("steps"), dict)
-            and set(item["steps"].values()) == {"completed"}
-        ] != ["EVENT_T6"]
+        or not promotion_gate_guard_is_current(gate, guard)
     ):
         errors.append(ASSIGNMENT_PRESSURE_GATE_DRIFT)
     return _map_result(errors)

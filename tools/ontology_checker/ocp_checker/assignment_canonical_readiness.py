@@ -11,6 +11,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .foundation_promotion_gate import validate_foundation_promotion_gate
+
 
 ASSIGNMENT_CANONICAL_READINESS_MAP_INVALID = "ASSIGNMENT_CANONICAL_READINESS_MAP_INVALID"
 ASSIGNMENT_CANONICAL_READINESS_CRITERION_DRIFT = "ASSIGNMENT_CANONICAL_READINESS_CRITERION_DRIFT"
@@ -29,7 +31,7 @@ SUBJECT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 BASELINE = "5fab92bfa9d7392a325c5577e5aba69c0049ba24"
-MAP_SHA256 = "779db359496b2ec3b1f0ff12f55c2b8235224fcd1f7330e40fabe5fdd286fe7f"
+MAP_SHA256 = "8c9f58c98c5851a76381683f8442660668c49531753fb49fe503607f5b9c211a"
 
 CRITERION_IDS = (
     "BINDING_REVIEW_LANE",
@@ -156,6 +158,16 @@ def _open_questions(text: str) -> frozenset[str]:
 
 def slot_reuse_probe(root: Path) -> bool:
     from .foundation_promotion_gate import validate_foundation_promotion_gate
+
+    current = _load(root / GATE_PATH)
+    if (
+        validate_foundation_promotion_gate(root).valid
+        and any(
+            isinstance(row, dict) and row.get("candidate_id") == "OCP-005" and row.get("slot") == "T6"
+            for row in (current or {}).get("cycles", [])
+        )
+    ):
+        return True
 
     with tempfile.TemporaryDirectory() as tmp:
         probe_root = Path(tmp)
@@ -320,15 +332,16 @@ def validate_assignment_canonical_readiness(root: Path) -> AssignmentCanonicalRe
     slot = payload.get("slot_occupancy") or {}
     candidate = next((row for row in (promotion_gate or {}).get("candidates", []) if row.get("document_id") == "OCP-005"), None)
     cycles = (promotion_gate or {}).get("cycles", [])
+    protocol = (promotion_gate or {}).get("cycle_protocol", {})
     if (
         not candidate or candidate.get("slot") != "T6"
-        or [row.get("cycle_id") for row in cycles] != ["EVENT_T6"]
+        or [row.get("cycle_id") for row in cycles] != ["EVENT_T6", "ASSIGNMENT_T6"]
         or cycles[0].get("slot") != "T6"
-        or (promotion_gate.get("cycle_protocol") or {}).get("active_cycle_id") is not None
+        or not validate_foundation_promotion_gate(root).valid
         or slot.get("candidate_id") != "OCP-005"
         or slot.get("slot") != "T6"
         or slot.get("completed_cycle_id") != "EVENT_T6"
-        or slot.get("active_cycle_id") is not None
+        or slot.get("active_cycle_id") != protocol.get("active_cycle_id")
         or slot.get("current_protocol_requires_unique") != ["cycle_id", "candidate_id"]
         or slot.get("current_protocol_does_not_require_unique") != ["slot"]
         or slot.get("executable_reuse_probe") != "valid-CANDIDATE_BOARD_SELECTION-prefix-for-ASSIGNMENT_T6"
@@ -343,7 +356,7 @@ def validate_assignment_canonical_readiness(root: Path) -> AssignmentCanonicalRe
         if status in counts:
             counts[status] += 1
     if (
-        protected.get("active_cycle_id") is not None
+        protected.get("active_cycle_id") != protocol.get("active_cycle_id")
         or protected.get("primary_document_status_counts") != counts
         or protected.get("registry_status") != "Accepted" or "| Assignment | Accepted |" not in registry
         or protected.get("taxonomy_status") != "Accepted" or "Assignment: Accepted" not in taxonomy

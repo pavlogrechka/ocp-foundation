@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import validate_foundation_promotion_gate
 
 
 CONSTRAINT_STATUS_READINESS_MAP_INVALID = "CONSTRAINT_STATUS_READINESS_MAP_INVALID"
@@ -355,8 +356,7 @@ def validate_constraint_document_status_readiness(
     ):
         errors.append(CONSTRAINT_STATUS_READINESS_PRECEDENT_DRIFT)
 
-    gate_payload = _load(repo_root / GATE_PATH)
-    if not isinstance(gate_payload, dict) or gate_payload.get("cycle_protocol", {}).get("active_cycle_id") is not None:
+    if not validate_foundation_promotion_gate(repo_root).valid:
         errors.append(CONSTRAINT_STATUS_READINESS_GATE_DRIFT)
 
     for item in payload.get("baseline_evidence_objects") or ():

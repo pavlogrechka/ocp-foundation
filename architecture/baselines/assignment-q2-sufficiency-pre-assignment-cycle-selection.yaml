@@ -1,0 +1,180 @@
+schema_version: 1
+rule_owner: AD-048
+baseline: 4586bccbdc943c6a92daf052ce3df915d41fb976
+baseline_evidence_objects:
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Document-ID: OCP-001", "Status: Canonical", "pre-canonical"]}
+  - {path: docs/005-assignment-concept/README.md, blob: 1dd975a17ec65df751357fdd049c8ca928739bd1, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b, state_tokens: ["Version: 0.3.0", "Status: Draft", "Яка amendment model потрібна для зміни role або applicability після Establishment?"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Document-ID: OCP-016", "Status: Canonical", "G4 consumer activation"]}
+  - {path: docs/023-resource-occupancy/README.md, blob: a846333fae80aff2b3697e811d2b155c91f04122, sha256: 5ec9aca56de4524b4ab78a9e98e2cf5d7561d6f13bac8cf7778d66a99f5490d9, state_tokens: ["Document-ID: OCP-023", "Status: Accepted", "Every Assignment must independently satisfy"]}
+  - {path: architecture/assignment-amendment-q2-attempt.yaml, blob: 94bfcdfa612862383dc3cefe729e5ed83f63d694, sha256: 05792d9211c7520604101f8d3e7655377805bb89e8bb6b6e9600da388c608299, state_tokens: ["rule_owner: AD-038", "Q2_SUPERSESSION_ONLY", "result: not-established"]}
+  - {path: architecture/assignment-consumer-pressure.yaml, blob: 2a96810984b79374c04bff20663cbc6953744c3d, sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2, state_tokens: ["SUPERSEDING_ASSIGNMENT_FOR_CHANGE", "POST_ESTABLISHMENT_IMMUTABILITY"]}
+  - {path: architecture/assignment-norm-compatibility.yaml, blob: 7abda1ed215fb15a520e56682c442db9c9e042b4, sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd, state_tokens: ["post_establishment_change_model", "classification: underdetermined"]}
+  - {path: architecture/assignment-stable-surface.yaml, blob: 6cc326c64e5dc5d84cbc60e1f95548db9dd0abad, sha256: cd093bd36ab29a203ad56ccded32baee671989be768b7ad415f65850e2b6d3d9, state_tokens: ["AMENDMENT_MODEL_ABSENT", "question_ids: [Q2]"]}
+  - {path: architecture/assignment-retroactivity-q3-resolution.yaml, blob: 0262964d9754325fe897871734ed2e1f0ec1ff9e, sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a, state_tokens: ["rule_owner: AD-046", "sufficient-for-q3-effectivity-boundary-only"]}
+  - {path: architecture/assignment-q9-sufficiency.yaml, blob: 35fcda31e6254e0c1ba889506aa6f92ba755a769, sha256: 773ebb1d147850d4eec317f9ef544662b1dcf2688f53c590742eeece1d7889ef, state_tokens: ["rule_owner: AD-047", "insufficient-for-q9-closure"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 78f5f75d84fe9b0bdbf43ad3922404fa34f6c2d1, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd, state_tokens: ["schema_version: 5", "cycle_id: EVENT_T6", "active_cycle_id: null"]}
+  - {path: architecture/discovery/AD-038-assignment-amendment-q2-attempt.md, blob: 1f1d6ef3bed85ee2910d93072e3e394da7453b4c, sha256: 3e9311901a261bb297c13c93616f3c65421757e6a8468ef013875106a22df1c9, state_tokens: ["Decision-ID: AD-038", "Status: Discovery"]}
+  - {path: architecture/discovery/AD-044-assignment-consumer-pressure.md, blob: 560f851e3fda0e491c39fc4c2bf90889fb2fc5db, sha256: 078a615572c864478929f9abfef7ae1ee287ebe1cca4919a010fb375d8676a6e, state_tokens: ["Decision-ID: AD-044", "Status: Discovery"]}
+  - {path: architecture/discovery/AD-045-assignment-norm-compatibility.md, blob: bc4d7dea13df24626200ec9e7b0080797a322ea9, sha256: 7a1c25d22bdf3179ff552dc1635ded320a6220ec6a205da091c26188bd590020, state_tokens: ["Decision-ID: AD-045", "Status: Discovery"]}
+  - {path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, blob: 22e43011c145a45c90f7ee806669c39c37779c08, sha256: 1732397cc866a68d93b80530b17975f9eb58e26acd0aa0cf0817a7b99c0021ac, state_tokens: ["Decision-ID: AD-046", "Status: Accepted"]}
+  - {path: architecture/discovery/AD-047-assignment-q9-sufficiency.md, blob: 481044de247a971845a1c1a972abc83bc339eeef, sha256: 55c7cd4b8846710a8f86364d99cd29a9197b734a2432b8e9f50ea5180bed9ef7, state_tokens: ["Decision-ID: AD-047", "Status: Discovery"]}
+  - {path: tools/ontology_checker/fixtures/assignment/valid-established.yaml, blob: 354de6880fe59429c40179eedd4037e52ff5208a, sha256: 3f2ea38f35292b821a7297ed4604a1764efd12c5399ee61a64ea7a2aa5b91117, state_tokens: ["case_id: assignment-valid-established-001", "expected:"]}
+  - {path: tools/ontology_checker/ocp_checker/checker.py, blob: 120ada9dd00b1df0b46cf3060aef2b0c290948b1, sha256: 3a093f0d76113bb5dd2799c7d0aaf73b51b752569dc13de145bb3d158a7b4a47, state_tokens: ["def validate_assignment(", "def assignment_effective_at("]}
+  - {path: tools/ontology_checker/ocp_checker/assignment_amendment_q2.py, blob: 6f4cfc4f0479b9d02955cbe10c21807f7b869a6b, sha256: 0e94423c2a26c2d27339c713dbfef3b6993767fd5097dc74e8e1030525ee28b2, state_tokens: ["ASSIGNMENT_AMENDMENT_Q2_PROBE_DRIFT", "Q2_SUPERSESSION_ONLY"]}
+gate_first:
+  evidence_form:
+    ocp016_gate: G4
+    applies: false
+    positive_capable: false
+    activation_created: false
+    reason: insufficiency-evidence-adds-no-rule-result-profile-or-activation
+  hypothetical_closures:
+    SUPERSEDING_ASSIGNMENT_FOR_CHANGE:
+      applies: true
+      positive_capable: true
+      reason: mandatory-successor-link-provenance-and-replay-mechanism-would-be-added
+    POST_ESTABLISHMENT_IMMUTABILITY:
+      applies: false
+      positive_capable: false
+      reason: pure-negative-prohibition-would-add-no-positive-capable-result-or-activation
+      separate_board_lifecycle_act_required: true
+sufficiency_criterion:
+  declared_before_application: true
+  order:
+    - owner-selection
+    - executable-discrimination
+    - accepted-consumer-exclusion
+    - unique-survivor-intersection
+    - no-new-rule-required
+  close_only_if:
+    - one-class-is-directly-normative-or-necessarily-derived-from-an-explicitly-exhaustive-enumeration
+    - executable-behavior-distinguishes-the-selected-class-from-its-alternative
+    - accepted-consumer-evidence-excludes-the-alternative
+    - pressure-and-current-norm-leave-exactly-one-q2-class
+    - finalization-needs-no-new-mutation-prohibition-successor-provenance-or-replay-rule
+  result: insufficient-for-q2-closure
+argument_type_policy:
+  direct_normative_statement:
+    sufficient_alone_when: exact-current-owner-statement-selects-one-class-and-excludes-the-other
+    current_sufficient_alone: false
+    current_reason: traceability-is-direct-but-the-amendment-model-is-explicitly-open
+  enumeration_inference:
+    sufficient_alone_when: enumeration-is-explicitly-exhaustive-and-the-residual-treatment-is-necessary
+    current_sufficient_alone: false
+    current_reason: endpoint-immutability-and-lifecycle-lists-do-not-claim-exhaustive-field-mutation-semantics
+  silence_inference:
+    sufficient_alone_when: never
+    current_sufficient_alone: false
+    current_reason: absent-amendment-transition-does-not-prohibit-field-change-or-require-supersession
+calibration:
+  owner_selection: {Q3: direct-boundary-present, Q2: traceability-only-model-open, Q9: closed-world-boundary-absent}
+  executable_discrimination: {Q3: present, Q2: absent-both-field-changes-accepted, Q9: absent-extra-interval-field-accepted}
+  accepted_consumer_exclusion: {Q3: excludes-retroactive-classes, Q2: removes-in-place-only-two-remain, Q9: neutral-two-remain}
+  survivor_intersection: {Q3: one-common-prospective-boundary, Q2: two-change-model-classes, Q9: two-cardinality-classes}
+  no_new_rule_required: {Q3: true, Q2: false, Q9: false}
+evidence_ledger:
+  - {evidence_id: DIRECT_TRACEABILITY_WITH_OPEN_MODEL, argument_type: direct-normative-statement, evidence_mode: analytic, source: docs/005-assignment-concept/README.md §14.6, proves: post-establishment-role-or-applicability-change-if-any-must-be-traceable, does_not_prove: whether-change-is-forbidden-or-requires-a-superseding-assignment}
+  - {evidence_id: DIRECT_ENDPOINT_IMMUTABILITY_ONLY, argument_type: direct-normative-statement, evidence_mode: analytic, source: docs/005-assignment-concept/README.md §§5-and-14.2, proves: resource-ref-and-operation-ref-cannot-be-edited-after-establishment, does_not_prove: role-or-applicability-immutability}
+  - {evidence_id: OPTIONAL_SUPERSESSION_MINIMUM_FIELD, argument_type: enumeration-inference, evidence_mode: analytic, source: docs/005-assignment-concept/README.md §§6-and-12, proves: supersedes-assignment-ref-is-an-optional-minimum-field-for-a-new-assignment, does_not_prove: supersession-is-required-for-role-or-applicability-change}
+  - {evidence_id: LIFECYCLE_PATH_ENUMERATION, argument_type: enumeration-inference, evidence_mode: analytic, source: docs/005-assignment-concept/README.md §7.6, proves: listed-paths-are-exhaustive-for-lifecycle-stage-transitions, does_not_prove: field-value-mutation-semantics-outside-lifecycle-stage}
+  - {evidence_id: NO_AMENDMENT_TRANSITION_OR_RECORD, argument_type: silence-inference, evidence_mode: analytic, source: docs/005-assignment-concept/README.md §§6-7, proves: no-current-amendment-record-is-defined, does_not_prove: a-prohibition-or-a-mandatory-successor-model}
+  - {evidence_id: ROLE_CHANGE_ACCEPTED_WITH_UNCHANGED_HISTORY, argument_type: executable-observation, evidence_mode: observed, source: tools/ontology_checker/fixtures/assignment/valid-established.yaml, proves: validator-accepts-post-establishment-role-value-replacement-without-successor-or-new-provenance, does_not_prove: semantic-permission-to-amend-in-place}
+  - {evidence_id: APPLICABILITY_CHANGE_ACCEPTED_WITH_UNCHANGED_HISTORY, argument_type: executable-observation, evidence_mode: observed, source: tools/ontology_checker/fixtures/assignment/valid-established.yaml, proves: validator-accepts-post-establishment-applicability-end-replacement-without-successor-or-new-provenance, does_not_prove: semantic-permission-to-amend-in-place}
+  - {evidence_id: AD044_TWO_PRESSURE_SURVIVORS, argument_type: historical-baseline-evidence, evidence_mode: observed, source: architecture/assignment-consumer-pressure.yaml, proves: consumer-pressure-removes-in-place-amendment-but-retains-supersession-and-immutability, does_not_prove: lifecycle-selection-authority}
+  - {evidence_id: AD045_TWO_UNDERDETERMINED_SURVIVORS, argument_type: historical-baseline-evidence, evidence_mode: analytic, source: architecture/assignment-norm-compatibility.yaml, proves: both-q2-survivors-have-no-current-norm-violation, does_not_prove: semantic-axis-completeness-or-lifecycle-selection-authority}
+  - {evidence_id: SIX_ACCEPTED_CONSUMERS_SELECT_NEITHER, argument_type: current-consumer-evidence, evidence_mode: analytic, source: architecture/assignment-amendment-q2-attempt.yaml, proves: no-current-accepted-consumer-requires-in-place-amendment-or-selects-between-the-two-survivors, does_not_prove: which-model-should-be-added}
+executable_probe:
+  fixture: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+  unchanged_fields: [assignment_id, transition_history, provenance_ref, supersedes_assignment_ref]
+  role_change:
+    field_path: role_specification.role_code
+    replacement_value: support
+    expected_original_valid: true
+    expected_mutated_valid: true
+  applicability_change:
+    field_path: applicability_end
+    replacement_value: "2026-08-02T13:00:00Z"
+    expected_original_valid: true
+    expected_mutated_valid: true
+  rejection_control:
+    field_path: role_specification.role_code
+    replacement_value: "---"
+    expected_valid: false
+    expected_error: ASSIGNMENT_ROLE_REQUIRED
+  result: validator-does-not-discriminate-q2-survivors
+surviving_q2_classes:
+  - {resolution_id: SUPERSEDING_ASSIGNMENT_FOR_CHANGE, pressure_effect: current-three-bindings-adequate, norm_classification: underdetermined, norm_underdetermined_axes: [post_establishment_change_model]}
+  - {resolution_id: POST_ESTABLISHMENT_IMMUTABILITY, pressure_effect: current-three-bindings-adequate, norm_classification: underdetermined, norm_underdetermined_axes: [post_establishment_change_model]}
+accepted_consumer_ids: [OCP-013, OCP-015, OCP-017, OCP-020, OCP-021, OCP-023]
+decision:
+  question_id: Q2
+  disposition: remains-open-insufficient-evidence
+  criterion_satisfied: false
+  closure_authorized_by_this_outcome: false
+  subject_changed: false
+  amendment_blocker_removed: false
+  missing_obligations:
+    - ROLE_AND_APPLICABILITY_IMMUTABILITY_RULE
+    - SUPERSESSION_REQUIRED_FOR_ROLE_OR_APPLICABILITY_CHANGE
+    - AMENDMENT_OR_SUCCESSOR_PROVENANCE_AND_REPLAY_BINDING
+subject_preservation:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  before: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  after: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  version_class: no-subject-change
+  sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+current_projection:
+  q2_state: open
+  q5_state: open
+  q9_state: open
+  amendment_moving_surface_question_ids: [Q2]
+  blockers:
+    AMENDMENT_MODEL_ABSENT: [Q2]
+    TEMPORAL_MODEL_UNRESOLVED: [Q9]
+    PARTIAL_SCOPE_IDENTITY_UNRESOLVED: [Q5]
+  assignment_discovery_result: bounded_stable_candidate_not_selected
+  whole_document_freeze_reachable: false
+  promotion_candidate_ids: [OCP-005, OCP-006, OCP-010]
+versioning:
+  OCP-005: unchanged-0.3.0-because-conditional-closure-threshold-failed
+  AD-048: 0.1.0-Discovery
+migration:
+  assignment_data: none
+  references: none
+  schemas: none
+  consumer_behavior: unchanged
+  rollback_unit: [AD-048-document-witness-checker-tests-and-accounting]
+  rollback_effect: removes-only-the-insufficiency-record-without-changing-q2-or-any-live-contract
+protected_artifacts:
+  - {path: docs/005-assignment-concept/README.md, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b}
+  - {path: architecture/assignment-amendment-q2-attempt.yaml, sha256: 05792d9211c7520604101f8d3e7655377805bb89e8bb6b6e9600da388c608299}
+  - {path: architecture/assignment-consumer-pressure.yaml, sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2}
+  - {path: architecture/assignment-norm-compatibility.yaml, sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd}
+  - {path: architecture/assignment-stable-surface.yaml, sha256: cd093bd36ab29a203ad56ccded32baee671989be768b7ad415f65850e2b6d3d9}
+  - {path: architecture/assignment-retroactivity-q3-resolution.yaml, sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a}
+  - {path: architecture/assignment-q9-sufficiency.yaml, sha256: 773ebb1d147850d4eec317f9ef544662b1dcf2688f53c590742eeece1d7889ef}
+  - {path: architecture/discovery/AD-038-assignment-amendment-q2-attempt.md, sha256: 3e9311901a261bb297c13c93616f3c65421757e6a8468ef013875106a22df1c9}
+  - {path: architecture/discovery/AD-044-assignment-consumer-pressure.md, sha256: 078a615572c864478929f9abfef7ae1ee287ebe1cca4919a010fb375d8676a6e}
+  - {path: architecture/discovery/AD-045-assignment-norm-compatibility.md, sha256: 7a1c25d22bdf3179ff552dc1635ded320a6220ec6a205da091c26188bd590020}
+  - {path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, sha256: 1732397cc866a68d93b80530b17975f9eb58e26acd0aa0cf0817a7b99c0021ac}
+  - {path: architecture/discovery/AD-047-assignment-q9-sufficiency.md, sha256: 55c7cd4b8846710a8f86364d99cd29a9197b734a2432b8e9f50ea5180bed9ef7}
+  - {path: architecture/foundation-promotion-gate.yaml, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd}
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+forbidden_outcomes:
+  - Q2_CLOSURE
+  - ANY_OTHER_QUESTION_CLOSURE
+  - AMENDMENT_BLOCKER_REMOVAL
+  - OCP005_CHANGE
+  - OCP005_STATUS_CHANGE
+  - ASSIGNMENT_CONCEPT_STATUS_CHANGE
+  - ASSIGNMENT_READINESS_CHANGE
+  - PROMOTION_CANDIDATE_SET_CHANGE
+  - POSITIVE_MODEL_ACTIVATION
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - T7_OPEN
+  - NEXT_ACT_AUTHORIZATION

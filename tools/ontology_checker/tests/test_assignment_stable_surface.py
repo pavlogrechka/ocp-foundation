@@ -303,7 +303,7 @@ class AssignmentStableSurfaceTests(unittest.TestCase):
                 self.copy_inputs(root)
                 gate = yaml.safe_load((root / self.gate_path).read_text(encoding="utf-8"))
                 if mutation == "activate":
-                    gate["cycle_protocol"]["active_cycle_id"] = "ASSIGNMENT_T6"
+                    gate["cycle_protocol"]["active_cycle_id"] = None
                 elif mutation == "remove-event":
                     gate["cycles"] = []
                 else:

@@ -1,0 +1,157 @@
+schema_version: 2
+rule_owner: AD-040
+current_projection_owner: AD-054
+baseline: 747d5aa2e71bd87c4e024d62f80d8cfa122d8279
+gate_first:
+  evidence_form:
+    ocp016_gate: G4
+    applies: false
+    reason: compatibility-preservation-evidence-is-not-a-positive-capable-rule-result-or-profile
+  blocker_closure:
+    ocp016_gate: G4
+    applies: false
+    reason: removing-an-evidence-debt-after-replay-adds-no-rule-field-result-or-profile
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  expected_version: 0.4.0
+  expected_status: Accepted
+  expected_concept_status: Accepted
+criterion:
+  accepted_consumer: current-status-is-Accepted-and-Depends-On-exactly-includes-OCP-005
+  preservation: every-declared-consumed-element-is-inside-the-bounded-stable-surface-and-its-predeclared-real-fixture-result-is-unchanged-while-moving-surfaces-remain-open
+  negative_consumer: assignment-coupling-remains-fail-safe-and-non-permissive
+  positive_consumer: exact-current-assignment-alignment-remains-valid-with-the-same-terminal-disposition
+stable_surface_witness: architecture/assignment-stable-surface.yaml
+consumer_results:
+  - consumer_id: OCP-006
+    primary: docs/006-constraint-concept/README.md
+    consumer_class: positive-derivation
+    consumed_tokens:
+      - кілька ефективних Assignment одного Resource
+      - Сам `supersedes_assignment_ref` не визначає допустимі часові межі
+      - Без цього Constraint сам факт кількох Assignment не є порушенням
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, SUPERSESSION_IDENTITY_BOUNDARY, EXECUTABLE_ASSIGNMENT_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: [AMENDMENT_AFTER_ESTABLISHMENT, TEMPORAL_EFFECTIVITY_EXTENSION, ROLE_GOVERNANCE, COMPOSITE_RESOURCE_SCOPE, CONSTRAINT_CONFLICT_HANDOFF, PROVENANCE_TAXONOMY, REPLACEMENT_POLICY]
+    fixture: tools/ontology_checker/fixtures/constraint/valid-assignment-moving-surfaces-independent.yaml
+    probe: assignment_moving_surfaces_do_not_change_exact_snapshot_result
+    expected_control: satisfied
+    expected_probe: moving:satisfied|binding:indeterminate|assignment:valid/valid
+    result: preserved
+  - consumer_id: OCP-013
+    primary: docs/013-resource-interchangeability/README.md
+    consumer_class: negative-exclusion
+    consumed_tokens:
+      - retain every exclusion of availability, authorization, ranking, selection, replacement and Assignment mutation
+    stable_surface_ids: [NON_INHERITANCE_NON_AUTHORITY_BOUNDARY, SUPERSESSION_IDENTITY_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/interchangeability/mandatory-counterexamples.yaml
+    probe: assignment_mutation_is_rejected
+    expected_control: positive
+    expected_probe: indeterminate
+    result: preserved
+  - consumer_id: OCP-015
+    primary: docs/015-coordination-workflow/README.md
+    consumer_class: negative-exclusion
+    consumed_tokens:
+      - preserves Resource and Assignment identity
+      - alter Resource or Assignment identity
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, NON_INHERITANCE_NON_AUTHORITY_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/coordination_workflow/mandatory-cases.yaml
+    probe: assignment_mutation
+    expected_control: positive
+    expected_probe: indeterminate
+    result: preserved
+  - consumer_id: OCP-017
+    primary: docs/017-operation-lifecycle/README.md
+    consumer_class: positive-derivation
+    consumed_tokens:
+      - if OCP-005 `assignment_effective_at` is true at that instant
+      - whose `operation_ref` names the Operation
+      - never edits an Assignment transition history
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, TRANSITION_HISTORY_LIFECYCLE_KERNEL, STRUCTURAL_ROLE_PROVENANCE_KERNEL, EXECUTABLE_ASSIGNMENT_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: [AMENDMENT_AFTER_ESTABLISHMENT, TEMPORAL_EFFECTIVITY_EXTENSION, ROLE_GOVERNANCE, COMPOSITE_RESOURCE_SCOPE]
+    fixture: tools/ontology_checker/fixtures/operation_lifecycle/valid-q3i-completed.yaml
+    probe: terminal_alignment_with_open_moving_extensions
+    expected_control: valid-remains_effective_independently
+    expected_probe: valid-remains_effective_independently
+    result: preserved
+  - consumer_id: OCP-020
+    primary: docs/020-quantitative-constraint-input/README.md
+    consumer_class: negative-exclusion
+    consumed_tokens:
+      - create, amend, activate, suspend or terminate an Assignment
+      - Existing Resource, Operation, Assignment and Constraint artifacts remain valid
+    stable_surface_ids: [NON_INHERITANCE_NON_AUTHORITY_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/quantitative_input/invalid-forbidden-coupling.yaml
+    probe: assignment_mutation_forbidden_coupling
+    expected_control: valid
+    expected_probe: QUANTITATIVE_INPUT_FORBIDDEN_COUPLING
+    result: preserved
+  - consumer_id: OCP-021
+    primary: docs/021-reservation-allocation-boundary/README.md
+    consumer_class: negative-exclusion
+    consumed_tokens:
+      - Their truth remains owned by OCP-005/OCP-006
+      - creates, blocks, cancels, supersedes or mutates an Assignment
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, NON_INHERITANCE_NON_AUTHORITY_BOUNDARY, SUPERSESSION_IDENTITY_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/reservation_boundary/invalid-forbidden-coupling.yaml
+    probe: assignment_mutation_forbidden_coupling
+    expected_control: valid
+    expected_probe: RESERVATION_BOUNDARY_FORBIDDEN_COUPLING+RESERVATION_BOUNDARY_REQUEST_INVALID
+    result: preserved
+  - consumer_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    consumer_class: positive-derivation
+    consumed_tokens:
+      - assignment_effective_at(assignment, at)
+      - Every Assignment must independently satisfy the current OCP-005 reference validator
+    stable_surface_ids: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, EXECUTABLE_ASSIGNMENT_BOUNDARY]
+    moving_consumed_surface_ids: []
+    moving_probe_surface_ids: []
+    fixture: tools/ontology_checker/fixtures/resource_occupancy/valid-one-effective.yaml
+    probe: completeness_evidence_removed
+    expected_control: occupied:A-001
+    expected_probe: indeterminate
+    result: preserved
+projection:
+  blocker_removed: ACCEPTED_CONSUMER_COMPATIBILITY_UNPROVEN
+  remaining_blockers: [AMENDMENT_MODEL_ABSENT, TEMPORAL_MODEL_UNRESOLVED, PARTIAL_SCOPE_IDENTITY_UNRESOLVED]
+  promotion_reachable: false
+  questions_changed: []
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+baseline_evidence_objects:
+  - {path: docs/005-assignment-concept/README.md, blob: 6e6c00e723b15a348e7610d4ca5a1ae23526c52b, sha256: a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065}
+  - {path: docs/013-resource-interchangeability/README.md, blob: 658a291b4c3b9a0229aba09d485c1137723fe70b, sha256: a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74}
+  - {path: docs/015-coordination-workflow/README.md, blob: ea60634e54faedabb8c5e08b036030c2f0e4e20b, sha256: 6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d}
+  - {path: docs/017-operation-lifecycle/README.md, blob: 0b2ea683df308babd1111ff47e9272c9b0742f78, sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030}
+  - {path: docs/020-quantitative-constraint-input/README.md, blob: 0e1e7d0947ab3c7d1c0355258651179f618636a2, sha256: 1783c32094aee9f09ca50ececb12bf9ec8f3c6599590331dba3894ad727d9b5c}
+  - {path: docs/021-reservation-allocation-boundary/README.md, blob: bae4ac5de36b5d2a2d0c9182e5f1208c14593a35, sha256: 6289378b6d9f785e24abca39dbd6d3da550ccb21a43b3d1632e8c5de4894a89e}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4}
+  - {path: architecture/discovery/AD-035-assignment-stable-surface.md, blob: 81ed1c4981c97a0d0a4511e4492741bf5382ce05, sha256: 85a10e965faaa7ba65484efe08e985b7a04bf06712553c914673d65faf1df805}
+  - {path: architecture/assignment-stable-surface.yaml, blob: ae8a2ff5bf493182d4cd51e897afe736ed36cd5d, sha256: 617af7d0598bbdd756fd890a6dcd38f0324d6c481abf2f72c5a871c439a6bcc8}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 78f5f75d84fe9b0bdbf43ad3922404fa34f6c2d1, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd}
+  - {path: tools/ontology_checker/fixtures/interchangeability/mandatory-counterexamples.yaml, blob: 3437e78bbff39a3ac977755ebe9e7af849aed60e, sha256: 6815557ac57854ba3dfa1214462818132595b13cd0594b220cef8a649e7eca66}
+  - {path: tools/ontology_checker/fixtures/coordination_workflow/mandatory-cases.yaml, blob: 6ce9ce33cc648ce6825fe8e9009caffdc5a53768, sha256: 16fdfbe2943760435a8030b8558290640b8dbf4abe882ee1cc985821015e2162}
+  - {path: tools/ontology_checker/fixtures/operation_lifecycle/valid-q3i-completed.yaml, blob: c85a65e217c7d0ecdbabf8e9adf76f1a88a7faff, sha256: 901ce32b9af2dcf9e664b565c7a6a4fc8919c7329d40d666a38a3115d0fb5672}
+  - {path: tools/ontology_checker/fixtures/quantitative_input/invalid-forbidden-coupling.yaml, blob: ce9e2a55acb574b0d542e29764ef5ef3f6b43834, sha256: 2ec5f9c2c2893c10cfd14fb25531a1f374d29a166b5f0696a5c374f7a481007e}
+  - {path: tools/ontology_checker/fixtures/reservation_boundary/invalid-forbidden-coupling.yaml, blob: 580df6de3974854d52e3d56df41d16b4f274895c, sha256: 6d66155d4c438304449242def419c1f40078ddbcbe0898c01faeed63c9d24135}
+forbidden_outcomes:
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - OCP005_PROMOTION
+  - ASSIGNMENT_FREEZE_REACHABLE
+  - OPEN_QUESTION_CLOSURE
+  - T7_OPEN

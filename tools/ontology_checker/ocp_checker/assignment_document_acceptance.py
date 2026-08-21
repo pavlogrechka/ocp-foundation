@@ -9,6 +9,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .foundation_promotion_gate import promotion_gate_guard_is_current
+
 
 ASSIGNMENT_ACCEPTANCE_MAP_INVALID = "ASSIGNMENT_ACCEPTANCE_MAP_INVALID"
 ASSIGNMENT_ACCEPTANCE_CRITERION_DRIFT = "ASSIGNMENT_ACCEPTANCE_CRITERION_DRIFT"
@@ -30,7 +32,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "1325de6a4fff84b8350fe1bfecf51e4fd0f4c176"
-MAP_SHA256 = "1fe41710d74251edde06c2465871c9c0162866e6a56a25d6217c7fa69607e596"
+MAP_SHA256 = "e93b7b11ec20a6d3b8a647519d98ec619c0f2b589c404ca6bfc83c2bb0e149dd"
 SNAPSHOT_SHA256 = "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b"
 SNAPSHOT_BLOB = "1dd975a17ec65df751357fdd049c8ca928739bd1"
 DIRECT_DEPENDENCIES = ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004")
@@ -315,8 +317,8 @@ def validate_assignment_document_acceptance(repo_root: Path) -> AssignmentDocume
     completed = [row.get("cycle_id") for row in cycles if isinstance(row, dict) and all(value == "completed" for value in (row.get("steps") or {}).values())]
     candidates = {row.get("document_id"): row for row in gate.get("candidates") or [] if isinstance(row, dict)}
     if (
-        gate.get("schema_version") != 5 or (gate.get("cycle_protocol") or {}).get("active_cycle_id") is not None
-        or completed != ["EVENT_T6"] or guard.get("candidate_selected") is not False or guard.get("cycle_opened") is not False
+        not promotion_gate_guard_is_current(gate, guard)
+        or guard.get("candidate_selected") is not False or guard.get("cycle_opened") is not False
         or (candidates.get("OCP-005") or {}).get("expected_document_status") != "Accepted"
         or (candidates.get("OCP-006") or {}).get("expected_document_status") != "Accepted"
         or (candidates.get("OCP-006") or {}).get("l2_blockers") != ["OCP-005"]

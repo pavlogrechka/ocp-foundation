@@ -79,26 +79,38 @@ class FoundationPromotionGateTests(unittest.TestCase):
     def append_assignment_cycle(self, root: Path, states: tuple[str, str, str]) -> None:
         payload = self.payload(root)
         steps = dict(zip(EXPECTED_STEPS, states))
-        payload["cycles"].append({
+        cycle = {
             "cycle_id": "ASSIGNMENT_T6", "candidate_id": "OCP-005", "slot": "T6",
             "steps": steps,
             "evidence": {
                 step: f"SYNTHETIC_{step}_ACT"
                 for step, state in steps.items() if state == "completed"
             },
-        })
+        }
+        existing = next(
+            (index for index, row in enumerate(payload["cycles"]) if row["candidate_id"] == "OCP-005"),
+            None,
+        )
+        if existing is None:
+            payload["cycles"].append(cycle)
+        else:
+            payload["cycles"][existing] = cycle
         payload["cycle_protocol"]["active_cycle_id"] = (
             None if all(state == "completed" for state in states) else "ASSIGNMENT_T6"
         )
         self.write_payload(root, payload)
 
-    def test_repository_records_completed_event_cycle_and_no_active_cycle(self) -> None:
+    def test_repository_records_completed_event_and_active_assignment_selection_cycle(self) -> None:
         result = validate_foundation_promotion_gate(ROOT)
         self.assertTrue(result.valid, result.errors)
         payload = self.payload()
         self.assertEqual(payload["schema_version"], 5)
-        self.assertIsNone(payload["cycle_protocol"]["active_cycle_id"])
-        self.assertEqual([item["candidate_id"] for item in payload["cycles"]], ["OCP-010"])
+        self.assertEqual(payload["cycle_protocol"]["active_cycle_id"], "ASSIGNMENT_T6")
+        self.assertEqual([item["candidate_id"] for item in payload["cycles"]], ["OCP-010", "OCP-005"])
+        self.assertEqual(
+            tuple(payload["cycles"][1]["steps"].values()),
+            ("completed", "pending", "pending"),
+        )
         self.assertEqual(set(payload["candidates"][0]), foundation_promotion_gate.CANDIDATE_KEYS)
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
@@ -140,9 +152,9 @@ class FoundationPromotionGateTests(unittest.TestCase):
             result = validate_foundation_promotion_gate(root)
             self.assertTrue(result.valid, result.errors)
 
-    def test_next_cycle_selected_draft_state_is_reachable_without_code_change(self) -> None:
+    def test_next_cycle_selected_accepted_state_is_reachable_without_code_change(self) -> None:
         self.assert_assignment_cycle_reachable(
-            ("completed", "pending", "pending"), "Draft", "Accepted"
+            ("completed", "pending", "pending"), "Accepted", "Accepted"
         )
 
     def test_next_cycle_document_promoted_state_is_reachable_without_code_change(self) -> None:
@@ -202,6 +214,10 @@ class FoundationPromotionGateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             self.copy_inputs(root)
+            payload = self.payload(root)
+            payload["cycles"] = [row for row in payload["cycles"] if row["candidate_id"] != "OCP-005"]
+            payload["cycle_protocol"]["active_cycle_id"] = None
+            self.write_payload(root, payload)
             self.mutate_subject_status(root, "OCP-005", "Canonical", "Accepted")
             payload = self.payload(root)
             constraint = next(item for item in payload["candidates"] if item["document_id"] == "OCP-006")
@@ -218,6 +234,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
             root = Path(tmp)
             self.copy_inputs(root)
             payload = self.payload(root)
+            payload["cycles"] = [row for row in payload["cycles"] if row["candidate_id"] != "OCP-005"]
             payload["cycles"].append({
                 "cycle_id": "CONSTRAINT_T7", "candidate_id": "OCP-006", "slot": "T7",
                 "steps": dict(zip(EXPECTED_STEPS, ("completed", "pending", "pending"))),

@@ -132,7 +132,7 @@ preserved_assignment_projection:
 promotion_gate_guard:
   schema_version: 5
   completed_cycle_ids: [EVENT_T6]
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
 forbidden_outcomes:
   - Q2_CLOSURE
   - AB026_RESOLUTION

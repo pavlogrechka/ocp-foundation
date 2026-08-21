@@ -1,0 +1,212 @@
+schema_version: 1
+rule_owner: AD-050
+baseline: f76f2d0828088e8d98b7a8d64f8c71cc843a13e6
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  reason: discovery-evidence-is-not-a-positive-capable-rule-result-or-profile
+  activation_performed: false
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+subject:
+  document_id: OCP-006
+  primary: docs/006-constraint-concept/README.md
+  expected_version: 0.3.2
+  expected_status: Draft
+  expected_concept_status: Accepted
+  discovery_result: bounded-stable-candidate-with-one-whole-freeze-blocker-not-selected
+classification_criterion:
+  vocabulary_source: architecture/assignment-stable-surface.yaml
+  classes:
+    blocks-whole-document-freeze: every-permitted-answer-can-change-a-declared-property-inside-the-bounded-kernel
+    local-after-bounded-freeze: a-named-kernel-remains-invariant-under-every-permitted-answer
+    outside-bounded-surface: current-owner-boundary-keeps-the-question-outside-the-named-kernel
+    outside-open-set: resolved-question-excluded-from-current-open-inventory
+  unclassified_policy: report-vocabulary-gap-before-extension
+question_inventory:
+  - question_id: Q1
+    state: open
+    classification: outside-bounded-surface
+    surface: CONFLICT_OBJECT_OR_AGGREGATION
+    classification_basis_mode: analytical
+    evidence_token: "Чи потрібен окремий фундаментальний Concept `Conflict`, чи достатньо агрегованого evaluation model?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["## 13. Violation and Conflict Boundary", "не є автоматично фундаментальним Conflict"]
+    invariant_surface: VIOLATION_NON_CONFLICT_BOUNDARY
+    moving_surface: FUTURE_CONFLICT_OWNER
+  - question_id: Q2
+    state: open
+    classification: local-after-bounded-freeze
+    surface: PREDICATE_EXPRESSION_LANGUAGE
+    classification_basis_mode: analytical
+    evidence_token: "Яка канонічна expression або rule language потрібна для PredicateSpecification?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["### 6.2 PredicateSpecification", "не визначає технологію його виконання"]
+    invariant_surface: VERSIONED_PREDICATE_INPUT_CONTRACT
+    moving_surface: EXPRESSION_LANGUAGE
+  - question_id: Q3
+    state: resolved
+    classification: outside-open-set
+    surface: PRECEDENCE_OVERRIDE_EXCEPTION
+    classification_basis_mode: observational
+    evidence_token: "Як визначаються precedence, override та exception між Constraint?"
+    closure_act: AD-027
+  - question_id: Q4
+    state: resolved
+    classification: outside-open-set
+    surface: CONTEXTUAL_WAIVER
+    classification_basis_mode: observational
+    evidence_token: "Чи допускаються contextual waivers, і яким Concept вони представлені?"
+    closure_act: AD-027
+  - question_id: Q5
+    state: resolved
+    classification: outside-open-set
+    surface: QUANTITY_UNIT_DEMAND_CAPACITY_INPUT
+    classification_basis_mode: observational
+    evidence_token: "Яка модель quantity, unit, demand і capacity потрібна для кількісних Constraint?"
+    closure_act: AD-025
+  - question_id: Q6
+    state: open
+    classification: blocks-whole-document-freeze
+    surface: DYNAMIC_INPUT_EVALUATION_CURRENTNESS
+    classification_basis_mode: analytical
+    evidence_token: "Який строк актуальності має ConstraintEvaluationRecord для dynamic inputs?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["no current authoritative result exists", "Відсутність current evaluation ніколи не трактується як `satisfied`"]
+    undefined_property: when-a-dynamic-input-evaluation-ceases-to-be-current
+    affected_declared_property: EFFECTIVE_RESULT_AND_ADMISSIBILITY
+  - question_id: Q7
+    state: open
+    classification: local-after-bounded-freeze
+    surface: EVALUATION_PERSISTENCE_MODE
+    classification_basis_mode: analytical
+    evidence_token: "Чи повинні всі blocking evaluations зберігатися, чи частина може бути відтворюваною derivation?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["authoritative stored or reproducible result", "exact Constraint version and input snapshot"]
+    invariant_surface: EXACT_BOUND_AUTHORITATIVE_RESULT
+    moving_surface: STORAGE_OR_REPRODUCTION_POLICY
+  - question_id: Q8
+    state: open
+    classification: outside-bounded-surface
+    surface: OPERATION_AUTHORIZATION
+    classification_basis_mode: analytical
+    evidence_token: "Як Constraint взаємодіє з authorization Operation?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["не замінює authorization, approval або execution decision", "не є джерелом авторизації автоматично"]
+    invariant_surface: CONSTRAINT_NON_AUTHORIZATION_BOUNDARY
+    moving_surface: EXTERNAL_OPERATION_AUTHORIZATION_OWNER
+  - question_id: Q9
+    state: resolved
+    classification: outside-open-set
+    surface: RESERVATION_OBJECT_FORM
+    classification_basis_mode: observational
+    evidence_token: "Чи є Reservation окремим Concept або результатом Assignment та blocking Constraint?"
+    closure_act: AD-026
+  - question_id: Q10
+    state: open
+    classification: outside-bounded-surface
+    surface: READINESS_AVAILABILITY_HANDOFF
+    classification_basis_mode: analytical
+    evidence_token: "Які Constraint повинні впливати на майбутню Readiness або availability model?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["Readiness і availability не виводяться з одного violation без окремого прийнятого правила"]
+    invariant_surface: NON_READINESS_NON_AVAILABILITY_BOUNDARY
+    moving_surface: FUTURE_READINESS_AVAILABILITY_OWNER
+  - question_id: Q11
+    state: open
+    classification: local-after-bounded-freeze
+    surface: CONSTRAINT_KIND_TAXONOMY
+    classification_basis_mode: analytical
+    evidence_token: "Чи потрібна окрема taxonomy constraint kinds у Core?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["## 14. Working Constraint Patterns", "робочими прикладами, а не канонічною taxonomy"]
+    invariant_surface: PREDICATE_AND_ENFORCEMENT_KERNEL
+    moving_surface: OPTIONAL_KIND_TAXONOMY
+  - question_id: Q12
+    state: open
+    classification: local-after-bounded-freeze
+    surface: DOMAIN_RELATION_EXPRESSION
+    classification_basis_mode: analytical
+    evidence_token: "Як виражати Constraint над геометричними, часовими та спектральними relations без включення domain semantics до Core?"
+    basis:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["relation_scope", "Конкретна selector language не визначається OCP-006", "Domain module може визначати власні predicate namespaces"]
+    invariant_surface: OPAQUE_TARGET_AND_VERSIONED_INPUT_CONTRACT
+    moving_surface: DOMAIN_RELATION_LANGUAGE
+stable_candidates:
+  - surface_id: CONSTRAINT_IDENTITY_SUPERSESSION_KERNEL
+    evidence:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["## 5. Identity", "зміна predicate, target specification, parameters або enforcement semantics створює новий Constraint", "## 16. Supersession and Change"]
+  - surface_id: STRUCTURAL_LIFECYCLE_EFFECTIVITY_KERNEL
+    evidence:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["## 6. Minimum Structural Contract", "## 7. Working Lifecycle", "## 8. Temporal Effectivity"]
+      - path: tools/ontology_checker/ocp_checker/checker.py
+        tokens: ["def constraint_effective_at(", "def validate_constraint("]
+  - surface_id: BOUNDED_EVALUATION_KERNEL
+    evidence:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["## 9. Evaluation Context", "## 10. Applicability", "## 11. Evaluation Result", "## 12. Admissibility Derivation"]
+      - path: tools/ontology_checker/ocp_checker/checker.py
+        tokens: ["def constraint_applicable_to(", "def effective_constraint_result(", "def constraint_set_decision("]
+  - surface_id: FAIL_SAFE_NON_AUTHORITY_BOUNDARY
+    evidence:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["Відсутність current evaluation ніколи не трактується як `satisfied`", "не замінює authorization, approval або execution decision", "не є автоматично фундаментальним Conflict"]
+  - surface_id: TARGET_SCOPE_NON_INHERITANCE_BOUNDARY
+    evidence:
+      - path: docs/006-constraint-concept/README.md
+        tokens: ["### 6.1 TargetSpecification", "## 15. Composition and Non-Inheritance", "scope повинен бути перевірним і простежуваним"]
+moving_surfaces:
+  - {surface_id: EXPRESSION_LANGUAGE, disposition: moving, question_ids: [Q2]}
+  - {surface_id: DYNAMIC_INPUT_EVALUATION_CURRENTNESS, disposition: moving, question_ids: [Q6]}
+  - {surface_id: STORAGE_OR_REPRODUCTION_POLICY, disposition: moving, question_ids: [Q7]}
+  - {surface_id: OPTIONAL_KIND_TAXONOMY, disposition: moving, question_ids: [Q11]}
+  - {surface_id: DOMAIN_RELATION_LANGUAGE, disposition: moving, question_ids: [Q12]}
+  - {surface_id: FUTURE_CONFLICT_OWNER, disposition: moving-external-owner, question_ids: [Q1]}
+  - {surface_id: EXTERNAL_OPERATION_AUTHORIZATION_OWNER, disposition: moving-external-owner, question_ids: [Q8]}
+  - {surface_id: FUTURE_READINESS_AVAILABILITY_OWNER, disposition: moving-external-owner, question_ids: [Q10]}
+blockers:
+  - blocker_id: EVALUATION_CURRENTNESS_UNRESOLVED
+    disposition: blocks-whole-document-freeze
+    question_ids: [Q6]
+forbidden_outcomes:
+  - OCP006_EDIT
+  - OCP006_STATUS_OR_VERSION_CHANGE
+  - OPEN_QUESTION_CLOSURE
+  - CONSTRAINT_SELECTION
+  - PROMOTION_CYCLE_START
+  - CONSTRAINT_CONCEPT_CANONICALIZATION
+  - OCP005_OR_ASSIGNMENT_BLOCKER_CHANGE
+  - GRAPH_OR_REGISTRY_CHANGE
+historical_closure_evidence:
+  AD-025:
+    path: architecture/discovery/AD-025-quantitative-constraint-input.md
+    expected_status: Accepted
+    question_ids: [Q5]
+    tokens: ["Quantity, Demand and Capacity Input Model", "positive capacity result remains gated future work"]
+  AD-026:
+    path: architecture/discovery/AD-026-reservation-allocation-boundary.md
+    expected_status: Accepted
+    question_ids: [Q9]
+    tokens: ["Reservation and Allocation Establishment Boundary", "does not establish Reservation or Allocation authority"]
+  AD-027:
+    path: architecture/discovery/AD-027-constraint-interaction-boundaries.md
+    expected_status: Accepted
+    question_ids: [Q3, Q4]
+    tokens: ["Constraint Application Order, Override and Contextual Waiver Boundaries", "no normative Constraint application order is established"]
+baseline_evidence_objects:
+  - {path: docs/006-constraint-concept/README.md, blob: 50f149cf5563083bb84d5d2197ec32c2ed15fa9b, sha256: 0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10}
+  - {path: architecture/discovery/AD-025-quantitative-constraint-input.md, blob: cd4e320be2db6398d758c6fa3ae49e0a0f520df5, sha256: dae3ee9ea8ffbe0fb62df127fa53920705d59f50ec793cb41cb6ca3c10642d46}
+  - {path: architecture/discovery/AD-026-reservation-allocation-boundary.md, blob: ad109d1003af32a019e6b525b4552db2c6e323b2, sha256: e258d714d242a5065b23c296a413a6d0d8c52e72d967b42798153888f6d872bd}
+  - {path: architecture/discovery/AD-027-constraint-interaction-boundaries.md, blob: fa49556df4f06aa039df23d9cc244587411b2d5e, sha256: 8d62725e4f8b1513c85fd24d59017215da94ddef8cda5244f300a6f25a0ee442}

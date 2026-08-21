@@ -10,7 +10,7 @@ gate_first:
 promotion_gate_guard:
   schema_version: 5
   completed_cycle_ids: [EVENT_T6]
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
 baseline_evidence_objects:
   - path: docs/005-assignment-concept/README.md
     blob: 6e6c00e723b15a348e7610d4ca5a1ae23526c52b

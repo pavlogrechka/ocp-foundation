@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .checker import load_fixture, validate_assignment
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_AMENDMENT_Q2_MAP_INVALID = "ASSIGNMENT_AMENDMENT_Q2_MAP_INVALID"
@@ -201,13 +202,6 @@ EXPECTED_PROJECTION = {
     "moving_surface": "AMENDMENT_AFTER_ESTABLISHMENT",
     "blocker_id": "AMENDMENT_MODEL_ABSENT",
 }
-EXPECTED_GATE_GUARD = {
-    "schema_version": 5,
-    "completed_cycle_ids": ["EVENT_T6"],
-    "active_cycle_id": None,
-}
-
-
 @dataclass(frozen=True)
 class AssignmentAmendmentQ2Result:
     errors: tuple[str, ...]
@@ -382,7 +376,7 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
         or set(payload.get("missing_obligations") or ()) != MISSING_OBLIGATION_IDS
         or len(payload.get("missing_obligations") or ()) != len(MISSING_OBLIGATION_IDS)
         or payload.get("preserved_assignment_projection") != EXPECTED_PROJECTION
-        or payload.get("promotion_gate_guard") != EXPECTED_GATE_GUARD
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
         or set(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
         or len(payload.get("forbidden_outcomes") or ()) != len(FORBIDDEN_OUTCOMES)
     ):
@@ -533,12 +527,7 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
             and set(item["steps"].values()) == {"completed"}
         ] if isinstance(cycles, list) else []
         protocol = gate.get("cycle_protocol")
-        if (
-            gate.get("schema_version") != 5
-            or completed != ["EVENT_T6"]
-            or not isinstance(protocol, dict)
-            or protocol.get("active_cycle_id") is not None
-        ):
+        if not isinstance(protocol, dict) or not promotion_gate_guard_is_current(gate, payload.get("promotion_gate_guard")):
             errors.append(ASSIGNMENT_AMENDMENT_Q2_GATE_DRIFT)
 
     return _result(errors)

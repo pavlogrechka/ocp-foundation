@@ -14,6 +14,7 @@ from .operation_lifecycle import validate_operation_q3i_fixture
 from .quantitative_input import validate_quantitative_input_fixture
 from .reservation_boundary import validate_reservation_boundary_fixture
 from .resource_occupancy import derive_resource_occupancy
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_CONSUMER_COMPATIBILITY_MAP_INVALID = "ASSIGNMENT_CONSUMER_COMPATIBILITY_MAP_INVALID"
@@ -200,7 +201,6 @@ EXPECTED_PROJECTION = {
     "promotion_reachable": False,
     "questions_changed": [],
 }
-EXPECTED_GATE_GUARD = {"schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None}
 EXPECTED_ANCHORS = {
     "docs/005-assignment-concept/README.md": ("6e6c00e723b15a348e7610d4ca5a1ae23526c52b", "a9226f4f5e168b945ae743626e73ba5e25d67318b390869a493e5fd30bdaa065"),
     "docs/013-resource-interchangeability/README.md": ("658a291b4c3b9a0229aba09d485c1137723fe70b", "a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74"),
@@ -395,7 +395,7 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
         or payload.get("criterion") != EXPECTED_CRITERION
         or payload.get("stable_surface_witness") != "architecture/assignment-stable-surface.yaml"
         or payload.get("projection") != EXPECTED_PROJECTION
-        or payload.get("promotion_gate_guard") != EXPECTED_GATE_GUARD
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
         or _anchors(payload.get("baseline_evidence_objects")) != EXPECTED_ANCHORS
         or set(payload.get("forbidden_outcomes") or ()) != FORBIDDEN_OUTCOMES
         or len(payload.get("forbidden_outcomes") or ()) != len(FORBIDDEN_OUTCOMES)
@@ -490,8 +490,8 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
     ]
     protocol = gate.get("cycle_protocol") if isinstance(gate, dict) else None
     if (
-        not isinstance(gate, dict) or gate.get("schema_version") != 5 or completed != ["EVENT_T6"]
-        or not isinstance(protocol, dict) or protocol.get("active_cycle_id") is not None
+        not isinstance(gate, dict) or not isinstance(protocol, dict)
+        or not promotion_gate_guard_is_current(gate, payload.get("promotion_gate_guard"))
     ):
         errors.append(ASSIGNMENT_CONSUMER_COMPATIBILITY_GATE_DRIFT)
     return _result(errors)

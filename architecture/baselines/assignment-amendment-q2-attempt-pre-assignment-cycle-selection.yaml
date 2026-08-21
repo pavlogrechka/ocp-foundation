@@ -1,0 +1,144 @@
+schema_version: 2
+rule_owner: AD-038
+current_projection_owner: AD-054
+baseline: 448d7d10fe3a3213da8479ce991995e01102cf3b
+gate_first:
+  evidence_form:
+    ocp016_gate: G4
+    applies: false
+    reason: negative-discovery-evidence-is-not-a-positive-capable-rule-result-or-profile
+  hypothetical_closure:
+    ocp016_gate: G4
+    applies: true
+    reason: closure-would-add-positive-post-establishment-mutation-and-supersession-rules
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  expected_version: 0.4.0
+  expected_status: Accepted
+  expected_concept_status: Accepted
+  question_id: Q2
+  question_state: open
+  question_classification: blocks-whole-document-freeze
+  blocker_id: AMENDMENT_MODEL_ABSENT
+hypothesis_result:
+  hypothesis_id: Q2_SUPERSESSION_ONLY
+  proposed_boundary: no-separate-amendment-model-required
+  result: not-established
+  q2_disposition: remains-open
+  blocker_disposition: remains-blocking-whole-document-freeze
+  reason: current-owner-contract-does-not-make-role-or-applicability-immutable-or-require-supersession
+owner_text_evidence:
+  - evidence_id: SUPERSESSION_OPTIONAL_RESOURCE_REPLACEMENT_ONLY
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - supersedes_assignment_ref [optional]
+      - Заміна Resource в Operation не змінює `resource_ref` існуючого Established Assignment.
+      - Новий Assignment може містити
+      - Supersession означає намір замінити попередній Assignment
+    consequence: does-not-require-role-or-applicability-supersession
+  - evidence_id: ONLY_ENDPOINT_REFERENCES_IMMUTABLE
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - Після transition `Draft → Established` значення `resource_ref` та `operation_ref` є незмінними.
+      - Кожен Assignment у stage `Established`, `Closed` або `Revoked` має RoleSpecification
+      - Кожен Assignment у stage `Established`, `Closed` або `Revoked` має `applicability_start`.
+    consequence: role-and-applicability-values-are-not-declared-immutable
+  - evidence_id: TRACEABILITY_MODEL_EXPLICITLY_OPEN
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.
+      - Яка amendment model потрібна для зміни role або applicability після Establishment?
+    consequence: traceability-obligation-exists-without-a-selected-mechanism
+  - evidence_id: LIFECYCLE_HAS_NO_AMENDMENT_TRANSITION
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - Draft → Established
+      - Draft → Cancelled
+      - Established → Closed
+      - Established → Revoked
+      - AssignmentTransitionRecord
+    consequence: current-history-can-trace-lifecycle-but-not-field-value-change
+missing_obligations:
+  - ROLE_VALUE_IMMUTABILITY_AFTER_ESTABLISHMENT
+  - APPLICABILITY_VALUE_IMMUTABILITY_AFTER_ESTABLISHMENT
+  - SUPERSESSION_REQUIRED_FOR_ROLE_OR_APPLICABILITY_CHANGE
+  - AMENDMENT_PROVENANCE_BINDING
+accepted_consumer_review:
+  - document_id: OCP-006
+    primary: docs/006-constraint-concept/README.md
+    expected_status: Accepted
+    evidence_token: Сам `supersedes_assignment_ref` не визначає допустимі часові межі
+    requires_in_place_amendment: false
+    consequence: consumes-supersession-as-identity-boundary-without-amendment-authority
+  - document_id: OCP-013
+    primary: docs/013-resource-interchangeability/README.md
+    expected_status: Accepted
+    evidence_token: Assignment mutation
+    requires_in_place_amendment: false
+    consequence: preserves-non-mutation-boundary
+  - document_id: OCP-015
+    primary: docs/015-coordination-workflow/README.md
+    expected_status: Accepted
+    evidence_token: alter Resource or Assignment identity
+    requires_in_place_amendment: false
+    consequence: preserves-assignment-identity
+  - document_id: OCP-017
+    primary: docs/017-operation-lifecycle/README.md
+    expected_status: Accepted
+    evidence_token: never edits an Assignment transition history
+    requires_in_place_amendment: false
+    consequence: consumes-current-truth-without-mutation-authority
+  - document_id: OCP-020
+    primary: docs/020-quantitative-constraint-input/README.md
+    expected_status: Accepted
+    evidence_token: create, amend, activate, suspend or terminate an Assignment
+    requires_in_place_amendment: false
+    consequence: explicitly-excludes-amendment-authority
+  - document_id: OCP-021
+    primary: docs/021-reservation-allocation-boundary/README.md
+    expected_status: Accepted
+    evidence_token: creates, blocks, cancels, supersedes or mutates an Assignment
+    requires_in_place_amendment: false
+    consequence: treats-assignment-truth-as-upstream-and-opaque
+  - document_id: OCP-023
+    primary: docs/023-resource-occupancy/README.md
+    expected_status: Accepted
+    evidence_token: Every Assignment must independently satisfy the current OCP-005 reference validator
+    requires_in_place_amendment: false
+    consequence: consumes-current-assignment-truth-without-amendment-authority
+executable_gap_probes:
+  fixture: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+  unchanged_fields: [transition_history, provenance_ref, supersedes_assignment_ref]
+  probes:
+    - probe_id: ESTABLISHED_ROLE_VALUE_REPLACEMENT
+      field_path: role_specification.role_code
+      original_value: executor
+      replacement_value: support
+      expected_original_valid: true
+      expected_mutated_valid: true
+    - probe_id: ESTABLISHED_APPLICABILITY_VALUE_REPLACEMENT
+      field_path: applicability_end
+      original_value: "2026-08-02T12:00:00Z"
+      replacement_value: "2026-08-02T13:00:00Z"
+      expected_original_valid: true
+      expected_mutated_valid: true
+preserved_assignment_projection:
+  witness: architecture/assignment-stable-surface.yaml
+  q2_state: open
+  q2_classification: blocks-whole-document-freeze
+  moving_surface: AMENDMENT_AFTER_ESTABLISHMENT
+  blocker_id: AMENDMENT_MODEL_ABSENT
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+forbidden_outcomes:
+  - Q2_CLOSURE
+  - AB026_RESOLUTION
+  - ASSIGNMENT_AMENDMENT_RULE
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - OCP005_PROMOTION
+  - ASSIGNMENT_CONCEPT_CANONICALIZATION
+  - T7_OPEN

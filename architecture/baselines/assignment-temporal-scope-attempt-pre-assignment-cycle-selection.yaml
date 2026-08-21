@@ -1,0 +1,162 @@
+schema_version: 1
+rule_owner: AD-039
+baseline: 94820489c7e6de17bc7eb1439a1c3dd78bfbc14f
+gate_first:
+  evidence_form:
+    ocp016_gate: G4
+    applies: false
+    reason: negative-discovery-evidence-is-not-a-positive-capable-rule-result-or-profile
+  hypothetical_closures:
+    temporal:
+      ocp016_gate: G4
+      applies: true
+      reason: closure-would-add-retroactivity-and-interval-cardinality-rules
+    partial_scope:
+      ocp016_gate: G4
+      applies: true
+      reason: closure-would-add-composite-part-identity-and-scope-rules
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  expected_version: 0.4.0
+  expected_status: Accepted
+  expected_concept_status: Accepted
+zone_results:
+  temporal:
+    question_ids: [Q3, Q9]
+    result: not-established
+    question_disposition: remain-open
+    blocker_id: TEMPORAL_MODEL_UNRESOLVED
+    blocker_disposition: remains-blocking-whole-document-freeze
+    existing_boundary: effectivity-before-established-at-is-false
+    missing_boundaries:
+      - retroactive-establishment-recording
+      - multiple-applicability-interval-cardinality
+  partial_scope:
+    question_ids: [Q5]
+    result: not-established
+    question_disposition: remain-open
+    blocker_id: PARTIAL_SCOPE_IDENTITY_UNRESOLVED
+    blocker_disposition: remains-blocking-whole-document-freeze
+    existing_boundary: composition-does-not-auto-create-component-assignments
+    missing_boundaries:
+      - partial-composite-resource-scope-identity
+owner_text_evidence:
+  - evidence_id: PRE_ESTABLISHMENT_EFFECTIVITY_ALREADY_FALSE
+    zone: temporal
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - established_at(Assignment) <= t
+      - До окремого рішення про ретроактивне Establishment Assignment не може бути ефективним для часу раніше `established_at`.
+    consequence: controls-effectivity-before-the-recorded-establishment-instant-only
+  - evidence_id: NO_ESTABLISHMENT_RECORDING_TIME_AXIS
+    zone: temporal
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - occurred_at of the unique Draft → Established record
+      - AssignmentTransitionRecord
+      - provenance_ref
+      - Чи допускається ретроактивне Establishment Assignment?
+    consequence: cannot-distinguish-original-from-later-backdated-establishment-record
+  - evidence_id: SINGLE_INTERVAL_MINIMUM_IS_NOT_CLOSED_WORLD
+    zone: temporal
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - applicability_start
+      - applicability_end [optional]
+      - Цей перелік визначає мінімальні перевірні поля Concept, але не є схемою бази даних чи API.
+      - Чи може один Assignment мати кілька неперервних applicability intervals
+    consequence: singular-minimum-does-not-prohibit-an-additional-interval-representation
+  - evidence_id: DIRECT_REFERENCE_NON_INHERITANCE_ONLY
+    zone: partial_scope
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - Assignment застосовується лише до Resource та Operation, указаних безпосередньо в його references.
+      - Assignment складеного Resource не створює Assignment для його складових Resource
+      - Механізми явного успадкування або масового створення Assignment можуть бути визначені окремими правилами
+    consequence: rejects-automatic-component-assignment-inference-not-explicit-partial-scope
+  - evidence_id: ONE_RESOURCE_REFERENCE_IS_NOT_PART_IDENTITY
+    zone: partial_scope
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - один Assignment не може групувати кілька Resource або кілька Operation.
+      - один Resource, який сам представляє визначену групу
+      - окремий Assignment для кожного Resource.
+    consequence: grouping-boundary-does-not-decide-subject-identity-for-a-part
+  - evidence_id: PARTIAL_SCOPE_QUESTION_EXPLICITLY_OPEN
+    zone: partial_scope
+    path: docs/005-assignment-concept/README.md
+    tokens:
+      - Чи повинен Assignment мати окремий scope для частини складеного Resource без створення нового Resource?
+    consequence: owner-contract-does-not-select-prohibition-or-positive-scope-form
+missing_obligations:
+  temporal:
+    - ESTABLISHMENT_RECORDING_TIME_AXIS
+    - RETROACTIVE_ESTABLISHMENT_PROHIBITION_OR_RULE
+    - CLOSED_WORLD_APPLICABILITY_INTERVAL_CARDINALITY
+    - MULTI_INTERVAL_REPRESENTATION_OR_SEPARATE_ASSIGNMENT_RULE
+  partial_scope:
+    - PARTIAL_SCOPE_FIELD_PROHIBITION_OR_SCHEMA
+    - COMPOSITE_PART_SUBJECT_IDENTITY_RULE
+    - PARTIAL_SCOPE_DERIVATION_AND_PROVENANCE
+executable_gap_probes:
+  fixture: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+  control:
+    probe_id: PRE_ESTABLISHMENT_EFFECTIVITY_FALSE
+    applicability_start: "2026-08-02T09:50:00Z"
+    query_time: "2026-08-02T09:54:00Z"
+    expected_assignment_valid: true
+    expected_effective: false
+  probes:
+    - probe_id: RETROACTIVE_ESTABLISHMENT_BACKDATE
+      zone: temporal
+      mutation: backdate-establishment
+      original_value: "2026-08-02T09:55:00Z"
+      replacement_value: "2026-08-02T09:52:00Z"
+      expected_original_valid: true
+      expected_mutated_valid: true
+    - probe_id: MULTIPLE_APPLICABILITY_INTERVAL_EXTENSION
+      zone: temporal
+      mutation: add-multiple-intervals
+      replacement_value:
+        - start: "2026-08-02T10:00:00Z"
+          end: "2026-08-02T10:30:00Z"
+        - start: "2026-08-02T11:00:00Z"
+          end: "2026-08-02T12:00:00Z"
+      expected_original_valid: true
+      expected_mutated_valid: true
+    - probe_id: PARTIAL_COMPOSITE_RESOURCE_SCOPE_EXTENSION
+      zone: partial_scope
+      mutation: add-partial-scope
+      replacement_value:
+        kind: component
+        component_ref: R-COMPONENT-001
+      expected_original_valid: true
+      expected_mutated_valid: true
+preserved_assignment_projection:
+  witness: architecture/assignment-stable-surface.yaml
+  questions:
+    Q3: blocks-whole-document-freeze
+    Q9: blocks-whole-document-freeze
+    Q5: blocks-whole-document-freeze
+  moving_surfaces:
+    TEMPORAL_EFFECTIVITY_EXTENSION: [Q3, Q9]
+    COMPOSITE_RESOURCE_SCOPE: [Q5]
+  blockers:
+    TEMPORAL_MODEL_UNRESOLVED: [Q3, Q9]
+    PARTIAL_SCOPE_IDENTITY_UNRESOLVED: [Q5]
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+forbidden_outcomes:
+  - Q3_CLOSURE
+  - Q9_CLOSURE
+  - Q5_CLOSURE
+  - ASSIGNMENT_TEMPORAL_RULE
+  - ASSIGNMENT_PARTIAL_SCOPE_RULE
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - OCP005_PROMOTION
+  - ASSIGNMENT_CONCEPT_CANONICALIZATION
+  - T7_OPEN

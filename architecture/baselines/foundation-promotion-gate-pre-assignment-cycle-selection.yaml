@@ -1,0 +1,43 @@
+schema_version: 5
+rule_owner: AD-033
+cycle_protocol:
+  ordered_steps: [CANDIDATE_BOARD_SELECTION, DOCUMENT_PROMOTION, CONCEPT_CANONICALIZATION]
+  allowed_step_states: [pending, completed]
+  active_cycle_id: null
+cycles:
+  - cycle_id: EVENT_T6
+    candidate_id: OCP-010
+    slot: T6
+    steps:
+      CANDIDATE_BOARD_SELECTION: completed
+      DOCUMENT_PROMOTION: completed
+      CONCEPT_CANONICALIZATION: completed
+    evidence:
+      CANDIDATE_BOARD_SELECTION: AD-016AC
+      DOCUMENT_PROMOTION: AD-016AD
+      CONCEPT_CANONICALIZATION: AD-032
+candidates:
+  - document_id: OCP-005
+    primary: docs/005-assignment-concept/README.md
+    slot: T6
+    expected_document_status: Accepted
+    expected_concept_status: Accepted
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004]
+    expected_l2: pass
+    l2_blockers: []
+  - document_id: OCP-006
+    primary: docs/006-constraint-concept/README.md
+    slot: T7
+    expected_document_status: Accepted
+    expected_concept_status: Accepted
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
+    expected_l2: fail
+    l2_blockers: [OCP-005]
+  - document_id: OCP-010
+    primary: docs/010-event-concept/README.md
+    slot: T6
+    expected_document_status: Canonical
+    expected_concept_status: Canonical
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-004, OCP-008]
+    expected_l2: pass
+    l2_blockers: []
