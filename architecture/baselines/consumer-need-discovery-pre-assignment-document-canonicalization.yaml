@@ -1,0 +1,246 @@
+schema_version: 3
+rule_owner: AD-036
+current_projection_owner: AD-056
+baseline: f64b3a23419092649cfb4059d4853eabd93fbbc2
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  reason: discovery-witness-is-not-a-positive-capable-rule-result-or-profile
+  accepted_consumer_activation_required: false
+criterion:
+  eligible_statuses: [Accepted, Canonical]
+  positive_unmet_need_requires:
+    - current-normative-statement
+    - exact-positive-result-token
+    - own-obligation-cannot-complete-without-result
+  non_qualifying_classes:
+    - negative-boundary-is-sufficient
+    - deferred-or-future-mention
+    - already-satisfied-positive-output
+    - governance-act-is-not-consumer-contract
+    - historical-baseline-or-review-snapshot
+historical_result:
+  scope: baseline
+  disposition: no_unmet_positive_consumer_need_declared
+  unmet_positive_needs: []
+current_result:
+  scope: current
+  disposition: unmet_positive_consumer_need_declared
+  unmet_positive_needs: [RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS]
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: ASSIGNMENT_T6
+eligible_lifecycle_documents:
+  - {artifact_id: OCP-000, path: docs/000-operational-ontology/README.md, version: 1.6.0, status: Canonical}
+  - {artifact_id: OCP-001, path: docs/001-ontology-governance/README.md, version: 1.0.0, status: Canonical}
+  - {artifact_id: OCP-002, path: docs/002-concept-taxonomy/README.md, version: 1.6.0, status: Canonical}
+  - {artifact_id: OCP-003, path: docs/003-resource-concept/README.md, version: 1.0.0, status: Canonical}
+  - {artifact_id: OCP-004, path: docs/004-operation-concept/README.md, version: 1.0.1, status: Canonical}
+  - {artifact_id: OCP-005, path: docs/005-assignment-concept/README.md, version: 0.4.0, status: Accepted}
+  - {artifact_id: OCP-006, path: docs/006-constraint-concept/README.md, version: 0.4.0, status: Accepted}
+  - {artifact_id: OCP-007, path: docs/007-organization-concept/README.md, version: 1.1.1, status: Canonical}
+  - {artifact_id: OCP-008, path: docs/008-objective-concept/README.md, version: 1.0.0, status: Canonical}
+  - {artifact_id: OCP-009, path: docs/009-capability-concept/README.md, version: 1.0.0, status: Canonical}
+  - {artifact_id: OCP-010, path: docs/010-event-concept/README.md, version: 1.0.1, status: Canonical}
+  - {artifact_id: OCP-011, path: docs/011-outcome-assessment-record/README.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: OCP-012, path: docs/012-capability-claim-record/README.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: OCP-013, path: docs/013-resource-interchangeability/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-014, path: docs/014-coordination-profile/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-015, path: docs/015-coordination-workflow/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-016, path: docs/016-core-boundary/README.md, version: 1.0.0, status: Canonical}
+  - {artifact_id: OCP-017, path: docs/017-operation-lifecycle/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-018, path: docs/018-operation-authorization-source/README.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: OCP-019, path: docs/019-conflict-derivation-boundary/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-020, path: docs/020-quantitative-constraint-input/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-021, path: docs/021-reservation-allocation-boundary/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-022, path: docs/022-order-authorization-boundary/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-023, path: docs/023-resource-occupancy/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: OCP-024, path: docs/024-completeness-evaluator/README.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: P-001, path: patterns/P-001-identified-record-pattern.md, version: 0.1.0, status: Accepted}
+eligible_governance_acts:
+  - {artifact_id: AD-002, path: architecture/discovery/AD-002-state-readiness-review.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: AD-003, path: architecture/discovery/AD-003-objective-boundary.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: AD-004, path: architecture/discovery/AD-004-operational-intent-boundary.md, version: 0.3.2, status: Accepted}
+  - {artifact_id: AD-005, path: architecture/discovery/AD-005-capability-boundary.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-006, path: architecture/discovery/AD-006-event-result-boundary.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-007, path: architecture/discovery/AD-007-capability-claim-boundary.md, version: 0.4.0, status: Accepted}
+  - {artifact_id: AD-008, path: architecture/discovery/AD-008-resource-interchangeability.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-009, path: architecture/discovery/AD-009-coordination-workflow-mandate.md, version: 0.2.0, status: Accepted}
+  - {artifact_id: AD-010, path: architecture/discovery/AD-010-cross-vertical-visibility-agreement.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-011, path: architecture/discovery/AD-011-state-readiness-evidence.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-012, path: architecture/discovery/AD-012-evidence-freshness-replay-boundary.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-013, path: architecture/discovery/AD-013-capability-claim-support-usability.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-014, path: architecture/discovery/AD-014-operational-area-environment-boundary.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-015, path: architecture/discovery/AD-015-core-boundary-specification.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-016, path: architecture/discovery/AD-016-foundation-canonicalization-readiness.md, version: 0.31.0, status: Accepted}
+  - {artifact_id: AD-017, path: architecture/discovery/AD-017-objective-editorial-correction-boundary.md, version: 0.3.0, status: Accepted}
+  - {artifact_id: AD-018, path: architecture/discovery/AD-018-resource-stable-surface.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: AD-019, path: architecture/discovery/AD-019-organization-stable-surface.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: AD-020, path: architecture/discovery/AD-020-operation-stable-surface.md, version: 0.2.1, status: Accepted}
+  - {artifact_id: AD-021, path: architecture/discovery/AD-021-operation-authorization-source.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-022, path: architecture/discovery/AD-022-conflict-derivation-boundary.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-025, path: architecture/discovery/AD-025-quantitative-constraint-input.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-026, path: architecture/discovery/AD-026-reservation-allocation-boundary.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-027, path: architecture/discovery/AD-027-constraint-interaction-boundaries.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-028, path: architecture/discovery/AD-028-open-question-resolution-sync.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-029, path: architecture/discovery/AD-029-accepted-document-hygiene.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-030, path: architecture/discovery/AD-030-order-authorization-boundary.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-032, path: architecture/discovery/AD-032-event-concept-canonicalization.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-033, path: architecture/discovery/AD-033-multicycle-promotion-gates.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-034, path: architecture/discovery/AD-034-current-numeric-accounting.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-037, path: architecture/discovery/AD-037-negative-boundary-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-041, path: architecture/discovery/AD-041-resource-occupancy-route-d.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-042, path: architecture/discovery/AD-042-resource-occupancy-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-043, path: architecture/discovery/AD-043-completeness-evaluator-contract.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-046, path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-049, path: architecture/discovery/AD-049-completeness-evaluator-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-053, path: architecture/discovery/AD-053-constraint-document-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-054, path: architecture/discovery/AD-054-assignment-document-acceptance.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-056, path: architecture/discovery/AD-056-assignment-promotion-selection.md, version: 0.1.0, status: Accepted}
+candidate_mentions:
+  - candidate_id: QUANTITY_INPUT_PREREQUISITE
+    artifact_id: OCP-003
+    path: docs/003-resource-concept/README.md
+    token: "окремий accepted consumable/measurement contract"
+    positive_result: quantitative-input-contract
+    can_complete_without_new_result: true
+    disposition: satisfied-by-existing-OCP-020-input-not-positive-result
+  - candidate_id: OPERATION_REQUIREMENT_OWNER
+    artifact_id: OCP-009
+    path: docs/009-capability-concept/README.md
+    token: "Operation requirement representation, holder claims та Resource interchangeability мають окремих normative owners."
+    positive_result: operation-requirement-contract
+    can_complete_without_new_result: true
+    disposition: deferred-separate-owner
+  - candidate_id: EVENT_OPERATION_RELATION
+    artifact_id: OCP-010
+    path: docs/010-event-concept/README.md
+    token: "A future positive relation requires a separately mandated owner act"
+    positive_result: positive-operation-event-relation
+    can_complete_without_new_result: true
+    disposition: deferred-future-relation
+  - candidate_id: INTERCHANGEABILITY_POSITIVE
+    artifact_id: OCP-013
+    path: docs/013-resource-interchangeability/README.md
+    token: "A `positive` result remains eligibility evidence only"
+    positive_result: contextual-interchangeability-positive
+    can_complete_without_new_result: true
+    disposition: already-defined-and-executable
+  - candidate_id: COORDINATION_ACTOR_AUTH
+    artifact_id: OCP-014
+    path: docs/014-coordination-profile/README.md
+    token: "Actor authentication and authorization require a separate future contract"
+    positive_result: actor-authentication-or-authorization
+    can_complete_without_new_result: true
+    disposition: explicitly-outside-current-profile
+  - candidate_id: COORDINATION_RESIDUAL
+    artifact_id: OCP-015
+    path: docs/015-coordination-workflow/README.md
+    token: "AB-059 is the next normative cycle named by this acceptance act."
+    positive_result: visibility-policy-or-agreement-semantics
+    can_complete_without_new_result: true
+    disposition: deferred-next-cycle
+  - candidate_id: G4_ACTIVATION_RULE
+    artifact_id: OCP-016
+    path: docs/016-core-boundary/README.md
+    token: "G4 consumer activation remains binding for positive-capable rules, results and profiles"
+    positive_result: none-governance-admission-rule
+    can_complete_without_new_result: true
+    disposition: gate-not-consumer-need
+  - candidate_id: LIFECYCLE_DOMAIN_RESPONSIBILITY
+    artifact_id: OCP-017
+    path: docs/017-operation-lifecycle/README.md
+    token: "A concrete domain must govern those responsibilities separately."
+    positive_result: production-domain-source-legitimacy
+    can_complete_without_new_result: true
+    disposition: deferred-production-responsibility
+  - candidate_id: PRODUCTION_SOURCE_PROFILE
+    artifact_id: OCP-018
+    path: docs/018-operation-authorization-source/README.md
+    token: "Any future production profile must name its own legitimate owner"
+    positive_result: production-source-profile
+    can_complete_without_new_result: true
+    disposition: deferred-future-production-profile
+  - candidate_id: CAPACITY_RESULT
+    artifact_id: OCP-020
+    path: docs/020-quantitative-constraint-input/README.md
+    token: "The exact baseline has no Accepted consumer that owns such a result need"
+    positive_result: capacity-sufficiency-or-reservation-result
+    can_complete_without_new_result: true
+    disposition: explicit-negative-boundary
+  - candidate_id: CONFLICT_POSITIVE_REOPENING
+    artifact_id: OCP-019
+    path: docs/019-conflict-derivation-boundary/README.md
+    token: "A later positive-capable model must be a separate Board act."
+    positive_result: positive-conflict-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
+  - candidate_id: RESERVATION_POSITIVE_REOPENING
+    artifact_id: OCP-021
+    path: docs/021-reservation-allocation-boundary/README.md
+    token: "Each branch can be reopened only by a separate Board act"
+    positive_result: positive-reservation-or-allocation-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
+  - candidate_id: ORDER_POSITIVE_REOPENING
+    artifact_id: OCP-022
+    path: docs/022-order-authorization-boundary/README.md
+    token: "A future positive proposal requires a separate Board act."
+    positive_result: positive-order-authorization-model
+    can_complete_without_new_result: true
+    disposition: deferred-separate-positive-act
+  - candidate_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+    artifact_id: OCP-023
+    path: docs/023-resource-occupancy/README.md
+    token: "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)"
+    positive_result: assignment-set-completeness-for-resource
+    can_complete_without_new_result: false
+    disposition: current-unmet-positive-consumer-need
+  - candidate_id: COMPLETENESS_REAL_EVALUATOR
+    artifact_id: OCP-024
+    path: docs/024-completeness-evaluator/README.md
+    token: "A real evaluator remains unresolved and requires a separate act grounded in an external domain authority."
+    positive_result: production-completeness-evaluator-legitimacy
+    can_complete_without_new_result: true
+    disposition: explicitly-outside-synthetic-recognition-contract
+established_positive_outputs:
+  - {artifact_id: OCP-011, path: docs/011-outcome-assessment-record/README.md, token: "`sufficient` | `achieved`, `not_achieved`, `partially_achieved` or `indeterminate`", result: outcome-assessment-conclusion}
+  - {artifact_id: OCP-012, path: docs/012-capability-claim-record/README.md, token: "`effective_capability_claim` may project an activated evidence-backed assertion", result: effective-capability-claim}
+  - {artifact_id: OCP-013, path: docs/013-resource-interchangeability/README.md, token: "`positive` — complete exact inputs show that the candidate satisfies the requirement", result: contextual-interchangeability-positive}
+  - {artifact_id: OCP-015, path: docs/015-coordination-workflow/README.md, token: "A `positive` projection means only that the required attributable confirmations exist", result: coordination-confirmation-positive}
+  - {artifact_id: OCP-017, path: docs/017-operation-lifecycle/README.md, token: "Only `input_state: effective` with `result: passed` satisfies the binding", result: lifecycle-evidence-binding}
+  - {artifact_id: OCP-018, path: docs/018-operation-authorization-source/README.md, token: "A unique effective `authorize` head derives `accepted`", result: authorization-source-accepted}
+negative_gate_history:
+  - {artifact_id: AD-022, path: architecture/discovery/AD-022-conflict-derivation-boundary.md, token: "every positive option lacks a concrete Accepted consumer", subject: conflict}
+  - {artifact_id: AD-025, path: architecture/discovery/AD-025-quantitative-constraint-input.md, token: "no positive-capable form may bypass its missing Accepted consumer", subject: capacity}
+  - {artifact_id: AD-026, path: architecture/discovery/AD-026-reservation-allocation-boundary.md, token: "no Accepted artifact owns a protected quantitative reservation/allocation result", subject: reservation-allocation}
+  - {artifact_id: AD-027, path: architecture/discovery/AD-027-constraint-interaction-boundaries.md, token: "no Accepted consumer need, exact positive rule", subject: precedence-override-waiver}
+  - {artifact_id: AD-030, path: architecture/discovery/AD-030-order-authorization-boundary.md, token: "lacks Order-specific need, rule, owner/evaluator and form", subject: order}
+baseline_evidence_objects:
+  - {path: docs/003-resource-concept/README.md, blob: 71485bb337cfd59def2e0f1b18b474a7959bd30c, sha256: f8656769dd046f221843f627c746d0d6040c2e83c736b900370d60244fce8315}
+  - {path: docs/009-capability-concept/README.md, blob: 31163eacb0ca2a78b17b9d2466d99ef0c8b2d272, sha256: 29362c815cb14f07bfd06775d1398498a27ace5ee5a4acaafde0eb39e902152a}
+  - {path: docs/010-event-concept/README.md, blob: a9de19a0873a6616d4c77614acf48d17e1b06bad, sha256: 51023373a39056ac70f80d97cea3c529938f82a01c9a1ee1f83410d34ae4f3ed}
+  - {path: docs/011-outcome-assessment-record/README.md, blob: ff2608a372c6305db4c290f05c15e961ca96e6f6, sha256: 1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5}
+  - {path: docs/012-capability-claim-record/README.md, blob: cd2df0f1961b6d03eea0db66c8fdfce1f97cb235, sha256: d4d5b4441cf2d1f7fea2dae572fcfa60f22b0ebce0e23ae6a86f71d9f4edd122}
+  - {path: docs/013-resource-interchangeability/README.md, blob: 658a291b4c3b9a0229aba09d485c1137723fe70b, sha256: a20659422f847f49a9231b8c1d1dabc0d8b911d9667c44013280b1826f621a74}
+  - {path: docs/014-coordination-profile/README.md, blob: 23bd05b4bb14fd7a85101bd5a8b3dd733b53dd99, sha256: 72c789c7b15ab2fd8997f60ba8cfd9d89f0e7730407763d18fb222bac5f06a8c}
+  - {path: docs/015-coordination-workflow/README.md, blob: ea60634e54faedabb8c5e08b036030c2f0e4e20b, sha256: 6077136b2460cfc56d0e06af9137338cb494ac9a8e14df036e662d9240415b1d}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4}
+  - {path: docs/017-operation-lifecycle/README.md, blob: 0b2ea683df308babd1111ff47e9272c9b0742f78, sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030}
+  - {path: docs/018-operation-authorization-source/README.md, blob: dc3148869f47af2bb27eb2fa74a188136d5fb568, sha256: e105e9c230277b6865721192ef4044ee77d9bfbff73505d164d7760c8ac31779}
+  - {path: docs/020-quantitative-constraint-input/README.md, blob: 0e1e7d0947ab3c7d1c0355258651179f618636a2, sha256: 1783c32094aee9f09ca50ececb12bf9ec8f3c6599590331dba3894ad727d9b5c}
+  - {path: architecture/discovery/AD-022-conflict-derivation-boundary.md, blob: daba3472caaa650c41231437bddba1a70d895230, sha256: a52f0fb9cab2bdd32f23e5f2c529c4c76db1ffd8efe1ae6046fc3dda23747d54}
+  - {path: architecture/discovery/AD-025-quantitative-constraint-input.md, blob: cd4e320be2db6398d758c6fa3ae49e0a0f520df5, sha256: dae3ee9ea8ffbe0fb62df127fa53920705d59f50ec793cb41cb6ca3c10642d46}
+  - {path: architecture/discovery/AD-026-reservation-allocation-boundary.md, blob: ad109d1003af32a019e6b525b4552db2c6e323b2, sha256: e258d714d242a5065b23c296a413a6d0d8c52e72d967b42798153888f6d872bd}
+  - {path: architecture/discovery/AD-027-constraint-interaction-boundaries.md, blob: fa49556df4f06aa039df23d9cc244587411b2d5e, sha256: 8d62725e4f8b1513c85fd24d59017215da94ddef8cda5244f300a6f25a0ee442}
+  - {path: architecture/discovery/AD-030-order-authorization-boundary.md, blob: 01b7a6f01065b57130f8c0572242d683bcd22108, sha256: 6ab90174bc1db423f403ac28a87d9eb0e1f84a7685cce881d94596a2fb9989bf}
+forbidden_outcomes:
+  - POSITIVE_MODEL_ACTIVATION
+  - CONSUMER_PROFILE_CREATION
+  - CONCEPT_OR_GRAPH_CHANGE
+  - STATUS_CHANGE
+  - AB018_OR_AB005_RESOLUTION
+  - PROMOTION_CYCLE_START
+  - ASSIGNMENT_REMEDIATION
+  - NEXT_ACT_AUTHORIZATION

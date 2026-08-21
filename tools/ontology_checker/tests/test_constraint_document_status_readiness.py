@@ -176,7 +176,7 @@ class ConstraintDocumentStatusReadinessTests(unittest.TestCase):
             self.copy_inputs(root)
             path = root / readiness.ASSIGNMENT_PATH
             text = path.read_text(encoding="utf-8")
-            path.write_text(text.replace("Status: Accepted", "Status: Canonical", 1), encoding="utf-8")
+            path.write_text(text.replace("Status: Canonical", "Status: Accepted", 1), encoding="utf-8")
             self.assertIn(
                 CONSTRAINT_STATUS_READINESS_SUBJECT_DRIFT,
                 validate_constraint_document_status_readiness(root).errors,

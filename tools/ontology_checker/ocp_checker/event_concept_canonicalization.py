@@ -88,7 +88,9 @@ CURRENT_TOKENS = {
     "architecture/event-lifecycle-promotion.yaml": ("expected_concept_status: Canonical",),
     "architecture/foundation-promotion-gate.yaml": ("expected_concept_status: Canonical",),
     "README.md": ("Assignment та Constraint лишаються `Accepted`, а Event є `Canonical`",),
-    "backlog/roadmap.md": ("Assignment і Constraint лишаються Accepted, Event є Canonical",),
+    "backlog/roadmap.md": (
+        "OCP-005 document є Canonical, тоді як Assignment і Constraint Concepts лишаються Accepted",
+    ),
     "backlog/architecture-backlog.md": ("Event Concept Canonical", "ASSIGNMENT_T6", "DOCUMENT_PROMOTION", "pending"),
 }
 EXPECTED_HISTORICAL = {

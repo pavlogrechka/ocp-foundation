@@ -49,18 +49,18 @@ class CurrentNumericAccountingTests(unittest.TestCase):
             derive_current_numeric_accounting(ROOT),
             {
                 "ocp_total": 25,
-                "ocp_canonical": 10,
-                "ocp_accepted": 15,
+                "ocp_canonical": 11,
+                "ocp_accepted": 14,
                 "ocp_draft": 0,
                 "concept_total": 8,
                 "concept_canonical": 6,
                 "concept_accepted": 2,
                 "snapshot_total": 16,
-                "snapshot_current": 15,
-                "snapshot_retained": 1,
+                "snapshot_current": 14,
+                "snapshot_retained": 2,
                 "p001_invokers": 9,
                 "fixtures": 303,
-                "tests": 469,
+                "tests": 477,
             },
         )
 

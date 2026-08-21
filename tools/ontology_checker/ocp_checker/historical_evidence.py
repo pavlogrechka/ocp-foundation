@@ -11,6 +11,7 @@ SUCCESSION_MAPS = (
     Path("architecture/constraint-document-acceptance.yaml"),
     Path("architecture/assignment-document-acceptance.yaml"),
     Path("architecture/assignment-promotion-selection.yaml"),
+    Path("architecture/assignment-document-canonicalization.yaml"),
 )
 
 

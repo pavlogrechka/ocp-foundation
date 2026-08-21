@@ -1,0 +1,255 @@
+schema_version: 1
+rule_owner: AD-047
+baseline: 7acced16b99790db04c8dccb9380a6191633af30
+baseline_evidence_objects:
+  - path: docs/001-ontology-governance/README.md
+    blob: 33524fa3d18f3253faa9a854500be7ddfb20815f
+    sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc
+    state_tokens: ["Document-ID: OCP-001", "Status: Canonical", "pre-canonical"]
+  - path: docs/005-assignment-concept/README.md
+    blob: 1dd975a17ec65df751357fdd049c8ca928739bd1
+    sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+    state_tokens: ["Version: 0.3.0", "Status: Draft", "Чи може один Assignment мати кілька неперервних applicability intervals"]
+  - path: docs/016-core-boundary/README.md
+    blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb
+    sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4
+    state_tokens: ["Document-ID: OCP-016", "Status: Canonical", "G4"]
+  - path: docs/023-resource-occupancy/README.md
+    blob: a846333fae80aff2b3697e811d2b155c91f04122
+    sha256: 5ec9aca56de4524b4ab78a9e98e2cf5d7561d6f13bac8cf7778d66a99f5490d9
+    state_tokens: ["Document-ID: OCP-023", "Status: Accepted", "multiple applicability intervals"]
+  - path: architecture/assignment-stable-surface.yaml
+    blob: 6cc326c64e5dc5d84cbc60e1f95548db9dd0abad
+    sha256: cd093bd36ab29a203ad56ccded32baee671989be768b7ad415f65850e2b6d3d9
+    state_tokens: ["TEMPORAL_MODEL_UNRESOLVED", "question_ids: [Q9]"]
+  - path: architecture/assignment-temporal-scope-attempt.yaml
+    blob: 9fa12f7c527c7d66ebbba24cf063fc353973d8ae
+    sha256: 4a8899d58ddf9edcf613760d330ff0003a3f982c1d6c188c4283c52fc364f7fb
+    state_tokens: ["rule_owner: AD-039", "mutation: add-multiple-intervals"]
+  - path: architecture/assignment-consumer-pressure.yaml
+    blob: 2a96810984b79374c04bff20663cbc6953744c3d
+    sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2
+    state_tokens: ["PROSPECTIVE_ONLY_SINGLE_INTERVAL", "PROSPECTIVE_ONLY_MULTIPLE_INTERVALS"]
+  - path: architecture/assignment-norm-compatibility.yaml
+    blob: 7abda1ed215fb15a520e56682c442db9c9e042b4
+    sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd
+    state_tokens: ["interval_cardinality", "underdetermined"]
+  - path: architecture/assignment-retroactivity-q3-resolution.yaml
+    blob: 0262964d9754325fe897871734ed2e1f0ec1ff9e
+    sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a
+    state_tokens: ["AD-046", "Q9"]
+  - path: architecture/discovery/AD-039-assignment-temporal-scope-attempt.md
+    blob: 4b22a482e19b6b8833789ebe5aebb9dd5a9fc58b
+    sha256: 310d2c3bb36b1c788e2573d42593f113066f344be1e9ee279901b1b8f6ce68dc
+    state_tokens: ["Decision-ID: AD-039", "Status: Discovery"]
+  - path: architecture/discovery/AD-044-assignment-consumer-pressure.md
+    blob: 560f851e3fda0e491c39fc4c2bf90889fb2fc5db
+    sha256: 078a615572c864478929f9abfef7ae1ee287ebe1cca4919a010fb375d8676a6e
+    state_tokens: ["Decision-ID: AD-044", "Status: Discovery"]
+  - path: architecture/discovery/AD-045-assignment-norm-compatibility.md
+    blob: bc4d7dea13df24626200ec9e7b0080797a322ea9
+    sha256: 7a1c25d22bdf3179ff552dc1635ded320a6220ec6a205da091c26188bd590020
+    state_tokens: ["Decision-ID: AD-045", "Status: Discovery"]
+  - path: architecture/discovery/AD-046-assignment-q3-lifecycle.md
+    blob: 22e43011c145a45c90f7ee806669c39c37779c08
+    sha256: 1732397cc866a68d93b80530b17975f9eb58e26acd0aa0cf0817a7b99c0021ac
+    state_tokens: ["Decision-ID: AD-046", "Status: Accepted"]
+  - path: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+    blob: 354de6880fe59429c40179eedd4037e52ff5208a
+    sha256: 3f2ea38f35292b821a7297ed4604a1764efd12c5399ee61a64ea7a2aa5b91117
+    state_tokens: ["case_id: assignment-valid-established-001", "expected:"]
+  - path: architecture/foundation-promotion-gate.yaml
+    blob: 78f5f75d84fe9b0bdbf43ad3922404fa34f6c2d1
+    sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd
+    state_tokens: ["schema_version: 5", "active_cycle_id: null", "cycle_id: EVENT_T6"]
+gate_first:
+  evidence_form:
+    ocp016_gate: G4
+    applies: false
+    positive_capable: false
+    activation_created: false
+    reason: insufficiency-evidence-adds-no-positive-capable-rule-result-profile-or-activation
+  hypothetical_closures:
+    single_interval_only:
+      ocp016_gate: G4
+      applies: true
+      reason: finalizing-one-interval-would-add-a-closed-world-cardinality-prohibition
+    multiple_intervals:
+      ocp016_gate: G4
+      applies: true
+      reason: admitting-many-intervals-would-add-representation-identity-and-derivation-rules
+  accepted_consumer_ref: OCP-023@0.2.0
+  consumer_selects_cardinality: false
+sufficiency_criterion:
+  declared_before_application: true
+  order:
+    - current-owner-closed-world-boundary
+    - executable-cardinality-discrimination
+    - accepted-consumer-selection
+    - surviving-current-norm-classes
+    - no-new-rule-required
+  close_only_if:
+    - owner-text-normatively-fixes-one-cardinality
+    - executable-behavior-rejects-every-alternative-cardinality
+    - accepted-consumer-excludes-all-but-one-cardinality
+    - pressure-and-norm-evidence-leave-exactly-one-q9-class
+    - finalization-needs-no-new-field-identity-representation-or-derivation-rule
+  form_only_basis_is_sufficient: false
+  comparison_to_q3:
+    current_owner_normative_boundary: {q3: present, q9: absent}
+    executable_discrimination: {q3: present, q9: absent}
+    accepted_consumer_exclusion: {q3: excludes-retroactive-classes, q9: neutral-between-single-and-multiple}
+    survivor_intersection: {q3: prospective-only-common-boundary, q9: two-cardinality-classes-remain}
+  result: insufficient-for-q9-closure
+evidence_ledger:
+  - evidence_id: OWNER_SINGULAR_MINIMUM_SHAPE
+    source_class: current-primary-owner
+    path: docs/005-assignment-concept/README.md
+    section: 6.3 Applicability interval
+    status: Draft
+    evidence_mode: analytic
+    proves: current-minimum-shape-carries-one-start-and-one-optional-end
+    does_not_prove: closed-world-cardinality-or-rejection-of-additional-interval-representation
+  - evidence_id: OWNER_MINIMUM_NOT_SCHEMA_BOUNDARY
+    source_class: current-primary-owner
+    path: docs/005-assignment-concept/README.md
+    section: 6. Minimum Structural Contract
+    status: Draft
+    evidence_mode: analytic
+    proves: field-list-is-explicitly-minimum-and-not-a-database-or-api-schema
+    does_not_prove: whether-many-intervals-or-separate-assignments-is-final
+  - evidence_id: CURRENT_TWO_INTERVAL_EXTENSION_PROBE
+    source_class: current-executable-behavior
+    path: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+    evidence_mode: observed
+    proves: otherwise-valid-assignment-remains-valid-with-a-synthetic-two-interval-extension
+    does_not_prove: that-the-extension-is-authorized-or-has-defined-effectivity
+  - evidence_id: AD044_CARDINALITY_NEUTRAL_PRESSURE
+    source_class: historical-baseline-evidence
+    path: architecture/assignment-consumer-pressure.yaml
+    baseline: 6099a1ce042624b86fb4289f75d396a53fa9addb
+    evidence_mode: observed
+    proves: accepted-consumer-bindings-are-adequate-for-both-prospective-cardinality-classes
+    does_not_prove: live-satisfaction-or-lifecycle-selection-authority
+  - evidence_id: AD045_TWO_UNDERDETERMINED_SURVIVORS
+    source_class: historical-baseline-evidence
+    path: architecture/assignment-norm-compatibility.yaml
+    baseline: 734dd019425b636f47187bf1c342612550028400
+    evidence_mode: analytic
+    proves: single-and-multiple-interval-classes-both-remain-underdetermined
+    does_not_prove: semantic-axis-completeness-or-lifecycle-selection-authority
+  - evidence_id: ACCEPTED_CONSUMER_CARDINALITY_NON_OWNERSHIP
+    source_class: current-accepted-consumer
+    path: docs/023-resource-occupancy/README.md
+    section: 7. Time and multiplicity boundaries
+    status: Accepted
+    evidence_mode: analytic
+    proves: accepted-consumer-explicitly-defines-neither-retroactivity-nor-multiple-intervals
+    does_not_prove: a-preference-for-single-or-multiple-intervals
+  - evidence_id: Q3_THRESHOLD_COMPARISON
+    source_class: current-accepted-governance
+    path: architecture/assignment-retroactivity-q3-resolution.yaml
+    evidence_mode: analytic
+    proves: q3-had-owner-executable-consumer-and-survivor-convergence
+    does_not_prove: that-q9-inherits-q3-result-by-analogy
+executable_probe:
+  fixture: tools/ontology_checker/fixtures/assignment/valid-established.yaml
+  subject_field: applicability_intervals
+  single_interval_control:
+    expected_valid: true
+    expected_effective_at: "2026-08-02T10:15:00Z"
+    expected_effective: true
+  two_interval_extension:
+    value:
+      - {start: "2026-08-02T10:00:00Z", end: "2026-08-02T10:30:00Z"}
+      - {start: "2026-08-02T11:00:00Z", end: "2026-08-02T11:30:00Z"}
+    expected_valid: true
+    expected_effective_at: "2026-08-02T10:15:00Z"
+    expected_effective: true
+  validator_rejection_control:
+    mutation: applicability_end-before-applicability_start
+    applicability_end: "2026-08-02T09:59:00Z"
+    expected_valid: false
+    expected_error: ASSIGNMENT_APPLICABILITY_INTERVAL_INVALID
+  result: validator-does-not-discriminate-q9-cardinality
+surviving_q9_classes:
+  - resolution_id: PROSPECTIVE_ONLY_SINGLE_INTERVAL
+    pressure_need_adequacy_effect: current-three-bindings-adequate
+    norm_classification: underdetermined
+    norm_underdetermined_axes: [interval_cardinality]
+  - resolution_id: PROSPECTIVE_ONLY_MULTIPLE_INTERVALS
+    pressure_need_adequacy_effect: current-three-bindings-adequate
+    norm_classification: underdetermined
+    norm_underdetermined_axes: [interval_cardinality]
+decision:
+  question_id: Q9
+  question_text: Чи може один Assignment мати кілька неперервних applicability intervals, чи кожен інтервал потребує окремого Assignment?
+  disposition: remains-open-insufficient-evidence
+  criterion_satisfied: false
+  closure_authorized_by_this_outcome: false
+  subject_changed: false
+  temporal_blocker_removed: false
+  missing_obligations:
+    - CLOSED_WORLD_APPLICABILITY_INTERVAL_CARDINALITY
+    - MULTI_INTERVAL_REPRESENTATION_OR_SEPARATE_ASSIGNMENT_RULE
+subject_preservation:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  before: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  after: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  version_class: no-subject-change
+  sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+  reason: conditional-closure-threshold-failed-so-ocp005-must-remain-byte-identical
+current_projection:
+  q2_state: open
+  q5_state: open
+  q9_state: open
+  temporal_moving_surface_question_ids: [Q9]
+  blockers:
+    AMENDMENT_MODEL_ABSENT: [Q2]
+    TEMPORAL_MODEL_UNRESOLVED: [Q9]
+    PARTIAL_SCOPE_IDENTITY_UNRESOLVED: [Q5]
+  assignment_discovery_result: bounded_stable_candidate_not_selected
+  whole_document_freeze_reachable: false
+  promotion_candidate_ids: [OCP-005, OCP-006, OCP-010]
+versioning:
+  OCP-005: unchanged-0.3.0-because-no-contract-change
+  AD-047: 0.1.0-Discovery
+migration:
+  assignment_data: none
+  references: none
+  schemas: none
+  consumer_behavior: unchanged
+  rollback_unit:
+    - AD-047-document-witness-checker-tests-and-accounting
+  rollback_effect: removes-only-the-insufficiency-record-without-changing-q9-or-any-live-contract
+protected_artifacts:
+  - {path: docs/005-assignment-concept/README.md, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b}
+  - {path: architecture/assignment-stable-surface.yaml, sha256: cd093bd36ab29a203ad56ccded32baee671989be768b7ad415f65850e2b6d3d9}
+  - {path: architecture/assignment-temporal-scope-attempt.yaml, sha256: 4a8899d58ddf9edcf613760d330ff0003a3f982c1d6c188c4283c52fc364f7fb}
+  - {path: architecture/assignment-consumer-pressure.yaml, sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2}
+  - {path: architecture/assignment-norm-compatibility.yaml, sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd}
+  - {path: architecture/assignment-retroactivity-q3-resolution.yaml, sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a}
+  - {path: architecture/discovery/AD-039-assignment-temporal-scope-attempt.md, sha256: 310d2c3bb36b1c788e2573d42593f113066f344be1e9ee279901b1b8f6ce68dc}
+  - {path: architecture/discovery/AD-044-assignment-consumer-pressure.md, sha256: 078a615572c864478929f9abfef7ae1ee287ebe1cca4919a010fb375d8676a6e}
+  - {path: architecture/discovery/AD-045-assignment-norm-compatibility.md, sha256: 7a1c25d22bdf3179ff552dc1635ded320a6220ec6a205da091c26188bd590020}
+  - {path: architecture/discovery/AD-046-assignment-q3-lifecycle.md, sha256: 1732397cc866a68d93b80530b17975f9eb58e26acd0aa0cf0817a7b99c0021ac}
+  - {path: architecture/foundation-promotion-gate.yaml, sha256: ca11036e10397d24b308957e059d0d5def1a9d90177c0d82987191c919a56dfd}
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: ASSIGNMENT_T6
+forbidden_outcomes:
+  - Q9_CLOSURE
+  - ANY_OTHER_QUESTION_CLOSURE
+  - TEMPORAL_BLOCKER_REMOVAL
+  - OCP005_CHANGE
+  - OCP005_STATUS_CHANGE
+  - ASSIGNMENT_CONCEPT_STATUS_CHANGE
+  - ASSIGNMENT_READINESS_CHANGE
+  - PROMOTION_CANDIDATE_SET_CHANGE
+  - POSITIVE_MODEL_ACTIVATION
+  - ASSIGNMENT_SELECTION
+  - PROMOTION_CYCLE_START
+  - T7_OPEN
+  - NEXT_ACT_AUTHORIZATION

@@ -1,6 +1,6 @@
 schema_version: 3
 rule_owner: AD-036
-current_projection_owner: AD-056
+current_projection_owner: AD-057
 baseline: f64b3a23419092649cfb4059d4853eabd93fbbc2
 gate_first:
   ocp016_gate: G4
@@ -37,7 +37,7 @@ eligible_lifecycle_documents:
   - {artifact_id: OCP-002, path: docs/002-concept-taxonomy/README.md, version: 1.6.0, status: Canonical}
   - {artifact_id: OCP-003, path: docs/003-resource-concept/README.md, version: 1.0.0, status: Canonical}
   - {artifact_id: OCP-004, path: docs/004-operation-concept/README.md, version: 1.0.1, status: Canonical}
-  - {artifact_id: OCP-005, path: docs/005-assignment-concept/README.md, version: 0.4.0, status: Accepted}
+  - {artifact_id: OCP-005, path: docs/005-assignment-concept/README.md, version: 1.0.0, status: Canonical}
   - {artifact_id: OCP-006, path: docs/006-constraint-concept/README.md, version: 0.4.0, status: Accepted}
   - {artifact_id: OCP-007, path: docs/007-organization-concept/README.md, version: 1.1.1, status: Canonical}
   - {artifact_id: OCP-008, path: docs/008-objective-concept/README.md, version: 1.0.0, status: Canonical}
@@ -98,6 +98,7 @@ eligible_governance_acts:
   - {artifact_id: AD-053, path: architecture/discovery/AD-053-constraint-document-acceptance.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-054, path: architecture/discovery/AD-054-assignment-document-acceptance.md, version: 0.1.0, status: Accepted}
   - {artifact_id: AD-056, path: architecture/discovery/AD-056-assignment-promotion-selection.md, version: 0.1.0, status: Accepted}
+  - {artifact_id: AD-057, path: architecture/discovery/AD-057-assignment-document-canonicalization.md, version: 0.1.0, status: Accepted}
 candidate_mentions:
   - candidate_id: QUANTITY_INPUT_PREREQUISITE
     artifact_id: OCP-003

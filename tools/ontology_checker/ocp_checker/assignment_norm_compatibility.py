@@ -160,7 +160,7 @@ NORMATIVE_STATEMENTS = {
     },
     "ASSIGNMENT_AMENDMENT_MODEL_OPEN": {
         "path": "docs/005-assignment-concept/README.md",
-        "status": "Accepted",
+        "status": "Canonical",
         "section": "14. Business Rules",
         "quote": "6. Зміна ролі або applicability після Establishment повинна бути простежуваною. Остаточна amendment model залишається відкритою.",
         "axis": "post_establishment_change_model",
@@ -168,7 +168,7 @@ NORMATIVE_STATEMENTS = {
     },
     "ASSIGNMENT_PROSPECTIVE_EFFECTIVITY_BOUNDARY": {
         "path": "docs/005-assignment-concept/README.md",
-        "status": "Accepted",
+        "status": "Canonical",
         "section": "8. Temporal Effectivity",
         "quote": "Assignment не може бути ефективним для часу раніше авторитетного `established_at`. Це остаточна негативна межа Q3: ретроактивне Establishment не створює effectivity до авторитетного `established_at`.",
         "axis": "retroactivity_policy",
@@ -267,7 +267,7 @@ SWEEP_VOCABULARY = {
         ("`contains`", "`part_of`"),
     ),
 }
-SOURCE_SWEEP_SHA256 = "53bd24704ec4b4e460c66286307536679f8ed79ff2d62f436e0b2e1b7692cb38"
+SOURCE_SWEEP_SHA256 = "ec1a27be48d0083338c71a88fba5f6a4626512a2814c8addbe44f5796e12bb2a"
 
 EXPECTED_GATE_FIRST = {
     "ocp016_gate": "G4",

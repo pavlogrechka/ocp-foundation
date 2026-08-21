@@ -135,6 +135,47 @@ def assignment_selection_prefix_is_current(payload: Any) -> bool:
     )
 
 
+def assignment_document_promotion_prefix_is_current(payload: Any) -> bool:
+    """Return whether the live gate is exactly after OCP-005 document promotion."""
+    if not isinstance(payload, dict):
+        return False
+    protocol = payload.get("cycle_protocol")
+    cycles = payload.get("cycles")
+    candidates = payload.get("candidates")
+    if not isinstance(protocol, dict) or not isinstance(cycles, list) or not isinstance(candidates, list):
+        return False
+    assignment = next((row for row in candidates if isinstance(row, dict) and row.get("document_id") == "OCP-005"), None)
+    constraint = next((row for row in candidates if isinstance(row, dict) and row.get("document_id") == "OCP-006"), None)
+    return (
+        payload.get("schema_version") == 5
+        and protocol.get("active_cycle_id") == "ASSIGNMENT_T6"
+        and len(cycles) == 2
+        and cycles[0].get("cycle_id") == "EVENT_T6"
+        and set(cycles[0].get("steps", {}).values()) == {"completed"}
+        and cycles[1] == {
+            "cycle_id": "ASSIGNMENT_T6",
+            "candidate_id": "OCP-005",
+            "slot": "T6",
+            "steps": {
+                "CANDIDATE_BOARD_SELECTION": "completed",
+                "DOCUMENT_PROMOTION": "completed",
+                "CONCEPT_CANONICALIZATION": "pending",
+            },
+            "evidence": {"CANDIDATE_BOARD_SELECTION": "AD-056", "DOCUMENT_PROMOTION": "AD-057"},
+        }
+        and assignment is not None
+        and assignment.get("expected_document_status") == "Canonical"
+        and assignment.get("expected_concept_status") == "Accepted"
+        and assignment.get("expected_l2") == "pass"
+        and assignment.get("l2_blockers") == []
+        and constraint is not None
+        and constraint.get("expected_document_status") == "Accepted"
+        and constraint.get("expected_concept_status") == "Accepted"
+        and constraint.get("expected_l2") == "pass"
+        and constraint.get("l2_blockers") == []
+    )
+
+
 def promotion_gate_guard_is_current(payload: Any, guard: Any) -> bool:
     """Compare a current-state guard with a gate without encoding a cycle instance."""
     if not isinstance(payload, dict) or not isinstance(guard, dict):
@@ -186,6 +227,7 @@ def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGa
             "CANDIDATE_BOARD_SELECTION", "DOCUMENT_PROMOTION", "CONCEPT_CANONICALIZATION",
         )
         or STEP_STATES != frozenset({"pending", "completed"})
+        or ALLOWED_L2_RESULTS != frozenset({"pass", "fail"})
         or ALLOWED_STATUS_PAIRS != frozenset({
             ("Draft", "Accepted"), ("Accepted", "Accepted"),
             ("Canonical", "Accepted"), ("Canonical", "Canonical"),

@@ -109,7 +109,7 @@ class FoundationPromotionGateTests(unittest.TestCase):
         self.assertEqual([item["candidate_id"] for item in payload["cycles"]], ["OCP-010", "OCP-005"])
         self.assertEqual(
             tuple(payload["cycles"][1]["steps"].values()),
-            ("completed", "pending", "pending"),
+            ("completed", "completed", "pending"),
         )
         self.assertEqual(set(payload["candidates"][0]), foundation_promotion_gate.CANDIDATE_KEYS)
 
@@ -152,9 +152,9 @@ class FoundationPromotionGateTests(unittest.TestCase):
             result = validate_foundation_promotion_gate(root)
             self.assertTrue(result.valid, result.errors)
 
-    def test_next_cycle_selected_accepted_state_is_reachable_without_code_change(self) -> None:
+    def test_current_cycle_document_promoted_state_is_reachable_without_code_change(self) -> None:
         self.assert_assignment_cycle_reachable(
-            ("completed", "pending", "pending"), "Accepted", "Accepted"
+            ("completed", "completed", "pending"), "Canonical", "Accepted"
         )
 
     def test_next_cycle_document_promoted_state_is_reachable_without_code_change(self) -> None:
@@ -241,6 +241,13 @@ class FoundationPromotionGateTests(unittest.TestCase):
                 "evidence": {"CANDIDATE_BOARD_SELECTION": "SYNTHETIC_SELECTION_ACT"},
             })
             payload["cycle_protocol"]["active_cycle_id"] = "CONSTRAINT_T7"
+            self.mutate_subject_status(root, "OCP-005", "Accepted", "Accepted")
+            payload = self.payload(root)
+            assignment = next(item for item in payload["candidates"] if item["document_id"] == "OCP-005")
+            assignment["expected_document_status"] = "Accepted"
+            constraint = next(item for item in payload["candidates"] if item["document_id"] == "OCP-006")
+            constraint["expected_l2"] = "pass"
+            constraint["l2_blockers"] = []
             self.write_payload(root, payload)
             self.assertIn(
                 FOUNDATION_PROMOTION_GATE_L2_MISMATCH,

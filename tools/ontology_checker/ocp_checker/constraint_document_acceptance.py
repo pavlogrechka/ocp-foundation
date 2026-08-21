@@ -31,7 +31,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 
 BASELINE = "8bfeffb2e2e8928a36d0179a831fa3899ca7cd6a"
-MAP_SHA256 = "9d63460184576edbaf823913f4533c7d1245568ecb92b3d1ab75550217e1eb43"
+MAP_SHA256 = "5d3792c7a194b89c9c3d8e6495a4afbff4a8e9d22bf0edd2407d8defe71f8e7d"
 SNAPSHOT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 SNAPSHOT_BLOB = "50f149cf5563083bb84d5d2197ec32c2ed15fa9b"
 DIRECT_DEPENDENCIES = (

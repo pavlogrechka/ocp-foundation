@@ -59,7 +59,7 @@ RECOMMENDATION_VALUES = frozenset({"HOLD", "EVENT_YK_REMEDIATION"})
 
 EXPECTED_L2 = {
     "OCP-005": (("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004"), "pass", ()),
-    "OCP-006": (("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005"), "fail", ("OCP-005",)),
+    "OCP-006": (("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004", "OCP-005"), "pass", ()),
     "OCP-010": (("OCP-000", "OCP-001", "OCP-002", "OCP-004", "OCP-008"), "pass", ()),
 }
 EXPECTED_OPTIONS = {

@@ -51,7 +51,9 @@ class AssignmentPromotionSelectionTests(unittest.TestCase):
         rows = {row["document_id"]: row for row in self.payload()["candidate_inventory"]}
         self.assertEqual(tuple(rows), selection.CANDIDATE_IDS)
         self.assertEqual(rows["OCP-005"]["eligibility"], "eligible")
-        self.assertEqual(rows["OCP-006"]["l2_blockers"], ["OCP-005"])
+        self.assertEqual(rows["OCP-006"]["l2_blockers"], [])
+        self.assertEqual(rows["OCP-006"]["l2_result"], "pass")
+        self.assertEqual(rows["OCP-006"]["disposition"], "rejected-not-selected-by-this-Board-decision")
         self.assertEqual(rows["OCP-006"]["eligibility"], "ineligible")
         self.assertEqual(rows["OCP-010"]["prior_cycle"], "EVENT_T6")
         self.assertEqual(rows["OCP-010"]["eligibility"], "ineligible")

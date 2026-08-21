@@ -32,7 +32,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "1325de6a4fff84b8350fe1bfecf51e4fd0f4c176"
-MAP_SHA256 = "e93b7b11ec20a6d3b8a647519d98ec619c0f2b589c404ca6bfc83c2bb0e149dd"
+MAP_SHA256 = "33b1f722671f263ab5153033fdaeb5b7cbc7e36c4f58fb9495089fc1733589d0"
 SNAPSHOT_SHA256 = "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b"
 SNAPSHOT_BLOB = "1dd975a17ec65df751357fdd049c8ca928739bd1"
 DIRECT_DEPENDENCIES = ("OCP-000", "OCP-001", "OCP-002", "OCP-003", "OCP-004")
@@ -241,8 +241,8 @@ def validate_assignment_document_acceptance(repo_root: Path) -> AssignmentDocume
     metadata = _frontmatter(repo_root / SUBJECT_PATH) or {}
     subject = payload.get("subject") or {}
     if (
-        metadata.get("Document-ID") != "OCP-005" or str(metadata.get("Version")) != "0.4.0"
-        or metadata.get("Status") != "Accepted" or metadata.get("Concept-Status") != "Accepted"
+        metadata.get("Document-ID") != "OCP-005" or str(metadata.get("Version")) != "1.0.0"
+        or metadata.get("Status") != "Canonical" or metadata.get("Concept-Status") != "Accepted"
         or _refs(metadata.get("Depends-On")) != DIRECT_DEPENDENCIES
         or subject.get("before") != {"version": "0.3.0", "status": "Draft", "concept_status": "Accepted"}
         or subject.get("after") != {"version": "0.4.0", "status": "Accepted", "concept_status": "Accepted"}
@@ -255,9 +255,9 @@ def validate_assignment_document_acceptance(repo_root: Path) -> AssignmentDocume
     snapshot_map = _load(repo_root / SNAPSHOT_MAP_PATH) or {}
     entries = {row.get("document_id"): row for row in snapshot_map.get("entries", []) if isinstance(row, dict)}
     expected_entry = {
-        "document_id": "OCP-005", "primary": SUBJECT_PATH.as_posix(), "current_status": "Accepted",
+        "document_id": "OCP-005", "primary": SUBJECT_PATH.as_posix(), "current_status": "Canonical",
         "reviewed_version": "0.3.0", "snapshot": SNAPSHOT_PATH.as_posix(),
-        "sha256": SNAPSHOT_SHA256, "basis": "current-accepted",
+        "sha256": SNAPSHOT_SHA256, "basis": "retained-acceptance-evidence",
     }
     if (
         snapshot != {"path": SNAPSHOT_PATH.as_posix(), "reviewed_version": "0.3.0", "sha256": SNAPSHOT_SHA256, "baseline_blob": SNAPSHOT_BLOB, "basis": "current-accepted"}
@@ -319,9 +319,9 @@ def validate_assignment_document_acceptance(repo_root: Path) -> AssignmentDocume
     if (
         not promotion_gate_guard_is_current(gate, guard)
         or guard.get("candidate_selected") is not False or guard.get("cycle_opened") is not False
-        or (candidates.get("OCP-005") or {}).get("expected_document_status") != "Accepted"
+        or (candidates.get("OCP-005") or {}).get("expected_document_status") != "Canonical"
         or (candidates.get("OCP-006") or {}).get("expected_document_status") != "Accepted"
-        or (candidates.get("OCP-006") or {}).get("l2_blockers") != ["OCP-005"]
+        or (candidates.get("OCP-006") or {}).get("l2_blockers") != []
     ):
         errors.append(ASSIGNMENT_ACCEPTANCE_GATE_DRIFT)
 

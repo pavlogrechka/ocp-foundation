@@ -21,15 +21,16 @@ cycles:
     slot: T6
     steps:
       CANDIDATE_BOARD_SELECTION: completed
-      DOCUMENT_PROMOTION: pending
+      DOCUMENT_PROMOTION: completed
       CONCEPT_CANONICALIZATION: pending
     evidence:
       CANDIDATE_BOARD_SELECTION: AD-056
+      DOCUMENT_PROMOTION: AD-057
 candidates:
   - document_id: OCP-005
     primary: docs/005-assignment-concept/README.md
     slot: T6
-    expected_document_status: Accepted
+    expected_document_status: Canonical
     expected_concept_status: Accepted
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004]
     expected_l2: pass
@@ -40,8 +41,8 @@ candidates:
     expected_document_status: Accepted
     expected_concept_status: Accepted
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
-    expected_l2: fail
-    l2_blockers: [OCP-005]
+    expected_l2: pass
+    l2_blockers: []
   - document_id: OCP-010
     primary: docs/010-event-concept/README.md
     slot: T6
