@@ -29,6 +29,7 @@ from ocp_checker.constraint_q6_sufficiency import validate_constraint_q6_suffici
 from ocp_checker.constraint_document_status_readiness import validate_constraint_document_status_readiness
 from ocp_checker.constraint_document_acceptance import validate_constraint_document_acceptance
 from ocp_checker.assignment_document_acceptance import validate_assignment_document_acceptance
+from ocp_checker.assignment_canonical_readiness import validate_assignment_canonical_readiness
 from ocp_checker.event_stable_surface import validate_event_stable_surface
 from ocp_checker.event_promotion_selection import validate_event_promotion_selection
 from ocp_checker.event_lifecycle_promotion import validate_event_lifecycle_promotion
@@ -231,6 +232,13 @@ def main() -> int:
     )
     failures += 0 if assignment_acceptance_result.valid else 1
 
+    assignment_canonical_readiness_result = validate_assignment_canonical_readiness(repo_root)
+    print(
+        f"{'PASS' if assignment_canonical_readiness_result.valid else 'FAIL'} "
+        f"assignment-canonical-readiness errors={list(assignment_canonical_readiness_result.errors)}"
+    )
+    failures += 0 if assignment_canonical_readiness_result.valid else 1
+
     event_selection_result = validate_event_promotion_selection(repo_root)
     print(
         f"{'PASS' if event_selection_result.valid else 'FAIL'} "
@@ -299,7 +307,7 @@ def main() -> int:
         f"Checked {len(files)} fixture(s), repository status, artifact governance, "
         f"foundation promotion gate, reassessment, Event, Assignment and Constraint stable-surface discovery, Constraint Q6 sufficiency and document-status readiness, "
         f"Assignment amendment-Q2 and temporal/partial-scope attempts, Accepted-consumer compatibility, pressure, norm compatibility, Q3 lifecycle and Q2/Q9 sufficiency, "
-        f"consumer-need discovery, OCP-024 and Constraint document acceptance, "
+        f"consumer-need discovery, OCP-024 and Constraint document acceptance, Assignment document acceptance and Canonical readiness, "
         f"Event selection, lifecycle promotion and Concept canonicalization, "
         f"open-question resolution sync, accepted snapshot governance, current numeric accounting, process audit, "
         f"Concept graph and generated map; "
