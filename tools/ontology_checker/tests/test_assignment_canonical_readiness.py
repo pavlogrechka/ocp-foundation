@@ -79,7 +79,7 @@ class AssignmentCanonicalReadinessTests(unittest.TestCase):
             (readiness.SUBJECT_PATH, "Version: 0.4.0", "Version: 1.0.0", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
             (readiness.SUBJECT_PATH, "Status: Accepted", "Status: Canonical", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
             (readiness.SUBJECT_PATH, "Concept-Status: Accepted", "Concept-Status: Canonical", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
-            (readiness.GATE_PATH, "active_cycle_id: null", "active_cycle_id: ASSIGNMENT_T6", ASSIGNMENT_CANONICAL_READINESS_SLOT_DRIFT),
+            (readiness.GATE_PATH, "active_cycle_id: ASSIGNMENT_T6", "active_cycle_id: null", ASSIGNMENT_CANONICAL_READINESS_SLOT_DRIFT),
         )
         for relative, old, new, expected in cases:
             with self.subTest(relative=relative, old=old), tempfile.TemporaryDirectory() as tmp:

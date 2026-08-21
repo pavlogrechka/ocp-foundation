@@ -89,7 +89,6 @@ class AssignmentTemporalScopeTests(unittest.TestCase):
             "EXPECTED_PROBES",
             "EXPECTED_PROJECTION",
             "CURRENT_PROJECTION",
-            "EXPECTED_GATE_GUARD",
         )
 
         def scalar_paths(value, prefix=()):

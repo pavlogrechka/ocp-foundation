@@ -3,7 +3,7 @@ rule_owner: AD-033
 cycle_protocol:
   ordered_steps: [CANDIDATE_BOARD_SELECTION, DOCUMENT_PROMOTION, CONCEPT_CANONICALIZATION]
   allowed_step_states: [pending, completed]
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
 cycles:
   - cycle_id: EVENT_T6
     candidate_id: OCP-010
@@ -16,6 +16,15 @@ cycles:
       CANDIDATE_BOARD_SELECTION: AD-016AC
       DOCUMENT_PROMOTION: AD-016AD
       CONCEPT_CANONICALIZATION: AD-032
+  - cycle_id: ASSIGNMENT_T6
+    candidate_id: OCP-005
+    slot: T6
+    steps:
+      CANDIDATE_BOARD_SELECTION: completed
+      DOCUMENT_PROMOTION: pending
+      CONCEPT_CANONICALIZATION: pending
+    evidence:
+      CANDIDATE_BOARD_SELECTION: AD-056
 candidates:
   - document_id: OCP-005
     primary: docs/005-assignment-concept/README.md

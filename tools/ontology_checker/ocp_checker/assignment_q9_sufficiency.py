@@ -11,6 +11,7 @@ import yaml
 from .historical_evidence import historical_path
 
 from .checker import assignment_effective_at, load_fixture, validate_assignment
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_Q9_MAP_INVALID = "ASSIGNMENT_Q9_MAP_INVALID"
@@ -30,7 +31,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 PROBE_FIXTURE = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
 BASELINE = "7acced16b99790db04c8dccb9380a6191633af30"
-MAP_SHA256 = "7dee17c530fe33897de54a01ef265a6930cdb14b8e5d8527b6e74402994bd84c"
+MAP_SHA256 = "1318bf67a91c1c4f8355cfeb2a1a2a3ce648b4f5521a80380552576c4f6ed23e"
 SUBJECT_SHA256 = "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b"
 Q9_TOKEN = "Чи може один Assignment мати кілька неперервних applicability intervals, чи кожен інтервал потребує окремого Assignment?"
 
@@ -439,18 +440,12 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
     ) if isinstance(candidates, list) else {}
     if (
         not isinstance(promotion, dict)
-        or promotion.get("schema_version") != 5
         or not isinstance(protocol, dict)
-        or protocol.get("active_cycle_id") is not None
-        or completed != ["EVENT_T6"]
         or candidate_ids != ["OCP-005", "OCP-006", "OCP-010"]
         or assignment_candidate.get("expected_document_status") != "Accepted"
         or assignment_candidate.get("expected_concept_status") != "Accepted"
-        or payload.get("promotion_gate_guard") != {
-            "schema_version": 5,
-            "completed_cycle_ids": ["EVENT_T6"],
-            "active_cycle_id": None,
-        }
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
+        or not promotion_gate_guard_is_current(promotion, payload.get("promotion_gate_guard"))
     ):
         errors.append(ASSIGNMENT_Q9_GATE_DRIFT)
 

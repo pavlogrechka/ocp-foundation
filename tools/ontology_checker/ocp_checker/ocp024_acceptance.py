@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 from .completeness_evaluator import (
     ACTIVATION_FIELDS,
@@ -39,7 +40,7 @@ VALID_FIXTURE = Path("tools/ontology_checker/fixtures/completeness_evaluator/val
 ZERO_OCCUPANCY_FIXTURE = Path("tools/ontology_checker/fixtures/resource_occupancy/valid-zero-assignments.yaml")
 
 BASELINE = "954e2d76317a993d228d45a77ccfddec0c0f379a"
-MAP_SHA256 = "b9d11c45235637367cf0a226cf71355937463767b8f6c375d8138fbab05fc9c1"
+MAP_SHA256 = "21de9f37c251375b4eabcd3c97194c5bcf9c6f2f894277a8fc90afd00907a7f6"
 SNAPSHOT_SHA256 = "0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753"
 SNAPSHOT_BLOB = "2713c99ca6653d35fc52435eaeaeb8f9f5174b1d"
 ACCEPTED_CONSUMERS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})
@@ -300,9 +301,8 @@ def validate_ocp024_acceptance(repo_root: Path) -> Ocp024AcceptanceResult:
         and all(state == "completed" for state in (item.get("steps") or {}).values())
     ]
     if (
-        (live_gate or {}).get("schema_version") != guard.get("schema_version")
-        or completed != guard.get("completed_cycle_ids")
-        or cycle.get("active_cycle_id") != guard.get("active_cycle_id")
+        set(guard or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
+        or not promotion_gate_guard_is_current(live_gate, guard)
     ):
         errors.append(OCP024_ACCEPTANCE_GATE_DRIFT)
     return _result(errors)

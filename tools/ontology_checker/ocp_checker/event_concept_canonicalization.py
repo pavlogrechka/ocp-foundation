@@ -89,7 +89,7 @@ CURRENT_TOKENS = {
     "architecture/foundation-promotion-gate.yaml": ("expected_concept_status: Canonical",),
     "README.md": ("Assignment та Constraint лишаються `Accepted`, а Event є `Canonical`",),
     "backlog/roadmap.md": ("Assignment і Constraint лишаються Accepted, Event є Canonical",),
-    "backlog/architecture-backlog.md": ("Event Concept Canonical", "active_cycle_id: null"),
+    "backlog/architecture-backlog.md": ("Event Concept Canonical", "ASSIGNMENT_T6", "DOCUMENT_PROMOTION", "pending"),
 }
 EXPECTED_HISTORICAL = {
     "architecture/event-stable-surface.yaml": "ed1e338f52d87de42d56c66c20c7cf89891a589f",

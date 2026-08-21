@@ -6,6 +6,8 @@ from typing import Any, Iterable
 
 import yaml
 
+from .foundation_promotion_gate import promotion_gate_guard_is_current
+
 
 ASSIGNMENT_STABLE_SURFACE_MAP_INVALID = "ASSIGNMENT_STABLE_SURFACE_MAP_INVALID"
 ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT = "ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT"
@@ -327,11 +329,7 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             "reason": "discovery-evidence-is-not-a-positive-capable-rule-result-or-profile",
             "accepted_consumer_activation_required": False,
         }
-        or payload.get("promotion_gate_guard") != {
-            "schema_version": 5,
-            "completed_cycle_ids": ["EVENT_T6"],
-            "active_cycle_id": None,
-        }
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
     ):
         errors.append(ASSIGNMENT_STABLE_SURFACE_MAP_INVALID)
 
@@ -586,12 +584,7 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             and set(item["steps"].values()) == {"completed"}
         ] if isinstance(cycles, list) else []
         protocol = gate.get("cycle_protocol")
-        if (
-            gate.get("schema_version") != 5
-            or completed != ["EVENT_T6"]
-            or not isinstance(protocol, dict)
-            or protocol.get("active_cycle_id") is not None
-        ):
+        if not isinstance(protocol, dict) or not promotion_gate_guard_is_current(gate, payload.get("promotion_gate_guard")):
             errors.append(ASSIGNMENT_STABLE_SURFACE_GATE_DRIFT)
 
     return _result(errors)

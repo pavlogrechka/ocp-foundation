@@ -91,6 +91,72 @@ def _completed_prefix(steps: dict[str, Any]) -> bool:
     return True
 
 
+def assignment_selection_prefix_is_current(payload: Any) -> bool:
+    """Return whether the live gate is exactly at the authorized OCP-005 selection prefix."""
+    if not isinstance(payload, dict):
+        return False
+    protocol = payload.get("cycle_protocol")
+    cycles = payload.get("cycles")
+    candidates = payload.get("candidates")
+    if not isinstance(protocol, dict) or not isinstance(cycles, list) or not isinstance(candidates, list):
+        return False
+    assignment = next(
+        (item for item in candidates if isinstance(item, dict) and item.get("document_id") == "OCP-005"),
+        None,
+    )
+    return (
+        payload.get("schema_version") == 5
+        and protocol.get("active_cycle_id") == "ASSIGNMENT_T6"
+        and len(cycles) == 2
+        and cycles[0].get("cycle_id") == "EVENT_T6"
+        and cycles[0].get("candidate_id") == "OCP-010"
+        and cycles[0].get("slot") == "T6"
+        and cycles[0].get("steps") == {
+            "CANDIDATE_BOARD_SELECTION": "completed",
+            "DOCUMENT_PROMOTION": "completed",
+            "CONCEPT_CANONICALIZATION": "completed",
+        }
+        and cycles[1] == {
+            "cycle_id": "ASSIGNMENT_T6",
+            "candidate_id": "OCP-005",
+            "slot": "T6",
+            "steps": {
+                "CANDIDATE_BOARD_SELECTION": "completed",
+                "DOCUMENT_PROMOTION": "pending",
+                "CONCEPT_CANONICALIZATION": "pending",
+            },
+            "evidence": {"CANDIDATE_BOARD_SELECTION": "AD-056"},
+        }
+        and assignment is not None
+        and assignment.get("expected_document_status") == "Accepted"
+        and assignment.get("expected_concept_status") == "Accepted"
+        and assignment.get("expected_l2") == "pass"
+        and assignment.get("l2_blockers") == []
+    )
+
+
+def promotion_gate_guard_is_current(payload: Any, guard: Any) -> bool:
+    """Compare a current-state guard with a gate without encoding a cycle instance."""
+    if not isinstance(payload, dict) or not isinstance(guard, dict):
+        return False
+    protocol = payload.get("cycle_protocol")
+    cycles = payload.get("cycles")
+    if not isinstance(protocol, dict) or not isinstance(cycles, list):
+        return False
+    completed = [
+        row.get("cycle_id") for row in cycles
+        if isinstance(row, dict)
+        and isinstance(row.get("steps"), dict)
+        and row["steps"]
+        and all(state == "completed" for state in row["steps"].values())
+    ]
+    return (
+        guard.get("schema_version") == payload.get("schema_version")
+        and guard.get("completed_cycle_ids") == completed
+        and guard.get("active_cycle_id") == protocol.get("active_cycle_id")
+    )
+
+
 def validate_foundation_promotion_gate(repo_root: Path) -> FoundationPromotionGateResult:
     errors: list[str] = []
     try:

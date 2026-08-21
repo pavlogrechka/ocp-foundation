@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 CONSTRAINT_STABLE_SURFACE_MAP_INVALID = "CONSTRAINT_STABLE_SURFACE_MAP_INVALID"
@@ -367,10 +368,9 @@ def validate_constraint_stable_surface(repo_root: Path) -> ConstraintStableSurfa
     ]
     protocol = gate.get("cycle_protocol") if isinstance(gate, dict) else None
     if (
-        guard != {"schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None}
-        or not isinstance(gate, dict) or gate.get("schema_version") != 5
-        or completed != ["EVENT_T6"]
-        or not isinstance(protocol, dict) or protocol.get("active_cycle_id") is not None
+        set(guard or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
+        or not isinstance(gate, dict) or not isinstance(protocol, dict)
+        or not promotion_gate_guard_is_current(gate, guard)
     ):
         errors.append(CONSTRAINT_STABLE_SURFACE_GATE_DRIFT)
     return _result(errors)

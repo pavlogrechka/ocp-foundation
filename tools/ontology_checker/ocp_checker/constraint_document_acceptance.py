@@ -9,6 +9,7 @@ from typing import Any, Iterable
 import yaml
 
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 CONSTRAINT_ACCEPTANCE_MAP_INVALID = "CONSTRAINT_ACCEPTANCE_MAP_INVALID"
@@ -30,7 +31,7 @@ SNAPSHOT_MAP_PATH = Path("architecture/accepted-document-snapshot-map.yaml")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 
 BASELINE = "8bfeffb2e2e8928a36d0179a831fa3899ca7cd6a"
-MAP_SHA256 = "afb3d3a86e455761c34a4bf6153cd75e86844b3fed2d93569df2848fcbd17c05"
+MAP_SHA256 = "9d63460184576edbaf823913f4533c7d1245568ecb92b3d1ab75550217e1eb43"
 SNAPSHOT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 SNAPSHOT_BLOB = "50f149cf5563083bb84d5d2197ec32c2ed15fa9b"
 DIRECT_DEPENDENCIES = (
@@ -424,12 +425,11 @@ def validate_constraint_document_acceptance(repo_root: Path) -> ConstraintDocume
         and set((row.get("steps") or {}).values()) == {"completed"}
     ]
     if (
-        guard != {"schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None, "ocp006_status_projection": "Accepted", "candidate_selected": False, "cycle_opened": False}
-        or not isinstance(gate_payload, dict) or gate_payload.get("schema_version") != 5
-        or gate_payload.get("cycle_protocol", {}).get("active_cycle_id") is not None
-        or completed != ["EVENT_T6"]
+        set(guard or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id", "ocp006_status_projection", "candidate_selected", "cycle_opened"}
+        or guard.get("ocp006_status_projection") != "Accepted"
+        or guard.get("candidate_selected") is not False or guard.get("cycle_opened") is not False
+        or not isinstance(gate_payload, dict) or not promotion_gate_guard_is_current(gate_payload, guard)
         or candidates.get("OCP-006", {}).get("expected_document_status") != "Accepted"
-        or len((gate_payload or {}).get("cycles", [])) != 1
     ):
         errors.append(CONSTRAINT_ACCEPTANCE_GATE_DRIFT)
 

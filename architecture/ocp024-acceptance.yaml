@@ -91,7 +91,7 @@ protected_artifacts:
 promotion_gate_guard:
   schema_version: 5
   completed_cycle_ids: [EVENT_T6]
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
 versioning:
   OCP-024: 0.1.0-to-0.2.0-precanonical-minor-lifecycle-acceptance-no-semantic-delta
   AD-049: 0.1.0-Accepted

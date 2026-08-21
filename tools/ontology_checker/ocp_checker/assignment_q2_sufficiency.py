@@ -11,6 +11,7 @@ import yaml
 from .historical_evidence import historical_path
 
 from .checker import load_fixture, validate_assignment
+from .foundation_promotion_gate import promotion_gate_guard_is_current
 
 
 ASSIGNMENT_Q2_SUFFICIENCY_MAP_INVALID = "ASSIGNMENT_Q2_SUFFICIENCY_MAP_INVALID"
@@ -30,7 +31,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 PROBE_FIXTURE = Path("tools/ontology_checker/fixtures/assignment/valid-established.yaml")
 
 BASELINE = "4586bccbdc943c6a92daf052ce3df915d41fb976"
-MAP_SHA256 = "f519447c04752af0b1ef2e72b59e68374ddd845706cdc01acbb4cb6b45ac3a04"
+MAP_SHA256 = "f7b406b67e79272320ebb4104f29f116898d551d52a2c78719fffffb8bda68ca"
 SUBJECT_SHA256 = "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b"
 Q2_TOKEN = "Яка amendment model потрібна для зміни role або applicability після Establishment?"
 
@@ -367,14 +368,12 @@ def validate_assignment_q2_sufficiency(repo_root: Path) -> AssignmentQ2Sufficien
     candidate_ids = [item.get("document_id") for item in candidates if isinstance(item, dict)] if isinstance(candidates, list) else []
     assignment = next((item for item in candidates if item.get("document_id") == "OCP-005"), {}) if isinstance(candidates, list) else {}
     if (
-        not isinstance(promotion, dict) or promotion.get("schema_version") != 5
-        or not isinstance(protocol, dict) or protocol.get("active_cycle_id") is not None
-        or completed != ["EVENT_T6"] or candidate_ids != ["OCP-005", "OCP-006", "OCP-010"]
+        not isinstance(promotion, dict) or not isinstance(protocol, dict)
+        or candidate_ids != ["OCP-005", "OCP-006", "OCP-010"]
         or assignment.get("expected_document_status") != "Accepted"
         or assignment.get("expected_concept_status") != "Accepted"
-        or payload.get("promotion_gate_guard") != {
-            "schema_version": 5, "completed_cycle_ids": ["EVENT_T6"], "active_cycle_id": None
-        }
+        or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
+        or not promotion_gate_guard_is_current(promotion, payload.get("promotion_gate_guard"))
     ):
         errors.append(ASSIGNMENT_Q2_SUFFICIENCY_GATE_DRIFT)
 

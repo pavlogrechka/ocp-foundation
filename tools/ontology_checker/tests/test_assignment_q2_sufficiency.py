@@ -113,7 +113,7 @@ class AssignmentQ2SufficiencyTests(unittest.TestCase):
             (assignment_q2_sufficiency.SURFACE_PATH, ("subject", "discovery_result"), "ready"),
             (assignment_q2_sufficiency.GATE_PATH, ("candidates", 0, "expected_document_status"), "Draft"),
             (assignment_q2_sufficiency.GATE_PATH, ("candidates",), []),
-            (assignment_q2_sufficiency.GATE_PATH, ("cycle_protocol", "active_cycle_id"), "ASSIGNMENT_T6"),
+            (assignment_q2_sufficiency.GATE_PATH, ("cycle_protocol", "active_cycle_id"), None),
         )
         for relative, value_path, replacement in attacks:
             with self.subTest(relative=relative, value_path=value_path), tempfile.TemporaryDirectory() as tmp:

@@ -10,6 +10,7 @@ import yaml
 
 from .checker import effective_constraint_result, load_fixture, validate_constraint
 from .historical_evidence import historical_path
+from .foundation_promotion_gate import validate_foundation_promotion_gate
 
 
 CONSTRAINT_Q6_MAP_INVALID = "CONSTRAINT_Q6_MAP_INVALID"
@@ -246,7 +247,6 @@ def validate_constraint_q6_sufficiency(repo_root: Path) -> ConstraintQ6Sufficien
         if _hash(repo_root / resolved) != item.get("sha256"):
             errors.append(CONSTRAINT_Q6_EVIDENCE_DRIFT)
             break
-    gate_payload = _load(repo_root / GATE_PATH)
-    if not isinstance(gate_payload, dict) or gate_payload.get("cycle_protocol", {}).get("active_cycle_id") is not None:
+    if not validate_foundation_promotion_gate(repo_root).valid:
         errors.append(CONSTRAINT_Q6_GATE_DRIFT)
     return _result(errors)

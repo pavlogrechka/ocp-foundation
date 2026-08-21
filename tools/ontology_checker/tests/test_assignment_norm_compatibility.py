@@ -29,6 +29,7 @@ from ocp_checker.assignment_norm_compatibility import (  # noqa: E402
 )
 from ocp_checker import validate_reference_fixture  # noqa: E402
 from ocp_checker.checker import load_fixture  # noqa: E402
+from ocp_checker.historical_evidence import historical_path  # noqa: E402
 
 
 class AssignmentNormCompatibilityTests(unittest.TestCase):
@@ -424,10 +425,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                     "docs/005-assignment-concept/README.md",
                     "architecture/assignment-stable-surface.yaml",
                 }:
-                    current = {
-                        "docs/006-constraint-concept/README.md": "docs/006-constraint-concept/reviewed-contract-v0.3.2.md",
-                        "architecture/foundation-promotion-gate.yaml": "architecture/baselines/foundation-promotion-gate-pre-ocp006-acceptance.yaml",
-                    }.get(path, path)
+                    current = historical_path(ROOT, Path(path), sha256)
                     self.assertEqual((ROOT / current).read_bytes(), baseline_bytes)
                 text = baseline_bytes.decode("utf-8")
                 self.assertTrue(all(token in text for token in tokens))

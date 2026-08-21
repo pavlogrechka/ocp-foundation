@@ -1,0 +1,244 @@
+schema_version: 1
+rule_owner: AD-054
+baseline: 1325de6a4fff84b8350fe1bfecf51e4fd0f4c176
+gate_first:
+  route: Route-F
+  positive_capable: false
+  ocp016_g4_applies: false
+  activation_performed: false
+  reason: document-lifecycle-authority-changes-without-adding-or-activating-a-rule-result-profile
+  unmet_consumer_need_effect: remains-unmet-and-unactivated
+subject:
+  document_id: OCP-005
+  path: docs/005-assignment-concept/README.md
+  before: {version: 0.3.0, status: Draft, concept_status: Accepted}
+  after: {version: 0.4.0, status: Accepted, concept_status: Accepted}
+  semantic_delta: none
+  exact_direct_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004]
+criteria:
+  - criterion_id: BINDING_REVIEW_LANE
+    applicability: applicable-to-Accepted
+    result: satisfied-by-exact-head-gates-and-authorized-squash
+    basis_mode: analytical-external-gate
+    source: docs/001-ontology-governance/README.md
+    tokens: ["окрема гілка та draft pull request", "зовнішнє adversarial review до рішення Architecture Board", "явне рішення Architecture Board", "squash merge після успішних required checks"]
+  - criterion_id: EXACT_ROUTE_AND_AUTHORITY_LEDGER
+    applicability: applicable-to-Accepted
+    result: satisfied
+    basis_mode: observational
+    source: docs/001-ontology-governance/README.md
+    tokens: ["запропонувати один primary semantic-authority route", "authority ledger, concrete consumers, exact dependencies, evidence, non-implications і migration/reopening effect"]
+  - criterion_id: BOARD_ACCEPTS_CURRENT_SEMANTICS
+    applicability: applicable-to-Accepted
+    result: satisfied-by-mandate-and-exact-head-authorization
+    basis_mode: analytical-board-act
+    source: docs/001-ontology-governance/README.md
+    tokens: ["`Accepted` означає, що Architecture Board прийняла поточну семантику як основу залежних специфікацій"]
+  - criterion_id: ATOMIC_DOCUMENT_PROMOTION_UNIT
+    applicability: applicable-to-Accepted
+    result: satisfied
+    basis_mode: observational
+    source: docs/001-ontology-governance/README.md
+    tokens: ["`Version`, `Status`, readable compatibility surface, exact direct dependencies, evidence та repository accounting"]
+  - criterion_id: CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT
+    applicability: not-applicable-Canonical-only
+    result: not-evaluated
+    basis_mode: observational
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Канонізація потребує стабільних залежностей, машинозчитуваних перевірок і окремого рішення Architecture Board"]
+  - criterion_id: CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2
+    applicability: not-applicable-Canonical-only
+    result: not-evaluated
+    basis_mode: observational
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Для OCP у статусі `Canonical` кожна direct dependency класу OCP повинна бути", "Draft або merely Accepted OCP не може постачати Canonical OCP"]
+  - criterion_id: EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT
+    applicability: applicable-to-Accepted
+    result: satisfied-by-exact-head-gates-and-authorized-squash
+    basis_mode: analytical-external-gate
+    source: docs/001-ontology-governance/README.md
+    tokens: ["Fable approval, Codex adjudication, green CI та Pavlo/Architecture Board authorization повинні стосуватися exact proposed head", "Lifecycle effect виникає лише після authorized squash merge"]
+route_decision:
+  selected: Route-F
+  selection_basis: current-subject-identity-lifecycle-registry-and-foundation-wide-authority
+  evidence:
+    - {path: docs/005-assignment-concept/README.md, tokens: ["Defines-Concepts: Assignment", "## 5. Identity", "## 7. Working Lifecycle", "## 9. Participation Derivation"]}
+    - {path: docs/000-operational-ontology/README.md, tokens: ["| Assignment | Accepted | OCP-005"]}
+    - {path: docs/002-concept-taxonomy/README.md, tokens: ["Assignment: Accepted"]}
+  rejected_routes:
+    Route-C: subject-defines-a-registered-identity-rather-than-only-a-shared-non-Concept-contract
+    Route-E: authority-is-not-owned-by-a-single-existing-Concept
+    Route-D: semantics-are-foundation-wide-not-domain-local
+    Route-I: identity-lifecycle-and-derivation-are-not-supplied-by-an-external-system
+  precedent_guide_is_not_route_proof: true
+authority_ledger:
+  document_semantic_owner: Architecture Board
+  concept_registry_owner: OCP-000
+  concept_taxonomy_projection: OCP-002
+  lifecycle_rule_owner: OCP-001
+  route_and_activation_boundary_owner: OCP-016
+  current_semantic_authority: OCP-005@0.4.0
+  reviewed_body_authority: docs/005-assignment-concept/reviewed-contract-v0.3.0.md
+compatibility_surface:
+  granted:
+    - ASSIGNMENT_IDENTITY_REFERENCE_KERNEL
+    - TRANSITION_HISTORY_LIFECYCLE_KERNEL
+    - STRUCTURAL_ROLE_PROVENANCE_KERNEL
+    - SINGLE_INTERVAL_EFFECTIVITY_AND_PARTICIPATION_KERNEL
+    - NON_INHERITANCE_NON_AUTHORITY_BOUNDARY
+    - SUPERSESSION_IDENTITY_BOUNDARY
+    - EXECUTABLE_ASSIGNMENT_BOUNDARY
+  withheld_open_surfaces:
+    Q2: AMENDMENT_AFTER_ESTABLISHMENT
+    Q4: ROLE_TAXONOMY
+    Q5: COMPOSITE_RESOURCE_SCOPE
+    Q7: ROLE_SPECIALIZATIONS
+    Q8: CONSTRAINT_CONFLICT_HANDOFF
+    Q9: MULTIPLE_APPLICABILITY_INTERVALS
+    Q10: PROVENANCE_TAXONOMY
+    Q11: REPLACEMENT_POLICY
+  sufficiency_failures_preserved:
+    Q2: current-rules-do-not-distinguish-successor-only-from-prohibition
+    Q9: single-interval-record-shape-is-not-a-normative-cardinality-decision
+  dependent_inference_permitted: false
+consumers:
+  - {document_id: OCP-006, path: docs/006-constraint-concept/README.md, token: "Без цього Constraint сам факт кількох Assignment не є порушенням", consumed_surface: assignment-identity-effectivity-and-supersession-boundaries, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-013, path: docs/013-resource-interchangeability/README.md, token: "retain every exclusion of availability, authorization, ranking, selection, replacement and Assignment mutation", consumed_surface: non-authority-and-non-mutation-boundary, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-015, path: docs/015-coordination-workflow/README.md, token: "preserves Resource and Assignment identity", consumed_surface: assignment-identity-non-mutation-boundary, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-017, path: docs/017-operation-lifecycle/README.md, token: "if OCP-005 `assignment_effective_at` is true at that instant", consumed_surface: effectivity-participation-and-history-boundary, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-020, path: docs/020-quantitative-constraint-input/README.md, token: "create, amend, activate, suspend or terminate an Assignment", consumed_surface: quantitative-input-non-mutation-boundary, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-021, path: docs/021-reservation-allocation-boundary/README.md, token: "Their truth remains owned by OCP-005/OCP-006", consumed_surface: truth-owner-and-non-reservation-boundary, acceptance_change: lifecycle-assurance-only}
+  - {document_id: OCP-023, path: docs/023-resource-occupancy/README.md, token: "assignment_effective_at(assignment, at)", consumed_surface: effectivity-and-reference-validation, acceptance_change: lifecycle-assurance-only}
+consumer_effect:
+  accepted_direct_consumer_count: 7
+  all_changes: lifecycle-assurance-only
+  newly_legitimized_positive_behavior: none
+  data_migration: none
+  reference_migration: none
+  schema_migration: none
+  runtime_behavior: unchanged
+unmet_positive_need:
+  need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+  consumer_id: OCP-023
+  exact_result: assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)
+  before: unmet
+  after: unmet
+  blocked_output: occupied-false
+  acceptance_supplies_completeness: false
+  acceptance_names_legitimate_evaluator: false
+  acceptance_activates_positive_model: false
+differences_from_previously_accepted_subject:
+  comparison_subject: OCP-006@AD-053
+  inventory_criterion: current-metadata-current-open-surfaces-current-consumers-and-current-positive-needs
+  differences:
+    - {axis: direct-dependencies, OCP-005: five-all-Canonical, OCP-006: six-including-pre-act-Draft-OCP-005, criterion_effect: no-Accepted-blocker-and-Canonical-floor-not-applicable, evidence_mode: analytic}
+    - {axis: accepted-consumers, OCP-005: seven, OCP-006: nine, criterion_effect: exact-ledger-required-count-does-not-decide-readiness, evidence_mode: analytic}
+    - {axis: whole-freeze-surfaces, OCP-005: three-Q2-Q5-Q9, OCP-006: one-Q6, criterion_effect: open-question-count-and-freeze-classification-are-not-promotion-criteria, evidence_mode: analytic}
+    - {axis: unmet-positive-consumer-need, OCP-005: one-current-OCP-023-need, OCP-006: none-declared, criterion_effect: remains-unmet-and-no-activation-so-no-status-criterion-fails, evidence_mode: analytic}
+    - {axis: direct-dependent-previous-subject, OCP-005: OCP-006-is-an-Accepted-consumer, OCP-006: OCP-005-was-a-Draft-dependency, criterion_effect: no-other-document-lifecycle-effect, evidence_mode: analytic}
+reviewed_snapshot:
+  path: docs/005-assignment-concept/reviewed-contract-v0.3.0.md
+  reviewed_version: 0.3.0
+  sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+  baseline_blob: 1dd975a17ec65df751357fdd049c8ca928739bd1
+  basis: current-accepted
+historical_evidence_successions:
+  - original_path: docs/005-assignment-concept/README.md
+    preserved_path: docs/005-assignment-concept/reviewed-contract-v0.3.0.md
+    sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+    reason: lifecycle-transition-preserves-completed-assignment-subject-state
+  - {original_path: architecture/assignment-stable-surface.yaml, preserved_path: architecture/baselines/assignment-stable-surface-pre-ocp005-acceptance.yaml, sha256: f9f6a2e22751bd932c39c4c2b2b187e6ddc1519b78b438b111d8990dcb9f1cff, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/assignment-amendment-q2-attempt.yaml, preserved_path: architecture/baselines/assignment-amendment-q2-attempt-pre-ocp005-acceptance.yaml, sha256: 537258ac647f9e5da7d798593e68cf9b7d5c30a8af1ca21243aaf829651bd353, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/assignment-consumer-compatibility.yaml, preserved_path: architecture/baselines/assignment-consumer-compatibility-pre-ocp005-acceptance.yaml, sha256: 2dbb12754a1208619adf1107a1ce43f93096a0cb2fac66b0f7d1454189e26d10, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/assignment-temporal-scope-attempt.yaml, preserved_path: architecture/baselines/assignment-temporal-scope-attempt-pre-ocp005-acceptance.yaml, sha256: 4a8899d58ddf9edcf613760d330ff0003a3f982c1d6c188c4283c52fc364f7fb, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/assignment-norm-compatibility.yaml, preserved_path: architecture/baselines/assignment-norm-compatibility-pre-ocp005-acceptance.yaml, sha256: 6e32c5ed98df564c4cf23b1791bff86a80772ecd6be2135ab786d924ac4066dd, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/foundation-promotion-gate.yaml, preserved_path: architecture/baselines/foundation-promotion-gate-pre-ocp005-acceptance.yaml, sha256: 1d881091777b600e86c8739f3daa816861b067ca7fe5f6d9c19a973bda7539b8, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/consumer-need-discovery.yaml, preserved_path: architecture/baselines/consumer-need-discovery-pre-ocp005-acceptance.yaml, sha256: b1009d40170f74bc10599c051577e7cc66dc299a0eab4450df827f98946a4d77, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/ocp024-acceptance.yaml, preserved_path: architecture/baselines/ocp024-acceptance-pre-ocp005-acceptance.yaml, sha256: 0790010c7745a2eb7627ab0acb6bd474dc8f3353d6cf231fe533ab004d9c5fe3, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/constraint-document-acceptance.yaml, preserved_path: architecture/baselines/constraint-document-acceptance-pre-ocp005-acceptance.yaml, sha256: 103e49a3f00548ee168a12acd694d123c4ffe2a63a58dbb509639ed2d6ed3c12, reason: preserve-pre-transition-current-projection}
+  - {original_path: architecture/constraint-document-status-readiness.yaml, preserved_path: architecture/baselines/constraint-document-status-readiness-pre-ocp005-acceptance.yaml, sha256: cd0436b92fa276038b41e440642bd6dfcf38c3fa5ff0564b296314b3084702ac, reason: preserve-pre-transition-current-projection}
+current_projection_sync:
+  owner: AD-054
+  historical_redirect_permitted_for_live_scans: false
+  expected:
+    ocp005_document_status: Accepted
+    ocp005_document_version: 0.4.0
+    primary_document_status_counts: {Canonical: 10, Accepted: 15, Draft: 0}
+    accepted_direct_consumer_count: 7
+    unmet_positive_need_count: 1
+document_status_projection:
+  OCP-000: [1.6.0, Canonical]
+  OCP-001: [1.0.0, Canonical]
+  OCP-002: [1.6.0, Canonical]
+  OCP-003: [1.0.0, Canonical]
+  OCP-004: [1.0.1, Canonical]
+  OCP-005: [0.4.0, Accepted]
+  OCP-006: [0.4.0, Accepted]
+  OCP-007: [1.1.1, Canonical]
+  OCP-008: [1.0.0, Canonical]
+  OCP-009: [1.0.0, Canonical]
+  OCP-010: [1.0.1, Canonical]
+  OCP-011: [0.3.0, Accepted]
+  OCP-012: [0.3.0, Accepted]
+  OCP-013: [0.2.0, Accepted]
+  OCP-014: [0.2.0, Accepted]
+  OCP-015: [0.2.0, Accepted]
+  OCP-016: [1.0.0, Canonical]
+  OCP-017: [0.2.0, Accepted]
+  OCP-018: [0.2.1, Accepted]
+  OCP-019: [0.2.0, Accepted]
+  OCP-020: [0.2.0, Accepted]
+  OCP-021: [0.2.0, Accepted]
+  OCP-022: [0.2.0, Accepted]
+  OCP-023: [0.2.0, Accepted]
+  OCP-024: [0.2.0, Accepted]
+atomic_package:
+  required_elements: [version, status, compatibility-surface, exact-direct-dependencies, criteria-evidence, reviewed-snapshot, consumer-and-unmet-need-ledger, live-projections, historical-successions, checker-tests-and-accounting]
+  complete: true
+  partial_effect_permitted: false
+versioning:
+  OCP-005: 0.3.0-to-0.4.0-precanonical-minor-lifecycle-acceptance-no-semantic-delta
+  AD-054: 0.1.0-Accepted
+migration:
+  data: none
+  references: none
+  schemas: none
+  runtime_behavior: unchanged
+  rollback_unit: [OCP-005-primary, reviewed-snapshot, snapshot-map, compatibility-dependency-consumer-and-unmet-need-ledger, live-repository-projections, historical-successions, acceptance-witness-checker-tests-and-accounting]
+promotion_gate_guard:
+  schema_version: 5
+  completed_cycle_ids: [EVENT_T6]
+  active_cycle_id: null
+  candidate_selected: false
+  cycle_opened: false
+  ocp005_status_projection: Accepted
+  ocp006_status_projection: Accepted
+  ocp006_canonical_l2_blocker: OCP-005-not-Canonical
+baseline_evidence_objects:
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "## Атомарні lifecycle acts і authorization boundary"]}
+  - {path: docs/005-assignment-concept/README.md, blob: 1dd975a17ec65df751357fdd049c8ca928739bd1, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b, state_tokens: ["Version: 0.3.0", "Status: Draft", "Concept-Status: Accepted"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Status: Canonical", "G4"]}
+  - {path: architecture/constraint-document-status-readiness.yaml, blob: d44bb026b103685c924bafda225387785f08605a, sha256: cd0436b92fa276038b41e440642bd6dfcf38c3fa5ff0564b296314b3084702ac, state_tokens: ["rule_owner: AD-052", "BOARD_ACCEPTS_CURRENT_SEMANTICS"]}
+  - {path: architecture/consumer-need-discovery.yaml, blob: 79cd331e5e0498453591eef2c76be944937edc8a, sha256: b1009d40170f74bc10599c051577e7cc66dc299a0eab4450df827f98946a4d77, state_tokens: ["unmet_positive_consumer_need_declared", "RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS"]}
+  - {path: architecture/assignment-stable-surface.yaml, blob: 9512535726116425740bd79745869c5f773602da, sha256: f9f6a2e22751bd932c39c4c2b2b187e6ddc1519b78b438b111d8990dcb9f1cff, state_tokens: ["expected_status: Draft", "AMENDMENT_MODEL_ABSENT", "TEMPORAL_MODEL_UNRESOLVED", "PARTIAL_SCOPE_IDENTITY_UNRESOLVED"]}
+  - {path: docs/023-resource-occupancy/README.md, blob: a846333fae80aff2b3697e811d2b155c91f04122, sha256: 5ec9aca56de4524b4ab78a9e98e2cf5d7561d6f13bac8cf7778d66a99f5490d9, state_tokens: ["Status: Accepted", "assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 0a8bd9db33f54561ae837cc83bf05cb1af568d52, sha256: 1d881091777b600e86c8739f3daa816861b067ca7fe5f6d9c19a973bda7539b8, state_tokens: ["active_cycle_id: null", "expected_document_status: Draft"]}
+protected_artifacts:
+  - {path: docs/000-operational-ontology/README.md, sha256: 120071c48f398d59b283ff71c8bb18fd0467f5e87e90dcef43ea8ad3f1af3dbe}
+  - {path: docs/002-concept-taxonomy/README.md, sha256: d49e9f896508d246994fd954174f04c69e0b4d32dfacc1dd612659263118df77}
+  - {path: docs/006-constraint-concept/README.md, sha256: 89868c7f59b29c3bd84b50e77f6101ff398a9bbd72e4cf69a697c3d632cc45e2}
+  - {path: docs/016-core-boundary/README.md, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4}
+  - {path: patterns/P-001-identified-record-pattern.md, sha256: 2c9dd172a19c2d340b58a159fe5e71b64215a3968ee05fa330790b7e6359c797}
+non_implications:
+  - NOT_CANONICAL
+  - NO_OTHER_DOCUMENT_PROMOTION_OR_CANONICALIZATION
+  - NO_QUESTION_CLOSURE
+  - NO_POSITIVE_ACTIVATION
+  - NO_CONCEPT_STATUS_CHANGE
+  - NO_UNMET_NEED_SATISFACTION
+  - NO_CANDIDATE_SELECTION
+  - NO_PROMOTION_CYCLE_START
+  - NO_NEXT_ACT_AUTHORIZATION
+  - NO_OCP006_LIFECYCLE_EFFECT
+  - NO_OCP016_CHANGE
+  - NO_AD052_CRITERIA_CHANGE

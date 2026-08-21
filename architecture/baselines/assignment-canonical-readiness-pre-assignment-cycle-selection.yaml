@@ -1,0 +1,147 @@
+schema_version: 1
+rule_owner: AD-055
+baseline: 5fab92bfa9d7392a325c5577e5aba69c0049ba24
+gate_first:
+  ocp016_gate: G4
+  applies: false
+  positive_capable: false
+  activation_performed: false
+  reason: discovery-classifies-existing-canonical-readiness-evidence-without-adding-or-activating-a-rule-result-profile
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  version: 0.4.0
+  status: Accepted
+  concept_status: Accepted
+  changed: false
+criteria_source:
+  path: architecture/constraint-document-status-readiness.yaml
+  rule_owner: AD-052
+  criterion_ids:
+    - BINDING_REVIEW_LANE
+    - EXACT_ROUTE_AND_AUTHORITY_LEDGER
+    - BOARD_ACCEPTS_CURRENT_SEMANTICS
+    - ATOMIC_DOCUMENT_PROMOTION_UNIT
+    - CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT
+    - CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2
+    - EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT
+criteria_assessment:
+  - criterion_id: BINDING_REVIEW_LANE
+    applicability: Canonical-transition-carried
+    result: pending-separate-canonicalization-act
+    readiness_effect: no-subject-readiness-failure
+    basis: no-review-or-authorization-is-carried-from-the-Accepted-act
+  - criterion_id: EXACT_ROUTE_AND_AUTHORITY_LEDGER
+    applicability: Canonical
+    result: satisfied-for-readiness
+    readiness_effect: pass
+    basis: Route-F-and-exact-current-owner-dependency-consumer-evidence-and-boundary-ledgers-exist
+  - criterion_id: BOARD_ACCEPTS_CURRENT_SEMANTICS
+    applicability: Accepted-only-previously-passed
+    result: not-re-evaluated
+    readiness_effect: excluded-from-Canonical-assessment
+    basis: AD-054-and-the-OCP005-Accepted-lifecycle-state
+  - criterion_id: ATOMIC_DOCUMENT_PROMOTION_UNIT
+    applicability: Canonical-transition-carried
+    result: future-unit-is-exactly-enumerable-but-not-executed
+    readiness_effect: no-subject-readiness-failure
+    basis: document-concept-registry-taxonomy-defining-metadata-evidence-accounting-and-gate-projections-form-one-future-unit
+  - criterion_id: CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT
+    applicability: Canonical
+    result: readiness-prerequisites-satisfied-board-act-pending
+    readiness_effect: pass-subject-evidence-pending-transition-authority
+    basis: all-direct-and-concept-dependencies-are-Canonical-and-the-bounded-current-contract-is-machine-checked
+  - criterion_id: CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2
+    applicability: Canonical
+    result: satisfied
+    readiness_effect: pass
+    basis: every-direct-OCP-dependency-is-already-Canonical
+  - criterion_id: EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT
+    applicability: Canonical-transition-carried
+    result: pending-separate-canonicalization-act
+    readiness_effect: no-subject-readiness-failure
+    basis: this-discovery-head-has-no-lifecycle-effect-and-cannot-supply-future-transition-gates
+stable_dependencies:
+  direct_ocp:
+    - {document_id: OCP-000, version: 1.6.0, status: Canonical}
+    - {document_id: OCP-001, version: 1.0.0, status: Canonical}
+    - {document_id: OCP-002, version: 1.6.0, status: Canonical}
+    - {document_id: OCP-003, version: 1.0.0, status: Canonical}
+    - {document_id: OCP-004, version: 1.0.1, status: Canonical}
+  concept:
+    - {concept_id: Resource, defining_document: OCP-003, status: Canonical}
+    - {concept_id: Operation, defining_document: OCP-004, status: Canonical}
+  result: satisfied
+machine_readable_checks:
+  frozen_surface: bounded-current-OCP005-contract-with-open-surfaces-explicitly-withheld
+  validators:
+    - assignment-stable-surface
+    - assignment-amendment-q2
+    - assignment-temporal-scope
+    - assignment-consumer-compatibility
+    - assignment-consumer-pressure
+    - assignment-norm-compatibility
+    - assignment-q3-lifecycle
+    - assignment-q2-sufficiency
+    - assignment-q9-sufficiency
+    - assignment-document-acceptance
+  result: satisfied
+open_questions:
+  current_ids: [Q2, Q4, Q5, Q7, Q8, Q9, Q10, Q11]
+  Canonical_criterion_found: false
+  canonical_precedent_carriers: [OCP-002, OCP-003, OCP-004, OCP-007, OCP-008, OCP-010]
+  conclusion: not-a-Canonical-status-bar-and-withheld-surfaces-remain-unavailable
+unmet_positive_need:
+  need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+  consumer_id: OCP-023
+  exact_result: assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)
+  current_state: unmet
+  Canonical_criterion_found: false
+  conclusion: not-a-Canonical-readiness-bar
+  remains_unavailable_after_hypothetical_canonicalization: [assignment-set-completeness, legitimate-real-evaluator, occupied-false-without-completeness]
+slot_occupancy:
+  candidate_id: OCP-005
+  slot: T6
+  completed_cycle_id: EVENT_T6
+  active_cycle_id: null
+  current_protocol_requires_unique: [cycle_id, candidate_id]
+  current_protocol_does_not_require_unique: [slot]
+  executable_reuse_probe: valid-CANDIDATE_BOARD_SELECTION-prefix-for-ASSIGNMENT_T6
+  conclusion: slot-reuse-allowed-but-cycle-opening-still-requires-separate-authority
+result:
+  subject_readiness_prerequisites: satisfied
+  transition_carried_requirements: pending-separate-canonicalization-act
+  ready_for_separate_cycle-and-canonicalization-proposal: true
+  canonicalization_authorized: false
+  candidate_selected: false
+  cycle_opened: false
+  lifecycle_effect: none
+protected_current_state:
+  active_cycle_id: null
+  document_version: 0.4.0
+  document_status: Accepted
+  concept_status: Accepted
+  registry_status: Accepted
+  taxonomy_status: Accepted
+  primary_document_status_counts: {Canonical: 10, Accepted: 15, Draft: 0}
+non_implications:
+  - NO_CANONICALIZATION
+  - NO_CANDIDATE_SELECTION
+  - NO_PROMOTION_CYCLE_START
+  - NO_ACTIVE_CYCLE_CHANGE
+  - NO_DOCUMENT_STATUS_OR_VERSION_CHANGE
+  - NO_CONCEPT_STATUS_CHANGE
+  - NO_QUESTION_CLOSURE
+  - NO_POSITIVE_NEED_SATISFACTION
+  - NO_POSITIVE_ACTIVATION
+  - NO_NEXT_ACT_AUTHORIZATION
+versioning: {OCP-005: unchanged-0.4.0, AD-055: 0.1.0-Discovery}
+migration: {data: none, references: none, schemas: none, rollback_unit: [AD-055-witness-checker-tests-and-accounting]}
+baseline_evidence_objects:
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "Канонізація потребує стабільних залежностей, машинозчитуваних перевірок і окремого рішення Architecture Board", "## Direct OCP dependency floor — L2"]}
+  - {path: docs/005-assignment-concept/README.md, blob: ce2a4863042939811af2a91b3b820d7f9e544aa1, sha256: e47794efea820ed74b964a401a05eaa215ac4317239bd230ea658fff05bdf524, state_tokens: ["Version: 0.4.0", "Status: Accepted", "Concept-Status: Accepted"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Status: Canonical", "G4"]}
+  - {path: architecture/constraint-document-status-readiness.yaml, blob: 48266dda3ba0315dd5dba40f06bf7ef57fa00dd4, sha256: f9c0ca7730e72125f9470659768aac6222e6aac238a7a81965fdd4fff114f807, state_tokens: ["rule_owner: AD-052", "CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT", "CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2"]}
+  - {path: architecture/assignment-document-acceptance.yaml, blob: 5731b53d718a9d0cfd11f86897efe762b10d3a8b, sha256: e79d4f70af03609eea9718e6e63a2b98359248bc00a629dc13700f0a6c21daad, state_tokens: ["rule_owner: AD-054", "unmet_positive_need", "promotion_gate_guard"]}
+  - {path: architecture/consumer-need-discovery.yaml, blob: 54645e4449251a6b9ee1f5738509a2e153d80c35, sha256: f57a7f80836fafb909f190ef6f2666ca9e3cc6581e88577043072ec84dcd3366, state_tokens: ["RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS", "current-unmet-positive-consumer-need"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 484b785ae733f8c812d1e28a9162304afbe3287f, sha256: 788e2efde0262a884d2215a8951ef6b29d6405c5874baf7c745b8cb87b2c64d1, state_tokens: ["active_cycle_id: null", "cycle_id: EVENT_T6", "document_id: OCP-005"]}

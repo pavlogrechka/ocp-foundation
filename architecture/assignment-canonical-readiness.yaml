@@ -103,7 +103,7 @@ slot_occupancy:
   candidate_id: OCP-005
   slot: T6
   completed_cycle_id: EVENT_T6
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
   current_protocol_requires_unique: [cycle_id, candidate_id]
   current_protocol_does_not_require_unique: [slot]
   executable_reuse_probe: valid-CANDIDATE_BOARD_SELECTION-prefix-for-ASSIGNMENT_T6
@@ -117,7 +117,7 @@ result:
   cycle_opened: false
   lifecycle_effect: none
 protected_current_state:
-  active_cycle_id: null
+  active_cycle_id: ASSIGNMENT_T6
   document_version: 0.4.0
   document_status: Accepted
   concept_status: Accepted
