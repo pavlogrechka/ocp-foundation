@@ -161,9 +161,9 @@ current_projection_sync:
   owner: AD-054
   historical_redirect_permitted_for_live_scans: false
   expected:
-    ocp005_document_status: Accepted
-    ocp005_document_version: 0.4.0
-    primary_document_status_counts: {Canonical: 10, Accepted: 15, Draft: 0}
+    ocp005_document_status: Canonical
+    ocp005_document_version: 1.0.0
+    primary_document_status_counts: {Canonical: 11, Accepted: 14, Draft: 0}
     accepted_direct_consumer_count: 7
     unmet_positive_need_count: 1
 document_status_projection:
@@ -172,7 +172,7 @@ document_status_projection:
   OCP-002: [1.6.0, Canonical]
   OCP-003: [1.0.0, Canonical]
   OCP-004: [1.0.1, Canonical]
-  OCP-005: [0.4.0, Accepted]
+  OCP-005: [1.0.0, Canonical]
   OCP-006: [0.4.0, Accepted]
   OCP-007: [1.1.1, Canonical]
   OCP-008: [1.0.0, Canonical]
@@ -211,9 +211,9 @@ promotion_gate_guard:
   active_cycle_id: ASSIGNMENT_T6
   candidate_selected: false
   cycle_opened: false
-  ocp005_status_projection: Accepted
+  ocp005_status_projection: Canonical
   ocp006_status_projection: Accepted
-  ocp006_canonical_l2_blocker: OCP-005-not-Canonical
+  ocp006_canonical_l2_blocker: none
 baseline_evidence_objects:
   - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "## Атомарні lifecycle acts і authorization boundary"]}
   - {path: docs/005-assignment-concept/README.md, blob: 1dd975a17ec65df751357fdd049c8ca928739bd1, sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b, state_tokens: ["Version: 0.3.0", "Status: Draft", "Concept-Status: Accepted"]}

@@ -269,8 +269,8 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
     if (
         metadata is None
         or metadata.get("Document-ID") != "OCP-005"
-        or str(metadata.get("Version")) != "0.4.0"
-        or metadata.get("Status") != "Accepted"
+        or str(metadata.get("Version")) != "1.0.0"
+        or metadata.get("Status") != "Canonical"
         or metadata.get("Concept-Status") != "Accepted"
         or historical_metadata is None
         or str(historical_metadata.get("Version")) != "0.3.0"
@@ -325,8 +325,8 @@ def validate_assignment_q3_lifecycle(repo_root: Path) -> AssignmentQ3LifecycleRe
         surface_subject = surface.get("subject")
         if (
             not isinstance(surface_subject, dict)
-            or str(surface_subject.get("expected_version")) != "0.4.0"
-            or surface_subject.get("expected_status") != "Accepted"
+            or str(surface_subject.get("expected_version")) != "1.0.0"
+            or surface_subject.get("expected_status") != "Canonical"
             or surface_questions.get("Q3") != ("resolved-current", "outside-open-set")
             or surface_questions.get("Q9") != ("open", "blocks-whole-document-freeze")
             or moving.get("TEMPORAL_EFFECTIVITY_EXTENSION") != ["Q9"]

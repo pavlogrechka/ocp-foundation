@@ -38,8 +38,8 @@ live_l2:
     blockers: []
   - document_id: OCP-006
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
-    result: fail
-    blockers: [OCP-005]
+    result: pass
+    blockers: []
   - document_id: OCP-010
     direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-004, OCP-008]
     result: pass

@@ -86,8 +86,8 @@ EXPECTED_GATE_FIRST = {
 EXPECTED_SUBJECT = {
     "document_id": "OCP-005",
     "primary": "docs/005-assignment-concept/README.md",
-    "expected_version": "0.4.0",
-    "expected_status": "Accepted",
+    "expected_version": "1.0.0",
+    "expected_status": "Canonical",
     "expected_concept_status": "Accepted",
     "question_id": "Q2",
     "question_state": "open",
@@ -395,8 +395,8 @@ def validate_assignment_amendment_q2(repo_root: Path) -> AssignmentAmendmentQ2Re
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.4.0"
-        or subject_metadata.get("Status") != "Accepted"
+        or str(subject_metadata.get("Version")) != "1.0.0"
+        or subject_metadata.get("Status") != "Canonical"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or not q2_line
         or "~~" in q2_line

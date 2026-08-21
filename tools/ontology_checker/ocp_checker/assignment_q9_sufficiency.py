@@ -240,8 +240,8 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
         or payload.get("subject_preservation", {}).get("sha256") != SUBJECT_SHA256
         or payload.get("subject_preservation", {}).get("version_class") != "no-subject-change"
         or current_metadata is None
-        or str(current_metadata.get("Version")) != "0.4.0"
-        or current_metadata.get("Status") != "Accepted"
+        or str(current_metadata.get("Version")) != "1.0.0"
+        or current_metadata.get("Status") != "Canonical"
     ):
         errors.append(ASSIGNMENT_Q9_SUBJECT_DRIFT)
 
@@ -296,8 +296,8 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
             }
             or not isinstance(subject, dict)
             or subject.get("discovery_result") != "bounded_stable_candidate_not_selected"
-            or str(subject.get("expected_version")) != "0.4.0"
-            or subject.get("expected_status") != "Accepted"
+            or str(subject.get("expected_version")) != "1.0.0"
+            or subject.get("expected_status") != "Canonical"
             or subject.get("expected_concept_status") != "Accepted"
             or payload.get("current_projection") != {
                 "q2_state": "open",
@@ -442,7 +442,7 @@ def validate_assignment_q9_sufficiency(repo_root: Path) -> AssignmentQ9Sufficien
         not isinstance(promotion, dict)
         or not isinstance(protocol, dict)
         or candidate_ids != ["OCP-005", "OCP-006", "OCP-010"]
-        or assignment_candidate.get("expected_document_status") != "Accepted"
+        or assignment_candidate.get("expected_document_status") != "Canonical"
         or assignment_candidate.get("expected_concept_status") != "Accepted"
         or set(payload.get("promotion_gate_guard") or {}) != {"schema_version", "completed_cycle_ids", "active_cycle_id"}
         or not promotion_gate_guard_is_current(promotion, payload.get("promotion_gate_guard"))

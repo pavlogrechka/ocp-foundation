@@ -40,7 +40,7 @@ VALID_FIXTURE = Path("tools/ontology_checker/fixtures/completeness_evaluator/val
 ZERO_OCCUPANCY_FIXTURE = Path("tools/ontology_checker/fixtures/resource_occupancy/valid-zero-assignments.yaml")
 
 BASELINE = "954e2d76317a993d228d45a77ccfddec0c0f379a"
-MAP_SHA256 = "21de9f37c251375b4eabcd3c97194c5bcf9c6f2f894277a8fc90afd00907a7f6"
+MAP_SHA256 = "03c9fdaecd6cd102d8a3eff683684abc25b18e226ebe231b69e1ff05f78d0518"
 SNAPSHOT_SHA256 = "0c77e0527ec3adf9ed7cf5bbd32e0a63e55a1c3780f007d35a0ef2630cc18753"
 SNAPSHOT_BLOB = "2713c99ca6653d35fc52435eaeaeb8f9f5174b1d"
 ACCEPTED_CONSUMERS = frozenset({"OCP-006", "OCP-013", "OCP-015", "OCP-017", "OCP-020", "OCP-021", "OCP-023"})

@@ -10,8 +10,8 @@ gate_first:
 subject:
   document_id: OCP-005
   primary: docs/005-assignment-concept/README.md
-  version: 0.4.0
-  status: Accepted
+  version: 1.0.0
+  status: Canonical
   concept_status: Accepted
   changed: false
 criteria_source:
@@ -118,12 +118,12 @@ result:
   lifecycle_effect: none
 protected_current_state:
   active_cycle_id: ASSIGNMENT_T6
-  document_version: 0.4.0
-  document_status: Accepted
+  document_version: 1.0.0
+  document_status: Canonical
   concept_status: Accepted
   registry_status: Accepted
   taxonomy_status: Accepted
-  primary_document_status_counts: {Canonical: 10, Accepted: 15, Draft: 0}
+  primary_document_status_counts: {Canonical: 11, Accepted: 14, Draft: 0}
 non_implications:
   - NO_CANONICALIZATION
   - NO_CANDIDATE_SELECTION
@@ -135,7 +135,7 @@ non_implications:
   - NO_POSITIVE_NEED_SATISFACTION
   - NO_POSITIVE_ACTIVATION
   - NO_NEXT_ACT_AUTHORIZATION
-versioning: {OCP-005: unchanged-0.4.0, AD-055: 0.1.0-Discovery}
+versioning: {OCP-005: current-1.0.0-Canonical-after-separate-transition, AD-055: 0.1.0-Discovery}
 migration: {data: none, references: none, schemas: none, rollback_unit: [AD-055-witness-checker-tests-and-accounting]}
 baseline_evidence_objects:
   - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "Канонізація потребує стабільних залежностей, машинозчитуваних перевірок і окремого рішення Architecture Board", "## Direct OCP dependency floor — L2"]}

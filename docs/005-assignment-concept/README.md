@@ -1,15 +1,15 @@
 ---
 Document-ID: OCP-005
 Title: Assignment Concept
-Version: 0.4.0
-Status: Accepted
+Version: 1.0.0
+Status: Canonical
 Owner: Architecture Board
 Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004
 Used-By: Operation Lifecycle, Resource Availability Model, Readiness Model, Coordination Model, Constraint Model, Domain Models
 Defines-Concepts: Assignment
 Concept-Depends-On: [Resource, Operation]
 Concept-Status: Accepted
-Last-Review: 2026-08-20
+Last-Review: 2026-08-21
 ---
 
 # Assignment Concept
@@ -556,3 +556,29 @@ Revision `0.4.0` is a pre-canonical MINOR lifecycle transition from `0.3.0 / Dra
 This acceptance does not make `OCP-005` Canonical; promote or canonicalize `OCP-006` or any other document; close any open question; activate any positive rule, result, profile or model; change `Assignment` or any other `Concept-Status`; satisfy the recorded unmet consumer need; select a promotion candidate; open a promotion cycle; or authorize another act.
 
 No data, reference, schema or runtime migration is required. The rollback boundary is the complete atomic unit: primary version/status and appended acceptance accounting, reviewed snapshot and snapshot-map entry, compatibility/dependency/consumer evidence, live repository projections, historical-successor bindings, checker/tests and repository accounting. A partial rollback is invalid and any reversal requires a new reviewed lifecycle act.
+
+## 29. Canonical authority and compatibility boundary
+
+Architecture Board has promoted this document to `Canonical` through the `DOCUMENT_PROMOTION` step of cycle `ASSIGNMENT_T6`. The `Assignment` Concept remains `Accepted`; document status and Concept status are independent lifecycle axes.
+
+OCP-001 defines the exact limit of this status: **«`Canonical` означає стабільну versioned governance-поверхню. Воно не означає production readiness, authorization, truth, універсальну повноту або незмінність назавжди.»**
+
+Dependent specifications gain a stable `1.x` governance and versioning boundary for exactly the compatibility surface listed in §27. They gain no new semantic or operational right beyond what `Accepted` already allowed: the rights delta is zero. In particular, `Canonical` does not turn the stable surface into a complete surface and does not make any withheld question available by silence.
+
+The following surfaces remain undefined and withheld exactly as before: Q2 amendment after Establishment, Q4 Role Taxonomy, Q5 composite-Resource partial scope, Q7 role specializations, Q8 simultaneous-Assignment Conflict handoff, Q9 multiple applicability intervals, Q10 provenance taxonomy and Q11 replacement overlap/gap policy. No dependent specification may infer or stabilize an answer to any of them from this status transition.
+
+`OCP-023` still cannot derive `occupied=false` without valid `assignment_set_complete_for_resource(resource_ref, evaluation_time, snapshot_ref)` evidence. This promotion neither supplies completeness evidence nor names or activates a legitimate evaluator; the recorded positive consumer need remains unmet.
+
+## 30. Dependency consequence without lifecycle action
+
+All direct OCP dependencies of `OCP-005` are `Canonical`, so the document satisfies dependency level `L2`. When `OCP-005` becomes `Canonical`, the same mechanical dependency-floor calculation for direct dependent `OCP-006` changes from fail-on-`OCP-005` to pass. This is only a derived dependency fact: `OCP-006` remains `0.4.0 / Accepted`, is not selected, promoted or canonicalized, and no promotion cycle is opened for it.
+
+## 31. Lifecycle accounting — v1.0.0
+
+Revision `1.0.0` is the first Canonical version required by the OCP-001 SemVer rule. It changes lifecycle authority, version, the readable compatibility boundary, exact transition evidence, live projections and repository accounting as one atomic `DOCUMENT_PROMOTION` unit; it makes no change to the reviewed semantic body, schema, runtime behavior, references or data.
+
+The existing immutable [`reviewed-contract-v0.3.0.md`](reviewed-contract-v0.3.0.md) remains retained acceptance evidence. OCP-001 requires exact-head review and authorization for this Canonical transition but does not require a second frozen reviewed-body snapshot for `Canonical`; this act's exact-head review binds the current primary and its atomic evidence instead of manufacturing a new snapshot rule.
+
+After this act, `DOCUMENT_PROMOTION` is completed and `CONCEPT_CANONICALIZATION` remains pending in `ASSIGNMENT_T6`; `active_cycle_id` remains `ASSIGNMENT_T6`. This act does not canonicalize Concept `Assignment`, complete the cycle, execute or authorize its third step, promote/canonicalize/select any other document, close any question, activate any positive model, satisfy the recorded unmet need or authorize another act.
+
+Rollback is one reviewed corrective unit restoring `OCP-005` to `0.4.0 / Accepted`, restoring `DOCUMENT_PROMOTION` to `pending`, and restoring all compatibility, dependency, evidence, projection, snapshot-retention and accounting carriers together. Partial rollback, direct history rewrite or restoration of only status or only gate state is forbidden.

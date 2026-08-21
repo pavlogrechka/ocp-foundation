@@ -14,8 +14,8 @@ gate_first:
 subject:
   document_id: OCP-005
   primary: docs/005-assignment-concept/README.md
-  expected_version: 0.4.0
-  expected_status: Accepted
+  expected_version: 1.0.0
+  expected_status: Canonical
   expected_concept_status: Accepted
 criterion:
   accepted_consumer: current-status-is-Accepted-and-Depends-On-exactly-includes-OCP-005

@@ -361,14 +361,14 @@ def validate_assignment_stable_surface(repo_root: Path) -> AssignmentStableSurfa
             subject != {
                 "document_id": "OCP-005",
                 "primary": "docs/005-assignment-concept/README.md",
-                "expected_version": "0.4.0",
-                "expected_status": "Accepted",
+                "expected_version": "1.0.0",
+                "expected_status": "Canonical",
                 "expected_concept_status": "Accepted",
                 "discovery_result": "bounded_stable_candidate_not_selected",
             }
             or primary != repo_root / "docs/005-assignment-concept/README.md"
-            or str(metadata.get("Version")) != "0.4.0"
-            or metadata.get("Status") != "Accepted"
+            or str(metadata.get("Version")) != "1.0.0"
+            or metadata.get("Status") != "Canonical"
             or metadata.get("Concept-Status") != "Accepted"
         ):
             errors.append(ASSIGNMENT_STABLE_SURFACE_SUBJECT_DRIFT)

@@ -76,8 +76,8 @@ class AssignmentCanonicalReadinessTests(unittest.TestCase):
 
     def test_each_subject_lifecycle_value_and_cycle_state_is_live(self) -> None:
         cases = (
-            (readiness.SUBJECT_PATH, "Version: 0.4.0", "Version: 1.0.0", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
-            (readiness.SUBJECT_PATH, "Status: Accepted", "Status: Canonical", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
+            (readiness.SUBJECT_PATH, "Version: 1.0.0", "Version: 0.4.0", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
+            (readiness.SUBJECT_PATH, "Status: Canonical", "Status: Accepted", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
             (readiness.SUBJECT_PATH, "Concept-Status: Accepted", "Concept-Status: Canonical", ASSIGNMENT_CANONICAL_READINESS_SUBJECT_DRIFT),
             (readiness.GATE_PATH, "active_cycle_id: ASSIGNMENT_T6", "active_cycle_id: null", ASSIGNMENT_CANONICAL_READINESS_SLOT_DRIFT),
         )

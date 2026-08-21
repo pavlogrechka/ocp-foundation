@@ -29,11 +29,11 @@ from ocp_checker.accepted_snapshot import (  # noqa: E402
 EXPECTED = {
     "OCP-005": (
         "docs/005-assignment-concept/README.md",
-        "Accepted",
+        "Canonical",
         "0.3.0",
         "docs/005-assignment-concept/reviewed-contract-v0.3.0.md",
         "de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b",
-        "current-accepted",
+        "retained-acceptance-evidence",
     ),
     "OCP-006": (
         "docs/006-constraint-concept/README.md",
@@ -186,7 +186,7 @@ class AcceptedSnapshotTests(unittest.TestCase):
     def test_repository_map_and_every_declared_element_are_exact(self) -> None:
         self.assertTrue(validate_accepted_snapshots(ROOT).valid)
         payload = self.payload()
-        self.assertEqual(payload["required_retained_evidence"], ["OCP-016"])
+        self.assertEqual(payload["required_retained_evidence"], ["OCP-005", "OCP-016"])
         self.assertEqual(
             {
                 entry["document_id"]: (

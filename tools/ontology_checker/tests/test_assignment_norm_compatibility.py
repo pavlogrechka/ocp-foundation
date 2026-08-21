@@ -161,7 +161,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
         self.assertFalse(
             payload["source_sweep"]["claim_boundary"]["semantic_axis_completeness_claimed"]
         )
-        self.assertEqual(len(payload["source_sweep"]["hits"]), 68)
+        self.assertEqual(len(payload["source_sweep"]["hits"]), 71)
         self.assertEqual(
             {item["disposition"] for item in payload["source_sweep"]["hits"]},
             {"classification-source", "considered-no-exclusion"},
@@ -178,7 +178,7 @@ class AssignmentNormCompatibilityTests(unittest.TestCase):
                 item["disposition"] == "considered-no-exclusion"
                 for item in payload["source_sweep"]["hits"]
             ),
-            61,
+            64,
         )
         self.assertTrue(
             all(item["evidence_mode"] == "analytic" for item in payload["source_sweep"]["hits"])

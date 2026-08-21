@@ -1,0 +1,125 @@
+schema_version: 1
+rule_owner: AD-016AB
+baseline: 53d254405e6f75c7198e3e989d14a5a5678628ce
+baseline_gate_state:
+  completed_steps: [T0, T1, T2, T3, AD-016C, AD-016D, T4, T5, AD-016Y, AD-016Z, Y10D, POST_DISCOVERY_REASSESSMENT]
+  required_before_promotion: [CANDIDATE_BOARD_SELECTION]
+  promotion_selections: []
+baseline_evidence_objects:
+  - path: docs/005-assignment-concept/README.md
+    blob: 7a82a051cfb572e31cceded52bdfbb8e917bffba
+    sha256: fbdbe9b4547f7b1f14c766e1925ff28d620c671a271cfc8721f8d6b8d4db7b5a
+  - path: docs/006-constraint-concept/README.md
+    blob: 95ef13a917e0f579cdd656672a6bd883060bb818
+    sha256: d1d2a8c4d85ffba3bbe22d38ed443946e8196558e42c67d929347436468632b6
+  - path: docs/010-event-concept/README.md
+    blob: 3a49b75bfa479e24debb89a130b7a05d6c790a88
+    sha256: 5ead70eb7238d6b6e630d2fa5850bb4a9325a752fed57d9239b9977642d67706
+  - path: docs/011-outcome-assessment-record/README.md
+    blob: ff2608a372c6305db4c290f05c15e961ca96e6f6
+    sha256: 1fb08e18fab560e671b468585d699a7d70bd55ed5be674315cb780a48bc70cc5
+  - path: docs/017-operation-lifecycle/README.md
+    blob: 0b2ea683df308babd1111ff47e9272c9b0742f78
+    sha256: 061e2c8a4c9d3d02bb5a7492e9c8723cace11a462548970727552e18c645a030
+gate_applicability:
+  form: governance-reassessment
+  g4_required: false
+  accepted_consumer_required: false
+criterion:
+  - LIVE_L2
+  - CURRENT_BLOCKERS
+  - COST
+  - UNLOCKS
+  - LEGALITY_GAP
+live_l2:
+  - document_id: OCP-005
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004]
+    result: pass
+    blockers: []
+  - document_id: OCP-006
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005]
+    result: fail
+    blockers: [OCP-005]
+  - document_id: OCP-010
+    direct_ocp_dependencies: [OCP-000, OCP-001, OCP-002, OCP-004, OCP-008]
+    result: pass
+    blockers: []
+options:
+  - option_id: HOLD
+    candidate_documents: []
+    l2_result: not-applicable
+    blocker_ids: []
+    cost_id: DELAY_ONLY
+    unlock_ids: []
+    missing_for_legality: []
+    result: legal-current
+  - option_id: ASSIGNMENT
+    candidate_documents: [OCP-005]
+    l2_result: pass
+    blocker_ids: [ASSIGNMENT_COMPATIBILITY_SURFACE_ABSENT, BOARD_SELECTION_ABSENT]
+    cost_id: BROAD_ASSIGNMENT_DISCOVERY
+    unlock_ids: [T6_ASSIGNMENT, CONSTRAINT_L2]
+    missing_for_legality: [ASSIGNMENT_BOUNDED_SURFACE, CANDIDATE_BOARD_SELECTION]
+    result: not-ready
+  - option_id: EVENT
+    candidate_documents: [OCP-010]
+    l2_result: pass
+    blocker_ids: [EVENT_OWNER_UNRESOLVED, EVENT_LEGACY_OVERLAP, EVENT_CONSUMER_BINDINGS_UNVERSIONED, BOARD_SELECTION_ABSENT]
+    cost_id: BOUNDED_EVENT_REMEDIATION
+    unlock_ids: [T6_EVENT]
+    missing_for_legality: [EVENT_YK_REMEDIATION, CANDIDATE_BOARD_SELECTION]
+    result: leading-continuation-not-selected
+  - option_id: JOINT_ASSIGNMENT_CONSTRAINT
+    candidate_documents: [OCP-005, OCP-006]
+    l2_result: mixed
+    blocker_ids: [JOINT_CURRENT_L2_MIXED, ASSIGNMENT_COMPATIBILITY_SURFACE_ABSENT, CONSTRAINT_REMEDIATION_SURFACE_ABSENT, BOARD_SELECTION_ABSENT]
+    cost_id: HIGH_JOINT_COMPATIBILITY
+    unlock_ids: [T6_ASSIGNMENT, T7_CONSTRAINT]
+    missing_for_legality: [ASSIGNMENT_BOUNDED_SURFACE, CONSTRAINT_REMEDIATION_CONTRACT, JOINT_COMPATIBILITY_CONTRACT, CANDIDATE_BOARD_SELECTION]
+    result: not-ready
+  - option_id: CONSTRAINT_REMEDIATION
+    candidate_documents: [OCP-006]
+    l2_result: fail
+    blocker_ids: [CONSTRAINT_L2_BLOCKED_BY_OCP005, CONSTRAINT_REMEDIATION_SURFACE_ABSENT, BOARD_SELECTION_ABSENT]
+    cost_id: SEQUENCED_CONSTRAINT_REMEDIATION
+    unlock_ids: [T7_CONSTRAINT]
+    missing_for_legality: [OCP005_CANONICAL_OR_SELECTED_JOINT, CONSTRAINT_REMEDIATION_CONTRACT, CANDIDATE_BOARD_SELECTION]
+    result: sequenced-only
+recommendation:
+  current_promotion: HOLD
+  continuation: EVENT_YK_REMEDIATION
+  selection_authority: false
+  selected_candidates: []
+evidence:
+  ASSIGNMENT_COMPATIBILITY_SURFACE_ABSENT:
+    - path: docs/005-assignment-concept/README.md
+      tokens: ["## 19. Open Questions and Resolved Boundaries", "Яка amendment model потрібна", "Яка replacement policy"]
+  EVENT_OWNER_UNRESOLVED:
+    - path: docs/010-event-concept/README.md
+      tokens: ["Який normative owner визначить Operation-to-Event relationship record"]
+  EVENT_LEGACY_OVERLAP:
+    - path: docs/010-event-concept/README.md
+      tokens: ["checker-local assessment envelope", "не є normative OutcomeAssessmentRecord contract"]
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Status: Accepted", "OutcomeAssessmentRecord"]
+  EVENT_CONSUMER_BINDINGS_UNVERSIONED:
+    - path: docs/011-outcome-assessment-record/README.md
+      tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-004, OCP-006, OCP-008, OCP-010"]
+    - path: docs/017-operation-lifecycle/README.md
+      tokens: ["Depends-On: AD-020, OCP-001, OCP-004, OCP-005, OCP-006, OCP-010"]
+  JOINT_CURRENT_L2_MIXED:
+    - path: docs/006-constraint-concept/README.md
+      tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005"]
+    - path: docs/005-assignment-concept/README.md
+      tokens: ["Status: Draft"]
+  CONSTRAINT_L2_BLOCKED_BY_OCP005:
+    - path: docs/006-constraint-concept/README.md
+      tokens: ["Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005"]
+    - path: docs/005-assignment-concept/README.md
+      tokens: ["Status: Draft"]
+  CONSTRAINT_REMEDIATION_SURFACE_ABSENT:
+    - path: docs/006-constraint-concept/README.md
+      tokens: ["## 22. Open Questions and Resolved Boundaries", "Яка канонічна expression або rule language", "Який строк актуальності"]
+  BOARD_SELECTION_ABSENT:
+    - path: architecture/foundation-promotion-reassessment.yaml
+      tokens: ["baseline_gate_state:", "required_before_promotion: [CANDIDATE_BOARD_SELECTION]", "promotion_selections: []"]

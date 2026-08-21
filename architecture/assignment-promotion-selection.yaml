@@ -16,7 +16,7 @@ authority:
 candidate_inventory:
   - document_id: OCP-005
     slot: T6
-    document_status: Accepted
+    document_status: Canonical
     concept_status: Accepted
     l2_result: pass
     prior_cycle: none
@@ -28,11 +28,11 @@ candidate_inventory:
     slot: T7
     document_status: Accepted
     concept_status: Accepted
-    l2_result: fail
-    l2_blockers: [OCP-005]
+    l2_result: pass
+    l2_blockers: []
     prior_cycle: none
     eligibility: ineligible
-    disposition: rejected-currently-direct-dependency-floor-L2-fails
+    disposition: rejected-not-selected-by-this-Board-decision
     evidence_mode: derived
   - document_id: OCP-010
     slot: T6
@@ -54,14 +54,15 @@ selection:
   candidate_id_unique: true
   step_state:
     CANDIDATE_BOARD_SELECTION: completed
-    DOCUMENT_PROMOTION: pending
+    DOCUMENT_PROMOTION: completed
     CONCEPT_CANONICALIZATION: pending
   step_evidence:
     CANDIDATE_BOARD_SELECTION: AD-056
+    DOCUMENT_PROMOTION: AD-057
 closability:
   forward:
     defined: true
-    ordered_remaining_steps: [DOCUMENT_PROMOTION, CONCEPT_CANONICALIZATION]
+    ordered_remaining_steps: [CONCEPT_CANONICALIZATION]
     each_requires_separate_mandate: true
     completion_state: all-three-steps-completed-and-active_cycle_id-null
     basis: foundation-promotion-gate-schema-5-ordered-prefix
@@ -136,7 +137,7 @@ historical_evidence_successions:
   - {original_path: architecture/foundation-promotion-gate.yaml, preserved_path: architecture/baselines/foundation-promotion-gate-pre-assignment-cycle-selection.yaml, sha256: 788e2efde0262a884d2215a8951ef6b29d6405c5874baf7c745b8cb87b2c64d1, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
   - {original_path: architecture/ocp024-acceptance.yaml, preserved_path: architecture/baselines/ocp024-acceptance-pre-assignment-cycle-selection.yaml, sha256: 317e5862a6c102dad610aee948be66896252f14abfc0bc0b8fee4fc305d105ca, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
 protected_current_state:
-  OCP-005: {version: 0.4.0, status: Accepted, concept_status: Accepted}
+  OCP-005: {version: 1.0.0, status: Canonical, concept_status: Accepted}
   OCP-006: {version: 0.4.0, status: Accepted, concept_status: Accepted}
   OCP-010: {version: 1.0.1, status: Canonical, concept_status: Canonical}
   assignment_registry_status: Accepted
@@ -159,7 +160,7 @@ non_implications:
   - NO_CONCEPT_STATUS_CHANGE
 versioning:
   foundation-promotion-gate: schema-5-state-instance-update-no-schema-change
-  OCP-005: unchanged-0.4.0-Accepted
+  OCP-005: current-1.0.0-Canonical-after-AD-057
   AD-056: 0.1.0-Accepted-governance-selection
 migration:
   data: none

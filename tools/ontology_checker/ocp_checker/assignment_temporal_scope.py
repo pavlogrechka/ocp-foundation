@@ -110,8 +110,8 @@ EXPECTED_GATE_FIRST = {
 EXPECTED_SUBJECT = {
     "document_id": "OCP-005",
     "primary": "docs/005-assignment-concept/README.md",
-    "expected_version": "0.4.0",
-    "expected_status": "Accepted",
+    "expected_version": "1.0.0",
+    "expected_status": "Canonical",
     "expected_concept_status": "Accepted",
 }
 EXPECTED_ZONE_RESULTS = {
@@ -424,8 +424,8 @@ def validate_assignment_temporal_scope(repo_root: Path) -> AssignmentTemporalSco
     if (
         subject_metadata is None
         or subject_metadata.get("Document-ID") != "OCP-005"
-        or str(subject_metadata.get("Version")) != "0.4.0"
-        or subject_metadata.get("Status") != "Accepted"
+        or str(subject_metadata.get("Version")) != "1.0.0"
+        or subject_metadata.get("Status") != "Canonical"
         or subject_metadata.get("Concept-Status") != "Accepted"
         or set(question_lines) != QUESTION_IDS
         or not question_lines.get("Q3")

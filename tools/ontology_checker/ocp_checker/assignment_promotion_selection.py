@@ -11,7 +11,7 @@ from typing import Any, Iterable
 import yaml
 
 from .foundation_promotion_gate import (
-    assignment_selection_prefix_is_current,
+    assignment_document_promotion_prefix_is_current,
     promotion_gate_guard_is_current,
     validate_foundation_promotion_gate,
 )
@@ -32,7 +32,7 @@ GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 READINESS_PATH = Path("architecture/assignment-canonical-readiness.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 BASELINE = "779aaf4c5d2799c8410a6934d28230c12b2ff31e"
-MAP_SHA256 = "87f8a57c3a5916ee0a580e078e4d2dc32f515fc306096ed878a1cb9edd27dc29"
+MAP_SHA256 = "436676f9026c19b5779d1141140a5bc4d3661f2cf999ae9576e13aa7c364a5a9"
 
 CANDIDATE_IDS = ("OCP-005", "OCP-006", "OCP-010")
 LIVE_CARRIERS = (
@@ -172,6 +172,10 @@ def rollback_gate_probe(root: Path) -> bool:
                 target = probe / source.relative_to(root)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(source, target)
+            shutil.copyfile(
+                root / "architecture/baselines/OCP-005-v0.4.0-pre-assignment-document-canonicalization.md",
+                probe / "docs/005-assignment-concept/README.md",
+            )
             target = probe / GATE_PATH
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(predecessor, target)
@@ -253,8 +257,8 @@ def validate_assignment_promotion_selection(root: Path) -> AssignmentPromotionSe
     }
     readiness = _load(root / READINESS_PATH) or {}
     expected_inventory = {
-        "OCP-005": ("T6", "Accepted", "Accepted", "pass", "none", "eligible", "selected-by-explicit-Board-decision"),
-        "OCP-006": ("T7", "Accepted", "Accepted", "fail", "none", "ineligible", "rejected-currently-direct-dependency-floor-L2-fails"),
+        "OCP-005": ("T6", "Canonical", "Accepted", "pass", "none", "eligible", "selected-by-explicit-Board-decision"),
+        "OCP-006": ("T7", "Accepted", "Accepted", "pass", "none", "ineligible", "rejected-not-selected-by-this-Board-decision"),
         "OCP-010": ("T6", "Canonical", "Canonical", "pass", "EVENT_T6", "ineligible", "rejected-currently-candidate-already-consumed-by-completed-cycle-and-candidate-ids-are-unique"),
     }
     observed_inventory: dict[str, tuple[Any, ...]] = {}
@@ -293,11 +297,11 @@ def validate_assignment_promotion_selection(root: Path) -> AssignmentPromotionSe
             "selected_candidate": "OCP-005", "cycle_id": "ASSIGNMENT_T6", "slot": "T6",
             "slot_reuse_basis": "AD-055-executable-reuse-probe", "cycle_id_unique": True,
             "candidate_id_unique": True,
-            "step_state": {"CANDIDATE_BOARD_SELECTION": "completed", "DOCUMENT_PROMOTION": "pending", "CONCEPT_CANONICALIZATION": "pending"},
-            "step_evidence": {"CANDIDATE_BOARD_SELECTION": "AD-056"},
+            "step_state": {"CANDIDATE_BOARD_SELECTION": "completed", "DOCUMENT_PROMOTION": "completed", "CONCEPT_CANONICALIZATION": "pending"},
+            "step_evidence": {"CANDIDATE_BOARD_SELECTION": "AD-056", "DOCUMENT_PROMOTION": "AD-057"},
         }
         or assignment_cycle.get("cycle_id") != "ASSIGNMENT_T6"
-        or not isinstance(gate, dict) or not assignment_selection_prefix_is_current(gate)
+        or not isinstance(gate, dict) or not assignment_document_promotion_prefix_is_current(gate)
         or not validate_foundation_promotion_gate(root).valid
     ):
         errors.append(ASSIGNMENT_SELECTION_GATE_DRIFT)
@@ -307,7 +311,7 @@ def validate_assignment_promotion_selection(root: Path) -> AssignmentPromotionSe
     rollback = closability.get("rollback") or {}
     if (
         forward != {
-            "defined": True, "ordered_remaining_steps": ["DOCUMENT_PROMOTION", "CONCEPT_CANONICALIZATION"],
+            "defined": True, "ordered_remaining_steps": ["CONCEPT_CANONICALIZATION"],
             "each_requires_separate_mandate": True,
             "completion_state": "all-three-steps-completed-and-active_cycle_id-null",
             "basis": "foundation-promotion-gate-schema-5-ordered-prefix",
@@ -370,8 +374,11 @@ def validate_assignment_promotion_selection(root: Path) -> AssignmentPromotionSe
     atomic = payload.get("atomic_package") or {}
     migration = payload.get("migration") or {}
     if (
-        current_documents != baseline_documents
-        or protected.get("OCP-005") != {"version": "0.4.0", "status": "Accepted", "concept_status": "Accepted"}
+        {key: value for key, value in current_documents.items() if key != "OCP-005"}
+        != {key: value for key, value in baseline_documents.items() if key != "OCP-005"}
+        or current_documents.get("OCP-005") != ("1.0.0", "Canonical", "Accepted")
+        or baseline_documents.get("OCP-005") != ("0.4.0", "Accepted", "Accepted")
+        or protected.get("OCP-005") != {"version": "1.0.0", "status": "Canonical", "concept_status": "Accepted"}
         or protected.get("OCP-006") != {"version": "0.4.0", "status": "Accepted", "concept_status": "Accepted"}
         or protected.get("OCP-010") != {"version": "1.0.1", "status": "Canonical", "concept_status": "Canonical"}
         or "| Assignment | Accepted |" not in registry or "Assignment: Accepted" not in taxonomy

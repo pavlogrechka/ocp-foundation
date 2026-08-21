@@ -25,7 +25,7 @@ SUBJECT_PATH = Path("docs/006-constraint-concept/README.md")
 ASSIGNMENT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 BASELINE = "b0b7ccfa8a40ce4f7056fdd2fbf8c61088a7fbcd"
-MAP_SHA256 = "37780494060708cbc24ce1075891b6cf6ce3e946daf463c6afe3f0f1cc0ca89e"
+MAP_SHA256 = "142781dd09a3b4f7af66de2dd18d6090a149d793e171ce1aca4edc48dcfa6028"
 SUBJECT_SHA256 = "0472d8ce4b15a8c64d58151ee7f706b450b930f708f6f0a7a40bdd87914b3b10"
 EXPECTED_INTERPRETATION = "confirms-open-question-closure-is-not-a-governance-promotion-criterion"
 OPEN_LEXICAL_VOCABULARY = (
@@ -291,10 +291,10 @@ def validate_constraint_document_status_readiness(
         or subject.get("Status") != "Draft"
         or subject.get("Concept-Status") != "Accepted"
         or _refs(subject.get("Depends-On")) != EXPECTED_DEPENDENCIES
-        or assignment.get("Status") != "Accepted"
+        or assignment.get("Status") != "Canonical"
         or live.get("direct_dependencies") != list(EXPECTED_DEPENDENCIES)
         or live.get("draft_direct_dependencies") != []
-        or live.get("below_canonical_direct_dependencies") != ["OCP-005"]
+        or live.get("below_canonical_direct_dependencies") != []
         or subject_claim != {
             "document_id": "OCP-006", "primary": str(SUBJECT_PATH), "version": "0.3.2",
             "status": "Draft", "concept_status": "Accepted", "changed": False,

@@ -31,7 +31,7 @@ ELIGIBLE_GOVERNANCE_IDS = frozenset(
         "AD-009", "AD-010", "AD-011", "AD-012", "AD-013", "AD-014", "AD-015",
         "AD-016", "AD-017", "AD-018", "AD-019", "AD-020", "AD-021", "AD-022",
         "AD-025", "AD-026", "AD-027", "AD-028", "AD-029", "AD-030", "AD-032",
-        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046", "AD-049", "AD-053", "AD-054", "AD-056",
+        "AD-033", "AD-034", "AD-037", "AD-041", "AD-042", "AD-043", "AD-046", "AD-049", "AD-053", "AD-054", "AD-056", "AD-057",
     }
 )
 CANDIDATE_IDS = frozenset(
@@ -350,7 +350,7 @@ def validate_consumer_need_discovery(repo_root: Path) -> ConsumerNeedDiscoveryRe
     if (
         payload.get("schema_version") != 3
         or payload.get("rule_owner") != "AD-036"
-        or payload.get("current_projection_owner") != "AD-056"
+        or payload.get("current_projection_owner") != "AD-057"
         or payload.get("baseline") != "f64b3a23419092649cfb4059d4853eabd93fbbc2"
         or payload.get("gate_first") != {
             "ocp016_gate": "G4",

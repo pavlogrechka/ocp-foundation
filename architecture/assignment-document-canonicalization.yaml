@@ -1,0 +1,129 @@
+schema_version: 1
+rule_owner: AD-057
+baseline: 428e8170c051928b10383df4a4287df018f4be96
+gate_first:
+  route: Route-F
+  operation: governance-document-lifecycle-promotion
+  positive_capable: false
+  ocp016_g4_applies: false
+  activation_performed: false
+  reason: document-status-promotion-adds-no-operational-rule-result-profile-or-activation
+authority:
+  owner: Architecture Board
+  cycle_id: ASSIGNMENT_T6
+  authorized_step: DOCUMENT_PROMOTION
+  unauthorized_step: CONCEPT_CANONICALIZATION
+  effect_boundary: exact-head-reviewed-authorized-squash-merge-only
+subject:
+  document_id: OCP-005
+  primary: docs/005-assignment-concept/README.md
+  before: {version: 0.4.0, status: Accepted, concept_status: Accepted}
+  after: {version: 1.0.0, status: Canonical, concept_status: Accepted}
+  semantic_delta: none
+  rights_delta_beyond_accepted: none
+criteria_source:
+  path: architecture/constraint-document-status-readiness.yaml
+  criterion_ids: [BINDING_REVIEW_LANE, EXACT_ROUTE_AND_AUTHORITY_LEDGER, BOARD_ACCEPTS_CURRENT_SEMANTICS, ATOMIC_DOCUMENT_PROMOTION_UNIT, CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT, CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2, EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT]
+criteria:
+  - {criterion_id: BINDING_REVIEW_LANE, applicability: Canonical, result: satisfied-by-this-exact-head-review-lane, evidence_mode: analytical-external-gate, basis: draft-PR-Fable-review-Codex-adjudication-green-CI-and-fresh-Board-authorization-are-bound-to-this-head}
+  - {criterion_id: EXACT_ROUTE_AND_AUTHORITY_LEDGER, applicability: Canonical, result: satisfied, evidence_mode: observational, basis: Route-F-owner-cycle-dependencies-consumers-boundaries-and-migration-are-explicit-in-this-witness}
+  - {criterion_id: BOARD_ACCEPTS_CURRENT_SEMANTICS, applicability: Accepted-only, result: not-re-evaluated, evidence_mode: observational, basis: criterion-does-not-apply-to-Canonical-transition}
+  - {criterion_id: ATOMIC_DOCUMENT_PROMOTION_UNIT, applicability: Canonical, result: satisfied, evidence_mode: observational, basis: version-status-readable-surface-exact-dependencies-evidence-gate-projections-and-accounting-form-one-unit}
+  - {criterion_id: CANONICAL_STABILITY_CHECKS_AND_BOARD_ACT, applicability: Canonical, result: satisfied-by-current-tree-and-this-Board-act, evidence_mode: observational-and-analytical-board-act, basis: stable-dependencies-machine-checks-and-separate-Board-document-promotion-decision-are-present}
+  - {criterion_id: CANONICAL_DIRECT_DEPENDENCY_FLOOR_L2, applicability: Canonical, result: satisfied, evidence_mode: derived, basis: every-direct-OCP-dependency-is-Canonical-in-the-current-tree}
+  - {criterion_id: EXACT_HEAD_AUTHORIZATION_AND_ATOMIC_EFFECT, applicability: Canonical, result: satisfied-by-this-gated-squash-workflow, evidence_mode: analytical-external-gate, basis: effect-occurs-only-after-all-four-gates-on-the-unchanged-head-and-authorized-squash}
+route:
+  selected: Route-F
+  basis: subject-defines-foundation-wide-registered-identity-lifecycle-and-derivation-semantics
+  rejected: {Route-C: not-only-a-shared-non-Concept-contract, Route-D: not-domain-local, Route-E: not-owned-by-one-existing-Concept, Route-I: not-external-system-owned}
+direct_dependencies:
+  - {document_id: OCP-000, version: 1.6.0, status: Canonical}
+  - {document_id: OCP-001, version: 1.0.0, status: Canonical}
+  - {document_id: OCP-002, version: 1.6.0, status: Canonical}
+  - {document_id: OCP-003, version: 1.0.0, status: Canonical}
+  - {document_id: OCP-004, version: 1.0.1, status: Canonical}
+machine_checks:
+  result: satisfied
+  validators: [assignment-stable-surface, assignment-amendment-q2, assignment-temporal-scope, assignment-consumer-compatibility, assignment-consumer-pressure, assignment-norm-compatibility, assignment-q3-lifecycle, assignment-q2-sufficiency, assignment-q9-sufficiency, assignment-document-acceptance, assignment-canonical-readiness, foundation-promotion-gate]
+compatibility_surface:
+  canonical_meaning_exact_quote: "`Canonical` означає стабільну versioned governance-поверхню. Воно не означає production readiness, authorization, truth, універсальну повноту або незмінність назавжди."
+  granted: [ASSIGNMENT_IDENTITY_REFERENCE_KERNEL, TRANSITION_HISTORY_LIFECYCLE_KERNEL, STRUCTURAL_ROLE_PROVENANCE_KERNEL, SINGLE_INTERVAL_EFFECTIVITY_AND_PARTICIPATION_KERNEL, NON_INHERITANCE_NON_AUTHORITY_BOUNDARY, SUPERSESSION_IDENTITY_BOUNDARY, EXECUTABLE_ASSIGNMENT_BOUNDARY]
+  withheld: {Q2: AMENDMENT_AFTER_ESTABLISHMENT, Q4: ROLE_TAXONOMY, Q5: COMPOSITE_RESOURCE_SCOPE, Q7: ROLE_SPECIALIZATIONS, Q8: CONSTRAINT_CONFLICT_HANDOFF, Q9: MULTIPLE_APPLICABILITY_INTERVALS, Q10: PROVENANCE_TAXONOMY, Q11: REPLACEMENT_POLICY}
+  stable_not_complete: true
+  dependent_inference_from_silence_permitted: false
+consumer_effect:
+  accepted_direct_consumers: [OCP-006, OCP-013, OCP-015, OCP-017, OCP-020, OCP-021, OCP-023]
+  effect_for_each: lifecycle-and-version-stability-only
+  newly_legal_semantics: none
+  unmet_need: {need_id: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS, consumer_id: OCP-023, state: unmet, blocked_output: occupied-false, supplied_by_promotion: false}
+dependent_consequence:
+  document_id: OCP-006
+  before_l2: {result: fail, blockers: [OCP-005]}
+  after_l2: {result: pass, blockers: []}
+  lifecycle_effect: none
+  current_state: {version: 0.4.0, status: Accepted, concept_status: Accepted, candidate_selected: false, cycle_opened: false}
+reviewed_body:
+  path: docs/005-assignment-concept/reviewed-contract-v0.3.0.md
+  reviewed_version: 0.3.0
+  sha256: de84c9dafdb6126ff68a3a33218a344ddc250cf1a28e63c91407fd416e7e161b
+  current_basis: retained-acceptance-evidence
+  canonical_snapshot_required_by_norm: false
+  transition_review_binding: exact-current-primary-head
+gate_transition:
+  active_cycle_id_before: ASSIGNMENT_T6
+  active_cycle_id_after: ASSIGNMENT_T6
+  before: {CANDIDATE_BOARD_SELECTION: completed, DOCUMENT_PROMOTION: pending, CONCEPT_CANONICALIZATION: pending}
+  after: {CANDIDATE_BOARD_SELECTION: completed, DOCUMENT_PROMOTION: completed, CONCEPT_CANONICALIZATION: pending}
+  evidence: {CANDIDATE_BOARD_SELECTION: AD-056, DOCUMENT_PROMOTION: AD-057}
+  cycle_completed: false
+current_projection:
+  OCP-005: {version: 1.0.0, status: Canonical, concept_status: Accepted}
+  OCP-006: {version: 0.4.0, status: Accepted, concept_status: Accepted, canonical_l2: pass}
+  primary_document_status_counts: {Canonical: 11, Accepted: 14, Draft: 0}
+  concept_status_counts: {Canonical: 6, Accepted: 2}
+  active_cycle_id: ASSIGNMENT_T6
+  accepted_snapshot_count: 14
+  retained_snapshot_count: 2
+historical_evidence_successions:
+  - {original_path: docs/005-assignment-concept/README.md, preserved_path: architecture/baselines/OCP-005-v0.4.0-pre-assignment-document-canonicalization.md, sha256: e47794efea820ed74b964a401a05eaa215ac4317239bd230ea658fff05bdf524}
+  - {original_path: architecture/accepted-document-snapshot-map.yaml, preserved_path: architecture/baselines/accepted-document-snapshot-map-pre-assignment-document-canonicalization.yaml, sha256: 1a6f3de1b0c1932ac9a9d5b38d0538a82979047437b8369d23391780cc6956ca}
+  - {original_path: architecture/assignment-amendment-q2-attempt.yaml, preserved_path: architecture/baselines/assignment-amendment-q2-attempt-pre-assignment-document-canonicalization.yaml, sha256: ee27ad22f4e1aa177ab4e09bd98b3d0597f95228d3ff197c5008305106ffebbd}
+  - {original_path: architecture/assignment-canonical-readiness.yaml, preserved_path: architecture/baselines/assignment-canonical-readiness-pre-assignment-document-canonicalization.yaml, sha256: b5de69e2d0ec3c15542e787edc579359dbe859cb126450b84923cb36eecf97bb}
+  - {original_path: architecture/assignment-consumer-compatibility.yaml, preserved_path: architecture/baselines/assignment-consumer-compatibility-pre-assignment-document-canonicalization.yaml, sha256: d291674974f89905cb99fb9e176e86afa9dcebbde02ca96ee52c10eabbe61354}
+  - {original_path: architecture/assignment-document-acceptance.yaml, preserved_path: architecture/baselines/assignment-document-acceptance-pre-assignment-document-canonicalization.yaml, sha256: bce37f6a421af9dcd065ea42823c05fe0233d5ffa6eac0cab3dab95eb3d76910}
+  - {original_path: architecture/assignment-norm-compatibility.yaml, preserved_path: architecture/baselines/assignment-norm-compatibility-pre-assignment-document-canonicalization.yaml, sha256: 76dd641683c72e04089e4f3e32e706c23d4edc8e501b2f5433ea9c392b9d8f45}
+  - {original_path: architecture/assignment-promotion-selection.yaml, preserved_path: architecture/baselines/assignment-promotion-selection-pre-assignment-document-canonicalization.yaml, sha256: 3620f43454bcb4840bcd88f73680ee954ae0bad057da91be70006ed132862234}
+  - {original_path: architecture/assignment-q2-sufficiency.yaml, preserved_path: architecture/baselines/assignment-q2-sufficiency-pre-assignment-document-canonicalization.yaml, sha256: 6e37041c6a18bad224844ff5552edbecaf132568bfb848b37230250960210dff}
+  - {original_path: architecture/assignment-q9-sufficiency.yaml, preserved_path: architecture/baselines/assignment-q9-sufficiency-pre-assignment-document-canonicalization.yaml, sha256: b39b7be9771668224b8783bc9ee7f183b8491c92e19a14041c6c2cf97b21c1c5}
+  - {original_path: architecture/assignment-retroactivity-q3-resolution.yaml, preserved_path: architecture/baselines/assignment-retroactivity-q3-resolution-pre-assignment-document-canonicalization.yaml, sha256: 06ee7f6bb3c8aab2e5d74f3927e3f32a875647390af1974391f68261ca067866}
+  - {original_path: architecture/assignment-stable-surface.yaml, preserved_path: architecture/baselines/assignment-stable-surface-pre-assignment-document-canonicalization.yaml, sha256: 3d0f1dfbbf8a8fe504803fbfc12aa1f958af76378c225419d221658e990b83a7}
+  - {original_path: architecture/assignment-temporal-scope-attempt.yaml, preserved_path: architecture/baselines/assignment-temporal-scope-attempt-pre-assignment-document-canonicalization.yaml, sha256: 11644d46b7d1a593fafea5065d77807a7a444c3420cdf94656130b6655cad4d0}
+  - {original_path: architecture/constraint-document-acceptance.yaml, preserved_path: architecture/baselines/constraint-document-acceptance-pre-assignment-document-canonicalization.yaml, sha256: b027d2250a7587cadd39851ff6f023ccb110ea33c70b482615afa320f3c16e81}
+  - {original_path: architecture/constraint-document-status-readiness.yaml, preserved_path: architecture/baselines/constraint-document-status-readiness-pre-assignment-document-canonicalization.yaml, sha256: f9c0ca7730e72125f9470659768aac6222e6aac238a7a81965fdd4fff114f807}
+  - {original_path: architecture/consumer-need-discovery.yaml, preserved_path: architecture/baselines/consumer-need-discovery-pre-assignment-document-canonicalization.yaml, sha256: e780a686c7f355e01863fa35c40ac79eef2347e0b4e40657192d04d36cf9faf5}
+  - {original_path: architecture/foundation-promotion-gate.yaml, preserved_path: architecture/baselines/foundation-promotion-gate-pre-assignment-document-canonicalization.yaml, sha256: 5e8bd8afaea211d7c698a4f57c100f8362091d76934eb7a1098cc6669e7241b7}
+  - {original_path: architecture/foundation-promotion-reassessment.yaml, preserved_path: architecture/baselines/foundation-promotion-reassessment-pre-assignment-document-canonicalization.yaml, sha256: ee24f0c3694f5361572683c869c980260fa1af93808c32f2127b9e9928318d91}
+  - {original_path: architecture/ocp024-acceptance.yaml, preserved_path: architecture/baselines/ocp024-acceptance-pre-assignment-document-canonicalization.yaml, sha256: 407af932d113664f94caeb40c5d13613bbc9930a6a28f91285d981cf3ea10aa2}
+atomicity:
+  required_elements: [version, status, document-step, compatibility-surface, exact-dependencies, criteria-evidence, current-projections, historical-successions, snapshot-retention, checker-tests, repository-accounting]
+  complete: true
+  partial_effect_permitted: false
+rollback:
+  mechanism: new-reviewed-corrective-rollback-PR
+  restores: {OCP-005: 0.4.0-Accepted, DOCUMENT_PROMOTION: pending, active_cycle_id: ASSIGNMENT_T6}
+  partial_rollback_permitted: false
+  history_rewrite_permitted: false
+non_implications: [NO_CONCEPT_CANONICALIZATION, NO_CYCLE_COMPLETION, NO_THIRD_STEP_EXECUTION, NO_THIRD_STEP_AUTHORIZATION, NO_OTHER_DOCUMENT_PROMOTION_CANONICALIZATION_OR_SELECTION, NO_QUESTION_CLOSURE, NO_POSITIVE_MODEL_ACTIVATION, NO_UNMET_NEED_SATISFACTION, NO_NEXT_ACT_AUTHORIZATION]
+versioning:
+  OCP-005: 0.4.0-to-1.0.0-first-Canonical-lifecycle-transition-no-semantic-delta
+  AD-057: 0.1.0-Accepted-governance-lifecycle-act
+migration: {data: none, references: none, schemas: none, runtime_behavior: unchanged, rollback_unit: whole-atomic-package}
+baseline_evidence_objects:
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Перша Canonical версія отримує номер `1.0.0`", "`Canonical` означає стабільну versioned governance-поверхню", "Lifecycle effect виникає лише після authorized squash merge"]}
+  - {path: docs/005-assignment-concept/README.md, blob: ce2a4863042939811af2a91b3b820d7f9e544aa1, sha256: e47794efea820ed74b964a401a05eaa215ac4317239bd230ea658fff05bdf524, state_tokens: ["Version: 0.4.0", "Status: Accepted", "Concept-Status: Accepted"]}
+  - {path: docs/006-constraint-concept/README.md, blob: ceecaa2f1542a32cf43ac12e06cebfff66b27782, sha256: 89868c7f59b29c3bd84b50e77f6101ff398a9bbd72e4cf69a697c3d632cc45e2, state_tokens: ["Version: 0.4.0", "Status: Accepted", "OCP-005"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Status: Canonical", "G4"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 012f01335d4418ecc13636ad74899c52ed9ff078, sha256: 5e8bd8afaea211d7c698a4f57c100f8362091d76934eb7a1098cc6669e7241b7, state_tokens: ["active_cycle_id: ASSIGNMENT_T6", "DOCUMENT_PROMOTION: pending", "CONCEPT_CANONICALIZATION: pending"]}
+  - {path: architecture/assignment-canonical-readiness.yaml, blob: df245b0ab0c6d36c37769c8b8b37622a0ad12eea, sha256: b5de69e2d0ec3c15542e787edc579359dbe859cb126450b84923cb36eecf97bb, state_tokens: ["rule_owner: AD-055", "subject_readiness_prerequisites: satisfied", "transition_carried_requirements: pending-separate-canonicalization-act"]}
+  - {path: architecture/consumer-need-discovery.yaml, blob: b8a4753c2285d66fb190289445e0ed208d83f072, sha256: e780a686c7f355e01863fa35c40ac79eef2347e0b4e40657192d04d36cf9faf5, state_tokens: ["RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS", "current-unmet-positive-consumer-need"]}
+  - {path: architecture/accepted-document-snapshot-map.yaml, blob: 04d4fe70b3fdc4035881818eacf7670d77ac1723, sha256: 1a6f3de1b0c1932ac9a9d5b38d0538a82979047437b8369d23391780cc6956ca, state_tokens: ["required_retained_evidence: [OCP-016]", "document_id: OCP-005", "basis: current-accepted"]}

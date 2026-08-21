@@ -131,9 +131,9 @@ class AssignmentDocumentAcceptanceTests(unittest.TestCase):
     def test_snapshot_loss_substitution_and_atomic_status_version_changes_fail(self) -> None:
         for relative, old, new, expected in (
             (acceptance.SNAPSHOT_PATH, "Document-ID: OCP-005", "Document-ID: MUTATED", ASSIGNMENT_ACCEPTANCE_SNAPSHOT_DRIFT),
-            (acceptance.SUBJECT_PATH, "Status: Accepted", "Status: Draft", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
-            (acceptance.SUBJECT_PATH, "Version: 0.4.0", "Version: 0.3.0", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
-            (acceptance.SUBJECT_PATH, "Version: 0.4.0", "Version: 0.4.1", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
+            (acceptance.SUBJECT_PATH, "Status: Canonical", "Status: Draft", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
+            (acceptance.SUBJECT_PATH, "Version: 1.0.0", "Version: 0.4.0", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
+            (acceptance.SUBJECT_PATH, "Version: 1.0.0", "Version: 1.0.1", ASSIGNMENT_ACCEPTANCE_SUBJECT_DRIFT),
         ):
             with self.subTest(path=relative, old=old), tempfile.TemporaryDirectory() as tmp:
                 root = Path(tmp)
@@ -171,7 +171,7 @@ class AssignmentDocumentAcceptanceTests(unittest.TestCase):
             with self.subTest(scanner=validator.__name__):
                 self.assertTrue(validator(ROOT).valid, validator(ROOT).errors)
         payload = self.payload()
-        self.assertEqual(payload["current_projection_sync"]["expected"]["primary_document_status_counts"], {"Canonical": 10, "Accepted": 15, "Draft": 0})
+        self.assertEqual(payload["current_projection_sync"]["expected"]["primary_document_status_counts"], {"Canonical": 11, "Accepted": 14, "Draft": 0})
 
     def test_every_defensive_value_is_individually_fixture_and_mutation_live(self) -> None:
         def scalar_paths(value, prefix=()):

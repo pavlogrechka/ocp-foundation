@@ -31,7 +31,7 @@ SUBJECT_PATH = Path("docs/005-assignment-concept/README.md")
 GATE_PATH = Path("architecture/foundation-promotion-gate.yaml")
 NEED_PATH = Path("architecture/consumer-need-discovery.yaml")
 BASELINE = "5fab92bfa9d7392a325c5577e5aba69c0049ba24"
-MAP_SHA256 = "8c9f58c98c5851a76381683f8442660668c49531753fb49fe503607f5b9c211a"
+MAP_SHA256 = "8a0484304ff61dc32ef0e3741954d79ed16ac8d98ea2e1705acea081c2239fa9"
 
 CRITERION_IDS = (
     "BINDING_REVIEW_LANE",
@@ -264,7 +264,7 @@ def validate_assignment_canonical_readiness(root: Path) -> AssignmentCanonicalRe
     subject_text = subject[2] if subject else ""
     protected = payload.get("protected_current_state") or {}
     if (
-        metadata.get("Version") != "0.4.0" or metadata.get("Status") != "Accepted"
+        metadata.get("Version") != "1.0.0" or metadata.get("Status") != "Canonical"
         or metadata.get("Concept-Status") != "Accepted"
         or _refs(metadata.get("Depends-On")) != tuple(DIRECT_DEPENDENCIES)
         or protected.get("document_version") != metadata.get("Version")

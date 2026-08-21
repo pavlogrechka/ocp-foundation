@@ -1,0 +1,178 @@
+schema_version: 1
+rule_owner: AD-056
+baseline: 779aaf4c5d2799c8410a6934d28230c12b2ff31e
+gate_first:
+  subject_route: Route-F
+  operation: governance-lifecycle-selection
+  positive_capable: false
+  ocp016_g4_applies: false
+  activation_performed: false
+  reason: selection-opens-a-governance-cycle-without-adding-or-activating-an-operational-rule-result-or-profile
+authority:
+  owner: Architecture Board
+  decision: select-OCP-005-for-canonicalization
+  authorized_step: CANDIDATE_BOARD_SELECTION
+  unauthorized_steps: [DOCUMENT_PROMOTION, CONCEPT_CANONICALIZATION]
+candidate_inventory:
+  - document_id: OCP-005
+    slot: T6
+    document_status: Accepted
+    concept_status: Accepted
+    l2_result: pass
+    prior_cycle: none
+    subject_readiness: satisfied-by-AD-055
+    eligibility: eligible
+    disposition: selected-by-explicit-Board-decision
+    evidence_mode: derived
+  - document_id: OCP-006
+    slot: T7
+    document_status: Accepted
+    concept_status: Accepted
+    l2_result: fail
+    l2_blockers: [OCP-005]
+    prior_cycle: none
+    eligibility: ineligible
+    disposition: rejected-currently-direct-dependency-floor-L2-fails
+    evidence_mode: derived
+  - document_id: OCP-010
+    slot: T6
+    document_status: Canonical
+    concept_status: Canonical
+    l2_result: pass
+    prior_cycle: EVENT_T6
+    eligibility: ineligible
+    disposition: rejected-currently-candidate-already-consumed-by-completed-cycle-and-candidate-ids-are-unique
+    evidence_mode: derived
+selection:
+  eligible_candidates: [OCP-005]
+  tie_break_required: false
+  selected_candidate: OCP-005
+  cycle_id: ASSIGNMENT_T6
+  slot: T6
+  slot_reuse_basis: AD-055-executable-reuse-probe
+  cycle_id_unique: true
+  candidate_id_unique: true
+  step_state:
+    CANDIDATE_BOARD_SELECTION: completed
+    DOCUMENT_PROMOTION: pending
+    CONCEPT_CANONICALIZATION: pending
+  step_evidence:
+    CANDIDATE_BOARD_SELECTION: AD-056
+closability:
+  forward:
+    defined: true
+    ordered_remaining_steps: [DOCUMENT_PROMOTION, CONCEPT_CANONICALIZATION]
+    each_requires_separate_mandate: true
+    completion_state: all-three-steps-completed-and-active_cycle_id-null
+    basis: foundation-promotion-gate-schema-5-ordered-prefix
+  rollback:
+    defined: true
+    mechanism: new-reviewed-corrective-rollback-PR
+    restores_active_cycle_id: null
+    restores_cycle_count: 1
+    history_rewrite: false
+    partial_edit_permitted: false
+    basis: OCP-001-corrective-rollback-row
+    atomic_unit:
+      - foundation-promotion-gate
+      - assignment-selection-witness
+      - all-live-cycle-projections
+      - historical-successor-bindings
+      - checker-and-tests
+      - repository-accounting
+  conclusion: cycle-is-closable-forward-or-by-reviewed-atomic-rollback
+live_projection_inventory:
+  active_cycle_id: ASSIGNMENT_T6
+  completed_cycle_ids: [EVENT_T6]
+  carriers:
+    - architecture/assignment-amendment-q2-attempt.yaml
+    - architecture/assignment-canonical-readiness.yaml
+    - architecture/assignment-consumer-compatibility.yaml
+    - architecture/assignment-consumer-pressure.yaml
+    - architecture/assignment-document-acceptance.yaml
+    - architecture/assignment-norm-compatibility.yaml
+    - architecture/assignment-q2-sufficiency.yaml
+    - architecture/assignment-q9-sufficiency.yaml
+    - architecture/assignment-retroactivity-q3-resolution.yaml
+    - architecture/assignment-stable-surface.yaml
+    - architecture/assignment-temporal-scope-attempt.yaml
+    - architecture/constraint-document-acceptance.yaml
+    - architecture/constraint-stable-surface.yaml
+    - architecture/consumer-need-discovery.yaml
+    - architecture/ocp024-acceptance.yaml
+  readers:
+    - assignment-stable-surface
+    - constraint-stable-surface
+    - constraint-q6-sufficiency
+    - constraint-document-status-readiness
+    - assignment-amendment-q2
+    - assignment-temporal-scope
+    - assignment-consumer-compatibility
+    - assignment-consumer-pressure
+    - assignment-norm-compatibility
+    - assignment-q3-lifecycle
+    - assignment-q2-sufficiency
+    - assignment-q9-sufficiency
+    - consumer-need-discovery
+    - ocp024-acceptance
+    - constraint-document-acceptance
+    - assignment-document-acceptance
+    - assignment-canonical-readiness
+historical_evidence_successions:
+  - {original_path: architecture/assignment-amendment-q2-attempt.yaml, preserved_path: architecture/baselines/assignment-amendment-q2-attempt-pre-assignment-cycle-selection.yaml, sha256: 40a7034b923449e44185cb1475f65513f47d9ba28d3710f18bbf93159632497f, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-canonical-readiness.yaml, preserved_path: architecture/baselines/assignment-canonical-readiness-pre-assignment-cycle-selection.yaml, sha256: 0cb85d2ab724d08b62128b31eb6544c0597b9024e7df901fb6060f275aded3ba, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-consumer-compatibility.yaml, preserved_path: architecture/baselines/assignment-consumer-compatibility-pre-assignment-cycle-selection.yaml, sha256: 6d4398a422b9d8147a00eeaf5cea90762c5a5ed21006f9ffad7b7f9f3556e6b9, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-consumer-pressure.yaml, preserved_path: architecture/baselines/assignment-consumer-pressure-pre-assignment-cycle-selection.yaml, sha256: d20f8b8330b4efdb6a23c09aa6f02b2182182ddd022486c370b11afb1d8f61b2, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-document-acceptance.yaml, preserved_path: architecture/baselines/assignment-document-acceptance-pre-assignment-cycle-selection.yaml, sha256: e79d4f70af03609eea9718e6e63a2b98359248bc00a629dc13700f0a6c21daad, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-norm-compatibility.yaml, preserved_path: architecture/baselines/assignment-norm-compatibility-pre-assignment-cycle-selection.yaml, sha256: cb208c47a8a2d16c0c4c2185bcb8e4b0c1179f1e5b636c61c36c5c53a824f29c, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-q2-sufficiency.yaml, preserved_path: architecture/baselines/assignment-q2-sufficiency-pre-assignment-cycle-selection.yaml, sha256: 16c8b8e7a032ea0f09085e47acf128d7040cad928b2807c9fc5ca5149bff305e, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-q9-sufficiency.yaml, preserved_path: architecture/baselines/assignment-q9-sufficiency-pre-assignment-cycle-selection.yaml, sha256: 773ebb1d147850d4eec317f9ef544662b1dcf2688f53c590742eeece1d7889ef, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-retroactivity-q3-resolution.yaml, preserved_path: architecture/baselines/assignment-retroactivity-q3-resolution-pre-assignment-cycle-selection.yaml, sha256: aa6b8fc70d320ad5a5c920dcd46379fb3119cfbfab938ba58600747cd0482d7a, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-stable-surface.yaml, preserved_path: architecture/baselines/assignment-stable-surface-pre-assignment-cycle-selection.yaml, sha256: 46ee3cf0de88c541cdf4ff00cfee32dde6078866a1a6e75ac141e8fcec0abd9d, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/assignment-temporal-scope-attempt.yaml, preserved_path: architecture/baselines/assignment-temporal-scope-attempt-pre-assignment-cycle-selection.yaml, sha256: 567bbaa3aafab60ffd71f5c38b46cd765363bb6e0afa16143925a89997737679, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/constraint-document-acceptance.yaml, preserved_path: architecture/baselines/constraint-document-acceptance-pre-assignment-cycle-selection.yaml, sha256: 1ba1c37db80e685624ce3440fc8140cb850a5cbc400a1445e887dc86e9465332, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/constraint-stable-surface.yaml, preserved_path: architecture/baselines/constraint-stable-surface-pre-assignment-cycle-selection.yaml, sha256: b1a09881a778e9085594fc8633d7448007f1f87b0865718952f0e8c3d668a2cb, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/consumer-need-discovery.yaml, preserved_path: architecture/baselines/consumer-need-discovery-pre-assignment-cycle-selection.yaml, sha256: f57a7f80836fafb909f190ef6f2666ca9e3cc6581e88577043072ec84dcd3366, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/foundation-promotion-gate.yaml, preserved_path: architecture/baselines/foundation-promotion-gate-pre-assignment-cycle-selection.yaml, sha256: 788e2efde0262a884d2215a8951ef6b29d6405c5874baf7c745b8cb87b2c64d1, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+  - {original_path: architecture/ocp024-acceptance.yaml, preserved_path: architecture/baselines/ocp024-acceptance-pre-assignment-cycle-selection.yaml, sha256: 317e5862a6c102dad610aee948be66896252f14abfc0bc0b8fee4fc305d105ca, reason: live-cycle-projection-advances-without-rewriting-the-pre-selection-evidence}
+protected_current_state:
+  OCP-005: {version: 0.4.0, status: Accepted, concept_status: Accepted}
+  OCP-006: {version: 0.4.0, status: Accepted, concept_status: Accepted}
+  OCP-010: {version: 1.0.1, status: Canonical, concept_status: Canonical}
+  assignment_registry_status: Accepted
+  assignment_taxonomy_status: Accepted
+  unmet_positive_need: RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS
+  unmet_positive_need_state: unmet
+atomic_package:
+  required_elements: [active-cycle-id, cycle-record, selection-evidence, live-projections, historical-successions, checker-and-tests, repository-accounting]
+  complete: true
+  partial_effect_permitted: false
+non_implications:
+  - NO_DOCUMENT_PROMOTION
+  - NO_CONCEPT_CANONICALIZATION
+  - NO_OTHER_DOCUMENT_OR_CONCEPT_PROMOTION
+  - NO_QUESTION_CLOSURE
+  - NO_POSITIVE_MODEL_ACTIVATION
+  - NO_UNMET_NEED_SATISFACTION
+  - NO_NEXT_STEP_AUTHORIZATION
+  - NO_DOCUMENT_STATUS_OR_VERSION_CHANGE
+  - NO_CONCEPT_STATUS_CHANGE
+versioning:
+  foundation-promotion-gate: schema-5-state-instance-update-no-schema-change
+  OCP-005: unchanged-0.4.0-Accepted
+  AD-056: 0.1.0-Accepted-governance-selection
+migration:
+  data: none
+  references: none
+  schemas: none
+  runtime_behavior: unchanged
+  rollback_unit: [gate, witness, live-projections, historical-successions, checker-tests, accounting]
+baseline_evidence_objects:
+  - {path: docs/001-ontology-governance/README.md, blob: 33524fa3d18f3253faa9a854500be7ddfb20815f, sha256: da74645aa4f3cae10c7c59ae7b87abd1840544700e4a58e9efd3f6600a27f1cc, state_tokens: ["Status: Canonical", "Architecture Board лишається єдиним owner статусів документів і Concept", "Corrective rollback"]}
+  - {path: docs/005-assignment-concept/README.md, blob: ce2a4863042939811af2a91b3b820d7f9e544aa1, sha256: e47794efea820ed74b964a401a05eaa215ac4317239bd230ea658fff05bdf524, state_tokens: ["Version: 0.4.0", "Status: Accepted", "Concept-Status: Accepted"]}
+  - {path: docs/006-constraint-concept/README.md, blob: ceecaa2f1542a32cf43ac12e06cebfff66b27782, sha256: 89868c7f59b29c3bd84b50e77f6101ff398a9bbd72e4cf69a697c3d632cc45e2, state_tokens: ["Version: 0.4.0", "Status: Accepted", "Depends-On: OCP-000, OCP-001, OCP-002, OCP-003, OCP-004, OCP-005"]}
+  - {path: docs/010-event-concept/README.md, blob: a9de19a0873a6616d4c77614acf48d17e1b06bad, sha256: 51023373a39056ac70f80d97cea3c529938f82a01c9a1ee1f83410d34ae4f3ed, state_tokens: ["Version: 1.0.1", "Status: Canonical", "Concept-Status: Canonical"]}
+  - {path: docs/016-core-boundary/README.md, blob: 94f5d997deea0168a3c553c2ac9f19d2ee03b4fb, sha256: 78b1ff043ea17b862a8157bfac1774352090ec4a9bd34e5dd8389d8673e006d4, state_tokens: ["Status: Canonical", "G4 consumer activation remains binding"]}
+  - {path: architecture/foundation-promotion-gate.yaml, blob: 484b785ae733f8c812d1e28a9162304afbe3287f, sha256: 788e2efde0262a884d2215a8951ef6b29d6405c5874baf7c745b8cb87b2c64d1, state_tokens: ["active_cycle_id: null", "cycle_id: EVENT_T6", "document_id: OCP-005"]}
+  - {path: architecture/assignment-canonical-readiness.yaml, blob: 9abb73817edd851c38893f22f505bf628b341771, sha256: 0cb85d2ab724d08b62128b31eb6544c0597b9024e7df901fb6060f275aded3ba, state_tokens: ["rule_owner: AD-055", "ready_for_separate_cycle-and-canonicalization-proposal: true", "active_cycle_id: null"]}
+  - {path: architecture/consumer-need-discovery.yaml, blob: 54645e4449251a6b9ee1f5738509a2e153d80c35, sha256: f57a7f80836fafb909f190ef6f2666ca9e3cc6581e88577043072ec84dcd3366, state_tokens: ["RESOURCE_OCCUPANCY_ASSIGNMENT_SET_COMPLETENESS", "current-unmet-positive-consumer-need"]}

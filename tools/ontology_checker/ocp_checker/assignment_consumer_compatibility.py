@@ -79,8 +79,8 @@ EXPECTED_GATE_FIRST = {
 EXPECTED_SUBJECT = {
     "document_id": "OCP-005",
     "primary": "docs/005-assignment-concept/README.md",
-    "expected_version": "0.4.0",
-    "expected_status": "Accepted",
+    "expected_version": "1.0.0",
+    "expected_status": "Canonical",
     "expected_concept_status": "Accepted",
 }
 EXPECTED_CRITERION = {
@@ -440,7 +440,7 @@ def validate_assignment_consumer_compatibility(repo_root: Path) -> AssignmentCon
     subject = _frontmatter(repo_root / EXPECTED_SUBJECT["primary"])
     if not subject or any(
         str(subject.get(field)) != str(expected)
-        for field, expected in (("Document-ID", "OCP-005"), ("Version", "0.4.0"), ("Status", "Accepted"), ("Concept-Status", "Accepted"))
+        for field, expected in (("Document-ID", "OCP-005"), ("Version", "1.0.0"), ("Status", "Canonical"), ("Concept-Status", "Accepted"))
     ):
         errors.append(ASSIGNMENT_CONSUMER_COMPATIBILITY_INVENTORY_DRIFT)
 
